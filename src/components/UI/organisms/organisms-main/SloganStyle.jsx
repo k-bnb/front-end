@@ -17,7 +17,7 @@ const SloganPc = styled.div`
   }
   div {
     display: flex;
-    font-size: 0.9rem;
+    font-size: 1.8rem;
     justify-content: center;
     .locations-img {
       flex-flow: column;
