@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import { GrFormClose } from 'react-icons/gr';
-import { AiOutlinePlus } from 'react-icons/ai';
+import React from './react';
+import styled from './styled-components';
+import { GrFormClose } from './react-icons/gr';
+import { AiOutlinePlus } from './react-icons/ai';
 
 const Modalcontainer = styled.div`
   display: flex;

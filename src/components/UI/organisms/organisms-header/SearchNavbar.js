@@ -102,13 +102,13 @@ const SearchNavbar = ({
                 setCondition({ ...initialCondition, guestNum: true });
               }}
             />
-            <SearchButtonUnit />
+            <SearchButtonUnit isClicked={isClicked} />
           </>
         )}
 
         {isScrolled && !isClicked && (
           <>
-            <SearchButtonUnit />
+            <SearchButtonUnit isClicked={isClicked} />
             <span className="start-search-text">검색 시작하기</span>
           </>
         )}
