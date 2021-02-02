@@ -1,8 +1,9 @@
-import { AiTwotoneHeart } from "react-icons/ai";
-import styled, { css } from "styled-components";
+import { AiTwotoneHeart } from 'react-icons/ai';
+import styled, { css } from 'styled-components';
 
 const BookmarkStyle = styled.div`
-  ${props => props.heart &&
+  ${(props) =>
+    props.heart &&
     css`
       width:48px;
       height:48px;
@@ -27,11 +28,10 @@ const BookmarkStyle = styled.div`
         transform: scale(0.92);
       }
     `}
-`
+`;
 
-
-const Bookmark = ({children, ...rest}) => {
-  return <BookmarkStyle {...rest}>{children}</BookmarkStyle>
+const Bookmark = ({ children, ...rest }) => {
+  return <BookmarkStyle {...rest}>{children}</BookmarkStyle>;
 };
 
 export default Bookmark;

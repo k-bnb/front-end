@@ -1,14 +1,15 @@
-import styled, { css } from "styled-components";
-import {AiFillStar} from "react-icons/ai";
+import styled, { css } from 'styled-components';
+import { AiFillStar } from 'react-icons/ai';
 
 const ScoreStyle = styled.div`
-  ${props => props.price && 
+  ${(props) =>
+    props.price &&
     css`
       color: #222;
-  `}
-`
+    `}
+`;
 
-const Score = ({children, ...rest}) => {
+const Score = ({ children, ...rest }) => {
   return (
     <ScoreStyle {...rest}>
       <AiFillStar />

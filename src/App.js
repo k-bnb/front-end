@@ -5,16 +5,18 @@ import HeaderList from './components/templates/templates-header/HeaderList';
 import HeaderMain from './components/templates/templates-header/HeaderMain';
 import MainPage from './components/pages/pages-main/MainPage';
 import Detail from './components/templates/templates-detail/Detail';
+import ListPage from './components/pages/pages-list/ListPage';
 
 function App() {
   return (
     <>
-      <HeaderMain />
+      {/* <HeaderMain /> */}
       {/* <HeaderDetail /> */}
       {/* <HeaderList /> */}
       {/* <Reservation /> */}
-      <MainPage />
+      {/* <MainPage /> */}
       {/* <Detail /> */}
+      <ListPage />
     </>
   );
 }
