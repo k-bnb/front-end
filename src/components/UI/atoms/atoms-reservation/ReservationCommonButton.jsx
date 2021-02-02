@@ -8,7 +8,7 @@ const StyledButton = styled.button`
   outline: none;
   cursor: pointer;
 
-  ${props =>
+  ${(props) =>
     props.edit &&
     css`
       font-size: 1.6rem;
@@ -16,7 +16,7 @@ const StyledButton = styled.button`
       text-decoration: underline;
     `}
 
-  ${props =>
+  ${(props) =>
     props.back &&
     css`
       position: absolute;
@@ -37,8 +37,12 @@ const StyledButton = styled.button`
     `}
 `;
 
-const ReservationEditButton = ({ children, ...rest }) => {
-  return <StyledButton {...rest}>{children}</StyledButton>;
+const ReservationEditButton = ({ openClick, children, ...rest }) => {
+  return (
+    <StyledButton onClick={openClick} {...rest}>
+      {children}
+    </StyledButton>
+  );
 };
 
 export default ReservationEditButton;

@@ -8,6 +8,7 @@ import ReservationRequestOrganism from '../../UI/organisms/organisms-reservation
 import ReservationTitle from '../../UI/atoms/atoms-reservation/ReservationTitle';
 import ReservationCommonButton from '../../UI/atoms/atoms-reservation/ReservationCommonButton';
 import CommonButton from '../../UI/atoms/atoms-reservation/CommonButton';
+import ReservationCostDetailOrganism from '../../UI/organisms/organisms-reservation/ReservationCostDetailOrganism';
 
 const TitleContainer = styled.div`
   position: relative;
@@ -47,6 +48,7 @@ const Reservation = () => {
           예약하기
         </CommonButton>
       </MainContainer>
+      <ReservationCostDetailOrganism />
     </section>
   );
 };
