@@ -14,9 +14,9 @@ function App() {
       {/* <HeaderDetail /> */}
       {/* <HeaderList /> */}
       {/* <Reservation /> */}
-      {/* <MainPage /> */}
+      <MainPage />
       {/* <Detail /> */}
-      <ListPage />
+      {/* <ListPage /> */}
     </>
   );
 }
