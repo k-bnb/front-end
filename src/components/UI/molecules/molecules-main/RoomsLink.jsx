@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import LoginPotal from '../../../../portal/modals/LoginModal';
-import Modal from '../../../../portal/modals/Modal';
+import Modal from '../../../../portal/Modal';
 // import LoginPotal from '../../../../potals/modals/LoginModal';
 // import Modal from '../../../../potals/modals/Modal';
 import Button from '../../atoms/atoms-main/Button';
