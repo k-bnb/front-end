@@ -102,21 +102,29 @@ const SearchNavbar = ({
                 setCondition({ ...initialCondition, guestNum: true });
               }}
             />
-            <SearchButtonUnit />
+            <SearchButtonUnit isClicked={isClicked} />
           </>
         )}
 
         {isScrolled && !isClicked && (
           <>
-            <SearchButtonUnit />
+            <SearchButtonUnit isClicked={isClicked} />
             <span className="start-search-text">검색 시작하기</span>
           </>
         )}
       </SearchNavbarBlock>
-      {(!isScrolled || isClicked) && condition.location && <LocationModal />}
-      {(!isScrolled || isClicked) && condition.checkIn && <CalendarModal />}
-      {(!isScrolled || isClicked) && condition.checkOut && <CalendarModal />}
-      {(!isScrolled || isClicked) && condition.guestNum && <GuestNumberModal />}
+      {(!isScrolled || isClicked) && condition.location && (
+        <LocationModal isClicked={isClicked} isScrolled={isScrolled} />
+      )}
+      {(!isScrolled || isClicked) && condition.checkIn && (
+        <CalendarModal isClicked={isClicked} isScrolled={isScrolled} />
+      )}
+      {(!isScrolled || isClicked) && condition.checkOut && (
+        <CalendarModal isClicked={isClicked} isScrolled={isScrolled} />
+      )}
+      {(!isScrolled || isClicked) && condition.guestNum && (
+        <GuestNumberModal isClicked={isClicked} isScrolled={isScrolled} />
+      )}
     </>
   );
 };
