@@ -113,10 +113,18 @@ const SearchNavbar = ({
           </>
         )}
       </SearchNavbarBlock>
-      {(!isScrolled || isClicked) && condition.location && <LocationModal />}
-      {(!isScrolled || isClicked) && condition.checkIn && <CalendarModal />}
-      {(!isScrolled || isClicked) && condition.checkOut && <CalendarModal />}
-      {(!isScrolled || isClicked) && condition.guestNum && <GuestNumberModal />}
+      {(!isScrolled || isClicked) && condition.location && (
+        <LocationModal isClicked={isClicked} isScrolled={isScrolled} />
+      )}
+      {(!isScrolled || isClicked) && condition.checkIn && (
+        <CalendarModal isClicked={isClicked} isScrolled={isScrolled} />
+      )}
+      {(!isScrolled || isClicked) && condition.checkOut && (
+        <CalendarModal isClicked={isClicked} isScrolled={isScrolled} />
+      )}
+      {(!isScrolled || isClicked) && condition.guestNum && (
+        <GuestNumberModal isClicked={isClicked} isScrolled={isScrolled} />
+      )}
     </>
   );
 };

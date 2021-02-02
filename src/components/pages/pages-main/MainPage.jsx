@@ -1,4 +1,4 @@
-import Main from '../templates/templates-main/Main';
+import Main from '../../templates/templates-main/Main';
 
 const imgs = [
   { src: './imgs/1.jpg', alt: '서울 지역 숙소', name: '서울' },

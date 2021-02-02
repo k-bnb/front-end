@@ -8,7 +8,7 @@ import Text from '../../UI/atoms/atoms-header/Text';
 const HeaderMainBlock = styled.header`
   text-align: center;
   padding: 0;
-  background: pink;
+  background: transparent;
   width: 100%;
   height: 80px;
   position: fixed;
@@ -16,8 +16,8 @@ const HeaderMainBlock = styled.header`
 
   h1 {
     position: absolute;
-    top: 50%;
-    left: 3%;
+    top: 45px;
+    left: 40px;
     transform: translateY(-50%);
     margin: 0;
   }
@@ -68,6 +68,7 @@ const HeaderMainBlock = styled.header`
   ${(props) =>
     props.isClicked &&
     css`
+      height: 200px;
       nav {
         position: absolute;
         top: 75%;
@@ -80,6 +81,13 @@ const HeaderMainBlock = styled.header`
         css`
           .accomodation {
             color: black;
+            top: 27%;
+          }
+          nav {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
           }
         `}
     `}

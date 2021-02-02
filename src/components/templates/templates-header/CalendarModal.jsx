@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const StyledCalModal = styled.div`
   position: absolute;
@@ -8,13 +8,24 @@ const StyledCalModal = styled.div`
   transform: translate(-50%, 0);
   width: 740px;
   height: 400px;
-  border: 1px solid black;
+  border: 1px solid lightgray;
   margin: 0 auto;
   border-radius: 40px;
+  background-color: white;
+  ${(props) =>
+    props.isScrolled &&
+    props.isClicked &&
+    css`
+      top: 180px;
+    `}
 `;
 
-const CalendarModal = () => {
-  return <StyledCalModal>Calendar Modal</StyledCalModal>;
+const CalendarModal = ({ isScrolled, isClicked }) => {
+  return (
+    <StyledCalModal isScrolled={isScrolled} isClicked={isClicked}>
+      Calendar Modal
+    </StyledCalModal>
+  );
 };
 
 export default CalendarModal;
