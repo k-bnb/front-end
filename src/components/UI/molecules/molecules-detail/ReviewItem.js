@@ -50,7 +50,7 @@ const ReviewText = styled.span`
   line-height: 24px;
 `;
 
-const Review = () => (
+const ReviewItem = () => (
   <ReviewListItem>
     <div className="dataContainer">
       <WriterPhoto></WriterPhoto>
@@ -63,4 +63,4 @@ const Review = () => (
   </ReviewListItem>
 );
 
-export default Review;
+export default ReviewItem;

@@ -1,30 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
-import CountBtn from '../../UI/atoms/atoms-detail/CountBtn';
 import ImageFrame from '../../UI/atoms/atoms-detail/ImageFrame';
-import WhiteBtn from '../../UI/atoms/atoms-detail/WhiteBtn';
 import DetailInfoContainer from '../../UI/molecules/molecules-detail/DetailInfoContainer';
 import { PageTitle } from '../../UI/molecules/molecules-detail/PageTitle';
-import Review from '../../UI/molecules/molecules-detail/Review';
+import Review from '../../UI/organisms/organisms-detail/Review';
+
+import HeaderDetail from '../templates-header/HeaderDetail';
 
 const DetailContainer = styled.div`
   font-size: 14px;
   margin: 0 auto;
   max-width: 1280px;
-  padding: 0 80px;
+  padding: 80px 80px 0;
 `;
 
 const Detail = () => {
   return (
-    <DetailContainer>
-      <PageTitle />
-      <ImageFrame />
-      <DetailInfoContainer />
+    <>
+      <HeaderDetail />
+      <DetailContainer>
+        <PageTitle />
+        <ImageFrame />
+        <DetailInfoContainer />
+        {/* <SavedListsModal /> */}
+      </DetailContainer>
       <Review />
-      <CountBtn />
-      <WhiteBtn />
-      {/* <SavedListsModal /> */}
-    </DetailContainer>
+    </>
   );
 };
 
