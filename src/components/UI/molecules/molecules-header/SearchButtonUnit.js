@@ -11,10 +11,10 @@ const GuestNumberUnitOuterBlock = styled.div`
   border: 0;
 `;
 
-const SearchButtonUnit = () => {
+const SearchButtonUnit = ({ isClicked }) => {
   return (
     <GuestNumberUnitOuterBlock>
-      <SearchButton />
+      <SearchButton isClicked={isClicked} />
     </GuestNumberUnitOuterBlock>
   );
 };

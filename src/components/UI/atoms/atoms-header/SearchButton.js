@@ -22,11 +22,12 @@ const SearchButtonBlock = styled.button`
   }
 `;
 
-const SearchButton = props => {
+const SearchButton = ({ isClicked }) => {
   return (
     <div>
       <SearchButtonBlock>
         <BiSearch />
+        {isClicked && <span>검색</span>}
       </SearchButtonBlock>
     </div>
   );

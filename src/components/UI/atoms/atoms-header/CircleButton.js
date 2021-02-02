@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
+import {
+  AiOutlinePlusCircle,
+  AiOutlineMinusCircle,
+} from '../../molecules/molecules-detail/react-icons/ai';
 
 const CircleButtonBlock = styled.button`
   width: 32px;
