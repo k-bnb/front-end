@@ -1,4 +1,6 @@
-import Main from '../../templates/templates-main/Main';
+import React from 'react';
+import HeaderMain from '../components/templates/templates-header/HeaderMain';
+import Main from '../components/templates/templates-main/Main';
 
 const imgs = [
   { src: './imgs/1.jpg', alt: '서울 지역 숙소', name: '서울' },
@@ -45,9 +47,10 @@ const section3Img = [
   { src: './imgs/nanlo.jpg', alt: '캠핑 및 글램핑', name: '체험 호스팅하기' },
 ];
 
-const MainPage = () => {
+const MainContainer = () => {
   return (
     <>
+      <HeaderMain />
       <Main
         imgs={imgs}
         section3Img={section3Img}
@@ -58,4 +61,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default MainContainer;
