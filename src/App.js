@@ -9,12 +9,12 @@ import Detail from './components/templates/templates-detail/Detail';
 function App() {
   return (
     <>
-      {/* <HeaderMain /> */}
+      <HeaderMain />
       {/* <HeaderDetail /> */}
       {/* <HeaderList /> */}
       {/* <Reservation /> */}
-      {/* <MainPage /> */}
-      <Detail />
+      <MainPage />
+      {/* <Detail /> */}
     </>
   );
 }
