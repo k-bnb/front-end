@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import ReservationHostImg from '../atoms/ReservationHostImg';
-import ReservationHostName from '../atoms/ReservationHostName';
-import ReservationHostNotice from '../atoms/ReservationHostNotice';
-import ReservationCommonContainer from '../atoms/ReservationCommonContainer';
+import ReservationHostImg from '../../atoms/atoms-reservation/ReservationHostImg';
+import ReservationHostName from '../../atoms/atoms-reservation/ReservationHostName';
+import ReservationHostNotice from '../../atoms/atoms-reservation/ReservationHostNotice';
+import ReservationCommonContainer from '../../atoms/atoms-reservation/ReservationCommonContainer';
 
 const Container = styled.div`
   display: flex;
@@ -22,13 +22,13 @@ const ReservationHostMolecule = () => {
   return (
     <Container>
       <LayoutReservationCommonContainer hostImg>
-        <ReservationHostImg img='/imgs/1.jpg' alt='host profile img' />
+        <ReservationHostImg img="/imgs/1.jpg" alt="host profile img" />
       </LayoutReservationCommonContainer>
       <div>
-        <ReservationHostName host children='호익' />
+        <ReservationHostName host children="호익" />
         <ReservationHostNotice
           host
-          children='안녕하세요. 저희 집에 방문하셔서 감사합니다.'
+          children="안녕하세요. 저희 집에 방문하셔서 감사합니다."
         />
       </div>
     </Container>

@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { IoIosArrowBack } from 'react-icons/io';
 import { BiCalendarCheck } from 'react-icons/bi';
-import ReservationInfoOrganism from '../UI/organisms/ReservationInfoOrganism';
-import ReservationRefundOrganism from '../UI/organisms/ReservationRefundOrganism';
-import ReservationRequestOrganism from '../UI/organisms/ReservationRequestOrganism';
-import ReservationTitle from '../UI/atoms/ReservationTitle';
-import ReservationCommonButton from '../UI/atoms/ReservationCommonButton';
-import CommonButton from '../UI/atoms/CommonButton';
+import ReservationInfoOrganism from '../../UI/organisms/organisms-reservation/ReservationInfoOrganism';
+import ReservationRefundOrganism from '../../UI/organisms/organisms-reservation/ReservationRefundOrganism';
+import ReservationRequestOrganism from '../../UI/organisms/organisms-reservation/ReservationRequestOrganism';
+import ReservationTitle from '../../UI/atoms/atoms-reservation/ReservationTitle';
+import ReservationCommonButton from '../../UI/atoms/atoms-reservation/ReservationCommonButton';
+import CommonButton from '../../UI/atoms/atoms-reservation/CommonButton';
 
 const TitleContainer = styled.div`
   position: relative;
@@ -36,7 +36,7 @@ const Reservation = () => {
         <ReservationCommonButton back>
           <IoIosArrowBack />
         </ReservationCommonButton>
-        <LayoutReservationTitle main children='예약 확인' />
+        <LayoutReservationTitle main children="예약 확인" />
       </TitleContainer>
       <MainContainer>
         <ReservationInfoOrganism />

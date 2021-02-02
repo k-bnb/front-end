@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ReservationContent from '../atoms/ReservationContent';
-import ReservationCommonButton from '../atoms/ReservationCommonButton';
+import ReservationContent from '../../atoms/atoms-reservation/ReservationContent';
+import ReservationCommonButton from '../../atoms/atoms-reservation/ReservationCommonButton';
 
 const Container = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const LayoutReservationContent = styled(ReservationContent)`
   margin-bottom: 0.8rem;
 `;
 
-const ReservationInfoMolecule = props => {
+const ReservationInfoMolecule = (props) => {
   const { title, content } = props.children;
 
   return (

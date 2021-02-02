@@ -1,7 +1,7 @@
 import React from 'react';
-import ReservationTitle from '../atoms/ReservationTitle';
-import ReservationUnderLine from '../atoms/ResevationUnderLine';
-import ReservationInfoMolecule from '../molecules/ReservationInfoMolecule';
+import ReservationTitle from '../../atoms/atoms-reservation/ReservationTitle';
+import ReservationUnderLine from '../../atoms/atoms-reservation/ResevationUnderLine';
+import ReservationInfoMolecule from '../../molecules/molecules-reservation/ReservationInfoMolecule';
 
 const ReservationInfoOrganism = () => {
   const dateChildren = {
@@ -17,7 +17,7 @@ const ReservationInfoOrganism = () => {
   return (
     <>
       <ReservationUnderLine />
-      <ReservationTitle sub children='예약 정보' />
+      <ReservationTitle sub children="예약 정보" />
       <ReservationInfoMolecule children={dateChildren} />
       <ReservationInfoMolecule children={guistChildren} />
       <ReservationUnderLine />
