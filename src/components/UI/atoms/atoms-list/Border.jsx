@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 const BorderStyle = styled.div`
   border-radius: 10px;
+  border: 1px dashed red;
   ${(props) =>
     props.carouselImg &&
     css`
@@ -16,7 +17,7 @@ const BorderStyle = styled.div`
       max-width: 400px;
       width: 100%;
 
-      height: 200px;
+      /* height: 200px; */
     `}
   ${(props) =>
     props.bookmarkImg &&

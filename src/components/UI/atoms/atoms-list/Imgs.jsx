@@ -1,4 +1,4 @@
-import styled, { css } from './styled-components';
+import styled, { css } from 'styled-components';
 
 const ImgStyle = styled.img`
   ${(props) =>
@@ -9,7 +9,7 @@ const ImgStyle = styled.img`
       border-radius: 8px;
     `}
   ${(props) =>
-    props.carousalBihImg &&
+    props.carousalBigImg &&
     css`
       width: 100%;
       height: 100%;

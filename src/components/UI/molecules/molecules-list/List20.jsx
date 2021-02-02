@@ -1,12 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-// import Border from '../atoms/Border';
-// import Bookmark from "../atoms/BookMark";
-// import Imgs from '../atoms/Imgs';
-// import Score from '../atoms/Score';
-// import TextStyled from '../atoms/Text';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BiWon } from 'react-icons/bi';
+import Imgs from '../../atoms/atoms-list/Imgs';
 import Bookmark from '../../atoms/atoms-list/BookMark';
 import Border from '../../atoms/atoms-list/Border';
 import Score from '../../atoms/atoms-list/Score';
@@ -63,13 +59,13 @@ const ULWrap = styled.ul`
     align-content: center;
   }
   span:first-child {
-    /* background-color: yellow; */
+    background-color: yellow;
     /* box-sizing:border-box; */
     width: 300px;
-    height: 100%;
+    height: 200px;
   }
   span:last-child {
-    /* background-color: #fff; */
+    background-color: #fff;
     width: 492px;
     margin-left: 16px;
     height: 100%;
@@ -107,12 +103,12 @@ const LodgingLists = ({ alt, ...rest }) => {
         <li>
           <span>
             <Border carouselImg>
-              {/* <Imgs
+              <Imgs
                 carousalImg
                 src="https://a0.muscache.com/im/pictures/02a7fd89-b923-4541-aff6-a6eeff4d4445.jpg?im_w=1200"
                 alt={alt}
                 {...rest}
-              /> */}
+              />
             </Border>
           </span>
           <span className="TextWrap">

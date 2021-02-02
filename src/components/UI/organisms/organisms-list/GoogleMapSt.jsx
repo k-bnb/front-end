@@ -1,9 +1,7 @@
 // import { GoogleApiWrapper } from 'google-maps-react';
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
-// import App from '../molecules/GoogleMap';
-// import FakeBox from '../molecules/GoogleMap';
-// import SearchData from "../molecules/SearchData";
+import FakeBox from '../../molecules/molecules-list/GoogleMap';
 
 const PcSize = styled.main`
   /* display : inline-block; */
@@ -39,21 +37,21 @@ const GoogleStyle = () => {
     <>
       {isPc && (
         <PcSize className="Asidemap">
-          {/* <GoogleApiWrapper />
+          {/* <GoogleApiWrapper /> */}
           <FakeBox />
-          <App /> */}
+          {/* <App /> */}
         </PcSize>
       )}
       {isTablet && (
         <TabletSize className="Asidemap">
           {/* <GoogleApiWrapper /> */}
-          {/* <FakeBox /> */}
+          <FakeBox />
         </TabletSize>
       )}
       {isMobile && (
         <MobileSize className="Asidemap">
           {/* <GoogleApiWrapper /> */}
-          {/* <FakeBox /> */}
+          <FakeBox />
         </MobileSize>
       )}
     </>
