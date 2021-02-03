@@ -38,9 +38,9 @@ const SectionTablet = styled.section`
     margin-right: 5px;
     .locations-img {
       flex-flow: column;
-      r
-			/* align-items: flex-start; */
-			img {
+
+      /* align-items: flex-start; */
+      img {
         margin-bottom: 3%;
         margin-right: 5%;
       }

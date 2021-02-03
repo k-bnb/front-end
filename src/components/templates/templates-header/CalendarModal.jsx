@@ -1,13 +1,14 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import CalendarNew from '../../../calendar/CalendarNew';
+import '../../../calendar/CalendarTemplate.css';
 
 const StyledCalModal = styled.div`
   position: absolute;
-  top: 165px;
-  left: 50%;
-  transform: translate(-50%, 0);
-  width: 740px;
-  height: 400px;
+  top: 98px;
+  left: 26%;
+  width: 1px;
+  height: 1px;
   border: 1px solid lightgray;
   margin: 0 auto;
   border-radius: 40px;
@@ -16,14 +17,14 @@ const StyledCalModal = styled.div`
     props.isScrolled &&
     props.isClicked &&
     css`
-      top: 180px;
+      top: 115px;
     `}
 `;
 
 const CalendarModal = ({ isScrolled, isClicked }) => {
   return (
     <StyledCalModal isScrolled={isScrolled} isClicked={isClicked}>
-      Calendar Modal
+      <CalendarNew />
     </StyledCalModal>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import HeaderMain from '../components/templates/templates-header/HeaderMain';
 import Main from '../components/templates/templates-main/Main';
 
