@@ -5,34 +5,37 @@ const TextBlock = styled.span`
   padding: 10px 12px 10px 0;
   font-size: 14px;
   line-height: 16px;
-  font-family: 'Airbnb Cereal App Medium -apple-system';
-  src: local('Airbnb Cereal App Book'),
-    url('AirbnbCerealBook.woff') format('woff');
-  ${props =>
+  ${(props) =>
     props.small &&
     css`
       font-size: 12px;
     `}
 
-  ${props =>
+  ${(props) =>
     props.bold &&
     css`
       font-weight: 600;
     `}
-    ${props =>
+
+    ${(props) =>
+    props.middlebold &&
+    css`
+      font-weight: 500;
+    `}
+    ${(props) =>
     props.noPadding &&
     css`
       padding: 0;
     `}
 
-    ${props =>
+    ${(props) =>
     props.block &&
     css`
       display: block;
     `}
 `;
 
-const Text = props => {
+const Text = (props) => {
   return <TextBlock {...props}>{props.children}</TextBlock>;
 };
 

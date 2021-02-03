@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
 const StyledGuestModal = styled.div`
@@ -22,9 +22,36 @@ const StyledGuestModal = styled.div`
     `}
 `;
 
-const GuestNumberModal = ({ isScrolled, isClicked }) => {
+const GuestNumberModal = ({
+  isScrolled,
+  isClicked,
+  setIsClicked,
+  setCondition,
+  initialCondition,
+}) => {
+  const clickOutSide = (e) => {
+    console.log(e.target.matches('.guest-modal'));
+    if (e.target.matches('.guest-modal')) {
+      return;
+    }
+    setIsClicked(false);
+    setCondition(initialCondition);
+  };
+
+  useEffect(() => {
+    window.addEventListener('click', clickOutSide);
+
+    return () => {
+      window.removeEventListener('click', clickOutSide);
+    };
+  }, []);
+
   return (
-    <StyledGuestModal isScrolled={isScrolled} isClicked={isClicked}>
+    <StyledGuestModal
+      isScrolled={isScrolled}
+      isClicked={isClicked}
+      className="guest-modal"
+    >
       GuestNumber Modal
     </StyledGuestModal>
   );

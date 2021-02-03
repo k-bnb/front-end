@@ -4,6 +4,8 @@ import ProfileButton from '../../UI/atoms/atoms-header/ProfileButton';
 import Logo from '../../UI/atoms/atoms-header/Logo';
 import SearchNavbar from '../../UI/organisms/organisms-header/SearchNavbar';
 import Text from '../../UI/atoms/atoms-header/Text';
+import ProfileToggleModal from '../../UI/organisms/organisms-header/ProfileToggleModal';
+import ProfileToggleModalContainer from '../../../containers/ProfileToggleModalContainer';
 
 const HeaderMainBlock = styled.header`
   text-align: center;
@@ -18,13 +20,6 @@ const HeaderMainBlock = styled.header`
     position: absolute;
     top: 45px;
     left: 40px;
-    transform: translateY(-50%);
-    margin: 0;
-  }
-  & > button {
-    position: absolute;
-    top: 50%;
-    right: 3%;
     transform: translateY(-50%);
     margin: 0;
   }
@@ -75,21 +70,21 @@ const HeaderMainBlock = styled.header`
         left: 50%;
         transform: translateX(-50%);
       }
-      ${(props) =>
-        props.isClicked &&
-        props.isScrolled &&
-        css`
-          .accomodation {
-            color: black;
-            top: 27%;
-          }
-          nav {
-            position: absolute;
-            top: 40%;
-            left: 50%;
-            transform: translateX(-50%);
-          }
-        `}
+    `}
+    ${(props) =>
+    props.isClicked &&
+    props.isScrolled &&
+    css`
+      .accomodation {
+        color: black;
+        top: 27%;
+      }
+      nav {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
     `}
 `;
 
@@ -129,16 +124,20 @@ const HeaderMain = () => {
   return (
     <HeaderMainBlock isScrolled={isScrolled} isClicked={isClicked}>
       {(isClicked || !isScrolled) && (
-        <Text className="accomodation" bold>
-          숙소
-        </Text>
+        <>
+          <Text className="accomodation" bold>
+            숙소
+          </Text>
+        </>
       )}
-      <Logo />
-      <ProfileButton />
+      <Logo isScrolled={isScrolled} />
+      <ProfileToggleModalContainer />
       <SearchNavbar
         initialCondition={initialCondition}
         isScrolled={isScrolled}
+        setIsScrolled={setIsScrolled}
         isClicked={isClicked}
+        setIsClicked={setIsClicked}
         onClickHandler={onClickHandler}
         condition={condition}
         setCondition={setCondition}

@@ -22,9 +22,10 @@ const SearchSelectedButtonBlock = styled.button`
   border: 0;
   color: white;
   margin-top: 8px;
-  margin-right: 22px;
+  margin-right: 30px;
   font-size: 16px;
   font-weight: bold;
+  padding: 0 15px;
   svg {
     font-weight: bold;
     font-size: 14px;
