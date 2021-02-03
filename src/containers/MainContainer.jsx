@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import HeaderMain from '../components/templates/templates-header/HeaderMain';
 import Main from '../components/templates/templates-main/Main';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeInput } from '../modules/auth';
 
 const imgs = [
   { src: './imgs/1.jpg', alt: '서울 지역 숙소', name: '서울' },

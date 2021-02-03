@@ -15,6 +15,7 @@ import Loginhead from '../../components/UI/molecules/molecules-main/Loginhead';
 import LoginGoogle from '../../components/UI/molecules/molecules-main/LoginGoogle';
 import LoginBtn from '../../components/UI/molecules/molecules-main/LoginBtn';
 import { keyframes } from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 
 const boxFade = keyframes`
 	0% {
@@ -326,9 +327,16 @@ const Modaldiv = styled.div`
   }
 `;
 
-const LoginPotal = ({ modal, setModal }) => {
-  const [formState, setFormState] = useState(false);
-
+const LoginModal = ({
+  setFormState,
+  formState,
+  modal,
+  setModal,
+  password,
+  email,
+  onChangeInput,
+}) => {
+  console.log(onChangeInput);
   // const noScroll = useCallback(() => {
   // 	if (modal) {
   // 		document.body.style.overflow = 'hidden';
@@ -349,13 +357,13 @@ const LoginPotal = ({ modal, setModal }) => {
   );
   console.log(formState);
   useEffect(() => {
-    setFormState(formState);
-  }, [formState]);
+    setFormState('login');
+  }, [setFormState]);
 
   const signupBtn = useCallback(
     (e) => {
       e.preventDefault();
-      setFormState(true);
+      setFormState('register');
       console.log(formState);
     },
     [formState],
@@ -363,21 +371,26 @@ const LoginPotal = ({ modal, setModal }) => {
   const signinBtn = useCallback(
     (e) => {
       e.preventDefault();
-      setFormState(false);
+      setFormState('login');
       console.log(formState);
     },
-    [formState],
+    [formState, setFormState],
   );
+  //  =======
+
+  //  ========
   return (
     <Modaldiv className="bg" onClick={bgClick}>
       <form>
         <CircleDiv
           className={modal ? 'login-group active' : 'login-group'}
-          style={formState ? { width: '590px' } : { width: '450px' }}
+          style={
+            formState === 'login' ? { width: '590px' } : { width: '450px' }
+          }
           logindiv
         >
           <Loginhead
-            name={formState ? '회원가입' : '로그인'}
+            name={formState === 'register' ? '회원가입' : '로그인'}
             modal={modal}
             setModal={setModal}
           />
@@ -387,18 +400,29 @@ const LoginPotal = ({ modal, setModal }) => {
           <CircleDiv className="email-login">
             <CircleDiv className="google-login">
               <CircleDiv
-                style={formState ? { width: '520px' } : {}}
+                style={formState === 'register' ? { width: '520px' } : {}}
                 className="login-input"
               >
                 <div className="email-div">
-                  <Input type="email" placeholder={'이메일 주소'} />
+                  <Input
+                    type="email"
+                    name="email"
+                    value={email}
+                    placeholder={'이메일 주소'}
+                    onChange={onChangeInput}
+                  />
                   <GoMail />
                 </div>
 
                 <div className="email-div">
                   <Input
-                    type={formState ? 'text' : 'password'}
-                    placeholder={formState ? '이름' : '비밀번호 입력'}
+                    value={password}
+                    name="password"
+                    type={formState === 'register' ? 'text' : 'password'}
+                    placeholder={
+                      formState === 'register' ? '이름' : '비밀번호 입력'
+                    }
+                    onChange={onChangeInput}
                   />
                   <RiLock2Line />
                 </div>
@@ -468,17 +492,19 @@ const LoginPotal = ({ modal, setModal }) => {
                   </label>
                 </div>
               )}
-              <LoginBtn name={formState ? '회원가입' : '로그인'} />
+              <LoginBtn
+                name={formState === 'register' ? '회원가입' : '로그인'}
+              />
             </CircleDiv>
           </CircleDiv>
           <CircleDiv borderline />
           <CircleDiv className="signup-div">
-            {formState ? (
+            {formState === 'register' ? (
               <TextStyle blacknormal>이미 에어비앤비 계정이 있나요?</TextStyle>
             ) : (
               <TextStyle blacknormal>에어비앤비 계정이 없으세요?</TextStyle>
             )}
-            {formState ? (
+            {formState === 'login' ? (
               <Button className="signup" onClick={signinBtn}>
                 <TextStyle greentextLine>로그인</TextStyle>
               </Button>
@@ -502,4 +528,4 @@ const LoginPotal = ({ modal, setModal }) => {
   );
 };
 
-export default LoginPotal;
+export default LoginModal;

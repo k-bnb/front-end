@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
-import { takeLatest } from 'redux-saga';
+import { takeLatest } from 'redux-saga/effects';
 import * as API from '../lib/api/auth';
 import createRequestSaga from '../lib/createRequestSaga';
 
@@ -53,6 +53,7 @@ const initialState = {
     email: '',
     password: '',
   },
+  token: null,
   registerError: null, // 회원가입 에러
   loginError: null, // 로그인 에러
 };

@@ -14,6 +14,27 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   rootReducer,
+  {
+    // 초기 상태
+    auth: {
+      // reducer-> state.auth
+      register: {
+        name: '',
+        year: '', // 생년
+        month: '', // 월
+        day: '', // 일
+        email: '',
+        password: '', // 패스워드 확인 없음.
+      },
+      login: {
+        email: '',
+        password: '',
+      },
+      token: localStorage.getItem('token'),
+      registerError: null, // 회원가입 에러
+      loginError: null, // 로그인 에러}
+    },
+  },
   composeWithDevTools(applyMiddleware(sagaMiddleware)),
 );
 
