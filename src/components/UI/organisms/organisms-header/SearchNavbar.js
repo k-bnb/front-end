@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import CheckDateUnit from '../../molecules/molecules-header/CheckDateUnit';
 import GuestNumber from '../../molecules/molecules-header/GuestNumber';
@@ -7,9 +7,13 @@ import SearchButtonUnit from '../../molecules/molecules-header/SearchButtonUnit'
 import LocationModal from '../../../templates/templates-header/LocationModal';
 import CalendarModal from '../../../templates/templates-header/CalendarModal';
 import GuestNumberModal from '../../../templates/templates-header/GuestNumberModal';
+import SearchSelectedButton from '../../atoms/atoms-header/SearchSelectedButton';
+
+const OuterContainer = styled.div``;
 
 const SearchNavbarBlock = styled.nav`
   overflow: hidden;
+  width: 761px;
   border-radius: 40px;
   background: white;
   margin: 20px auto 0;
@@ -18,6 +22,14 @@ const SearchNavbarBlock = styled.nav`
   justify-content: center;
   transition-duration: 0.2s;
   text-align: left;
+  .closer {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    /* background-color: rgba(0, 0, 0, 0.2); */
+    background-color: red;
+    z-index: 10;
+  }
   ${(props) =>
     props.isScrolled &&
     !props.isClicked &&
@@ -62,11 +74,24 @@ const SearchNavbar = ({
   condition,
   setCondition,
 }) => {
-  const isSelected = // 현재 하나라도 선택되어 있는상태인가? -> 선택되어 있으면 검색 버튼 변경하는 용도.
-    initialCondition.location ||
-    initialCondition.checkIn ||
-    initialCondition.checkOut ||
-    initialCondition.guestNum;
+  // const onCloseModal = (e) => {
+  //   setCondition(initialCondition);
+  // };
+  // useEffect(() => {
+  //   console.log(md);
+
+  //   if (
+  //     condition.checkIn ||
+  //     condition.checkOut ||
+  //     condition.location ||
+  //     condition.guestNum
+  //   ) {
+  //     window.addEventListener('click', onCloseModal);
+  //   }
+  //   return () => {
+  //     window.removeEventListener('click', onCloseModal);
+  //   };
+  // }, []);
 
   return (
     <>
@@ -78,11 +103,13 @@ const SearchNavbar = ({
         {(!isScrolled || isClicked) && (
           <>
             <SearchUnit
+              condition={condition.location}
               onClick={() => {
                 setCondition({ ...initialCondition, location: true });
               }}
             ></SearchUnit>
             <CheckDateUnit
+              condition={condition.checkIn}
               both
               onClick={() => {
                 setCondition({ ...initialCondition, checkIn: true });
@@ -91,6 +118,7 @@ const SearchNavbar = ({
               체크인
             </CheckDateUnit>
             <CheckDateUnit
+              condition={condition.checkOut}
               onClick={() => {
                 setCondition({ ...initialCondition, checkOut: true });
               }}
@@ -98,11 +126,20 @@ const SearchNavbar = ({
               체크아웃
             </CheckDateUnit>
             <GuestNumber
+              condition={condition.guestNum}
               onClick={() => {
                 setCondition({ ...initialCondition, guestNum: true });
               }}
             />
-            <SearchButtonUnit isClicked={isClicked} />
+            {isClicked ||
+            condition.location ||
+            condition.checkIn ||
+            condition.checkOut ||
+            condition.guestNum ? (
+              <SearchSelectedButton />
+            ) : (
+              <SearchButtonUnit isClicked={isClicked} />
+            )}
           </>
         )}
 
@@ -114,7 +151,15 @@ const SearchNavbar = ({
         )}
       </SearchNavbarBlock>
       {(!isScrolled || isClicked) && condition.location && (
-        <LocationModal isClicked={isClicked} isScrolled={isScrolled} />
+        <div
+          className="closer"
+          onClick={() => {
+            console.log('hi');
+            setCondition(initialCondition);
+          }}
+        >
+          <LocationModal isClicked={isClicked} isScrolled={isScrolled} />
+        </div>
       )}
       {(!isScrolled || isClicked) && condition.checkIn && (
         <CalendarModal isClicked={isClicked} isScrolled={isScrolled} />

@@ -1,15 +1,17 @@
 import { useState } from 'react';
-import LoginPotal from '../../../../portal/modals/LoginModal';
 import Modal from '../../../../portal/Modal';
 // import LoginPotal from '../../../../potals/modals/LoginModal';
 // import Modal from '../../../../potals/modals/Modal';
 import Button from '../../atoms/atoms-main/Button';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
+import LoginModalContainer from '../../../../portal/modals/LoginModalContainer';
 
-const RoomsLink = () => {
+const RoomsLink = (props) => {
+  console.log('dd', props);
   const [modal, setModal] = useState(false);
 
-  const click = () => {
+  const click = (e) => {
+    e.preventDefault();
     setModal(true);
   };
 
@@ -24,7 +26,7 @@ const RoomsLink = () => {
       </div>
       {modal && (
         <Modal>
-          <LoginPotal modal={modal} setModal={setModal} />
+          <LoginModalContainer modal={modal} setModal={setModal} />
         </Modal>
       )}
     </>

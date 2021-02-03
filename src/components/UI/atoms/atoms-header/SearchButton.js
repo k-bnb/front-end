@@ -27,7 +27,6 @@ const SearchButton = ({ isClicked }) => {
     <div>
       <SearchButtonBlock>
         <BiSearch />
-        {isClicked && <span>검색</span>}
       </SearchButtonBlock>
     </div>
   );

@@ -12,6 +12,7 @@ const StyledLocModal = styled.div`
   margin: 0 auto;
   border-radius: 40px;
   background-color: white;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.6) !important;
 
   ${(props) =>
     props.isScrolled &&

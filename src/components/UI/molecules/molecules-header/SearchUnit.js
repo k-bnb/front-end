@@ -10,10 +10,14 @@ const SearchUnitBlock = styled.div`
 
 const SearchUnitOuterBlock = styled.div`
   cursor: pointer;
-  min-width: 150px;
-  padding: 15px 0 15px 30px;
+  text-align: left;
+  min-width: 230px;
+  padding: 15px 0 15px 25px;
   background-color: #fff;
   border: 0;
+  & > div {
+    padding-left: 10px;
+  }
   &:hover > div {
     border: 0;
   }
@@ -23,10 +27,10 @@ const SearchUnitOuterBlock = styled.div`
   }
 `;
 
-const SearchUnit = (props) => {
+const SearchUnit = ({ onClick, condition }) => {
   return (
     <>
-      <SearchUnitOuterBlock onClick={props.onClick}>
+      <SearchUnitOuterBlock onClick={onClick}>
         <SearchUnitBlock>
           <Text small bold noPadding>
             위치

@@ -9,16 +9,24 @@ const MainComponentPc = styled.main`
 
   background-image: url(./imgs/bg.jpg);
   background-size: cover;
-  background-position: bottom 15% left 100%;
+  background-position: bottom 0% right 100%;
   background-repeat: no-repeat;
   .RoomLink {
-    width: 400px;
     display: flex;
-    flex-direction: row;
-    flex-flow: wrap;
+    flex-direction: column;
+
     button {
-      padding: 5px 10px;
-      margin-top: 25px;
+      span {
+        font-size: 1.3rem;
+        line-height: 3.4rem;
+        letter-spacing: 1.6px;
+        font-weight: 800;
+      }
+      width: 15rem;
+      border-radius: 10px;
+      /* width: 100px; */
+      padding: 5px 0px;
+      margin-top: 20px;
     }
     margin-bottom: 7%;
   }
@@ -34,18 +42,26 @@ const MainComponentTablet = styled.main`
   background-position: bottom 15% left 100%;
   background-repeat: no-repeat;
   .RoomLink {
-    width: 400px;
+    /* width: 400px; */
     display: flex;
-    flex-direction: row;
-    flex-flow: wrap;
+    flex-direction: column;
 
     span {
       /* font-size: 3rem; */
     }
 
     button {
-      padding: 5px 10px;
-      margin-top: 25px;
+      span {
+        font-size: 1.1rem;
+        line-height: 3.4rem;
+        letter-spacing: 1.6px;
+        font-weight: 800;
+      }
+      width: 15rem;
+      border-radius: 5px;
+      /* width: 100px; */
+      padding: 5px 0px;
+      margin-top: 20px;
     }
     margin-bottom: 7%;
   }
@@ -54,37 +70,39 @@ const MainComponentTablet = styled.main`
 const MainComponentMobile = styled.main`
   /* width: 100%; */
 
-  padding: 20px 20px 200px 30px;
+  padding: 180px 20px 200px 30px;
 
   background-image: url(./imgs/bg.jpg);
   background-size: cover;
   background-position: bottom 15% left 100%;
   background-repeat: no-repeat;
-  min-height: 500px;
+  min-height: 600px;
   .RoomLink {
-    width: 300px;
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
 
+    display: flex;
+    flex-direction: column;
     span {
-      width: 300px;
       font-size: 3rem;
-      line-height: 3rem;
+      line-height: 3.4rem;
       letter-spacing: 1.6px;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     button {
+      width: 15rem;
       span {
-        font-size: 1rem;
+        font-size: 1.3rem;
         line-height: 2;
+        font-weight: 700;
       }
-      width: 200px;
-      padding: 0px 0px;
-      margin-top: 25px;
+      border-radius: 5px;
+      /* width: 100px; */
+      padding: 5px 0px;
+      margin-top: 20px;
     }
-    margin-bottom: 7%;
   }
 `;
 
