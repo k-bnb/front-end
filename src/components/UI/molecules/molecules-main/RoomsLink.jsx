@@ -9,7 +9,8 @@ import TextStyle from '../../atoms/atoms-main/TextStyle';
 const RoomsLink = () => {
   const [modal, setModal] = useState(false);
 
-  const click = () => {
+  const click = (e) => {
+    e.preventDefault();
     setModal(true);
   };
 

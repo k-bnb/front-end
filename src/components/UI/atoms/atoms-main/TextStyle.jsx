@@ -6,7 +6,7 @@ const StyleSpan = styled.span`
     prop.whiteMainBold &&
     css`
       color: #fff;
-      font-size: 4rem;
+      font-size: 5rem;
       letter-spacing: -0.02em;
       line-height: 70px;
       font-weight: 800;
@@ -16,7 +16,7 @@ const StyleSpan = styled.span`
     prop.whiteMiddleSmallBold &&
     css`
       color: #fff;
-      font-size: 1rem;
+      font-size: 1.6rem;
       letter-spacing: -0.02em;
       line-height: 70px;
       font-weight: 800;
@@ -61,7 +61,7 @@ const StyleSpan = styled.span`
     prop.blackBold &&
     css`
       color: #222;
-      font-size: 1.9rem;
+      font-size: 3rem;
       letter-spacing: 3px;
       line-height: 36px;
       font-weight: 800;
@@ -81,7 +81,7 @@ const StyleSpan = styled.span`
     prop.whiteBold &&
     css`
       color: #eee;
-      font-size: 1.9rem;
+      font-size: 3.9rem;
       letter-spacing: 3px;
       line-height: 36px;
       font-weight: 800;
@@ -99,7 +99,7 @@ const StyleSpan = styled.span`
     prop.blackmiddlebold &&
     css`
       color: #222;
-      font-size: 1rem;
+      font-size: 1.7rem;
       letter-spacing: normal;
       font-weight: 700;
     `}
