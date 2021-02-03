@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import HostingData from './HostingData';
-import BookingInfo from './BookingInfo';
 import { TypeInfo } from './TypeInfo';
 import { TextSummary } from './TextSummary';
 import EmoticonNotice from './EmoticonNotice';
+import BookingInfo from '../../organisms/organisms-detail/BookingInfo';
 
 const InfoContainer = styled.div`
   display: flex;
@@ -24,6 +24,7 @@ const BookingSummaryBox = styled.div`
   position: relative;
   width: 33.3%;
   margin-left: 8.3%;
+  top: 80px;
 `;
 
 const DetailInfoContainer = () => (

@@ -10,7 +10,6 @@ import WhiteBtn from '../../atoms/atoms-detail/WhiteBtn';
 const EmoticonContainer = styled.div`
   padding: 48px 0;
   font-size: 16px;
-  border-bottom: 1px solid rgb(221, 221, 221);
 `;
 
 const EmoticonNoticeBox = styled.div`

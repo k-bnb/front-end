@@ -6,7 +6,7 @@ import { BiBed } from 'react-icons/bi';
 
 const TypeInfoContainer = styled.div`
   padding: 48px 0;
-  border-bottom: 1px solid rgb(221, 221, 221);
+  /border-bottom: 1px solid rgb(221, 221, 221);
 `;
 
 export const TypeTitle = styled(Title)`
