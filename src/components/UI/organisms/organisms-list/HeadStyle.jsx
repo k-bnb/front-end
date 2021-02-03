@@ -15,13 +15,13 @@ const MobileSize = styled.main``;
 
 const HeadStyle = () => {
   const isPc = useMediaQuery({
-    query: '(min-width: 1128px)', //1128px 이상인 경우에만 적용
+    query: '(min-width: 1025px)', //1128px 이상인 경우에만 적용
   });
   const isTablet = useMediaQuery({
-    query: `(min-width: 745px)and (max-width: 1127px)`,
+    query: `(min-width: 677px)and (max-width: 1025px)`,
   });
   const isMobile = useMediaQuery({
-    query: `(max-width: 744px)`, //744px 이하인 경우에만 적용
+    query: `(max-width: 677px)`, //744px 이하인 경우에만 적용
   });
 
   return (

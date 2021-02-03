@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const ImgStyle = styled.img`
+  /* object-fit:cover; */
   ${(props) =>
     props.carousalImg &&
     css`
@@ -11,9 +12,10 @@ const ImgStyle = styled.img`
   ${(props) =>
     props.carousalBigImg &&
     css`
-      width: 100%;
-      height: 100%;
+      max-width: 100%;
+      height: auto;
       border-radius: 8px;
+      /* margin: 20px; */
     `}
 `;
 

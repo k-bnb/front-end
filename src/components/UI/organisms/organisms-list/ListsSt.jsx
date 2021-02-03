@@ -20,7 +20,8 @@ const TabletSize = styled.main`
 `;
 
 const MobileSize = styled.main`
-  width: 665px;
+  max-width: 744px;
+  /* padding: 20px; */
   min-height: calc(100vh - 0px);
   background-color: purple;
   /* carousalBihImg */
@@ -52,7 +53,7 @@ const ListStyle = () => {
       {isMobile && (
         <MobileSize className="Listmain">
           {/* <LodgingLists /> */}
-          <Border style={{width:'100%', margin: '0 auto' }} bigCarouselImg >
+          <Border bigCarouselImg >
             <Imgs carousalBigImg src="https://a0.muscache.com/im/pictures/02a7fd89-b923-4541-aff6-a6eeff4d4445.jpg?im_w=1200"/>
           </Border>
         </MobileSize>
