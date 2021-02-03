@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeInput } from '../../modules/auth';
-import LoginModal from './LoginModal';
+import LoginOraganisms from '../components/UI/organisms/organisms-modals-auth/LoginOraganisms';
+import { changeInput } from '../modules/auth';
 
 const LoginModalContainer = ({ modal, setModal }) => {
   const [formState, setFormState] = useState('login');
@@ -15,7 +15,7 @@ const LoginModalContainer = ({ modal, setModal }) => {
     dispatch(changeInput(formState, e.target.name, e.target.value));
   };
   return (
-    <LoginModal
+    <LoginOraganisms
       onChangeInput={onChangeInput}
       formState={formState}
       setFormState={setFormState}
