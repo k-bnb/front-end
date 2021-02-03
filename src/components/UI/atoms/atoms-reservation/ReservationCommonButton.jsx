@@ -37,12 +37,8 @@ const StyledButton = styled.button`
     `}
 `;
 
-const ReservationEditButton = ({ openClick, children, ...rest }) => {
-  return (
-    <StyledButton onClick={openClick} {...rest}>
-      {children}
-    </StyledButton>
-  );
+const ReservationEditButton = ({ children, ...rest }) => {
+  return <StyledButton {...rest}>{children}</StyledButton>;
 };
 
 export default ReservationEditButton;

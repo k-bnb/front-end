@@ -112,7 +112,7 @@ const StyleSpan = styled.span`
     ${(props) =>
     props.blckMiddleTextLine &&
     css`
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 400;
       color: rgb(0, 0, 0);
       text-decoration: underline;
@@ -121,7 +121,7 @@ const StyleSpan = styled.span`
     ${(props) =>
     props.blackMiddleText &&
     css`
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 400;
       color: rgb(0, 0, 0);
     `}
