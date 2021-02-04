@@ -20,15 +20,13 @@ const store = createStore(
       // reducer의 state.auth에 들어가는 초기 상태, token을 로컬 스토리지에서 get 해서 넣어준다. (auth스토어와 localStorage를 연결)
       register: {
         name: '',
-        year: '', // 생년
-        month: '', // 월
-        day: '', // 일
-        email: '',
-        password: '', // 패스워드 확인 없음.
+        birth: '',
+        registerEmail: '',
+        registerPassword: '', // 패스워드 확인 없음.
       },
       login: {
-        email: '',
-        password: '',
+        loginEmail: '',
+        loginPassword: '',
       },
       token: localStorage.getItem('token'),
       registerError: null, // 회원가입 에러

@@ -9,14 +9,9 @@ const AuthModalContainer = ({ modal, setModal, formState, setFormState }) => {
   const { loginEmail, loginPassword } = useSelector(
     (state) => state.auth.login,
   );
-  const {
-    registerEmail,
-    name,
-    registerPassword,
-    year,
-    month,
-    day,
-  } = useSelector((state) => state.auth.register);
+  const { registerEmail, name, registerPassword, birth } = useSelector(
+    (state) => state.auth.register,
+  );
 
   const onChange = (e) => {
     console.log('change');
@@ -30,9 +25,7 @@ const AuthModalContainer = ({ modal, setModal, formState, setFormState }) => {
 
   const onRegisterSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      register({ registerEmail, name, registerPassword, year, month, day }),
-    );
+    dispatch(register({ registerEmail, name, registerPassword, birth }));
   };
   return (
     <>
@@ -57,9 +50,7 @@ const AuthModalContainer = ({ modal, setModal, formState, setFormState }) => {
           name={name}
           email={registerEmail}
           password={registerPassword}
-          year={year}
-          month={month}
-          day={day}
+          birth={birth}
           modal={modal}
           setModal={setModal}
         />

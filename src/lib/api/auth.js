@@ -8,11 +8,12 @@ export const login = ({ email, password }) =>
   });
 
 // 회원가입
-export const register = ({ name, email, password }) =>
-  client.post('http://3.34.198.174:8080/auth/register', {
+export const register = ({ name, email, password, birth }) =>
+  client.post('http://3.34.198.174:8080/auth/signup', {
     name,
     email,
     password,
+    birth,
   });
 
 // 유저 정보 조회

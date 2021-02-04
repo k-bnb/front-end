@@ -22,14 +22,12 @@ const RegisterOrganism = ({
   name,
   email,
   password,
-  year,
-  month,
-  day,
+  birth,
   modal,
   setModal,
 }) => {
   return (
-    <ModalTemplate modal={modal} setModal={setModal} signup>
+    <ModalTemplate modal={modal} setModal={setModal} signup onSubmit={onSubmit}>
       <AuthHead name="회원가입" setModal={setModal} />
       <AuthGoogle />
       <CircleDiv borderline className="or" />
@@ -37,10 +35,11 @@ const RegisterOrganism = ({
         onChange={onChange}
         email={email}
         password={password}
+        name={name}
       />
-      <AuthRegisterdate name={name} year={year} month={month} day={day} />
+      <AuthRegisterdate onChange={onChange} name={name} birth={birth} />
       <BtnContainer>
-        <AuthBtn name="회원가입" onSubmit={onSubmit} />
+        <AuthBtn name="회원가입" />
       </BtnContainer>
     </ModalTemplate>
   );

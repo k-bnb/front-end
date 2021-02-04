@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Input from '../../atoms/atoms-main/Input';
 import MainInfoParagraph from '../../atoms/atoms-main/MainInfoParagraph';
@@ -24,7 +24,7 @@ const InputContainer = styled.div`
   }
 `;
 
-const AuthRegisterdate = () => {
+const AuthRegisterdate = ({ onChange, birth }) => {
   return (
     <>
       <MainInfoParagraph>
@@ -32,7 +32,14 @@ const AuthRegisterdate = () => {
         다른 회원에게 공개되지 않습니다.
       </MainInfoParagraph>
       <InputContainer>
-        <Input type="date" required pattern="\d{4}-\d{2}-\d{2}" />
+        <Input
+          type="date"
+          name="birth"
+          value={birth}
+          required
+          pattern="\d{4}-\d{2}-\d{2}"
+          onChange={onChange}
+        />
       </InputContainer>
     </>
   );
