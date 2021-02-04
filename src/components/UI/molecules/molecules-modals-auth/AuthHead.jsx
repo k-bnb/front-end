@@ -29,7 +29,7 @@ const Container = styled.div`
 const AuthHead = ({ name, setModal }) => {
   const hide = (e) => {
     e.preventDefault();
-    // props.setModal(false);
+
     setModal(false);
   };
   return (

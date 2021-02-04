@@ -4,7 +4,7 @@ import TextStyle from '../../atoms/atoms-main/TextStyle';
 const AuthButton = styled.button`
   width: 100%;
   border: 0;
-  height: 40px;
+  height: 100%;
   background-color: rgb(255, 90, 95);
   border-radius: 5px;
   span {

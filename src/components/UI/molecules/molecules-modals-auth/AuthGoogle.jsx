@@ -4,11 +4,6 @@ import Button from '../../atoms/atoms-main/Button';
 import CircleDiv from '../../atoms/atoms-main/DivStyle';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
 const Container = styled.div`
-  /* display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  align-items: center;
-  border-radius: 0; */
   margin-top: 10px;
   display: flex;
   align-items: flex-start;
