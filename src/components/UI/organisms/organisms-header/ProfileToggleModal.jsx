@@ -16,19 +16,32 @@ const ProfileToggleBlock = styled.div`
   }
 `;
 
-const ProfileToggleModal = ({ isOpen, setIsOpen, formState, setFormState }) => {
+const ProfileToggleModal = ({
+  isOpen,
+  setIsOpen,
+  formState,
+  setFormState,
+  token,
+  dispatch,
+}) => {
   const handleOnClick = () => {
     setIsOpen(!isOpen); // 토글로 모달창을 켜고 닫는다.
   };
 
   return (
     <ProfileToggleBlock>
-      <ProfileButton handleOnClick={handleOnClick}></ProfileButton>
+      <ProfileButton
+        handleOnClick={handleOnClick}
+        token={token}
+      ></ProfileButton>
       {isOpen && (
         <ProfileToggleItems
+          isOpen={isOpen}
           setIsOpen={setIsOpen}
           formState={formState}
           setFormState={setFormState}
+          token={token}
+          dispatch={dispatch}
         />
       )}
     </ProfileToggleBlock>

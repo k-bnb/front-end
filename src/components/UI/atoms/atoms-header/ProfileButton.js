@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { FaUserCircle } from 'react-icons/fa';
 
@@ -22,12 +22,17 @@ const ProfileButtonBlock = styled.button`
   svg:last-child {
     font-size: 30px;
   }
+  ${(props) =>
+    props.token &&
+    css`
+      color: red;
+    `}
 `;
 
-const ProfileButton = ({ handleOnClick }) => {
+const ProfileButton = ({ handleOnClick, token }) => {
   // handleOnClick 함수는 모달창을 껐다 켜주는 토글 함수
   return (
-    <ProfileButtonBlock onClick={handleOnClick}>
+    <ProfileButtonBlock onClick={handleOnClick} token={token}>
       <GiHamburgerMenu />
       <FaUserCircle />
     </ProfileButtonBlock>

@@ -3,6 +3,7 @@ import Text from '../../atoms/atoms-header/Text';
 import styled from 'styled-components';
 import Modal from '../../../../portal/Modal';
 import AuthModalContainer from '../../../../containers/AuthModalContainer';
+import { logout } from '../../../../modules/auth';
 
 const ProfileToggleItemUl = styled.ul`
   list-style: none;
@@ -36,7 +37,14 @@ const ProfileToggleItemLi = styled.li`
   }
 `;
 
-const ProfileToggleItems = ({ setIsOpen, formState, setFormState }) => {
+const ProfileToggleItems = ({
+  isOpen,
+  setIsOpen,
+  formState,
+  setFormState,
+  token,
+  dispatch,
+}) => {
   const [modal, setModal] = useState(false);
 
   const displayLoginModal = (e) => {
@@ -44,7 +52,6 @@ const ProfileToggleItems = ({ setIsOpen, formState, setFormState }) => {
     console.log('loginClick');
     setFormState('login');
     setModal(true);
-    console.log(formState);
   };
 
   const displayRegisterModal = (e) => {
@@ -55,20 +62,28 @@ const ProfileToggleItems = ({ setIsOpen, formState, setFormState }) => {
   };
 
   const clickOutside = (e) => {
-    if (
-      // 모달 창의 내부를 클릭한게 아니라면 창을 닫아주는 함수
-      e.target.matches('.profile-toggle-modal > li') ||
-      e.target.matches('.profile-toggle-modal') ||
-      e.target.matches('.login-group.active')
-    ) {
-      if (!!e.target.classList[2]) {
-        const formName = e.target.classList[2];
-        setFormState(formName);
-        // setIsOpen(false); // 로그인 / 회원가입 상태 변경 해주고 닫기
+    // 모달 창의 내부를 클릭한게 아니라면 창을 닫아주는 함수
+    // 로그인/회원가입 모달이 열려있지 않고, 프로필 아래의 토글 모달영역 내부가 아닐때.
+    if (isOpen && !modal)
+      if (
+        e.target.matches('.profile-toggle-modal > li') ||
+        e.target.matches('.profile-toggle-modal')
+      ) {
+        return;
+      } else if (
+        e.target.closest('form') &&
+        e.target.closest('form').className === 'auth-modal-form'
+      ) {
+        return;
       }
-      return;
-    }
-    // setIsOpen(false);
+
+    setIsOpen(false);
+  };
+
+  // 로그아웃 함수
+  const requestLogOut = () => {
+    dispatch(logout());
+    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -78,23 +93,38 @@ const ProfileToggleItems = ({ setIsOpen, formState, setFormState }) => {
       window.removeEventListener('click', clickOutside);
     };
   }, []);
+  console.log(token);
 
   return (
     <>
       <ProfileToggleItemUl className="profile-toggle-modal">
-        <ProfileToggleItemLi onClick={displayLoginModal} className="login">
-          로그인
-        </ProfileToggleItemLi>
-        <ProfileToggleItemLi
-          onClick={displayRegisterModal}
-          className="register"
-        >
-          회원가입
-        </ProfileToggleItemLi>
+        {!token && (
+          <>
+            <ProfileToggleItemLi onClick={displayLoginModal} className="login">
+              로그인
+            </ProfileToggleItemLi>
+            <ProfileToggleItemLi
+              onClick={displayRegisterModal}
+              className="register"
+            >
+              회원가입
+            </ProfileToggleItemLi>
+          </>
+        )}
+        {token && (
+          <>
+            <ProfileToggleItemLi>예약 내역</ProfileToggleItemLi>
+            <ProfileToggleItemLi onClick={requestLogOut}>
+              로그 아웃
+            </ProfileToggleItemLi>
+          </>
+        )}
       </ProfileToggleItemUl>
       {modal && (
         <Modal>
           <AuthModalContainer
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
             modal={modal}
             setModal={setModal}
             formState={formState}
