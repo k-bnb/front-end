@@ -53,7 +53,7 @@ const EmailLoginInput = ({ email, password, onChange }) => {
             <div className="email-div">
               <Input
                 type="email"
-                name="email"
+                name="loginEmail"
                 value={email}
                 placeholder={'이메일 주소'}
                 onChange={onChange}
@@ -71,7 +71,7 @@ const EmailLoginInput = ({ email, password, onChange }) => {
             <div className="email-div">
               <Input
                 value={password}
-                name="password"
+                name="loginPassword"
                 type="password"
                 placeholder="비밀번호 입력"
                 onChange={onChange}

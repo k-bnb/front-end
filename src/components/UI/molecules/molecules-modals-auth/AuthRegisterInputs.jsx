@@ -24,36 +24,36 @@ const InputContainer = styled.div`
   }
 `;
 
-const AuthRegisterInputs = () => {
+const AuthRegisterInputs = ({ email, name, password, onChange }) => {
   return (
     <>
       <InputContainer>
         <Input
           type="text"
           name="name"
-          // value={email}
+          value={name}
           placeholder={'이름'}
-          // onChange={onChangeInput}
+          onChange={onChange}
         />
         <AiOutlineUser />
       </InputContainer>
       <InputContainer>
         <Input
           type="email"
-          name="email"
-          // value={email}
+          name="registerEmail"
+          value={email}
           placeholder={'이메일 주소'}
-          // onChange={onChangeInput}
+          onChange={onChange}
         />
         <GoMail />
       </InputContainer>
       <InputContainer>
         <Input
-          type="email"
-          name="password"
-          // value={email}
+          type="password"
+          name="registerPassword"
+          value={password}
           placeholder={'비밀번호 입력'}
-          // onChange={onChangeInput}
+          onChange={onChange}
         />
         <RiLockPasswordLine />
       </InputContainer>

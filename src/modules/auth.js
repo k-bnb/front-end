@@ -24,14 +24,12 @@ export const changeInput = createAction(CHANGE_INPUT, (form, name, value) => ({
 export const initializeInput = createAction(INITIALIZE_INPUT, (form) => form);
 export const register = createAction(
   REGISTER,
-  ({ name, year, month, day, email, password }) => ({
+  ({ name, birth, registerEmail, registerPassword }) => ({
     // register 상태 전달
     name,
-    year,
-    month,
-    day,
-    email,
-    password,
+    birth,
+    email: registerEmail,
+    password: registerPassword,
   }),
 );
 export const login = createAction(
@@ -46,9 +44,7 @@ export const login = createAction(
 const initialState = {
   register: {
     name: '',
-    year: '', // 생년
-    month: '', // 월
-    day: '', // 일
+    birth: '',
     registerEmail: '',
     registerPassword: '', // 패스워드 확인 없음.
   },
@@ -87,7 +83,7 @@ const auth = handleActions(
     [REGISTER_SUCCESS]: (_, { payload: { accessToken } }) => {
       // 토큰을 스토리지에 저장
       localStorage.setItem('token', accessToken);
-      return { ...initialState };
+      return { ...initialState, token: accessToken };
     },
     [REGISTER_FAILURE]: (state, action) => {
       // 왜 안돼
