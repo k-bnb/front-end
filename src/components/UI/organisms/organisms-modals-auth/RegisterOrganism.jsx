@@ -14,16 +14,33 @@ const BtnContainer = styled.div`
   margin: 2.4rem 0;
 `;
 
-const RegisterOrganism = ({ modal, setModal }) => {
+const RegisterOrganism = ({
+  formState,
+  setFormState,
+  onChange,
+  onSubmit,
+  name,
+  email,
+  password,
+  year,
+  month,
+  day,
+  modal,
+  setModal,
+}) => {
   return (
     <ModalTemplate modal={modal} setModal={setModal} signup>
       <AuthHead name="회원가입" setModal={setModal} />
       <AuthGoogle />
       <CircleDiv borderline className="or" />
-      <AuthRegisterInputs />
-      <AuthRegisterdate />
+      <AuthRegisterInputs
+        onChange={onChange}
+        email={email}
+        password={password}
+      />
+      <AuthRegisterdate name={name} year={year} month={month} day={day} />
       <BtnContainer>
-        <AuthBtn name="회원가입" />
+        <AuthBtn name="회원가입" onSubmit={onSubmit} />
       </BtnContainer>
     </ModalTemplate>
   );

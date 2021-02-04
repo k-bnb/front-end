@@ -41,6 +41,16 @@ const ProfileToggleItems = ({ setIsOpen, formState, setFormState }) => {
 
   const displayLoginModal = (e) => {
     e.preventDefault();
+    console.log('loginClick');
+    setFormState('login');
+    setModal(true);
+    console.log(formState);
+  };
+
+  const displayRegisterModal = (e) => {
+    e.preventDefault();
+    console.log('registerClick');
+    setFormState('register');
     setModal(true);
   };
 
@@ -75,11 +85,20 @@ const ProfileToggleItems = ({ setIsOpen, formState, setFormState }) => {
         <ProfileToggleItemLi onClick={displayLoginModal} className="login">
           로그인
         </ProfileToggleItemLi>
-        <ProfileToggleItemLi className="register">회원가입</ProfileToggleItemLi>
+        <ProfileToggleItemLi
+          onClick={displayRegisterModal}
+          className="register"
+        >
+          회원가입
+        </ProfileToggleItemLi>
       </ProfileToggleItemUl>
       {modal && (
         <Modal>
-          <AuthModalContainer modal={modal} setModal={setModal} />
+          <AuthModalContainer
+            modal={modal}
+            setModal={setModal}
+            formState={formState}
+          />
         </Modal>
       )}
     </>
