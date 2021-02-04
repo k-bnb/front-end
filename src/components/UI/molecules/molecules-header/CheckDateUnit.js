@@ -15,6 +15,13 @@ const CheckDateUnitOuterBlock = styled.div`
     border-radius: 32px;
     background-color: lightgray;
   }
+  ${(props) =>
+    props.condition &&
+    css`
+      border-radius: 32px;
+      background: linear-gradient(145deg, #f0f0f0, #cacaca);
+      box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff;
+    `}
 `;
 
 const CheckDateUnitBlock = styled.div`
@@ -37,7 +44,7 @@ const CheckDateUnitBlock = styled.div`
 const CheckDateUnit = (props) => {
   return (
     <CheckDateUnitOuterBlock>
-      <CheckDateUnitBlock {...props}>
+      <CheckDateUnitBlock {...props} condition={props.condition}>
         <Text small bold noPadding block>
           {props.children}
         </Text>

@@ -9,8 +9,6 @@ import CalendarModal from '../../../templates/templates-header/CalendarModal';
 import GuestNumberModal from '../../../templates/templates-header/GuestNumberModal';
 import SearchSelectedButton from '../../atoms/atoms-header/SearchSelectedButton';
 
-const OuterContainer = styled.div``;
-
 const SearchNavbarBlock = styled.nav`
   overflow: hidden;
   width: 761px;
@@ -68,31 +66,14 @@ const SearchNavbarBlock = styled.nav`
 
 const SearchNavbar = ({
   isScrolled,
+  setIsScrolled,
   isClicked,
+  setIsClicked,
   onClickHandler,
   initialCondition,
   condition,
   setCondition,
 }) => {
-  // const onCloseModal = (e) => {
-  //   setCondition(initialCondition);
-  // };
-  // useEffect(() => {
-  //   console.log(md);
-
-  //   if (
-  //     condition.checkIn ||
-  //     condition.checkOut ||
-  //     condition.location ||
-  //     condition.guestNum
-  //   ) {
-  //     window.addEventListener('click', onCloseModal);
-  //   }
-  //   return () => {
-  //     window.removeEventListener('click', onCloseModal);
-  //   };
-  // }, []);
-
   return (
     <>
       <SearchNavbarBlock
@@ -110,7 +91,6 @@ const SearchNavbar = ({
             ></SearchUnit>
             <CheckDateUnit
               condition={condition.checkIn}
-              both
               onClick={() => {
                 setCondition({ ...initialCondition, checkIn: true });
               }}
@@ -119,7 +99,9 @@ const SearchNavbar = ({
             </CheckDateUnit>
             <CheckDateUnit
               condition={condition.checkOut}
+              setCondition={setCondition}
               onClick={() => {
+                console.log('djsdfkfnnvnvnvn');
                 setCondition({ ...initialCondition, checkOut: true });
               }}
             >
@@ -151,24 +133,48 @@ const SearchNavbar = ({
         )}
       </SearchNavbarBlock>
       {(!isScrolled || isClicked) && condition.location && (
-        <div
-          className="closer"
-          onClick={() => {
-            console.log('hi');
-            setCondition(initialCondition);
-          }}
-        >
-          <LocationModal isClicked={isClicked} isScrolled={isScrolled} />
-        </div>
+        <LocationModal
+          isClicked={isClicked}
+          isScrolled={isScrolled}
+          setIsClicked={setIsClicked}
+          setIsScrolled={setIsScrolled}
+          setCondition={setCondition}
+          initialCondition={initialCondition}
+          condition={condition}
+        />
       )}
       {(!isScrolled || isClicked) && condition.checkIn && (
-        <CalendarModal isClicked={isClicked} isScrolled={isScrolled} />
+        <CalendarModal
+          isClicked={isClicked}
+          isScrolled={isScrolled}
+          setIsClicked={setIsClicked}
+          setIsScrolled={setIsScrolled}
+          setCondition={setCondition}
+          initialCondition={initialCondition}
+          condition={condition}
+        />
       )}
       {(!isScrolled || isClicked) && condition.checkOut && (
-        <CalendarModal isClicked={isClicked} isScrolled={isScrolled} />
+        <CalendarModal
+          isClicked={isClicked}
+          isScrolled={isScrolled}
+          setIsClicked={setIsClicked}
+          setIsScrolled={setIsScrolled}
+          setCondition={setCondition}
+          initialCondition={initialCondition}
+          condition={condition}
+        />
       )}
       {(!isScrolled || isClicked) && condition.guestNum && (
-        <GuestNumberModal isClicked={isClicked} isScrolled={isScrolled} />
+        <GuestNumberModal
+          isClicked={isClicked}
+          isScrolled={isScrolled}
+          setIsClicked={setIsClicked}
+          setIsScrolled={setIsScrolled}
+          setCondition={setCondition}
+          initialCondition={initialCondition}
+          condition={condition}
+        />
       )}
     </>
   );

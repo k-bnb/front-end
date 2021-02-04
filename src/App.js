@@ -9,6 +9,8 @@ import ListPage from './components/pages/ListPage';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import DetailPage from './components/pages/DetailPage';
 import ReservationPage from './components/pages/ReservationPage';
+import ProfileToggleModal from './components/UI/organisms/organisms-header/ProfileToggleModal';
+import Main from './components/templates/templates-main/Main';
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Route path="/reserve" component={ReservationPage} />
         <Route path="/detail/" component={DetailPage} />
         <Route path="/rooms" component={ListPage} />
+        {/* <Route path="/" exact component={ProfileToggleModal} /> */}
         <Route path="/" exact component={MainPage} />
       </Switch>
     </BrowserRouter>

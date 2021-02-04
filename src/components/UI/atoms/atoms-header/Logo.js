@@ -7,8 +7,8 @@ const LogoBlock = styled.h1`
   font-style: normal;
   font-weight: 900;
   font-size: 2rem;
-  color: white;
   svg {
+    color: white;
     /* font-size: 34px; */
   }
   span {
@@ -16,10 +16,13 @@ const LogoBlock = styled.h1`
     vertical-align: top;
   }
 
+  // 스크롤 된 상황에만 마젠타 색상으로 변경.
   ${(props) =>
-    props.magenta &&
+    props.isScrolled &&
     css`
-      color: rgb(255, 56, 92);
+      svg {
+        color: rgb(255, 56, 92);
+      }
     `}
 `;
 

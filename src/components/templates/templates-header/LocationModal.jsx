@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
 const StyledLocModal = styled.div`
@@ -22,9 +22,36 @@ const StyledLocModal = styled.div`
     `}
 `;
 
-const LocationModal = ({ isScrolled, isClicked }) => {
+const LocationModal = ({
+  isScrolled,
+  isClicked,
+  setIsClicked,
+  setCondition,
+  initialCondition,
+}) => {
+  const clickOutSide = (e) => {
+    console.log(e.target.matches('.location-modal'));
+    if (e.target.matches('.location-modal')) {
+      return;
+    }
+    setIsClicked(false);
+    setCondition(initialCondition);
+  };
+
+  useEffect(() => {
+    window.addEventListener('click', clickOutSide);
+
+    return () => {
+      window.removeEventListener('click', clickOutSide);
+    };
+  }, []);
+
   return (
-    <StyledLocModal isScrolled={isScrolled} isClicked={isClicked}>
+    <StyledLocModal
+      isScrolled={isScrolled}
+      isClicked={isClicked}
+      className="location-modal"
+    >
       Location Modal
     </StyledLocModal>
   );

@@ -4,31 +4,31 @@ import Modal from '../../../../portal/Modal';
 // import Modal from '../../../../potals/modals/Modal';
 import Button from '../../atoms/atoms-main/Button';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
-import LoginModalContainer from '../../../../portal/modals/LoginModalContainer';
+import AuthModalContainer from '../../../../containers/AuthModalContainer';
 
 const RoomsLink = (props) => {
-  console.log('dd', props);
-  const [modal, setModal] = useState(false);
+  // console.log('dd', props);
+  // const [modal, setModal] = useState(false);
 
-  const click = (e) => {
-    e.preventDefault();
-    setModal(true);
-  };
+  // const click = (e) => {
+  //   e.preventDefault();
+  //   setModal(true);
+  // };
 
   return (
     <>
       <div className="RoomLink">
         <TextStyle whiteMainBold>이제, 여행은</TextStyle>
         <TextStyle whiteMainBold>가까운 곳에서</TextStyle>
-        <Button normal onClick={click}>
+        <Button normal>
           <TextStyle blacknormal> 근처의 숙소 둘러보기</TextStyle>
         </Button>
       </div>
-      {modal && (
+      {/* {modal && (
         <Modal>
-          <LoginModalContainer modal={modal} setModal={setModal} />
+          <AuthModalContainer modal={modal} setModal={setModal} />
         </Modal>
-      )}
+      )} */}
     </>
   );
 };

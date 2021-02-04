@@ -24,9 +24,10 @@ const ProfileButtonBlock = styled.button`
   }
 `;
 
-const ProfileButton = () => {
+const ProfileButton = ({ handleOnClick }) => {
+  // handleOnClick 함수는 모달창을 껐다 켜주는 토글 함수
   return (
-    <ProfileButtonBlock>
+    <ProfileButtonBlock onClick={handleOnClick}>
       <GiHamburgerMenu />
       <FaUserCircle />
     </ProfileButtonBlock>
