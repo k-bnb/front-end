@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Button from '../../atoms/atoms-main/Button';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
+
 const AuthButton = styled.button`
   width: 100%;
   border: 0;

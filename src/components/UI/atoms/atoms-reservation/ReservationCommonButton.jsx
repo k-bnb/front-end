@@ -8,7 +8,7 @@ const StyledButton = styled.button`
   outline: none;
   cursor: pointer;
 
-  ${props =>
+  ${(props) =>
     props.edit &&
     css`
       font-size: 1.6rem;
@@ -16,7 +16,7 @@ const StyledButton = styled.button`
       text-decoration: underline;
     `}
 
-  ${props =>
+  ${(props) =>
     props.back &&
     css`
       position: absolute;
