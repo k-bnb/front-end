@@ -15,8 +15,6 @@ const RoomsLink = (props) => {
   //   setModal(true);
   // };
 
-  console.log(modal);
-
   return (
     <>
       <div className="RoomLink">
