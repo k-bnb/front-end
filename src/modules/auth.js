@@ -34,10 +34,13 @@ export const register = createAction(
     password,
   }),
 );
-export const login = createAction(LOGIN, ({ email, password }) => ({
-  email,
-  password,
-}));
+export const login = createAction(
+  LOGIN,
+  ({ loginEmail: email, loginPassword: password }) => ({
+    email,
+    password,
+  }),
+);
 
 // initial State
 const initialState = {
@@ -46,12 +49,12 @@ const initialState = {
     year: '', // 생년
     month: '', // 월
     day: '', // 일
-    email: '',
-    password: '', // 패스워드 확인 없음.
+    registerEmail: '',
+    registerPassword: '', // 패스워드 확인 없음.
   },
   login: {
-    email: '',
-    password: '',
+    loginEmail: '',
+    loginPassword: '',
   },
   token: null,
   registerError: null, // 회원가입 에러

@@ -92,7 +92,7 @@ const SearchNavbar = ({
             <CheckDateUnit
               condition={condition.checkIn}
               onClick={() => {
-                setCondition({ ...initialCondition, checkIn: true });
+                setCondition({ checkIn: true });
               }}
             >
               체크인
