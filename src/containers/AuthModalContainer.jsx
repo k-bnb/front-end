@@ -5,14 +5,6 @@ import RegisterOrganism from '../components/UI/organisms/organisms-modals-auth/R
 import { changeInput, login, register } from '../modules/auth';
 import { debounce } from 'lodash';
 
-function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, ms);
-  });
-}
-
 const AuthModalContainer = ({
   modal,
   setModal,
@@ -49,10 +41,25 @@ const AuthModalContainer = ({
     }
     if (!isEmail && e.target.name === 'loginPassword') {
       e.target.style.border = '1px solid black';
-      return;
-    }
 
-    e.target.style.border = '1px solid green';
+      if (e.target.name === 'name' && e.target.value !== 'kkk') {
+        e.target.style.border = '1px solid red';
+        return;
+      }
+
+      if (!isEmail && e.target.name === 'registerEmail') {
+        e.target.style.border = '1px solid red';
+        return;
+      }
+
+      if (e.target.name === 'registerPassword' && e.target.value !== 'iii') {
+        e.target.style.border = '1px solid red';
+
+        return;
+      }
+
+      e.target.style.border = '1px solid green';
+    }
   };
 
   const onLoginSubmit = (e) => {
@@ -66,6 +73,7 @@ const AuthModalContainer = ({
     dispatch(register({ registerEmail, name, registerPassword, birth }));
     setIsOpen(false);
   };
+
   return (
     <>
       {formState === 'login' && (
