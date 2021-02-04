@@ -4,22 +4,28 @@ const sizeStyles = css`
   ${(props) =>
     props.size === 'large' &&
     css`
-      height: 3rem;
-      font-size: 1.25rem;
+      height: 30px;
+      font-size: 20px;
+      padding: 8px 16px;
+
     `}
 
   ${(props) =>
     props.size === 'normal' &&
     css`
-      height: 2.25rem;
-      font-size: 1rem;
+      height: 14px;
+      font-size: 16px;
+      padding: 8px 16px;
+
     `}
 	
 	${(props) =>
     props.size === 'small' &&
     css`
-      height: 1.75rem;
-      font-size: 0.875rem;
+      height: 10px;
+      font-size: 14px;
+      padding: 8px 16px;
+
     `}
 	${(props) =>
     props.size === 'heart' &&
@@ -31,15 +37,32 @@ const sizeStyles = css`
 			padding: 0;
 			margin:0;
 			background-color:none;
-			&:hover{
-			background: ##f7f7f7;
-			border-color: #222;
-			&:active{
-				background: ##f7f7f7;
-				border-color: #222;
-				transform: scale(0.92);
-			}
-		`}
+      &:hover{
+        background:#f7f7f7;
+        border-color:#222;
+      }
+      &:active{
+        background: #f7f7f7;
+        border-color:#222;
+        transform: scale(0.92);
+      }
+    `}
+    
+    ${(props) =>
+    props.size === 'number' &&
+    css`
+      width : 20px;
+      height: 20px;
+      &:hover{
+        background:#f7f7f7;
+        border-color:#222;
+      }
+      &:focus{
+        background:#222;
+        color:white;
+      }
+    `}
+		
 `;
 
 const StyledButton = styled.button`
@@ -49,7 +72,6 @@ const StyledButton = styled.button`
   border-radius: 30px;
   cursor: pointer;
   outline: none;
-  padding: 8px 16px;
 
   /* 크기 */
   ${sizeStyles}

@@ -3,6 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
 import Imgs from '../../atoms/atoms-list/Imgs';
 import Border from '../../atoms/atoms-list/Border';
+import PageNation from '../../molecules/molecules-list/PageNation';
 // import LodgingLists from "../molecules/List20";
 
 const PcSize = styled.main`
@@ -43,6 +44,7 @@ const ListStyle = () => {
       {isPc && (
         <PcSize className="Listmain">
           <LodgingLists />
+          <PageNation />
         </PcSize>
       )}
       {isTablet && (

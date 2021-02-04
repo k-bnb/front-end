@@ -5,7 +5,8 @@ const SpanSt = styled.div`
     props.size === 'blackSmall' &&
     css`
       color: #222;
-      font-size: 0.8rem;
+      font-size: 14px;
+      
       /* letter-spacing : 3px;
 			line-height : 36px; */
     `}
@@ -13,7 +14,7 @@ const SpanSt = styled.div`
     props.size === 'blackSmallBold' &&
     css`
       color: #222;
-      font-size: 0.8rem;
+      font-size: 14px;
       /* letter-spacing : 3px;
 			line-height : 36px; */
       font-weight: 800;
@@ -22,7 +23,7 @@ const SpanSt = styled.div`
     props.size === 'blackMiddle' &&
     css`
       color: #222;
-      font-size: 1.2rem;
+      font-size: 16px;
       /* letter-spacing : 3px;
 			line-height : 36px; */
     `}
@@ -30,7 +31,7 @@ const SpanSt = styled.div`
     props.size === 'blackMiddleBold' &&
     css`
       color: #222;
-      font-size: 1.2rem;
+      font-size: 16px;
       /* letter-spacing : 3px;
 			line-height : 36px; */
       font-weight: 800;
@@ -39,7 +40,7 @@ const SpanSt = styled.div`
     props.size === 'blackLarge' &&
     css`
       color: #222;
-      font-size: 1.5rem;
+      font-size: 20px;
       /* letter-spacing : 3px;
 			line-height : 36px; */
     `}
@@ -47,7 +48,7 @@ const SpanSt = styled.div`
     props.size === 'blackLargeBold' &&
     css`
       color: #222;
-      font-size: 1.5rem;
+      font-size: 20px;
       /* letter-spacing : 3px;
 			line-height : 36px; */
       font-weight: 800;
