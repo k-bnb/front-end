@@ -7,6 +7,7 @@ const UnderlineBtn = styled.button`
   background-color: transparent;
   border: none;
   border-radius: 8px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   display: inline-block;
@@ -21,7 +22,7 @@ const UnderlineBtn = styled.button`
 
 const TextunderlineBtn = () => (
   <UnderlineBtn>
-    <AiOutlineHeart /> 저장목록
+    <AiOutlineHeart font-size="18px" /> 저장 목록
   </UnderlineBtn>
 );
 

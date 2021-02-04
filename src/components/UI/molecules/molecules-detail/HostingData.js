@@ -3,6 +3,10 @@ import styled from 'styled-components';
 
 const HostingDataContainer = styled.div`
   padding: 48px 0 24px;
+
+  .simple-data {
+    font-size: 16px;
+  }
 `;
 const HostInfo = styled.div`
   color: rgb(34, 34, 34);
@@ -15,7 +19,7 @@ const HostInfo = styled.div`
 const HostingData = () => (
   <HostingDataContainer>
     <HostInfo>Joy님이 호스팅하는 펜션</HostInfo>
-    최대 인원 2명.침실 1개.침대 1개.욕실 1개
+    <div className="simple-data">최대 인원 2명.침실 1개.침대 1개.욕실 1개</div>
   </HostingDataContainer>
 );
 

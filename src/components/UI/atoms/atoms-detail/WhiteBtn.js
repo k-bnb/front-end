@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const WhiteButton = styled.a`
   display: inline-block;
-  margin: 0;
+  margin: 24px 0 0;
   padding: 13px 23px;
   border-radius: 8px;
   border: 1px solid #222;
@@ -20,9 +20,9 @@ const WhiteButton = styled.a`
   }
 `;
 
-const WhiteBtn = () => (
+const WhiteBtn = ({ text }) => (
   <div>
-    <WhiteButton>편의시설 모두 보기</WhiteButton>
+    <WhiteButton>{text}</WhiteButton>
   </div>
 );
 export default WhiteBtn;
