@@ -15,6 +15,8 @@ const LOGIN = 'auth/LOGIN';
 const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
 const LOGIN_FAILURE = 'auth/LOGIN_FAILURE';
 
+const LOGOUT = 'auth/LOGOUT';
+
 // action creators
 export const changeInput = createAction(CHANGE_INPUT, (form, name, value) => ({
   form,
@@ -39,6 +41,8 @@ export const login = createAction(
     password,
   }),
 );
+
+export const logout = createAction(LOGOUT);
 
 // initial State
 const initialState = {
@@ -102,6 +106,10 @@ const auth = handleActions(
       ...state,
       loginError: action.payload.error,
     }),
+    [LOGOUT]: (state, action) => {
+      localStorage.removeItem('token');
+      return { ...initialState };
+    },
   },
   initialState,
 );

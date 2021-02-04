@@ -4,7 +4,14 @@ import LoginOraganisms from '../components/UI/organisms/organisms-modals-auth/Lo
 import RegisterOrganism from '../components/UI/organisms/organisms-modals-auth/RegisterOrganism';
 import { changeInput, login, register } from '../modules/auth';
 
-const AuthModalContainer = ({ modal, setModal, formState, setFormState }) => {
+const AuthModalContainer = ({
+  modal,
+  setModal,
+  formState,
+  setFormState,
+  isOpen,
+  setIsOpen,
+}) => {
   const dispatch = useDispatch();
   const { loginEmail, loginPassword } = useSelector(
     (state) => state.auth.login,
@@ -21,11 +28,13 @@ const AuthModalContainer = ({ modal, setModal, formState, setFormState }) => {
   const onLoginSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ loginEmail, loginPassword }));
+    setIsOpen(false);
   };
 
   const onRegisterSubmit = (e) => {
     e.preventDefault();
     dispatch(register({ registerEmail, name, registerPassword, birth }));
+    setIsOpen(false);
   };
   return (
     <>

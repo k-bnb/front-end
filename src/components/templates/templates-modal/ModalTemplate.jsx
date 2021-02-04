@@ -64,7 +64,7 @@ const ModalTemplate = ({ children, modal, setModal, signup, onSubmit }) => {
 
   return (
     <Modaldiv className="bg" onClick={bgClick}>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="auth-modal-form">
         <CircleDiv
           className={modal ? 'login-group active' : 'login-group'}
           logindiv
