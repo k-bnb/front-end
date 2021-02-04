@@ -4,16 +4,16 @@ import styled, { css } from 'styled-components';
 const StyledH2 = styled.h2`
   margin: 0;
   font-weight: bold;
-  ${props =>
+  ${(props) =>
     props.main &&
     css`
       font-size: 3.2rem;
     `}
 
-  ${props =>
+  ${(props) =>
     props.sub &&
     css`
-      font-size: 2rem;
+      font-size: 2.2rem;
     `}
 `;
 

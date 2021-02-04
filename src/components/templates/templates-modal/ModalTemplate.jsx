@@ -1,5 +1,5 @@
-import styled, { css, keyframes } from 'styled-components';
-import React, { Children, useCallback } from 'react';
+import styled, { keyframes } from 'styled-components';
+import React, { useCallback } from 'react';
 import CircleDiv from '../../UI/atoms/atoms-main/DivStyle';
 
 const boxFade = keyframes`
@@ -35,6 +35,7 @@ const Modaldiv = styled.div`
       animation: ${boxFade} 0.2s ease-in alternate forwards;
     }
   }
+
   .or {
     position: relative;
     &::before {

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { AiOutlineClose } from 'react-icons/ai';
 import Button from '../../atoms/atoms-main/Button';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
+
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -26,12 +27,13 @@ const Container = styled.div`
     margin: 0 auto;
   }
 `;
+
 const AuthHead = ({ name, setModal }) => {
   const hide = (e) => {
     e.preventDefault();
-    // props.setModal(false);
     setModal(false);
   };
+
   return (
     <Container>
       <Button onClick={hide} circlehover>
@@ -41,4 +43,5 @@ const AuthHead = ({ name, setModal }) => {
     </Container>
   );
 };
+
 export default AuthHead;

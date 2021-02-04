@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ReservationContent from '../../atoms/atoms-reservation/ReservationContent';
 import ReservationCommonButton from '../../atoms/atoms-reservation/ReservationCommonButton';

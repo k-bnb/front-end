@@ -2,7 +2,7 @@ import { Children } from 'react';
 import styled, { css } from 'styled-components';
 
 const StyleSpan = styled.span`
-  ${prop =>
+  ${(prop) =>
     prop.whiteMainBold &&
     css`
       color: #fff;
@@ -12,7 +12,7 @@ const StyleSpan = styled.span`
       font-weight: 800;
     `}
 
-  ${prop =>
+  ${(prop) =>
     prop.whiteMiddleSmallBold &&
     css`
       color: #fff;
@@ -22,7 +22,7 @@ const StyleSpan = styled.span`
       font-weight: 800;
     `}
     
-	${prop =>
+	${(prop) =>
     prop.whiteMiddleBold &&
     css`
       color: #fff;
@@ -32,7 +32,7 @@ const StyleSpan = styled.span`
       font-weight: 600;
     `}
 
-    ${prop =>
+    ${(prop) =>
     prop.blacktextLine &&
     css`
       color: #222;
@@ -43,7 +43,7 @@ const StyleSpan = styled.span`
       font-weight: 600;
     `}
     
-  ${prop =>
+  ${(prop) =>
     prop.greentextLine &&
     css`
       color: #008489;
@@ -56,7 +56,7 @@ const StyleSpan = styled.span`
       }
     `}
     
-	${prop =>
+	${(prop) =>
     prop.blackBold &&
     css`
       color: #222;
@@ -66,7 +66,7 @@ const StyleSpan = styled.span`
       font-weight: 800;
     `}
     
-    ${prop =>
+    ${(prop) =>
     prop.whiteBold &&
     css`
       color: #eee;
@@ -75,7 +75,7 @@ const StyleSpan = styled.span`
       line-height: 36px;
       font-weight: 800;
     `}
-    ${prop =>
+    ${(prop) =>
     prop.blacknormal &&
     css`
       color: #222;
@@ -84,7 +84,7 @@ const StyleSpan = styled.span`
       /* line-height: 36px; */
     `}
 
-    ${prop =>
+    ${(prop) =>
     prop.blackmiddlebold &&
     css`
       color: #222;
@@ -93,7 +93,7 @@ const StyleSpan = styled.span`
       font-weight: 700;
     `}
 
-		${props =>
+		${(props) =>
     props.blackSmallBold &&
     css`
       color: #000;
@@ -101,12 +101,29 @@ const StyleSpan = styled.span`
       font-weight: 600;
     `} 
 
-		${props =>
+		${(props) =>
     props.graySmallNormal &&
     css`
       color: #717171;
       font-size: 1.2rem;
       font-weight: 400;
+    `}
+
+    ${(props) =>
+    props.blckMiddleTextLine &&
+    css`
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: rgb(0, 0, 0);
+      text-decoration: underline;
+    `}
+
+    ${(props) =>
+    props.blackMiddleText &&
+    css`
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: rgb(0, 0, 0);
     `}
 `;
 
