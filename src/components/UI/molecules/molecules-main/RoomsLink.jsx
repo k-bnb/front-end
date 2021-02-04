@@ -4,7 +4,7 @@ import Modal from '../../../../portal/Modal';
 // import Modal from '../../../../potals/modals/Modal';
 import Button from '../../atoms/atoms-main/Button';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
-import LoginModalContainer from '../../../../portal/modals/LoginModalContainer';
+import AuthModalContainer from '../../../../containers/AuthModalContainer';
 
 const RoomsLink = (props) => {
   console.log('dd', props);
@@ -14,6 +14,8 @@ const RoomsLink = (props) => {
     e.preventDefault();
     setModal(true);
   };
+
+  console.log(modal);
 
   return (
     <>
@@ -26,7 +28,7 @@ const RoomsLink = (props) => {
       </div>
       {modal && (
         <Modal>
-          <LoginModalContainer modal={modal} setModal={setModal} />
+          <AuthModalContainer modal={modal} setModal={setModal} />
         </Modal>
       )}
     </>

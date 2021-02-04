@@ -11,9 +11,9 @@ import { RiArrowUpSLine } from 'react-icons/ri';
 
 import { GoMail } from 'react-icons/go';
 import { RiLock2Line } from 'react-icons/ri';
-import Loginhead from '../../components/UI/molecules/molecules-main/Loginhead';
-import LoginGoogle from '../../components/UI/molecules/molecules-main/LoginGoogle';
-import LoginBtn from '../../components/UI/molecules/molecules-main/LoginBtn';
+import Loginhead from '../../components/UI/molecules/molecules-modals-auth/AuthHead';
+import LoginGoogle from '../../components/UI/molecules/molecules-modals-auth/AuthGoogle';
+import LoginBtn from '../../components/UI/molecules/molecules-modals-auth/AuthBtn';
 import { keyframes } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -389,11 +389,8 @@ const LoginModal = ({
           }
           logindiv
         >
-          <Loginhead
-            name={formState === 'register' ? '회원가입' : '로그인'}
-            modal={modal}
-            setModal={setModal}
-          />
+          {/* 필요함 */}
+          <Loginhead name="회원가입" modal={modal} setModal={setModal} />
           <LoginGoogle />
 
           <CircleDiv borderline className="or" />
