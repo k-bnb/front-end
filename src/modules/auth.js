@@ -71,29 +71,33 @@ export function* authSaga() {
 // auth reducer
 const auth = handleActions(
   {
-    [CHANGE_INPUT]: (state, { payload: form, name, value }) =>
+    [CHANGE_INPUT]: (state, { payload: { form, name, value } }) =>
       produce(state, (draft) => {
         draft[form][name] = value;
       }),
+
     [INITIALIZE_INPUT]: (state, { payload: form }) => ({
       ...state,
       [form]: initialState,
     }),
     // 성공시 response.data
-    [REGISTER_SUCCESS]: (_, { payload: accessToken }) => {
+    [REGISTER_SUCCESS]: (_, { payload: { accessToken } }) => {
       // 토큰을 스토리지에 저장
       localStorage.setItem('token', accessToken);
       return { ...initialState };
     },
-    [REGISTER_FAILURE]: (state, action) => ({
+    [REGISTER_FAILURE]: (state, action) => {
       // 왜 안돼
-      ...state,
-      registerError: action.payload.error,
-    }),
-    [LOGIN_SUCCESS]: (_, { payload: accessToken }) => {
+      console.log(action);
+      return {
+        ...state,
+        registerError: action.payload.error,
+      };
+    },
+    [LOGIN_SUCCESS]: (_, { payload: { accessToken } }) => {
       // 토큰을 스토리지에 저장
       localStorage.setItem('token', accessToken);
-      return { ...initialState };
+      return { ...initialState, token: accessToken };
     },
     [LOGIN_FAILURE]: (state, action) => ({
       ...state,

@@ -52,8 +52,7 @@ const Modaldiv = styled.div`
   }
 `;
 
-const ModalTemplate = ({ children, modal, setModal, signup }) => {
-  console.log(signup);
+const ModalTemplate = ({ children, modal, setModal, signup, onSubmit }) => {
   const bgClick = useCallback(
     (e) => {
       if (!e.target.matches('.bg')) return;
@@ -64,7 +63,7 @@ const ModalTemplate = ({ children, modal, setModal, signup }) => {
 
   return (
     <Modaldiv className="bg" onClick={bgClick}>
-      <form>
+      <form onSubmit={onSubmit}>
         <CircleDiv
           className={modal ? 'login-group active' : 'login-group'}
           logindiv

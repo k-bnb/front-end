@@ -43,7 +43,8 @@ const EmailInputStyle = styled.div`
   }
 `;
 
-const EmailLoginInput = () => {
+const EmailLoginInput = ({ email, password, onChange }) => {
+  console.log('dsdf', email);
   return (
     <EmailInputStyle>
       <CircleDiv className="email-login">
@@ -53,21 +54,35 @@ const EmailLoginInput = () => {
               <Input
                 type="email"
                 name="email"
-                // value={email}
+                value={email}
                 placeholder={'이메일 주소'}
-                // onChange={onChangeInput}
+                onChange={onChange}
               />
+              {/* <input
+                type="email"
+                name="email"
+                value={email}
+                placeholder={'이메일 주소'}
+                onChange={onChange}
+              /> */}
               <GoMail />
             </div>
 
             <div className="email-div">
               <Input
-                // value={password}
+                value={password}
                 name="password"
                 type="password"
                 placeholder="비밀번호 입력"
-                // onChange={onChangeInput}
+                onChange={onChange}
               />
+              {/* <input
+                type="password"
+                value={password}
+                name="password"
+                placeholder="비밀번호 입력"
+                onChange={onChange}
+              /> */}
               <RiLock2Line />
             </div>
           </CircleDiv>
