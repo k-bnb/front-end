@@ -20,9 +20,9 @@ const WhiteButton = styled.a`
   }
 `;
 
-const WhiteBtn = () => (
+const WhiteBtn = ({ text }) => (
   <div>
-    <WhiteButton>편의시설 모두 보기</WhiteButton>
+    <WhiteButton>{text}</WhiteButton>
   </div>
 );
 export default WhiteBtn;

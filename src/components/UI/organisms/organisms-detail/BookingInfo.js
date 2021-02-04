@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import ReserveBtn from '../../atoms/atoms-detail/ReserveBtn';
 import DatePersonBox from '../../molecules/molecules-detail/DatePersonBox';
 import OneDayPrice from '../../molecules/molecules-detail/OneDayPrice';
+import PriceDetail from '../../molecules/molecules-detail/PriceDetail';
+import TotalPrice from '../../molecules/molecules-detail/TotalPrice';
 
 const BookingInfoContainer = styled.div`
   position: sticky;
@@ -18,7 +20,7 @@ const BookingInfoContainer = styled.div`
   box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
 
   .notice {
-    margin-top: 8px;
+    margin-top: 16px;
     white-space: normal;
     font-size: 14px;
     text-align: center;
@@ -32,6 +34,8 @@ const BookingInfo = () => (
     <DatePersonBox />
     <ReserveBtn></ReserveBtn>
     <span className="notice">예약 확정 전에는 요금이 청구되지 않습니다.</span>
+    <PriceDetail />
+    <TotalPrice />
   </BookingInfoContainer>
 );
 

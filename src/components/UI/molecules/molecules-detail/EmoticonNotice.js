@@ -77,7 +77,7 @@ const EmoticonNotice = () => (
     <Medkit />
     <Television />
     <Refrigerator />
-    <WhiteBtn />
+    <WhiteBtn text="편의시설 모두 보기" />
   </EmoticonContainer>
 );
 
