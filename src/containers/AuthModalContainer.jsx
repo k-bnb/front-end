@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginOraganisms from '../components/UI/organisms/organisms-modals-auth/LoginOraganisms';
 import RegisterOrganism from '../components/UI/organisms/organisms-modals-auth/RegisterOrganism';
@@ -6,6 +6,7 @@ import { changeInput, login, register } from '../modules/auth';
 
 const AuthModalContainer = ({ modal, setModal, formState, setFormState }) => {
   const dispatch = useDispatch();
+
   const { loginEmail, loginPassword } = useSelector(
     (state) => state.auth.login,
   );
@@ -13,9 +14,30 @@ const AuthModalContainer = ({ modal, setModal, formState, setFormState }) => {
     (state) => state.auth.register,
   );
 
+  const isEmail = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(
+    registerEmail,
+  );
+
   const onChange = (e) => {
-    console.log('change');
+    console.log('clicke');
     dispatch(changeInput(formState, e.target.name, e.target.value));
+
+    if (e.target.name === 'name' && e.target.value !== 'kkk') {
+      e.target.style.border = '1px solid red';
+      return;
+    }
+
+    if (!isEmail && e.target.name === 'registerEmail') {
+      e.target.style.border = '1px solid red';
+      return;
+    }
+
+    if (e.target.name === 'registerPassword' && e.target.value !== 'iii') {
+      e.target.style.border = '1px solid red';
+      return;
+    }
+
+    e.target.style.border = '1px solid green';
   };
 
   const onLoginSubmit = (e) => {
@@ -27,6 +49,7 @@ const AuthModalContainer = ({ modal, setModal, formState, setFormState }) => {
     e.preventDefault();
     dispatch(register({ registerEmail, name, registerPassword, birth }));
   };
+
   return (
     <>
       {formState === 'login' && (
