@@ -5,7 +5,7 @@ import Logo from '../../UI/atoms/atoms-header/Logo';
 import SearchNavbar from '../../UI/organisms/organisms-header/SearchNavbar';
 import Text from '../../UI/atoms/atoms-header/Text';
 import ProfileToggleModal from '../../UI/organisms/organisms-header/ProfileToggleModal';
-import ProfileToggleModalContainer from '../../../containers/ProfileToggleModalContainer';
+import ProfileToggleModalContainer from '../../../containers/header-containers/ProfileToggleModalContainer';
 
 const HeaderMainBlock = styled.header`
   text-align: center;

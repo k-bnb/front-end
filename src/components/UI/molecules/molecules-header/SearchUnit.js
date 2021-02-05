@@ -2,6 +2,7 @@ import React from 'react';
 import SearchInput from '../../atoms/atoms-header/SearchInput';
 import styled, { css } from 'styled-components';
 import Text from '../../atoms/atoms-header/Text';
+import LocationSearchInput from '../../atoms/atoms-header/LocationSearchInput';
 
 const SearchUnitBlock = styled.div`
   display: inline-block;
@@ -42,7 +43,7 @@ const SearchUnit = ({ onClick, condition }) => {
           <Text small bold noPadding>
             위치
           </Text>
-          <SearchInput />
+          <LocationSearchInput />
         </SearchUnitBlock>
       </SearchUnitOuterBlock>
     </>
