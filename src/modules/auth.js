@@ -1,17 +1,8 @@
-<<<<<<< HEAD
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
-import { takeLatest } from 'redux-saga/effects';
-import * as API from '../lib/api/auth';
 import createRequestSaga from '../lib/createRequestSaga';
-// import { action } from '../../node_modules/commander/typings/index';
-=======
-import { createAction, handleActions } from "redux-actions";
-import produce from "immer";
-import createRequestSaga from "../lib/createRequestSaga";
-import * as API from '../lib/api/auth'
-import {takeLatest} from 'redux-saga/effects'
->>>>>>> 8d2751d0d01920fa3cc487a73110740df4371802
+import * as API from '../lib/api/auth';
+import { takeLatest } from 'redux-saga/effects';
 
 //action type
 const CHANGE_INPUT = 'auth/CHANGE_INPUT';
@@ -25,46 +16,52 @@ const LOGIN_FAILURE = 'auth/LOGIN_FAILURE';
 const LOGOUT = 'auth/LOGOUT';
 
 //action creators
-export const changeInput = createAction(CHANGE_INPUT,(form,name,value) => ({
+export const changeInput = createAction(CHANGE_INPUT, (form, name, value) => ({
   form,
   name,
   value,
 }));
-export const initialzeInput = createAction(INITIALIZE_INPUT,(form) => ({
+export const initialzeInput = createAction(INITIALIZE_INPUT, (form) => ({
   form,
 }));
-export const register = createAction(REGISTER, ({name, birth, registerEmail, registerPassword})=>({
-  name,
-  birth,
-  email:registerEmail,
-  password:registerPassword,
-}));
-export const login = createAction(LOGIN, ({loginEmail:email, loginPassword:password})=>({
-  email,
-  password,
-}));
+export const register = createAction(
+  REGISTER,
+  ({ name, birth, registerEmail, registerPassword }) => ({
+    name,
+    birth,
+    email: registerEmail,
+    password: registerPassword,
+  }),
+);
+export const login = createAction(
+  LOGIN,
+  ({ loginEmail: email, loginPassword: password }) => ({
+    email,
+    password,
+  }),
+);
 export const logout = createAction(LOGOUT);
 
 //initial State
 const initialState = {
-  register : {
-    name : '',
-    birth : '',
-    email : '',
-    password : '',
+  register: {
+    name: '',
+    birth: '',
+    email: '',
+    password: '',
   },
   login: {
-    email : '',
-    password : '',
+    email: '',
+    password: '',
   },
   token: null,
-  registerError:null,
-  loginError:null,
-}
+  registerError: null,
+  loginError: null,
+};
 
 //saga
 const registerSaga = createRequestSaga(REGISTER, API.register);
-const loginSaga = createRequestSaga(LOGIN,API.login);
+const loginSaga = createRequestSaga(LOGIN, API.login);
 
 //authSaga
 export function* authSaga() {
@@ -72,19 +69,18 @@ export function* authSaga() {
   yield takeLatest(LOGIN, loginSaga);
 }
 
-
 //Reducer
 const auth = handleActions(
   {
     //[change_input]: (state,action.type)=>{}
-    [CHANGE_INPUT] : (state,{payload:{form, name, value}})=>
-    produce(state,(draft)=>{
-      draft[form][name]=value;
-    }),
+    [CHANGE_INPUT]: (state, { payload: { form, name, value } }) =>
+      produce(state, (draft) => {
+        draft[form][name] = value;
+      }),
 
-    [INITIALIZE_INPUT] : (state,{payload:{form}})=>({
+    [INITIALIZE_INPUT]: (state, { payload: { form } }) => ({
       ...state,
-      [form]:initialState
+      [form]: initialState,
     }),
     // 성공시 response.data
     [REGISTER_SUCCESS]: (_, { payload: { accessToken } }) => {
@@ -100,26 +96,27 @@ const auth = handleActions(
     //   };
     // },
 
-    [REGISTER_FAILURE] : (_,{payload:{error}})=>({
+    [REGISTER_FAILURE]: (_, { payload: { error } }) => ({
       ...initialState,
-      registerError:error
+      registerError: error,
     }),
 
-    [LOGIN_SUCCESS] : (_,{payload:{accessToken}}) => {
+    [LOGIN_SUCCESS]: (_, { payload: { accessToken } }) => {
       localStorage.setItem('token', accessToken);
-      return{...initialState,token:accessToken};
+      return { ...initialState, token: accessToken };
     },
 
-    [LOGIN_FAILURE] : (_,{payload:{error}}) => ({
+    [LOGIN_FAILURE]: (_, { payload: { error } }) => ({
       ...initialState,
-      loginError:error
+      loginError: error,
     }),
 
-    [LOGOUT] : () => {
+    [LOGOUT]: () => {
       localStorage.removeItem('token');
-      return{...initialState}
-    }
-  },initialState
-)
+      return { ...initialState };
+    },
+  },
+  initialState,
+);
 
 export default auth;
