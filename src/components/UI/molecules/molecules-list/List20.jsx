@@ -1,21 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-// import Border from '../atoms/Border';
-// import Bookmark from "../atoms/BookMark";
-// import Imgs from '../atoms/Imgs';
-// import Score from '../atoms/Score';
-// import TextStyled from '../atoms/Text';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BiWon } from 'react-icons/bi';
 import Bookmark from '../../atoms/atoms-list/BookMark';
 import Border from '../../atoms/atoms-list/Border';
 import Score from '../../atoms/atoms-list/Score';
 import TextStyled from '../../atoms/atoms-list/Text';
+import Imgs from '../../atoms/atoms-list/Imgs';
+import ScoreText from './Score-Text';
 
 const Wrap = styled.div`
-  width: 840px;
-  min-height: 5013px;
-  padding: 0 24px;
+  max-width: 100%;
+  height: auto;
+  /* min-height: 5013px;/ */
+  /* padding: 0 24px; */
   box-sizing: border-box;
 `;
 
@@ -23,11 +21,13 @@ const ULWrap = styled.ul`
   list-style: none;
   display: inline-block;
   padding: 0;
-  width: 808x;
-  height: 5013px;
+  /* width: 808px; */
+  /* height: 5013px; */
 
   li {
-    width: 792px;
+    /* width: 792px; */
+    position: relative;
+    width: 100%;
     height: 266px;
     padding: 24px 8px;
     box-sizing: border-box;
@@ -37,25 +37,27 @@ const ULWrap = styled.ul`
     border-bottom: 1px solid #000;
     align-items: center;
     :nth-child(1) {
-      /* background : #ccc; */
-      border-top: 2px solid #000;
-      /* border-bottom: none; */
+      /* border-top: 2px solid #000; */
+      border-top:2px dashed red;
     }
   }
   span {
     /* box-sizing:border-box; */
   }
   .TextWrap {
+    /* width: 100%; */
     padding: 0 10px 20px 10px;
     line-height: 25px;
   }
   .TextHead {
-    position: relative;
+    /* width: 100%; */
+    
   }
   .Ellipsis {
     width: 416px;
+    /* width: 100%; */
     height: 46px;
-    margin-right: 16px;
+    /* margin-right: 20px; */
     display: block;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -69,15 +71,17 @@ const ULWrap = styled.ul`
     height: 100%;
   }
   span:last-child {
-    /* background-color: #fff; */
-    width: 492px;
+    /* background-color: #fff;max-width: 100%;
+      height: auto; */
+    /* width: 492px; */
+    width:100%;
     margin-left: 16px;
     height: 100%;
   }
   .TextWrap > div > .heart {
     position: absolute;
-    right: -15px;
-    top: -10px;
+    right: 15px;
+    top: 5px;
   }
   hr {
     width: 50px;
@@ -107,12 +111,12 @@ const LodgingLists = ({ alt, ...rest }) => {
         <li>
           <span>
             <Border carouselImg>
-              {/* <Imgs
+              <Imgs
                 carousalImg
                 src="https://a0.muscache.com/im/pictures/02a7fd89-b923-4541-aff6-a6eeff4d4445.jpg?im_w=1200"
                 alt={alt}
                 {...rest}
-              /> */}
+              />
             </Border>
           </span>
           <span className="TextWrap">
@@ -120,7 +124,7 @@ const LodgingLists = ({ alt, ...rest }) => {
               <TextStyled size="blackSmall">jinjin의 아파트 전체</TextStyled>
               <TextStyled className="Ellipsis" size="blackMiddle">
                 동서남북역 도보1분/아파트전체/호텔급 풀옵션/반려동물 불가/금연
-                존
+                존/고성방가금지/시티뷰 
               </TextStyled>
               <Bookmark className="heart" heart>
                 <AiOutlineHeart />
@@ -132,14 +136,16 @@ const LodgingLists = ({ alt, ...rest }) => {
             </TextStyled>
             <TextStyled size="blackSmall">주차. 난방. 무선인터넷</TextStyled>
             <div className="TextBottom">
-              <Score className="Score">3.45(462)</Score>
+              <ScoreText />
               <TextStyled className="sleep" size="blackMiddleBold">
                 <BiWon />
-                325,900/박
+                325,900/박 
+                
               </TextStyled>
             </div>
           </span>
         </li>
+        
       </ULWrap>
     </Wrap>
   );
