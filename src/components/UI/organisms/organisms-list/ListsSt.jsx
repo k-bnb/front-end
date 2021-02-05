@@ -7,25 +7,20 @@ import PageNation from '../../molecules/molecules-list/PageNation';
 // import LodgingLists from "../molecules/List20";
 
 const PcSize = styled.main`
-  width: 840px;
   min-height: calc(100vh - 80px);
   background-color: #eee;
-  /* .listWrap{
-		padding: 0 24px;
-	} */
+  padding: 0 24px;
+  
 `;
 const TabletSize = styled.main`
-  width: 1000px;
-  min-height: calc(100vh - 80px);
+  /* min-height: calc(100vh - 80px); */
   background-color: skyblue;
+  padding: 0 24px;
 `;
 
 const MobileSize = styled.main`
-  max-width: 744px;
-  /* padding: 20px; */
   min-height: calc(100vh - 0px);
   background-color: purple;
-  /* carousalBihImg */
 `;
 
 const ListStyle = () => {
@@ -50,14 +45,15 @@ const ListStyle = () => {
       {isTablet && (
         <TabletSize className="Listmain">
           <LodgingLists />
+          <PageNation />
         </TabletSize>
       )}
       {isMobile && (
         <MobileSize className="Listmain">
-          {/* <LodgingLists /> */}
           <Border bigCarouselImg >
             <Imgs carousalBigImg src="https://a0.muscache.com/im/pictures/02a7fd89-b923-4541-aff6-a6eeff4d4445.jpg?im_w=1200"/>
           </Border>
+          <PageNation />
         </MobileSize>
       )}
     </>

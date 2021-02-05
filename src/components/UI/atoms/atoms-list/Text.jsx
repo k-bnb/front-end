@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 
 const SpanSt = styled.div`
+  padding: 0;
+  margin: 0;
   ${(props) =>
     props.size === 'blackSmall' &&
     css`
@@ -48,7 +50,7 @@ const SpanSt = styled.div`
     props.size === 'blackLargeBold' &&
     css`
       color: #222;
-      font-size: 20px;
+      font-size: 30px;
       /* letter-spacing : 3px;
 			line-height : 36px; */
       font-weight: 800;

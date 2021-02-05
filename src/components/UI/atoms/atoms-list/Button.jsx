@@ -30,8 +30,8 @@ const sizeStyles = css`
 	${(props) =>
     props.size === 'heart' &&
     css`
-			width:48px;
-			height:48px;
+			width:28px;
+			height:28px;
 			border-radius : 50%;
 			font-size:1.5rem;
 			padding: 0;

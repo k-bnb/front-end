@@ -6,6 +6,9 @@ import TextStyled from '../../atoms/atoms-list/Text';
 
 const SearchPlace = styled.div`
   margin-top:100px;
+  /* /* width: 100%; */
+  padding: 20px;
+  /* display: flex; */
 `
 
 const SearchData = () => {

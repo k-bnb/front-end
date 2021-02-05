@@ -1,9 +1,8 @@
-// import MainStyle from '../UI/organisms/ListMainSt';
-// import ListStyle from '../UI/organisms/ListsSt';
-import GoogleStyle from '../../UI/organisms/organisms-list/GoogleMapSt';
+import HeaderList from '../templates-header/HeaderList';
 import HeadStyle from '../../UI/organisms/organisms-list/HeadStyle';
 import ListStyle from '../../UI/organisms/organisms-list/ListsSt';
-import HeaderList from '../templates-header/HeaderList';
+import GoogleStyle from '../../UI/organisms/organisms-list/GoogleMapSt';
+import FooterFake from '../../UI/organisms/organisms-list/FooterFake';
 
 const ListTemplate = () => {
   return (
@@ -17,6 +16,7 @@ const ListTemplate = () => {
         </div>
         <GoogleStyle style={{ flexShrink: '1' }} />
       </div>
+      <FooterFake />
     </>
   );
 };

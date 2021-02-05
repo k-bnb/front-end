@@ -3,12 +3,15 @@ import styled from 'styled-components';
 import GoogleMapUse from "../../molecules/molecules-list/GoogleMap";
 
 const PcSize = styled.main`
-  /* display : inline-block; */
-  /* width: 80px; */
+  display : block;
+  margin-top:-80px;
+  padding-top:80px;
+  position:sticky;
+  top:0;
   min-width: calc(100vw - 840px);
-  /* min-height : calc(100vh - 80px); */
-  /* left : auto; */
-  background-color: lightcoral;
+  height:100vh;
+  /* cursor: url('https://maps.gstatic.com/mapfiles/openhand_8_8.cur'), default; */
+  /* background-color: lightcoral; */
 `;
 
 const TabletSize = styled.main`
@@ -41,14 +44,12 @@ const GoogleStyle = () => {
       )}
       {isTablet && (
         <TabletSize className="Asidemap">
-          {/* <GoogleApiWrapper /> */}
-          {/* <FakeBox /> */}
+          <GoogleMapUse />
         </TabletSize>
       )}
       {isMobile && (
         <MobileSize className="Asidemap">
-          {/* <GoogleApiWrapper /> */}
-          {/* <FakeBox /> */}
+          <GoogleMapUse />
         </MobileSize>
       )}
     </>

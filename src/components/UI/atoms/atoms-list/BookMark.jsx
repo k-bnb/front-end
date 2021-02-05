@@ -1,4 +1,3 @@
-import { AiTwotoneHeart } from 'react-icons/ai';
 import styled, { css } from 'styled-components';
 
 const BookmarkStyle = styled.div`
