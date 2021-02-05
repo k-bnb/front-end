@@ -18,6 +18,24 @@ const TextBlock = styled.span`
     `}
 
     ${(props) =>
+    props.gray &&
+    css`
+      color: gray;
+    `}
+
+    ${(props) =>
+    props.big &&
+    css`
+      font-size: 16px;
+    `}
+
+    ${(props) =>
+    props.bigger &&
+    css`
+      font-size: 20px;
+    `}
+
+    ${(props) =>
     props.middlebold &&
     css`
       font-weight: 500;

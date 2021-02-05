@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ProfileToggleModal from '../components/UI/organisms/organisms-header/ProfileToggleModal';
+import ProfileToggleModal from '../../components/UI/organisms/organisms-header/ProfileToggleModal';
 
 const ProfileToggleModalContainer = () => {
   // isOpen -> true일 경우 profileToggleModal에서 ProfileToggleItems을 켜주고 꺼주고..

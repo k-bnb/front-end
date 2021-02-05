@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
+import GuestNumberModalUnit from '../../UI/molecules/molecules-header/GuestNumberModalUnit';
 
 const StyledGuestModal = styled.div`
   position: absolute;
@@ -7,12 +8,12 @@ const StyledGuestModal = styled.div`
   left: 59%;
   transform: translate(-50%, 0);
   width: 400px;
-  height: 400px;
+  height: auto;
   border: 1px solid lightgray;
-  margin: 0 auto;
   border-radius: 40px;
   background-color: white;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.6) !important;
+  padding: 30px;
 
   ${(props) =>
     props.isScrolled &&
@@ -52,7 +53,9 @@ const GuestNumberModal = ({
       isClicked={isClicked}
       className="guest-modal"
     >
-      GuestNumber Modal
+      <GuestNumberModalUnit />
+      <GuestNumberModalUnit />
+      <GuestNumberModalUnit />
     </StyledGuestModal>
   );
 };

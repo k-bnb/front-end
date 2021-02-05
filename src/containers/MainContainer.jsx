@@ -4,6 +4,7 @@ import HeaderMain from '../components/templates/templates-header/HeaderMain';
 import Main from '../components/templates/templates-main/Main';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeInput } from '../modules/auth';
+import HeaderContainer from './header-containers/HeaderContainer';
 
 const imgs = [
   { src: './imgs/1.jpg', alt: '서울 지역 숙소', name: '서울' },
@@ -53,7 +54,7 @@ const section3Img = [
 const MainContainer = () => {
   return (
     <>
-      <HeaderMain />
+      <HeaderContainer />
       <Main
         imgs={imgs}
         section3Img={section3Img}

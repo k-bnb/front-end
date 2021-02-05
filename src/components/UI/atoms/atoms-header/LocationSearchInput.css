@@ -1,0 +1,62 @@
+.search {
+  position: relative;
+}
+
+.combo-box-pop-over {
+  width: 500px !important;
+  height: auto;
+  padding: 20px 10px 20px;
+  font-size: 15px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.6) !important;
+  border: 0 !important;
+  transform: translate(-20px, 30px);
+}
+
+.combo-box-input {
+  width: 190px;
+  border: 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+.combo-box-input:focus {
+  background-color: transparent;
+  outline: none;
+}
+
+.combo-box-options-container {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+.combo-box-options-container:hover {
+  background-color: rgb(238, 232, 232);
+}
+
+.combo-box-options {
+  padding: 0 20px;
+  height: 60px;
+  width: calc(100% - 48px) !important;
+  font-size: 15px;
+  line-height: 25px;
+}
+
+.combo-box-options:hover {
+  background-color: transparent !important;
+}
+.combo-box-marker-container {
+  background-color: rgb(245, 238, 238);
+  border: 1px solid rgb(216, 210, 210);
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+}
+
+.gray-marker {
+  width: 17px;
+  height: 17px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
