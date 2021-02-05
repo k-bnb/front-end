@@ -18,6 +18,7 @@ const AuthModalContainer = ({
   const { loginEmail, loginPassword } = useSelector(
     (state) => state.auth.login,
   );
+
   const { registerEmail, name, registerPassword, birth } = useSelector(
     (state) => state.auth.register,
   );
