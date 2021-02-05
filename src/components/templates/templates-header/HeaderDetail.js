@@ -12,6 +12,7 @@ const HeaderDetailBlock = styled.header`
   height: 80px;
   position: fixed;
   transition-duration: 0.3s;
+  z-index: 1000;
 
   h1 {
     position: absolute;

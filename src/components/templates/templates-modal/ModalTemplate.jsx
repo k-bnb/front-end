@@ -1,7 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import React, { useCallback } from 'react';
 import CircleDiv from '../../UI/atoms/atoms-main/DivStyle';
-
 const boxFade = keyframes`
 	0% {
 		opacity: 0;
@@ -14,7 +13,6 @@ const boxFade = keyframes`
 		opacity: 1;
 	}
 `;
-
 const Modaldiv = styled.div`
   display: flex;
   position: fixed;
@@ -26,16 +24,13 @@ const Modaldiv = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
-
   .login-group {
     display: flex;
     justify-content: flex-start;
-
     &.active {
       animation: ${boxFade} 0.2s ease-in alternate forwards;
     }
   }
-
   .or {
     position: relative;
     &::before {
@@ -52,7 +47,6 @@ const Modaldiv = styled.div`
     }
   }
 `;
-
 const ModalTemplate = ({ children, modal, setModal, signup, onSubmit }) => {
   const bgClick = useCallback(
     (e) => {
@@ -61,7 +55,6 @@ const ModalTemplate = ({ children, modal, setModal, signup, onSubmit }) => {
     },
     [setModal],
   );
-
   return (
     <Modaldiv className="bg" onClick={bgClick}>
       <form onSubmit={onSubmit} className="auth-modal-form">
@@ -76,5 +69,4 @@ const ModalTemplate = ({ children, modal, setModal, signup, onSubmit }) => {
     </Modaldiv>
   );
 };
-
 export default ModalTemplate;

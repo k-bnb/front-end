@@ -2,17 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ReviewListItem = styled.div`
-  display: block;
-  width: 100%;
+  width: 41.66%;
+  margin-right: 8.3%;
   margin-bottom: 40px;
   padding: 0 8px;
   font-size: 16px;
-  line-height: 20px;
   font-weight: 400;
+  line-height: 20px;
+  min-width: 390px;
+`;
 
-  & > .dataContainer {
-    display: flex;
-  }
+const ImgDataContainer = styled.div`
+  display: flex;
+  margin-bottom: 16px;
+  align-items: center;
 `;
 
 const WriterOfReview = styled.div`
@@ -50,17 +53,17 @@ const ReviewText = styled.span`
   line-height: 24px;
 `;
 
-const Review = () => (
+const ReviewItem = () => (
   <ReviewListItem>
-    <div className="dataContainer">
+    <ImgDataContainer>
       <WriterPhoto></WriterPhoto>
       <WriterOfReview>
         <WriterData>name</WriterData>
         <WriterData>date</WriterData>
       </WriterOfReview>
-    </div>
+    </ImgDataContainer>
     <ReviewText>깨끗하고 좋습니다~</ReviewText>
   </ReviewListItem>
 );
 
-export default Review;
+export default ReviewItem;
