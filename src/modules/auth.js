@@ -1,87 +1,90 @@
+<<<<<<< HEAD
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 import { takeLatest } from 'redux-saga/effects';
 import * as API from '../lib/api/auth';
 import createRequestSaga from '../lib/createRequestSaga';
+// import { action } from '../../node_modules/commander/typings/index';
+=======
+import { createAction, handleActions } from "redux-actions";
+import produce from "immer";
+import createRequestSaga from "../lib/createRequestSaga";
+import * as API from '../lib/api/auth'
+import {takeLatest} from 'redux-saga/effects'
+>>>>>>> 8d2751d0d01920fa3cc487a73110740df4371802
 
-// action types
+//action type
 const CHANGE_INPUT = 'auth/CHANGE_INPUT';
-const INITIALIZE_INPUT = 'auth/INITIALIZE_INPUT';
+const INITIALIZE_INPUT = 'auth/INITIALIZE';
 const REGISTER = 'auth/REGISTER';
 const REGISTER_SUCCESS = 'auth/REGISTER_SUCCESS';
 const REGISTER_FAILURE = 'auth/REGISTER_FAILURE';
-
 const LOGIN = 'auth/LOGIN';
 const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
 const LOGIN_FAILURE = 'auth/LOGIN_FAILURE';
-
 const LOGOUT = 'auth/LOGOUT';
 
-// action creators
-export const changeInput = createAction(CHANGE_INPUT, (form, name, value) => ({
+//action creators
+export const changeInput = createAction(CHANGE_INPUT,(form,name,value) => ({
   form,
   name,
   value,
 }));
-export const initializeInput = createAction(INITIALIZE_INPUT, (form) => form);
-export const register = createAction(
-  REGISTER,
-  ({ name, birth, registerEmail, registerPassword }) => ({
-    // register 상태 전달
-    name,
-    birth,
-    email: registerEmail,
-    password: registerPassword,
-  }),
-);
-export const login = createAction(
-  LOGIN,
-  ({ loginEmail: email, loginPassword: password }) => ({
-    email,
-    password,
-  }),
-);
-
+export const initialzeInput = createAction(INITIALIZE_INPUT,(form) => ({
+  form,
+}));
+export const register = createAction(REGISTER, ({name, birth, registerEmail, registerPassword})=>({
+  name,
+  birth,
+  email:registerEmail,
+  password:registerPassword,
+}));
+export const login = createAction(LOGIN, ({loginEmail:email, loginPassword:password})=>({
+  email,
+  password,
+}));
 export const logout = createAction(LOGOUT);
 
-// initial State
+//initial State
 const initialState = {
-  register: {
-    name: '',
-    birth: '',
-    registerEmail: '',
-    registerPassword: '', // 패스워드 확인 없음.
+  register : {
+    name : '',
+    birth : '',
+    email : '',
+    password : '',
   },
   login: {
-    loginEmail: '',
-    loginPassword: '',
+    email : '',
+    password : '',
   },
   token: null,
-  registerError: null, // 회원가입 에러
-  loginError: null, // 로그인 에러
-};
+  registerError:null,
+  loginError:null,
+}
 
-// sagas
+//saga
 const registerSaga = createRequestSaga(REGISTER, API.register);
-const loginSaga = createRequestSaga(LOGIN, API.login);
+const loginSaga = createRequestSaga(LOGIN,API.login);
 
-// 사가 authSaga
+//authSaga
 export function* authSaga() {
   yield takeLatest(REGISTER, registerSaga);
   yield takeLatest(LOGIN, loginSaga);
 }
 
-// auth reducer
+
+//Reducer
 const auth = handleActions(
   {
-    [CHANGE_INPUT]: (state, { payload: { form, name, value } }) =>
-      produce(state, (draft) => {
-        draft[form][name] = value;
-      }),
+    //[change_input]: (state,action.type)=>{}
+    [CHANGE_INPUT] : (state,{payload:{form, name, value}})=>
+    produce(state,(draft)=>{
+      draft[form][name]=value;
+    }),
 
-    [INITIALIZE_INPUT]: (state, { payload: form }) => ({
+    [INITIALIZE_INPUT] : (state,{payload:{form}})=>({
       ...state,
-      [form]: initialState,
+      [form]:initialState
     }),
     // 성공시 response.data
     [REGISTER_SUCCESS]: (_, { payload: { accessToken } }) => {
@@ -89,29 +92,34 @@ const auth = handleActions(
       localStorage.setItem('token', accessToken);
       return { ...initialState, token: accessToken };
     },
-    [REGISTER_FAILURE]: (state, action) => {
-      // 왜 안돼
-      console.log(action);
-      return {
-        ...state,
-        registerError: action.payload.error,
-      };
-    },
-    [LOGIN_SUCCESS]: (_, { payload: { accessToken } }) => {
-      // 토큰을 스토리지에 저장
-      localStorage.setItem('token', accessToken);
-      return { ...initialState, token: accessToken };
-    },
-    [LOGIN_FAILURE]: (state, action) => ({
-      ...state,
-      loginError: action.payload.error,
+    // [REGISTER_FAILURE]: (state, action) => {
+    //   console.log(action);
+    //   return {
+    //     ...state,
+    //     registerError: action.payload.error,
+    //   };
+    // },
+
+    [REGISTER_FAILURE] : (_,{payload:{error}})=>({
+      ...initialState,
+      registerError:error
     }),
-    [LOGOUT]: (state, action) => {
-      localStorage.removeItem('token');
-      return { ...initialState };
+
+    [LOGIN_SUCCESS] : (_,{payload:{accessToken}}) => {
+      localStorage.setItem('token', accessToken);
+      return{...initialState,token:accessToken};
     },
-  },
-  initialState,
-);
+
+    [LOGIN_FAILURE] : (_,{payload:{error}}) => ({
+      ...initialState,
+      loginError:error
+    }),
+
+    [LOGOUT] : () => {
+      localStorage.removeItem('token');
+      return{...initialState}
+    }
+  },initialState
+)
 
 export default auth;
