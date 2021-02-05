@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileToggleModal from '../components/UI/organisms/organisms-header/ProfileToggleModal';
 
 const ProfileToggleModalContainer = () => {
@@ -6,6 +7,8 @@ const ProfileToggleModalContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
   // formState -> 'login', 'register'로 상태 전환 해줌.
   const [formState, setFormState] = useState(null); // 초기값은 null, 로그인 버튼 누르면 login으로, 회원가입 누르면 'register'
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
 
   return (
     <ProfileToggleModal
@@ -13,6 +16,8 @@ const ProfileToggleModalContainer = () => {
       setIsOpen={setIsOpen}
       formState={formState}
       setFormState={setFormState}
+      token={token}
+      dispatch={dispatch}
     />
   );
 };

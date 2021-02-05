@@ -12,14 +12,14 @@ const TextSummaryContainer = styled.div`
   }
 `;
 
-const SimpleSummary = styled.div`
+export const SimpleSummary = styled.div`
   display: flex;
   margin-bottom: 24px;
   color: #222222;
   line-height: 20px;
 `;
 
-const Text = styled.div`
+export const Text = styled.div`
   line-height: 20px;
   margin-left: 16px;
   &:first-child {
@@ -57,4 +57,4 @@ const TextSummary = () => (
   </TextSummaryContainer>
 );
 
-export default TextSummary;
+export { TextSummary };

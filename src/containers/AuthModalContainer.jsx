@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginOraganisms from '../components/UI/organisms/organisms-modals-auth/LoginOraganisms';
 import RegisterOrganism from '../components/UI/organisms/organisms-modals-auth/RegisterOrganism';
 import { changeInput, login, register } from '../modules/auth';
+import { debounce } from 'lodash';
 
-const AuthModalContainer = ({ modal, setModal, formState, setFormState }) => {
+const AuthModalContainer = ({
+  modal,
+  setModal,
+  formState,
+  setFormState,
+  isOpen,
+  setIsOpen,
+}) => {
   const dispatch = useDispatch();
+  const [checkEmail, setCheckEmail] = useState(null);
   const { loginEmail, loginPassword } = useSelector(
     (state) => state.auth.login,
   );
@@ -13,20 +22,58 @@ const AuthModalContainer = ({ modal, setModal, formState, setFormState }) => {
     (state) => state.auth.register,
   );
 
-  const onChange = (e) => {
-    console.log('change');
+  const isEmail = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(
+    loginEmail,
+  );
+
+  useEffect(() => {
+    setCheckEmail(isEmail);
+  }, [isEmail]);
+  console.log(checkEmail);
+
+  const onChange = async (e) => {
     dispatch(changeInput(formState, e.target.name, e.target.value));
+    console.log(e);
+
+    if (!isEmail && e.target.name === 'loginEmail') {
+      e.target.style.border = '1px solid red';
+      return;
+    }
+    if (!isEmail && e.target.name === 'loginPassword') {
+      e.target.style.border = '1px solid black';
+
+      if (e.target.name === 'name' && e.target.value !== 'kkk') {
+        e.target.style.border = '1px solid red';
+        return;
+      }
+
+      if (!isEmail && e.target.name === 'registerEmail') {
+        e.target.style.border = '1px solid red';
+        return;
+      }
+
+      if (e.target.name === 'registerPassword' && e.target.value !== 'iii') {
+        e.target.style.border = '1px solid red';
+
+        return;
+      }
+
+      e.target.style.border = '1px solid green';
+    }
   };
 
   const onLoginSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ loginEmail, loginPassword }));
+    setIsOpen(false);
   };
 
   const onRegisterSubmit = (e) => {
     e.preventDefault();
     dispatch(register({ registerEmail, name, registerPassword, birth }));
+    setIsOpen(false);
   };
+
   return (
     <>
       {formState === 'login' && (

@@ -11,6 +11,7 @@ const InputStyle = styled.input`
     font-weight: 600;
     padding: 10px;
   }
+
   &:focus {
     border-radius: 5px;
     /* border: 1px; */

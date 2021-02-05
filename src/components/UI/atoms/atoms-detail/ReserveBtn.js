@@ -2,11 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ReservationBtn = styled.button`
-  background: #ff385c;
+  background: #d70466;
   color: white;
-  /* min-width: 200px; */
+  min-width: 110px;
   width: 100%;
-  min-width: 100px;
   border-radius: 8px;
   border: none;
   text-align: center;
@@ -15,6 +14,8 @@ const ReservationBtn = styled.button`
   font-weight: 600;
   padding: 10px 20px;
   white-space: nowrap;
+  transition: opacity 1.25s ease 0s;
+  cursor: pointer;
 `;
 
 const ReserveBtn = () => {
