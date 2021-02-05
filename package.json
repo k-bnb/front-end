@@ -22,11 +22,8 @@
     "react-dates": "^21.8.0",
     "react-dom": "^17.0.1",
     "react-error-boundary": "^3.1.0",
-<<<<<<< HEAD
     "react-geocode": "^0.2.2",
     "react-google-autocomplete": "^1.2.6",
-=======
->>>>>>> 3f9edc291530dae08c9b74e869510c56907de91f
     "react-google-maps": "^9.4.5",
     "react-icons": "^4.1.0",
     "react-redux": "^7.2.2",
