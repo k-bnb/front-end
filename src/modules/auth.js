@@ -3,6 +3,7 @@ import produce from 'immer';
 import { takeLatest } from 'redux-saga/effects';
 import * as API from '../lib/api/auth';
 import createRequestSaga from '../lib/createRequestSaga';
+// import { action } from '../../node_modules/commander/typings/index';
 
 // action types
 const CHANGE_INPUT = 'auth/CHANGE_INPUT';
@@ -18,6 +19,7 @@ const LOGIN_FAILURE = 'auth/LOGIN_FAILURE';
 const LOGOUT = 'auth/LOGOUT';
 
 // action creators
+
 export const changeInput = createAction(CHANGE_INPUT, (form, name, value) => ({
   form,
   name,
@@ -34,6 +36,7 @@ export const register = createAction(
     password: registerPassword,
   }),
 );
+
 export const login = createAction(
   LOGIN,
   ({ loginEmail: email, loginPassword: password }) => ({
@@ -43,7 +46,6 @@ export const login = createAction(
 );
 
 export const logout = createAction(LOGOUT);
-
 // initial State
 const initialState = {
   register: {
@@ -90,7 +92,6 @@ const auth = handleActions(
       return { ...initialState, token: accessToken };
     },
     [REGISTER_FAILURE]: (state, action) => {
-      // 왜 안돼
       console.log(action);
       return {
         ...state,
