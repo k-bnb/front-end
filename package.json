@@ -17,6 +17,7 @@
     "google": "^2.1.0",
     "immer": "^8.0.1",
     "maps": "^0.3.3",
+    "moment": "^2.29.1",
     "query-string": "^6.13.8",
     "react": "^17.0.1",
     "react-dates": "^21.8.0",
