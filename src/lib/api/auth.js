@@ -24,3 +24,21 @@ export const userMe = (token) =>
       'Content-Type': 'application/json',
     },
   });
+
+// 예약하기
+// export const reserve = (token) =>
+//   client.get('http://3.34.198.174:8080/reservation', {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//       'Content-Type': 'application/json',
+//     },
+//   });
+
+// 예약 리스트 보기 // params에서 page / size 넣기
+// export const reserve = (token) =>
+//   client.get('http://3.34.198.174:8080/reservation?page=0&size=5', {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//       'Content-Type': 'application/json',
+//     },
+//   });
