@@ -1,32 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
-import ImageFrame from '../../UI/atoms/atoms-detail/ImageFrame';
-import DetailInfoContainer from '../../UI/molecules/molecules-detail/DetailInfoContainer';
+import theme from './theme';
+//import { useMediaQuery } from 'react-responsive';
+import ImageFrame from '../../UI/organisms/organisms-detail/ImageFrame';
+//import DetailInfoContainer from '../../UI/organisms/organisms-detail/DetailInfoContainer';
 import { PageTitle } from '../../UI/molecules/molecules-detail/PageTitle';
+// import { Slider } from '../../UI/organisms/organisms-detail/Carousel';
 import ImportantNotice from '../../UI/organisms/organisms-detail/ImportantNotice';
 import Review from '../../UI/organisms/organisms-detail/Review';
-
 import HeaderDetail from '../templates-header/HeaderDetail';
+import WrappingContainer from '../../UI/organisms/organisms-detail/WrappingContainer';
 
 const DetailContainer = styled.div`
+  padding: 80px 80px 0;
   font-size: 14px;
   margin: 0 auto;
   max-width: 1280px;
-  padding: 80px 80px 0;
+  color: rgb(34, 34, 34);
 `;
 
 const Detail = () => {
   return (
     <>
       <HeaderDetail />
-      <DetailContainer>
+      <DetailContainer theme={theme}>
         <PageTitle />
         <ImageFrame />
-        <DetailInfoContainer />
+        <WrappingContainer />
         {/* <SavedListsModal /> */}
       </DetailContainer>
       <Review />
       <ImportantNotice />
+      {/* <Slider /> */}
     </>
   );
 };

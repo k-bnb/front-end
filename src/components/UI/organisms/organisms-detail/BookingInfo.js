@@ -6,18 +6,24 @@ import OneDayPrice from '../../molecules/molecules-detail/OneDayPrice';
 import PriceDetail from '../../molecules/molecules-detail/PriceDetail';
 import TotalPrice from '../../molecules/molecules-detail/TotalPrice';
 
-const BookingInfoContainer = styled.div`
+const PositionBox = styled.div`
   position: sticky;
+  z-index: 100;
+  background-color: skyblue;
+`;
+
+const BookingInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-right: 1px;
+  margin-top: 48px;
   padding-bottom: 48px;
   min-width: 216px;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 12px;
   padding: 24px;
   box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+  background-color: pink;
 
   .notice {
     margin-top: 16px;
@@ -29,14 +35,16 @@ const BookingInfoContainer = styled.div`
 `;
 
 const BookingInfo = () => (
-  <BookingInfoContainer>
-    <OneDayPrice />
-    <DatePersonBox />
-    <ReserveBtn></ReserveBtn>
-    <span className="notice">예약 확정 전에는 요금이 청구되지 않습니다.</span>
-    <PriceDetail />
-    <TotalPrice />
-  </BookingInfoContainer>
+  <PositionBox>
+    <BookingInfoContainer>
+      <OneDayPrice />
+      <DatePersonBox />
+      <ReserveBtn></ReserveBtn>
+      <span className="notice">예약 확정 전에는 요금이 청구되지 않습니다.</span>
+      <PriceDetail />
+      <TotalPrice />
+    </BookingInfoContainer>
+  </PositionBox>
 );
 
 export default BookingInfo;

@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import NoticeAll, {
-  AccommodationRules,
-} from '../../molecules/molecules-detail/NoticeAll';
+import NoticeAll, { AccommodationRules } from './NoticeAll';
 
 const ImportantNoticeWrapper = styled.div`
   padding: 0 80px;

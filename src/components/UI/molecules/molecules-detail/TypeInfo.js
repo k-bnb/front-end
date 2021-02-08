@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Title } from './PageTitle';
-import { SimpleSummary, Text } from './TextSummary';
 import { BiBed } from 'react-icons/bi';
 
 const TypeInfoContainer = styled.div`
   padding: 48px 0;
-  /border-bottom: 1px solid rgb(221, 221, 221);
+  border-bottom: 1px solid rgb(221, 221, 221);
 `;
 
 export const TypeTitle = styled(Title)`
@@ -37,7 +36,6 @@ const TypeeSummary = styled.div`
 const TypeText = styled.div`
   line-height: 20px;
   &:first-child {
-    color: rgb(34, 34, 34);
     font-weight: 600;
     font-size: 16px;
     margin-bottom: 4px;
