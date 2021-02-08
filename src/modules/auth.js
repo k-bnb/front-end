@@ -1,9 +1,8 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
-import { takeLatest } from 'redux-saga/effects';
-import * as API from '../lib/api/auth';
 import createRequestSaga from '../lib/createRequestSaga';
-// import { action } from '../../node_modules/commander/typings/index';
+import * as API from '../lib/api/auth';
+import { takeLatest } from 'redux-saga/effects';
 
 //action type
 const CHANGE_INPUT = 'auth/CHANGE_INPUT';
