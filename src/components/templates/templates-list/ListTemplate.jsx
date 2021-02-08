@@ -24,7 +24,6 @@ const ListTemplate = ({
 }) => {
   return (
     <>
-      <HeaderList />
       <div style={{ display: 'flex' }}>
         {/* <MainStyle /> */}
         <div style={{ display: 'block' }}>

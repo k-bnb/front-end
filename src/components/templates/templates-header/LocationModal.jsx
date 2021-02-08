@@ -1,16 +1,13 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
-import Portal from '../../../../node_modules/@reach/portal/dist/index';
-import { changeInput } from '../../../modules/auth';
-import loading from '../../../modules/loading';
 import Text from '../../UI/atoms/atoms-header/Text';
+import { useClickOutside } from '../../../lib/useClickOutside';
+import { destinationInput, locationInput } from '../../../modules/search';
 
 const StyledLocModal = styled.div`
   position: absolute;
-  top: 165px;
-  left: 40vw;
-  transform: translate(-50%, 0);
+  top: 90px;
+  left: 0;
   border-radius: 40px;
   background-color: white;
   width: 500px !important;
@@ -33,6 +30,7 @@ const StyledLocModal = styled.div`
 
   .nearby-icon-container {
     width: 20%;
+    padding-left: 30px;
   }
 
   .nearby-icon {
@@ -55,32 +53,25 @@ const StyledLocModal = styled.div`
 const LocationModal = ({
   isScrolled,
   isClicked,
-  setIsClicked,
-  setCondition,
-  initialCondition,
+  setNavModalState,
+  dispatch,
 }) => {
-  const clickOutSide = (e) => {
-    console.log(e.target.firstChild); // 가까운 여행지 둘러보기
-    if (e.target.matches('.location-modal')) {
-      return;
-    }
-    setIsClicked(false);
-    setCondition(initialCondition);
-  };
-
-  useEffect(() => {
-    window.addEventListener('click', clickOutSide);
-
-    return () => {
-      window.removeEventListener('click', clickOutSide);
-    };
-  }, []);
+  let locationRef = useClickOutside(() => {
+    console.log('locartion start');
+    setNavModalState({
+      location: false,
+      checkIn: false,
+      checkOut: false,
+      guest: false,
+    });
+  });
 
   return (
     <StyledLocModal
       isScrolled={isScrolled}
       isClicked={isClicked}
       className="location-modal"
+      ref={locationRef}
     >
       <div className="nearby-outer-container">
         <span className="nearby-icon-container">
@@ -103,6 +94,17 @@ const LocationModal = ({
     navigator.geolocation.getCurrentPosition(
       (position) => {
         console.log(position); // 현위치 반환
+        dispatch(destinationInput('가까운 여행지 둘러보기'));
+        dispatch(
+          locationInput({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeMax: position.coords.latitude + 0.04,
+            latitudeMin: position.coords.latitude - 0.04,
+            longitudeMax: position.coords.longitude + 0.08,
+            longitudeMin: position.coords.longitude - 0.08,
+          }),
+        );
       }, // 성공시 콜백함수
       () => null, // 실패시 콜백함수, 따로 처리 안해줘서 null 반환
     );

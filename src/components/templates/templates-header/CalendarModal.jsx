@@ -1,61 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import CalendarNew from '../../../calendar/CalendarNew';
 import '../../../calendar/CalendarTemplate.css';
+import { useClickOutside } from '../../../lib/useClickOutside';
 
 const StyledCalModal = styled.div`
+  background-color: red;
   position: absolute;
-  top: 98px;
-  left: 26%;
-  width: 1px;
-  height: 1px;
-  border: 1px solid lightgray;
-  margin: 0 auto;
-  border-radius: 40px;
-  background-color: white;
-  ${(props) =>
-    props.isScrolled &&
-    props.isClicked &&
-    css`
-      top: 115px;
-    `}
+  top: 0;
+  left: 0;
+  height: 200px;
+  width: 100vw;
 `;
 
 const CalendarModal = ({
-  isScrolled,
-  isClicked,
-  setIsClicked,
-  setCondition,
-  initialCondition,
+  SearchTypeHandler,
+  navModalState,
+  setNavModalState,
+  initialNavModalState,
 }) => {
-  const clickOutSide = (e) => {
-    console.log(e.target.matches('.calendar-modal'));
-    if (e.target.matches('.calendar-modal')) {
-      return;
-    }
-    console.log('djksdjf');
-    setIsClicked(false);
-    // setCondition(initialCondition);
-    // setCondition({ ...initialCondition });
-  };
+  const [selected, setSelected] = useState(false);
+  console.log('상태', navModalState);
 
-  useEffect(() => {
-    window.addEventListener('click', clickOutSide);
-
-    return () => {
-      window.removeEventListener('click', clickOutSide);
-    };
-  }, []);
-
-  return (
-    <StyledCalModal
-      isScrolled={isScrolled}
-      isClicked={isClicked}
-      className="calendar-modal"
-    >
-      <CalendarNew />
-    </StyledCalModal>
-  );
+  return <CalendarNew setNavModalState={setNavModalState} />;
 };
 
 export default CalendarModal;

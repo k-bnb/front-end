@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import HeaderContainer from './header-containers/HeaderContainer';
 import ListTemplate from '../components/templates/templates-list/ListTemplate';
 import {
   costInput,
@@ -94,24 +95,27 @@ const ListContainer = () => {
     setSearchModalState(null);
   };
   return (
-    <ListTemplate
-      searchModalState={searchModalState}
-      setSearchModalState={setSearchModalState}
-      roomTypes={roomTypes}
-      RoomSearchClick={RoomSearchClick}
-      cashSearchClick={cashSearchClick}
-      bedroomSearchClick={bedroomSearchClick}
-      costSearch={costSearch}
-      cost={cost}
-      roomType={roomType}
-      bedNum={bedNum}
-      bedRoomNum={bedRoomNum}
-      bathRoomNum={bathRoomNum}
-      minusBtn={minusBtn}
-      plusBtn={plusBtn}
-      searchBtn={searchBtn}
-      costState={costState}
-    />
+    <>
+      <HeaderContainer />
+      <ListTemplate
+        searchModalState={searchModalState}
+        setSearchModalState={setSearchModalState}
+        roomTypes={roomTypes}
+        RoomSearchClick={RoomSearchClick}
+        cashSearchClick={cashSearchClick}
+        bedroomSearchClick={bedroomSearchClick}
+        costSearch={costSearch}
+        cost={cost}
+        roomType={roomType}
+        bedNum={bedNum}
+        bedRoomNum={bedRoomNum}
+        bathRoomNum={bathRoomNum}
+        minusBtn={minusBtn}
+        plusBtn={plusBtn}
+        searchBtn={searchBtn}
+        costState={costState}
+      />
+    </>
   );
 };
 
