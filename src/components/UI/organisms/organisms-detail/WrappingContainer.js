@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import HostingData from './HostingData';
-import { TypeInfo } from './TypeInfo';
-import { TextSummary } from './TextSummary';
+import HostingData from '../../molecules/molecules-detail/HostingData';
+import { TypeInfo } from '../../molecules/molecules-detail/TypeInfo';
+import { TextSummary } from '../../molecules/molecules-detail/TextSummary';
 import EmoticonNotice from './EmoticonNotice';
-import BookingInfo from '../../organisms/organisms-detail/BookingInfo';
+import BookingInfo from './BookingInfo';
 
 const InfoContainer = styled.div`
   display: flex;
@@ -24,10 +24,10 @@ const BookingSummaryBox = styled.div`
   position: relative;
   width: 33.3%;
   margin-left: 8.3%;
-  top: 80px;
+  /* top: 80px; */
 `;
 
-const DetailInfoContainer = () => (
+const WrappingContainer = () => (
   <InfoContainer>
     <DetailInfo>
       <HostingData />
@@ -41,4 +41,4 @@ const DetailInfoContainer = () => (
   </InfoContainer>
 );
 
-export default DetailInfoContainer;
+export default WrappingContainer;

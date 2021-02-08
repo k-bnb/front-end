@@ -4,7 +4,7 @@ import { IoIosMedkit } from 'react-icons/io';
 import { AiOutlineWifi } from 'react-icons/ai';
 import { RiComputerLine, RiParkingBoxLine } from 'react-icons/ri';
 import { CgSmartHomeRefrigerator } from 'react-icons/cg';
-import { TypeTitle } from './TypeInfo';
+import { TypeTitle } from '../../molecules/molecules-detail/TypeInfo';
 import WhiteBtn from '../../atoms/atoms-detail/WhiteBtn';
 
 const EmoticonContainer = styled.div`
