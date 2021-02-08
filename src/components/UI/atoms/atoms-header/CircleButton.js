@@ -12,9 +12,9 @@ const CircleButtonBlock = styled.button`
   font-size: 25px;
 `;
 
-const CircleButton = ({ minus }) => {
+const CircleButton = ({ minus, ...rest }) => {
   return (
-    <CircleButtonBlock>
+    <CircleButtonBlock {...rest}>
       {minus ? <span>-</span> : <span>+</span>}
     </CircleButtonBlock>
   );

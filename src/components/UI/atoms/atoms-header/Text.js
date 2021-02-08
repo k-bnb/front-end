@@ -5,6 +5,13 @@ const TextBlock = styled.span`
   padding: 10px 12px 10px 0;
   font-size: 14px;
   line-height: 16px;
+
+  ${(props) =>
+    props.white &&
+    css`
+      color: white;
+    `}
+
   ${(props) =>
     props.small &&
     css`
@@ -50,6 +57,39 @@ const TextBlock = styled.span`
     props.block &&
     css`
       display: block;
+    `}
+    ${(props) =>
+    props.after &&
+    props.black &&
+    css`
+      position: relative;
+      &::after {
+        content: '';
+        display: inline-block;
+        width: 17px;
+        height: 3px;
+        position: absolute;
+        top: 25px;
+        left: 4px;
+        background-color: black;
+      }
+    `}
+
+    ${(props) =>
+    props.after &&
+    props.white &&
+    css`
+      position: relative;
+      &::after {
+        content: '';
+        display: inline-block;
+        width: 17px;
+        height: 3px;
+        position: absolute;
+        top: 25px;
+        left: 4px;
+        background-color: white;
+      }
     `}
 `;
 

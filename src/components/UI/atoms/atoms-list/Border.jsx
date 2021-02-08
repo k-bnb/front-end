@@ -1,21 +1,19 @@
 import styled, { css } from 'styled-components';
 
 const activeStyles = css`
-  ${(props)=>
+  ${(props) =>
     props.active === 'active' &&
     css`
       width: 100%;
       height: auto;
-    `
-  }
-  ${(props)=>
+    `}
+  ${(props) =>
     props.active === 'unactive' &&
     css`
       width: 840px;
       height: auto;
-    `
-  }
-`
+    `}
+`;
 
 const BorderStyle = styled.div`
   /* 공통 스타일 */
@@ -37,9 +35,9 @@ const BorderStyle = styled.div`
     props.bigCarouselImg &&
     css`
       max-width: 100%;
-      height : auto;
+      height: auto;
       padding: 20px 0;
-      margin : 0 20px;
+      margin: 0 20px;
     `}
   ${(props) =>
     props.bookmarkImg &&
@@ -51,15 +49,18 @@ const BorderStyle = styled.div`
     props.bigBorder &&
     css`
       max-width: 100%;
-      height : auto;
+      height: auto;
       padding: 20px 0;
-      margin : 0 20px;
+      margin: 0 20px;
     `}
 `;
 
 const Border = ({ children, active, ...rest }) => {
-  console.log(rest, 111);
-  return <BorderStyle active={active} {...rest}>{children}</BorderStyle>;
+  return (
+    <BorderStyle active={active} {...rest}>
+      {children}
+    </BorderStyle>
+  );
 };
 
 export default Border;

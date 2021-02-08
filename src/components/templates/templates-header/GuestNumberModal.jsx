@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import GuestNumberModalUnit from '../../UI/molecules/molecules-header/GuestNumberModalUnit';
+import { useClickOutside } from '../../../lib/useClickOutside';
+import { useDispatch, useSelector } from 'react-redux';
 
 const StyledGuestModal = styled.div`
   position: absolute;
-  top: 165px;
-  left: 59%;
-  transform: translate(-50%, 0);
+  top: 80px;
+  right: 0;
+  /* transform: translate(-50%, 0); */
   width: 400px;
   height: auto;
   border: 1px solid lightgray;
@@ -23,39 +25,31 @@ const StyledGuestModal = styled.div`
     `}
 `;
 
-const GuestNumberModal = ({
-  isScrolled,
-  isClicked,
-  setIsClicked,
-  setCondition,
-  initialCondition,
-}) => {
-  const clickOutSide = (e) => {
-    console.log(e.target.matches('.guest-modal'));
-    if (e.target.matches('.guest-modal')) {
-      return;
-    }
-    setIsClicked(false);
-    setCondition(initialCondition);
-  };
-
-  useEffect(() => {
-    window.addEventListener('click', clickOutSide);
-
-    return () => {
-      window.removeEventListener('click', clickOutSide);
-    };
-  }, []);
+const GuestNumberModal = ({ SearchTypeHandler, setNavModalState }) => {
+  let guestRef = useClickOutside(() => {
+    setNavModalState({
+      location: false,
+      checkIn: false,
+      checkOut: false,
+      guest: false,
+    });
+  });
 
   return (
-    <StyledGuestModal
-      isScrolled={isScrolled}
-      isClicked={isClicked}
-      className="guest-modal"
-    >
-      <GuestNumberModalUnit />
-      <GuestNumberModalUnit />
-      <GuestNumberModalUnit />
+    <StyledGuestModal className="guest-modal" ref={guestRef}>
+      <GuestNumberModalUnit
+        type={'성인'}
+        detail={'만 13세 이상'}
+        name="numOfAdult"
+      />
+
+      <GuestNumberModalUnit type={'어린이'} detail={'2~12세'} name="numOfKid" />
+
+      <GuestNumberModalUnit
+        type={'유아'}
+        detail={'2세 미만'}
+        name="numOfInfant"
+      />
     </StyledGuestModal>
   );
 };

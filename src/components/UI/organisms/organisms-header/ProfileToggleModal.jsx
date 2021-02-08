@@ -7,7 +7,6 @@ const ProfileToggleBlock = styled.div`
   position: absolute;
   right: 35px;
   top: 20px;
-  z-index: 10;
 
   & > ul {
     position: absolute;

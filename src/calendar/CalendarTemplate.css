@@ -18,6 +18,9 @@
   border-radius: 50% !important;
 }
 
+.DayPicker_weekHeader_li {
+  border: 0 !important;
+}
 .CalendarDay__selected_span {
   background: rgb(247, 247, 247) !important;
   color: rgb(34, 34, 34) !important;
@@ -52,39 +55,18 @@
   border: 0 !important;
 }
 
-/* 모달 우측 하단에 화살표 없애는 속성 */
-.DayPickerKeyboardShortcuts_buttonReset {
-  display: none !important;
-}
-
-.DateInput_fang {
-  display: none;
-}
-
-.DateInput_input__focused {
-  border: 0 !important;
-}
-
-.DateRangePicker_picker.DateRangePicker_picker_1 {
-  border: 0 !important;
-}
-
-/* 두개의 인풋 사이의 화살표 없애기 속성 */
-.DateRangePickerInput_arrow {
-  display: none;
-}
-
 /* 달력 포함하고있는 전체 모달의 속성 */
 .DayPicker {
-  /* margin: 0 auto; */
-  padding-top: 30px;
-  padding-left: 65px;
+  padding-top: 20px i !important;
+  display: flex !important;
+  justify-content: center !important;
   border-radius: 30px;
   position: absolute !important;
-  transform: translate(10%, 0%);
-  height: 380px;
-  width: 760px !important;
-  top: 0 !important;
+  top: 100px;
+  left: -285px;
+  height: 410px;
+  width: 850px !important;
+  max-width: 850px !important;
   border-radius: 30px !important;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.6) !important;
 }
@@ -93,136 +75,4 @@
   width: 100% !important;
   height: 400px !important;
   border-radius: 30px !important;
-}
-
-/* 공통 높이 나중에 조절하기 */
-#checkIn,
-#checkOut {
-  height: 67px;
-  outline-width: 2px !important;
-  /* outline: 1px solid black !important; */
-}
-
-/* 인풋2개 컨테이너 */
-.DateRangePickerInput {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  border: 0 !important;
-  background-color: transparent !important;
-}
-
-/* 인풋 전체 범위 */
-.DateRangePicker {
-  width: 100%;
-  display: block;
-  align-items: center;
-  position: relative;
-  /* position: relative; */
-}
-
-.DateInput_input
-  .DateInput_input_1
-  .DateInput_input__readOnly
-  .DateInput_input__readOnly_2 {
-  border: 1px solid black !important;
-}
-/* 체크인 인풋 */
-#checkIn {
-  position: absolute;
-  box-sizing: border-box !important;
-  padding: 10px 20px 10px 20px !important;
-  width: 100%;
-  width: 180px;
-  top: -9px;
-  left: -64px;
-  cursor: pointer;
-  border: 0 !important;
-  border-top: 1px solid lightgray !important;
-  height: 65px;
-  display: none;
-}
-
-/* 체크아웃 인풋 */
-#checkOut {
-  position: absolute;
-  box-sizing: border-box !important;
-  padding: 10px 20px 10px 20px !important;
-  width: 100%;
-  width: 180px;
-  top: -9px;
-  left: -11px;
-  cursor: pointer;
-  border: 0 !important;
-  border-top: 1px solid lightgray !important;
-  height: 65px;
-  display: none;
-}
-
-/* placeHolder 설정 */
-#checkIn::placeholder {
-  color: rgb(34, 34, 34);
-  font-size: 13px;
-  position: absolute !important;
-}
-
-#checkOut::placeholder {
-  color: rgb(34, 34, 34);
-  font-size: 13px;
-  position: absolute !important;
-}
-
-#checkIn:hover {
-  border-radius: 32px !important;
-  background-color: lightgray !important;
-}
-#checkOut:hover {
-  border-radius: 32px !important;
-  background-color: lightgray !important;
-}
-
-#checkIn:focus {
-  background-color: white !important;
-  border-radius: 30px !important;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.6) !important;
-}
-#checkOut:focus {
-  background-color: white !important;
-  border-radius: 30px !important;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.6) !important;
-}
-
-.checkIn-text {
-  position: absolute;
-  top: -16px;
-  left: -45px;
-  font-size: 13px;
-  cursor: pointer;
-  padding: 30px 90px 20px 20px;
-}
-.checkOut-text {
-  position: absolute;
-  top: -17px;
-  cursor: pointer;
-  left: 137px;
-  padding: 30px 75px 20px 20px;
-  font-size: 13px;
-}
-
-.checkIn:valid {
-  font-size: 12px;
-}
-.checkOut:valid {
-  font-size: 12px;
-}
-
-.DateInput_input {
-  top: 10px;
-  font-size: 13px;
-  vertical-align: bottom;
-}
-
-.DateInput_input::placeholder {
-  transform: translateY(7px);
-  display: none;
 }

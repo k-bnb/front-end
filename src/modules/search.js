@@ -10,12 +10,19 @@ const DESTINATION_INPUT = 'search/DESTINATION_INPUT';
 const LOCATION_INPUT = 'search/LOCATION_INPUT';
 const DATE_INPUT = 'search/DATE_INPUT';
 const GUEST_INPUT = 'search/GUEST_INPUT';
+const SPECIFIC_INPUT_CLEAR = 'search/SPECIFIC_INPUT_CLEAR';
+
+// Detail Filter
+
+const ROOMTYPE_INPUT = 'search/ROOMTYPE_INPUT';
+const COST_INPUT = 'search/COST_INPUT';
+const ROOMNUM_INPUT = 'search/ROOMNUM_INPUT';
 
 //search action type
 //비동기
 const SEARCHING = 'search/SEARCHING';
 const SEARCHING_SUCCESS = 'search/SEARCHING_SUCCESS';
-const SEARCHING_FAILURE = 'search/SEARCHINGSEARCHING_FAILURE';
+const SEARCHING_FAILURE = 'search/SEARCHING_FAILURE';
 
 //action create
 export const destinationInput = createAction(
@@ -26,34 +33,67 @@ export const locationInput = createAction(
   LOCATION_INPUT,
   (locationSearch) => locationSearch,
 ); //locationSearch 객체.
-export const dateInput = createAction(
-  DATE_INPUT,
-  (checkDateSearch) => checkDateSearch,
-); //checkDateSearch 객체.
-export const guestInput = createAction(
-  GUEST_INPUT,
-  (guestSearch) => guestSearch,
-); //guestSearch 객체.
+export const dateInput = createAction(DATE_INPUT, (form, checkDateSearch) => ({
+  form,
+  checkDateSearch,
+})); //checkDateSearch 객체.
+export const guestInput = createAction(GUEST_INPUT, (form, name, value) => ({
+  form,
+  name,
+  value,
+})); // form -> guestinput, name -> numOfAdult, value ->
+export const specificInputClear = createAction(
+  SPECIFIC_INPUT_CLEAR,
+  (form) => form,
+); // form: 초기화할 정보(위치, 날짜, 인원)
 export const searching = createAction(
   SEARCHING,
-  ({ locationSearch, checkDateSearch, guestSearch }) => ({
+  ({
     locationSearch,
     checkDateSearch,
     guestSearch,
+    costSearch,
+    roomType,
+    bedNum,
+    bedRoomNum,
+    bathRoomNum,
+  }) => ({
+    locationSearch,
+    checkDateSearch,
+    guestSearch,
+    costSearch,
+    roomType,
+    bedNum,
+    bedRoomNum,
+    bathRoomNum,
   }),
 );
+// detaile action
+
+export const roomTypeInput = createAction(
+  ROOMTYPE_INPUT,
+  (roomType) => roomType,
+);
+export const costInput = createAction(COST_INPUT, (name, value) => ({
+  name,
+  value,
+}));
+export const roomnumInput = createAction(ROOMNUM_INPUT, (name, value) => ({
+  name,
+  value,
+}));
 
 //initial State
 const initialState = {
   destinationName: '',
   searchReq: {
     locationSearch: {
-      latitude: null,
-      longitude: null,
-      latitudeMax: null,
-      latitudeMin: null,
-      longitudeMax: null,
-      longitudeMin: null,
+      latitude: '',
+      longitude: '',
+      latitudeMax: '',
+      latitudeMin: '',
+      longitudeMax: '',
+      longitudeMin: '',
     },
     checkDateSearch: {
       startDate: '',
@@ -64,6 +104,14 @@ const initialState = {
       numOfKid: 0,
       numOfInfant: 0,
     },
+    costSearch: {
+      minCost: 0,
+      maxCost: 0,
+    },
+    roomType: '',
+    bedNum: 0,
+    bedRoomNum: 0,
+    bathRoomNum: 0,
   },
   searchRes: [],
   searchError: null,
@@ -85,37 +133,60 @@ const search = handleActions(
       destinationName,
     }),
 
-    [LOCATION_INPUT]: (state, { payload: { locationSearch } }) =>
+    [LOCATION_INPUT]: (state, { payload: locationSearch }) =>
       produce(state, (draft) => {
         draft.searchReq.locationSearch = locationSearch;
       }),
 
-    [DATE_INPUT]: (state, { payload: { checkDateSearch } }) =>
+    [DATE_INPUT]: (state, { payload: { form, checkDateSearch } }) =>
       produce(state, (draft) => {
-        draft.searchReq.checkDateSearch = checkDateSearch;
+        draft.searchReq.checkDateSearch[form] = checkDateSearch;
       }),
 
-    [GUEST_INPUT]: (state, { payload: { guestSearch } }) =>
+    [GUEST_INPUT]: (state, { payload: { form, name, value } }) =>
       produce(state, (draft) => {
-        draft.searchReq.guestSearch = guestSearch;
+        draft.searchReq[form][name] = value; // draft.searchReq.guestSearch.numOfAdult = value
       }),
-
-    [SEARCHING_SUCCESS]: (
-      state,
-      {
-        payload: {
-          _embedded: { roomDtoList },
-        },
-      },
-    ) =>
+    [SPECIFIC_INPUT_CLEAR]: (state, { payload: form }) =>
       produce(state, (draft) => {
-        draft.searchRes = roomDtoList;
-      }), //_embedded:{roomDtoList} 는 방 정보를 가진 배열.
+        draft.searchReq[form] = initialState.searchReq[form]; // 선택한 form 초기화.
+      }),
+    // [SEARCHING_SUCCESS]: (
+    //   state,
+    //   {
+    //     payload: {
+    //       _embedded: { roomDtoList },`
+    //     },
+    //   },
+    // ) =>
+    //   produce(state, (draft) => {
+    //     draft.searchRes = roomDtoList;
+    //   }), //_embedded:{roomDtoList} 는 방 정보를 가진 배열.
+    [SEARCHING_SUCCESS]: (state, action) => {
+      console.log(action);
+      return produce(state, (draft) => {
+        draft.searchRes = action;
+      });
+    },
 
-    [SEARCHING_FAILURE]: (_, { payload: { error } }) => ({
-      ...initialState,
+    [SEARCHING_FAILURE]: (state, { payload: { error } }) => ({
+      ...state,
       searchError: error,
     }),
+    [ROOMTYPE_INPUT]: (state, { payload: { roomType } }) => {
+      console.log(roomType);
+      return produce(state, (draft) => {
+        draft.searchReq.roomType = roomType;
+      });
+    },
+    [COST_INPUT]: (state, { payload: { name, value } }) =>
+      produce(state, (draft) => {
+        draft.searchReq.costSearch[name] = value;
+      }),
+    [ROOMNUM_INPUT]: (state, { payload: { name, value } }) =>
+      produce(state, (draft) => {
+        draft.searchReq[name] = value;
+      }),
   },
   initialState,
 );

@@ -8,7 +8,7 @@ import search, { searchSaga } from './search';
 const rootReducer = combineReducers({ auth, loading, search });
 
 export function* rootSaga() {
-  yield all([authSaga(),searchSaga()]);
+  yield all([authSaga(), searchSaga()]);
 }
 
 export default rootReducer;
