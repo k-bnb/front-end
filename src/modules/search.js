@@ -95,7 +95,10 @@ const initialState = {
       longitudeMax: 12.0,
       longitudeMin: 8.0,
     },
-    checkDateSearch: null,
+    checkDateSearch: {
+      startDate: '',
+      endDate: '',
+    },
     guestSearch: {
       numOfAdult: 0,
       numOfKid: 0,
