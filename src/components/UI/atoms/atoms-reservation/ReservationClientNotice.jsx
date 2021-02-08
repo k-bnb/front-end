@@ -10,10 +10,10 @@ const StyledTextArea = styled.textarea`
   outline: none;
 `;
 
-const ReservationClientNotice = () => {
+const ReservationClientNotice = ({ change, value }) => {
   return (
     <Container clientText>
-      <StyledTextArea rows='5'></StyledTextArea>
+      <StyledTextArea rows="5" onChange={change} value={value}></StyledTextArea>
     </Container>
   );
 };

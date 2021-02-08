@@ -42,7 +42,7 @@ const LayoutReservationTitle = styled(ReservationTitle)`
   margin-left: 6rem;
 `;
 
-const Reservation = () => {
+const Reservation = ({ change, click, value }) => {
   return (
     <section>
       <header>
@@ -75,9 +75,9 @@ const Reservation = () => {
       <TempContainer>
         <MainContainer>
           <ReservationInfoOrganism />
-          <ReservationRequestOrganism />
+          <ReservationRequestOrganism change={change} value={value} />
           <ReservationRefundOrganism />
-          <CommonButton reservation>
+          <CommonButton reservation click={click}>
             <BiCalendarCheck />
             예약하기
           </CommonButton>
