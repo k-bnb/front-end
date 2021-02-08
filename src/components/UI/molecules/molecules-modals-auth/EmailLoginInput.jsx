@@ -44,8 +44,6 @@ const EmailInputStyle = styled.div`
 `;
 
 const EmailLoginInput = ({ email, password, onChange, checkEmail }) => {
-  console.log('dsdf', email);
-  console.log(checkEmail);
   return (
     <EmailInputStyle>
       <CircleDiv className="email-login">

@@ -11,11 +11,17 @@ const LOCATION_INPUT = 'search/LOCATION_INPUT';
 const DATE_INPUT = 'search/DATE_INPUT';
 const GUEST_INPUT = 'search/GUEST_INPUT';
 
+// Detail Filter
+
+const ROOMTYPE_INPUT = 'search/ROOMTYPE_INPUT';
+const COST_INPUT = 'search/COST_INPUT';
+const ROOMNUM_INPUT = 'search/ROOMNUM_INPUT';
+
 //search action type
 //비동기
 const SEARCHING = 'search/SEARCHING';
 const SEARCHING_SUCCESS = 'search/SEARCHING_SUCCESS';
-const SEARCHING_FAILURE = 'search/SEARCHINGSEARCHING_FAILURE';
+const SEARCHING_FAILURE = 'search/SEARCHING_FAILURE';
 
 //action create
 export const destinationInput = createAction(
@@ -36,34 +42,67 @@ export const guestInput = createAction(
 ); //guestSearch 객체.
 export const searching = createAction(
   SEARCHING,
-  ({ locationSearch, checkDateSearch, guestSearch }) => ({
+  ({
     locationSearch,
     checkDateSearch,
     guestSearch,
+    costSearch,
+    roomType,
+    bedNum,
+    bedRoomNum,
+    bathRoomNum,
+  }) => ({
+    locationSearch,
+    checkDateSearch,
+    guestSearch,
+    costSearch,
+    roomType,
+    bedNum,
+    bedRoomNum,
+    bathRoomNum,
   }),
 );
+// detaile action
+
+export const roomTypeInput = createAction(
+  ROOMTYPE_INPUT,
+  (roomType) => roomType,
+);
+export const costInput = createAction(COST_INPUT, (name, value) => ({
+  name,
+  value,
+}));
+export const roomnumInput = createAction(ROOMNUM_INPUT, (name, value) => ({
+  name,
+  value,
+}));
 
 //initial State
 const initialState = {
   destinationName: '',
   searchReq: {
     locationSearch: {
-      latitude: null,
-      longitude: null,
-      latitudeMax: null,
-      latitudeMin: null,
-      longitudeMax: null,
-      longitudeMin: null,
+      latitude: 10.0,
+      longitude: 10.0,
+      latitudeMax: 12.0,
+      latitudeMin: 8.0,
+      longitudeMax: 12.0,
+      longitudeMin: 8.0,
     },
-    checkDateSearch: {
-      startDate: '',
-      endDate: '',
-    },
+    checkDateSearch: null,
     guestSearch: {
       numOfAdult: 0,
       numOfKid: 0,
       numOfInfant: 0,
     },
+    costSearch: {
+      minCost: 0,
+      maxCost: 0,
+    },
+    roomType: '',
+    bedNum: 0,
+    bedRoomNum: 0,
+    bathRoomNum: 0,
   },
   searchRes: [],
   searchError: null,
@@ -116,6 +155,20 @@ const search = handleActions(
       ...initialState,
       searchError: error,
     }),
+    [ROOMTYPE_INPUT]: (state, { payload: { roomType } }) => {
+      console.log(roomType);
+      return produce(state, (draft) => {
+        draft.searchReq.roomType = roomType;
+      });
+    },
+    [COST_INPUT]: (state, { payload: { name, value } }) =>
+      produce(state, (draft) => {
+        draft.searchReq.costSearch[name] = value;
+      }),
+    [ROOMNUM_INPUT]: (state, { payload: { name, value } }) =>
+      produce(state, (draft) => {
+        draft.searchReq[name] = value;
+      }),
   },
   initialState,
 );

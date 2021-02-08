@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Container from './ReservationCommonContainer';
 
-console.log(Container);
-
 // const StyledDiv = styled.div`
 //   width: 42px;
 //   height: 42px;
