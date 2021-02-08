@@ -14,7 +14,7 @@ const LayoutReservationContent = styled(ReservationContent)`
   margin-bottom: 0.4rem;
 `;
 
-const ReservationRequestOrganism = () => {
+const ReservationRequestOrganism = ({ change, value }) => {
   return (
     <section>
       <ReservationTitle sub children="필수 입력 정보" />
@@ -26,7 +26,7 @@ const ReservationRequestOrganism = () => {
         />
       </PaddingContainer>
       <ReservationHostMolecule />
-      <ReservationClientNotice host />
+      <ReservationClientNotice host change={change} />
       <ReservationUnderLine />
     </section>
   );
