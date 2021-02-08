@@ -15,7 +15,7 @@ const HeaderMainSearchNavBlock = styled.div`
   background-color: white;
   transition: 0.2s ease;
   white-space: nowrap;
-
+  z-index: -1;
   ul {
     height: 100%;
     margin: 0;
