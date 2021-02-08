@@ -1,11 +1,13 @@
 import React from 'react';
 import { SiAirbnb } from 'react-icons/si';
+import { useHistory, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 const LogoBlock = styled.h1`
   position: absolute;
   top: 13px;
   left: 35px;
+  cursor: pointer;
 
   .a11y-hidden {
     overflow: hidden;
@@ -39,8 +41,19 @@ const LogoBlock = styled.h1`
 `;
 
 const Logo = (props) => {
+  const history = useHistory();
+  // const match = useRouterMatch();
+  const location = useLocation();
   return (
-    <LogoBlock {...props}>
+    <LogoBlock
+      {...props}
+      onClick={() => {
+        history.push('/');
+        console.log('moved');
+        console.log(history);
+        console.log(location);
+      }}
+    >
       <div class="a11y-hidden">에어비엔비</div>
       <svg
         width="102"
