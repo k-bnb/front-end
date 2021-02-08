@@ -13,7 +13,7 @@ const StyledButton = styled.button`
   outline: none;
   cursor: pointer;
 
-  ${props =>
+  ${(props) =>
     props.reservation &&
     css`
       display: inline-flex;
@@ -33,8 +33,12 @@ const StyledButton = styled.button`
     `}
 `;
 
-const CommonButton = ({ children, ...rest }) => {
-  return <StyledButton {...rest}>{children}</StyledButton>;
+const CommonButton = ({ click, children, ...rest }) => {
+  return (
+    <StyledButton onClick={click} {...rest}>
+      {children}
+    </StyledButton>
+  );
 };
 
 export default CommonButton;
