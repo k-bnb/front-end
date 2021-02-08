@@ -10,6 +10,7 @@ const DESTINATION_INPUT = 'search/DESTINATION_INPUT';
 const LOCATION_INPUT = 'search/LOCATION_INPUT';
 const DATE_INPUT = 'search/DATE_INPUT';
 const GUEST_INPUT = 'search/GUEST_INPUT';
+const SPECIFIC_INPUT_CLEAR = 'search/SPECIFIC_INPUT_CLEAR';
 
 //search action type
 //비동기
@@ -26,14 +27,19 @@ export const locationInput = createAction(
   LOCATION_INPUT,
   (locationSearch) => locationSearch,
 ); //locationSearch 객체.
-export const dateInput = createAction(
-  DATE_INPUT,
-  (checkDateSearch) => checkDateSearch,
-); //checkDateSearch 객체.
-export const guestInput = createAction(
-  GUEST_INPUT,
-  (guestSearch) => guestSearch,
-); //guestSearch 객체.
+export const dateInput = createAction(DATE_INPUT, (form, checkDateSearch) => ({
+  form,
+  checkDateSearch,
+})); //checkDateSearch 객체.
+export const guestInput = createAction(GUEST_INPUT, (form, name, value) => ({
+  form,
+  name,
+  value,
+})); // form -> guestinput, name -> numOfAdult, value ->
+export const specificInputClear = createAction(
+  SPECIFIC_INPUT_CLEAR,
+  (form) => form,
+); // form: 초기화할 정보(위치, 날짜, 인원)
 export const searching = createAction(
   SEARCHING,
   ({ locationSearch, checkDateSearch, guestSearch }) => ({
@@ -85,21 +91,24 @@ const search = handleActions(
       destinationName,
     }),
 
-    [LOCATION_INPUT]: (state, { payload: { locationSearch } }) =>
+    [LOCATION_INPUT]: (state, { payload: locationSearch }) =>
       produce(state, (draft) => {
         draft.searchReq.locationSearch = locationSearch;
       }),
 
-    [DATE_INPUT]: (state, { payload: { checkDateSearch } }) =>
+    [DATE_INPUT]: (state, { payload: { form, checkDateSearch } }) =>
       produce(state, (draft) => {
-        draft.searchReq.checkDateSearch = checkDateSearch;
+        draft.searchReq.checkDateSearch[form] = checkDateSearch;
       }),
 
-    [GUEST_INPUT]: (state, { payload: { guestSearch } }) =>
+    [GUEST_INPUT]: (state, { payload: { form, name, value } }) =>
       produce(state, (draft) => {
-        draft.searchReq.guestSearch = guestSearch;
+        draft.searchReq[form][name] = value; // draft.searchReq.guestSearch.numOfAdult = value
       }),
-
+    [SPECIFIC_INPUT_CLEAR]: (state, { payload: form }) =>
+      produce(state, (draft) => {
+        draft.searchReq[form] = initialState.searchReq[form]; // 선택한 form 초기화.
+      }),
     [SEARCHING_SUCCESS]: (
       state,
       {
