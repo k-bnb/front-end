@@ -26,7 +26,7 @@ const FooterFake = () => {
     <>
       {isPc && (
         <PcSize className="Listheader">
-          {/* <Foot /> */}
+          
         </PcSize>
       )}
       {isTablet && (

@@ -7,7 +7,7 @@ const BookmarkStyle = styled.div`
       width:48px;
       height:48px;
       border-radius : 50%;
-      font-size:1.5rem;
+      font-size:24px;
       padding: 0;
       margin:0;
       display : flex;

@@ -20,7 +20,7 @@ const TabletSize = styled.main`
 
 const MobileSize = styled.main`
   /* width : calc(100%-100%); */
-  background-color: yellow;
+  /* background-color: yellow; */
   display: none;
 `;
 
@@ -44,12 +44,12 @@ const GoogleStyle = () => {
       )}
       {isTablet && (
         <TabletSize className="Asidemap">
-          <GoogleMapUse />
+          {/* <GoogleMapUse /> */}
         </TabletSize>
       )}
       {isMobile && (
         <MobileSize className="Asidemap">
-          <GoogleMapUse />
+          {/* <GoogleMapUse /> */}
         </MobileSize>
       )}
     </>

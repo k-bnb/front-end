@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Imgs from '../../atoms/atoms-list/Imgs';
 import Border from '../../atoms/atoms-list/Border';
 import PageNation from '../../molecules/molecules-list/PageNation';
+import SearchData from '../../molecules/molecules-list/SearchData';
 // import LodgingLists from "../molecules/List20";
 
 const PcSize = styled.main`
@@ -13,7 +14,8 @@ const PcSize = styled.main`
   
 `;
 const TabletSize = styled.main`
-  /* min-height: calc(100vh - 80px); */
+  width:100%;
+  min-height: calc(100vh - 80px);
   background-color: skyblue;
   padding: 0 24px;
 `;
@@ -38,18 +40,21 @@ const ListStyle = () => {
     <>
       {isPc && (
         <PcSize className="Listmain">
+          <SearchData />
           <LodgingLists />
           <PageNation />
         </PcSize>
       )}
       {isTablet && (
         <TabletSize className="Listmain">
+          <SearchData />
           <LodgingLists />
           <PageNation />
         </TabletSize>
       )}
       {isMobile && (
         <MobileSize className="Listmain">
+          <SearchData />
           <Border bigCarouselImg >
             <Imgs carousalBigImg src="https://a0.muscache.com/im/pictures/02a7fd89-b923-4541-aff6-a6eeff4d4445.jpg?im_w=1200"/>
           </Border>

@@ -4,15 +4,15 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { BiWon } from 'react-icons/bi';
 import Bookmark from '../../atoms/atoms-list/BookMark';
 import Border from '../../atoms/atoms-list/Border';
-import Score from '../../atoms/atoms-list/Score';
 import TextStyled from '../../atoms/atoms-list/Text';
 import Imgs from '../../atoms/atoms-list/Imgs';
 import ScoreText from './Score-Text';
-import ListCarousel from './ListCarousel';
-import { SliderData } from './SliderData';
+// import ListCarousel from './ListCarousel';
+// import { SliderData } from './SliderData';
 
 const Wrap = styled.div`
-  max-width: 100%;
+  /* max-width: 100%; */
+  width:100%;
   height: auto;
   /* min-height: 5013px;/ */
   /* padding: 0 24px; */
@@ -39,8 +39,8 @@ const ULWrap = styled.ul`
     border-bottom: 1px solid #000;
     align-items: center;
     :nth-child(1) {
-      /* border-top: 2px solid #000; */
-      border-top:2px dashed red;
+      border-top: 2px solid #000;
+      /* border-top:2px dashed red; */
     }
   }
   span {
@@ -106,22 +106,22 @@ const ULWrap = styled.ul`
   } */
 `;
 
-const LodgingLists = () => {
+const LodgingLists = ({alt, ...rest}) => {
   return (
     <>
-      <ListCarousel slides={SliderData} />
+      {/* <ListCarousel slides={SliderData} /> */}
       <Wrap className="listWrap">
         <ULWrap>
           <li>
             <span>
               <Border carouselImg>
-                {/* <Imgs
+                <Imgs
                   carousalImg
                   src="https://a0.muscache.com/im/pictures/02a7fd89-b923-4541-aff6-a6eeff4d4445.jpg?im_w=1200"
-                  alt={alt}
+                  // alt={alt}
                   {...rest}
                 />
-                <Imgs
+                {/*<Imgs
                   carousalImg
                   src="https://a0.muscache.com/im/pictures/02a7fd89-b923-4541-aff6-a6eeff4d4445.jpg?im_w=1200"
                   alt={alt}
@@ -155,7 +155,6 @@ const LodgingLists = () => {
               </div>
             </span>
           </li>
-          
         </ULWrap>
       </Wrap>
     </>
