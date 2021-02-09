@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import SearchButton from '../../atoms/atoms-header/SearchButton';
 import styled, { css } from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 const GuestNumberUnitOuterBlock = styled.div`
   cursor: pointer;
@@ -13,10 +14,18 @@ const GuestNumberUnitOuterBlock = styled.div`
   background-color: transparent;
 `;
 
-const SearchButtonUnit = ({ isClicked }) => {
+const SearchButtonUnit = (props) => {
+  const history = useHistory();
+  const buttonRef = useRef();
+
   return (
     <GuestNumberUnitOuterBlock className="search-button-unit">
-      <SearchButton isClicked={isClicked} />
+      <SearchButton
+        ref={buttonRef}
+        onClick={() => {
+          history.push('/rooms');
+        }}
+      />
     </GuestNumberUnitOuterBlock>
   );
 };

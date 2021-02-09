@@ -36,10 +36,14 @@ const SearchButtonBlock = styled.button`
     `}
 `;
 
-const SearchButton = ({ isScrolled }) => {
+const SearchButton = ({ isScrolled, onClick }) => {
   return (
     <>
-      <SearchButtonBlock isScrolled={isScrolled} className="search-button-unit">
+      <SearchButtonBlock
+        isScrolled={isScrolled}
+        className="search-button-unit"
+        onClick={onClick}
+      >
         {!isScrolled && <BiSearch className="search-button-unit" />}
         {isScrolled && <HiSearch className="search-button-unit" />}
       </SearchButtonBlock>

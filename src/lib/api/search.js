@@ -11,7 +11,7 @@ export const search = ({
   bedRoomNum,
   bathRoomNum,
 }) =>
-  client.post(`http://3.34.198.174:8080/room/list?page=1&size=5`, {
+  client.post(`http://3.34.198.174:8080/room/list?page=0&size=5`, {
     locationSearch,
     checkDateSearch,
     guestSearch,

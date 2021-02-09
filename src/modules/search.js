@@ -88,12 +88,12 @@ const initialState = {
   destinationName: '',
   searchReq: {
     locationSearch: {
-      latitude: 10.0,
-      longitude: 10.0,
-      latitudeMax: 12.0,
-      latitudeMin: 8.0,
-      longitudeMax: 12.0,
-      longitudeMin: 8.0,
+      latitude: '',
+      longitude: '',
+      latitudeMax: '',
+      latitudeMin: '',
+      longitudeMax: '',
+      longitudeMin: '',
     },
     checkDateSearch: {
       startDate: '',
@@ -151,20 +151,26 @@ const search = handleActions(
       produce(state, (draft) => {
         draft.searchReq[form] = initialState.searchReq[form]; // 선택한 form 초기화.
       }),
-    [SEARCHING_SUCCESS]: (
-      state,
-      {
-        payload: {
-          _embedded: { roomDtoList },
-        },
-      },
-    ) =>
-      produce(state, (draft) => {
-        draft.searchRes = roomDtoList;
-      }), //_embedded:{roomDtoList} 는 방 정보를 가진 배열.
+    // [SEARCHING_SUCCESS]: (
+    //   state,
+    //   {
+    //     payload: {
+    //       _embedded: { roomDtoList },`
+    //     },
+    //   },
+    // ) =>
+    //   produce(state, (draft) => {
+    //     draft.searchRes = roomDtoList;
+    //   }), //_embedded:{roomDtoList} 는 방 정보를 가진 배열.
+    [SEARCHING_SUCCESS]: (state, action) => {
+      console.log(action);
+      return produce(state, (draft) => {
+        draft.searchRes = action;
+      });
+    },
 
-    [SEARCHING_FAILURE]: (_, { payload: { error } }) => ({
-      ...initialState,
+    [SEARCHING_FAILURE]: (state, { payload: { error } }) => ({
+      ...state,
       searchError: error,
     }),
     [ROOMTYPE_INPUT]: (state, { payload: { roomType } }) => {

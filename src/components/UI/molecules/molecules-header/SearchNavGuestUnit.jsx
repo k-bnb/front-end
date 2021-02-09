@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import {
@@ -10,6 +10,7 @@ import GuestNumberModal from '../../../templates/templates-header/GuestNumberMod
 import RemoveButton from '../../../templates/templates-header/RemoveButton';
 import Text from '../../atoms/atoms-header/Text';
 import SearchButtonUnit from './SearchButtonUnit';
+import { Link, useHistory } from 'react-router-dom';
 
 const SearchNavGuestUnitLi = styled.li`
   position: relative;
