@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { specificInputClear } from '../../../../modules/search';
-import RemoveButton from '../../../templates/templates-header/RemoveButton';
+import RemoveButton from '../../atoms/atoms-header/RemoveButton';
 import Text from '../../atoms/atoms-header/Text';
 
 const SearchNavCheckOutUnitLi = styled.li`
@@ -28,9 +28,11 @@ const SearchNavCheckOutUnit = ({ SearchTypeHandler, navModalState }) => {
 
   return (
     <SearchNavCheckOutUnitLi
-      onClick={() => {
-        console.log('out');
-        SearchTypeHandler('checkOut');
+      onClick={(e) => {
+        if (!e.target.matches('checkout-remove-btn')) {
+          console.log('out');
+          SearchTypeHandler('checkOut');
+        }
       }}
       navModalState={navModalState}
     >
@@ -48,8 +50,12 @@ const SearchNavCheckOutUnit = ({ SearchTypeHandler, navModalState }) => {
       )}
       {!!endDate && navModalState.checkOut && (
         <RemoveButton
+          className="checkout-remove-btn"
           checkOutDate
-          onClick={() => dispatch(specificInputClear('checkDateSearch'))}
+          onMouseDown={(e) => {
+            console.log('lelel');
+            dispatch(specificInputClear('checkDateSearch'));
+          }}
         />
       )}
     </SearchNavCheckOutUnitLi>

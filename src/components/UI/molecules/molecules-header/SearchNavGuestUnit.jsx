@@ -7,7 +7,7 @@ import {
   specificInputClear,
 } from '../../../../modules/search';
 import GuestNumberModal from '../../../templates/templates-header/GuestNumberModal';
-import RemoveButton from '../../../templates/templates-header/RemoveButton';
+import RemoveButton from '../../atoms/atoms-header/RemoveButton';
 import Text from '../../atoms/atoms-header/Text';
 import SearchButtonUnit from './SearchButtonUnit';
 import { Link, useHistory } from 'react-router-dom';

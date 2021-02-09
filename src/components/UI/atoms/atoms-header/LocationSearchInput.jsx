@@ -1,12 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import './LocationSearchInput.css';
-import Portal from '@reach/portal';
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  InfoWindow,
-} from '@react-google-maps/api';
+import { useLoadScript } from '@react-google-maps/api';
 import { formatRelative } from 'date-fns'; // date 사용.
 import '@reach/combobox/styles.css';
 import { FaMapMarkerAlt } from 'react-icons/fa';
@@ -21,25 +15,16 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete';
-import { KmlLayer, getDefaultViewport, getDraggable } from 'react-google-maps';
-import { Rectangle, LatLnggetBounds } from 'react-google-maps';
 import { useDispatch, useSelector } from 'react-redux';
-import { locationInput, destinationInput } from '../../../../modules/search';
+import {
+  locationInput,
+  destinationInput,
+  specificInputClear,
+} from '../../../../modules/search';
+import { search } from '../../../../lib/api/search';
+import { useState } from 'react';
 
 const libraries = ['places'];
-const mapContainerStyle = {
-  // 지도 크기 설정.
-  width: '100vw',
-  height: '100vh',
-};
-const center = {
-  lat: 43.653225,
-  lng: -79.383186,
-};
-const options = {
-  disableDefaultUI: true,
-  zoomControl: true,
-};
 
 // app 전체 컴포넌트
 const LocationSearchInput = ({ SearchTypeHandler }) => {
@@ -47,119 +32,19 @@ const LocationSearchInput = ({ SearchTypeHandler }) => {
     googleMapsApiKey: 'AIzaSyDi2VswS8ZRJ3Vk6aDl0Mx3RbxI27GeXbQ',
     libraries,
   });
-  const [markers, setMarkers] = React.useState([]);
-  const [selected, setSelected] = React.useState(null); // 선택한 marker의 lat, lng를 저장
 
-  const onMapClick = React.useCallback((e) => {
-    setMarkers((current) => [
-      // current는 현재 marker, 객체는 새롭게 찍은 곳의 marker
-      ...current,
-      {
-        lat: e.latLng.lat(), // lat는 lat를 구하는 메서드
-        lng: e.latLng.lng(), // lng는 lng를 구하는 메서드
-        time: new Date(), // key값에 사용하기 위해 등록된 시간을 key로 전달
-      },
-    ]);
-  }, []);
-
-  const mapRef = React.useRef();
-  const onMapLoad = React.useCallback((map) => {
-    mapRef.current = map;
-  }, []);
-
-  const panTo = React.useCallback(({ lat, lng }) => {
-    // 이 함수는 검색 결과 표시하는 곳에서 전달받은 lat, lng를 가지고 맵의 위치를 이동시켜주고 확대 시켜줌.
-    mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
-  }, []);
-
-  if (loadError) return 'Error loading maps';
-  if (!isLoaded) return 'Loading Maps';
+  if (loadError) return '';
+  if (!isLoaded) return '';
 
   return (
     <div className="location-search-input-outer-container">
-      <Search panTo={panTo} SearchTypeHandler={SearchTypeHandler} />
-      {/* <Locate panTo={panTo} /> // 현재 내 위치 정보 */}
-      {/* <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={8}
-        center={center}
-        options={options}
-        onClick={onMapClick}
-        onLoad={onMapLoad}
-        onBoundsChanged={() => {
-          console.log('hi');
-          console.log('bound', mapRef.current.getBounds()); // 현재 화면의 범위 반환
-          // console.log('current', mapRef.current.getCurrentPosition());
-        }}
-      >
-        {markers.map((marker) => (
-          <Marker
-            key={marker.time.toString()}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            icon={{
-              url: '/skateboarding.svg', // public 폴더 기준 경로
-              scaledSize: new window.google.maps.Size(30, 30), // 30 x 30 pixel
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15), // icon 사이즈의 절반으로 하면 중앙에 위치
-            }}
-            draggable={true}
-            onClick={() => {
-              setSelected(marker);
-            }}
-            label={'hellddsdssdo'}
-            title={'hh'}
-          />
-        ))}
-        {selected ? (
-          // selected가 있으면 infoWindow를 띄워준다.
-          <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
-            onCloseClick={() => {
-              setSelected(null);
-            }}
-          >
-            <div>
-              <h2>Bear Spotted!</h2>
-              <p>Spotted {formatRelative(selected.time, new Date())}</p>
-            </div>
-          </InfoWindow>
-        ) : null}
-      </GoogleMap> */}
+      <Search SearchTypeHandler={SearchTypeHandler} />
     </div>
   );
 };
 
-function Locate({ panTo }) {
-  return (
-    <button
-      className="locate"
-      onClick={() => {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            console.log(position); // 현위치 반환
-            panTo({
-              // 현재 위치로 지도를 이동시켜줌.
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-            });
-          }, // 성공시 콜백함수
-          () => null, // 실패시 콜백함수, 따로 처리 안해줘서 null 반환
-          options,
-        );
-      }}
-    >
-      <img
-        src="skateboarding.svg"
-        alt="skateboarding locate me"
-        width="30"
-        height="30"
-      />
-    </button>
-  );
-}
-
 function Search({ panTo, SearchTypeHandler }) {
+  const [isFirst, setIsFirst] = useState(true);
   const {
     ready,
     value, // value는 사용자가 input에 검색한 값
@@ -178,6 +63,9 @@ function Search({ panTo, SearchTypeHandler }) {
 
   const dispatch = useDispatch();
   const destinationName = useSelector(({ search }) => search.destinationName);
+  const { latitude } = useSelector(
+    ({ search }) => search.searchReq.locationSearch,
+  );
 
   return (
     <>
@@ -195,14 +83,8 @@ function Search({ panTo, SearchTypeHandler }) {
             dispatch(
               // 좌표값 store로 전달
               locationInput({
-                latitude:
-                  (results[0].geometry.bounds.Va.i +
-                    results[0].geometry.bounds.Va.j) /
-                  2,
-                longitude:
-                  (results[0].geometry.bounds.Qa.i +
-                    results[0].geometry.bounds.Qa.j) /
-                  2,
+                latitude: lat,
+                longitude: lng,
                 latitudeMax: results[0].geometry.bounds.Va.j,
                 latitudeMin: results[0].geometry.bounds.Va.i,
                 longitudeMax: results[0].geometry.bounds.Qa.j,
@@ -210,8 +92,6 @@ function Search({ panTo, SearchTypeHandler }) {
               }),
             );
             console.log('ㅇㅇ', results[0]);
-            console.log(lat, lng);
-            panTo({ lat, lng });
           } catch (error) {
             console.error('error');
           }
@@ -221,18 +101,6 @@ function Search({ panTo, SearchTypeHandler }) {
           value={destinationName}
           onChange={(e) => {
             setValue(e.target.value);
-            // if (!destinationName) {
-            //   dispatch(
-            //     locationInput({
-            //       latitude: null,
-            //       longitude: null,
-            //       latitudeMax: null,
-            //       latitudeMin: null,
-            //       longitudeMax: null,
-            //       longitudeMin: null,
-            //     }),
-            //   );
-            // }
             console.log(e.target.value); // 여기서 dispatch로 스토어 상태 업데이트 하자.
             dispatch(destinationInput(e.target.value)); // DestinationName 변경
           }}
@@ -240,13 +108,13 @@ function Search({ panTo, SearchTypeHandler }) {
           placeholder="어디로 여행가세요?"
           className="combo-box-input"
           id="locationInput"
-          onFocus={() => {}}
           onClick={() => {
             SearchTypeHandler('location');
           }}
           autoComplete="off"
+          selectOnClick={true}
         />
-        {!(destinationName === '가까운 여행지 둘러보기') && (
+        {!latitude && ( // locationSearch에 값이 하나라도 들어가면 입력된 것이므로 팝업 띄우지 않는다.
           <ComboboxPopover className="combo-box-pop-over">
             <ComboboxList className="combo-box-list">
               {status === 'OK' &&
@@ -271,3 +139,7 @@ function Search({ panTo, SearchTypeHandler }) {
 }
 
 export default LocationSearchInput;
+
+// function onlyKorean(str) {
+//   return str.replace(/[^\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F]/gi, '');
+// }

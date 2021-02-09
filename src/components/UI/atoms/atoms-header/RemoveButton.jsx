@@ -2,7 +2,7 @@ import React from 'react';
 import { TiDeleteOutline } from 'react-icons/ti';
 import styled, { css } from 'styled-components';
 
-const RemoveButtonBlock = styled.span`
+const RemoveButtonBlock = styled.button`
   position: absolute;
   top: 50%;
   right: 60px;
@@ -15,6 +15,7 @@ const RemoveButtonBlock = styled.span`
   background-color: lightgray;
   color: black;
   font-size: 17px;
+  border: 0;
   cursor:pointer;
   &:hover {
     background-color: lightgray;
