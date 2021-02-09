@@ -1,27 +1,20 @@
-// import Button from "../atoms/Button"
-
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
-import Modal from '../../../../portal/Modal';
 import Button from '../../atoms/atoms-list/Button';
 import TextStyled from '../../atoms/atoms-list/Text';
 import FooterBtn from './FooterBtn';
 import RoomReSearch from './RoomReSearch';
 import SearchModal from './SearchModal';
 // import TextStyled from '../atoms/Text';
-
 const SearchPlace = styled.div`
   margin-top: 100px;
   /* /* width: 100%; */
   padding: 20px;
-
   /* display: flex; */
   .filter-style {
     display: flex;
-
     .roomType {
       position: relative;
-
       margin-right: 10px;
       button {
         display: flex;
@@ -34,7 +27,6 @@ const SearchPlace = styled.div`
     }
   }
 `;
-
 const SearchData = ({
   searchModalState,
   setSearchModalState,
@@ -54,7 +46,6 @@ const SearchData = ({
   costState,
 }) => {
   // const modal = useRef();
-
   const handleClickOutside = ({ target }) => {
     if (!target.matches('.modals')) return;
     // if (!modal.current.contains(target)) {
@@ -152,5 +143,4 @@ const SearchData = ({
     </>
   );
 };
-
 export default SearchData;
