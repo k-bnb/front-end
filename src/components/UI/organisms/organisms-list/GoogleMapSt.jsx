@@ -1,15 +1,15 @@
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
-import GoogleMapUse from "../../molecules/molecules-list/GoogleMap";
+import GoogleMapUse from '../../molecules/molecules-list/GoogleMap';
 
 const PcSize = styled.main`
-  display : block;
-  margin-top:-80px;
-  padding-top:80px;
-  position:sticky;
-  top:0;
+  display: block;
+  margin-top: -80px;
+  padding-top: 80px;
+  position: sticky;
+  top: 0;
   min-width: calc(100vw - 840px);
-  height:100vh;
+  height: 100vh;
   /* cursor: url('https://maps.gstatic.com/mapfiles/openhand_8_8.cur'), default; */
   /* background-color: lightcoral; */
 `;

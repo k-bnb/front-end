@@ -23,6 +23,8 @@ import usePlacesAutocomplete, {
 } from 'use-places-autocomplete';
 import { KmlLayer, getDefaultViewport, getDraggable } from 'react-google-maps';
 import { Rectangle, LatLnggetBounds } from 'react-google-maps';
+import { useDispatch, useSelector } from 'react-redux';
+import { locationInput, destinationInput } from '../../../../modules/search';
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -40,7 +42,7 @@ const options = {
 };
 
 // app 전체 컴포넌트
-const LocationSearchInput = () => {
+const LocationSearchInput = ({ SearchTypeHandler }) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: 'AIzaSyDi2VswS8ZRJ3Vk6aDl0Mx3RbxI27GeXbQ',
     libraries,
@@ -76,7 +78,7 @@ const LocationSearchInput = () => {
 
   return (
     <div className="location-search-input-outer-container">
-      <Search panTo={panTo} />
+      <Search panTo={panTo} SearchTypeHandler={SearchTypeHandler} />
       {/* <Locate panTo={panTo} /> // 현재 내 위치 정보 */}
       {/* <GoogleMap
         mapContainerStyle={mapContainerStyle}
@@ -157,7 +159,7 @@ function Locate({ panTo }) {
   );
 }
 
-function Search({ panTo }) {
+function Search({ panTo, SearchTypeHandler }) {
   const {
     ready,
     value, // value는 사용자가 input에 검색한 값
@@ -174,6 +176,9 @@ function Search({ panTo }) {
     },
   }); // {} 안에 옵션 넣어서 전달
 
+  const dispatch = useDispatch();
+  const destinationName = useSelector(({ search }) => search.destinationName);
+
   return (
     <>
       <Combobox
@@ -185,8 +190,26 @@ function Search({ panTo }) {
           // address는 유저가 선택한 제안 값
           try {
             const results = await getGeocode({ address }); // 유저가 검색한 address를 인수로 전달하여 promise를 반환받음.
+            console.log(results[0]);
             const { lat, lng } = await getLatLng(results[0]); // 결과에서 lat과 lng정보를 추출
-            console.log(results);
+            dispatch(
+              // 좌표값 store로 전달
+              locationInput({
+                latitude:
+                  (results[0].geometry.bounds.Va.i +
+                    results[0].geometry.bounds.Va.j) /
+                  2,
+                longitude:
+                  (results[0].geometry.bounds.Qa.i +
+                    results[0].geometry.bounds.Qa.j) /
+                  2,
+                latitudeMax: results[0].geometry.bounds.Va.j,
+                latitudeMin: results[0].geometry.bounds.Va.i,
+                longitudeMax: results[0].geometry.bounds.Qa.j,
+                longitudeMin: results[0].geometry.bounds.Qa.i,
+              }),
+            );
+            console.log('ㅇㅇ', results[0]);
             console.log(lat, lng);
             panTo({ lat, lng });
           } catch (error) {
@@ -194,35 +217,54 @@ function Search({ panTo }) {
           }
         }}
       >
-        <label className="combo-box-label">
-          <ComboboxInput
-            value={value}
-            onChange={(e) => {
-              setValue(e.target.value);
-              console.log(e.target.value); // 여기서 dispatch로 스토어 상태 업데이트 하자.
-            }}
-            disabled={!ready} // 아직 준비되지않으면 사용할수 없음.
-            placeholder="어디로 여행가세요?"
-            className="combo-box-input"
-          />
-        </label>
-        <ComboboxPopover className="combo-box-pop-over">
-          <ComboboxList className="combo-box-list">
-            {status === 'OK' &&
-              data.map(({ id, description }) => (
-                <div className="combo-box-options-container">
-                  <div className="combo-box-marker-container">
-                    <FaMapMarkerAlt className="gray-marker" />
+        <ComboboxInput
+          value={destinationName}
+          onChange={(e) => {
+            setValue(e.target.value);
+            // if (!destinationName) {
+            //   dispatch(
+            //     locationInput({
+            //       latitude: null,
+            //       longitude: null,
+            //       latitudeMax: null,
+            //       latitudeMin: null,
+            //       longitudeMax: null,
+            //       longitudeMin: null,
+            //     }),
+            //   );
+            // }
+            console.log(e.target.value); // 여기서 dispatch로 스토어 상태 업데이트 하자.
+            dispatch(destinationInput(e.target.value)); // DestinationName 변경
+          }}
+          disabled={!ready} // 아직 준비되지않으면 사용할수 없음.
+          placeholder="어디로 여행가세요?"
+          className="combo-box-input"
+          id="locationInput"
+          onFocus={() => {}}
+          onClick={() => {
+            SearchTypeHandler('location');
+          }}
+          autoComplete="off"
+        />
+        {!(destinationName === '가까운 여행지 둘러보기') && (
+          <ComboboxPopover className="combo-box-pop-over">
+            <ComboboxList className="combo-box-list">
+              {status === 'OK' &&
+                data.map(({ id, description }) => (
+                  <div className="combo-box-options-container">
+                    <div className="combo-box-marker-container">
+                      <FaMapMarkerAlt className="gray-marker" />
+                    </div>
+                    <ComboboxOption
+                      className="combo-box-options"
+                      key={id}
+                      value={description}
+                    />
                   </div>
-                  <ComboboxOption
-                    className="combo-box-options"
-                    key={id}
-                    value={description}
-                  />
-                </div>
-              ))}
-          </ComboboxList>
-        </ComboboxPopover>
+                ))}
+            </ComboboxList>
+          </ComboboxPopover>
+        )}
       </Combobox>
     </>
   );

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoginOraganisms from '../components/UI/organisms/organisms-modals-auth/LoginOraganisms';
 import RegisterOrganism from '../components/UI/organisms/organisms-modals-auth/RegisterOrganism';
 import { changeInput, login, register } from '../modules/auth';
-import { debounce } from 'lodash';
 
 const AuthModalContainer = ({
   modal,
@@ -18,6 +17,7 @@ const AuthModalContainer = ({
   const { loginEmail, loginPassword } = useSelector(
     (state) => state.auth.login,
   );
+
   const { registerEmail, name, registerPassword, birth } = useSelector(
     (state) => state.auth.register,
   );

@@ -20,7 +20,6 @@ const ImgStyle = styled.img`
 `;
 
 const Imgs = ({ src, alt, ...rest }) => {
-  console.log(src, 44);
   return (
     <div>
       <ImgStyle src={src} {...rest} alt={alt} />

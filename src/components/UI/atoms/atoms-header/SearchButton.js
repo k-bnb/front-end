@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { BiSearch } from 'react-icons/bi';
+import { HiSearch } from 'react-icons/hi';
 
 const SearchButtonBlock = styled.button`
   background: rgb(255, 56, 92);
@@ -8,6 +9,8 @@ const SearchButtonBlock = styled.button`
   height: 48px;
   border-radius: 50%;
   border: 0;
+  cursor: pointer;
+
   svg {
     color: white;
     font-size: 18px;
@@ -20,16 +23,31 @@ const SearchButtonBlock = styled.button`
       rgb(215, 4, 102) 100%
     );
   }
+  ${(props) =>
+    props.isScrolled &&
+    css`
+      width: 32px;
+      height: 32px;
+      padding: 8px;
+      svg {
+        line-height: 15px;
+        font-size: 16px;
+      }
+    `}
 `;
 
-const SearchButton = ({ isClicked }) => {
+const SearchButton = ({ isScrolled, onClick }) => {
   return (
-    <div>
-      <SearchButtonBlock>
-        <BiSearch />
-        {isClicked && <span>검색</span>}
+    <>
+      <SearchButtonBlock
+        isScrolled={isScrolled}
+        className="search-button-unit"
+        onClick={onClick}
+      >
+        {!isScrolled && <BiSearch className="search-button-unit" />}
+        {isScrolled && <HiSearch className="search-button-unit" />}
       </SearchButtonBlock>
-    </div>
+    </>
   );
 };
 

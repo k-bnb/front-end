@@ -40,21 +40,18 @@ const ListStyle = () => {
     <>
       {isPc && (
         <PcSize className="Listmain">
-          <SearchData />
           <LodgingLists />
           <PageNation />
         </PcSize>
       )}
       {isTablet && (
         <TabletSize className="Listmain">
-          <SearchData />
           <LodgingLists />
           <PageNation />
         </TabletSize>
       )}
       {isMobile && (
         <MobileSize className="Listmain">
-          <SearchData />
           <Border bigCarouselImg >
             <Imgs carousalBigImg src="https://a0.muscache.com/im/pictures/02a7fd89-b923-4541-aff6-a6eeff4d4445.jpg?im_w=1200"/>
           </Border>
