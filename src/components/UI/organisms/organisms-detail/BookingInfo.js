@@ -8,6 +8,8 @@ import TotalPrice from '../../molecules/molecules-detail/TotalPrice';
 
 const BookingInfoContainer = styled.div`
   position: sticky;
+  top: 200px;
+  margin-bottom: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import './LocationSearchInput.css';
 import { useLoadScript } from '@react-google-maps/api';
-import { formatRelative } from 'date-fns'; // date 사용.
 import '@reach/combobox/styles.css';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import {
@@ -44,7 +43,6 @@ const LocationSearchInput = ({ SearchTypeHandler }) => {
 };
 
 function Search({ panTo, SearchTypeHandler }) {
-  const [isFirst, setIsFirst] = useState(true);
   const {
     ready,
     value, // value는 사용자가 input에 검색한 값

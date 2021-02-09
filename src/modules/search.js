@@ -69,7 +69,6 @@ export const searching = createAction(
   }),
 );
 // detaile action
-
 export const roomTypeInput = createAction(
   ROOMTYPE_INPUT,
   (roomType) => roomType,
@@ -105,8 +104,8 @@ const initialState = {
       numOfInfant: 0,
     },
     costSearch: {
-      minCost: 0,
-      maxCost: 0,
+      minCost: 10000,
+      maxCost: 1000000,
     },
     roomType: '',
     bedNum: 0,
@@ -151,21 +150,9 @@ const search = handleActions(
       produce(state, (draft) => {
         draft.searchReq[form] = initialState.searchReq[form]; // 선택한 form 초기화.
       }),
-    // [SEARCHING_SUCCESS]: (
-    //   state,
-    //   {
-    //     payload: {
-    //       _embedded: { roomDtoList },`
-    //     },
-    //   },
-    // ) =>
-    //   produce(state, (draft) => {
-    //     draft.searchRes = roomDtoList;
-    //   }), //_embedded:{roomDtoList} 는 방 정보를 가진 배열.
     [SEARCHING_SUCCESS]: (state, action) => {
-      console.log(action);
       return produce(state, (draft) => {
-        draft.searchRes = action;
+        draft.searchRes = action.payload._embedded.roomDtoList;
       });
     },
 
