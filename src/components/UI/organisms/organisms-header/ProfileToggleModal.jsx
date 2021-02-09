@@ -5,6 +5,7 @@ import ProfileToggleItems from '../../molecules/molecules-header/ProfileToggleIt
 
 const ProfileToggleBlock = styled.div`
   position: absolute;
+  z-index: 1000;
   right: 35px;
   top: 20px;
 

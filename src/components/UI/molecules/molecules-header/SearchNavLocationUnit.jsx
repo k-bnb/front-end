@@ -6,7 +6,7 @@ import {
   specificInputClear,
 } from '../../../../modules/search';
 import LocationModal from '../../../templates/templates-header/LocationModal';
-import RemoveButton from '../../../templates/templates-header/RemoveButton';
+import RemoveButton from '../../atoms/atoms-header/RemoveButton';
 import SearchNavLocationUnitLabel from '../../atoms/atoms-header/SearchNavLocationUnitLabel';
 
 const SearchNavLocationUnitLi = styled.li`

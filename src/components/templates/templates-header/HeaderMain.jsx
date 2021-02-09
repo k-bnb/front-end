@@ -19,14 +19,13 @@ const BlackOutsideRange = styled.div`
         width: 100vw;
         height: 100vh;
         background-color: rgba(0, 0, 0, 0.4);
-        z-index: 1;
       }
     `}
 `;
 
 const HeaderMainBlock = styled.div`
   position: fixed;
-  z-index: 1;
+  /* z-index: ; */
   width: 100%;
   height: 80px;
   background-color: transparent;
