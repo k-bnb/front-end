@@ -2,11 +2,10 @@ import React from './react';
 import styled from './styled-components';
 import { GrFormClose } from './react-icons/gr';
 import { AiOutlinePlus } from './react-icons/ai';
+import '../../atoms/atoms-detail/DetailBasicStyle.css';
 
 const Modalcontainer = styled.div`
-  display: flex;
   inset: 0px;
-  align-items: center;
   justify-content: center;
   padding: 40px;
   z-index: 100;
@@ -42,17 +41,15 @@ const CancelBtn = styled.button`
   border: none;
   outline: none;
   border-radius: 50%;
-  color: black;
   width: 32px;
   height: 32px;
   cursor: pointer;
-  line-height: 20px;
   z-index: 10;
   background: transparent;
   line-height: 16px;
   svg {
     font-size: 24px;
-    font-weight: 400;
+    /* font-weight: 400; */
   }
   &:hover {
     background: rgb(247, 247, 247);
@@ -60,24 +57,19 @@ const CancelBtn = styled.button`
 `;
 
 const ModalHeader = styled.div`
-  display: flex;
-  align-items: center;
   justify-content: center;
   min-height: 64px;
   padding: 0 24px;
   border-bottom: 1px solid rgb(235, 235, 235);
-  line-height: 20px;
   font-weight: 800;
-  font-size: 16px;
-  color: rgb(34, 34, 34);
 `;
 
 const SavedItem = styled.button`
   border: none;
   padding: 0 16px;
   width: 100%;
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
   padding: 12px;
   border-radius: 8px;
   background: transparent;
@@ -112,22 +104,16 @@ const ItemData = styled.div`
     margin-bottom: 4px;
     font-size: 12px;
     line-height: 16px;
-    font-weight: 400;
     color: rgb(113, 113, 113);
   }
   .location {
-    font-size: 16px;
-    line-height: 20px;
     font-weight: 600;
-    color: rgb(34, 34, 34);
     margin-bottom: 4px;
   }
   .accommodation-number {
     font-size: 14px;
     line-height: 18px;
-    font-weight: 400;
     margin-top: 4px;
-    color: rgb(34, 34, 34);
   }
 `;
 
@@ -140,14 +126,14 @@ const DetailData = ({ date, location, number }) => (
 );
 
 const SavedListsModal = () => (
-  <Modalcontainer>
+  <Modalcontainer className="basic-flex">
     <SavedLists>
       <CancelBtn>
         <GrFormClose />
       </CancelBtn>
-      <ModalHeader>목록에 저장하기</ModalHeader>
+      <ModalHeader className="basic-flex">목록에 저장하기</ModalHeader>
       <div className="saved-item-container">
-        <SavedItem>
+        <SavedItem className="basic-flex">
           <ItemImage>
             <AiOutlinePlus className="plus-icon" />
           </ItemImage>

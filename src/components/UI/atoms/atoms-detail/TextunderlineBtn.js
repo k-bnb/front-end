@@ -14,9 +14,7 @@ const UnderlineBtn = styled.button`
   text-decoration: underline;
 
   &:hover {
-    border: none;
     background: rgb(247, 247, 247);
-    color: #000;
   }
 `;
 

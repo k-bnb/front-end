@@ -19,16 +19,12 @@ export const SimpleSummary = styled.div`
   display: flex;
   margin-bottom: 24px;
   color: #222222;
-  line-height: 20px;
 `;
 
 export const Text = styled.div`
-  line-height: 20px;
   margin-left: 16px;
   &:first-child {
-    color: rgb(34, 34, 34);
     font-weight: 600;
-    font-size: 16px;
     margin-bottom: 4px;
   }
   &:last-child {

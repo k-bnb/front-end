@@ -13,10 +13,12 @@ import WrappingContainer from '../../UI/organisms/organisms-detail/WrappingConta
 
 const DetailContainer = styled.div`
   padding: 80px 80px 0;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: rgb(34, 34, 34);
   margin: 0 auto;
   max-width: 1280px;
-  color: rgb(34, 34, 34);
 `;
 
 const Detail = () => {
