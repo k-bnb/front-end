@@ -105,8 +105,8 @@ const initialState = {
       numOfInfant: 0,
     },
     costSearch: {
-      minCost: 0,
-      maxCost: 0,
+      minCost: 10000,
+      maxCost: 1000000,
     },
     roomType: '',
     bedNum: 0,
