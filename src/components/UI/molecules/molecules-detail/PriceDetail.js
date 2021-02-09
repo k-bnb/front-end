@@ -7,9 +7,6 @@ const PriceBox = styled.ul`
   margin-top: 24px;
   margin-block-end: 0;
   padding: 0;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
 `;
 
 const PriceDetail = () => (

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TextunderlineBtn from '../../atoms/atoms-detail/TextunderlineBtn';
-import Score from '../../atoms/atoms-detail/Score';
+import Grade from '../../atoms/atoms-detail/Grade';
 
 const AccommodationTitle = styled.div`
   max-width: 1128px;
@@ -27,12 +27,14 @@ const DetailData = styled.div`
   flex-wrap: wrap;
 `;
 
-const PageTitle = () => (
+const PageTitle = ({ name }) => (
   <AccommodationTitle>
     <div className="title-container">
-      <Title>조이 하우스 두번째 이야기 오션뷰 & 테라스/이호테우해변 </Title>
+      <Title>
+        조이 하우스 두번째 이야기 오션뷰 & 테라스/이호테우해변{name}{' '}
+      </Title>
       <DetailData>
-        <Score />
+        <Grade />
         <TextunderlineBtn />
       </DetailData>
     </div>

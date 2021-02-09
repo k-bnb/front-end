@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import NoticeAll, { AccommodationRules } from './NoticeAll';
+import NoticeAll from './NoticeAll';
+import '../../atoms/atoms-detail/DetailBasicStyle.css';
 
 const ImportantNoticeWrapper = styled.div`
   padding: 0 80px;
@@ -22,7 +23,7 @@ const SectionTitle = styled.h2`
 
 const ImportantNotice = () => (
   <ImportantNoticeWrapper>
-    <NoticeContainer>
+    <NoticeContainer className="basic-section-padding">
       <SectionTitle>알아두어야 할 사항</SectionTitle>
       <NoticeAll />
     </NoticeContainer>

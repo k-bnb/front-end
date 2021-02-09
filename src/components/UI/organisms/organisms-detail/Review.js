@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Score from '../../atoms/atoms-detail/Score';
+import Grade from '../../atoms/atoms-detail/Grade';
 import WhiteBtn from '../../atoms/atoms-detail/WhiteBtn';
 import ReviewItem from '../../molecules/molecules-detail/ReviewItem';
 import ScoreAverage from '../../molecules/molecules-detail/ScoreAverage';
 import { TypeTitle } from '../../molecules/molecules-detail/TypeInfo';
+import '../../atoms/atoms-detail/DetailBasicStyle.css';
 
 const ReveiwSectionWrapper = styled.div`
   padding: 0 80px;
@@ -12,7 +13,6 @@ const ReveiwSectionWrapper = styled.div`
 
 const ReviewContainer = styled.div`
   margin: 0 auto;
-  padding: 48px 0;
   height: 100%;
   max-width: 1128px;
 `;
@@ -31,9 +31,9 @@ const ReviewItemBox = styled.div`
 
 const Review = () => (
   <ReveiwSectionWrapper>
-    <ReviewContainer>
+    <ReviewContainer className="basic-section-padding">
       <ReviewTitle>
-        <Score />{' '}
+        <Grade />{' '}
       </ReviewTitle>
       <ScoreAverage />
       <ReviewItemBox>

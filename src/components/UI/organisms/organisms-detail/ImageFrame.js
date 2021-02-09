@@ -62,8 +62,6 @@ const ImgDetailBtn = styled.a`
   border-radius: 8px;
   border: 1px solid #222;
   text-align: center;
-  font-size: 16px;
-  line-height: 20px;
   font-weight: 600;
   color: #222;
   background: #fff;

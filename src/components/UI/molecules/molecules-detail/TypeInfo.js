@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Title } from './PageTitle';
 import { BiBed } from 'react-icons/bi';
+import '../../atoms/atoms-detail/DetailBasicStyle.css';
 
 const TypeInfoContainer = styled.div`
-  padding: 48px 0;
   border-bottom: 1px solid rgb(221, 221, 221);
 `;
 
@@ -30,11 +30,9 @@ const CoverBox = styled.div`
 const TypeeSummary = styled.div`
   display: flex;
   color: #222222;
-  line-height: 20px;
 `;
 
 const TypeText = styled.div`
-  line-height: 20px;
   &:first-child {
     font-weight: 600;
     font-size: 16px;
@@ -47,7 +45,7 @@ const TypeText = styled.div`
 `;
 
 export const TypeInfo = () => (
-  <TypeInfoContainer>
+  <TypeInfoContainer className="basic-section-padding">
     <TypeTitle>침대/침구 유형</TypeTitle>
     <CoverBox>
       <div className="emoticon">

@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import '../../atoms/atoms-detail/DetailBasicStyle.css';
+import Text from '../../atoms/atoms-detail/DetailText';
 
 const ReviewListItem = styled.div`
   width: 41.66%;
@@ -7,15 +9,11 @@ const ReviewListItem = styled.div`
   margin-bottom: 40px;
   padding: 0 8px;
   font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
   min-width: 390px;
 `;
 
 const ImgDataContainer = styled.div`
-  display: flex;
   margin-bottom: 16px;
-  align-items: center;
 `;
 
 const WriterOfReview = styled.div`
@@ -30,39 +28,30 @@ const WriterPhoto = styled.div`
   background-color: lightgray;
 `;
 
-const WriterData = styled.div`
-  display: block;
+const WriterData = styled(Text)`
   margin-left: 12px;
-  line-height: 20px;
-  &:first-child {
-    color: rgb(34, 34, 34);
-    font-weight: 600;
-    font-size: 16px;
-  }
-  &:last-child {
-    color: rgb(113, 113, 113);
-    font-weight: 400;
-    font-size: 14px;
-  }
 `;
 
-const ReviewText = styled.span`
-  display: block;
-  color: rgb(34, 34, 34);
-  font-weight: 400;
+const ReviewText = styled(Text)`
   line-height: 24px;
 `;
 
 const ReviewItem = () => (
   <ReviewListItem>
-    <ImgDataContainer>
+    <ImgDataContainer className="basic-flex">
       <WriterPhoto></WriterPhoto>
       <WriterOfReview>
-        <WriterData>name</WriterData>
-        <WriterData>date</WriterData>
+        <WriterData big bold block noPadding>
+          name
+        </WriterData>
+        <WriterData gray block noPadding>
+          date
+        </WriterData>
       </WriterOfReview>
     </ImgDataContainer>
-    <ReviewText>깨끗하고 좋습니다~</ReviewText>
+    <ReviewText big block>
+      깨끗하고 좋습니다~
+    </ReviewText>
   </ReviewListItem>
 );
 

@@ -16,19 +16,19 @@ const BookingInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 48px;
-  padding-bottom: 48px;
   min-width: 216px;
   border: 1px solid rgb(221, 221, 221);
   border-radius: 12px;
+  margin-top: 48px;
   padding: 24px;
+  padding-bottom: 48px;
   box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
   background-color: pink;
 
   .notice {
     margin-top: 16px;
     white-space: normal;
-    font-size: 14px;
+    font-size: 14spx;
     text-align: center;
     word-break: normal;
   }
