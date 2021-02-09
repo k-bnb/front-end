@@ -27,7 +27,6 @@ export const searching = createAction(SEARCHING, ({locationSearch,checkDateSearc
   guestSearch
 }));
 
-
 //initial State
 const initialState = {
   destinationName:'',
