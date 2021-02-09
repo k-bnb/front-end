@@ -10,6 +10,8 @@ const HeaderMainTopBlock = styled.header`
   padding-top: 30px;
   background-color: transparent;
   transition: 0.1s ease-in;
+  position: relatvie;
+  z-index: 9999;
 
   ${(props) =>
     props.isScrolled &&

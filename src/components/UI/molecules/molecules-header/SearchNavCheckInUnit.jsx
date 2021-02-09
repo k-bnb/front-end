@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { specificInputClear } from '../../../../modules/search';
-import RemoveButton from '../../../templates/templates-header/RemoveButton';
+import RemoveButton from '../../atoms/atoms-header/RemoveButton';
 import Text from '../../atoms/atoms-header/Text';
 
 const SearchNavCheckInUnitLi = styled.li`
@@ -47,7 +47,7 @@ const SearchNavCheckInUnit = ({ SearchTypeHandler, navModalState }) => {
       {!!startDate && navModalState.checkIn && (
         <RemoveButton
           checkInDate
-          onClick={() => {
+          onMouseDown={() => {
             console.log('hi');
             dispatch(specificInputClear('checkDateSearch'));
           }}

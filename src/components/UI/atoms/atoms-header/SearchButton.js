@@ -10,7 +10,6 @@ const SearchButtonBlock = styled.button`
   border-radius: 50%;
   border: 0;
   cursor: pointer;
-
   svg {
     color: white;
     font-size: 18px;

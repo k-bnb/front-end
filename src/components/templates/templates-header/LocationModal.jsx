@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import Text from '../../UI/atoms/atoms-header/Text';
 import { useClickOutside } from '../../../lib/useClickOutside';
 import { destinationInput, locationInput } from '../../../modules/search';
+import { useSelector } from 'react-redux';
 
 const StyledLocModal = styled.div`
   position: absolute;

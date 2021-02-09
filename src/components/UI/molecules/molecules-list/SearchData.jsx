@@ -1,7 +1,5 @@
-// import Button from "../atoms/Button"
 import { useEffect } from 'react';
 import styled from 'styled-components';
-
 import Button from '../../atoms/atoms-list/Button';
 import TextStyled from '../../atoms/atoms-list/Text';
 import FooterBtn from './FooterBtn';
@@ -100,9 +98,9 @@ const SearchData = ({
               onClick={cashSearchClick}
             >
               <TextStyled size="blackSmall">
-                {/* {costState.minCostState
+                {costState.minCostState
                   ? '$' + costState.minCostPay + '+'
-                  : '요금'} */}
+                  : '요금'}
               </TextStyled>
             </Button>
             {searchModalState === 'cash' && (
