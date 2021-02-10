@@ -67,7 +67,7 @@
   position: absolute !important;
   top: 10px;
   right: 50%;
-  transform: translateX(50%);
+  transform: translateX(40%);
   height: 230px;
   width: 655px !important;
   max-width: 850px !important;

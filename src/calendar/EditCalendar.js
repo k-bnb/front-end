@@ -4,7 +4,7 @@ import { DayPickerRangeController } from 'react-dates';
 import moment from 'moment';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
-import './CalendarTemplate.css';
+import './EditCalendarTemplate.css';
 import { dateInput } from '../modules/search';
 
 function EditCalendar() {
