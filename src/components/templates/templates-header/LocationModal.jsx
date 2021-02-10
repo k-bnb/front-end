@@ -66,6 +66,9 @@ const LocationModal = ({
       guest: false,
     });
   });
+  const locationSearch = useSelector(
+    (state) => state.search.searchReq.locationSearch,
+  );
 
   return (
     <StyledLocModal
@@ -74,7 +77,13 @@ const LocationModal = ({
       className="location-modal"
       ref={locationRef}
     >
-      <div className="nearby-outer-container">
+      <div
+        className="nearby-outer-container"
+        onClick={() => {
+          getNearbyAddress();
+          console.log('hi;;');
+        }}
+      >
         <span className="nearby-icon-container">
           <img
             className="nearby-icon"
@@ -84,7 +93,7 @@ const LocationModal = ({
             height="50px"
           />
         </span>
-        <Text big className="nearby-text" onClick={getNearbyAddress}>
+        <Text big className="nearby-text">
           가까운 여행지 둘러보기
         </Text>
       </div>
@@ -106,8 +115,12 @@ const LocationModal = ({
             longitudeMin: position.coords.longitude - 0.08,
           }),
         );
+        console.log(locationSearch);
       }, // 성공시 콜백함수
-      () => null, // 실패시 콜백함수, 따로 처리 안해줘서 null 반환
+      (e) => {
+        console.log('error');
+      }, // 실패시 콜백함수, 따로 처리 안해줘서 null 반환
+      { timeout: 10000 },
     );
   }
 };

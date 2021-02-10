@@ -18,7 +18,5 @@ const ReservationBtn = styled.button`
   cursor: pointer;
 `;
 
-const ReserveBtn = () => {
-  return <ReservationBtn>예약하기</ReservationBtn>;
-};
+const ReserveBtn = () => <ReservationBtn>예약하기</ReservationBtn>;
 export default ReserveBtn;
