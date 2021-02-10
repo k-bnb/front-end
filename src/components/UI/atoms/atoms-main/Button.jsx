@@ -5,6 +5,9 @@ const ButtonStyle = styled.button`
   border: 1px solid #ddd;
   cursor: pointer;
   outline: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
   background: none;
   ${(props) =>
     props.submitBtn &&
@@ -57,9 +60,31 @@ const ButtonStyle = styled.button`
         background-color: rgba(235, 231, 231);
       }
     `} 
-	padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+    ${(props) =>
+    props.greenText &&
+    css`
+      color: #008489;
+      font-size: 1.6rem;
+      /* letter-spacing: -0.02em; */
+      /* line-height: 58px; */
+      font-weight: 600;
+      /* border: 0; */
+      &:hover {
+        text-decoration: underline;
+      }
+    `}
+
+  	${(props) =>
+    props.save &&
+    css`
+      display: block;
+      background-color: #008489;
+      font-size: 1.6rem;
+      padding: 10px 22px;
+      color: #eee;
+      font-weight: 800;
+      border-radius: 5px;
+    `}
 `;
 
 const Button = ({ children, ...rest }) => {
