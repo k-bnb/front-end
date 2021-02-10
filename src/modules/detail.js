@@ -34,9 +34,9 @@ const initialStates = {
   roomId: '',
   startDate: '',
   endDate: '',
-  numOfAdult: '',
-  numOfKid: '',
-  numOfInfant: '',
+  numOfAdult: 0,
+  numOfKid: 0,
+  numOfInfant: 0,
 };
 
 // reducer
