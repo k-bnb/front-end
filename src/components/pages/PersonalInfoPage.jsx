@@ -1,10 +1,10 @@
 import React from 'react';
-import PersonalTemplate from '../templates/templates-personal/PersonalTemplate';
+import PersonalContainer from '../../containers/PersonalContainer';
 
 const PersonalInfoPage = () => {
   return (
     <>
-      <PersonalTemplate />
+      <PersonalContainer />
     </>
   );
 };

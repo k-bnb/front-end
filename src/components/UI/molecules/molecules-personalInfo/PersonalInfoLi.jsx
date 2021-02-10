@@ -8,6 +8,7 @@ const PersonalInfoListyle = styled.li`
   /* align-items: flex-start; */
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin: 20px 0;
+  list-style: none;
   &:last-child {
     margin-bottom: 0;
   }

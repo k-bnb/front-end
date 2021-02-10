@@ -136,8 +136,8 @@ const Selector = ({ options, defultValue }) => {
         <RiArrowDownSLine />
       </label>
       <div onClick={click} ref={divRef} className="select-option">
-        {options.map((item) => (
-          <div>
+        {options.map((item, i) => (
+          <div key={i}>
             <button
               name={item.value}
               className={item.isDisabled ? 'disabled' : ''}

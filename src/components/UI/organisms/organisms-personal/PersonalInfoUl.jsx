@@ -7,6 +7,7 @@ import PersonalNameInput from '../../molecules/molecules-personalInfo/PersonalNa
 import PersonalInfoGenderSelect from '../../molecules/molecules-personalInfo/PersonalInfoGenderSelect';
 import Input from '../../atoms/atoms-main/Input';
 import PersonalInfoBirthinput from '../../molecules/molecules-personalInfo/PersonalInfoBirthinput';
+import PersonalInfoEmailInput from '../../molecules/molecules-personalInfo/PersonalInfoEmailInput';
 
 const PersonalInfoUIStyle = styled.ul`
   display: flex;
@@ -28,46 +29,56 @@ const PersonalInfoUIStyle = styled.ul`
   }
 `;
 
-const PersonalInfoUl = () => {
+const PersonalInfoUl = ({
+  fix: { name, gender, birth, emailAddress, cancel },
+  fixInfoBtn,
+  cancelclick,
+}) => {
   return (
-    <PersonalInfoUIStyle>
+    <PersonalInfoUIStyle onClick={cancel ? cancelclick : fixInfoBtn}>
       <PersonalInfoLi>
         <div>
           <TextStyle>실명</TextStyle>
-          <TextStyle>Jeong Jeong</TextStyle>
-          <PersonalNameInput />
+          {name ? <PersonalNameInput /> : <TextStyle>Jeong Jeong</TextStyle>}
         </div>
-        <Button className="btn">
-          <TextStyle greentextLine>수정</TextStyle>
+        <Button name="name" className="btn" greenText>
+          {!name ? '수정' : '취소'}
         </Button>
       </PersonalInfoLi>
       <PersonalInfoLi>
         <div className="gender">
           <TextStyle>성별</TextStyle>
-          <TextStyle>지정되지 않음</TextStyle>
-          <PersonalInfoGenderSelect />
+          {gender ? (
+            <PersonalInfoGenderSelect />
+          ) : (
+            <TextStyle>지정되지 않음</TextStyle>
+          )}
         </div>
-        <Button className="btn">
-          <TextStyle greentextLine>수정</TextStyle>
+        <Button name="gender" className="btn" greenText>
+          {!gender ? '수정' : '취소'}
         </Button>
       </PersonalInfoLi>
       <PersonalInfoLi>
         <div>
           <TextStyle>생년월일</TextStyle>
           <TextStyle>1995년 8월 12일</TextStyle>
-          <PersonalInfoBirthinput />
+          {birth && <PersonalInfoBirthinput />}
         </div>
-        <Button className="btn">
-          <TextStyle greentextLine>수정</TextStyle>
+        <Button name="birth" className="btn" greenText>
+          {!birth ? '수정' : '취소'}
         </Button>
       </PersonalInfoLi>
       <PersonalInfoLi>
         <div>
           <TextStyle>이메일 주소</TextStyle>
-          <TextStyle>jungjh1234567@gmail.com</TextStyle>
+          {emailAddress ? (
+            <PersonalInfoEmailInput />
+          ) : (
+            <TextStyle>jungjh1234567@gmail.com</TextStyle>
+          )}
         </div>
-        <Button className="btn">
-          <TextStyle greentextLine>수정</TextStyle>
+        <Button name="emailAddress" className="btn" greenText>
+          {!emailAddress ? '수정' : '취소'}
         </Button>
       </PersonalInfoLi>
       <PersonalInfoLi>
@@ -84,8 +95,8 @@ const PersonalInfoUl = () => {
           <TextStyle>정부 발급 신분증</TextStyle>
           <TextStyle>제공되지 않음</TextStyle>
         </div>
-        <Button className="btn">
-          <TextStyle greentextLine>추가</TextStyle>
+        <Button className="btn" greenText>
+          추가
         </Button>
       </PersonalInfoLi>
       <PersonalInfoLi>
@@ -93,8 +104,8 @@ const PersonalInfoUl = () => {
           <TextStyle>주소</TextStyle>
           <TextStyle>제공되지 않음</TextStyle>
         </div>
-        <Button className="btn">
-          <TextStyle greentextLine>추가</TextStyle>
+        <Button className="btn" greenText>
+          추가
         </Button>
       </PersonalInfoLi>
       <PersonalInfoLi>
@@ -102,8 +113,8 @@ const PersonalInfoUl = () => {
           <TextStyle>비상 연락처</TextStyle>
           <TextStyle>제공되지 않음</TextStyle>
         </div>
-        <Button className="btn">
-          <TextStyle greentextLine>추가</TextStyle>
+        <Button className="btn" greenText>
+          추가
         </Button>
       </PersonalInfoLi>
       <PersonalInfoLi>
@@ -111,8 +122,8 @@ const PersonalInfoUl = () => {
           <TextStyle>중국 여행에 필요한 여권 정보</TextStyle>
           <TextStyle>제공되지 않음</TextStyle>
         </div>
-        <Button className="btn">
-          <TextStyle greentextLine>추가</TextStyle>
+        <Button className="btn" greenText>
+          추가
         </Button>
       </PersonalInfoLi>
     </PersonalInfoUIStyle>

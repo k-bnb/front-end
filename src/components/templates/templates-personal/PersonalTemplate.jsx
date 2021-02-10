@@ -29,7 +29,7 @@ const TabletDiv = styled.div`
   div {
   }
 `;
-const PersonalTemplate = () => {
+const PersonalTemplate = ({ fix, fixInfoBtn, cancelclick }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 900px)',
   });
@@ -41,7 +41,11 @@ const PersonalTemplate = () => {
     <PersonalTemplateStyle>
       <PersonalInfoHead />
       <div className="main-group">
-        <PersonalInfoUl />
+        <PersonalInfoUl
+          fix={fix}
+          cancelclick={cancelclick}
+          fixInfoBtn={fixInfoBtn}
+        />
         {isPc && (
           <PcDiv>
             <PersonalInfoArticle />

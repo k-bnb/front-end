@@ -1,6 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import styled from 'styled-components';
+import Button from '../../atoms/atoms-main/Button';
 import Selector from '../../atoms/atoms-personalinfo/Selector';
 
 const PersonalInfoGenderSelectStyle = styled.div`
@@ -24,7 +25,7 @@ const PersonalInfoGenderSelect = () => {
       <div className="select-gender">
         <Selector defultValue={defultValue} options={options} />
       </div>
-      <button>저장</button>
+      <Button save>저장</Button>
     </PersonalInfoGenderSelectStyle>
   );
 };
