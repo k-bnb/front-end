@@ -5,12 +5,16 @@ import '../../../calendar/CalendarTemplate.css';
 import { useClickOutside } from '../../../lib/useClickOutside';
 
 const StyledCalModal = styled.div`
-  background-color: red;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 200px;
-  width: 100vw;
+  ${(props) =>
+    props.detail &&
+    css`
+      background-color: red;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 200px;
+      width: 100vw;
+    `}
 `;
 
 const CalendarModal = ({
