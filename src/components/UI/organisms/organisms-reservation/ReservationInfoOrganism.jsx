@@ -3,10 +3,18 @@ import ReservationTitle from '../../atoms/atoms-reservation/ReservationTitle';
 import ReservationUnderLine from '../../atoms/atoms-reservation/ResevationUnderLine';
 import ReservationInfoMolecule from '../../molecules/molecules-reservation/ReservationInfoMolecule';
 
-const ReservationInfoOrganism = ({ manageModal, modal }) => {
+const ReservationInfoOrganism = ({
+  manageModal,
+  modal,
+  checkDateSearch,
+  checkDate,
+  saveDate,
+}) => {
+  const { startDate, endDate } = checkDateSearch;
+
   const dateChildren = {
     title: '날짜',
-    content: '2020. 2. 3-2020. 2. 5',
+    content: `${startDate}-${endDate}`,
   };
 
   const guistChildren = {
@@ -22,11 +30,15 @@ const ReservationInfoOrganism = ({ manageModal, modal }) => {
         children={dateChildren}
         manageModal={manageModal}
         modal={modal}
+        checkDate={checkDate}
+        saveDate={saveDate}
       />
       <ReservationInfoMolecule
         children={guistChildren}
         manageModal={manageModal}
         modal={modal}
+        checkDate={checkDate}
+        saveDate={saveDate}
       />
       <ReservationUnderLine />
     </>

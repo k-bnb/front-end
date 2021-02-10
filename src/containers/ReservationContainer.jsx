@@ -1,30 +1,34 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setState } from '../../node_modules/expect/build/index';
 import Reservation from '../components/templates/templates-reservation/Reservation';
 import { clientMessageChange, reserving } from '../modules/reserve';
+import { initialDate } from '../modules/reserve';
+import { dateInput } from '../modules/search';
 
 const ReservationContainer = () => {
   // store 에서 관리하는 state
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  const { roomId, guestNumber, infantNumber, totalCost, message } = useSelector(
-    (state) => state.reserve,
-  );
+  const {
+    roomId,
+    guestNumber,
+    infantNumber,
+    totalCost,
+    message,
+    checkDateSearch: checkDate,
+  } = useSelector((state) => state.reserve);
   const { checkDateSearch } = useSelector(({ search }) => search.searchReq);
+
   const { startDate: checkIn, endDate: checkOut } = checkDateSearch;
 
-  // reserve container 에서만 사용하는 state(local state)
+  const { startDate, endDate } = checkDate;
+
   const [modal, setModal] = useState(false); // modal on/off state
 
   // modal state 변경 event function
   const manageModal = () => {
     setModal(!modal);
   };
-
-  console.log(checkDateSearch);
-  console.log(checkIn);
-  console.log(checkOut);
 
   // textArea state 관리하는 event function
   const change = (e) => {
@@ -49,6 +53,18 @@ const ReservationContainer = () => {
     );
   };
 
+  const saveDate = () => {
+    setModal(!modal);
+
+    dispatch(dateInput('startDate', startDate)); // 시작일만 선택시 시작일 dispatch
+    dispatch(dateInput('endDate', endDate)); // 시작일만 선택시 시작일 dispatch
+  };
+
+  // const deleteDate = () => {
+  //   dispatch(initialDate());
+  // };
+
+  console.log(modal);
   return (
     <Reservation
       change={change}
@@ -56,6 +72,9 @@ const ReservationContainer = () => {
       manageModal={manageModal}
       value={message}
       modal={modal}
+      checkDateSearch={checkDateSearch}
+      checkDate={checkDate}
+      saveDate={saveDate}
     />
   );
 };

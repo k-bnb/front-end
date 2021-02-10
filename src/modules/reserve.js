@@ -2,9 +2,12 @@ import { createAction, handleActions } from 'redux-actions';
 import createRequestSaga from '../lib/createRequestSaga';
 import * as API from '../lib/api/reserve';
 import { takeLatest } from 'redux-saga/effects';
+import produce from 'immer';
 
 // action type
 const CLIENT_MESSAGE_CHANGE = 'reserve/CLIENT_MESSAGE_CHANGE';
+const CHANGE_DATE = 'reserve/CHANGE_DATE';
+const INITIAL_DATE = 'reserve/INITIAL_DATE';
 
 // 비동기 action type
 const RESERVING = 'reserve/RESERVING';
@@ -15,6 +18,16 @@ export const clientMessageChange = createAction(
   CLIENT_MESSAGE_CHANGE,
   (value) => value,
 );
+
+export const changeDate = createAction(
+  CHANGE_DATE,
+  (form, checkDateSearch) => ({
+    form,
+    checkDateSearch,
+  }),
+);
+
+export const initialDate = createAction(INITIAL_DATE);
 
 export const reserving = createAction(
   RESERVING,
@@ -42,12 +55,14 @@ export const reserving = createAction(
 // initialState
 const initialState = {
   roomId: 5,
-  checkIn: '2021-02-01',
-  checkOut: '2021-02-02',
   guestNumber: 2,
   infantNumber: 2,
   totalCost: 3000,
   message: '',
+  checkDateSearch: {
+    startDate: '',
+    endDate: '',
+  },
   reserveError: null,
 };
 
@@ -57,6 +72,15 @@ const reserve = handleActions(
     [CLIENT_MESSAGE_CHANGE]: (state, { payload: value }) => ({
       ...state,
       message: value,
+    }),
+
+    [CHANGE_DATE]: (state, { payload: { form, checkDateSearch } }) =>
+      produce(state, (draft) => {
+        draft.checkDateSearch[form] = checkDateSearch;
+      }),
+
+    [INITIAL_DATE]: () => ({
+      ...initialState,
     }),
 
     [RESERVING_FAILURE]: (state, { payload: error }) => ({

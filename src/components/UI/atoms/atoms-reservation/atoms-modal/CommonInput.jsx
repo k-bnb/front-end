@@ -20,8 +20,8 @@ const StyledInput = styled.input`
     `}
 `;
 
-function CommonInput({ ...rest }) {
-  return <StyledInput {...rest} value="" />;
+function CommonInput({ scheduleDate, ...rest }) {
+  return <StyledInput {...rest} value={scheduleDate} />;
 }
 
 export default CommonInput;

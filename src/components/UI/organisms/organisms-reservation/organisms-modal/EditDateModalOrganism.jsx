@@ -37,11 +37,13 @@ const CalendarContainer = styled.div`
   position: relative;
 `;
 
-function EditDateModalOrganism({ manageModal }) {
+function EditDateModalOrganism({ manageModal, checkDate, saveDate }) {
   const checkChildren = {
     checkIn: '체크인',
     checkOut: '체크아웃',
   };
+
+  const { startDate, endDate } = checkDate;
 
   return (
     <CommonBg modalBg>
@@ -56,15 +58,21 @@ function EditDateModalOrganism({ manageModal }) {
             <CommonText day>1박</CommonText>
           </ScheduleDayContainer>
           <ScheduleSelectContainer>
-            <ScheduleInfoMolecule children={checkChildren.checkIn} />
-            <ScheduleInfoMolecule children={checkChildren.checkOut} />
+            <ScheduleInfoMolecule
+              children={checkChildren.checkIn}
+              scheduleDate={startDate}
+            />
+            <ScheduleInfoMolecule
+              children={checkChildren.checkOut}
+              scheduleDate={endDate}
+            />
           </ScheduleSelectContainer>
         </ScheduleInfoContainer>
         <CalendarContainer>
           <EditCalendar />
         </CalendarContainer>
         <div>
-          <ScheduleControlMolecule />
+          <ScheduleControlMolecule saveDate={saveDate} />
         </div>
       </CommonTemp>
     </CommonBg>

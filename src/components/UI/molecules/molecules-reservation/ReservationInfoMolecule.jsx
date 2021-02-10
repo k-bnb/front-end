@@ -15,9 +15,14 @@ const LayoutReservationContent = styled(ReservationContent)`
   margin-bottom: 0.8rem;
 `;
 
-const ReservationInfoMolecule = (props) => {
-  const { title, content } = props.children;
-  const { manageModal, modal } = props;
+const ReservationInfoMolecule = ({
+  children,
+  manageModal,
+  modal,
+  checkDate,
+  saveDate,
+}) => {
+  const { title, content } = children;
 
   return (
     <Container>
@@ -25,7 +30,13 @@ const ReservationInfoMolecule = (props) => {
         <LayoutReservationContent bold children={title} />
         <ReservationContent normal children={content} />
       </div>
-      <ReservationCommonButton edit manageModal={manageModal} modal={modal}>
+      <ReservationCommonButton
+        edit
+        manageModal={manageModal}
+        modal={modal}
+        checkDate={checkDate}
+        saveDate={saveDate}
+      >
         수정
       </ReservationCommonButton>
     </Container>

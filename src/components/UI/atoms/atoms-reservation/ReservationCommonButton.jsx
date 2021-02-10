@@ -39,14 +39,29 @@ const StyledButton = styled.button`
     `}
 `;
 
-const ReservationEditButton = ({ children, manageModal, modal, ...rest }) => {
+const ReservationEditButton = ({
+  children,
+  manageModal,
+  modal,
+  checkDate,
+  saveDate,
+  ...rest
+}) => {
   return (
     <>
       <StyledButton onClick={manageModal} {...rest}>
         {children}
       </StyledButton>
       {modal && (
-        <Modal>{<EditDateModalOrganism manageModal={manageModal} />}</Modal>
+        <Modal>
+          {
+            <EditDateModalOrganism
+              manageModal={manageModal}
+              checkDate={checkDate}
+              saveDate={saveDate}
+            />
+          }
+        </Modal>
       )}
     </>
   );

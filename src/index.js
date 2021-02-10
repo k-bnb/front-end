@@ -33,6 +33,18 @@ const store = createStore(
       registerError: null, // 회원가입 에러
       loginError: null, // 로그인 에러}
     },
+    reserve: {
+      roomId: 5,
+      guestNumber: 2,
+      infantNumber: 2,
+      totalCost: 3000,
+      message: '',
+      checkDateSearch: {
+        startDate: sessionStorage.getItem('startDate'),
+        endDate: sessionStorage.getItem('endDate'),
+      },
+      reserveError: null,
+    },
   },
   composeWithDevTools(applyMiddleware(sagaMiddleware)),
 );

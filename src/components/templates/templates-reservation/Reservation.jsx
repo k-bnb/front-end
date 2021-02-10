@@ -42,7 +42,16 @@ const LayoutReservationTitle = styled(ReservationTitle)`
   margin-left: 6rem;
 `;
 
-const Reservation = ({ change, click, manageModal, value, modal }) => {
+const Reservation = ({
+  change,
+  click,
+  manageModal,
+  value,
+  modal,
+  checkDateSearch,
+  checkDate,
+  saveDate,
+}) => {
   return (
     <section>
       <header>
@@ -74,7 +83,13 @@ const Reservation = ({ change, click, manageModal, value, modal }) => {
       </TitleContainer>
       <TempContainer>
         <MainContainer>
-          <ReservationInfoOrganism manageModal={manageModal} modal={modal} />
+          <ReservationInfoOrganism
+            manageModal={manageModal}
+            modal={modal}
+            checkDateSearch={checkDateSearch}
+            checkDate={checkDate}
+            saveDate={saveDate}
+          />
           <ReservationRequestOrganism change={change} value={value} />
           <ReservationRefundOrganism />
           <CommonButton reservation click={click}>

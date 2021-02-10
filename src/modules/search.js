@@ -138,10 +138,14 @@ const search = handleActions(
         draft.searchReq.locationSearch = locationSearch;
       }),
 
-    [DATE_INPUT]: (state, { payload: { form, checkDateSearch } }) =>
-      produce(state, (draft) => {
+    [DATE_INPUT]: (state, { payload: { form, checkDateSearch } }) => {
+      // token 처럼 초기값이 필요로 하기 때문에 sessionStorage에 저장
+      sessionStorage.setItem([form], checkDateSearch);
+
+      return produce(state, (draft) => {
         draft.searchReq.checkDateSearch[form] = checkDateSearch;
-      }),
+      });
+    },
 
     [GUEST_INPUT]: (state, { payload: { form, name, value } }) =>
       produce(state, (draft) => {

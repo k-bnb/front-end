@@ -10,11 +10,13 @@ const Container = styled.div`
     margin-left: 16px;
   }
 `;
-function ScheduleControlMolecule() {
+function ScheduleControlMolecule({ saveDate }) {
   return (
     <Container>
       <CommonButton dateDelete>날짜 지우기</CommonButton>
-      <CommonButton dateSave>저장하기</CommonButton>
+      <CommonButton dateSave saveDate={saveDate}>
+        저장하기
+      </CommonButton>
     </Container>
   );
 }

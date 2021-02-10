@@ -71,9 +71,9 @@ const StyledCommonButton = styled.button`
     `}
 `;
 
-function CommonButton({ children, manageModal, ...rest }) {
+function CommonButton({ children, manageModal, saveDate, ...rest }) {
   return (
-    <StyledCommonButton {...rest} onClick={manageModal}>
+    <StyledCommonButton {...rest} onClick={manageModal || saveDate}>
       {children}
     </StyledCommonButton>
   );

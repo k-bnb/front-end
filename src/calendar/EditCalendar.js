@@ -5,11 +5,11 @@ import moment from 'moment';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import './EditCalendarTemplate.css';
-import { dateInput } from '../modules/search';
+import { changeDate } from '../modules/reserve';
 
 function EditCalendar() {
   const dispatch = useDispatch();
-  const { checkDateSearch } = useSelector(({ search }) => search.searchReq);
+  const { checkDateSearch } = useSelector((state) => state.reserve);
 
   const [dateRange, setDateRange] = useState({
     startDate: checkDateSearch.startDate || null,
@@ -26,22 +26,19 @@ function EditCalendar() {
     endDate = moment(endDate);
   }
 
-  console.log(startDate);
-  console.log(endDate);
-
   const handleOnDateChange = (startDate, endDate) => {
     if (startDate.startDate && !startDate.endDate) {
       let startD = moment(startDate.startDate._d).format('YYYY-MM-DD');
-      dispatch(dateInput('startDate', startD)); // 시작일만 선택시 시작일 dispatch
+      dispatch(changeDate('startDate', startD)); // 시작일만 선택시 시작일 dispatch
       setDateRange({ startDate: startD, endDate: startD });
     }
 
     if (startDate.startDate && startDate.endDate) {
       let startD = moment(startDate.startDate._d).format('YYYY-MM-DD');
       let endD = moment(startDate.endDate._d).format('YYYY-MM-DD');
-      dispatch(dateInput('startDate', startD)); // 시작일만 선택시 시작일 dispatch
+      dispatch(changeDate('startDate', startD)); // 시작일만 선택시 시작일 dispatch
 
-      dispatch(dateInput('endDate', endD)); // 시작일만 선택시 시작일 dispatch
+      dispatch(changeDate('endDate', endD)); // 시작일만 선택시 시작일 dispatch
       setDateRange({ startDate: startD, endDate: endD });
     }
 
