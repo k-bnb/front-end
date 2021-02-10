@@ -2,6 +2,7 @@ import client from './client';
 
 // 검색
 export const search = ({
+  id,
   locationSearch,
   checkDateSearch,
   guestSearch,
@@ -11,7 +12,7 @@ export const search = ({
   bedRoomNum,
   bathRoomNum,
 }) =>
-  client.post(`http://3.34.198.174:8080/room/list?page=0&size=5`, {
+  client.post(`http://3.34.198.174:8080/room/list?page=${id}&size=5`, {
     locationSearch,
     checkDateSearch,
     guestSearch,

@@ -49,6 +49,7 @@ export const specificInputClear = createAction(
 export const searching = createAction(
   SEARCHING,
   ({
+    id,
     locationSearch,
     checkDateSearch,
     guestSearch,
@@ -58,6 +59,7 @@ export const searching = createAction(
     bedRoomNum,
     bathRoomNum,
   }) => ({
+    id,
     locationSearch,
     checkDateSearch,
     guestSearch,
@@ -88,12 +90,12 @@ const initialState = {
   destinationName: '',
   searchReq: {
     locationSearch: {
-      latitude: '',
-      longitude: '',
-      latitudeMax: '',
-      latitudeMin: '',
-      longitudeMax: '',
-      longitudeMin: '',
+      latitude: 37.5451891,
+      longitude: 127.0574869,
+      latitudeMax: 37.5851891,
+      latitudeMin: 37.5051891,
+      longitudeMax: 127.1374869,
+      longitudeMin: 126.9774869,
     },
     checkDateSearch: {
       startDate: '',
@@ -114,11 +116,12 @@ const initialState = {
     bathRoomNum: 0,
   },
   searchRes: [],
+  totalPage: {},
   searchError: null,
 };
 
 //saga
-const searchingSaga = createRequestSaga(SEARCHING, API.search);
+const searchingSaga = createRequestSaga(SEARCHING, (id) => (API.search(id)));
 
 //seachSaga
 export function* searchSaga() {
@@ -165,7 +168,9 @@ const search = handleActions(
     [SEARCHING_SUCCESS]: (state, action) => {
       console.log(action);
       return produce(state, (draft) => {
-        draft.searchRes = action;
+        draft.searchRes = action.payload._embedded.roomDtoList;
+        draft.totalPage = action.payload.page;
+
       });
     },
 

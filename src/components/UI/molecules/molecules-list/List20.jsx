@@ -11,8 +11,7 @@ import ScoreText from './Score-Text';
 // import { SliderData } from './SliderData';
 
 const Wrap = styled.div`
-  /* max-width: 100%; */
-  width:100%;
+  /* width:100%; */
   height: auto;
   /* min-height: 5013px;/ */
   /* padding: 0 24px; */
@@ -106,7 +105,8 @@ const ULWrap = styled.ul`
   } */
 `;
 
-const LodgingLists = ({alt, ...rest}) => {
+const LodgingLists = ({alt,bathRoomNum,roomType, city, borough ,bedNum,bedRoomNum, roomImgUrlList ,cost, grade, id, name,peopleLimit,isCheck, isParking, isSmoking, commentCount ,...rest}) => {
+  console.log(bathRoomNum, bedNum,bedRoomNum ,cost, grade, id, name, roomImgUrlList);
   return (
     <>
       {/* <ListCarousel slides={SliderData} /> */}
@@ -115,26 +115,23 @@ const LodgingLists = ({alt, ...rest}) => {
           <li>
             <span>
               <Border carouselImg>
-                <Imgs
-                  carousalImg
-                  src="https://a0.muscache.com/im/pictures/02a7fd89-b923-4541-aff6-a6eeff4d4445.jpg?im_w=1200"
-                  // alt={alt}
-                  {...rest}
-                />
-                {/*<Imgs
-                  carousalImg
-                  src="https://a0.muscache.com/im/pictures/02a7fd89-b923-4541-aff6-a6eeff4d4445.jpg?im_w=1200"
-                  alt={alt}
-                  {...rest}
-                /> */}
+                {
+                  roomImgUrlList.map(src => (
+                    <Imgs
+                    carousalImg
+                    src={src}
+                    // alt={alt}
+                    
+                  />
+                  ))
+                }
               </Border>
             </span>
             <span className="TextWrap">
               <div className="TextHead">
-                <TextStyled size="blackSmall">jinjin의 아파트 전체</TextStyled>
+                <TextStyled size="blackSmall">{city} {borough} {city || borough ? '의' : ''} {roomType}</TextStyled>
                 <TextStyled className="Ellipsis" size="blackMiddle">
-                  동서남북역 도보1분/아파트전체/호텔급 풀옵션/반려동물 불가/금연
-                  존/고성방가금지/시티뷰 
+                {name} 
                 </TextStyled>
                 <Bookmark className="heart" heart>
                   <AiOutlineHeart />
@@ -142,14 +139,18 @@ const LodgingLists = ({alt, ...rest}) => {
               </div>
               <hr />
               <TextStyled size="blackSmall">
-                최대 인원 4명. 침실2개. 침대 4개. 욕실 1개
+                최대 인원 {peopleLimit}명. 침실{bedRoomNum}개. 침대 {bedNum}개. 욕실 {bathRoomNum}개
               </TextStyled>
-              <TextStyled size="blackSmall">주차. 난방. 무선인터넷</TextStyled>
+              <TextStyled size="blackSmall">{isSmoking ? '흡연 가능' : '흡연 불가능'} {' '}
+              {isParking ? '주차 가능' : '주차 불가능'}
+              </TextStyled>
               <div className="TextBottom">
-                <ScoreText />
+                <ScoreText 
+                grade={grade} 
+                commentCount={commentCount}/>
                 <TextStyled className="sleep" size="blackMiddleBold">
                   <BiWon />
-                  325,900/박 
+                  {cost}/박 
                   
                 </TextStyled>
               </div>

@@ -7,7 +7,9 @@ const PcSize = styled.main`
   margin-top: -80px;
   padding-top: 80px;
   position: sticky;
-  top: 0;
+  right: 0;
+  /* top: 0; */
+  width : 100%;
   min-width: calc(100vw - 840px);
   height: 100vh;
   /* cursor: url('https://maps.gstatic.com/mapfiles/openhand_8_8.cur'), default; */
