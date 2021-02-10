@@ -13,6 +13,7 @@ const HeaderListBlock = styled.header`
   height: 80px;
   position: fixed;
   transition-duration: 0.3s;
+  z-index:100;
 
   h1 {
     position: absolute;

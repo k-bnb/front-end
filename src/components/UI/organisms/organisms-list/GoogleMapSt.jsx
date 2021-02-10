@@ -7,7 +7,9 @@ const PcSize = styled.main`
   margin-top: -80px;
   padding-top: 80px;
   position: sticky;
-  top: 0;
+  right: 0;
+  /* top: 0; */
+  width : 100%;
   min-width: calc(100vw - 840px);
   height: 100vh;
   /* cursor: url('https://maps.gstatic.com/mapfiles/openhand_8_8.cur'), default; */
@@ -20,7 +22,7 @@ const TabletSize = styled.main`
 
 const MobileSize = styled.main`
   /* width : calc(100%-100%); */
-  background-color: yellow;
+  /* background-color: yellow; */
   display: none;
 `;
 
@@ -44,12 +46,12 @@ const GoogleStyle = () => {
       )}
       {isTablet && (
         <TabletSize className="Asidemap">
-          <GoogleMapUse />
+          {/* <GoogleMapUse /> */}
         </TabletSize>
       )}
       {isMobile && (
         <MobileSize className="Asidemap">
-          <GoogleMapUse />
+          {/* <GoogleMapUse /> */}
         </MobileSize>
       )}
     </>

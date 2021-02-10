@@ -9,10 +9,10 @@ const ScoreTextStyle = styled.div`
   /* align-items:flex-start; */
 `
 
-const ScoreText = () => {
+const ScoreText = ({grade,commentCount}) => {
   return (
     <ScoreTextStyle>
-      <Score /><TextStyled size='blackMiddle'>3.45(462)</TextStyled>
+      <Score /><TextStyled size='blackMiddle'>{grade} ({commentCount})</TextStyled>
     </ScoreTextStyle>
   );
 };

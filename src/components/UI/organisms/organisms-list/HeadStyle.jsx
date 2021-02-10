@@ -1,19 +1,15 @@
 import SearchData from '../../molecules/molecules-list/SearchData';
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
-// import SearchData from '../molecules/SearchData';
+
 
 const PcSize = styled.main`
-  /* width: 100%; */
-
-  /* padding: 20px; */
+  /* width: 100%;
+  padding-top:100px; */
   display: flex;
 `;
-
 const TabletSize = styled.main``;
-
 const MobileSize = styled.main``;
-
 const HeadStyle = ({
   searchModalState,
   setSearchModalState,
@@ -31,6 +27,7 @@ const HeadStyle = ({
   plusBtn,
   searchBtn,
   costState,
+  
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1025px)', //1128px 이상인 경우에만 적용
@@ -41,7 +38,7 @@ const HeadStyle = ({
   const isMobile = useMediaQuery({
     query: `(max-width: 677px)`, //744px 이하인 경우에만 적용
   });
-
+  console.log(costState)
   return (
     <>
       {isPc && (

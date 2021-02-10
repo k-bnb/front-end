@@ -8,15 +8,16 @@ const PageStyle = styled.div`
   padding: 40px;
 `
 
-const PageNation = () => {
+const PageNation = ({totalPage, pageNationClick}) => {
+ 
   return(
-    <PageStyle className="PageNation">
-      <Button size="number">&#60;</Button>
-      <Button size="number">1</Button>
-      <Button size="number">2</Button>
-      <Button size="number">3</Button>
-      <Button size="number">4</Button>
-      <Button size="number">5</Button>
+    <PageStyle onClick={pageNationClick} className="PageNation">
+      <Button size="number" >&#60;</Button>
+{
+   Array.from({length: totalPage.totalPages}, (_,i) => {
+    return <Button size="number" name={i}>{i}</Button>
+   })
+}   
       <Button size="number">&#62;</Button>
     </PageStyle>
   )
