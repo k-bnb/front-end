@@ -6,6 +6,7 @@ const PageStyle = styled.div`
   min-width:547px;
   text-align:center;
   padding: 40px;
+  border-top: 1px solid rgba(170,170,170,0.5);
 `
 
 const PageNation = ({totalPage, pageNationClick}) => {

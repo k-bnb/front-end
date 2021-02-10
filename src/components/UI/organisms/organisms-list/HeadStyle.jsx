@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 
 const PcSize = styled.main`
-  /* width: 100%;
-  padding-top:100px; */
+  /* width: 80px; */
+  /* padding-top:100px; */
   display: flex;
 `;
 const TabletSize = styled.main``;
@@ -30,13 +30,13 @@ const HeadStyle = ({
   
 }) => {
   const isPc = useMediaQuery({
-    query: '(min-width: 1025px)', //1128px 이상인 경우에만 적용
+    query: '(min-width: 1025px)', //1025 px 이상인 경우에만 적용(1127이상.)
   });
   const isTablet = useMediaQuery({
-    query: `(min-width: 677px)and (max-width: 1025px)`,
+    query: `(min-width: 677px)and (max-width: 1024px)`,
   });
   const isMobile = useMediaQuery({
-    query: `(max-width: 677px)`, //744px 이하인 경우에만 적용
+    query: `(max-width: 676px)`, //744px 이하인 경우에만 적용(744이하.)
   });
   console.log(costState)
   return (

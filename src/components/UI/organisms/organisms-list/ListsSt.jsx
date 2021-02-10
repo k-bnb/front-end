@@ -1,26 +1,23 @@
-import LodgingLists from '../../molecules/molecules-list/List20';
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
 import Imgs from '../../atoms/atoms-list/Imgs';
 import Border from '../../atoms/atoms-list/Border';
+import LodgingLists from '../../molecules/molecules-list/List20';
 import PageNation from '../../molecules/molecules-list/PageNation';
 import { Link } from 'react-router-dom';
 // import LodgingLists from "../molecules/List20";
 
 const PcSize = styled.main`
   min-height: calc(100vh - 80px);
-  background-color: #eee;
+  /* background-color: #eee; */
   padding: 0 24px;
-  ul{
-    width:100%;
-  }
-  
 `;
+
 const TabletSize = styled.main`
   /* width:100%; */
   width: 100vw;
   min-height: calc(100vh - 80px);
-  background-color: skyblue;
+  /* background-color: skyblue; */
   padding: 0 24px;
   ul {
     width: 100%;
@@ -37,10 +34,10 @@ const ListStyle = ({room, totalPage, pageNationClick}) => {
     query: '(min-width: 1025px)', //1025 px 이상인 경우에만 적용(1127이상.)
   });
   const isTablet = useMediaQuery({
-    query: `(min-width: 677px)and (max-width: 1025px)`,
+    query: `(min-width: 677px)and (max-width: 1024px)`,
   });
   const isMobile = useMediaQuery({
-    query: `(max-width: 677px)`, //744px 이하인 경우에만 적용(744이하.)
+    query: `(max-width: 676px)`, //744px 이하인 경우에만 적용(744이하.)
   });
   console.log(room);
   return (
@@ -48,22 +45,21 @@ const ListStyle = ({room, totalPage, pageNationClick}) => {
       {isPc && (
         <PcSize className="Listmain">
           {room.map(({bathRoomNum, roomType, city, borough  ,bedNum,bedRoomNum ,cost, grade, id, name ,peopleLimit, isCheck, isParking, isSmoking, commentCount,roomImgUrlList}) => {
-          return (<Link to={`/detail/${id}`} key={id}>
-          <LodgingLists bathRoomNum={bathRoomNum} city={city} borough={borough} isCheck={isCheck} isParking={isParking} isSmoking={isSmoking} commentCount={commentCount} bedNum={bedNum} roomImgUrlList={roomImgUrlList} roomType={roomType} peopleLimit={peopleLimit} bedRoomNum={bedRoomNum} cost={cost} grade={grade} id={id} name={name} />
-          </Link>
-          )
-          }) }
+          return (
+            <Link to={`/detail/${id}`} key={id} style={{textDecoration:'none'}}>
+              <LodgingLists bathRoomNum={bathRoomNum} city={city} borough={borough} isCheck={isCheck} isParking={isParking} isSmoking={isSmoking} commentCount={commentCount} bedNum={bedNum} roomImgUrlList={roomImgUrlList} roomType={roomType} peopleLimit={peopleLimit} bedRoomNum={bedRoomNum} cost={cost} grade={grade} id={id} name={name} />
+            </Link>
+          )})}
           <PageNation totalPage={totalPage} pageNationClick={pageNationClick}/>
         </PcSize>
       )}
       {isTablet && (
         <TabletSize className="Listmain">
-           {room.map(({bathRoomNum, roomType, city, borough ,bedNum,bedRoomNum ,cost, grade, id, name ,peopleLimit, isCheck, isParking, isSmoking, commentCount,roomImgUrlList}) => {
-          return (<Link to={`/detail/${id}`} key={id}>
+          {room.map(({bathRoomNum, roomType, city, borough ,bedNum,bedRoomNum ,cost, grade, id, name ,peopleLimit, isCheck, isParking, isSmoking, commentCount,roomImgUrlList}) => {
+          return (<Link to={`/detail/${id}`} key={id} style={{textDecoration:'none'}}>
           <LodgingLists bathRoomNum={bathRoomNum}  city={city} borough={borough}  isCheck={isCheck} isParking={isParking} isSmoking={isSmoking} commentCount={commentCount} bedNum={bedNum} roomImgUrlList={roomImgUrlList} roomType={roomType} peopleLimit={peopleLimit} bedRoomNum={bedRoomNum} cost={cost} grade={grade} id={id} name={name} />
-          </Link>
-          )
-          }) }
+          </Link>)
+          })}
           <PageNation totalPage={totalPage} pageNationClick={pageNationClick} />
         </TabletSize>
       )}

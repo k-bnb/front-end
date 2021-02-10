@@ -29,6 +29,7 @@ const BorderStyle = styled.div`
     css`
       width: 300px;
       height: 200px;
+      overflow:hidden;
     `}
   ${(props) =>
     props.bigCarouselImg &&

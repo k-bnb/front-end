@@ -27,28 +27,25 @@ const ListTemplate = ({
   return (
     <div>
       <HeadStyle
-            searchModalState={searchModalState}
-            setSearchModalState={setSearchModalState}
-            RoomSearchClick={RoomSearchClick}
-            cashSearchClick={cashSearchClick}
-            bedroomSearchClick={bedroomSearchClick}
-            roomTypes={roomTypes}
-            cost={cost}
-            costSearch={costSearch}
-            roomType={roomType}
-            bedNum={bedNum}
-            bedRoomNum={bedRoomNum}
-            bathRoomNum={bathRoomNum}
-            minusBtn={minusBtn}
-            plusBtn={plusBtn}
-            searchBtn={searchBtn}
-            costState={costState}
-            
-          
-          />
+        searchModalState={searchModalState}
+        setSearchModalState={setSearchModalState}
+        RoomSearchClick={RoomSearchClick}
+        cashSearchClick={cashSearchClick}
+        bedroomSearchClick={bedroomSearchClick}
+        roomTypes={roomTypes}
+        cost={cost}
+        costSearch={costSearch}
+        roomType={roomType}
+        bedNum={bedNum}
+        bedRoomNum={bedRoomNum}
+        bathRoomNum={bathRoomNum}
+        minusBtn={minusBtn}
+        plusBtn={plusBtn}
+        searchBtn={searchBtn}
+        costState={costState}
+      />
       <div style={{display:'flex'}}>
         <div style={{ display: 'block' }}>
-          
           <ListStyle room={room} totalPage={totalPage} pageNationClick={pageNationClick}/>
         </div>
         <GoogleStyle style={{ flexShrink: '1' }} />

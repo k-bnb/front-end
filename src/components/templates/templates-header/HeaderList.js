@@ -8,12 +8,13 @@ import SearchNavbarList from '../../UI/organisms/organisms-header/SearchNavbarLi
 const HeaderListBlock = styled.header`
   text-align: center;
   padding: 0;
-  background: pink;
   width: 100%;
   height: 80px;
+  background-color: #fff;
   position: fixed;
   transition-duration: 0.3s;
   z-index:100;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
 
   h1 {
     position: absolute;
