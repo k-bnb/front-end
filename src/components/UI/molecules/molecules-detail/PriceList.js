@@ -16,7 +16,6 @@ const DetailItem = styled.span`
   flex-shrink: 1;
   flex-grow: 1;
   white-space: normal;
-  color: rgb(34, 34, 34);
 `;
 
 const DetailItemBtn = styled.button`
@@ -29,7 +28,6 @@ const DetailItemBtn = styled.button`
   border-radius: 4px;
   outline: none;
   text-align: left;
-  color: rgb(34, 34, 34);
 `;
 
 const PriceItem = styled.span`

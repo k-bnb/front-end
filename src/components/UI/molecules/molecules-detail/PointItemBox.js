@@ -1,28 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import '../../atoms/atoms-detail/DetailBasicStyle.css';
+import Text from '../../atoms/atoms-detail/DetailText';
 
 const ItemBox = styled.div`
   margin-bottom: 16px;
-  display: flex;
-  align-items: center;
   justify-content: space-between;
   width: 100%;
 `;
-const Text = styled.div`
+const TextBox = styled.div`
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
 `;
 const PointContainer = styled.div`
   max-width: 150px;
   min-width: 107px;
   width: 100%;
-  display: flex;
-  align-items: center;
   margin-left: 12px;
 `;
 const PointBar = styled.div`
@@ -44,22 +39,24 @@ const Point = styled.span`
   background: rgb(34, 34, 34);
 `;
 
-const Pointnumber = styled.span`
-  color: rgb(34, 34, 34);
-  font-weight: 600;
-  font-size: 12px;
+const Pointnumber = styled(Text)`
   line-height: 16px;
   margin-left: 6px;
+  padding: 0;
 `;
 
 const PointItemBox = ({ textItem, point }) => (
-  <ItemBox>
-    <Text>{textItem}</Text>
-    <PointContainer>
+  <ItemBox className="basic-flex">
+    <TextBox>
+      <Text big>{textItem}</Text>
+    </TextBox>
+    <PointContainer className="basic-flex">
       <PointBar>
         <Point />
       </PointBar>
-      <Pointnumber>{point}</Pointnumber>
+      <Pointnumber big bold>
+        {point}
+      </Pointnumber>
     </PointContainer>
   </ItemBox>
 );
