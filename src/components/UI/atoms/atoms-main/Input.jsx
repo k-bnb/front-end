@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import React from 'react';
 const InputStyle = styled.input`
   width: 100%;
   /* height: 100%; */
@@ -19,9 +19,11 @@ const InputStyle = styled.input`
   }
 `;
 
-const Input = ({ type, placeholder, ...rest }) => {
+const Input = React.forwardRef(({ type, placeholder, ...rest }, ref) => {
   console.log(type, placeholder);
-  return <InputStyle type={type} placeholder={placeholder} {...rest} />;
-};
+  return (
+    <InputStyle type={type} ref={ref} placeholder={placeholder} {...rest} />
+  );
+});
 
 export default Input;

@@ -120,7 +120,7 @@ const initialState = {
 };
 
 //saga
-const searchingSaga = createRequestSaga(SEARCHING, (id) => (API.search(id)));
+const searchingSaga = createRequestSaga(SEARCHING, (id) => API.search(id));
 
 //seachSaga
 export function* searchSaga() {
@@ -157,7 +157,6 @@ const search = handleActions(
       return produce(state, (draft) => {
         draft.searchRes = action.payload._embedded.roomDtoList;
         draft.totalPage = action.payload.page;
-
       });
     },
 

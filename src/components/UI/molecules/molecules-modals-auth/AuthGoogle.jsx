@@ -13,9 +13,10 @@ const Container = styled.div`
   align-items: center;
   border-radius: 5px;
 
-  button {
+  a {
     width: 400px;
     height: 40px;
+    text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
