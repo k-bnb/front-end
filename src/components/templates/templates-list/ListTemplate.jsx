@@ -22,34 +22,35 @@ const ListTemplate = ({
   costState,
   room,
   totalPage,
-  pageNationClick
+  pageNationClick,
 }) => {
   return (
     <div>
       <HeadStyle
-            searchModalState={searchModalState}
-            setSearchModalState={setSearchModalState}
-            RoomSearchClick={RoomSearchClick}
-            cashSearchClick={cashSearchClick}
-            bedroomSearchClick={bedroomSearchClick}
-            roomTypes={roomTypes}
-            cost={cost}
-            costSearch={costSearch}
-            roomType={roomType}
-            bedNum={bedNum}
-            bedRoomNum={bedRoomNum}
-            bathRoomNum={bathRoomNum}
-            minusBtn={minusBtn}
-            plusBtn={plusBtn}
-            searchBtn={searchBtn}
-            costState={costState}
-            
-          
-          />
-      <div style={{display:'flex'}}>
+        searchModalState={searchModalState}
+        setSearchModalState={setSearchModalState}
+        RoomSearchClick={RoomSearchClick}
+        cashSearchClick={cashSearchClick}
+        bedroomSearchClick={bedroomSearchClick}
+        roomTypes={roomTypes}
+        cost={cost}
+        costSearch={costSearch}
+        roomType={roomType}
+        bedNum={bedNum}
+        bedRoomNum={bedRoomNum}
+        bathRoomNum={bathRoomNum}
+        minusBtn={minusBtn}
+        plusBtn={plusBtn}
+        searchBtn={searchBtn}
+        costState={costState}
+      />
+      <div style={{ display: 'flex' }}>
         <div style={{ display: 'block' }}>
-          
-          <ListStyle room={room} totalPage={totalPage} pageNationClick={pageNationClick}/>
+          <ListStyle
+            room={room}
+            totalPage={totalPage}
+            pageNationClick={pageNationClick}
+          />
         </div>
         <GoogleStyle style={{ flexShrink: '1' }} />
       </div>

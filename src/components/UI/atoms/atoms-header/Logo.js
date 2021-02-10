@@ -1,5 +1,4 @@
 import React from 'react';
-import { SiAirbnb } from 'react-icons/si';
 import { useHistory, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
@@ -38,6 +37,14 @@ const LogoBlock = styled.h1`
         color: rgb(255, 56, 92);
       }
     `}
+
+  ${(props) =>
+    props.rooms &&
+    css`
+      svg {
+        color: rgb(255, 56, 92);
+      }
+    `}
 `;
 
 const Logo = (props) => {
@@ -49,9 +56,6 @@ const Logo = (props) => {
       {...props}
       onClick={() => {
         history.push('/');
-        console.log('moved');
-        console.log(history);
-        console.log(location);
       }}
     >
       <div class="a11y-hidden">에어비엔비</div>
