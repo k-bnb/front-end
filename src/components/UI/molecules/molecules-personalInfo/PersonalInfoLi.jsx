@@ -2,12 +2,15 @@ import React, { Children } from 'react';
 import styled from 'styled-components';
 
 const PersonalInfoListyle = styled.li`
-  display: flex;
-
-  justify-content: space-between;
-  align-items: flex-start;
+  /* display: flex; */
+  position: relative;
+  /* justify-content: space-between; */
+  /* align-items: flex-start; */
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin: 20px 0;
+  &:last-child {
+    margin-bottom: 0;
+  }
   div {
     span {
       margin-bottom: 10px;

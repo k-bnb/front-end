@@ -3,9 +3,29 @@ import styled from 'styled-components';
 import PersonalInfoLi from '../../molecules/molecules-personalInfo/PersonalInfoLi';
 import Button from '../../atoms/atoms-main/Button';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
+import PersonalNameInput from '../../molecules/molecules-personalInfo/PersonalNameInput';
+import PersonalInfoGenderSelect from '../../molecules/molecules-personalInfo/PersonalInfoGenderSelect';
+import Input from '../../atoms/atoms-main/Input';
+import PersonalInfoBirthinput from '../../molecules/molecules-personalInfo/PersonalInfoBirthinput';
 
 const PersonalInfoUIStyle = styled.ul`
+  display: flex;
+  flex-grow: 2;
+  /* max-width: 500px; */
+  /* min-width: 500px; */
+  flex-direction: column;
   padding: 0;
+  margin: 10px 20px 0 20px;
+  li {
+    div {
+      /* border: 1px solid; */
+    }
+    .btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
 `;
 
 const PersonalInfoUl = () => {
@@ -15,17 +35,19 @@ const PersonalInfoUl = () => {
         <div>
           <TextStyle>실명</TextStyle>
           <TextStyle>Jeong Jeong</TextStyle>
+          <PersonalNameInput />
         </div>
-        <Button>
+        <Button className="btn">
           <TextStyle greentextLine>수정</TextStyle>
         </Button>
       </PersonalInfoLi>
       <PersonalInfoLi>
-        <div>
+        <div className="gender">
           <TextStyle>성별</TextStyle>
           <TextStyle>지정되지 않음</TextStyle>
+          <PersonalInfoGenderSelect />
         </div>
-        <Button>
+        <Button className="btn">
           <TextStyle greentextLine>수정</TextStyle>
         </Button>
       </PersonalInfoLi>
@@ -33,8 +55,9 @@ const PersonalInfoUl = () => {
         <div>
           <TextStyle>생년월일</TextStyle>
           <TextStyle>1995년 8월 12일</TextStyle>
+          <PersonalInfoBirthinput />
         </div>
-        <Button>
+        <Button className="btn">
           <TextStyle greentextLine>수정</TextStyle>
         </Button>
       </PersonalInfoLi>
@@ -43,7 +66,7 @@ const PersonalInfoUl = () => {
           <TextStyle>이메일 주소</TextStyle>
           <TextStyle>jungjh1234567@gmail.com</TextStyle>
         </div>
-        <Button>
+        <Button className="btn">
           <TextStyle greentextLine>수정</TextStyle>
         </Button>
       </PersonalInfoLi>
@@ -52,7 +75,7 @@ const PersonalInfoUl = () => {
           <TextStyle>전화번호</TextStyle>
           <TextStyle>제공되지 않음</TextStyle>
         </div>
-        <Button>
+        <Button className="btn">
           <TextStyle greentextLine>추가</TextStyle>
         </Button>
       </PersonalInfoLi>
@@ -61,7 +84,7 @@ const PersonalInfoUl = () => {
           <TextStyle>정부 발급 신분증</TextStyle>
           <TextStyle>제공되지 않음</TextStyle>
         </div>
-        <Button>
+        <Button className="btn">
           <TextStyle greentextLine>추가</TextStyle>
         </Button>
       </PersonalInfoLi>
@@ -70,7 +93,7 @@ const PersonalInfoUl = () => {
           <TextStyle>주소</TextStyle>
           <TextStyle>제공되지 않음</TextStyle>
         </div>
-        <Button>
+        <Button className="btn">
           <TextStyle greentextLine>추가</TextStyle>
         </Button>
       </PersonalInfoLi>
@@ -79,7 +102,7 @@ const PersonalInfoUl = () => {
           <TextStyle>비상 연락처</TextStyle>
           <TextStyle>제공되지 않음</TextStyle>
         </div>
-        <Button>
+        <Button className="btn">
           <TextStyle greentextLine>추가</TextStyle>
         </Button>
       </PersonalInfoLi>
@@ -88,7 +111,7 @@ const PersonalInfoUl = () => {
           <TextStyle>중국 여행에 필요한 여권 정보</TextStyle>
           <TextStyle>제공되지 않음</TextStyle>
         </div>
-        <Button>
+        <Button className="btn">
           <TextStyle greentextLine>추가</TextStyle>
         </Button>
       </PersonalInfoLi>

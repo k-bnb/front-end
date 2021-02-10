@@ -5,6 +5,7 @@ import TextStyle from '../../atoms/atoms-main/TextStyle';
 import { IoIosArrowForward } from 'react-icons/io';
 const PersonalInfoHeadingStyle = styled.header`
   width: 100%;
+  margin-left: 20px;
   div {
     display: flex;
     align-items: center;
