@@ -13,6 +13,8 @@ const PositionBox = styled.div`
 `;
 
 const BookingInfoContainer = styled.div`
+  top: 200px;
+  margin-bottom: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
