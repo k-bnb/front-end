@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { IoIosArrowDown } from 'react-icons/io';
-
+import GuestNumberModal from '../../../templates/templates-header/GuestNumberModal';
+import CalendarDetail from '../../../../calendar/CalendarDetail';
 const BookingBox = styled.div`
   position: relative;
   margin-bottom: 16px;
@@ -81,20 +82,30 @@ const GuestBtn = styled.div`
   padding-right: 12px;
 `;
 
-const DatePersonBox = () => (
-  <BookingBox>
-    <CheckDate>
-      <SelectionInfo text="체크인" date="2021.3.4" />
-      <SelectionInfo className="divider" text="체크아웃" date="2021.3.6" />
-    </CheckDate>
-    <Personnel>
-      <CheckTxt>인원</CheckTxt>
-      <SelectinoGuest>게스트 1명</SelectinoGuest>
-      <GuestBtn>
-        <IoIosArrowDown />
-      </GuestBtn>
-    </Personnel>
-  </BookingBox>
-);
+const DatePersonBox = () => {
+  const [isOpen, setIsOpen] = useState(false); // detail page에서 모달창 열고닫기 기능구현
+
+  return (
+    <BookingBox>
+      <CheckDate>
+        <SelectionInfo text="체크인" date="2021.3.4" />
+        <SelectionInfo className="divider" text="체크아웃" date="2021.3.6" />
+        <CalendarDetail />
+      </CheckDate>
+      <Personnel
+        onClick={() => {
+          setIsOpen(true);
+        }}
+      >
+        <CheckTxt>인원</CheckTxt>
+        <SelectinoGuest>게스트 1명</SelectinoGuest>
+        <GuestBtn>
+          <IoIosArrowDown />
+        </GuestBtn>
+        {isOpen && <GuestNumberModal detailPage={true} setIsOpen={setIsOpen} />}
+      </Personnel>
+    </BookingBox>
+  );
+};
 
 export default DatePersonBox;

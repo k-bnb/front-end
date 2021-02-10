@@ -10,11 +10,11 @@ const PositionBox = styled.div`
   position: sticky;
   z-index: 100;
   background-color: skyblue;
+  top: 200px;
+  margin-bottom: 100px;
 `;
 
 const BookingInfoContainer = styled.div`
-  top: 200px;
-  margin-bottom: 200px;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { guestInput, specificInputClear } from '../../../../modules/search';
 import CircleButton from '../../atoms/atoms-header/CircleButtonHeader';
 import Text from '../../atoms/atoms-header/Text';
@@ -11,18 +11,22 @@ const GuestNumberModalUnitBlock = styled.div`
   align-items: center;
   padding-bottom: 10px;
   white-space: nowrap;
+  padding-top: 20px;
   .count {
     font-size: 15px;
     margin: 0 15px;
     vertical-align: super;
   }
-  & + & {
-    border-top: 1px solid lightgray;
-    padding-top: 20px;
-  }
+  ${(props) =>
+    !props.detailPage &&
+    css`
+      & + & {
+        border-top: 1px solid lightgray;
+      }
+    `}
 `;
 
-const GuestNumberModalUnit = ({ type, detail, name }) => {
+const GuestNumberModalUnit = ({ type, detail, name, detailPage }) => {
   // type (성인, 어린이, 유아) , detail(13세이상..), name:button이름 (numOfAdult, numOfKid, numOfInfant)
   const dispatch = useDispatch();
   const { guestSearch } = useSelector(({ search: { searchReq } }) => searchReq);
@@ -50,7 +54,7 @@ const GuestNumberModalUnit = ({ type, detail, name }) => {
   };
 
   return (
-    <GuestNumberModalUnitBlock>
+    <GuestNumberModalUnitBlock detailPage={detailPage}>
       <div className="guest-num-texts">
         <Text className="guest-num-modal-interactive" bold block noPadding big>
           {type}

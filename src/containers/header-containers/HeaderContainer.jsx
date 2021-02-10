@@ -84,6 +84,17 @@ const HeaderContainer = (props) => {
           initialNavModalState={initialNavModalState}
         />
       )}
+      {/* {history.location.pathname === '/detail/:id' && (
+        <HeaderDetail
+          isScrolled={isScrolled}
+          setIsScrolled={setIsScrolled}
+          isClicked={isClicked}
+          setIsClicked={setIsClicked}
+          navModalState={navModalState}
+          setNavModalState={setNavModalState}
+          initialNavModalState={initialNavModalState}
+        />
+      )} */}
     </>
   );
 };
