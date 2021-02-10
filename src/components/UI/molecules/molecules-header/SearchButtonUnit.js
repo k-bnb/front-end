@@ -21,7 +21,6 @@ const SearchButtonUnit = (props) => {
   return (
     <GuestNumberUnitOuterBlock className="search-button-unit">
       <SearchButton
-        ref={buttonRef}
         onClick={() => {
           history.push('/rooms');
         }}

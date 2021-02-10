@@ -15,20 +15,16 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from 'use-places-autocomplete';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  locationInput,
-  destinationInput,
-  specificInputClear,
-} from '../../../../modules/search';
-import { search } from '../../../../lib/api/search';
-import { useState } from 'react';
+import { locationInput, destinationInput } from '../../../../modules/search';
 
 const libraries = ['places'];
 
 // app 전체 컴포넌트
 const LocationSearchInput = ({ SearchTypeHandler }) => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyDi2VswS8ZRJ3Vk6aDl0Mx3RbxI27GeXbQ',
+    // googleMapsApiKey: 'AIzaSyDi2VswS8ZRJ3Vk6aDl0Mx3RbxI27GeXbQ', 내 코드
+    googleMapsApiKey: 'AIzaSyC6KyJE5Cb_kVrW02y-mkWEDGlrUfodq6E',
+
     libraries,
   });
 
@@ -75,6 +71,7 @@ function Search({ panTo, SearchTypeHandler }) {
 
           // address는 유저가 선택한 제안 값
           try {
+            console.log('jjjjdfjfdsj');
             const results = await getGeocode({ address }); // 유저가 검색한 address를 인수로 전달하여 promise를 반환받음.
             console.log(results[0]);
             const { lat, lng } = await getLatLng(results[0]); // 결과에서 lat과 lng정보를 추출
@@ -91,12 +88,13 @@ function Search({ panTo, SearchTypeHandler }) {
             );
             console.log('ㅇㅇ', results[0]);
           } catch (error) {
+            console.log('failfail');
             console.error('error');
           }
         }}
       >
         <ComboboxInput
-          value={destinationName}
+          value={value}
           onChange={(e) => {
             setValue(e.target.value);
             console.log(e.target.value); // 여기서 dispatch로 스토어 상태 업데이트 하자.

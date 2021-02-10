@@ -58,7 +58,7 @@ const Logo = (props) => {
         history.push('/');
       }}
     >
-      <div class="a11y-hidden">에어비엔비</div>
+      <div className="a11y-hidden">에어비엔비</div>
       <svg
         width="102"
         height="32"

@@ -140,7 +140,6 @@ function Datepicker({ setNavModalState }) {
   return (
     <CalendarNewBlock>
       <DayPickerRangeController
-        id="headerCalendar"
         isRTL={false} // 오른쪽에서 왼쪽으로 가는건가? false이면 왼쪽에서 오른쪽으로
         hideKeyboardShortcutsPanel={true}
         isOutsideRange={(day) => moment().diff(day) >= 0} // 오늘부터 선택 가능

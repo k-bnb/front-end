@@ -41,21 +41,21 @@ const HeaderContainer = (props) => {
     }
   }, [isScrolled, isClicked]);
 
-  const headerRef = useRef();
-  useEffect(() => {
-    const clickOutsideHeader = (e) => {
-      if (headerRef.current && headerRef.current.contains(e.target)) {
-        return;
-      }
-      if (!isClicked && isScrolled) {
-        setIsClicked(false); // 헤더 바깥 영역이 클릭된 상태로 전환.
-      }
-      // if (isClicked && isScrolled) {
-      //   // setIsClicked()
-      // }
-    };
-    clickOutsideHeader();
-  });
+  // const headerRef = useRef();
+  // useEffect(() => {
+  //   const clickOutsideHeader = (e) => {
+  //     if (headerRef.current && headerRef.current.contains(e.target)) {
+  //       return;
+  //     }
+  //     if (!isClicked && isScrolled) {
+  //       setIsClicked(false); // 헤더 바깥 영역이 클릭된 상태로 전환.
+  //     }
+  //     // if (isClicked && isScrolled) {
+  //     //   // setIsClicked()
+  //     // }
+  //   };
+  //   clickOutsideHeader();
+  // });
 
   return (
     <>
@@ -68,7 +68,6 @@ const HeaderContainer = (props) => {
           navModalState={navModalState}
           setNavModalState={setNavModalState}
           initialNavModalState={initialNavModalState}
-          ref={headerRef}
           isClickedOutside={isClickedOutside}
           setIsClickedOutside={setIsClickedOutside}
         />
