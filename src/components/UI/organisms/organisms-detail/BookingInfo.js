@@ -9,7 +9,6 @@ import TotalPrice from '../../molecules/molecules-detail/TotalPrice';
 const PositionBox = styled.div`
   position: sticky;
   z-index: 100;
-  background-color: skyblue;
   top: 200px;
   margin-bottom: 100px;
 `;
@@ -25,12 +24,11 @@ const BookingInfoContainer = styled.div`
   padding: 24px;
   padding-bottom: 48px;
   box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
-  background-color: pink;
 
   .notice {
     margin-top: 16px;
     white-space: normal;
-    font-size: 14spx;
+    font-size: 14px;
     text-align: center;
     word-break: normal;
   }

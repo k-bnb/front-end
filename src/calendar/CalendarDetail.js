@@ -6,15 +6,94 @@ import './DetailCalendarTemplate.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { dateInput } from '../modules/search';
 import styled from 'styled-components';
+import DatePersonBox from '../components/UI/molecules/molecules-detail/DatePersonBox';
+import { useClickOutside } from '../lib/useClickOutside';
+import Text from '../components/UI/atoms/atoms-header/Text';
+import CloseBtn from '../components/UI/atoms/atoms-detail/CloseBtn';
+
+const CheckInAndOut = styled.div`
+  position: relative;
+  flex: 1 1 0%;
+  overflow: hidden;
+
+  & + & {
+    border-left: 1px solid rgb(176, 176, 176);
+  }
+`;
+
+export const CheckTxt = styled.div`
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  font-size: 10px;
+  font-weight: 800;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 12px;
+  color: rgb(34, 34, 34);
+`;
+
+const CheckDate = styled.div`
+  height: 56px;
+  width: 40%;
+  position: absolute;
+  display: flex;
+  justify-content: flex-start;
+  flex: 1 1 0%;
+  border: 1px solid rgb(176, 176, 176);
+  border-radius: 5px;
+  right: 25px;
+`;
+
+const SelectionDate = styled.div`
+  height: 56px;
+  padding: 26px 12px 10px;
+  line-height: 18px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const SelectionInfo = ({ text, date }) => (
+  <CheckInAndOut>
+    <CheckTxt>{text}</CheckTxt>
+    <SelectionDate>{date}</SelectionDate>
+  </CheckInAndOut>
+);
 
 const CalendarBlock = styled.div`
   position: absolute;
+  z-index: 1;
   background-color: green;
-  width: 1000px;
-  height: 600px;
+  width: 667px;
+  height: 464px;
+  top: -20px;
+  right: -25px;
+  background-color: white;
+  box-shadow: 2px 4px 15px 1px rgba(0, 0, 0, 0.79);
+  border-radius: 20px;
+
+  .add-date-container {
+    display: flex;
+    transform: translateY(25px);
+    & > span {
+      /* 날짜선택 텍스트 */
+      margin-top: 10px;
+      margin-left: 40px;
+    }
+  }
+
+  .close-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 30px;
+  }
 `;
 
-function Datepicker({ setNavModalState }) {
+function Datepicker({ setNavModalState, setIsCalendarOpen }) {
   const dispatch = useDispatch();
   const { checkDateSearch } = useSelector(({ search }) => search.searchReq);
 
@@ -68,38 +147,58 @@ function Datepicker({ setNavModalState }) {
       return;
     }
   }, [dateRange]);
-
   return (
-    <CalendarBlock>
-      <DayPickerRangeController
-        isRTL={false} // 오른쪽에서 왼쪽으로 가는건가? false이면 왼쪽에서 오른쪽으로
-        hideKeyboardShortcutsPanel={true}
-        isOutsideRange={(day) => moment().diff(day) >= 0} // 오늘부터 선택 가능
-        maxDate={null}
-        minDate={null}
-        monthFormat="YYYY년 M월" // 달력에 표시되는 양식 '2021년 2월'
-        startDate={startDate} // 클릭한 날짜를 시작일로 표시, 미리 찍어두고 싶으면 괄호안에 다른값을 넣는다.
-        endDate={endDate} //클릭한 날짜를 종료일로 표시, 미리 찍어두고 싶으면 괄호안에 다른값을 넣는다.
-        onDatesChange={handleOnDateChange} // PropTypes.func.isRequired,
-        focusedInput={focus} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-        onFocusChange={(focus) => {
-          setFocus(focus);
-        }} // PropTypes.func.isRequired,
-        keepOpenOnDateSelect={true}
-        daySize={45} // 달력크기
-        numberOfMonths={2} // 렌더링 되는 달력 갯수 (2이면 2달)
-        transitionDuration={300} // 달력넘어가는 속도 millisec
-        // initialVisibleMonth={() => moment().add(2, 'M')} // 달력을 열면 처음 보이는날.
-        onOutsideClick={() => {
-          setNavModalState({
-            location: false,
-            checkIn: false,
-            checkOut: false,
-            guest: false,
-          });
-        }}
-      />
-    </CalendarBlock>
+    <>
+      <CalendarBlock>
+        <div className="add-date-container">
+          <Text bigger bold className="add-date">
+            날짜 선택
+          </Text>
+          <CheckDate
+            onClick={() => {
+              setIsCalendarOpen(true);
+            }}
+          >
+            <SelectionInfo text="체크인" date="2021.3.4" />
+            <SelectionInfo
+              className="divider"
+              text="체크아웃"
+              date="2021.3.6"
+            />
+          </CheckDate>
+        </div>
+        <DayPickerRangeController
+          isRTL={false} // 오른쪽에서 왼쪽으로 가는건가? false이면 왼쪽에서 오른쪽으로
+          hideKeyboardShortcutsPanel={true}
+          isOutsideRange={(day) => moment().diff(day) >= 0} // 오늘부터 선택 가능
+          maxDate={null}
+          minDate={null}
+          monthFormat="YYYY년 M월" // 달력에 표시되는 양식 '2021년 2월'
+          startDate={startDate} // 클릭한 날짜를 시작일로 표시, 미리 찍어두고 싶으면 괄호안에 다른값을 넣는다.
+          endDate={endDate} //클릭한 날짜를 종료일로 표시, 미리 찍어두고 싶으면 괄호안에 다른값을 넣는다.
+          onDatesChange={handleOnDateChange} // PropTypes.func.isRequired,
+          focusedInput={focus} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+          onFocusChange={(focus) => {
+            setFocus(focus);
+          }} // PropTypes.func.isRequired,
+          keepOpenOnDateSelect={true}
+          daySize={40} // 달력크기
+          numberOfMonths={2} // 렌더링 되는 달력 갯수 (2이면 2달)
+          transitionDuration={300} // 달력넘어가는 속도 millisec
+          // initialVisibleMonth={() => moment().add(2, 'M')} // 달력을 열면 처음 보이는날.
+          onOutsideClick={(e) => {
+            if (
+              e.target.classList.contains('e') ||
+              e.target.classList.contains('DayPicker__withBorder')
+            )
+              return;
+            setIsCalendarOpen(false);
+          }}
+          verticalHeight={100}
+        />
+        <CloseBtn className="close-btn" />
+      </CalendarBlock>
+    </>
   );
 }
 

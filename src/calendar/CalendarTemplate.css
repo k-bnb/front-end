@@ -57,7 +57,6 @@
 
 /* 달력 포함하고있는 전체 모달의 속성 */
 .DayPicker {
-  padding-top: 20px i !important;
   display: flex !important;
   justify-content: center !important;
   border-radius: 30px;

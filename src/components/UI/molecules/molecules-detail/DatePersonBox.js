@@ -9,6 +9,7 @@ const BookingBox = styled.div`
   border: 1px solid rgb(176, 176, 176);
   border-radius: 8px;
   width: 100%;
+  cursor: pointer;
 `;
 
 const CheckDate = styled.div`
@@ -84,13 +85,20 @@ const GuestBtn = styled.div`
 
 const DatePersonBox = () => {
   const [isOpen, setIsOpen] = useState(false); // detail page에서 모달창 열고닫기 기능구현
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   return (
     <BookingBox>
-      <CheckDate>
+      <CheckDate
+        onClick={() => {
+          setIsCalendarOpen(true);
+        }}
+      >
         <SelectionInfo text="체크인" date="2021.3.4" />
         <SelectionInfo className="divider" text="체크아웃" date="2021.3.6" />
-        <CalendarDetail />
+        {isCalendarOpen && (
+          <CalendarDetail setIsCalendarOpen={setIsCalendarOpen} />
+        )}
       </CheckDate>
       <Personnel
         onClick={() => {
