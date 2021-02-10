@@ -18,7 +18,6 @@ const activeStyles = css`
 const BorderStyle = styled.div`
   /* 공통 스타일 */
   border-radius: 10px;
-  /* border: 5px dashed red; */
   box-sizing: border-box;
 
   /* 정적,동적 */

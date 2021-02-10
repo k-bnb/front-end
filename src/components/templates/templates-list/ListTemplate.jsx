@@ -1,8 +1,7 @@
-import HeaderList from '../templates-header/HeaderList';
-import HeadStyle from '../../UI/organisms/organisms-list/HeadStyle';
 import ListStyle from '../../UI/organisms/organisms-list/ListsSt';
 import GoogleStyle from '../../UI/organisms/organisms-list/GoogleMapSt';
 import FooterFake from '../../UI/organisms/organisms-list/FooterFake';
+import HeadStyle from '../../UI/organisms/organisms-list/HeadStyle';
 
 const ListTemplate = ({
   searchModalState,
@@ -21,13 +20,13 @@ const ListTemplate = ({
   costSearch,
   searchBtn,
   costState,
+  room,
+  totalPage,
+  pageNationClick
 }) => {
   return (
-    <>
-      <div style={{ display: 'flex' }}>
-        {/* <MainStyle /> */}
-        <div style={{ display: 'block' }}>
-          <HeadStyle
+    <div>
+      <HeadStyle
             searchModalState={searchModalState}
             setSearchModalState={setSearchModalState}
             RoomSearchClick={RoomSearchClick}
@@ -44,13 +43,18 @@ const ListTemplate = ({
             plusBtn={plusBtn}
             searchBtn={searchBtn}
             costState={costState}
+            
+          
           />
-          <ListStyle />
+      <div style={{display:'flex'}}>
+        <div style={{ display: 'block' }}>
+          
+          <ListStyle room={room} totalPage={totalPage} pageNationClick={pageNationClick}/>
         </div>
         <GoogleStyle style={{ flexShrink: '1' }} />
       </div>
       <FooterFake />
-    </>
+    </div>
   );
 };
 

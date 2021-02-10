@@ -5,12 +5,12 @@ import TextStyled from '../../atoms/atoms-list/Text';
 import FooterBtn from './FooterBtn';
 import RoomReSearch from './RoomReSearch';
 import SearchModal from './SearchModal';
-// import TextStyled from '../atoms/Text';
+
 const SearchPlace = styled.div`
-  margin-top: 100px;
-  /* /* width: 100%; */
-  padding: 20px;
-  /* display: flex; */
+  padding : 20px;
+  padding-top:100px;
+  /* margin-top:100px; */
+
   .filter-style {
     display: flex;
     .roomType {
