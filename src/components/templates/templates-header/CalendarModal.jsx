@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import CalendarNew from '../../../calendar/CalendarNew';
-import '../../../calendar/CalendarTemplate.css';
+// import '../../../calendar/CalendarTemplate.css';
 import { useClickOutside } from '../../../lib/useClickOutside';
 
 const StyledCalModal = styled.div`
-  ${(props) =>
-    props.detail &&
-    css`
-      background-color: red;
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 200px;
-      width: 100vw;
-    `}
+  ${(props) => props.detail && css``}
+  background-color: red;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 200px;
+  width: 100vw;
 `;
 
 const CalendarModal = ({

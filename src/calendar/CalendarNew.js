@@ -3,10 +3,84 @@ import { DateRangePicker, DayPickerRangeController } from 'react-dates';
 import moment from 'moment';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
-import './CalendarTemplate.css';
-import { useClickOutside } from '../lib/useClickOutside';
 import { useDispatch, useSelector } from 'react-redux';
 import { dateInput } from '../modules/search';
+import styled from 'styled-components';
+
+const CalendarNewBlock = styled.div`
+  .App {
+    padding-left: 20px;
+    position: relative;
+  }
+  .CalendarDay {
+    border: 0 !important;
+  }
+
+  /* 날짜에 호버햇을때 회색 원 표시 */
+  .CalendarDay.CalendarDay__default.CalendarDay__default_2:hover {
+    /* border: 1px solid rgb(34, 34, 34) !important; */
+    background-color: lightgray;
+    border-radius: 50% !important;
+  }
+
+  .DayPicker_weekHeader_li {
+    border: 0 !important;
+  }
+  .CalendarDay__selected_span {
+    background: rgb(247, 247, 247) !important;
+    color: rgb(34, 34, 34) !important;
+    border: 0 !important;
+  }
+
+  /* // Will edit selected date or the endpoints of a range of dates */
+  .CalendarDay__selected {
+    background: rgb(34, 34, 34) !important;
+    color: white;
+    border-radius: 50%;
+    border: 0 !important;
+    font-size: 12px;
+  }
+
+  /* // Will edit when hovered over. _span style also has this property */
+  .CalendarDay__selected:hover {
+    background: orange;
+    color: white;
+  }
+
+  /* // Will edit when the second date (end date) in a range of dates */
+  /* // is not yet selected. Edits the dates between your mouse and said date */
+  .CalendarDay__hovered_span:hover,
+  .CalendarDay__hovered_span {
+    background: transparent !important;
+    color: rgb(34, 34, 34) !important;
+  }
+
+  /* 모달 내부의 화살표 테두리 없애는 속성 */
+  .DayPickerNavigation_button {
+    border: 0 !important;
+  }
+
+  /* 달력 포함하고있는 전체 모달의 속성 */
+  .DayPicker {
+    display: flex !important;
+    justify-content: center !important;
+    border-radius: 30px;
+    position: absolute !important;
+    top: 100px;
+    left: -285px;
+    height: 410px;
+    width: 850px !important;
+    max-width: 850px !important;
+    border-radius: 30px !important;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.6) !important;
+  }
+  /* 모달의 전체 컨테이너 */
+  .CalendarMonthGrid {
+    width: 100% !important;
+    height: 400px !important;
+    border-radius: 30px !important;
+  }
+`;
 
 function Datepicker({ setNavModalState }) {
   const dispatch = useDispatch();
@@ -64,8 +138,9 @@ function Datepicker({ setNavModalState }) {
   }, [dateRange]);
 
   return (
-    <>
+    <CalendarNewBlock>
       <DayPickerRangeController
+        id="headerCalendar"
         isRTL={false} // 오른쪽에서 왼쪽으로 가는건가? false이면 왼쪽에서 오른쪽으로
         hideKeyboardShortcutsPanel={true}
         isOutsideRange={(day) => moment().diff(day) >= 0} // 오늘부터 선택 가능
@@ -94,7 +169,7 @@ function Datepicker({ setNavModalState }) {
           // setIsClicked(false);
         }}
       />
-    </>
+    </CalendarNewBlock>
   );
 }
 

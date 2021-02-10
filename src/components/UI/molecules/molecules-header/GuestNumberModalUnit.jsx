@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import {
-  clearSpecificInputDetail,
+  clearGuestDetail,
   guestChangeDetail,
 } from '../../../../modules/detail';
 import { guestInput, specificInputClear } from '../../../../modules/search';
@@ -87,7 +87,7 @@ const GuestNumberModalUnit = ({
       detail.numOfAdult === 1 &&
       (detail.numOfKid || detail.numOfInfant)
     ) {
-      dispatch(clearSpecificInputDetail());
+      dispatch(clearGuestDetail());
     }
   };
 
