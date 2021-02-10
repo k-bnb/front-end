@@ -24,7 +24,7 @@ const ListTemplate = ({
 }) => {
   return (
     <>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', zIndex: '-1' }}>
         {/* <MainStyle /> */}
         <div style={{ display: 'block' }}>
           <HeadStyle

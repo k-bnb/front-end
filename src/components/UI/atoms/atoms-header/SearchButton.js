@@ -23,7 +23,7 @@ const SearchButtonBlock = styled.button`
     );
   }
   ${(props) =>
-    props.isScrolled &&
+    (props.isScrolled || props.rooms) &&
     css`
       width: 32px;
       height: 32px;
@@ -32,16 +32,23 @@ const SearchButtonBlock = styled.button`
         line-height: 15px;
         font-size: 16px;
       }
-    `}
+    `}/* ${(props) =>
+    props.rooms &&
+    css`
+      position: absolute;
+      top: -1px;
+      right: -3px;
+    `} */
 `;
 
-const SearchButton = ({ isScrolled, onClick }) => {
+const SearchButton = ({ isScrolled, onClick, rooms }) => {
   return (
     <>
       <SearchButtonBlock
         isScrolled={isScrolled}
         className="search-button-unit"
         onClick={onClick}
+        rooms={rooms}
       >
         {!isScrolled && <BiSearch className="search-button-unit" />}
         {isScrolled && <HiSearch className="search-button-unit" />}
