@@ -8,6 +8,7 @@ const ReservationInfoOrganism = ({
   manageDateModal,
   guestModal,
   manageGuestModal,
+  setGuestModal,
   checkDateSearch,
   checkDate,
   saveDate,
@@ -40,6 +41,7 @@ const ReservationInfoOrganism = ({
         children={guistChildren}
         modal={guestModal}
         manageModal={manageGuestModal}
+        setGuestModal={setGuestModal}
         checkDate={checkDate}
         saveDate={saveDate}
       />

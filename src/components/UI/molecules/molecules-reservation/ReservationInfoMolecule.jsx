@@ -20,12 +20,11 @@ const ReservationInfoMolecule = ({
   children,
   modal,
   manageModal,
+  setGuestModal,
   checkDate,
   saveDate,
 }) => {
   const { title, content } = children;
-
-  console.log(title);
 
   return (
     <Container>
@@ -49,6 +48,7 @@ const ReservationInfoMolecule = ({
           edit
           guestModal={modal}
           manageGuestModal={manageModal}
+          setGuestModal={setGuestModal}
           title={title}
         >
           수정

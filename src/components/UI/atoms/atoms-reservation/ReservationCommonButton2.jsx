@@ -1,5 +1,8 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
+import { initialGuest } from '../../../../modules/reserve';
+import { guestInput } from '../../../../modules/search';
 import Modal from '../../../../portal/Modal';
 import EditGuestModalOrganism from '../../organisms/organisms-reservation/organisms-modal/EditGuestModalOrganism';
 
@@ -43,10 +46,32 @@ const ReservationEditButton2 = ({
   children,
   guestModal,
   manageGuestModal,
+  setGuestModal,
   checkDate,
   saveDate,
   ...rest
 }) => {
+  const dispatch = useDispatch();
+
+  const { numOfAdult, numOfKid, numOfInfant } = useSelector(
+    ({ reserve }) => reserve.guestSearch,
+  );
+
+  console.log(numOfAdult, numOfKid, numOfInfant);
+
+  // 지우기 button을 클릭 시 reserve guestSearch의 상태 초기화
+  const clearGuest = () => {
+    dispatch(initialGuest('guestSearch'));
+  };
+
+  // 저장하기 button을 통해 search reducer의 상태 변경
+  // 월요일날 새로운 search reducer에 새로운 action function 및 action type을 만들어서 한번에 보내기
+  const saveGuest = () => {
+    setGuestModal(!guestModal);
+    dispatch(guestInput('guestSearch', 'numOfAdult', numOfAdult));
+    dispatch(guestInput('guestSearch', 'numOfKid', numOfKid));
+    dispatch(guestInput('guestSearch', 'numOfInfant', numOfInfant));
+  };
   return (
     <>
       <StyledButton onClick={manageGuestModal} {...rest}>
@@ -54,7 +79,11 @@ const ReservationEditButton2 = ({
       </StyledButton>
       {guestModal && (
         <Modal>
-          <EditGuestModalOrganism manageGuestModal={manageGuestModal} />
+          <EditGuestModalOrganism
+            manageGuestModal={manageGuestModal}
+            clearGuest={clearGuest}
+            saveGuest={saveGuest}
+          />
         </Modal>
       )}
     </>

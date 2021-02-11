@@ -93,6 +93,7 @@ const ReservationContainer = () => {
       manageDateModal={manageDateModal}
       guestModal={guestModal}
       manageGuestModal={manageGuestModal}
+      setGuestModal={setGuestModal}
       checkDateSearch={checkDateSearch}
       checkDate={checkDate}
       saveDate={saveDate}

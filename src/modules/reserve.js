@@ -6,8 +6,12 @@ import produce from 'immer';
 
 // action type
 const CLIENT_MESSAGE_CHANGE = 'reserve/CLIENT_MESSAGE_CHANGE';
+// calendar change action type
 const CHANGE_DATE = 'reserve/CHANGE_DATE';
 const INITIAL_DATE = 'reserve/INITIAL_DATE';
+// guest number change action type
+const CHANGE_GUEST = 'reserve/CHANGE_GUEST';
+const INITIAL_GUEST = 'reserve/INITIAL_GUEST';
 
 // 비동기 action type
 const RESERVING = 'reserve/RESERVING';
@@ -19,6 +23,7 @@ export const clientMessageChange = createAction(
   (value) => value,
 );
 
+// calendar change action function
 export const changeDate = createAction(
   CHANGE_DATE,
   (form, checkDateSearch) => ({
@@ -29,6 +34,16 @@ export const changeDate = createAction(
 
 export const initialDate = createAction(INITIAL_DATE);
 
+// guest number change action function
+export const changeGuest = createAction(CHANGE_GUEST, (form, name, value) => ({
+  form,
+  name,
+  value,
+}));
+
+export const initialGuest = createAction(INITIAL_GUEST, (form) => form);
+
+// saga action function
 export const reserving = createAction(
   RESERVING,
   (
@@ -63,6 +78,11 @@ const initialState = {
     startDate: '',
     endDate: '',
   },
+  guestSearch: {
+    numOfAdult: 0,
+    numOfKid: 0,
+    numOfInfant: 0,
+  },
   reserveError: null,
 };
 
@@ -82,6 +102,16 @@ const reserve = handleActions(
     [INITIAL_DATE]: () => ({
       ...initialState,
     }),
+
+    [CHANGE_GUEST]: (state, { payload: { form, name, value } }) =>
+      produce(state, (draft) => {
+        draft[form][name] = value;
+      }),
+
+    [INITIAL_GUEST]: (state, { payload: form }) =>
+      produce(state, (draft) => {
+        draft[form] = initialState[form]; // 선택한 form 초기화.
+      }),
 
     [RESERVING_FAILURE]: (state, { payload: error }) => ({
       ...state,

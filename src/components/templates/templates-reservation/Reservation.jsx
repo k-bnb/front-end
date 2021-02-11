@@ -50,6 +50,7 @@ const Reservation = ({
   manageDateModal,
   guestModal,
   manageGuestModal,
+  setGuestModal,
   checkDateSearch,
   checkDate,
   saveDate,
@@ -90,6 +91,7 @@ const Reservation = ({
             manageDateModal={manageDateModal}
             guestModal={guestModal}
             manageGuestModal={manageGuestModal}
+            setGuestModal={setGuestModal}
             checkDateSearch={checkDateSearch}
             checkDate={checkDate}
             saveDate={saveDate}

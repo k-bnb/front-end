@@ -131,12 +131,20 @@ function CommonButton({
   manageDateModal,
   manageGuestModal,
   saveDate,
+  clearGuest,
+  saveGuest,
   ...rest
 }) {
   return (
     <StyledCommonButton
       {...rest}
-      onClick={manageDateModal || manageGuestModal || saveDate}
+      onClick={
+        manageDateModal ||
+        manageGuestModal ||
+        saveDate ||
+        clearGuest ||
+        saveGuest
+      }
     >
       {children}
     </StyledCommonButton>

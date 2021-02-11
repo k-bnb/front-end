@@ -14,7 +14,6 @@ const HeaderContainer = styled.div`
 
 const MainContainer = styled.div`
   padding: 8px 24px 16px;
-  /* margin-bottom: 16px; */
 `;
 
 const FooterContainer = styled.div`
@@ -24,7 +23,7 @@ const FooterContainer = styled.div`
   border-top: 1px solid rgb(235, 235, 235);
 `;
 
-function EditGuestModalOrganism({ manageGuestModal }) {
+function EditGuestModalOrganism({ manageGuestModal, clearGuest, saveGuest }) {
   return (
     <CommonBg modalBg>
       <CommonTemp guestModal>
@@ -35,31 +34,23 @@ function EditGuestModalOrganism({ manageGuestModal }) {
           <CommonText guestTitle>게스트</CommonText>
         </HeaderContainer>
         <MainContainer>
-          <GuestNumberModalUnit
-            type={'성인'}
-            detail={'만 13세 이상'}
-            name="numOfAdult"
-          />
+          <GuestNumberModalUnit none type={'성인'} name="numOfAdult" />
 
-          <GuestNumberModalUnit
-            type={'어린이'}
-            detail={'2~12세'}
-            name="numOfKid"
-          />
+          <GuestNumberModalUnit none type={'어린이'} name="numOfKid" />
 
-          <GuestNumberModalUnit
-            type={'유아'}
-            detail={'2세 미만'}
-            name="numOfInfant"
-          />
+          <GuestNumberModalUnit none type={'유아'} name="numOfInfant" />
 
           <CommonText guestLimitInfo>
-            최대 8명. 유아는 숙박인원에 포함되지 않습니다.
+            최대 X명. 유아는 숙박인원에 포함되지 않습니다.
           </CommonText>
         </MainContainer>
         <FooterContainer>
-          <CommonButton guestDelete>지우기</CommonButton>
-          <CommonButton guestSave>저장하기</CommonButton>
+          <CommonButton guestDelete clearGuest={clearGuest}>
+            지우기
+          </CommonButton>
+          <CommonButton guestSave saveGuest={saveGuest}>
+            저장하기
+          </CommonButton>
         </FooterContainer>
       </CommonTemp>
     </CommonBg>
