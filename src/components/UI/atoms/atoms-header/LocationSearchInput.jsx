@@ -94,17 +94,19 @@ function Search({ panTo, SearchTypeHandler }) {
         }}
       >
         <ComboboxInput
-          value={value}
+          select
+          change
+          value={destinationName}
           onChange={(e) => {
             setValue(e.target.value);
-            console.log(e.target.value); // 여기서 dispatch로 스토어 상태 업데이트 하자.
             dispatch(destinationInput(e.target.value)); // DestinationName 변경
+            console.log(e.target.value); // 여기서 dispatch로 스토어 상태 업데이트 하자.
           }}
           disabled={!ready} // 아직 준비되지않으면 사용할수 없음.
           placeholder="어디로 여행가세요?"
           className="combo-box-input"
           id="locationInput"
-          onClick={() => {
+          onClick={(e) => {
             SearchTypeHandler('location');
           }}
           autoComplete="off"
@@ -123,6 +125,12 @@ function Search({ panTo, SearchTypeHandler }) {
                       className="combo-box-options"
                       key={id}
                       value={description}
+                      onKeyDown={(e) => {
+                        if (e.key !== 'Enter') {
+                          e.preventDefault();
+                          return;
+                        }
+                      }}
                     />
                   </div>
                 ))}
