@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const ReservationBtn = styled.button`
   background: #d70466;
@@ -16,7 +16,15 @@ const ReservationBtn = styled.button`
   white-space: nowrap;
   transition: opacity 1.25s ease 0s;
   cursor: pointer;
+
+  ${(props) =>
+    props.half &&
+    css`
+      width: 100px;
+    `}
 `;
 
-const ReserveBtn = () => <ReservationBtn>예약하기</ReservationBtn>;
+const ReserveBtn = ({ half }) => (
+  <ReservationBtn half={half}>예약하기</ReservationBtn>
+);
 export default ReserveBtn;

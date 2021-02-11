@@ -31,6 +31,7 @@ const HeaderListBlock = styled.div`
   background-color: white;
   transition: 0.1s ease;
   z-index: 9999;
+  box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.1);
 
   ${(props) =>
     props.isClicked &&
