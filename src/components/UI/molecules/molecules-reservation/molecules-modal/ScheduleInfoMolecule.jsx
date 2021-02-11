@@ -23,7 +23,6 @@ const Container = styled.div`
 `;
 
 function ScheduleInfoMolecule({ children, scheduleDate }) {
-  console.log(scheduleDate, '봐라');
   return (
     <Container>
       <CommonText schedule>{children}</CommonText>

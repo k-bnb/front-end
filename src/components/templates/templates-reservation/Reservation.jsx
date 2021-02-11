@@ -45,9 +45,11 @@ const LayoutReservationTitle = styled(ReservationTitle)`
 const Reservation = ({
   change,
   click,
-  manageModal,
   value,
-  modal,
+  dateModal,
+  manageDateModal,
+  guestModal,
+  manageGuestModal,
   checkDateSearch,
   checkDate,
   saveDate,
@@ -84,8 +86,10 @@ const Reservation = ({
       <TempContainer>
         <MainContainer>
           <ReservationInfoOrganism
-            manageModal={manageModal}
-            modal={modal}
+            dateModal={dateModal}
+            manageDateModal={manageDateModal}
+            guestModal={guestModal}
+            manageGuestModal={manageGuestModal}
             checkDateSearch={checkDateSearch}
             checkDate={checkDate}
             saveDate={saveDate}

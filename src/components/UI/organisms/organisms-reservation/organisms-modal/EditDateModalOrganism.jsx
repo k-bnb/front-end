@@ -37,7 +37,7 @@ const CalendarContainer = styled.div`
   position: relative;
 `;
 
-function EditDateModalOrganism({ manageModal, checkDate, saveDate }) {
+function EditDateModalOrganism({ manageDateModal, checkDate, saveDate }) {
   const checkChildren = {
     checkIn: '체크인',
     checkOut: '체크아웃',
@@ -47,9 +47,9 @@ function EditDateModalOrganism({ manageModal, checkDate, saveDate }) {
 
   return (
     <CommonBg modalBg>
-      <CommonTemp modal>
+      <CommonTemp dateModal>
         <CancelButtonContainer>
-          <CommonButton cancelModal manageModal={manageModal}>
+          <CommonButton cancelModal manageDateModal={manageDateModal}>
             <AiOutlineClose />
           </CommonButton>
         </CancelButtonContainer>

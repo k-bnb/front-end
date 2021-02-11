@@ -4,14 +4,17 @@ import ReservationUnderLine from '../../atoms/atoms-reservation/ResevationUnderL
 import ReservationInfoMolecule from '../../molecules/molecules-reservation/ReservationInfoMolecule';
 
 const ReservationInfoOrganism = ({
-  manageModal,
-  modal,
+  dateModal,
+  manageDateModal,
+  guestModal,
+  manageGuestModal,
   checkDateSearch,
   checkDate,
   saveDate,
 }) => {
   const { startDate, endDate } = checkDateSearch;
 
+  //  dateChildren.title
   const dateChildren = {
     title: '날짜',
     content: `${startDate}-${endDate}`,
@@ -28,15 +31,15 @@ const ReservationInfoOrganism = ({
       <ReservationTitle sub children="예약 정보" />
       <ReservationInfoMolecule
         children={dateChildren}
-        manageModal={manageModal}
-        modal={modal}
+        modal={dateModal}
+        manageModal={manageDateModal}
         checkDate={checkDate}
         saveDate={saveDate}
       />
       <ReservationInfoMolecule
         children={guistChildren}
-        manageModal={manageModal}
-        modal={modal}
+        modal={guestModal}
+        manageModal={manageGuestModal}
         checkDate={checkDate}
         saveDate={saveDate}
       />

@@ -21,6 +21,22 @@ const StyledSpan = styled.span`
       font-size: 22px;
       font-weight: 600;
     `}
+
+  ${(props) =>
+    props.guestTitle &&
+    css`
+      font-size: 22px;
+      font-weight: 800;
+      color: rgba(34, 34, 34, 0.8);
+    `}
+
+    ${(props) =>
+    props.guestLimitInfo &&
+    css`
+      font-size: 12px;
+      line-height: 16px;
+      color: #484848;
+    `}
 `;
 
 function CommonText({ children, ...rest }) {

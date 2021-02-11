@@ -5,7 +5,7 @@ const StyledTemp = styled.div`
   background: transparent;
 
   ${(props) =>
-    props.modal &&
+    props.dateModal &&
     css`
       position: absolute;
       top: 50%;
@@ -16,6 +16,22 @@ const StyledTemp = styled.div`
       background: #fff;
       border-radius: 16px;
       padding: 16px 28px;
+    `}
+
+  ${(props) =>
+    props.guestModal &&
+    css`
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 365px;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border-radius: 12px;
+      /* padding: 16px 24px; */
     `}
 `;
 

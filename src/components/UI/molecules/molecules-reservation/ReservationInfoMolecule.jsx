@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ReservationContent from '../../atoms/atoms-reservation/ReservationContent';
 import ReservationCommonButton from '../../atoms/atoms-reservation/ReservationCommonButton';
+import ReservationCommonButton2 from '../../atoms/atoms-reservation/ReservationCommonButton2';
 
 const Container = styled.div`
   display: flex;
@@ -17,12 +18,14 @@ const LayoutReservationContent = styled(ReservationContent)`
 
 const ReservationInfoMolecule = ({
   children,
-  manageModal,
   modal,
+  manageModal,
   checkDate,
   saveDate,
 }) => {
   const { title, content } = children;
+
+  console.log(title);
 
   return (
     <Container>
@@ -30,15 +33,27 @@ const ReservationInfoMolecule = ({
         <LayoutReservationContent bold children={title} />
         <ReservationContent normal children={content} />
       </div>
-      <ReservationCommonButton
-        edit
-        manageModal={manageModal}
-        modal={modal}
-        checkDate={checkDate}
-        saveDate={saveDate}
-      >
-        수정
-      </ReservationCommonButton>
+      {title === '날짜' ? (
+        <ReservationCommonButton
+          edit
+          dateModal={modal}
+          manageDateModal={manageModal}
+          checkDate={checkDate}
+          saveDate={saveDate}
+          title={title}
+        >
+          수정
+        </ReservationCommonButton>
+      ) : (
+        <ReservationCommonButton2
+          edit
+          guestModal={modal}
+          manageGuestModal={manageModal}
+          title={title}
+        >
+          수정
+        </ReservationCommonButton2>
+      )}
     </Container>
   );
 };

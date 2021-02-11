@@ -23,11 +23,32 @@ const ReservationContainer = () => {
 
   const { startDate, endDate } = checkDate;
 
-  const [modal, setModal] = useState(false); // modal on/off state
+  // const [visible, setVisible] = useState({
+  //   state: false,
+  //   type: null,
+  // }); // type에 따라 modal이 열리는 상태
 
-  // modal state 변경 event function
-  const manageModal = () => {
-    setModal(!modal);
+  // const showModal = (type) => {
+  //   setVisible({ ...visible, state: true, type });
+  // };
+
+  // const hiddleModal = ({ target }) => {
+  //   if (target.dataset.name) {
+  //     setVisible({ ...visible, state: false });
+  //   }
+  // };
+
+  // console.log(visible);
+
+  const [dateModal, setDateModal] = useState(false);
+  const [guestModal, setGuestModal] = useState(false);
+
+  const manageDateModal = () => {
+    setDateModal(!dateModal);
+  };
+
+  const manageGuestModal = () => {
+    setGuestModal(!guestModal);
   };
 
   // textArea state 관리하는 event function
@@ -54,8 +75,7 @@ const ReservationContainer = () => {
   };
 
   const saveDate = () => {
-    setModal(!modal);
-
+    setDateModal(!dateModal);
     dispatch(dateInput('startDate', startDate)); // 시작일만 선택시 시작일 dispatch
     dispatch(dateInput('endDate', endDate)); // 시작일만 선택시 시작일 dispatch
   };
@@ -64,14 +84,15 @@ const ReservationContainer = () => {
   //   dispatch(initialDate());
   // };
 
-  console.log(modal);
   return (
     <Reservation
       change={change}
       click={click}
-      manageModal={manageModal}
       value={message}
-      modal={modal}
+      dateModal={dateModal}
+      manageDateModal={manageDateModal}
+      guestModal={guestModal}
+      manageGuestModal={manageGuestModal}
       checkDateSearch={checkDateSearch}
       checkDate={checkDate}
       saveDate={saveDate}
