@@ -52,7 +52,6 @@ const ULWrap = styled.ul`
   }
   .TextHead {
     /* width: 100%; */
-    
   }
   .Ellipsis {
     width: 416px;
@@ -75,7 +74,7 @@ const ULWrap = styled.ul`
     /* background-color: #fff;max-width: 100%;
       height: auto; */
     /* width: 492px; */
-    width:100%;
+    width: 100%;
     margin-left: 16px;
     height: 100%;
   }
@@ -105,8 +104,26 @@ const ULWrap = styled.ul`
   } */
 `;
 
-const LodgingLists = ({alt,bathRoomNum,roomType, city, borough ,bedNum,bedRoomNum, roomImgUrlList ,cost, grade, id, name,peopleLimit,isCheck, isParking, isSmoking, commentCount ,...rest}) => {
-  console.log(bathRoomNum, bedNum,bedRoomNum ,cost, grade, id, name, roomImgUrlList);
+const LodgingLists = ({
+  alt,
+  bathRoomNum,
+  roomType,
+  city,
+  borough,
+  bedNum,
+  bedRoomNum,
+  roomImgUrlList,
+  cost,
+  grade,
+  id,
+  name,
+  peopleLimit,
+  isCheck,
+  isParking,
+  isSmoking,
+  commentCount,
+  ...rest
+}) => {
   return (
     <>
       {/* <ListCarousel slides={SliderData} /> */}
@@ -115,23 +132,22 @@ const LodgingLists = ({alt,bathRoomNum,roomType, city, borough ,bedNum,bedRoomNu
           <li>
             <span>
               <Border carouselImg>
-                {
-                  roomImgUrlList.map(src => (
-                    <Imgs
+                {roomImgUrlList.map((src) => (
+                  <Imgs
                     carousalImg
                     src={src}
                     // alt={alt}
-                    
                   />
-                  ))
-                }
+                ))}
               </Border>
             </span>
             <span className="TextWrap">
               <div className="TextHead">
-                <TextStyled size="blackSmall">{city} {borough} {city || borough ? '의' : ''} {roomType}</TextStyled>
+                <TextStyled size="blackSmall">
+                  {city} {borough} {city || borough ? '의' : ''} {roomType}
+                </TextStyled>
                 <TextStyled className="Ellipsis" size="blackMiddle">
-                {name} 
+                  {name}
                 </TextStyled>
                 <Bookmark className="heart" heart>
                   <AiOutlineHeart />
@@ -139,19 +155,18 @@ const LodgingLists = ({alt,bathRoomNum,roomType, city, borough ,bedNum,bedRoomNu
               </div>
               <hr />
               <TextStyled size="blackSmall">
-                최대 인원 {peopleLimit}명. 침실{bedRoomNum}개. 침대 {bedNum}개. 욕실 {bathRoomNum}개
+                최대 인원 {peopleLimit}명. 침실{bedRoomNum}개. 침대 {bedNum}개.
+                욕실 {bathRoomNum}개
               </TextStyled>
-              <TextStyled size="blackSmall">{isSmoking ? '흡연 가능' : '흡연 불가능'} {' '}
-              {isParking ? '주차 가능' : '주차 불가능'}
+              <TextStyled size="blackSmall">
+                {isSmoking ? '흡연 가능' : '흡연 불가능'}{' '}
+                {isParking ? '주차 가능' : '주차 불가능'}
               </TextStyled>
               <div className="TextBottom">
-                <ScoreText 
-                grade={grade} 
-                commentCount={commentCount}/>
+                <ScoreText grade={grade} commentCount={commentCount} />
                 <TextStyled className="sleep" size="blackMiddleBold">
                   <BiWon />
-                  {cost}/박 
-                  
+                  {cost}/박
                 </TextStyled>
               </div>
             </span>
