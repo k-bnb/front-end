@@ -68,18 +68,18 @@ const GoogleMarkerStyle = styled.div`
   }
 `;
 
-function GoogleMapUse({ roomMap }) {
+function GoogleMapUse({
+  roomMap,
+  locationSearch,
+  checkDateSearch,
+  guestSearch,
+  costSearch,
+  roomType,
+  bedNum,
+  bedRoomNum,
+  bathRoomNum,
+}) {
   const [selectedSample, setSelectedSample] = useState(null);
-  const {
-    locationSearch,
-    checkDateSearch,
-    guestSearch,
-    costSearch,
-    roomType,
-    bedNum,
-    bedRoomNum,
-    bathRoomNum,
-  } = useSelector((state) => state.search.searchReq);
 
   const [locate, setLocate] = useState({
     address: '',
@@ -98,6 +98,7 @@ function GoogleMapUse({ roomMap }) {
       lng: 0,
     },
   });
+  console.log(roomMap);
   console.log(locationSearch.latitude);
   useEffect(() => {
     if (navigator.geolocation) {
@@ -268,12 +269,14 @@ function GoogleMapUse({ roomMap }) {
   };
 
   const mapRef = useRef();
-  console.log(roomMap);
+
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
+
   const MapWithAMarker = withScriptjs(
     withGoogleMap((props) => {
+      console.log(props);
       return (
         <GoogleMap
           // scrollwheel={false}
@@ -282,6 +285,9 @@ function GoogleMapUse({ roomMap }) {
           defaultCenter={{
             lat: locationSearch.latitude,
             lng: locationSearch.longitude,
+          }}
+          onClick={() => {
+            setSelectedSample(null);
           }}
           onLoad={onMapLoad}
           onDragEnd={dragMark}
@@ -321,6 +327,7 @@ function GoogleMapUse({ roomMap }) {
                 getPixelPositionOffset={getPixelPositionOffset}
               >
                 <div
+                  className="cost-memo"
                   onClick={(e) => {
                     console.log('overlayviewText', e);
                   }}

@@ -11,13 +11,9 @@ const ListTemplate = ({
   bedroomSearchClick,
   roomTypes,
   cost,
-  roomType,
-  bedNum,
-  bedRoomNum,
-  bathRoomNum,
   minusBtn,
   plusBtn,
-  costSearch,
+
   searchBtn,
   costState,
   room,
@@ -25,6 +21,13 @@ const ListTemplate = ({
   pageNationClick,
   roomMap,
   locationSearch,
+  checkDateSearch,
+  guestSearch,
+  costSearch,
+  roomType,
+  bedNum,
+  bedRoomNum,
+  bathRoomNum,
 }) => {
   return (
     <div>
@@ -58,6 +61,13 @@ const ListTemplate = ({
           locationSearch={locationSearch}
           roomMap={roomMap}
           room={room}
+          checkDateSearch={checkDateSearch}
+          guestSearch={guestSearch}
+          costSearch={costSearch}
+          roomType={roomType}
+          bedNum={bedNum}
+          bedRoomNum={bedRoomNum}
+          bathRoomNum={bathRoomNum}
           style={{ flexShrink: '1' }}
         />
       </div>
