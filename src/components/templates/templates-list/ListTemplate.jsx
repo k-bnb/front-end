@@ -11,18 +11,23 @@ const ListTemplate = ({
   bedroomSearchClick,
   roomTypes,
   cost,
-  roomType,
-  bedNum,
-  bedRoomNum,
-  bathRoomNum,
   minusBtn,
   plusBtn,
-  costSearch,
+
   searchBtn,
   costState,
   room,
   totalPage,
   pageNationClick,
+  roomMap,
+  locationSearch,
+  checkDateSearch,
+  guestSearch,
+  costSearch,
+  roomType,
+  bedNum,
+  bedRoomNum,
+  bathRoomNum,
 }) => {
   return (
     <div>
@@ -52,7 +57,19 @@ const ListTemplate = ({
             pageNationClick={pageNationClick}
           />
         </div>
-        <GoogleStyle style={{ flexShrink: '1' }} />
+        <GoogleStyle
+          locationSearch={locationSearch}
+          roomMap={roomMap}
+          room={room}
+          checkDateSearch={checkDateSearch}
+          guestSearch={guestSearch}
+          costSearch={costSearch}
+          roomType={roomType}
+          bedNum={bedNum}
+          bedRoomNum={bedRoomNum}
+          bathRoomNum={bathRoomNum}
+          style={{ flexShrink: '1' }}
+        />
       </div>
       <FooterFake />
     </div>

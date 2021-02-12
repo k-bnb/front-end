@@ -22,9 +22,7 @@ const libraries = ['places'];
 // app 전체 컴포넌트
 const LocationSearchInput = ({ SearchTypeHandler }) => {
   const { isLoaded, loadError } = useLoadScript({
-    // googleMapsApiKey: 'AIzaSyDi2VswS8ZRJ3Vk6aDl0Mx3RbxI27GeXbQ', 내 코드
-    googleMapsApiKey: 'AIzaSyC6KyJE5Cb_kVrW02y-mkWEDGlrUfodq6E',
-
+    googleMapsApiKey: 'AIzaSyC9pRTw-7zb847DyWLD-fUujKxvlG01s08',
     libraries,
   });
 
