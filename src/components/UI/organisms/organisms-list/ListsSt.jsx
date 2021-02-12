@@ -11,10 +11,9 @@ const PcSize = styled.main`
   min-height: calc(100vh - 80px);
   background-color: #eee;
   padding: 0 24px;
-  ul{
-    width:100%;
+  ul {
+    width: 100%;
   }
-  
 `;
 const TabletSize = styled.main`
   /* width:100%; */
@@ -32,7 +31,7 @@ const MobileSize = styled.main`
   background-color: purple;
 `;
 
-const ListStyle = ({room, totalPage, pageNationClick}) => {
+const ListStyle = ({ room, totalPage, pageNationClick }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1025px)', //1025 px 이상인 경우에만 적용(1127이상.)
   });
@@ -42,37 +41,114 @@ const ListStyle = ({room, totalPage, pageNationClick}) => {
   const isMobile = useMediaQuery({
     query: `(max-width: 677px)`, //744px 이하인 경우에만 적용(744이하.)
   });
-  console.log(room);
+
   return (
     <>
       {isPc && (
         <PcSize className="Listmain">
-          {room.map(({bathRoomNum, roomType, city, borough  ,bedNum,bedRoomNum ,cost, grade, id, name ,peopleLimit, isCheck, isParking, isSmoking, commentCount,roomImgUrlList}) => {
-          return (<Link to={`/detail/${id}`} key={id}>
-          <LodgingLists bathRoomNum={bathRoomNum} city={city} borough={borough} isCheck={isCheck} isParking={isParking} isSmoking={isSmoking} commentCount={commentCount} bedNum={bedNum} roomImgUrlList={roomImgUrlList} roomType={roomType} peopleLimit={peopleLimit} bedRoomNum={bedRoomNum} cost={cost} grade={grade} id={id} name={name} />
-          </Link>
-          )
-          }) }
-          <PageNation totalPage={totalPage} pageNationClick={pageNationClick}/>
+          {room.map(
+            ({
+              bathRoomNum,
+              roomType,
+              city,
+              borough,
+              bedNum,
+              bedRoomNum,
+              cost,
+              grade,
+              id,
+              name,
+              peopleLimit,
+              isCheck,
+              isParking,
+              isSmoking,
+              commentCount,
+              roomImgUrlList,
+            }) => {
+              return (
+                <Link to={`/detail/${id}`} key={id}>
+                  <LodgingLists
+                    bathRoomNum={bathRoomNum}
+                    city={city}
+                    borough={borough}
+                    isCheck={isCheck}
+                    isParking={isParking}
+                    isSmoking={isSmoking}
+                    commentCount={commentCount}
+                    bedNum={bedNum}
+                    roomImgUrlList={roomImgUrlList}
+                    roomType={roomType}
+                    peopleLimit={peopleLimit}
+                    bedRoomNum={bedRoomNum}
+                    cost={cost}
+                    grade={grade}
+                    id={id}
+                    name={name}
+                  />
+                </Link>
+              );
+            },
+          )}
+          <PageNation totalPage={totalPage} pageNationClick={pageNationClick} />
         </PcSize>
       )}
       {isTablet && (
         <TabletSize className="Listmain">
-           {room.map(({bathRoomNum, roomType, city, borough ,bedNum,bedRoomNum ,cost, grade, id, name ,peopleLimit, isCheck, isParking, isSmoking, commentCount,roomImgUrlList}) => {
-          return (<Link to={`/detail/${id}`} key={id}>
-          <LodgingLists bathRoomNum={bathRoomNum}  city={city} borough={borough}  isCheck={isCheck} isParking={isParking} isSmoking={isSmoking} commentCount={commentCount} bedNum={bedNum} roomImgUrlList={roomImgUrlList} roomType={roomType} peopleLimit={peopleLimit} bedRoomNum={bedRoomNum} cost={cost} grade={grade} id={id} name={name} />
-          </Link>
-          )
-          }) }
+          {room.map(
+            ({
+              bathRoomNum,
+              roomType,
+              city,
+              borough,
+              bedNum,
+              bedRoomNum,
+              cost,
+              grade,
+              id,
+              name,
+              peopleLimit,
+              isCheck,
+              isParking,
+              isSmoking,
+              commentCount,
+              roomImgUrlList,
+            }) => {
+              return (
+                <Link to={`/detail/${id}`} key={id}>
+                  <LodgingLists
+                    bathRoomNum={bathRoomNum}
+                    city={city}
+                    borough={borough}
+                    isCheck={isCheck}
+                    isParking={isParking}
+                    isSmoking={isSmoking}
+                    commentCount={commentCount}
+                    bedNum={bedNum}
+                    roomImgUrlList={roomImgUrlList}
+                    roomType={roomType}
+                    peopleLimit={peopleLimit}
+                    bedRoomNum={bedRoomNum}
+                    cost={cost}
+                    grade={grade}
+                    id={id}
+                    name={name}
+                  />
+                </Link>
+              );
+            },
+          )}
           <PageNation totalPage={totalPage} pageNationClick={pageNationClick} />
         </TabletSize>
       )}
       {isMobile && (
         <MobileSize className="Listmain">
-          <Border bigCarouselImg >
-            <Imgs carousalBigImg src="https://a0.muscache.com/im/pictures/02a7fd89-b923-4541-aff6-a6eeff4d4445.jpg?im_w=1200"/>
+          <Border bigCarouselImg>
+            <Imgs
+              carousalBigImg
+              src="https://a0.muscache.com/im/pictures/02a7fd89-b923-4541-aff6-a6eeff4d4445.jpg?im_w=1200"
+            />
           </Border>
-          <PageNation totalPage={totalPage} pageNationClick={pageNationClick}/>
+          <PageNation totalPage={totalPage} pageNationClick={pageNationClick} />
         </MobileSize>
       )}
     </>
