@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+import { AiOutlineClose } from 'react-icons/ai';
 
 const CloseBtnBlock = styled.button`
   padding: 8px 16px;
@@ -10,10 +11,38 @@ const CloseBtnBlock = styled.button`
   color: white;
   border: 0;
   cursor: pointer;
+  transition-duration: 0.2s;
+  &:active {
+    transform: scale(0.95);
+  }
+
+  ${(props) =>
+    props.carouselModal &&
+    css`
+      &:hover {
+        background-color: rgb(219, 214, 214);
+      }
+      background-color: rgb(231, 227, 227);
+      color: black;
+      svg {
+        vertical-align: middle;
+      }
+    `}
 `;
 
 const CloseBtn = (props) => {
-  return <CloseBtnBlock {...props}>닫기</CloseBtnBlock>;
+  return (
+    <CloseBtnBlock {...props}>
+      {props.carouselModal ? (
+        <>
+          <AiOutlineClose />
+          <span>닫기</span>
+        </>
+      ) : (
+        '닫기'
+      )}
+    </CloseBtnBlock>
+  );
 };
 
 export default CloseBtn;

@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-// import imgsrc1 from 'https://a0.muscache.com/im/pictures/144d8628-1123-4cd4-af93-dd81f47455cd.jpg?im_w=960';
-// import imgsrc2 from 'https://a0.muscache.com/im/pictures/9471ef27-e408-4bc6-82b3-73d76bc7c693.jpg?im_w=1200';
-// import imgsrc3 from 'https://a0.muscache.com/im/pictures/4f91a3fc-f44e-4c07-a6d5-e653a18fcb5e.jpg?im_w=1200';
+import imgsrc1 from 'https://a0.muscache.com/im/pictures/144d8628-1123-4cd4-af93-dd81f47455cd.jpg?im_w=960';
+import imgsrc2 from 'https://a0.muscache.com/im/pictures/9471ef27-e408-4bc6-82b3-73d76bc7c693.jpg?im_w=1200';
+import imgsrc3 from 'https://a0.muscache.com/im/pictures/4f91a3fc-f44e-4c07-a6d5-e653a18fcb5e.jpg?im_w=1200';
 
 const ImgContainer = styled.div`
   width: 60%;
