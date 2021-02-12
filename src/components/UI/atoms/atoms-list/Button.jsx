@@ -28,12 +28,12 @@ const sizeStyles = css`
 
     `}
 	${(props) =>
-    props.size === 'heart' &&
+    props.size === 'Pcheart' &&
     css`
 			width:28px;
 			height:28px;
 			border-radius : 50%;
-			font-size:1.5rem;
+      color:#000;
 			padding: 0;
 			margin:0;
 			background-color:none;
@@ -46,6 +46,15 @@ const sizeStyles = css`
         border-color:#222;
         transform: scale(0.92);
       }
+    `}
+	${(props) =>
+    props.size === 'Mobileheart' &&
+    css`
+			width:28px;
+			height:28px;
+			border-radius : 50%;
+			padding: 0;
+			margin:0;
     `}
     
     ${(props) =>
@@ -88,7 +97,7 @@ const StyledButton = styled.button`
 
   /* 기타 */
   & + & {
-    margin-left: 1rem;
+    margin-left: 14px;
   }
 `;
 
