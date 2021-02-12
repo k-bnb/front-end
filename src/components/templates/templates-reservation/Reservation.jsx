@@ -51,7 +51,9 @@ const Reservation = ({
   guestModal,
   manageGuestModal,
   setGuestModal,
+  comfirmModal,
   checkDateSearch,
+  guestSearch,
   checkDate,
   saveDate,
 }) => {
@@ -93,12 +95,13 @@ const Reservation = ({
             manageGuestModal={manageGuestModal}
             setGuestModal={setGuestModal}
             checkDateSearch={checkDateSearch}
+            guestSearch={guestSearch}
             checkDate={checkDate}
             saveDate={saveDate}
           />
           <ReservationRequestOrganism change={change} value={value} />
           <ReservationRefundOrganism />
-          <CommonButton reservation click={click}>
+          <CommonButton reservation click={click} comfirmModal={comfirmModal}>
             <BiCalendarCheck />
             예약하기
           </CommonButton>

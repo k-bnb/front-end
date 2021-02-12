@@ -1,5 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import Modal from '../../../../portal/Modal';
+import ComfirmModalOrganism from '../../organisms/organisms-reservation/organisms-modal/ComfirmModalOrganism';
 
 const StyledButton = styled.button`
   padding: 0;
@@ -33,11 +35,24 @@ const StyledButton = styled.button`
     `}
 `;
 
-const CommonButton = ({ click, children, ...rest }) => {
+const CommonButton = ({
+  click,
+  children,
+  comfirmModal,
+  directHome,
+  ...rest
+}) => {
   return (
-    <StyledButton onClick={click} {...rest}>
-      {children}
-    </StyledButton>
+    <>
+      <StyledButton onClick={click || directHome} {...rest}>
+        {children}
+      </StyledButton>
+      {comfirmModal && (
+        <Modal>
+          <ComfirmModalOrganism />
+        </Modal>
+      )}
+    </>
   );
 };
 

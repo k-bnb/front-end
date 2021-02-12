@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Reservation from '../components/templates/templates-reservation/Reservation';
 import { clientMessageChange, reserving } from '../modules/reserve';
-import { initialDate } from '../modules/reserve';
 import { dateInput } from '../modules/search';
 
 const ReservationContainer = () => {
   // store 에서 관리하는 state
   const dispatch = useDispatch();
+
   const token = useSelector((state) => state.auth.token);
   const {
     roomId,
@@ -17,31 +17,18 @@ const ReservationContainer = () => {
     message,
     checkDateSearch: checkDate,
   } = useSelector((state) => state.reserve);
-  const { checkDateSearch } = useSelector(({ search }) => search.searchReq);
+  const { checkDateSearch, guestSearch } = useSelector(
+    ({ search }) => search.searchReq,
+  );
 
   const { startDate: checkIn, endDate: checkOut } = checkDateSearch;
 
   const { startDate, endDate } = checkDate;
 
-  // const [visible, setVisible] = useState({
-  //   state: false,
-  //   type: null,
-  // }); // type에 따라 modal이 열리는 상태
-
-  // const showModal = (type) => {
-  //   setVisible({ ...visible, state: true, type });
-  // };
-
-  // const hiddleModal = ({ target }) => {
-  //   if (target.dataset.name) {
-  //     setVisible({ ...visible, state: false });
-  //   }
-  // };
-
-  // console.log(visible);
-
+  //  리펙토링시 객체로 묶기
   const [dateModal, setDateModal] = useState(false);
   const [guestModal, setGuestModal] = useState(false);
+  const [comfirmModal, setComfirmModal] = useState(false);
 
   const manageDateModal = () => {
     setDateModal(!dateModal);
@@ -60,6 +47,7 @@ const ReservationContainer = () => {
 
   // 확인 button 클릭해서 예약하기 event function
   const click = () => {
+    setComfirmModal(true);
     dispatch(
       reserving(
         roomId,
@@ -94,7 +82,9 @@ const ReservationContainer = () => {
       guestModal={guestModal}
       manageGuestModal={manageGuestModal}
       setGuestModal={setGuestModal}
+      comfirmModal={comfirmModal}
       checkDateSearch={checkDateSearch}
+      guestSearch={guestSearch}
       checkDate={checkDate}
       saveDate={saveDate}
     />

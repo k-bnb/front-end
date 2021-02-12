@@ -10,20 +10,31 @@ const ReservationInfoOrganism = ({
   manageGuestModal,
   setGuestModal,
   checkDateSearch,
+  guestSearch,
   checkDate,
   saveDate,
 }) => {
+  // 예약하기 페이지 날짜 정보 가져오기
   const { startDate, endDate } = checkDateSearch;
 
-  //  dateChildren.title
+  // 예약하기 페이지 게스터 정보 가져오기
+  const { numOfAdult, numOfKid, numOfInfant } = guestSearch;
+
+  console.log();
+
   const dateChildren = {
     title: '날짜',
     content: `${startDate}-${endDate}`,
   };
 
+  //  게스트 수
+  const totalGuestNum = numOfAdult + numOfKid + numOfInfant;
+  const guestNum = `게스트 ${totalGuestNum - numOfInfant}명`;
+  const infantNum = numOfInfant ? `, 유아 ${numOfInfant}명` : '';
+
   const guistChildren = {
     title: '게스트',
-    content: '게스트 3명',
+    content: guestNum + infantNum,
   };
 
   return (

@@ -77,7 +77,7 @@ const StyledCommonButton = styled.button`
       }
     `}
 
-    ${(props) =>
+  ${(props) =>
     props.guestSave &&
     css`
       padding: 14px 24px;
@@ -93,7 +93,7 @@ const StyledCommonButton = styled.button`
       }
     `}
 
-    ${(props) =>
+  ${(props) =>
     props.dateDelete &&
     css`
       padding: 8px;
@@ -108,6 +108,7 @@ const StyledCommonButton = styled.button`
         background: rgb(243, 243, 243);
       }
     `}
+
 
     ${(props) =>
     props.guestDelete &&
