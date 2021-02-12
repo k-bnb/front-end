@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
 
 const AverageGrade = styled.div`
@@ -10,6 +10,13 @@ const AverageGrade = styled.div`
   font-size: 18px;
   color: #222222;
   cursor: pointer;
+
+  ${(props) =>
+    props.small &&
+    css`
+      font-weight: 600;
+      font-size: 10px;
+    `}
 `;
 
 const ScoreStar = styled(AiFillStar)`
@@ -19,9 +26,9 @@ const ScoreStar = styled(AiFillStar)`
   /* margin-top: 3px; */
 `;
 
-const Grade = ({ grade }) => (
+const Grade = ({ grade, small }) => (
   <>
-    <AverageGrade>
+    <AverageGrade small={small} className="grade">
       {' '}
       <ScoreStar /> score{grade}
     </AverageGrade>

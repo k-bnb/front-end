@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import GuestNumberModalUnit from '../../UI/molecules/molecules-header/GuestNumberModalUnit';
 import { useClickOutside } from '../../../lib/useClickOutside';
@@ -23,10 +23,30 @@ const StyledGuestModal = styled.div`
     css`
       top: 180px;
     `}
+
+  ${(props) =>
+    props.detailPage &&
+    css`
+      width: 100%;
+      min-width: 320px;
+      top: 55px;
+      right: 0;
+      border-radius: 5px;
+      box-shadow: none;
+    `}
 `;
 
-const GuestNumberModal = ({ SearchTypeHandler, setNavModalState }) => {
+const GuestNumberModal = ({
+  SearchTypeHandler,
+  setNavModalState,
+  detailPage,
+  setIsOpen,
+}) => {
   let guestRef = useClickOutside(() => {
+    if (detailPage) {
+      setIsOpen(false);
+      return;
+    }
     setNavModalState({
       location: false,
       checkIn: false,
@@ -36,19 +56,30 @@ const GuestNumberModal = ({ SearchTypeHandler, setNavModalState }) => {
   });
 
   return (
-    <StyledGuestModal className="guest-modal" ref={guestRef}>
+    <StyledGuestModal
+      className="guest-modal"
+      ref={guestRef}
+      detailPage={detailPage}
+    >
       <GuestNumberModalUnit
         type={'성인'}
-        detail={'만 13세 이상'}
+        decription={'만 13세 이상'}
         name="numOfAdult"
+        detailPage={detailPage}
       />
 
-      <GuestNumberModalUnit type={'어린이'} detail={'2~12세'} name="numOfKid" />
+      <GuestNumberModalUnit
+        type={'어린이'}
+        decription={'2~12세'}
+        name="numOfKid"
+        detailPage={detailPage}
+      />
 
       <GuestNumberModalUnit
         type={'유아'}
-        detail={'2세 미만'}
+        decription={'2세 미만'}
         name="numOfInfant"
+        detailPage={detailPage}
       />
     </StyledGuestModal>
   );

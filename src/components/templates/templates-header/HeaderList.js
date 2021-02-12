@@ -1,97 +1,96 @@
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import Logo from '../../UI/atoms/atoms-header/Logo';
-import ProfileButton from '../../UI/atoms/atoms-header/ProfileButton';
-import Text from '../../UI/atoms/atoms-header/Text';
-import SearchNavbarList from '../../UI/organisms/organisms-header/SearchNavbarList';
+import HeaderListTop from '../../UI/organisms/organisms-header/HeaderListTop';
+import HeaderListSearchNav from '../../UI/organisms/organisms-header/HeaderListSearchNav';
+import HeaderListSearchNavContainer from '../../../containers/header-containers/HeaderListSearchNavContainer';
+import { useClickOutside } from '../../../lib/useClickOutside';
 
-const HeaderListBlock = styled.header`
-  text-align: center;
-  padding: 0;
+const BlackOutsideRange = styled.div`
+  ${(props) =>
+    !props.isClickedOutside &&
+    css`
+      .black-outside-boundary {
+        position: fixed;
+        color: red;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+    `}
+`;
+
+const HeaderListBlock = styled.div`
+  position: fixed;
   width: 100%;
   height: 80px;
   background-color: #fff;
   position: fixed;
-  transition-duration: 0.3s;
-  z-index:100;
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
+  background-color: white;
+  transition: 0.1s ease;
+  z-index: 9999;
+  box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.1);
 
-  h1 {
-    position: absolute;
-    top: 50%;
-    left: 3%;
-    transform: translateY(-50%);
-    margin: 0;
-  }
-  & > button {
-    position: absolute;
-    top: 50%;
-    right: 3%;
-    transform: translateY(-50%);
-    margin: 0;
-  }
-  & > nav {
-    position: absolute;
-    height: 48px;
-    top: -5%;
-    left: 50%;
-    transform: translateX(-50%);
-    button {
-      width: 32px;
-      height: 32px;
-      font-size: 12px;
-      position: absolute;
-      right: 2%;
-    }
-  }
-`;
-const StyledText = styled(Text)`
-  display: inline-block;
-  padding: 5px 10px;
-  &:first-child {
-    margin-left: 10px;
-  }
-  & + & {
-    border-left: 1px solid lightgray;
-  }
   ${(props) =>
-    props.wide &&
+    props.isClicked &&
+    props.isScrolled &&
     css`
-      width: 135px;
+      background-color: white;
+      height: 180px;
     `}
 `;
 
-const HeaderList = () => {
-  const [scroll, setScroll] = useState(false);
-
-  const scrollFunc = () => {
-    console.log(window.scrollY);
-    if (window.scrollY >= 80) {
-      setScroll(true);
-    } else {
-      setScroll(false);
+const HeaderList = ({
+  isScrolled,
+  setIsScrolled,
+  isClicked,
+  setIsClicked,
+  navModalState,
+  setNavModalState,
+  initialNavModalState,
+  isClickedOutside,
+  setIsClickedOutside,
+}) => {
+  const blackOutsideRef = useClickOutside(() => {
+    if (isClicked && isScrolled && !isClickedOutside) {
+      setIsClickedOutside(true);
+      setIsClicked(false);
     }
-  };
-
-  useEffect(() => {
-    window.addEventListener('scroll', scrollFunc);
-    return () => {
-      window.removeEventListener('scroll', scrollFunc);
-    };
-  }, []);
-
-  const StyledSearchNavbarList = styled(SearchNavbarList)``;
+  });
 
   return (
-    <HeaderListBlock isScrolled={scroll}>
-      <Logo />
-      <ProfileButton />
-      <StyledSearchNavbarList>
-        <StyledText bold>근처 추천 장소</StyledText>
-        <StyledText bold>날짜 입력</StyledText>
-        <StyledText wide>게스트 추가</StyledText>
-      </StyledSearchNavbarList>
-    </HeaderListBlock>
+    <>
+      {isScrolled && isClicked && (
+        <BlackOutsideRange ref={blackOutsideRef}>
+          <div className="black-outside-boundary">hi</div>
+        </BlackOutsideRange>
+      )}
+      <HeaderListBlock
+        isClicked={isClicked}
+        isScrolled={isScrolled}
+        isClickedOutside={isClickedOutside}
+      >
+        <HeaderListTop
+          isScrolled={isScrolled}
+          isClicked={isClicked}
+          isClickedOutside={isClickedOutside}
+        >
+          MainTop
+        </HeaderListTop>
+        <HeaderListSearchNavContainer
+          isScrolled={isScrolled}
+          isClicked={isClicked}
+          isClickedOutside={isClickedOutside}
+          setIsClicked={setIsClicked}
+          navModalState={navModalState}
+          setNavModalState={setNavModalState}
+          initialNavModalState={initialNavModalState}
+        />
+      </HeaderListBlock>
+    </>
   );
 };
 

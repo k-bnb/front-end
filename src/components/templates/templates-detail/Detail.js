@@ -24,7 +24,6 @@ const DetailContainer = styled.div`
 const Detail = () => {
   return (
     <>
-      <HeaderDetail />
       <DetailContainer theme={theme}>
         <PageTitle />
         <ImageFrame />

@@ -6,16 +6,15 @@ import SearchNavDatesUnit from '../../molecules/molecules-header/SearchNavDatesU
 import SearchNavGuestUnit from '../../molecules/molecules-header/SearchNavGuestUnit';
 import SearchNavLocationUnit from '../../molecules/molecules-header/SearchNavLocationUnit';
 
-const HeaderMainSearchNavBlock = styled.div`
+const HeaderDetailSearchNavBlock = styled.div`
   height: 66px;
   width: 100%;
   max-width: 850px;
   margin: 0 auto;
   border-radius: 30px;
-  background-color: white;
   transition: 0.2s ease;
   white-space: nowrap;
-  z-index: -1;
+  z-index: 9999;
   ul {
     height: 100%;
     margin: 0;
@@ -23,11 +22,8 @@ const HeaderMainSearchNavBlock = styled.div`
     display: flex;
     list-style: none;
   }
-  li {
-    /* border-right: 1px solid black; */
-  }
+
   ${(props) =>
-    props.isScrolled &&
     !props.isClicked &&
     css`
       padding: 8px 8px 14px 15px;
@@ -50,10 +46,10 @@ const HeaderMainSearchNavBlock = styled.div`
         margin-left: 10px;
       }
     `}
-  /* scroll 된 상태에서 nav bar 클릭하는 경우 */
+
+  /* nav bar 클릭하는 경우 */
   ${(props) =>
     props.isClicked &&
-    props.isScrolled &&
     css`
       height: 66px;
       width: 100%;
@@ -63,6 +59,7 @@ const HeaderMainSearchNavBlock = styled.div`
       background-color: white;
       transition: 0.2s ease;
       border: 1px solid lightgray;
+      transform: translateY(-100px);
 
       ul {
         height: 100%;
@@ -74,7 +71,7 @@ const HeaderMainSearchNavBlock = styled.div`
     `}
 `;
 
-const HeaderMainSearchNav = ({
+const HeaderDetailSearchNav = ({
   isScrolled,
   isClicked,
   navModalState,
@@ -84,12 +81,20 @@ const HeaderMainSearchNav = ({
 }) => {
   return (
     <>
-      <HeaderMainSearchNavBlock
+      <HeaderDetailSearchNavBlock
         isScrolled={isScrolled}
         isClicked={isClicked}
         onClick={clickHandler}
       >
-        {(!isScrolled || isClicked) && (
+        {!isClicked && (
+          <div className="isScrolled">
+            <Text bold noPadding>
+              검색 시작하기
+            </Text>
+            <SearchButton isScrolled={true} />
+          </div>
+        )}
+        {isClicked && (
           <ul>
             <SearchNavLocationUnit
               SearchTypeHandler={SearchTypeHandler}
@@ -108,17 +113,9 @@ const HeaderMainSearchNav = ({
             />
           </ul>
         )}
-        {isScrolled && !isClicked && (
-          <div className="isScrolled">
-            <Text bold noPadding>
-              검색 시작하기
-            </Text>
-            <SearchButton isScrolled={isScrolled} />
-          </div>
-        )}
-      </HeaderMainSearchNavBlock>
+      </HeaderDetailSearchNavBlock>
     </>
   );
 };
 
-export default HeaderMainSearchNav;
+export default HeaderDetailSearchNav;

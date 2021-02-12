@@ -22,7 +22,7 @@ const ListTemplate = ({
   costState,
   room,
   totalPage,
-  pageNationClick
+  pageNationClick,
 }) => {
   return (
     <div>
@@ -44,9 +44,13 @@ const ListTemplate = ({
         searchBtn={searchBtn}
         costState={costState}
       />
-      <div style={{display:'flex'}}>
+      <div style={{ display: 'flex' }}>
         <div style={{ display: 'block' }}>
-          <ListStyle room={room} totalPage={totalPage} pageNationClick={pageNationClick}/>
+          <ListStyle
+            room={room}
+            totalPage={totalPage}
+            pageNationClick={pageNationClick}
+          />
         </div>
         <GoogleStyle style={{ flexShrink: '1' }} />
       </div>

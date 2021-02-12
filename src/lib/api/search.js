@@ -1,5 +1,4 @@
 import client from './client';
-
 // 검색
 export const search = ({
   id,
