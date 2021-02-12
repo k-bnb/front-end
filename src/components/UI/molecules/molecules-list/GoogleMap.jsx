@@ -98,7 +98,50 @@ function GoogleMapUse({ roomMap }) {
       lng: 0,
     },
   });
-  console.log(locationSearch.latitude);
+
+  const samples = [
+    {
+      id: 1,
+      latitude: 37.5047592,
+      longitude: 127.0415586,
+      cost: '$98,765',
+      NAME: 'jinsol',
+      DESCRIPTION: 'examples-1',
+    },
+    {
+      id: 2,
+      latitude: 36.806702,
+      longitude: 126.979874,
+      cost: '$135,246',
+      NAME: 'yongmin',
+      DESCRIPTION: 'examples-2',
+    },
+    {
+      id: 3,
+      latitude: 37.894917,
+      longitude: 127.200356,
+      cost: '$12,345',
+      NAME: 'jihun',
+      DESCRIPTION: 'examples-3',
+    },
+    {
+      id: 4,
+      latitude: 36.351002,
+      longitude: 127.385002,
+      cost: '$12,345',
+      NAME: 'myungjae',
+      DESCRIPTION: 'examples-4',
+    },
+    {
+      id: 5,
+      latitude: 37.34222,
+      longitude: 127.920158,
+      cost: '$12,345',
+      NAME: 'youna',
+      DESCRIPTION: 'examples-5',
+    },
+  ];
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {

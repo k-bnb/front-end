@@ -14,6 +14,7 @@ const PcSize = styled.main`
   min-width: calc(100vw - 840px);
 
   height: 100vh;
+  z-index: -1;
   /* cursor: url('https://maps.gstatic.com/mapfiles/openhand_8_8.cur'), default; */
   /* background-color: lightcoral; */
 `;

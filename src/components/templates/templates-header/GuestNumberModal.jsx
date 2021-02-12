@@ -63,21 +63,21 @@ const GuestNumberModal = ({
     >
       <GuestNumberModalUnit
         type={'성인'}
-        detail={'만 13세 이상'}
+        decription={'만 13세 이상'}
         name="numOfAdult"
         detailPage={detailPage}
       />
 
       <GuestNumberModalUnit
         type={'어린이'}
-        detail={'2~12세'}
+        decription={'2~12세'}
         name="numOfKid"
         detailPage={detailPage}
       />
 
       <GuestNumberModalUnit
         type={'유아'}
-        detail={'2세 미만'}
+        decription={'2세 미만'}
         name="numOfInfant"
         detailPage={detailPage}
       />

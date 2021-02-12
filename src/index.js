@@ -11,7 +11,6 @@ import createSagaMiddleware from 'redux-saga';
 import { rootSaga } from './modules/index';
 
 const sagaMiddleware = createSagaMiddleware();
-console.log('거쳤다.');
 
 const store = createStore(
   rootReducer,
