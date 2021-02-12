@@ -13,7 +13,7 @@ function App() {
       <Switch>
         <Route path="/personInfo" component={PersonalInfoPage} />
         <Route path="/reserve" component={ReservationPage} />
-        <Route path="/detail/" component={DetailPage} />
+        <Route path="/detail" component={DetailPage} />
         <Route path="/rooms" component={ListPage} />
         <Route path="/redirect" exact component={AuthRedirect} />
         <Route path="/" exact component={MainPage} />

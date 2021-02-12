@@ -2,16 +2,83 @@ import React, { useEffect, useState } from 'react';
 import { DayPickerRangeController } from 'react-dates';
 import moment from 'moment';
 import 'react-dates/initialize';
-import './DetailCalendarTemplate.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { dateInput } from '../modules/search';
 import styled from 'styled-components';
-import DatePersonBox from '../components/UI/molecules/molecules-detail/DatePersonBox';
-import { useClickOutside } from '../lib/useClickOutside';
 import Text from '../components/UI/atoms/atoms-header/Text';
 import CloseBtn from '../components/UI/atoms/atoms-detail/CloseBtn';
 import { dateChangeDetail } from '../modules/detail';
 import { start } from 'pretty-error';
+
+const CalendarDetailBlock = styled.div`
+  /* 달력 날짜하나하나 */
+  .CalendarDay {
+    border: 0 !important;
+    /* background-color: beige !important; */
+  }
+
+  /* 날짜에 호버햇을때 회색 원 표시 */
+  .CalendarDay.CalendarDay__default.CalendarDay__default_2:hover {
+    background-color: lightgray;
+    border-radius: 50% !important;
+  }
+
+  .DayPicker_weekHeader_li {
+    border: 0 !important;
+  }
+  .CalendarDay__selected_span {
+    background: rgb(247, 247, 247) !important;
+    color: rgb(34, 34, 34) !important;
+    border: 0 !important;
+  }
+
+  /* // Will edit selected date or the endpoints of a range of dates */
+  .CalendarDay__selected {
+    background: rgb(34, 34, 34) !important;
+    color: white;
+    border-radius: 50%;
+    border: 0 !important;
+    font-size: 12px;
+  }
+
+  .CalendarDay__hovered_span:hover,
+  .CalendarDay__hovered_span {
+    background: transparent !important;
+    color: rgb(34, 34, 34) !important;
+  }
+
+  /* 모달 내부의 화살표 테두리 없애는 속성 */
+  .DayPickerNavigation_button {
+    border: 0 !important;
+  }
+
+  /* 달력 포함하고있는 전체 모달의 속성 */
+  /* 모달의 전체 컨테이너 */
+  .CalendarMonthGrid {
+    width: 100% !important;
+    height: 400px !important;
+    border-radius: 0 !important;
+  }
+
+  .DayPicker__withBorder {
+    border: 0 !important;
+    z-index: 0;
+    background-color: transparent;
+    position: absolute !important;
+    top: 0;
+    right: 0;
+  }
+
+  .DayPicker {
+    position: absolute !important;
+    width: fit-content !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    transform: translate(0px, 0px);
+    z-index: -1;
+    padding: 85px 18px;
+  }
+`;
 
 const CheckInAndOut = styled.div`
   position: relative;
@@ -39,7 +106,7 @@ export const CheckTxt = styled.div`
 
 const CheckDate = styled.div`
   height: 56px;
-  width: 40%;
+  width: 50%;
   position: absolute;
   display: flex;
   justify-content: flex-start;
@@ -157,7 +224,7 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
     }
   }, [dateRange]);
   return (
-    <>
+    <CalendarDetailBlock>
       <CalendarBlock>
         <div className="add-date-container">
           <Text bigger bold className="add-date">
@@ -207,7 +274,7 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
         />
         <CloseBtn className="close-btn" />
       </CalendarBlock>
-    </>
+    </CalendarDetailBlock>
   );
 }
 

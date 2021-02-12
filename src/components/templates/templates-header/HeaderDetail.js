@@ -1,69 +1,70 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import Logo from '../../UI/atoms/atoms-header/Logo';
-import ProfileButton from '../../UI/atoms/atoms-header/ProfileButton';
-import SearchNavbarDetail from '../../UI/organisms/organisms-header/SearchNavbarDetail';
+import HeaderDetailTop from '../../UI/organisms/organisms-header/HeaderDetailTop';
+import HeaderDetailSearchNavContainer from '../../../containers/header-containers/HeaderDetailSearchNavContainer';
+import { useClickOutside } from '../../../lib/useClickOutside';
+import HeaderDetailScrolled from '../../UI/organisms/organisms-header/HeaderDetailScrolled';
+import HeaderDetailScrolledContainer from '../../../containers/header-containers/HeaderDetailScrolledContainer';
 
-const HeaderDetailBlock = styled.header`
-  text-align: center;
-  padding: 0;
-  background: pink;
+const HeaderDetailBlock = styled.div`
+  position: absolute;
   width: 100%;
   height: 80px;
-  position: fixed;
-  transition-duration: 0.3s;
-  z-index: 1000;
-
-  h1 {
-    position: absolute;
-    top: 50%;
-    left: 3%;
-    transform: translateY(-50%);
-    margin: 0;
-  }
-  & > button {
-    position: absolute;
-    top: 50%;
-    right: 3%;
-    transform: translateY(-50%);
-    margin: 0;
-  }
-  & > nav {
-    position: absolute;
-    height: 48px;
-    top: -5%;
-    left: 50%;
-    transform: translateX(-50%);
-    button {
-      width: 32px;
-      height: 32px;
-      font-size: 12px;
-      position: absolute;
-      right: 2%;
-    }
-  }
+  background-color: transparent;
+  transition: 0.1s ease-out;
+  z-index: 101;
+  background-color: white;
 `;
 
-const HeaderDetail = () => {
-  const [scroll, setScroll] = useState(false);
-
-  useEffect(() => {
-    window.onscroll = () => {
-      console.log(window.scrollY);
-      if (window.scrollY >= 80) {
-        setScroll(true);
-      } else {
-        setScroll(false);
-      }
-    };
-  }, []);
-
+const HeaderDetail = ({
+  isScrolled,
+  setIsScrolled,
+  isClicked,
+  setIsClicked,
+  navModalState,
+  setNavModalState,
+  initialNavModalState,
+  isClickedOutside,
+  setIsClickedOutside,
+  isScrolledDetail,
+  setIsScrolledDetail,
+}) => {
+  const blackOutsideRef = useClickOutside(() => {
+    if (isClicked && isScrolled && !isClickedOutside) {
+      setIsClickedOutside(true);
+      setIsClicked(false);
+    }
+  });
   return (
-    <HeaderDetailBlock isScrolled={scroll}>
-      <Logo />
-      <ProfileButton />
-      <SearchNavbarDetail>검색 시작하기</SearchNavbarDetail>
-    </HeaderDetailBlock>
+    <>
+      {!isScrolledDetail && (
+        <HeaderDetailBlock
+          isClicked={isClicked}
+          isScrolled={isScrolled}
+          isClickedOutside={isClickedOutside}
+          detailHeader={true}
+        >
+          <HeaderDetailTop
+            isScrolled={isScrolled}
+            isClicked={isClicked}
+            isClickedOutside={isClickedOutside}
+            detailHeader={true}
+          >
+            MainTop
+          </HeaderDetailTop>
+          <HeaderDetailSearchNavContainer
+            isScrolled={isScrolled}
+            isClicked={isClicked}
+            isClickedOutside={isClickedOutside}
+            setIsClicked={setIsClicked}
+            navModalState={navModalState}
+            setNavModalState={setNavModalState}
+            initialNavModalState={initialNavModalState}
+          />
+        </HeaderDetailBlock>
+      )}
+      {isScrolledDetail && <HeaderDetailScrolledContainer />}
+    </>
   );
 };
 

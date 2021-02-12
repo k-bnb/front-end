@@ -25,11 +25,10 @@ const BlackOutsideRange = styled.div`
 
 const HeaderMainBlock = styled.div`
   position: fixed;
-  /* z-index: ; */
   width: 100%;
   height: 80px;
   background-color: transparent;
-  transition: 0.1s ease;
+  transition: 0.1s ease-out;
 
   ${(props) =>
     props.isClicked &&
