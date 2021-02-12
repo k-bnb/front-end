@@ -6,13 +6,15 @@ const PcSize = styled.main`
   display: block;
   margin-top: -80px;
   padding-top: 80px;
+  top: 0;
   position: sticky;
-  right: 0;
+
   /* top: 0; */
-  width : 100%;
+  width: 100%;
   min-width: calc(100vw - 840px);
+
   height: 100vh;
-  z-index: -1;
+  z-index: 100;
   /* cursor: url('https://maps.gstatic.com/mapfiles/openhand_8_8.cur'), default; */
   /* background-color: lightcoral; */
 `;
@@ -27,7 +29,18 @@ const MobileSize = styled.main`
   display: none;
 `;
 
-const GoogleStyle = () => {
+const GoogleStyle = ({
+  roomMap,
+  locationSearch,
+  room,
+  checkDateSearch,
+  guestSearch,
+  costSearch,
+  roomType,
+  bedNum,
+  bedRoomNum,
+  bathRoomNum,
+}) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1025px)', //1128px 이상인 경우에만 적용
   });
@@ -42,18 +55,25 @@ const GoogleStyle = () => {
     <>
       {isPc && (
         <PcSize className="Asidemap">
-          <GoogleMapUse />
+          <GoogleMapUse
+            room={room}
+            roomMap={roomMap}
+            locationSearch={locationSearch}
+            checkDateSearch={checkDateSearch}
+            guestSearch={guestSearch}
+            costSearch={costSearch}
+            roomType={roomType}
+            bedNum={bedNum}
+            bedRoomNum={bedRoomNum}
+            bathRoomNum={bathRoomNum}
+          />
         </PcSize>
       )}
       {isTablet && (
-        <TabletSize className="Asidemap">
-          {/* <GoogleMapUse /> */}
-        </TabletSize>
+        <TabletSize className="Asidemap">{/* <GoogleMapUse /> */}</TabletSize>
       )}
       {isMobile && (
-        <MobileSize className="Asidemap">
-          {/* <GoogleMapUse /> */}
-        </MobileSize>
+        <MobileSize className="Asidemap">{/* <GoogleMapUse /> */}</MobileSize>
       )}
     </>
   );

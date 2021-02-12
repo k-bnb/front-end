@@ -20,7 +20,6 @@ const InputStyle = styled.input`
 `;
 
 const Input = React.forwardRef(({ type, placeholder, ...rest }, ref) => {
-  console.log(type, placeholder);
   return (
     <InputStyle type={type} ref={ref} placeholder={placeholder} {...rest} />
   );
