@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 
 const CarouselBlock = styled.div`
-  position: relative;
-  margin-top: 50px;
+  /* position: relative; */
+  margin-top: 40px;
 
   .detail-carousel-prev-btn,
   .detail-carousel-next-btn {
@@ -17,23 +17,31 @@ const CarouselBlock = styled.div`
     border: 1px solid gray;
     transform: translateY(-50%);
     z-index: 1;
+    transition-duration: 0.3s;
     cursor: pointer;
-    svg {
-      font-size: 18px;
-    }
-
     &:disabled {
       display: none;
     }
     &:hover {
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: rgba(168, 160, 160, 0.3);
+    }
+    &:active {
+      transform: translateY(-50%) scale(0.92);
+      background-color: rgba(168, 160, 160, 0.3);
+      outline: none;
+    }
+    &:focus {
+      outline: none;
+    }
+    svg {
+      font-size: 18px;
     }
   }
   .detail-carousel-prev-btn {
-    left: 0;
+    left: 20px;
   }
   .detail-carousel-next-btn {
-    right: 0;
+    right: 20px;
   }
 `;
 
@@ -53,7 +61,7 @@ const CarouselPhotoUl = styled.ul`
   }
   .active-li {
     opacity: 1;
-    transition-duration: 0.4s;
+    transition-duration: 0.5s;
   }
   .non-active-li {
     opacity: 0;
@@ -61,8 +69,8 @@ const CarouselPhotoUl = styled.ul`
 
   img {
     vertical-align: middle; // 이미지 아래의 빈공간 없애기.
-    width: 1000px;
-    height: 600px;
+    width: 70vw;
+    height: 80vh;
     object-fit: contain;
   }
 `;

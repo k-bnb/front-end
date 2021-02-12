@@ -9,18 +9,10 @@ const HeadermainSearchNavContainer = ({
   navModalState,
   setNavModalState,
   initialNavModalState,
+  SearchTypeHandler,
+  moveFocusNext,
+  clickHandler,
 }) => {
-  // 어떤것을 선택했는가 상태를 바꿔주는 함수
-  const SearchTypeHandler = (searchType) => {
-    setNavModalState({ ...initialNavModalState, [searchType]: true }); // 전달받은 타입값만 true로 설정.
-  };
-
-  // 클릭하면 nav bar가 다시 커지게 해주는 함수.
-  const clickHandler = () => {
-    // click하면 nav bar가 다시 커지도록 상태 바꿔주는 함수.
-    setIsClicked(true);
-  };
-
   return (
     <HeaderMainSearchNav
       isScrolled={isScrolled}
@@ -31,6 +23,7 @@ const HeadermainSearchNavContainer = ({
       clickHandler={clickHandler}
       SearchTypeHandler={SearchTypeHandler}
       initialNavModalState={initialNavModalState}
+      moveFocusNext={moveFocusNext}
     />
   );
 };

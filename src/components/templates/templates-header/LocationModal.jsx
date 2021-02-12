@@ -56,6 +56,7 @@ const LocationModal = ({
   isClicked,
   setNavModalState,
   dispatch,
+  moveFocusNext,
 }) => {
   let locationRef = useClickOutside(() => {
     console.log('locartion start');
@@ -115,6 +116,7 @@ const LocationModal = ({
             longitudeMin: position.coords.longitude - 0.08,
           }),
         );
+        moveFocusNext('location');
         console.log(locationSearch);
       }, // 성공시 콜백함수
       (e) => {

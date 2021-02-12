@@ -4,7 +4,6 @@ import CloseBtn from '../../UI/atoms/atoms-detail/CloseBtn';
 import Text from '../../UI/atoms/atoms-header/Text';
 import { FiShare } from 'react-icons/fi';
 import { BsHeart } from 'react-icons/bs';
-import Carousel from '../../UI/molecules/molecules-main/Carousel';
 import SeeAllPhotosCarousel from '../../UI/organisms/organisms-detail/SeeAllPhotosCarousel';
 
 const slideDown = keyframes`

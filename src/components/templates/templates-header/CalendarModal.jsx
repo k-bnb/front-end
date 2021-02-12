@@ -14,16 +14,16 @@ const StyledCalModal = styled.div`
   width: 100vw;
 `;
 
-const CalendarModal = ({
-  SearchTypeHandler,
-  navModalState,
-  setNavModalState,
-  initialNavModalState,
-}) => {
+const CalendarModal = ({ navModalState, setNavModalState, moveFocusNext }) => {
   const [selected, setSelected] = useState(false);
   console.log('상태', navModalState);
 
-  return <CalendarNew setNavModalState={setNavModalState} />;
+  return (
+    <CalendarNew
+      setNavModalState={setNavModalState}
+      moveFocusNext={moveFocusNext}
+    />
+  );
 };
 
 export default CalendarModal;

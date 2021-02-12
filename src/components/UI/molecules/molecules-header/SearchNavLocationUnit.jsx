@@ -32,6 +32,7 @@ const SearchNavLocationUnit = ({
   navModalState,
   SearchTypeHandler,
   setNavModalState,
+  moveFocusNext,
 }) => {
   const dispatch = useDispatch();
   const locationSearch = useSelector(
@@ -47,6 +48,7 @@ const SearchNavLocationUnit = ({
         SearchTypeHandler={SearchTypeHandler}
         locationSearch={locationSearch}
         destinationName={destinationName}
+        moveFocusNext={moveFocusNext}
       />
       {!!destinationName && navModalState.location && (
         <RemoveButton
@@ -62,6 +64,7 @@ const SearchNavLocationUnit = ({
           dispatch={dispatch}
           SearchTypeHandler={SearchTypeHandler}
           setNavModalState={setNavModalState}
+          moveFocusNext={moveFocusNext}
         />
       )}
     </SearchNavLocationUnitLi>
