@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import HeaderMain from '../../components/templates/templates-header/HeaderMain';
 import HeaderList from '../../components/templates/templates-header/HeaderList';
 import HeaderDetail from '../../components/templates/templates-header/HeaderDetail';
 import { useSelector } from 'react-redux';
+import qs from 'query-string';
 
 const HeaderContainer = (props) => {
   const history = useHistory();
+  const match = useRouteMatch();
+  console.log(match);
+  console.log(qs);
   // 어떤것을 선택했는가 상태를 바꿔주는 함수
   const { locationSearch, checkDateSearch, guestSearch } = useSelector(
     (state) => state.search.searchReq,
@@ -52,12 +56,9 @@ const HeaderContainer = (props) => {
       setIsClicked(false);
 
       // detail 페이지 일 경우에만 실행되는 조건문, 513 <= scroll <= 1127 -> resToFixed만 true
-      if (history.location.pathname === '/detail' && window.scrollY >= 513) {
+      if (match.params.roomId && window.scrollY >= 513) {
         setIsScrolledDetail(true);
-      } else if (
-        history.location.pathname === '/detail' &&
-        window.scrollY < 513
-      ) {
+      } else if (match.params.roomId && window.scrollY < 513) {
         setIsScrolledDetail(false);
       }
 
@@ -119,7 +120,7 @@ const HeaderContainer = (props) => {
           clickHandler={clickHandler}
         />
       )}
-      {history.location.pathname === '/detail' && (
+      {match.params.roomId && (
         <HeaderDetail
           isScrolled={isScrolled}
           setIsScrolled={setIsScrolled}
