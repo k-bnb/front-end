@@ -14,7 +14,7 @@ const PcSize = styled.main`
   min-width: calc(100vw - 840px);
 
   height: 100vh;
-  z-index: -1;
+  z-index: 100;
   /* cursor: url('https://maps.gstatic.com/mapfiles/openhand_8_8.cur'), default; */
   /* background-color: lightcoral; */
 `;
@@ -29,7 +29,18 @@ const MobileSize = styled.main`
   display: none;
 `;
 
-const GoogleStyle = ({ roomMap, locationSearch, room }) => {
+const GoogleStyle = ({
+  roomMap,
+  locationSearch,
+  room,
+  checkDateSearch,
+  guestSearch,
+  costSearch,
+  roomType,
+  bedNum,
+  bedRoomNum,
+  bathRoomNum,
+}) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1025px)', //1128px 이상인 경우에만 적용
   });
@@ -48,6 +59,13 @@ const GoogleStyle = ({ roomMap, locationSearch, room }) => {
             room={room}
             roomMap={roomMap}
             locationSearch={locationSearch}
+            checkDateSearch={checkDateSearch}
+            guestSearch={guestSearch}
+            costSearch={costSearch}
+            roomType={roomType}
+            bedNum={bedNum}
+            bedRoomNum={bedRoomNum}
+            bathRoomNum={bathRoomNum}
           />
         </PcSize>
       )}

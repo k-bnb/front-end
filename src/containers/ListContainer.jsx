@@ -41,7 +41,7 @@ const ListContainer = () => {
   //진솔.
   const room = useSelector((state) => state.search.searchRes);
   const totalPage = useSelector((state) => state.search.totalPage);
-
+  console.log(room);
   const roomMap = room.map((item) => {
     return {
       id: item.id,
@@ -156,6 +156,8 @@ const ListContainer = () => {
         pageNationClick={pageNationClick}
         roomMap={roomMap}
         locationSearch={locationSearch}
+        checkDateSearch={checkDateSearch}
+        guestSearch={guestSearch}
       />
     </>
   );

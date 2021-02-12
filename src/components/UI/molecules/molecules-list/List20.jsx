@@ -29,6 +29,8 @@ const ULWrap = styled.ul`
     /* width: 792px; */
     position: relative;
     width: 100%;
+    min-width: 500px;
+    /* max-width: 90px; */
     height: 266px;
     padding: 24px 8px;
     box-sizing: border-box;
@@ -37,10 +39,24 @@ const ULWrap = styled.ul`
     justify-content: space-between;
     border-bottom: 1px solid #000;
     align-items: center;
+
     :nth-child(1) {
       border-top: 2px solid #000;
       /* border-top:2px dashed red; */
     }
+    /* .slice {
+      background-color: red;
+      display: flex;
+
+      overflow: hidden;
+      div {
+        width: 500%;
+        display: flex;
+        img {
+          width: 100%;
+        }
+      }
+    } */
   }
   span {
     /* box-sizing:border-box; */
@@ -130,17 +146,18 @@ const LodgingLists = ({
       <Wrap className="listWrap">
         <ULWrap>
           <li>
-            <span>
-              <Border carouselImg>
-                {roomImgUrlList.map((src) => (
+            <div className="slice" carouselImg>
+              {roomImgUrlList.map((src) => (
+                <div>
                   <Imgs
                     carousalImg
                     src={src}
                     // alt={alt}
                   />
-                ))}
-              </Border>
-            </span>
+                </div>
+              ))}
+            </div>
+
             <span className="TextWrap">
               <div className="TextHead">
                 <TextStyled size="blackSmall">
