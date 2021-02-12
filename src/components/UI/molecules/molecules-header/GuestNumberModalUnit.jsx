@@ -41,7 +41,9 @@ const GuestNumberModalUnit = ({
   // detail 페이지 일 경우는 스토어의 값을 name 이라고 쓴다
   const detailName = useSelector(({ detail }) => detail[searchName]);
 
-  const disableHandler = () => (searchName === 'numOfAdult' ? 16 : 5); // 성인이면 최대값16, 나머지 5
+  const disableHandler = () => {
+    return searchName === 'numOfAdult' ? 16 : 5;
+  }; // 성인이면 최대값16, 나머지 5
 
   // 성인이 없이 유아, 어린이만 증가시킬때, 성인도 같이 증가시키는 함수
   const hasAdultGuestIncrease = () => {
@@ -81,7 +83,15 @@ const GuestNumberModalUnit = ({
           name={searchName}
           onDecrease={() => {
             if (detailPage) {
+              // detail page와 main page 모두 액션을 날려줘야 한다.
               dispatch(guestChangeDetail(searchName, detailName - 1));
+              dispatch(
+                guestInput(
+                  'guestSearch',
+                  searchName,
+                  guestSearch[searchName] - 1,
+                ),
+              );
               return;
             }
             hasNonAdultGuestDecrease();
@@ -107,6 +117,13 @@ const GuestNumberModalUnit = ({
           onIncrease={() => {
             if (detailPage) {
               dispatch(guestChangeDetail(searchName, detailName + 1));
+              dispatch(
+                guestInput(
+                  'guestSearch',
+                  searchName,
+                  guestSearch[searchName] + 1,
+                ),
+              );
               return;
             }
             hasAdultGuestIncrease();

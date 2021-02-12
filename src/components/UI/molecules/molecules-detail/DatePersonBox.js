@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { IoIosArrowDown } from 'react-icons/io';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import GuestNumberModal from '../../../templates/templates-header/GuestNumberModal';
 import CalendarDetail from '../../../../calendar/CalendarDetail';
 const BookingBox = styled.div`
@@ -83,7 +83,7 @@ const GuestBtn = styled.div`
   padding-right: 12px;
 `;
 
-const DatePersonBox = () => {
+const DatePersonBox = ({ peopleLimit }) => {
   const [isOpen, setIsOpen] = useState(false); // detail page에서 모달창 열고닫기 기능구현
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
@@ -107,10 +107,14 @@ const DatePersonBox = () => {
       >
         <CheckTxt>인원</CheckTxt>
         <SelectinoGuest>게스트 1명</SelectinoGuest>
-        <GuestBtn>
-          <IoIosArrowDown />
-        </GuestBtn>
-        {isOpen && <GuestNumberModal detailPage={true} setIsOpen={setIsOpen} />}
+        <GuestBtn>{isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}</GuestBtn>
+        {isOpen && (
+          <GuestNumberModal
+            detailPage={true}
+            setIsOpen={setIsOpen}
+            peopleLimit={peopleLimit}
+          />
+        )}
       </Personnel>
     </BookingBox>
   );

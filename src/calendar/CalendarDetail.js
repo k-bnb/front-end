@@ -10,6 +10,8 @@ import DatePersonBox from '../components/UI/molecules/molecules-detail/DatePerso
 import { useClickOutside } from '../lib/useClickOutside';
 import Text from '../components/UI/atoms/atoms-header/Text';
 import CloseBtn from '../components/UI/atoms/atoms-detail/CloseBtn';
+import { dateChangeDetail } from '../modules/detail';
+import { start } from 'pretty-error';
 
 const CheckInAndOut = styled.div`
   position: relative;
@@ -97,6 +99,9 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
   const dispatch = useDispatch();
   const { checkDateSearch } = useSelector(({ search }) => search.searchReq);
 
+  let { detailStartDate } = useSelector((state) => state.detail.startDate); // Calendar modal의 checkIn 날짜 넣기 (SelectionInfo)
+  console.log({ detailStartDate });
+
   const [dateRange, setdateRange] = useState({
     startDate: checkDateSearch.startDate || null,
     endDate: checkDateSearch.endDate || null,
@@ -106,6 +111,8 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
   let { startDate, endDate } = dateRange;
   console.log(startDate);
   console.log(endDate);
+
+  // const {detailEndDate}= useSelector()
 
   // startDate의 값이 있으며, 이미 string으로 변화되어 store에 저장된경우
   // 달력에는 다시 moment 객체로 변환시켜 startdate, enddate로 입력시킨다.
@@ -124,15 +131,17 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
 
     if (startDate.startDate && !startDate.endDate) {
       let startD = moment(startDate.startDate._d).format('YYYY-MM-DD');
-      dispatch(dateInput('startDate', startD)); // 시작일만 선택시 시작일 dispatch
+      dispatch(dateInput('startDate', startD)); // 시작일만 선택시 시작일 main page에 dispatch
+      console.log(startD);
+      dispatch(dateChangeDetail('startDate', startD));
       setdateRange({ startDate: startD, endDate: startD });
     }
     if (startDate.startDate && startDate.endDate) {
       let startD = moment(startDate.startDate._d).format('YYYY-MM-DD');
       let endD = moment(startDate.endDate._d).format('YYYY-MM-DD');
       dispatch(dateInput('startDate', startD)); // 시작일만 선택시 시작일 dispatch
-
-      dispatch(dateInput('endDate', endD)); // 시작일만 선택시 시작일 dispatch
+      dispatch(dateInput('endDate', endD)); // 끝나는일 선택시 dispatch
+      dispatch(dateChangeDetail('endDate', endD));
       setdateRange({ startDate: startD, endDate: endD });
     }
     setdateRange(startDate, endDate);
@@ -159,7 +168,7 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
               setIsCalendarOpen(true);
             }}
           >
-            <SelectionInfo text="체크인" date="2021.3.4" />
+            <SelectionInfo text="체크인" date={detailStartDate} />
             <SelectionInfo
               className="divider"
               text="체크아웃"

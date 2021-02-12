@@ -29,6 +29,7 @@ const PriceInner = styled.span`
 
 const OneDayPrice = ({ roomCost }) => (
   <PriceInfo>
+    {/* endDate가 null 일 경우에는 roomCost 띄우지 않기 */}
     <PriceBox>
       <BiWon font-size="22px" />
       <Price>82,000{roomCost}</Price>
