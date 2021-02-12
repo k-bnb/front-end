@@ -35,6 +35,7 @@ const ReservationCostDetailOrganism = () => {
     rate: '4.7',
   };
 
+  // 임시 고정값, 상세보기 페이지 redux state로 변경 예정
   const staticChildren = {
     cost: '₩43,000 x 2박',
     cleaningFee: '청소비',
