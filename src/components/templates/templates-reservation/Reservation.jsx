@@ -42,7 +42,21 @@ const LayoutReservationTitle = styled(ReservationTitle)`
   margin-left: 6rem;
 `;
 
-const Reservation = ({ change, click, value }) => {
+const Reservation = ({
+  change,
+  click,
+  value,
+  dateModal,
+  manageDateModal,
+  guestModal,
+  manageGuestModal,
+  setGuestModal,
+  comfirmModal,
+  checkDateSearch,
+  guestSearch,
+  checkDate,
+  saveDate,
+}) => {
   return (
     <section>
       <header>
@@ -74,10 +88,20 @@ const Reservation = ({ change, click, value }) => {
       </TitleContainer>
       <TempContainer>
         <MainContainer>
-          <ReservationInfoOrganism />
+          <ReservationInfoOrganism
+            dateModal={dateModal}
+            manageDateModal={manageDateModal}
+            guestModal={guestModal}
+            manageGuestModal={manageGuestModal}
+            setGuestModal={setGuestModal}
+            checkDateSearch={checkDateSearch}
+            guestSearch={guestSearch}
+            checkDate={checkDate}
+            saveDate={saveDate}
+          />
           <ReservationRequestOrganism change={change} value={value} />
           <ReservationRefundOrganism />
-          <CommonButton reservation click={click}>
+          <CommonButton reservation click={click} comfirmModal={comfirmModal}>
             <BiCalendarCheck />
             예약하기
           </CommonButton>

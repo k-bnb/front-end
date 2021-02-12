@@ -1,5 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import Modal from '../../../../portal/Modal';
+import EditDateModalOrganism from '../../organisms/organisms-reservation/organisms-modal/EditDateModalOrganism';
 
 const StyledButton = styled.button`
   border: 0;
@@ -37,8 +39,30 @@ const StyledButton = styled.button`
     `}
 `;
 
-const ReservationEditButton = ({ children, ...rest }) => {
-  return <StyledButton {...rest}>{children}</StyledButton>;
+const ReservationEditButton = ({
+  children,
+  dateModal,
+  manageDateModal,
+  checkDate,
+  saveDate,
+  ...rest
+}) => {
+  return (
+    <>
+      <StyledButton onClick={manageDateModal} {...rest}>
+        {children}
+      </StyledButton>
+      {dateModal && (
+        <Modal>
+          <EditDateModalOrganism
+            manageDateModal={manageDateModal}
+            checkDate={checkDate}
+            saveDate={saveDate}
+          />
+        </Modal>
+      )}
+    </>
+  );
 };
 
 export default ReservationEditButton;

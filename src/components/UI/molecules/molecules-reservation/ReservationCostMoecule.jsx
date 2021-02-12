@@ -12,7 +12,7 @@ const Container = styled.div`
   }
 `;
 
-const ReservationCostDetailOrganism = ({ children }) => {
+const ReservationCostDetailMolecule = ({ children }) => {
   const { cost, cleaningFee, serviceFee, lodgmentFee, totalFee } = children;
 
   return (
@@ -38,4 +38,4 @@ const ReservationCostDetailOrganism = ({ children }) => {
   );
 };
 
-export default ReservationCostDetailOrganism;
+export default ReservationCostDetailMolecule;
