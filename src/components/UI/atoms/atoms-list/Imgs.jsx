@@ -20,11 +20,7 @@ const ImgStyle = styled.img`
 `;
 
 const Imgs = ({ src, alt, ...rest }) => {
-  return (
-    <div>
-      <ImgStyle src={src} {...rest} alt={alt} />
-    </div>
-  );
+  return <ImgStyle src={src} {...rest} alt={alt} />;
 };
 
 export default Imgs;

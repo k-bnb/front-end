@@ -42,6 +42,7 @@ const HeaderDetailScrolledBlock = styled.div`
     margin: 0;
     display: flex;
     justify-content: space-between;
+    white-space: nowrap;
   }
 
   .header-detail-list {

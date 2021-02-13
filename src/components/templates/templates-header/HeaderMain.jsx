@@ -49,6 +49,12 @@ const HeaderMain = ({
   initialNavModalState,
   isClickedOutside,
   setIsClickedOutside,
+  SearchTypeHandler,
+  locationSearch,
+  checkDateSearch,
+  guestSearch,
+  moveFocusNext,
+  clickHandler,
 }) => {
   const blackOutsideRef = useClickOutside(() => {
     if (isClicked && isScrolled && !isClickedOutside) {
@@ -84,6 +90,12 @@ const HeaderMain = ({
           navModalState={navModalState}
           setNavModalState={setNavModalState}
           initialNavModalState={initialNavModalState}
+          SearchTypeHandler={SearchTypeHandler}
+          locationSearch={locationSearch}
+          checkDateSearch={checkDateSearch}
+          guestSearch={guestSearch}
+          moveFocusNext={moveFocusNext}
+          clickHandler={clickHandler}
         />
       </HeaderMainBlock>
     </>

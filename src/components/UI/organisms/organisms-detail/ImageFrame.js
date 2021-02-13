@@ -25,6 +25,11 @@ const AccommodationPictures = styled.div`
       filter: brightness(80%);
     }
   }
+  .dot-square {
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+  }
 
   .one {
     grid-column: 1/3;
@@ -58,19 +63,48 @@ const ImgDetailBtn = styled.a`
   right: 24px;
   z-index: 10;
   margin: 24px 0 0;
-  padding: 5px 15px;
+  padding: 7px 15px;
   border-radius: 8px;
   border: 1px solid #222;
   text-align: center;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
   color: #222;
   background: #fff;
   cursor: pointer;
+  transition-duration: 0.2s;
+  &:active {
+    transform: scale(0.95);
+  }
 `;
 
-const ImageFrame = () => (
+const ImageFrame = ({ setShowModal }) => (
   <AccommodationPictures>
-    <ImgDetailBtn>사진 모두 보기</ImgDetailBtn>
+    <ImgDetailBtn
+      onClick={() => {
+        setShowModal(true);
+      }}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 17 17"
+        role="presentation"
+        aria-hidden="true"
+        focusable="false"
+        className="dot-square"
+      >
+        <circle cx="1.5" cy="1.5" r="1.5"></circle>
+        <circle cx="1.5" cy="8.5" r="1.5"></circle>
+        <circle cx="8.5" cy="1.5" r="1.5"></circle>
+        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+        <circle cx="15.5" cy="1.5" r="1.5"></circle>
+        <circle cx="15.5" cy="8.5" r="1.5"></circle>
+        <circle cx="1.5" cy="15.5" r="1.5"></circle>
+        <circle cx="8.5" cy="15.5" r="1.5"></circle>
+        <circle cx="15.5" cy="15.5" r="1.5"></circle>
+      </svg>
+      사진 모두 보기
+    </ImgDetailBtn>
     <div className="one">
       <img
         src="https://a0.muscache.com/im/pictures/144d8628-1123-4cd4-af93-dd81f47455cd.jpg?im_w=960"

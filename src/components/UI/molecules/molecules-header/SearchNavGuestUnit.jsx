@@ -47,6 +47,7 @@ const SearchNavGuestUnit = ({
   setNavModalState,
 }) => {
   const dispatch = useDispatch();
+  const { locationSearch } = useSelector((state) => state.search.searchReq);
   const { numOfAdult, numOfKid, numOfInfant } = useSelector(
     ({ search: { searchReq } }) => searchReq.guestSearch,
   );
@@ -79,7 +80,12 @@ const SearchNavGuestUnit = ({
           />
         )}
       </div>
-      <SearchButtonUnit navModalState={navModalState} />
+      <SearchButtonUnit
+        navModalState={navModalState}
+        SearchTypeHandler={SearchTypeHandler}
+        dispatch={dispatch}
+        locationSearch={locationSearch}
+      />
       {navModalState.guest && (
         <GuestNumberModal
           SearchTypeHandler={SearchTypeHandler}

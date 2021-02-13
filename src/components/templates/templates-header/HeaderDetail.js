@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
 import HeaderDetailTop from '../../UI/organisms/organisms-header/HeaderDetailTop';
 import HeaderDetailSearchNavContainer from '../../../containers/header-containers/HeaderDetailSearchNavContainer';
 import { useClickOutside } from '../../../lib/useClickOutside';
-import HeaderDetailScrolled from '../../UI/organisms/organisms-header/HeaderDetailScrolled';
 import HeaderDetailScrolledContainer from '../../../containers/header-containers/HeaderDetailScrolledContainer';
 
 const HeaderDetailBlock = styled.div`
@@ -28,6 +27,12 @@ const HeaderDetail = ({
   setIsClickedOutside,
   isScrolledDetail,
   setIsScrolledDetail,
+  SearchTypeHandler,
+  locationSearch,
+  checkDateSearch,
+  guestSearch,
+  moveFocusNext,
+  clickHandler,
 }) => {
   const blackOutsideRef = useClickOutside(() => {
     if (isClicked && isScrolled && !isClickedOutside) {
@@ -35,6 +40,7 @@ const HeaderDetail = ({
       setIsClicked(false);
     }
   });
+  console.log(isScrolledDetail);
   return (
     <>
       {!isScrolledDetail && (
@@ -49,9 +55,7 @@ const HeaderDetail = ({
             isClicked={isClicked}
             isClickedOutside={isClickedOutside}
             detailHeader={true}
-          >
-            MainTop
-          </HeaderDetailTop>
+          />
           <HeaderDetailSearchNavContainer
             isScrolled={isScrolled}
             isClicked={isClicked}
@@ -60,6 +64,12 @@ const HeaderDetail = ({
             navModalState={navModalState}
             setNavModalState={setNavModalState}
             initialNavModalState={initialNavModalState}
+            SearchTypeHandler={SearchTypeHandler}
+            locationSearch={locationSearch}
+            checkDateSearch={checkDateSearch}
+            guestSearch={guestSearch}
+            moveFocusNext={moveFocusNext}
+            clickHandler={clickHandler}
           />
         </HeaderDetailBlock>
       )}

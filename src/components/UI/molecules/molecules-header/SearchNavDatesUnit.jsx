@@ -21,6 +21,7 @@ const SearchNavDatesUnit = ({
   navModalState,
   setNavModalState,
   initialNavModalState,
+  moveFocusNext,
 }) => {
   return (
     <SearchNavDatesUnitLi>
@@ -40,6 +41,7 @@ const SearchNavDatesUnit = ({
           setNavModalState={setNavModalState}
           initialNavModalState={initialNavModalState}
           navModalState={navModalState}
+          moveFocusNext={moveFocusNext}
         />
       )}
     </SearchNavDatesUnitLi>
