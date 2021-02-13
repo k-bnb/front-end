@@ -4,11 +4,11 @@ import moment from 'moment';
 import 'react-dates/initialize';
 import { useDispatch, useSelector } from 'react-redux';
 import { dateInput } from '../modules/search';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Text from '../components/UI/atoms/atoms-header/Text';
 import CloseBtn from '../components/UI/atoms/atoms-detail/CloseBtn';
-import { dateChangeDetail } from '../modules/detail';
-import { start } from 'pretty-error';
+import { clearCheckDateDtail, dateChangeDetail } from '../modules/detail';
+import { AiOutlineClose } from 'react-icons/ai';
 
 const CalendarDetailBlock = styled.div`
   /* 달력 날짜하나하나 */
@@ -126,10 +126,29 @@ const SelectionDate = styled.div`
   white-space: nowrap;
 `;
 
-const SelectionInfo = ({ text, date }) => (
+const CloseEmoticon = styled.div`
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  right: 12px;
+  top: 20px;
+  z-index: 9999;
+  text-align: center;
+  cursor: pointer;
+  /* ${(props) =>
+    props.checkIn &&
+    css`
+      left: 135px;
+    `} */
+`;
+
+const SelectionInfo = ({ text, date, dispatch }) => (
   <CheckInAndOut>
     <CheckTxt>{text}</CheckTxt>
     <SelectionDate>{date}</SelectionDate>
+    <CloseEmoticon onMouseDown={() => dispatch(clearCheckDateDtail())}>
+      <AiOutlineClose />
+    </CloseEmoticon>
   </CheckInAndOut>
 );
 
@@ -166,9 +185,6 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
   const dispatch = useDispatch();
   const { checkDateSearch } = useSelector(({ search }) => search.searchReq);
 
-  let { detailStartDate } = useSelector((state) => state.detail.startDate); // Calendar modal의 checkIn 날짜 넣기 (SelectionInfo)
-  console.log({ detailStartDate });
-
   const [dateRange, setdateRange] = useState({
     startDate: checkDateSearch.startDate || null,
     endDate: checkDateSearch.endDate || null,
@@ -179,7 +195,10 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
   console.log(startDate);
   console.log(endDate);
 
-  // const {detailEndDate}= useSelector()
+  // Calendar modal의 checkIn, CheckOut 날짜 넣기
+  let detailStartDate = useSelector((state) => state.detail.startDate);
+  let detailEndDate = useSelector((state) => state.detail.endDate);
+  console.log({ detailStartDate });
 
   // startDate의 값이 있으며, 이미 string으로 변화되어 store에 저장된경우
   // 달력에는 다시 moment 객체로 변환시켜 startdate, enddate로 입력시킨다.
@@ -223,6 +242,7 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
       return;
     }
   }, [dateRange]);
+
   return (
     <CalendarDetailBlock>
       <CalendarBlock>
@@ -230,16 +250,22 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
           <Text bigger bold className="add-date">
             날짜 선택
           </Text>
+          {/* 버튼의 클릭 이벤트가 되는지 확인하기 */}
           <CheckDate
             onClick={() => {
               setIsCalendarOpen(true);
             }}
           >
-            <SelectionInfo text="체크인" date={detailStartDate} />
+            <SelectionInfo
+              text="체크인"
+              date={detailStartDate}
+              dispatch={dispatch}
+            />
             <SelectionInfo
               className="divider"
               text="체크아웃"
-              date="2021.3.6"
+              date={detailEndDate}
+              dispatch={dispatch}
             />
           </CheckDate>
         </div>
