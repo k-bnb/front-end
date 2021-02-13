@@ -41,6 +41,7 @@ const GuestNumberModal = ({
   setNavModalState,
   detailPage,
   setIsOpen,
+  peopleLimit,
 }) => {
   let guestRef = useClickOutside(() => {
     if (detailPage) {
