@@ -40,7 +40,6 @@ const HeaderDetail = ({
       setIsClicked(false);
     }
   });
-  console.log(isScrolledDetail);
   return (
     <>
       {!isScrolledDetail && (

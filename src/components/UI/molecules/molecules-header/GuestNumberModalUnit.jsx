@@ -156,16 +156,8 @@ const GuestNumberModalUnit = ({
           name={searchName}
           onDecrease={() => {
             if (detailPage) {
-              // detail page와 main page 모두 액션을 날려줘야 한다.
               detailDecreaseWhenNoAdult();
               dispatch(guestChangeDetail(searchName, detailName - 1));
-              dispatch(
-                guestInput(
-                  'guestSearch',
-                  searchName,
-                  guestSearch[searchName] - 1,
-                ),
-              );
               return;
             }
             decreaseWhenNoAdult();
@@ -214,13 +206,6 @@ const GuestNumberModalUnit = ({
             if (detailPage) {
               detailIncreaseWithoutAdult();
               dispatch(guestChangeDetail(searchName, detailName + 1));
-              dispatch(
-                guestInput(
-                  'guestSearch',
-                  searchName,
-                  guestSearch[searchName] + 1,
-                ),
-              );
               return;
             }
 

@@ -6,15 +6,25 @@ import HeaderContainer from './header-containers/HeaderContainer';
 
 const DetailContainer = () => {
   const [showModal, setShowModal] = useState(false);
+  const [current, setCurrent] = useState(0); // 현재 보는 사진의 index
 
   return (
     <>
       <HeaderContainer />
-      <Detail showModal={showModal} setShowModal={setShowModal} />(
+      <Detail
+        showModal={showModal}
+        setShowModal={setShowModal}
+        current={current}
+        setCurrent={setCurrent}
+      />
       <Modal>
-        <CarouselModal showModal={showModal} setShowModal={setShowModal} />
+        <CarouselModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          current={current}
+          setCurrent={setCurrent}
+        />
       </Modal>
-      )
     </>
   );
 };

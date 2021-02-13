@@ -20,12 +20,16 @@ const DetailContainer = styled.div`
   max-width: 1280px;
 `;
 
-const Detail = ({ showModal, setShowModal }) => {
+const Detail = ({ showModal, setShowModal, current, setCurrent }) => {
   return (
     <>
       <DetailContainer theme={theme}>
         <PageTitle />
-        <ImageFrame setShowModal={setShowModal} />
+        <ImageFrame
+          setShowModal={setShowModal}
+          current={current}
+          setCurrent={setCurrent}
+        />
         <WrappingContainer />
         {/* <SavedListsModal /> */}
       </DetailContainer>
