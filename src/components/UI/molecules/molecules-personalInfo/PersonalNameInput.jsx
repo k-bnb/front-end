@@ -46,11 +46,7 @@ const PersonalNameInput = () => {
       <div className="person-info">
         <div>
           <label htmlFor="">이름</label>
-          <input type="text" />
-        </div>
-        <div>
-          <label htmlFor="">성</label>
-          <input type="text" />
+          <input type="text" name={'name'} />
         </div>
       </div>
       <Button save>저장</Button>
