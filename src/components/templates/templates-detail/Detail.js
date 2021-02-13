@@ -8,7 +8,6 @@ import { PageTitle } from '../../UI/molecules/molecules-detail/PageTitle';
 // import { Slider } from '../../UI/organisms/organisms-detail/Carousel';
 import ImportantNotice from '../../UI/organisms/organisms-detail/ImportantNotice';
 import Review from '../../UI/organisms/organisms-detail/Review';
-import HeaderDetail from '../templates-header/HeaderDetail';
 import WrappingContainer from '../../UI/organisms/organisms-detail/WrappingContainer';
 
 const DetailContainer = styled.div`
@@ -21,12 +20,12 @@ const DetailContainer = styled.div`
   max-width: 1280px;
 `;
 
-const Detail = () => {
+const Detail = ({ showModal, setShowModal }) => {
   return (
     <>
       <DetailContainer theme={theme}>
         <PageTitle />
-        <ImageFrame />
+        <ImageFrame setShowModal={setShowModal} />
         <WrappingContainer />
         {/* <SavedListsModal /> */}
       </DetailContainer>
