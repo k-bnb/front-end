@@ -89,12 +89,12 @@ const initialState = {
   destinationName: '',
   searchReq: {
     locationSearch: {
-      latitude: '',
-      longitude: '',
-      latitudeMax: '',
-      latitudeMin: '',
-      longitudeMax: '',
-      longitudeMin: '',
+      latitude: 37.55559028863329,
+      longitude: 126.76740548073847,
+      latitudeMax: 37.7,
+      latitudeMin: 37.5,
+      longitudeMax: 127.1,
+      longitudeMin: 126.77,
     },
     checkDateSearch: {
       startDate: '',

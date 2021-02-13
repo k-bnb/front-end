@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import PersonalTemplate from '../components/templates/templates-personal/PersonalTemplate';
 
 const PersonalContainer = () => {
