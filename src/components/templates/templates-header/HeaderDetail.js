@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import HeaderDetailTop from '../../UI/organisms/organisms-header/HeaderDetailTop';
 import HeaderDetailSearchNavContainer from '../../../containers/header-containers/HeaderDetailSearchNavContainer';
 import { useClickOutside } from '../../../lib/useClickOutside';
 import HeaderDetailScrolledContainer from '../../../containers/header-containers/HeaderDetailScrolledContainer';
+import { useOnScreen } from '../../../lib/useOnScreen';
 
 const HeaderDetailBlock = styled.div`
   position: absolute;
@@ -24,35 +25,30 @@ const HeaderDetail = ({
   setNavModalState,
   initialNavModalState,
   isClickedOutside,
-  setIsClickedOutside,
-  isScrolledDetail,
-  setIsScrolledDetail,
   SearchTypeHandler,
   locationSearch,
   checkDateSearch,
   guestSearch,
   moveFocusNext,
   clickHandler,
+  DetailHeaderRef,
+  ImageContainerRef,
+  reviewRef,
+  facilityRef,
 }) => {
-  const blackOutsideRef = useClickOutside(() => {
-    if (isClicked && isScrolled && !isClickedOutside) {
-      setIsClickedOutside(true);
-      setIsClicked(false);
-    }
-  });
+  const showButton = useOnScreen(DetailHeaderRef, '-80px'); // detail header가 스크롤 된 경우, 예약하기 버튼이 가려지면 헤더에 뜬다
+  const showDetailHeader = useOnScreen(ImageContainerRef, '0px'); // 사진5개 가지고있는 컨테이너를 뷰포트가 지나면 헤더가 생긴다.
   return (
     <>
-      {!isScrolledDetail && (
+      {showDetailHeader && (
         <HeaderDetailBlock
           isClicked={isClicked}
           isScrolled={isScrolled}
-          isClickedOutside={isClickedOutside}
           detailHeader={true}
         >
           <HeaderDetailTop
             isScrolled={isScrolled}
             isClicked={isClicked}
-            isClickedOutside={isClickedOutside}
             detailHeader={true}
           />
           <HeaderDetailSearchNavContainer
@@ -72,7 +68,14 @@ const HeaderDetail = ({
           />
         </HeaderDetailBlock>
       )}
-      {isScrolledDetail && <HeaderDetailScrolledContainer />}
+      {!showDetailHeader && (
+        <HeaderDetailScrolledContainer
+          DetailHeaderRef={DetailHeaderRef}
+          showButton={showButton}
+          reviewRef={reviewRef}
+          facilityRef={facilityRef}
+        />
+      )}
     </>
   );
 };

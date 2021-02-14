@@ -20,7 +20,16 @@ const DetailContainer = styled.div`
   max-width: 1280px;
 `;
 
-const Detail = ({ showModal, setShowModal, current, setCurrent }) => {
+const Detail = ({
+  showModal,
+  setShowModal,
+  current,
+  setCurrent,
+  DetailHeaderRef,
+  ImageContainerRef,
+  reviewRef,
+  facilityRef,
+}) => {
   return (
     <>
       <DetailContainer theme={theme}>
@@ -29,11 +38,15 @@ const Detail = ({ showModal, setShowModal, current, setCurrent }) => {
           setShowModal={setShowModal}
           current={current}
           setCurrent={setCurrent}
+          ImageContainerRef={ImageContainerRef}
         />
-        <WrappingContainer />
+        <WrappingContainer
+          DetailHeaderRef={DetailHeaderRef}
+          facilityRef={facilityRef}
+        />
         {/* <SavedListsModal /> */}
       </DetailContainer>
-      <Review />
+      <Review reviewRef={reviewRef} />
       <ImportantNotice />
       {/* <Slider /> */}
     </>

@@ -78,9 +78,9 @@ const ImgDetailBtn = styled.a`
   }
 `;
 
-const ImageFrame = ({ setShowModal, setCurrent }) => {
+const ImageFrame = ({ setShowModal, setCurrent, ImageContainerRef }) => {
   return (
-    <AccommodationPictures>
+    <AccommodationPictures ref={ImageContainerRef}>
       <ImgDetailBtn
         onClick={() => {
           setShowModal(true);

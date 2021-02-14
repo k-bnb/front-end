@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import Grade from '../../atoms/atoms-detail/Grade';
 import WhiteBtn from '../../atoms/atoms-detail/WhiteBtn';
@@ -29,21 +29,23 @@ const ReviewItemBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const Review = () => (
-  <ReveiwSectionWrapper>
-    <ReviewContainer className="basic-section-padding">
-      <ReviewTitle>
-        <Grade />{' '}
-      </ReviewTitle>
-      <ScoreAverage />
-      <ReviewItemBox>
-        <ReviewItem />
-        <ReviewItem />
-        <ReviewItem />
-      </ReviewItemBox>
-      <WhiteBtn text="후기 38개 모두 보기" />
-    </ReviewContainer>
-  </ReveiwSectionWrapper>
-);
+const Review = ({ reviewRef }) => {
+  return (
+    <ReveiwSectionWrapper ref={reviewRef}>
+      <ReviewContainer className="basic-section-padding">
+        <ReviewTitle>
+          <Grade />{' '}
+        </ReviewTitle>
+        <ScoreAverage />
+        <ReviewItemBox>
+          <ReviewItem />
+          <ReviewItem />
+          <ReviewItem />
+        </ReviewItemBox>
+        <WhiteBtn text="후기 38개 모두 보기" />
+      </ReviewContainer>
+    </ReveiwSectionWrapper>
+  );
+};
 
 export default Review;
