@@ -3,13 +3,18 @@ import styled from 'styled-components';
 // import SearchData from '../molecules/SearchData';
 
 const PcSize = styled.main`
-  height: 530px;
+  height: 525px;
   background-color: burlywood;
 `;
 
-const TabletSize = styled.main``;
+const TabletSize = styled.main`
+  height: 705px;
+  background-color: burlywood;`;
 
-const MobileSize = styled.main``;
+const MobileSize = styled.main`
+  height: 1234px;
+  background-color: burlywood;
+`;
 
 const FooterFake = () => {
   const isPc = useMediaQuery({

@@ -25,8 +25,7 @@ const ListContainer = () => {
     bedRoomNum,
     bathRoomNum,
   } = useSelector((state) => state.search.searchReq);
-
-
+  
   const dispatch = useDispatch();
   console.log(costSearch);
   const RoomSearchClick = () => {
@@ -42,9 +41,8 @@ const ListContainer = () => {
 //진솔.
   const room = useSelector(state => state.search.searchRes);
   const totalPage = useSelector(state => state.search.totalPage);
-
-
 //여기까지.
+
   const roomTypes = useCallback(
     (e) => {
       if (e.target.checked) {
@@ -73,6 +71,7 @@ const ListContainer = () => {
     if (e.target.matches('button > span')) return;
     dispatch(roomnumInput(e.target.name, ++e.target.value));
   };
+
   console.log(costState)
   const searchBtn = () => {
     if (costSearch.minCost) {
@@ -86,8 +85,6 @@ const ListContainer = () => {
         minCostPay: '',
       }));
     }
- 
-
     const id = 0;
     dispatch(
       searching({
@@ -106,7 +103,7 @@ const ListContainer = () => {
   };
 
   const pageNationClick = (e) => {
-    const id =  e.target.name
+    const id =  e.target.name;
     dispatch(
       searching({
         id,
@@ -119,8 +116,11 @@ const ListContainer = () => {
         bedRoomNum,
         bathRoomNum,
       }),
-    );
+    );  
   }
+
+  // const [currentPage, setCurrentPage] = useState(0)
+
   return (
     <>
       <HeaderContainer />

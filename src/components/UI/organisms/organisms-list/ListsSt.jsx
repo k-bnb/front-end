@@ -13,6 +13,9 @@ import { BiWon } from 'react-icons/bi';
 
 const PcSize = styled.main`
   min-height: calc(100vh - 80px);
+  padding-left: 24px;
+  padding-right: 24px;
+  margin : 0 auto;
 `;
 
 const TabletSize = styled.main`
@@ -83,7 +86,7 @@ const ListStyle = ({room, totalPage, pageNationClick}) => {
   const isMobile = useMediaQuery({
     query: `(max-width: 743px)`, //744px 이하인 경우에만 적용(744이하.)
   });
-  console.log(room);
+  console.log(room,totalPage,pageNationClick);
   return (
     <>
       {isPc && (
