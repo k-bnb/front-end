@@ -12,6 +12,7 @@ import WrappingContainer from '../../UI/organisms/organisms-detail/WrappingConta
 import Modal from '../../../portal/Modal';
 import { useSelector } from 'react-redux';
 import LoadingModal from '../LoadingModal';
+import ReviewContainer from '../../../containers/ReviewContainer';
 
 const DetailContainer = styled.div`
   padding: 80px 80px 0;
@@ -57,7 +58,7 @@ const Detail = ({
         {isLoading && <LoadingModal />}
         {/* <SavedListsModal /> */}
       </DetailContainer>
-      <Review reviewRef={reviewRef} />
+      <ReviewContainer reviewRef={reviewRef} />
       <ImportantNotice />
       {/* <Slider /> */}
     </>

@@ -25,13 +25,11 @@ const DetailContainer = () => {
     (state) => state.loading['detail/REQUEST_DETAIL'],
   );
 
-  const { startDate, endDate, numOfAdult, numOfKid, numOfInfant } = useSelector(
-    (state) => state.detail,
-  );
+  const detailObj = useSelector((state) => state.detail);
   const { roomImgUrlList } = useSelector((state) => state.detail.infoRes);
   console.log(roomImgUrlList);
 
-  const detailObj = { startDate, endDate, numOfAdult, numOfKid, numOfInfant };
+  // const detailObj = { startDate, endDate, numOfAdult, numOfKid, numOfInfant };
 
   const moveToReserve = () => {
     console.log('hi');
