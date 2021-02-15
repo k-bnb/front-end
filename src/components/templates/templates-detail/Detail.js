@@ -5,8 +5,8 @@ import { PageTitle } from '../../UI/molecules/molecules-detail/PageTitle';
 import ImportantNotice from '../../UI/organisms/organisms-detail/ImportantNotice';
 import Review from '../../UI/organisms/organisms-detail/Review';
 import WrappingContainer from '../../UI/organisms/organisms-detail/WrappingContainer';
-import Modal from '../../../portal/Modal';
-import LoaderIcon from 'react-loader-icon';
+//import Modal from '../../../portal/Modal';
+//import LoaderIcon from 'react-loader-icon';
 import { useSelector } from 'react-redux';
 
 const Theme = {
@@ -35,17 +35,6 @@ const DetailTemplate = styled.div`
   }
 `;
 
-<<<<<<< HEAD
-const Detail = ({ setShowModal, Theme }) => {
-  return (
-    <>
-      <DetailTemplate Theme={Theme}>
-        <PageTitle name />
-        <ImageFrame setShowModal={setShowModal} />
-        <WrappingContainer />
-      </DetailTemplate>
-      <Review />
-=======
 const Detail = ({
   showModal,
   setShowModal,
@@ -56,6 +45,7 @@ const Detail = ({
   reviewRef,
   facilityRef,
   moveToReserve,
+  infoRes,
 }) => {
   const loading = useSelector(
     (state) => state.loading['detail/REQUEST_DETAIL'],
@@ -63,29 +53,29 @@ const Detail = ({
 
   return (
     <>
-      <DetailContainer theme={theme}>
-        <PageTitle />
+      <DetailTemplate Theme={Theme} infoRes={infoRes}>
+        <PageTitle infoRes={infoRes} />
         <ImageFrame
           setShowModal={setShowModal}
           current={current}
           setCurrent={setCurrent}
           ImageContainerRef={ImageContainerRef}
+          roomImgUrlList={infoRes.roomImgUrlList}
         />
         <WrappingContainer
           DetailHeaderRef={DetailHeaderRef}
           facilityRef={facilityRef}
           moveToReserve={moveToReserve}
+          infoRes={infoRes}
         />
         {/* {loading && (
           <Modal>
             <LoaderIcon type={'bubbles'} />
           </Modal>
         )} */}
-        {/* <SavedListsModal /> */}
-      </DetailContainer>
-      <Review reviewRef={reviewRef} />
->>>>>>> 93b85d8bda9d84d59a821f5acab2b9787aabcc41
-      <ImportantNotice />
+      </DetailTemplate>
+      <Review reviewRef={reviewRef} commentList={infoRes.commentList} />
+      <ImportantNotice infoRes={infoRes} />
     </>
   );
 };

@@ -146,7 +146,7 @@ const SelectionInfo = ({ text, date, dispatch }) => (
   <CheckInAndOut>
     <CheckTxt>{text}</CheckTxt>
     <SelectionDate>{date}</SelectionDate>
-    <CloseEmoticon onMouseDown={() => dispatch(clearCheckDateDtail())}>
+    <CloseEmoticon onClick={() => dispatch(clearCheckDateDtail())}>
       <AiOutlineClose />
     </CloseEmoticon>
   </CheckInAndOut>

@@ -27,9 +27,9 @@ const FilledHeartEmoticon = styled(AiFillHeart)`
   color: red;
 `;
 
-const TextunderlineBtn = () => (
-  <UnderlineBtn>
-    <HeartEmoticon />
+const TextunderlineBtn = ({ isChecked, onClick }) => (
+  <UnderlineBtn onClick={onClick}>
+    {isChecked ? <FilledHeartEmoticon /> : <HeartEmoticon />}
     저장 목록
   </UnderlineBtn>
 );
