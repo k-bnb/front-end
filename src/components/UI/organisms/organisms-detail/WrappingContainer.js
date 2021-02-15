@@ -27,7 +27,7 @@ const BookingSummaryBox = styled.div`
   /* top: 80px; */
 `;
 
-const WrappingContainer = ({ DetailHeaderRef, facilityRef }) => (
+const WrappingContainer = ({ DetailHeaderRef, facilityRef, moveToReserve }) => (
   <InfoContainer>
     <DetailInfo>
       <HostingData />
@@ -36,7 +36,10 @@ const WrappingContainer = ({ DetailHeaderRef, facilityRef }) => (
       <EmoticonNotice facilityRef={facilityRef} />
     </DetailInfo>
     <BookingSummaryBox>
-      <BookingInfo DetailHeaderRef={DetailHeaderRef} />
+      <BookingInfo
+        DetailHeaderRef={DetailHeaderRef}
+        moveToReserve={moveToReserve}
+      />
     </BookingSummaryBox>
   </InfoContainer>
 );
