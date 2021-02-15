@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import theme from './theme';
 //import { useMediaQuery } from 'react-responsive';
 import ImageFrame from '../../UI/organisms/organisms-detail/ImageFrame';
@@ -10,8 +10,8 @@ import ImportantNotice from '../../UI/organisms/organisms-detail/ImportantNotice
 import Review from '../../UI/organisms/organisms-detail/Review';
 import WrappingContainer from '../../UI/organisms/organisms-detail/WrappingContainer';
 import Modal from '../../../portal/Modal';
-import LoaderIcon from 'react-loader-icon';
 import { useSelector } from 'react-redux';
+import LoadingModal from '../LoadingModal';
 
 const DetailContainer = styled.div`
   padding: 80px 80px 0;
@@ -33,11 +33,10 @@ const Detail = ({
   reviewRef,
   facilityRef,
   moveToReserve,
+  isLoading,
+  detailObj,
+  roomImgUrlList,
 }) => {
-  const loading = useSelector(
-    (state) => state.loading['detail/REQUEST_DETAIL'],
-  );
-
   return (
     <>
       <DetailContainer theme={theme}>
@@ -47,17 +46,15 @@ const Detail = ({
           current={current}
           setCurrent={setCurrent}
           ImageContainerRef={ImageContainerRef}
+          roomImgUrlList={roomImgUrlList}
         />
         <WrappingContainer
           DetailHeaderRef={DetailHeaderRef}
           facilityRef={facilityRef}
           moveToReserve={moveToReserve}
+          detailObj={detailObj}
         />
-        {/* {loading && (
-          <Modal>
-            <LoaderIcon type={'bubbles'} />
-          </Modal>
-        )} */}
+        {isLoading && <LoadingModal />}
         {/* <SavedListsModal /> */}
       </DetailContainer>
       <Review reviewRef={reviewRef} />

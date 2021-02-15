@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { DayPickerRangeController } from 'react-dates';
 import moment from 'moment';
 import 'react-dates/initialize';
@@ -146,7 +146,7 @@ const SelectionInfo = ({ text, date, dispatch }) => (
   <CheckInAndOut>
     <CheckTxt>{text}</CheckTxt>
     <SelectionDate>{date}</SelectionDate>
-    <CloseEmoticon onMouseDown={() => dispatch(clearCheckDateDtail())}>
+    <CloseEmoticon onClick={() => dispatch(clearCheckDateDtail())}>
       <AiOutlineClose />
     </CloseEmoticon>
   </CheckInAndOut>
@@ -183,22 +183,17 @@ const CalendarBlock = styled.div`
 
 function Datepicker({ setNavModalState, setIsCalendarOpen }) {
   const dispatch = useDispatch();
-  const { checkDateSearch } = useSelector(({ search }) => search.searchReq);
+  const detailStartDate = useSelector((state) => state.detail.startDate);
+  const detailEndDate = useSelector((state) => state.detail.endDate);
 
   const [dateRange, setdateRange] = useState({
-    startDate: checkDateSearch.startDate || null,
-    endDate: checkDateSearch.endDate || null,
+    startDate: detailStartDate || null,
+    endDate: detailEndDate || null,
   });
   const [focus, setFocus] = useState('startDate');
 
   let { startDate, endDate } = dateRange;
-  console.log(startDate);
-  console.log(endDate);
-
   // Calendar modal의 checkIn, CheckOut 날짜 넣기
-  let detailStartDate = useSelector((state) => state.detail.startDate);
-  let detailEndDate = useSelector((state) => state.detail.endDate);
-  console.log({ detailStartDate });
 
   // startDate의 값이 있으며, 이미 string으로 변화되어 store에 저장된경우
   // 달력에는 다시 moment 객체로 변환시켜 startdate, enddate로 입력시킨다.
@@ -212,6 +207,7 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
   const handleOnDateChange = (startDate, endDate) => {
     // if (moment()._d > startDate) {
     //   console.log('error');
+    //   console.log('dslkfjdslkfjsl');
     //   return;
     // }
 
@@ -232,6 +228,7 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
     }
     setdateRange(startDate, endDate);
   };
+  const DetailCalendarModalRef = useRef();
 
   // 날짜 변경시 시작일 종료일을
   useEffect(() => {
@@ -244,7 +241,7 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
   }, [dateRange]);
 
   return (
-    <CalendarDetailBlock>
+    <CalendarDetailBlock ref={DetailCalendarModalRef}>
       <CalendarBlock>
         <div className="add-date-container">
           <Text bigger bold className="add-date">
@@ -292,6 +289,12 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
             if (
               e.target.classList.contains('e') ||
               e.target.classList.contains('DayPicker__withBorder')
+            )
+              return;
+
+            if (
+              DetailCalendarModalRef.current.contains(e.target) &&
+              !e.target.classList.contains('close-btn')
             )
               return;
             setIsCalendarOpen(false);

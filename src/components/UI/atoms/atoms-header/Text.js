@@ -91,6 +91,17 @@ const TextBlock = styled.span`
         background-color: white;
       }
     `}
+
+    ${(props) =>
+    props.blue &&
+    css`
+      color: #008489;
+      font-size: 12px;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    `}
 `;
 
 const Text = (props) => {

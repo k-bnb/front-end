@@ -17,13 +17,12 @@ export default function createRequestSaga(type, request) {
         payload: response.data,
       });
     } catch (error) {
-      console.log(error);
       yield put({
         type: FAILURE,
         payload: error,
       });
     }
-    yield delay(2000);
+    yield delay(1000);
     yield put(finishLoading(type)); // 로딩 종료, type: 요청 작업 종류
   };
 }
