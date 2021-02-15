@@ -127,6 +127,7 @@ const ListContainer = () => {
   Array.from({ length: totalPage.totalPages }, (_, i) => {
     return numberOfPages.push(i);
   });
+  console.log(numberOfPages);
   let dotsInitial = '...';
   let dotsLeft = '... ';
   let dotsRight = ' ...';
