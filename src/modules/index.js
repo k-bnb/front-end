@@ -6,6 +6,7 @@ import search, { searchSaga } from './search';
 import reserve, { reserveSaga } from './reserve';
 import detail from './detail';
 import person from './person';
+import user, { userSaga } from './user';
 // 이곳은 모듈을 합치는 곳입니다
 const rootReducer = combineReducers({
   auth,
@@ -14,10 +15,11 @@ const rootReducer = combineReducers({
   reserve,
   detail,
   person,
+  user,
 });
 
 export function* rootSaga() {
-  yield all([authSaga(), searchSaga(), reserveSaga()]);
+  yield all([authSaga(), searchSaga(), reserveSaga(), userSaga()]);
 }
 
 export default rootReducer;
