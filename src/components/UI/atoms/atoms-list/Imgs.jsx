@@ -3,26 +3,26 @@ import styled, { css } from 'styled-components';
 const ImgStyle = styled.img`
   /* object-fit:cover; */
   ${(props) =>
-    props.carousalImg &&
+    props.size === 'carousalImg' &&
     css`
       width: 300px;
       height: 200px;
       border-radius: 8px;
     `}
   ${(props) =>
-    props.carousalBigImg &&
+    props.size === 'carousalBigImg' &&
     css`
       max-width: 100%;
       height: auto;
       border-radius: 8px;
-      /* margin: 20px; */
+      object-fit:cover;
     `}
 `;
 
-const Imgs = ({ src, alt, ...rest }) => {
+const Imgs = ({ src, alt, size, ...rest }) => {
   return (
     <div>
-      <ImgStyle src={src} {...rest} alt={alt} />
+      <ImgStyle src={src} size={size} {...rest} alt={alt} />
     </div>
   );
 };

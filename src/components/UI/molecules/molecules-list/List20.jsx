@@ -12,10 +12,11 @@ import { Link } from 'react-router-dom';
 // import { SliderData } from './SliderData';
 
 // const Wrap = styled.ul`
-
+//   width: 100%;
 // `
 
 const List = styled.li`
+  width: 100%;
   position: relative;
   width: 100%;
   height: 266px;
@@ -33,16 +34,6 @@ const List = styled.li`
   .TextWrap {
     padding: 0 10px 20px 10px;
     line-height: 25px;
-    
-  }
-  .Ellipsis {
-    width: 416px;
-    height: 46px;
-    display: block;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    align-content: center;
   }
   span:first-child {
     width: 300px;
@@ -55,16 +46,18 @@ const List = styled.li`
     display : flex;
     flex-flow : column nowrap;
   }
-  .TextWrap > div > a> .heart {
+  .heart{
     position: absolute;
-    right: 5px;
-    top: 15px;
+    right: 30px;
+    top: 25px;
+    font-size:25px;
+    color: #000;
   }
   hr {
     width: 50px;
     text-align: left;
     color: #eee;
-    margin: 0 0 15px 0;
+    margin: 15px 0;
     padding: 0;
   }
   .TextBottom {
@@ -72,29 +65,32 @@ const List = styled.li`
     display:flex;
     justify-content: space-between;
   }
-
+  .cost{
+    display : flex;
+    flex-flow : row nowrap;
+  }
 `;
 
 const LodgingLists = ({alt,bathRoomNum,roomType, city, borough ,bedNum,bedRoomNum, roomImgUrlList ,cost, grade, id, name,peopleLimit,isCheck, isParking, isSmoking, commentCount ,...rest}) => {
-  console.log(bathRoomNum, bedNum,bedRoomNum ,cost, grade, id, name, roomImgUrlList);
+  // console.log(bathRoomNum, bedNum,bedRoomNum ,cost, grade, id, name, roomImgUrlList);
   return (
     <>      
       <List>
         <span>
-          <Border carouselImg>
+          <Border size='carouselImg'>
             {roomImgUrlList.map(src => (
-              <Imgs carousalImg src={src} />
+              <Imgs size ='carousalImg' src={src} />
             ))}
           </Border>
         </span>
         <span className="TextWrap">
           <div className="TextHead">
             <TextStyled size="blackSmall">{city} {borough} {city || borough ? '의' : ''} {roomType}</TextStyled>
-            <TextStyled className="Ellipsis" size="blackMiddle">
+            <TextStyled type="Ellipsis" size="blackMiddle">
             {name} 
             </TextStyled>
             <Link to= '/'>
-              <Bookmark className="heart" heart>
+              <Bookmark Pcheart className="heart">
                 <AiOutlineHeart />
               </Bookmark>
             </Link>
@@ -112,7 +108,7 @@ const LodgingLists = ({alt,bathRoomNum,roomType, city, borough ,bedNum,bedRoomNu
             commentCount={commentCount}/>
             <TextStyled className="cost" size="blackMiddleBold">
               <BiWon />
-              {cost}/박
+                {cost}/<TextStyled size="blackMiddle">박</TextStyled>
             </TextStyled>
           </div>
         </span>
