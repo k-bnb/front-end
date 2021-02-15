@@ -76,7 +76,6 @@ const CarouselPhotoUl = styled.ul`
 `;
 
 const SeeAllPhotosCarousel = ({ photos, current, setCurrent }) => {
-  console.log(photos[1]);
   return (
     <CarouselBlock>
       <button

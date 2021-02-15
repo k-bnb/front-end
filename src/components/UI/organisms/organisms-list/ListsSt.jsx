@@ -31,7 +31,15 @@ const MobileSize = styled.main`
   background-color: purple;
 `;
 
-const ListStyle = ({ room, totalPage, pageNationClick }) => {
+const ListStyle = ({
+  room,
+  totalPage,
+  pageNationClick,
+  currentButton,
+  setCurrentButton,
+  arrOfcurrButtons,
+  setArrOfCurrButtons,
+}) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1025px)', //1025 px 이상인 경우에만 적용(1127이상.)
   });
@@ -66,30 +74,35 @@ const ListStyle = ({ room, totalPage, pageNationClick }) => {
               roomImgUrlList,
             }) => {
               return (
-                <Link to={`/detail/${id}`} key={id}>
-                  <LodgingLists
-                    bathRoomNum={bathRoomNum}
-                    city={city}
-                    borough={borough}
-                    isCheck={isCheck}
-                    isParking={isParking}
-                    isSmoking={isSmoking}
-                    commentCount={commentCount}
-                    bedNum={bedNum}
-                    roomImgUrlList={roomImgUrlList}
-                    roomType={roomType}
-                    peopleLimit={peopleLimit}
-                    bedRoomNum={bedRoomNum}
-                    cost={cost}
-                    grade={grade}
-                    id={id}
-                    name={name}
-                  />
-                </Link>
+                <LodgingLists
+                  bathRoomNum={bathRoomNum}
+                  city={city}
+                  borough={borough}
+                  isCheck={isCheck}
+                  isParking={isParking}
+                  isSmoking={isSmoking}
+                  commentCount={commentCount}
+                  bedNum={bedNum}
+                  roomImgUrlList={roomImgUrlList}
+                  roomType={roomType}
+                  peopleLimit={peopleLimit}
+                  bedRoomNum={bedRoomNum}
+                  cost={cost}
+                  grade={grade}
+                  id={id}
+                  name={name}
+                />
               );
             },
           )}
-          <PageNation totalPage={totalPage} pageNationClick={pageNationClick} />
+          <PageNation
+            totalPage={totalPage}
+            pageNationClick={pageNationClick}
+            currentButton={currentButton}
+            setCurrentButton={setCurrentButton}
+            arrOfcurrButtons={arrOfcurrButtons}
+            setArrOfCurrButtons={setArrOfCurrButtons}
+          />
         </PcSize>
       )}
       {isTablet && (

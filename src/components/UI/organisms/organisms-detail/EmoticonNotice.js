@@ -65,8 +65,8 @@ const Refrigerator = () => (
   </EmoticonNoticeBox>
 );
 
-const EmoticonNotice = () => (
-  <div className="basic-section-padding">
+const EmoticonNotice = ({ facilityRef }) => (
+  <div className="basic-section-padding" ref={facilityRef}>
     <TypeTitle>편의시설</TypeTitle>
     <Parking />
     <Wifi />

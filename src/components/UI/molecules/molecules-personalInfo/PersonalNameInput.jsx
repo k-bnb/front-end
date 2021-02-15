@@ -37,7 +37,7 @@ const PersonalNameInputStyle = styled.div`
     }
   }
 `;
-const PersonalNameInput = () => {
+const PersonalNameInput = ({ personInfoChange }) => {
   return (
     <PersonalNameInputStyle>
       <TextStyle>
@@ -46,11 +46,7 @@ const PersonalNameInput = () => {
       <div className="person-info">
         <div>
           <label htmlFor="">이름</label>
-          <input type="text" />
-        </div>
-        <div>
-          <label htmlFor="">성</label>
-          <input type="text" />
+          <input type="text" name={'name'} onChange={personInfoChange} />
         </div>
       </div>
       <Button save>저장</Button>

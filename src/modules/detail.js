@@ -1,16 +1,25 @@
 import { createAction, handleActions } from 'redux-actions';
+import createRequestSaga from '../lib/createRequestSaga';
+import * as API from '../lib/api/detail';
+import { takeLatest } from 'redux-saga/effects';
 
 // Action Type
 const SEARCH_TO_DETAIL = 'detail/SEARCH_TO_DETAIL';
 const DATE_CHANGE_DETAIL = 'detail/DATE_CHANGE_DETAIL';
 const GUEST_CHANGE_DETAIL = 'detail/GUEST_CHANGE_DETAIL';
 const ROOM_ID_DETAIL = 'detail/ROOM_ID_DETAIL';
-const CLEAR_GUEST_DETAIL = 'detail/CLEAR_SPECIFIC_INPUT_DETAIL';
+
+const REQUEST_DETAIL = 'detail/REQUEST_DETAIL';
+const REQUEST_DETAIL_SUCCESS = 'detail/REQUEST_DETAIL_SUCCESS';
+const REQUEST_DETAIL_FAILURE = 'detail/REQUEST_DETAIL_FAILURE';
+
+const CLEAR_GUEST_DETAIL = 'detail/CLEAR_GUEST_DETAIL';
+const CLEAR_CHECKDATE_DETAIL = 'detail/CLEAR_CHECKDATE_DETAIL';
+
 // Action Creator
 export const searchToDetail = createAction(
   SEARCH_TO_DETAIL,
-  ({ roomId, startDate, endDate, numOfAdult, numOfKid, numOfInfant }) => ({
-    roomId,
+  ({ startDate, endDate, numOfAdult, numOfKid, numOfInfant }) => ({
     startDate,
     endDate,
     numOfAdult,
@@ -28,18 +37,60 @@ export const guestChangeDetail = createAction(
   (input, guest) => ({ input, guest }),
 );
 
-export const roomIdDetail = createAction(ROOM_ID_DETAIL, (id) => id);
+export const requestDetail = createAction(REQUEST_DETAIL, (id) => id);
 
 export const clearGuestDetail = createAction(CLEAR_GUEST_DETAIL);
 
+export const clearCheckDateDtail = createAction(CLEAR_CHECKDATE_DETAIL);
+
+// saga
+const requestDetailSaga = createRequestSaga(
+  REQUEST_DETAIL,
+  API.detailInformation,
+);
+
+export function* detailSaga() {
+  yield takeLatest(REQUEST_DETAIL, requestDetailSaga);
+}
+
 // initial state
 const initialStates = {
-  roomId: '',
   startDate: '',
   endDate: '',
   numOfAdult: 0,
   numOfKid: 0,
   numOfInfant: 0,
+  infoRes: {
+    id: '',
+    name: '',
+    roomType: '',
+    roomCost: 0,
+    cleaningCost: 0,
+    tax: 0,
+    peopleLimit: 0,
+    description: '',
+    checkOutTime: '13:00:00',
+    checkInTime: '15:00:00',
+    isSmoking: false,
+    isParking: false,
+    bedRoomNum: 0,
+    bedNum: 0,
+    bathRoomNum: 0,
+    grade: 0,
+    commentCount: 0,
+    locationDetail: {
+      country: null,
+      city: '',
+      borough: '',
+      neighborhood: '',
+      detailAddress: null,
+      latitude: 0,
+      longitude: 0,
+    },
+    commentList: [],
+    roomImgUrlList: [],
+  },
+  detailError: null,
 };
 
 // reducer
@@ -60,6 +111,19 @@ const detail = handleActions(
       numOfAdult: 0,
       numOfKid: 0,
       numOfInfant: 0,
+    }),
+    [CLEAR_CHECKDATE_DETAIL]: (state, _) => ({
+      ...state,
+      startDate: '',
+      endDate: '',
+    }),
+    [REQUEST_DETAIL_SUCCESS]: (state, { payload }) => ({
+      ...state,
+      infoRes: payload,
+    }),
+    [REQUEST_DETAIL_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      detailError: error,
     }),
   },
   initialStates,

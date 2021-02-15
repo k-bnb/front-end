@@ -71,10 +71,10 @@ const photos = [
   'https://a0.muscache.com/im/pictures/b23d7c84-c948-4557-b141-4f36d738d2fa.jpg?im_w=1200',
 ];
 
-const CarouselModal = ({ showModal, setShowModal }) => {
-  const [current, setCurrent] = useState(0); // 현재 보는 사진의 index
+const CarouselModal = ({ showModal, setShowModal, current, setCurrent }) => {
   const [localShowModal, setLocalShowModal] = useState(showModal);
   const [showAnimation, setShowAnimation] = useState(false);
+  console.log(current);
 
   useEffect(() => {
     // current의 변화 감지
@@ -85,9 +85,6 @@ const CarouselModal = ({ showModal, setShowModal }) => {
       }, 400);
     }
     setLocalShowModal(showModal);
-    return () => {
-      setCurrent(0);
-    };
   }, [localShowModal, showModal]);
 
   if (!localShowModal && !showAnimation) return null;
@@ -98,6 +95,7 @@ const CarouselModal = ({ showModal, setShowModal }) => {
           carouselModal
           onClick={() => {
             setShowModal(false);
+            setCurrent(0);
           }}
         />
         <Text>{`${current + 1} / ${photos.length}`}</Text>
