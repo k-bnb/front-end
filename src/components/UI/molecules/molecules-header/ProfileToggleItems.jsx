@@ -128,6 +128,7 @@ const ProfileToggleItems = ({
             modal={modal}
             setModal={setModal}
             formState={formState}
+            setFormState={setFormState}
           />
         </Modal>
       )}

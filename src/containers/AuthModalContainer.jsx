@@ -74,6 +74,9 @@ const AuthModalContainer = ({
     setIsOpen(false);
   };
 
+  const changeRegister = () => {
+    setFormState(() => 'register');
+  };
   return (
     <>
       {formState === 'login' && (
@@ -86,6 +89,7 @@ const AuthModalContainer = ({
           password={loginPassword}
           modal={modal}
           setModal={setModal}
+          changeRegister={changeRegister}
         />
       )}
       {formState === 'register' && (

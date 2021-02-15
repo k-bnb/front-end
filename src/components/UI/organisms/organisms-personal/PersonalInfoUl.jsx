@@ -33,13 +33,18 @@ const PersonalInfoUl = ({
   fix: { name, gender, birth, emailAddress, cancel },
   fixInfoBtn,
   cancelclick,
+  personInfoChange,
 }) => {
   return (
     <PersonalInfoUIStyle onClick={cancel ? cancelclick : fixInfoBtn}>
       <PersonalInfoLi>
         <div>
           <TextStyle>실명</TextStyle>
-          {name ? <PersonalNameInput /> : <TextStyle>Jeong Jeong</TextStyle>}
+          {name ? (
+            <PersonalNameInput personInfoChange={personInfoChange} />
+          ) : (
+            <TextStyle>Jeong Jeong</TextStyle>
+          )}
         </div>
         <Button name="name" className="btn" greenText>
           {!name ? '수정' : '취소'}
@@ -49,7 +54,7 @@ const PersonalInfoUl = ({
         <div className="gender">
           <TextStyle>성별</TextStyle>
           {gender ? (
-            <PersonalInfoGenderSelect />
+            <PersonalInfoGenderSelect personInfoChange={personInfoChange} />
           ) : (
             <TextStyle>지정되지 않음</TextStyle>
           )}
@@ -62,7 +67,9 @@ const PersonalInfoUl = ({
         <div>
           <TextStyle>생년월일</TextStyle>
           <TextStyle>1995년 8월 12일</TextStyle>
-          {birth && <PersonalInfoBirthinput />}
+          {birth && (
+            <PersonalInfoBirthinput personInfoChange={personInfoChange} />
+          )}
         </div>
         <Button name="birth" className="btn" greenText>
           {!birth ? '수정' : '취소'}
@@ -72,7 +79,7 @@ const PersonalInfoUl = ({
         <div>
           <TextStyle>이메일 주소</TextStyle>
           {emailAddress ? (
-            <PersonalInfoEmailInput />
+            <PersonalInfoEmailInput personInfoChange={personInfoChange} />
           ) : (
             <TextStyle>jungjh1234567@gmail.com</TextStyle>
           )}

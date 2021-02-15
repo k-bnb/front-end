@@ -99,49 +99,6 @@ function GoogleMapUse({
     },
   });
 
-  const samples = [
-    {
-      id: 1,
-      latitude: 37.5047592,
-      longitude: 127.0415586,
-      cost: '$98,765',
-      NAME: 'jinsol',
-      DESCRIPTION: 'examples-1',
-    },
-    {
-      id: 2,
-      latitude: 36.806702,
-      longitude: 126.979874,
-      cost: '$135,246',
-      NAME: 'yongmin',
-      DESCRIPTION: 'examples-2',
-    },
-    {
-      id: 3,
-      latitude: 37.894917,
-      longitude: 127.200356,
-      cost: '$12,345',
-      NAME: 'jihun',
-      DESCRIPTION: 'examples-3',
-    },
-    {
-      id: 4,
-      latitude: 36.351002,
-      longitude: 127.385002,
-      cost: '$12,345',
-      NAME: 'myungjae',
-      DESCRIPTION: 'examples-4',
-    },
-    {
-      id: 5,
-      latitude: 37.34222,
-      longitude: 127.920158,
-      cost: '$12,345',
-      NAME: 'youna',
-      DESCRIPTION: 'examples-5',
-    },
-  ];
-
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -309,12 +266,16 @@ function GoogleMapUse({
       }),
     );
   };
-
+  const [zoom, setZoom] = useState(14);
   const mapRef = useRef();
 
+  console.log(locate);
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
+  const handleZoomChanged = () => {
+    setZoom(mapRef.current.getZoom());
+  };
 
   const MapWithAMarker = withScriptjs(
     withGoogleMap((props) => {
@@ -324,6 +285,7 @@ function GoogleMapUse({
           // scrollwheel={false}
           ref={mapRef}
           defaultZoom={12}
+          zoom={zoom}
           defaultCenter={{
             lat: locationSearch.latitude,
             lng: locationSearch.longitude,
@@ -335,7 +297,9 @@ function GoogleMapUse({
           onDragEnd={dragMark}
           onBoundsChanged={() => {
             console.log('hi');
+            console.log(mapRef.current);
           }}
+          onZoomChanged={handleZoomChanged}
         >
           {roomMap.map((sample) => (
             <>
