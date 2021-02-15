@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
+import Text from './DetailText';
 
 const AverageGrade = styled.div`
   display: inline-flex;
@@ -26,12 +27,12 @@ const ScoreStar = styled(AiFillStar)`
   /* margin-top: 3px; */
 `;
 
-const Grade = ({ grade, small }) => (
-  <>
+const Grade = ({ grade, small }) => {
+  return (
     <AverageGrade small={small} className="grade">
-      {' '}
-      <ScoreStar /> score{grade}
+      <ScoreStar />
+      {grade}
     </AverageGrade>
-  </>
-);
+  );
+};
 export default Grade;

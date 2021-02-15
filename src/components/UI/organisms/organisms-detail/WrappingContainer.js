@@ -31,12 +31,14 @@ const WrappingContainer = ({
   DetailHeaderRef,
   facilityRef,
   moveToReserve,
+  infoRes,
+  reservationDates,
   detailObj,
 }) => (
   <InfoContainer>
     <DetailInfo>
-      <HostingData />
-      <TextSummary />
+      <HostingData infoRes={infoRes} />
+      <TextSummary infoRes={infoRes} />
       <TypeInfo />
       <EmoticonNotice facilityRef={facilityRef} />
     </DetailInfo>

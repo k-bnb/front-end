@@ -33,51 +33,64 @@ export const Text = styled.div`
   }
 `;
 
-const TextSummary = () => (
-  <TextSummaryContainer>
-    <SimpleSummary>
-      <div className="emoticon">
-        <AiOutlineHome />
-      </div>
-      <div>
-        <Text>집 전체</Text>
-        <Text>펜션(한국) 전체를 단독으로 사용하시게 됩니다.</Text>
-      </div>
-    </SimpleSummary>
-    <SimpleSummary>
-      <div className="emoticon">
-        <WiStars />
-      </div>
-      <div>
-        <Text>청결 강화</Text>
-        <Text>
-          에어비앤비의 강화딘 5단계 청소 절차를 준수하겠다고 동의한
-          호스트입니다.
-        </Text>
-      </div>
-    </SimpleSummary>
-    <SimpleSummary>
-      <div className="emoticon">
-        <RiDoorOpenFill />
-      </div>
-      <div>
-        <Text>셀프 체크인</Text>
-        <Text>키패드를 이용해 체크인하세요.</Text>
-      </div>
-    </SimpleSummary>
-    <SimpleSummary>
-      <div className="emoticon">
-        <RiCalendarCheckLine />
-      </div>
-      <div>
-        <Text>3월3일 3:00PM까지 무료 취소 가능 </Text>
-        <Text>
-          그 후에는 3월 4일 3:00PM 전에 예약을 취소하면 첫 1박 요금 및 서비스
-          수수료를 제외한 요금 전액이 환불됩니다.
-        </Text>
-      </div>
-    </SimpleSummary>
-  </TextSummaryContainer>
-);
+// const CheckInDate = ({ reservationDates }) => {
+//   const strStartDate = reservationDates.checkIn;
+
+//   const strArr = strStartDate.split('-');
+//   console.log(strStartDate);
+//   return { year: strArr[0], month: strArr[1] + 1, day: strArr[2] };
+// };
+
+const TextSummary = ({ infoRes }) => {
+  // console.log(infoRes);
+  // console.log(CheckInDate(infoRes).year);
+
+  return (
+    <TextSummaryContainer>
+      <SimpleSummary>
+        <div className="emoticon">
+          <AiOutlineHome />
+        </div>
+        <div>
+          <Text>집 전체</Text>
+          <Text>펜션(한국) 전체를 단독으로 사용하시게 됩니다.</Text>
+        </div>
+      </SimpleSummary>
+      <SimpleSummary>
+        <div className="emoticon">
+          <WiStars />
+        </div>
+        <div>
+          <Text>청결 강화</Text>
+          <Text>
+            에어비앤비의 강화딘 5단계 청소 절차를 준수하겠다고 동의한
+            호스트입니다.
+          </Text>
+        </div>
+      </SimpleSummary>
+      <SimpleSummary>
+        <div className="emoticon">
+          <RiDoorOpenFill />
+        </div>
+        <div>
+          <Text>셀프 체크인</Text>
+          <Text>키패드를 이용해 체크인하세요.</Text>
+        </div>
+      </SimpleSummary>
+      <SimpleSummary>
+        <div className="emoticon">
+          <RiCalendarCheckLine />
+        </div>
+        <div>
+          <Text>3월3일 3:00PM까지 무료 취소 가능 </Text>
+          <Text>
+            그 후에는 3월 4일 3:00PM 전에 예약을 취소하면 첫 1박 요금 및 서비스
+            수수료를 제외한 요금 전액이 환불됩니다.
+          </Text>
+        </div>
+      </SimpleSummary>
+    </TextSummaryContainer>
+  );
+};
 
 export { TextSummary };

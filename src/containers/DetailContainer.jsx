@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import CarouselModal from '../components/templates/templates-detail/CarouselModal';
 import Detail from '../components/templates/templates-detail/Detail';
-import { requestDetail } from '../modules/detail';
+import { requestDetail, searchToDetail } from '../modules/detail';
 import Modal from '../portal/Modal';
 import HeaderContainer from './header-containers/HeaderContainer';
-import LoaderIcon from 'react-loader-icon';
-
+// import LoaderIcon from 'react-loader-icon';
+import { detailToReserveDate, detailToReserveGuest } from '../modules/reserve';
 const DetailContainer = () => {
   const [showModal, setShowModal] = useState(false);
   const [current, setCurrent] = useState(0); // 현재 보는 사진의 index
@@ -20,18 +20,20 @@ const DetailContainer = () => {
   const dispatch = useDispatch();
   const roomId = match.params.roomId;
   const { infoRes } = useSelector((state) => state.detail);
+  const { startDate, endDate } = useSelector(
+    ({ search }) => search.searchReq.checkDateSearch,
+  );
+  const { numOfAdult, numOfKid, numOfInfant } = useSelector(
+    ({ search }) => search.searchReq.guestSearch,
+  );
 
   const isLoading = useSelector(
     (state) => state.loading['detail/REQUEST_DETAIL'],
   );
 
-  const { startDate, endDate, numOfAdult, numOfKid, numOfInfant } = useSelector(
-    (state) => state.detail,
-  );
+  const detailObj = useSelector((state) => state.detail);
   const { roomImgUrlList } = useSelector((state) => state.detail.infoRes);
   console.log(roomImgUrlList);
-
-  const detailObj = { startDate, endDate, numOfAdult, numOfKid, numOfInfant };
 
   const moveToReserve = () => {
     console.log('hi');
@@ -41,9 +43,12 @@ const DetailContainer = () => {
   };
 
   useEffect(() => {
+    dispatch(
+      searchToDetail(startDate, endDate, numOfAdult, numOfKid, numOfInfant),
+    );
     dispatch(requestDetail(roomId));
-  }, []);
-
+  }, [dispatch, roomId, startDate, endDate, numOfAdult, numOfKid, numOfInfant]);
+  // startDate, endDate, numOfAdult, numOfKid, numOfInfant,
   return (
     <>
       <HeaderContainer
@@ -80,5 +85,4 @@ const DetailContainer = () => {
     </>
   );
 };
-
 export default DetailContainer;
