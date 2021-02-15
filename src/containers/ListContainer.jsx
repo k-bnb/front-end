@@ -26,6 +26,8 @@ const ListContainer = () => {
     bathRoomNum,
   } = useSelector((state) => state.search.searchReq);
 
+  const isLoading = useSelector((state) => state.loading['search/SEARCHING']);
+
   const dispatch = useDispatch();
 
   const RoomSearchClick = () => {
@@ -169,6 +171,7 @@ const ListContainer = () => {
         setCurrentButton={setCurrentButton}
         arrOfcurrButtons={arrOfcurrButtons}
         setArrOfCurrButtons={setArrOfCurrButtons}
+        isLoading={isLoading}
       />
     </>
   );

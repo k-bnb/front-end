@@ -75,7 +75,12 @@ const CarouselPhotoUl = styled.ul`
   }
 `;
 
-const SeeAllPhotosCarousel = ({ photos, current, setCurrent }) => {
+const SeeAllPhotosCarousel = ({
+  photos,
+  current,
+  setCurrent,
+  roomImgUrlList,
+}) => {
   return (
     <CarouselBlock>
       <button
@@ -92,12 +97,12 @@ const SeeAllPhotosCarousel = ({ photos, current, setCurrent }) => {
         onClick={() => {
           setCurrent(current + 1);
         }}
-        disabled={current === photos.length - 1}
+        disabled={current === roomImgUrlList.length - 1}
       >
         <GrFormNext />
       </button>
       <CarouselPhotoUl>
-        {photos.map((photo, index) => (
+        {roomImgUrlList.map((photo, index) => (
           <li className={current === index ? 'active-li' : 'non-active-li'}>
             <img
               src={`${photo}`}

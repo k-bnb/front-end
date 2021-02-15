@@ -15,7 +15,7 @@ const DetailContainer = () => {
   const ImageContainerRef = useRef();
   const reviewRef = useRef();
   const facilityRef = useRef();
-  // const history = useHistory();
+  const history = useHistory();
   const match = useRouteMatch();
   const dispatch = useDispatch();
   const roomId = match.params.roomId;
@@ -27,6 +27,21 @@ const DetailContainer = () => {
     ({ search }) => search.searchReq.guestSearch,
   );
 
+  const isLoading = useSelector(
+    (state) => state.loading['detail/REQUEST_DETAIL'],
+  );
+
+  const detailObj = useSelector((state) => state.detail);
+  const { roomImgUrlList } = useSelector((state) => state.detail.infoRes);
+  console.log(roomImgUrlList);
+
+  const moveToReserve = () => {
+    console.log('hi');
+    if (!localStorage.getItem('token')) return;
+    history.push('/reserve');
+    window.scrollTo(0, 0);
+  };
+
   useEffect(() => {
     dispatch(
       searchToDetail(startDate, endDate, numOfAdult, numOfKid, numOfInfant),
@@ -36,7 +51,6 @@ const DetailContainer = () => {
   // startDate, endDate, numOfAdult, numOfKid, numOfInfant,
   return (
     <>
-      {/* // <LoaderIcon type={'bubbles'} /> */}
       <HeaderContainer
         DetailHeaderRef={DetailHeaderRef}
         ImageContainerRef={ImageContainerRef}
@@ -53,7 +67,10 @@ const DetailContainer = () => {
         reviewRef={reviewRef}
         facilityRef={facilityRef}
         infoRes={infoRes}
-        // moveToReserve={moveToReserve}
+        moveToReserve={moveToReserve}
+        isLoading={isLoading}
+        detailObj={detailObj}
+        roomImgUrlList={roomImgUrlList}
       />
       <Modal>
         <CarouselModal
@@ -62,6 +79,7 @@ const DetailContainer = () => {
           current={current}
           setCurrent={setCurrent}
           infoRes={infoRes}
+          roomImgUrlList={roomImgUrlList}
         />
       </Modal>
     </>

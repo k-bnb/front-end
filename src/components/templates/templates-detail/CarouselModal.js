@@ -71,9 +71,16 @@ const photos = [
   'https://a0.muscache.com/im/pictures/b23d7c84-c948-4557-b141-4f36d738d2fa.jpg?im_w=1200',
 ];
 
-const CarouselModal = ({ showModal, setShowModal, current, setCurrent }) => {
+const CarouselModal = ({
+  showModal,
+  setShowModal,
+  current,
+  setCurrent,
+  roomImgUrlList,
+}) => {
   const [localShowModal, setLocalShowModal] = useState(showModal);
   const [showAnimation, setShowAnimation] = useState(false);
+
   console.log(current);
 
   useEffect(() => {
@@ -98,7 +105,7 @@ const CarouselModal = ({ showModal, setShowModal, current, setCurrent }) => {
             setCurrent(0);
           }}
         />
-        <Text>{`${current + 1} / ${photos.length}`}</Text>
+        <Text>{`${current + 1} / ${roomImgUrlList.length}`}</Text>
         <div className="buttons-container">
           <FiShare className="share" />
           <BsHeart className="like" />
@@ -108,6 +115,7 @@ const CarouselModal = ({ showModal, setShowModal, current, setCurrent }) => {
         photos={photos}
         current={current}
         setCurrent={setCurrent}
+        roomImgUrlList={roomImgUrlList}
       />
     </CarouselModalBlock>
   );

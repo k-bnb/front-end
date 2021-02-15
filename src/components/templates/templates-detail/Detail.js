@@ -8,6 +8,8 @@ import WrappingContainer from '../../UI/organisms/organisms-detail/WrappingConta
 //import Modal from '../../../portal/Modal';
 //import LoaderIcon from 'react-loader-icon';
 import { useSelector } from 'react-redux';
+import LoadingModal from '../LoadingModal';
+import Modal from '../../../portal/Modal';
 
 const Theme = {
   laptop: `screen and (min-width: 1024px)`,
@@ -46,11 +48,10 @@ const Detail = ({
   facilityRef,
   moveToReserve,
   infoRes,
+  isLoading,
+  detailObj,
+  roomImgUrlList,
 }) => {
-  const loading = useSelector(
-    (state) => state.loading['detail/REQUEST_DETAIL'],
-  );
-
   return (
     <>
       <DetailTemplate Theme={Theme} infoRes={infoRes}>
@@ -60,15 +61,16 @@ const Detail = ({
           current={current}
           setCurrent={setCurrent}
           ImageContainerRef={ImageContainerRef}
-          roomImgUrlList={infoRes.roomImgUrlList}
+          roomImgUrlList={roomImgUrlList}
         />
         <WrappingContainer
           DetailHeaderRef={DetailHeaderRef}
           facilityRef={facilityRef}
           moveToReserve={moveToReserve}
           infoRes={infoRes}
+          detailObj={detailObj}
         />
-        {/* {loading && (
+        {/* {isLoading && (
           <Modal>
             <LoaderIcon type={'bubbles'} />
           </Modal>

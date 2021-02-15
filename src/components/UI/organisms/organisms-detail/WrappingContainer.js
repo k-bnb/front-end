@@ -33,6 +33,7 @@ const WrappingContainer = ({
   moveToReserve,
   infoRes,
   reservationDates,
+  detailObj,
 }) => (
   <InfoContainer>
     <DetailInfo>
@@ -45,6 +46,7 @@ const WrappingContainer = ({
       <BookingInfo
         DetailHeaderRef={DetailHeaderRef}
         moveToReserve={moveToReserve}
+        detailObj={detailObj}
       />
     </BookingSummaryBox>
   </InfoContainer>

@@ -34,11 +34,11 @@ const BookingInfoContainer = styled.div`
   }
 `;
 
-const BookingInfo = ({ DetailHeaderRef, moveToReserve }) => (
+const BookingInfo = ({ DetailHeaderRef, moveToReserve, detailObj }) => (
   <PositionBox>
     <BookingInfoContainer>
       <OneDayPrice />
-      <DatePersonBox />
+      <DatePersonBox detailObj={detailObj} />
       <ReserveBtn
         DetailHeaderRef={DetailHeaderRef}
         moveToReserve={moveToReserve}
