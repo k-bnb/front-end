@@ -15,6 +15,7 @@ const LoginOraganisms = ({
   email,
   password,
   onSubmit,
+  changeRegister,
 }) => {
   return (
     <ModalTemplate modal={modal} setModal={setModal} onSubmit={onSubmit}>
@@ -30,7 +31,7 @@ const LoginOraganisms = ({
       {/* 또는 border */}
       <CircleDiv borderline />
 
-      <LoginGoSignupBtn />
+      <LoginGoSignupBtn changeRegister={changeRegister} />
       <BackLogin />
     </ModalTemplate>
   );

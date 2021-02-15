@@ -319,7 +319,7 @@ const LodgingLists = ({
                 >
                   {/* <Imgs carousalImg src={imgs.img[imgs.img.length]} /> */}
 
-                  {imgs.img.map((src, i, arr) => (
+                  {roomImgUrlList.map((src, i, arr) => (
                     <>
                       <Imgs
                         carousalImg

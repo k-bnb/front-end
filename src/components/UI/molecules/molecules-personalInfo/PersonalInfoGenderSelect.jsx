@@ -11,7 +11,7 @@ const PersonalInfoGenderSelectStyle = styled.div`
   }
 `;
 
-const PersonalInfoGenderSelect = () => {
+const PersonalInfoGenderSelect = ({ personInfoChange }) => {
   const options = [
     { value: '성별', label: '성별', isDisabled: true },
     { value: '남자', label: '남자' },
@@ -23,7 +23,12 @@ const PersonalInfoGenderSelect = () => {
   return (
     <PersonalInfoGenderSelectStyle>
       <div className="select-gender">
-        <Selector defultValue={defultValue} options={options} />
+        <Selector
+          defultValue={defultValue}
+          name="gender"
+          personInfoChange={personInfoChange}
+          options={options}
+        />
       </div>
       <Button save>저장</Button>
     </PersonalInfoGenderSelectStyle>
