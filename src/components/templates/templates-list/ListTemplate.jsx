@@ -23,6 +23,10 @@ const ListTemplate = ({
   room,
   totalPage,
   pageNationClick,
+  currentPage,
+  setCurrentPage,
+  arrOfCurrButtons,
+  setArrOfCurrButtons,
 }) => {
   return (
     <div>
@@ -50,6 +54,10 @@ const ListTemplate = ({
             room={room}
             totalPage={totalPage}
             pageNationClick={pageNationClick}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            arrOfCurrButtons={arrOfCurrButtons}
+            setArrOfCurrButtons={setArrOfCurrButtons}
           />
         </div>
         <GoogleStyle style={{ flexShrink: '1' }} />

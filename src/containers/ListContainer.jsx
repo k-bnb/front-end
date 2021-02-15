@@ -101,8 +101,12 @@ const ListContainer = () => {
     );
     setSearchModalState(null);
   };
-
+  
+  const [currentPage, setCurrentPage] = useState(0);
+  const [arrOfCurrButtons, setArrOfCurrButtons] = useState([]);
+  
   const pageNationClick = (e) => {
+    setCurrentPage(e.target.name);
     const id =  e.target.name;
     dispatch(
       searching({
@@ -119,7 +123,6 @@ const ListContainer = () => {
     );  
   }
 
-  // const [currentPage, setCurrentPage] = useState(0)
 
   return (
     <>
@@ -144,6 +147,10 @@ const ListContainer = () => {
         room={room}
         totalPage={totalPage}
         pageNationClick={pageNationClick}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        arrOfCurrButtons={arrOfCurrButtons}
+        setArrOfCurrButtons={setArrOfCurrButtons}
       />
     </>
   );

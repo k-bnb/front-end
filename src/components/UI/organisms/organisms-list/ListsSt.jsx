@@ -76,7 +76,10 @@ const MobileSize = styled.main`
   
 `;
 
-const ListStyle = ({room, totalPage, pageNationClick}) => {
+const ListStyle = ({room, totalPage, pageNationClick,currentPage,
+  setCurrentPage,
+  arrOfCurrButtons,
+  setArrOfCurrButtons,}) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
   });
@@ -97,7 +100,10 @@ const ListStyle = ({room, totalPage, pageNationClick}) => {
               <LodgingLists bathRoomNum={bathRoomNum} city={city} borough={borough} isCheck={isCheck} isParking={isParking} isSmoking={isSmoking} commentCount={commentCount} bedNum={bedNum} roomImgUrlList={roomImgUrlList} roomType={roomType} peopleLimit={peopleLimit} bedRoomNum={bedRoomNum} cost={cost} grade={grade} id={id} name={name} />
             </Link>
           )})}
-          <PageNation totalPage={totalPage} pageNationClick={pageNationClick}/>
+          <PageNation totalPage={totalPage} pageNationClick={pageNationClick} currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        arrOfCurrButtons={arrOfCurrButtons}
+        setArrOfCurrButtons={setArrOfCurrButtons}/>
         </PcSize>
       )}
       {isTablet && (

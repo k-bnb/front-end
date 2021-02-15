@@ -10,17 +10,13 @@ const PageStyle = styled.div`
   border-top: 1px solid rgba(170,170,170,0.5);
 `
 
-const PageNation = ({totalPage, pageNationClick}) => {
+const PageNation = ({totalPage,pageNationClick,currentButton,setCurrentButton,arrOfCurrButtons,setArrOfCurrButtons}) => {
   let numberOfPages = [];
-
-  const [currentButton, setCurrentButton] = useState(0);
-  const [arrOfCurrButtons, setArrOfCurrButtons] = useState([])
-  
   
   Array.from({length: totalPage.totalPages}, (_,i) => {
     return numberOfPages.push(i);
   });
-  
+  console.log(arrOfCurrButtons)
   useEffect(()=>{
     let tempNumberOfPages = [...arrOfCurrButtons];
 
@@ -59,7 +55,7 @@ const PageNation = ({totalPage, pageNationClick}) => {
   },[currentButton])
 
   return(
-    <PageStyle className="PageNation" onClick={pageNationClick}>
+    <PageStyle className="PageNation">
       <div className="pagination-container">
         <button
           className={`${currentButton === 0 ? 'disabled' : ''}`}
@@ -68,13 +64,12 @@ const PageNation = ({totalPage, pageNationClick}) => {
           &#60;
         </button>
 
-        {arrOfCurrButtons.map(((item, index) => {
+        {arrOfCurrButtons.map(((page) => {
           return <button
-            key={index}
-            className={`${currentButton === item ? 'active' : ''}`}
-            onClick={() => setCurrentButton(item)}
+            className={`${currentButton === page ? 'active' : ''}`}
+            onClick={pageNationClick}
           >
-            {item}
+            {page}
           </button>
         }))}
 
