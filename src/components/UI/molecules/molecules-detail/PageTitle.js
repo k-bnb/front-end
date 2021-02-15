@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TextunderlineBtn from '../../atoms/atoms-detail/TextunderlineBtn';
 import Grade from '../../atoms/atoms-detail/Grade';
@@ -27,18 +27,22 @@ const DetailData = styled.div`
   flex-wrap: wrap;
 `;
 
-const PageTitle = ({ name }) => (
-  <AccommodationTitle>
-    <div className="title-container">
-      <Title>
-        조이 하우스 두번째 이야기 오션뷰 & 테라스/이호테우해변{name}{' '}
-      </Title>
-      <DetailData>
-        <Grade />
-        <TextunderlineBtn />
-      </DetailData>
-    </div>
-  </AccommodationTitle>
-);
+const PageTitle = ({ name, grade }) => {
+  const [showListModal, setShowListModal] = useState(false);
+
+  return (
+    <AccommodationTitle>
+      <div className="title-container">
+        <Title>
+          조이 하우스 두번째 이야기 오션뷰 & 테라스/이호테우해변{name}{' '}
+        </Title>
+        <DetailData>
+          <Grade grade />
+          <TextunderlineBtn onClick={() => {}} />
+        </DetailData>
+      </div>
+    </AccommodationTitle>
+  );
+};
 
 export { PageTitle };

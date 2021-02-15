@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 
 const UnderlineBtn = styled.button`
   color: #000;
@@ -18,9 +18,19 @@ const UnderlineBtn = styled.button`
   }
 `;
 
+const HeartEmoticon = styled(AiOutlineHeart)`
+  font-size: 18px;
+`;
+const FilledHeartEmoticon = styled(AiFillHeart)`
+  font-size: 18px;
+
+  color: red;
+`;
+
 const TextunderlineBtn = () => (
   <UnderlineBtn>
-    <AiOutlineHeart font-size="18px" /> 저장 목록
+    <HeartEmoticon />
+    저장 목록
   </UnderlineBtn>
 );
 

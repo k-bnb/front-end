@@ -1,16 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import theme from './theme';
-//import { useMediaQuery } from 'react-responsive';
 import ImageFrame from '../../UI/organisms/organisms-detail/ImageFrame';
-//import DetailInfoContainer from '../../UI/organisms/organisms-detail/DetailInfoContainer';
 import { PageTitle } from '../../UI/molecules/molecules-detail/PageTitle';
-// import { Slider } from '../../UI/organisms/organisms-detail/Carousel';
 import ImportantNotice from '../../UI/organisms/organisms-detail/ImportantNotice';
 import Review from '../../UI/organisms/organisms-detail/Review';
 import WrappingContainer from '../../UI/organisms/organisms-detail/WrappingContainer';
 
-const DetailContainer = styled.div`
+const Theme = {
+  laptop: `screen and (min-width: 1024px)`,
+  tablet: `screen and (min-width: 677px)and (max-width: 1025px)`,
+  mobile: `screen and (max-width: 677px)`,
+};
+
+const DetailTemplate = styled.div`
   padding: 80px 80px 0;
   font-size: 16px;
   font-weight: 400;
@@ -18,20 +20,28 @@ const DetailContainer = styled.div`
   color: rgb(34, 34, 34);
   margin: 0 auto;
   max-width: 1280px;
+
+  @media ${Theme.laptop} {
+    padding: 80px 80px 0;
+  }
+  @media ${Theme.tablet} {
+    padding: 80px 40px 0;
+  }
+  @media ${Theme.mobile} {
+    padding: 80px 24px 0;
+  }
 `;
 
-const Detail = ({ showModal, setShowModal }) => {
+const Detail = ({ setShowModal, Theme }) => {
   return (
     <>
-      <DetailContainer theme={theme}>
-        <PageTitle />
+      <DetailTemplate Theme={Theme}>
+        <PageTitle name />
         <ImageFrame setShowModal={setShowModal} />
         <WrappingContainer />
-        {/* <SavedListsModal /> */}
-      </DetailContainer>
+      </DetailTemplate>
       <Review />
       <ImportantNotice />
-      {/* <Slider /> */}
     </>
   );
 };
