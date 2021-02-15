@@ -6,7 +6,12 @@ import HeaderDetail from '../../components/templates/templates-header/HeaderDeta
 import { useSelector } from 'react-redux';
 import qs from 'query-string';
 
-const HeaderContainer = (props) => {
+const HeaderContainer = ({
+  DetailHeaderRef,
+  ImageContainerRef,
+  reviewRef,
+  facilityRef,
+}) => {
   const history = useHistory();
   const match = useRouteMatch();
   console.log(match);
@@ -26,7 +31,6 @@ const HeaderContainer = (props) => {
   };
   const [navModalState, setNavModalState] = useState(initialNavModalState); // 조건검색 모달 4개 open 여부
   const [isClickedOutside, setIsClickedOutside] = useState(false); // 어두운 영역 클릭시 전체 조건 초기화
-  const [isScrolledDetail, setIsScrolledDetail] = useState(false); // detail 페이지에서 사진 하단부 까지 스크롤되면 헤더를 교체해준다.
 
   const SearchTypeHandler = (searchType) => {
     setNavModalState({ ...initialNavModalState, [searchType]: true }); // 전달받은 타입값만 true로 설정.
@@ -52,15 +56,7 @@ const HeaderContainer = (props) => {
 
   useEffect(() => {
     const scrollHandler = () => {
-      console.log(window.scrollY);
       setIsClicked(false);
-
-      // detail 페이지 일 경우에만 실행되는 조건문, 513 <= scroll <= 1127 -> resToFixed만 true
-      if (match.params.roomId && window.scrollY >= 513) {
-        setIsScrolledDetail(true);
-      } else if (match.params.roomId && window.scrollY < 513) {
-        setIsScrolledDetail(false);
-      }
 
       if (window.scrollY >= 80) {
         setIsScrolled(true);
@@ -129,14 +125,16 @@ const HeaderContainer = (props) => {
           navModalState={navModalState}
           setNavModalState={setNavModalState}
           initialNavModalState={initialNavModalState}
-          isScrolledDetail={isScrolledDetail}
-          setIsScrolledDetail={setIsScrolledDetail}
           SearchTypeHandler={SearchTypeHandler}
           locationSearch={locationSearch}
           checkDateSearch={checkDateSearch}
           guestSearch={guestSearch}
           moveFocusNext={moveFocusNext}
           clickHandler={clickHandler}
+          DetailHeaderRef={DetailHeaderRef}
+          ImageContainerRef={ImageContainerRef}
+          reviewRef={reviewRef}
+          facilityRef={facilityRef}
         />
       )}
     </>

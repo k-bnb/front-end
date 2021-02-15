@@ -23,12 +23,12 @@ const PersonalInfoEmailInputStyle = styled.div`
   }
 `;
 
-const PersonalInfoEmailInput = () => {
+const PersonalInfoEmailInput = ({ personInfoChange }) => {
   return (
     <PersonalInfoEmailInputStyle>
       <TextStyle>언제든지 확인하실 수 있는 주소를 사용하세요</TextStyle>
       <div>
-        <input type="text" />
+        <input type="text" name="email" onChange={personInfoChange} />
       </div>
       <Button save>저장</Button>
     </PersonalInfoEmailInputStyle>

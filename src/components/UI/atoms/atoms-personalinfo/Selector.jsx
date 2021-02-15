@@ -112,7 +112,7 @@ const SelectStyle = styled.div`
     }
   }
 `;
-const Selector = ({ options, defultValue }) => {
+const Selector = ({ options, defultValue, name, personInfoChange }) => {
   const [defaultvalues, setdefaultvalues] = useState('');
 
   const labelRef = useRef();
@@ -123,14 +123,20 @@ const Selector = ({ options, defultValue }) => {
 
   const click = (e) => {
     if (!e.target.matches('.select-option')) {
-      setdefaultvalues(e.target.name);
+      setdefaultvalues(e.target.value);
       labelRef.current.checked = false;
     }
   };
 
   return (
     <SelectStyle>
-      <input ref={labelRef} type="checkbox" id="selectBtn" className="box" />
+      <input
+        ref={labelRef}
+        name={name}
+        type="checkbox"
+        id="selectBtn"
+        className="box"
+      />
       <label htmlFor="selectBtn">
         {defaultvalues}
         <RiArrowDownSLine />
@@ -139,7 +145,9 @@ const Selector = ({ options, defultValue }) => {
         {options.map((item, i) => (
           <div key={i}>
             <button
-              name={item.value}
+              onClick={personInfoChange}
+              name={'gender'}
+              value={item.value}
               className={item.isDisabled ? 'disabled' : ''}
             >
               <AiOutlineCheck />

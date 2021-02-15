@@ -28,6 +28,10 @@ const ListTemplate = ({
   bedNum,
   bedRoomNum,
   bathRoomNum,
+  currentButton,
+  setCurrentButton,
+  arrOfcurrButtons,
+  setArrOfCurrButtons,
 }) => {
   return (
     <div>
@@ -55,6 +59,10 @@ const ListTemplate = ({
             room={room}
             totalPage={totalPage}
             pageNationClick={pageNationClick}
+            currentButton={currentButton}
+            setCurrentButton={setCurrentButton}
+            arrOfcurrButtons={arrOfcurrButtons}
+            setArrOfCurrButtons={setArrOfCurrButtons}
           />
         </div>
         <GoogleStyle

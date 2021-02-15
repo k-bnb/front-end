@@ -31,7 +31,15 @@ const MobileSize = styled.main`
   background-color: purple;
 `;
 
-const ListStyle = ({ room, totalPage, pageNationClick }) => {
+const ListStyle = ({
+  room,
+  totalPage,
+  pageNationClick,
+  currentButton,
+  setCurrentButton,
+  arrOfcurrButtons,
+  setArrOfCurrButtons,
+}) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1025px)', //1025 px 이상인 경우에만 적용(1127이상.)
   });
@@ -87,7 +95,14 @@ const ListStyle = ({ room, totalPage, pageNationClick }) => {
               );
             },
           )}
-          <PageNation totalPage={totalPage} pageNationClick={pageNationClick} />
+          <PageNation
+            totalPage={totalPage}
+            pageNationClick={pageNationClick}
+            currentButton={currentButton}
+            setCurrentButton={setCurrentButton}
+            arrOfcurrButtons={arrOfcurrButtons}
+            setArrOfCurrButtons={setArrOfCurrButtons}
+          />
         </PcSize>
       )}
       {isTablet && (

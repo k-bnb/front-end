@@ -5,6 +5,9 @@ import { PageTitle } from '../../UI/molecules/molecules-detail/PageTitle';
 import ImportantNotice from '../../UI/organisms/organisms-detail/ImportantNotice';
 import Review from '../../UI/organisms/organisms-detail/Review';
 import WrappingContainer from '../../UI/organisms/organisms-detail/WrappingContainer';
+import Modal from '../../../portal/Modal';
+import LoaderIcon from 'react-loader-icon';
+import { useSelector } from 'react-redux';
 
 const Theme = {
   laptop: `screen and (min-width: 1024px)`,
@@ -32,6 +35,7 @@ const DetailTemplate = styled.div`
   }
 `;
 
+<<<<<<< HEAD
 const Detail = ({ setShowModal, Theme }) => {
   return (
     <>
@@ -41,6 +45,46 @@ const Detail = ({ setShowModal, Theme }) => {
         <WrappingContainer />
       </DetailTemplate>
       <Review />
+=======
+const Detail = ({
+  showModal,
+  setShowModal,
+  current,
+  setCurrent,
+  DetailHeaderRef,
+  ImageContainerRef,
+  reviewRef,
+  facilityRef,
+  moveToReserve,
+}) => {
+  const loading = useSelector(
+    (state) => state.loading['detail/REQUEST_DETAIL'],
+  );
+
+  return (
+    <>
+      <DetailContainer theme={theme}>
+        <PageTitle />
+        <ImageFrame
+          setShowModal={setShowModal}
+          current={current}
+          setCurrent={setCurrent}
+          ImageContainerRef={ImageContainerRef}
+        />
+        <WrappingContainer
+          DetailHeaderRef={DetailHeaderRef}
+          facilityRef={facilityRef}
+          moveToReserve={moveToReserve}
+        />
+        {/* {loading && (
+          <Modal>
+            <LoaderIcon type={'bubbles'} />
+          </Modal>
+        )} */}
+        {/* <SavedListsModal /> */}
+      </DetailContainer>
+      <Review reviewRef={reviewRef} />
+>>>>>>> 93b85d8bda9d84d59a821f5acab2b9787aabcc41
       <ImportantNotice />
     </>
   );
