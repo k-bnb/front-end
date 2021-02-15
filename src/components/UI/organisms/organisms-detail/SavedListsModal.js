@@ -3,6 +3,7 @@ import styled from './styled-components';
 import { GrFormClose } from './react-icons/gr';
 import { AiOutlinePlus } from './react-icons/ai';
 import '../../atoms/atoms-detail/DetailBasicStyle.css';
+import { useEffect, useState } from 'react';
 
 const Modalcontainer = styled.div`
   inset: 0px;
@@ -125,25 +126,35 @@ const DetailData = ({ date, location, number }) => (
   </>
 );
 
-const SavedListsModal = () => (
-  <Modalcontainer className="basic-flex">
-    <SavedLists>
-      <CancelBtn>
-        <GrFormClose />
-      </CancelBtn>
-      <ModalHeader className="basic-flex">목록에 저장하기</ModalHeader>
-      <div className="saved-item-container">
-        <SavedItem className="basic-flex">
-          <ItemImage>
-            <AiOutlinePlus className="plus-icon" />
-          </ItemImage>
-          <ItemData>
-            <DetailData location={'새로운 목록 만들기'}></DetailData>
-          </ItemData>
-        </SavedItem>
-      </div>
-    </SavedLists>
-  </Modalcontainer>
-);
+const SavedListsModal = ({ showListModal, setShowListModal }) => {
+  useEffect(() => {
+    setShowListModal(true);
+  }, [setShowListModal]);
+
+  return (
+    <Modalcontainer className="basic-flex">
+      <SavedLists>
+        <CancelBtn
+          onClick={() => {
+            setShowListModal(false);
+          }}
+        >
+          <GrFormClose />
+        </CancelBtn>
+        <ModalHeader className="basic-flex">목록에 저장하기</ModalHeader>
+        <div className="saved-item-container">
+          <SavedItem className="basic-flex">
+            <ItemImage>
+              <AiOutlinePlus className="plus-icon" />
+            </ItemImage>
+            <ItemData>
+              <DetailData location={'새로운 목록 만들기'}></DetailData>
+            </ItemData>
+          </SavedItem>
+        </div>
+      </SavedLists>
+    </Modalcontainer>
+  );
+};
 
 export default SavedListsModal;

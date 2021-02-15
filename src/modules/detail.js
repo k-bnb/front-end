@@ -2,24 +2,20 @@ import { createAction, handleActions } from 'redux-actions';
 import createRequestSaga from '../lib/createRequestSaga';
 import * as API from '../lib/api/detail';
 import { takeLatest } from 'redux-saga/effects';
-
 // Action Type
 const SEARCH_TO_DETAIL = 'detail/SEARCH_TO_DETAIL';
 const DATE_CHANGE_DETAIL = 'detail/DATE_CHANGE_DETAIL';
 const GUEST_CHANGE_DETAIL = 'detail/GUEST_CHANGE_DETAIL';
 const ROOM_ID_DETAIL = 'detail/ROOM_ID_DETAIL';
-
 const REQUEST_DETAIL = 'detail/REQUEST_DETAIL';
 const REQUEST_DETAIL_SUCCESS = 'detail/REQUEST_DETAIL_SUCCESS';
 const REQUEST_DETAIL_FAILURE = 'detail/REQUEST_DETAIL_FAILURE';
-
 const CLEAR_GUEST_DETAIL = 'detail/CLEAR_GUEST_DETAIL';
 const CLEAR_CHECKDATE_DETAIL = 'detail/CLEAR_CHECKDATE_DETAIL';
-
 // Action Creator
 export const searchToDetail = createAction(
   SEARCH_TO_DETAIL,
-  ({ startDate, endDate, numOfAdult, numOfKid, numOfInfant }) => ({
+  (startDate, endDate, numOfAdult, numOfKid, numOfInfant) => ({
     startDate,
     endDate,
     numOfAdult,
@@ -27,7 +23,6 @@ export const searchToDetail = createAction(
     numOfInfant,
   }),
 );
-
 export const dateChangeDetail = createAction(
   DATE_CHANGE_DETAIL,
   (input, date) => ({ input, date }),
@@ -36,23 +31,17 @@ export const guestChangeDetail = createAction(
   GUEST_CHANGE_DETAIL,
   (input, guest) => ({ input, guest }),
 );
-
 export const requestDetail = createAction(REQUEST_DETAIL, (id) => id);
-
 export const clearGuestDetail = createAction(CLEAR_GUEST_DETAIL);
-
 export const clearCheckDateDtail = createAction(CLEAR_CHECKDATE_DETAIL);
-
 // saga
 const requestDetailSaga = createRequestSaga(
   REQUEST_DETAIL,
   API.detailInformation,
 );
-
 export function* detailSaga() {
   yield takeLatest(REQUEST_DETAIL, requestDetailSaga);
 }
-
 // initial state
 const initialStates = {
   startDate: '',
@@ -92,11 +81,20 @@ const initialStates = {
   },
   detailError: null,
 };
-
 // reducer
 const detail = handleActions(
   {
-    [SEARCH_TO_DETAIL]: (state, { payload }) => ({ ...state, ...payload }),
+    [SEARCH_TO_DETAIL]: (
+      state,
+      { payload: { startDate, endDate, numOfAdult, numOfKid, numOfInfant } },
+    ) => ({
+      ...state,
+      startDate,
+      endDate,
+      numOfAdult,
+      numOfKid,
+      numOfInfant,
+    }),
     [DATE_CHANGE_DETAIL]: (state, { payload: { input, date } }) => ({
       ...state,
       [input]: date,
@@ -117,10 +115,13 @@ const detail = handleActions(
       startDate: '',
       endDate: '',
     }),
-    [REQUEST_DETAIL_SUCCESS]: (state, { payload }) => ({
-      ...state,
-      infoRes: payload,
-    }),
+    [REQUEST_DETAIL_SUCCESS]: (state, { payload: infoRes }) => {
+      sessionStorage.setItem('detailRes', JSON.stringify(infoRes));
+      return {
+        ...state,
+        infoRes,
+      };
+    },
     [REQUEST_DETAIL_FAILURE]: (state, { payload: error }) => ({
       ...state,
       detailError: error,
@@ -128,5 +129,4 @@ const detail = handleActions(
   },
   initialStates,
 );
-
 export default detail;

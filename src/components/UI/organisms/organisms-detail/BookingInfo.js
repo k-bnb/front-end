@@ -9,7 +9,7 @@ import TotalPrice from '../../molecules/molecules-detail/TotalPrice';
 const PositionBox = styled.div`
   position: sticky;
   z-index: 100;
-  top: 200px;
+  top: 160px;
   margin-bottom: 100px;
 `;
 

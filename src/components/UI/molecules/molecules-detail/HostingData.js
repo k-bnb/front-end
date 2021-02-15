@@ -6,6 +6,10 @@ const HostingDataContainer = styled.div`
   padding: 48px 0 24px;
 `;
 
+const dataWrapper = styled.div`
+  display: flex;
+`;
+
 const HostInfo = styled.div`
   font-weight: 600;
   font-size: 22px;
@@ -13,15 +17,23 @@ const HostInfo = styled.div`
   margin-bottom: 8px;
 `;
 
-const HostingData = ({ peopleLimit, bedRoomNum, bedNum, bathRoomNum }) => (
+const HostingData = ({ infoRes }) => (
   <HostingDataContainer>
     <HostInfo>Joy님이 호스팅하는 펜션</HostInfo>
-    <div className="simple-data">
-      <Text big>최대 인원 2명{peopleLimit}.</Text>
-      <Text big>침실 1개{bedRoomNum}.</Text>
-      <Text big>침대 1개{bedNum}</Text>
-      <Text big>욕실 1개{bathRoomNum}</Text>
-    </div>
+    <dataWrapper>
+      <Text big noPadding>
+        최대 인원 {infoRes.peopleLimit}명.
+      </Text>
+      <Text big noPadding>
+        침실 {infoRes.bedRoomNum}개.
+      </Text>
+      <Text big noPadding>
+        침대 {infoRes.bedNum}개.
+      </Text>
+      <Text big noPadding>
+        욕실 {infoRes.bathRoomNum}개
+      </Text>
+    </dataWrapper>
   </HostingDataContainer>
 );
 
