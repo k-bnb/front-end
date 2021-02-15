@@ -14,7 +14,7 @@ const GuestNumberUnitOuterBlock = styled.div`
   background-color: transparent;
 `;
 
-const SearchButtonUnit = (props) => {
+const SearchButtonUnit = ({ locationSearch, dispatch, SearchTypeHandler }) => {
   const history = useHistory();
   const buttonRef = useRef();
 
@@ -22,6 +22,11 @@ const SearchButtonUnit = (props) => {
     <GuestNumberUnitOuterBlock className="search-button-unit">
       <SearchButton
         onClick={() => {
+          // 위치정보값이 비어있을 경우는, 위치정보 모달창을 띄워주고 검색이 되는것을 막는다.
+          if (!locationSearch.latitude) {
+            SearchTypeHandler('location');
+            return;
+          }
           history.push('/rooms');
         }}
       />

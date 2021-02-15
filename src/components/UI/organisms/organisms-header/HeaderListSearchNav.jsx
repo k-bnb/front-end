@@ -103,16 +103,15 @@ const HeaderMainSearchNav = ({
   navModalState,
   setNavModalState,
   SearchTypeHandler,
+  checkDateSearch,
+  guestSearch,
   clickHandler,
+  moveFocusNext,
 }) => {
   const destinationName = useSelector((state) => state.search.destinationName);
-  const { checkDateSearch, guestSearch } = useSelector(
-    (state) => state.search.searchReq,
-  );
-  console.log('ㅇ', destinationName);
-
   const { startDate, endDate } = checkDateSearch;
   const { numOfAdult, numOfKid } = guestSearch;
+
   return (
     <>
       <HeaderListSearchNavBlock
@@ -126,11 +125,13 @@ const HeaderMainSearchNav = ({
               SearchTypeHandler={SearchTypeHandler}
               navModalState={navModalState}
               setNavModalState={setNavModalState}
+              moveFocusNext={moveFocusNext}
             />
             <SearchNavDatesUnit
               SearchTypeHandler={SearchTypeHandler}
               navModalState={navModalState}
               setNavModalState={setNavModalState}
+              moveFocusNext={moveFocusNext}
             />
             <SearchNavGuestUnit
               SearchTypeHandler={SearchTypeHandler}

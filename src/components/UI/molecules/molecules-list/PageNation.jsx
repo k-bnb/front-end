@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import Button from "../../atoms/atoms-list/Button";
-import './pagenation.css'
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import Button from '../../atoms/atoms-list/Button';
 
 const PageStyle = styled.div`
-  min-width:547px;
-  text-align:center;
+  min-width: 547px;
+
+  text-align: center;
   padding: 40px;
   border-top: 1px solid rgba(170,170,170,0.5);
 `
@@ -81,7 +81,7 @@ const PageNation = ({totalPage,pageNationClick,currentButton,setCurrentButton,ar
         </button>
       </div>
     </PageStyle>
-  )
-}
+  );
+};
 
 export default PageNation;

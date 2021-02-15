@@ -5,7 +5,10 @@ const SEARCH_TO_DETAIL = 'detail/SEARCH_TO_DETAIL';
 const DATE_CHANGE_DETAIL = 'detail/DATE_CHANGE_DETAIL';
 const GUEST_CHANGE_DETAIL = 'detail/GUEST_CHANGE_DETAIL';
 const ROOM_ID_DETAIL = 'detail/ROOM_ID_DETAIL';
-const CLEAR_GUEST_DETAIL = 'detail/CLEAR_SPECIFIC_INPUT_DETAIL';
+
+const CLEAR_GUEST_DETAIL = 'detail/CLEAR_GUEST_DETAIL';
+const CLEAR_CHECKDATE_DETAIL = 'detail/CLEAR_CHECKDATE_DETAIL';
+
 // Action Creator
 export const searchToDetail = createAction(
   SEARCH_TO_DETAIL,
@@ -31,6 +34,8 @@ export const guestChangeDetail = createAction(
 export const roomIdDetail = createAction(ROOM_ID_DETAIL, (id) => id);
 
 export const clearGuestDetail = createAction(CLEAR_GUEST_DETAIL);
+
+export const clearCheckDateDtail = createAction(CLEAR_CHECKDATE_DETAIL);
 
 // initial state
 const initialStates = {
@@ -60,6 +65,11 @@ const detail = handleActions(
       numOfAdult: 0,
       numOfKid: 0,
       numOfInfant: 0,
+    }),
+    [CLEAR_CHECKDATE_DETAIL]: (state, _) => ({
+      ...state,
+      startDate: '',
+      endDate: '',
     }),
   },
   initialStates,

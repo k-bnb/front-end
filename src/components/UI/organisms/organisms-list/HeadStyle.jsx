@@ -2,7 +2,6 @@ import SearchData from '../../molecules/molecules-list/SearchData';
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
 
-
 const PcSize = styled.main`
   /* width: 80px; */
   /* padding-top:100px; */
@@ -27,7 +26,6 @@ const HeadStyle = ({
   plusBtn,
   searchBtn,
   costState,
-  
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
@@ -38,7 +36,7 @@ const HeadStyle = ({
   const isMobile = useMediaQuery({
     query: `(max-width: 743px)`, //744px 이하인 경우에만 적용(744이하.)
   });
-  console.log(costState)
+
   return (
     <>
       {isPc && (

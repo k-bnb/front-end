@@ -82,7 +82,7 @@ const CalendarNewBlock = styled.div`
   }
 `;
 
-function Datepicker({ setNavModalState }) {
+function Datepicker({ setNavModalState, moveFocusNext }) {
   const dispatch = useDispatch();
   const { checkDateSearch } = useSelector(({ search }) => search.searchReq);
 
@@ -106,14 +106,15 @@ function Datepicker({ setNavModalState }) {
   }
 
   const handleOnDateChange = (startDate, endDate) => {
-    // if (moment()._d > startDate) {
-    //   console.log('error');
+    // if (endDate > startDate) {
+    //   dispatch()
     //   return;
     // }
 
     if (startDate.startDate && !startDate.endDate) {
       let startD = moment(startDate.startDate._d).format('YYYY-MM-DD');
       dispatch(dateInput('startDate', startD)); // 시작일만 선택시 시작일 dispatch
+      moveFocusNext('checkIn');
       setdateRange({ startDate: startD, endDate: startD });
     }
     if (startDate.startDate && startDate.endDate) {

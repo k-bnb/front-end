@@ -20,11 +20,9 @@ import { locationInput, destinationInput } from '../../../../modules/search';
 const libraries = ['places'];
 
 // app 전체 컴포넌트
-const LocationSearchInput = ({ SearchTypeHandler }) => {
+const LocationSearchInput = ({ SearchTypeHandler, moveFocusNext }) => {
   const { isLoaded, loadError } = useLoadScript({
-    // googleMapsApiKey: 'AIzaSyDi2VswS8ZRJ3Vk6aDl0Mx3RbxI27GeXbQ', 내 코드
-    googleMapsApiKey: 'AIzaSyC6KyJE5Cb_kVrW02y-mkWEDGlrUfodq6E',
-
+    googleMapsApiKey: 'AIzaSyC9pRTw-7zb847DyWLD-fUujKxvlG01s08',
     libraries,
   });
 
@@ -33,12 +31,15 @@ const LocationSearchInput = ({ SearchTypeHandler }) => {
 
   return (
     <div className="location-search-input-outer-container">
-      <Search SearchTypeHandler={SearchTypeHandler} />
+      <Search
+        SearchTypeHandler={SearchTypeHandler}
+        moveFocusNext={moveFocusNext}
+      />
     </div>
   );
 };
 
-function Search({ panTo, SearchTypeHandler }) {
+function Search({ panTo, SearchTypeHandler, moveFocusNext }) {
   const {
     ready,
     value, // value는 사용자가 input에 검색한 값
@@ -71,7 +72,6 @@ function Search({ panTo, SearchTypeHandler }) {
 
           // address는 유저가 선택한 제안 값
           try {
-            console.log('jjjjdfjfdsj');
             const results = await getGeocode({ address }); // 유저가 검색한 address를 인수로 전달하여 promise를 반환받음.
             console.log(results[0]);
             const { lat, lng } = await getLatLng(results[0]); // 결과에서 lat과 lng정보를 추출
@@ -86,9 +86,10 @@ function Search({ panTo, SearchTypeHandler }) {
                 longitudeMin: results[0].geometry.bounds.Qa.i,
               }),
             );
+            moveFocusNext('location');
+
             console.log('ㅇㅇ', results[0]);
           } catch (error) {
-            console.log('failfail');
             console.error('error');
           }
         }}

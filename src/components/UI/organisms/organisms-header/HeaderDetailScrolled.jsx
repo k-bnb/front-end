@@ -35,13 +35,14 @@ const HeaderDetailScrolledBlock = styled.div`
   box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.1);
 
   ul {
-    width: 20%;
+    width: 200px;
     height: 100%;
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     justify-content: space-between;
+    white-space: nowrap;
   }
 
   .header-detail-list {
@@ -116,7 +117,13 @@ const HeaderDetailScrolledBlock = styled.div`
     `}
 `;
 
-const HeaderDetailScrolled = ({ showButton, scrollToHandler }) => {
+const HeaderDetailScrolled = ({
+  showButton,
+  scrollToHandler,
+  scrollToElement,
+  reviewRef,
+  facilityRef,
+}) => {
   const [localShowButton, setLocalShowButton] = useState(showButton);
   const [displayAnimation, setDisplayAnimation] = useState(false);
 
@@ -144,7 +151,7 @@ const HeaderDetailScrolled = ({ showButton, scrollToHandler }) => {
           noPadding
           className="header-detail-list"
           onClick={() => {
-            scrollToHandler(1178); // 편의시설로 이동
+            scrollToElement(facilityRef); // 편의시설로 이동
           }}
         >
           편의시설
@@ -153,7 +160,8 @@ const HeaderDetailScrolled = ({ showButton, scrollToHandler }) => {
           noPadding
           className="header-detail-list"
           onClick={() => {
-            scrollToHandler(1520); // 편의시설로 이동
+            // scrollToHandler(1720); // 후기로 이동
+            scrollToElement(reviewRef);
           }}
         >
           후기

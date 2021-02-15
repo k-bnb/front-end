@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import HeaderListTop from '../../UI/organisms/organisms-header/HeaderListTop';
-import HeaderListSearchNav from '../../UI/organisms/organisms-header/HeaderListSearchNav';
 import HeaderListSearchNavContainer from '../../../containers/header-containers/HeaderListSearchNavContainer';
 import { useClickOutside } from '../../../lib/useClickOutside';
 
@@ -53,6 +52,12 @@ const HeaderList = ({
   initialNavModalState,
   isClickedOutside,
   setIsClickedOutside,
+  SearchTypeHandler,
+  locationSearch,
+  checkDateSearch,
+  guestSearch,
+  moveFocusNext,
+  clickHandler,
 }) => {
   const blackOutsideRef = useClickOutside(() => {
     if (isClicked && isScrolled && !isClickedOutside) {
@@ -88,6 +93,12 @@ const HeaderList = ({
           navModalState={navModalState}
           setNavModalState={setNavModalState}
           initialNavModalState={initialNavModalState}
+          SearchTypeHandler={SearchTypeHandler}
+          locationSearch={locationSearch}
+          checkDateSearch={checkDateSearch}
+          guestSearch={guestSearch}
+          moveFocusNext={moveFocusNext}
+          clickHandler={clickHandler}
         />
       </HeaderListBlock>
     </>

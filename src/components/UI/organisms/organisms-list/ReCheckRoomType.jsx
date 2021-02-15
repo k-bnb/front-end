@@ -72,7 +72,6 @@ const ReCheckRoomTypeStyle = styled.div`
 `;
 
 const ReCheckRoomType = ({ roomTypes, roomType }) => {
-  console.log(roomType);
   return (
     <ReCheckRoomTypeStyle>
       <div className="checkRooms">

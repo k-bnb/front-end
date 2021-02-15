@@ -13,9 +13,11 @@ import { BiWon } from 'react-icons/bi';
 
 const PcSize = styled.main`
   min-height: calc(100vh - 80px);
-  padding-left: 24px;
-  padding-right: 24px;
-  margin : 0 auto;
+  background-color: #eee;
+  padding: 0 24px;
+  ul {
+    width: 100%;
+  }
 `;
 
 const TabletSize = styled.main`
@@ -76,10 +78,15 @@ const MobileSize = styled.main`
   
 `;
 
-const ListStyle = ({room, totalPage, pageNationClick,currentPage,
-  setCurrentPage,
-  arrOfCurrButtons,
-  setArrOfCurrButtons,}) => {
+const ListStyle = ({
+  room,
+  totalPage,
+  pageNationClick,
+  currentButton,
+  setCurrentButton,
+  arrOfcurrButtons,
+  setArrOfCurrButtons,
+}) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
   });
@@ -89,31 +96,106 @@ const ListStyle = ({room, totalPage, pageNationClick,currentPage,
   const isMobile = useMediaQuery({
     query: `(max-width: 743px)`, //744px 이하인 경우에만 적용(744이하.)
   });
-  console.log(room,totalPage,pageNationClick);
   return (
     <>
       {isPc && (
         <PcSize className="Listmain">
-          {room.map(({bathRoomNum, roomType, city, borough  ,bedNum,bedRoomNum ,cost, grade, id, name ,peopleLimit, isCheck, isParking, isSmoking, commentCount,roomImgUrlList}) => {
-          return (
-            <Link to={`/detail/${id}`} key={id} style={{textDecoration:'none'}}>
-              <LodgingLists bathRoomNum={bathRoomNum} city={city} borough={borough} isCheck={isCheck} isParking={isParking} isSmoking={isSmoking} commentCount={commentCount} bedNum={bedNum} roomImgUrlList={roomImgUrlList} roomType={roomType} peopleLimit={peopleLimit} bedRoomNum={bedRoomNum} cost={cost} grade={grade} id={id} name={name} />
-            </Link>
-          )})}
-          <PageNation totalPage={totalPage} pageNationClick={pageNationClick} currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        arrOfCurrButtons={arrOfCurrButtons}
-        setArrOfCurrButtons={setArrOfCurrButtons}/>
+          {room.map(
+            ({
+              bathRoomNum,
+              roomType,
+              city,
+              borough,
+              bedNum,
+              bedRoomNum,
+              cost,
+              grade,
+              id,
+              name,
+              peopleLimit,
+              isCheck,
+              isParking,
+              isSmoking,
+              commentCount,
+              roomImgUrlList,
+            }) => {
+              return (
+                <LodgingLists
+                  bathRoomNum={bathRoomNum}
+                  city={city}
+                  borough={borough}
+                  isCheck={isCheck}
+                  isParking={isParking}
+                  isSmoking={isSmoking}
+                  commentCount={commentCount}
+                  bedNum={bedNum}
+                  roomImgUrlList={roomImgUrlList}
+                  roomType={roomType}
+                  peopleLimit={peopleLimit}
+                  bedRoomNum={bedRoomNum}
+                  cost={cost}
+                  grade={grade}
+                  id={id}
+                  name={name}
+                />
+              );
+            },
+          )}
+          <PageNation
+            totalPage={totalPage}
+            pageNationClick={pageNationClick}
+            currentButton={currentButton}
+            setCurrentButton={setCurrentButton}
+            arrOfcurrButtons={arrOfcurrButtons}
+            setArrOfCurrButtons={setArrOfCurrButtons}
+          />
         </PcSize>
       )}
       {isTablet && (
         <TabletSize className="Listmain">
-          {room.map(({bathRoomNum, roomType, city, borough ,bedNum,bedRoomNum ,cost, grade, id, name ,peopleLimit, isCheck, isParking, isSmoking, commentCount,roomImgUrlList}) => {
-          return (
-            <Link to={`/detail/${id}`} key={id} style={{textDecoration:'none'}}>
-            <LodgingLists bathRoomNum={bathRoomNum}  city={city} borough={borough}  isCheck={isCheck} isParking={isParking} isSmoking={isSmoking} commentCount={commentCount} bedNum={bedNum} roomImgUrlList={roomImgUrlList} roomType={roomType} peopleLimit={peopleLimit} bedRoomNum={bedRoomNum} cost={cost} grade={grade} id={id} name={name} />
-            </Link>
-          )})}
+          {room.map(
+            ({
+              bathRoomNum,
+              roomType,
+              city,
+              borough,
+              bedNum,
+              bedRoomNum,
+              cost,
+              grade,
+              id,
+              name,
+              peopleLimit,
+              isCheck,
+              isParking,
+              isSmoking,
+              commentCount,
+              roomImgUrlList,
+            }) => {
+              return (
+                <Link to={`/detail/${id}`} key={id}>
+                  <LodgingLists
+                    bathRoomNum={bathRoomNum}
+                    city={city}
+                    borough={borough}
+                    isCheck={isCheck}
+                    isParking={isParking}
+                    isSmoking={isSmoking}
+                    commentCount={commentCount}
+                    bedNum={bedNum}
+                    roomImgUrlList={roomImgUrlList}
+                    roomType={roomType}
+                    peopleLimit={peopleLimit}
+                    bedRoomNum={bedRoomNum}
+                    cost={cost}
+                    grade={grade}
+                    id={id}
+                    name={name}
+                  />
+                </Link>
+              );
+            },
+          )}
           <PageNation totalPage={totalPage} pageNationClick={pageNationClick} />
         </TabletSize>
       )}

@@ -25,9 +25,8 @@ const ListContainer = () => {
     bedRoomNum,
     bathRoomNum,
   } = useSelector((state) => state.search.searchReq);
-  
   const dispatch = useDispatch();
-  console.log(costSearch);
+
   const RoomSearchClick = () => {
     setSearchModalState('room');
   };
@@ -38,11 +37,23 @@ const ListContainer = () => {
     setSearchModalState('bedroom');
   };
 
-//진솔.
-  const room = useSelector(state => state.search.searchRes);
-  const totalPage = useSelector(state => state.search.totalPage);
-//여기까지.
+  const room = useSelector((state) => state.search.searchRes);
+  const totalPage = useSelector((state) => state.search.totalPage);
+  console.log(room);
+  const roomMap = room.map((item) => {
+    return {
+      id: item.id,
+      name: item.name,
+      latitude: item.latitude,
+      longitude: item.longitude,
+      commentCount: item.commentCount,
+      cost: item.cost,
+      roomImgUrlList: item.roomImgUrlList,
+      roomType: item.roomType,
+    };
+  });
 
+  //여기까지.
   const roomTypes = useCallback(
     (e) => {
       if (e.target.checked) {
@@ -72,7 +83,6 @@ const ListContainer = () => {
     dispatch(roomnumInput(e.target.name, ++e.target.value));
   };
 
-  console.log(costState)
   const searchBtn = () => {
     if (costSearch.minCost) {
       setCostState((state) => ({
@@ -101,13 +111,15 @@ const ListContainer = () => {
     );
     setSearchModalState(null);
   };
-  
-  const [currentPage, setCurrentPage] = useState(0);
-  const [arrOfCurrButtons, setArrOfCurrButtons] = useState([]);
-  
+
+  // pageNation
+
+  const [currentButton, setCurrentButton] = useState(0);
+  const [arrOfcurrButtons, setArrOfCurrButtons] = useState([]);
+
   const pageNationClick = (e) => {
-    setCurrentPage(e.target.name);
-    const id =  e.target.name;
+    setCurrentButton(e.target.name);
+    const id = e.target.name;
     dispatch(
       searching({
         id,
@@ -120,9 +132,8 @@ const ListContainer = () => {
         bedRoomNum,
         bathRoomNum,
       }),
-    );  
-  }
-
+    );
+  };
 
   return (
     <>
@@ -147,9 +158,13 @@ const ListContainer = () => {
         room={room}
         totalPage={totalPage}
         pageNationClick={pageNationClick}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        arrOfCurrButtons={arrOfCurrButtons}
+        roomMap={roomMap}
+        locationSearch={locationSearch}
+        checkDateSearch={checkDateSearch}
+        guestSearch={guestSearch}
+        currentButton={currentButton}
+        setCurrentButton={setCurrentButton}
+        arrOfcurrButtons={arrOfcurrButtons}
         setArrOfCurrButtons={setArrOfCurrButtons}
       />
     </>

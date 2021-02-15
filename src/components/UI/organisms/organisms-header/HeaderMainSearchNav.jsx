@@ -81,6 +81,7 @@ const HeaderMainSearchNav = ({
   setNavModalState,
   SearchTypeHandler,
   clickHandler,
+  moveFocusNext,
 }) => {
   return (
     <>
@@ -95,11 +96,13 @@ const HeaderMainSearchNav = ({
               SearchTypeHandler={SearchTypeHandler}
               navModalState={navModalState}
               setNavModalState={setNavModalState}
+              moveFocusNext={moveFocusNext}
             />
             <SearchNavDatesUnit
               SearchTypeHandler={SearchTypeHandler}
               navModalState={navModalState}
               setNavModalState={setNavModalState}
+              moveFocusNext={moveFocusNext}
             />
             <SearchNavGuestUnit
               SearchTypeHandler={SearchTypeHandler}
