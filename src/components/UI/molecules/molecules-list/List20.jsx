@@ -341,7 +341,7 @@ const LodgingLists = ({
                 </button>
               </div>
             </div>
-            <Link to={`/detail/${id}`} key={id}>
+            <Link to={`/detail/1`} key={id}>
               <span className="TextWrap">
                 <div className="TextHead">
                   <TextStyled size="blackSmall">

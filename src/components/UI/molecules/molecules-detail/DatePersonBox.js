@@ -83,7 +83,7 @@ const GuestBtn = styled.div`
   padding-right: 12px;
 `;
 
-const DatePersonBox = ({ peopleLimit }) => {
+const DatePersonBox = ({ peopleLimit, detailObj }) => {
   const [isOpen, setIsOpen] = useState(false); // detail page에서 모달창 열고닫기 기능구현
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
@@ -94,8 +94,12 @@ const DatePersonBox = ({ peopleLimit }) => {
           setIsCalendarOpen(true);
         }}
       >
-        <SelectionInfo text="체크인" date="2021.3.4" />
-        <SelectionInfo className="divider" text="체크아웃" date="2021.3.6" />
+        <SelectionInfo text="체크인" date={detailObj.startDate} />
+        <SelectionInfo
+          className="divider"
+          text="체크아웃"
+          date={detailObj.endDate}
+        />
         {isCalendarOpen && (
           <CalendarDetail setIsCalendarOpen={setIsCalendarOpen} />
         )}
@@ -106,7 +110,9 @@ const DatePersonBox = ({ peopleLimit }) => {
         }}
       >
         <CheckTxt>인원</CheckTxt>
-        <SelectinoGuest>게스트 1명</SelectinoGuest>
+        <SelectinoGuest>{`${
+          detailObj.numOfAdult + detailObj.numOfKid
+        } 명`}</SelectinoGuest>
         <GuestBtn>{isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}</GuestBtn>
         {isOpen && (
           <GuestNumberModal

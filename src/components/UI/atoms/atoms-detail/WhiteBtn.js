@@ -10,9 +10,14 @@ const WhiteButton = styled.a`
   border: 1px solid #222;
   text-align: center;
   color: #222;
+  transition-duration: 0.3s;
+  cursor: pointer;
 
   &:hover {
     background: rgb(247, 247, 247);
+  }
+  &:active {
+    transform: scale(0.95);
   }
 `;
 
