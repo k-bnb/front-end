@@ -39,6 +39,7 @@ const ListStyle = ({
   setCurrentButton,
   arrOfcurrButtons,
   setArrOfCurrButtons,
+  numberOfPages,
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1025px)', //1025 px 이상인 경우에만 적용(1127이상.)
@@ -102,6 +103,7 @@ const ListStyle = ({
             setCurrentButton={setCurrentButton}
             arrOfcurrButtons={arrOfcurrButtons}
             setArrOfCurrButtons={setArrOfCurrButtons}
+            numberOfPages={numberOfPages}
           />
         </PcSize>
       )}

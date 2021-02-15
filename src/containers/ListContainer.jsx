@@ -120,9 +120,28 @@ const ListContainer = () => {
   const [currentButton, setCurrentButton] = useState(0);
   const [arrOfcurrButtons, setArrOfCurrButtons] = useState([]);
 
+  let numberOfPages = [];
+
+  Array.from({ length: totalPage.totalPages }, (_, i) => {
+    return numberOfPages.push(i);
+  });
+  console.log(numberOfPages);
+  if (numberOfPages.length > 10) {
+    const newArr1 = numberOfPages.slice(0, 4);
+
+    const newArr2 = numberOfPages.slice(
+      numberOfPages.length - 4,
+      numberOfPages.length,
+    );
+    numberOfPages = [...newArr1, '...', ...newArr2];
+  }
+  console.log(numberOfPages);
   const pageNationClick = (e) => {
     setCurrentButton(e.target.name);
     const id = e.target.name;
+    if (numberOfPages[id + 1] === '...') {
+      console.log('ddd');
+    }
     dispatch(
       searching({
         id,
@@ -169,6 +188,7 @@ const ListContainer = () => {
         setCurrentButton={setCurrentButton}
         arrOfcurrButtons={arrOfcurrButtons}
         setArrOfCurrButtons={setArrOfCurrButtons}
+        numberOfPages={numberOfPages}
       />
     </>
   );

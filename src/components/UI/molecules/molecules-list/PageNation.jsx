@@ -32,23 +32,18 @@ const PageNation = ({
   setCurrentButton,
   arrOfcurrButtons,
   setArrOfCurrButtons,
+  numberOfPages,
 }) => {
-  let numberOfPages = [];
-
-  Array.from({ length: totalPage.totalPages }, (_, i) => {
-    return numberOfPages.push(i);
-  });
-
   console.log(numberOfPages);
+
   if (numberOfPages.length > 6) {
     const newArr1 = numberOfPages.slice(0, 4);
+
     const newArr2 = numberOfPages.slice(
       numberOfPages.length - 4,
       numberOfPages.length,
     );
     numberOfPages = [...newArr1, '...', ...newArr2];
-
-    console.log(newArr2);
   }
   console.log(numberOfPages);
   return (
