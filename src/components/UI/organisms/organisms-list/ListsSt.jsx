@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 const PcSize = styled.main`
   min-height: calc(100vh - 80px);
-  background-color: #eee;
+  /* background-color: #eee; */
   padding: 0 24px;
   ul {
     width: 100%;
