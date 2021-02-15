@@ -1,4 +1,4 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, delay } from 'redux-saga/effects';
 import { startLoading, finishLoading } from '../modules/loading';
 
 //  request : 백엔드 api
@@ -8,7 +8,7 @@ export default function createRequestSaga(type, request) {
 
   return function* (action) {
     yield put(startLoading(type)); // 로딩 시작, type: 요청 작업 종류
-
+    console.log('hi');
     try {
       const response = yield call(request, action.payload);
 
@@ -23,6 +23,7 @@ export default function createRequestSaga(type, request) {
         payload: error,
       });
     }
+    yield delay(2000);
     yield put(finishLoading(type)); // 로딩 종료, type: 요청 작업 종류
   };
 }
