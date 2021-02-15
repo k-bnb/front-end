@@ -24,7 +24,9 @@ const ReservationBtn = styled.button`
     `}
 `;
 
-const ReserveBtn = ({ half }) => (
-  <ReservationBtn half={half}>예약하기</ReservationBtn>
+const ReserveBtn = ({ half, DetailHeaderRef }) => (
+  <ReservationBtn half={half} ref={DetailHeaderRef}>
+    예약하기
+  </ReservationBtn>
 );
 export default ReserveBtn;
