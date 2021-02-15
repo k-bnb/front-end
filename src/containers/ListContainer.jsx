@@ -115,7 +115,13 @@ const ListContainer = () => {
     setSearchModalState(null);
   };
 
+  // pageNation
+
+  const [currentButton, setCurrentButton] = useState(0);
+  const [arrOfcurrButtons, setArrOfCurrButtons] = useState([]);
+
   const pageNationClick = (e) => {
+    setCurrentButton(e.target.name);
     const id = e.target.name;
     dispatch(
       searching({
@@ -131,6 +137,7 @@ const ListContainer = () => {
       }),
     );
   };
+
   return (
     <>
       <HeaderContainer />
@@ -158,6 +165,10 @@ const ListContainer = () => {
         locationSearch={locationSearch}
         checkDateSearch={checkDateSearch}
         guestSearch={guestSearch}
+        currentButton={currentButton}
+        setCurrentButton={setCurrentButton}
+        arrOfcurrButtons={arrOfcurrButtons}
+        setArrOfCurrButtons={setArrOfCurrButtons}
       />
     </>
   );

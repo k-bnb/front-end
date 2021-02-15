@@ -29,7 +29,12 @@ const TabletDiv = styled.div`
   div {
   }
 `;
-const PersonalTemplate = ({ fix, fixInfoBtn, cancelclick }) => {
+const PersonalTemplate = ({
+  fix,
+  fixInfoBtn,
+  cancelclick,
+  personInfoChange,
+}) => {
   const isPc = useMediaQuery({
     query: '(min-width: 900px)',
   });
@@ -45,6 +50,7 @@ const PersonalTemplate = ({ fix, fixInfoBtn, cancelclick }) => {
           fix={fix}
           cancelclick={cancelclick}
           fixInfoBtn={fixInfoBtn}
+          personInfoChange={personInfoChange}
         />
         {isPc && (
           <PcDiv>
