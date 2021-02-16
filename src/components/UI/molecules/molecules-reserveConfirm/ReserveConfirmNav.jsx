@@ -4,6 +4,7 @@ import Button from '../../atoms/atoms-main/Button';
 const ReserveConfirmNavStyle = styled.div`
   display: flex;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
   button {
     border: 0;
     padding: 10px 0;
