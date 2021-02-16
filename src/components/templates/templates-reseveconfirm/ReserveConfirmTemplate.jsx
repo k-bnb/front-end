@@ -7,6 +7,7 @@ import ReserveConfirmSection from '../../UI/organisms/organisms-reserveconfirm/R
 import HeaderList from '../templates-header/HeaderList';
 const ReserveConfirmTemplateStyle = styled.div`
   max-width: 980px;
+  min-width: 980px;
   margin: 0 auto;
 `;
 const ReserveConfirmTemplate = ({ active, activClick, list }) => {
