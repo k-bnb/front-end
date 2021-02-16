@@ -8,8 +8,10 @@ import Modal from '../portal/Modal';
 import HeaderContainer from './header-containers/HeaderContainer';
 // import LoaderIcon from 'react-loader-icon';
 import { detailToReserveDate, detailToReserveGuest } from '../modules/reserve';
+import ReviewModal from '../components/templates/templates-detail/ReviewModal';
 const DetailContainer = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showReviewModal, setShowReviewModal] = useState(false);
   const [current, setCurrent] = useState(0); // 현재 보는 사진의 index
   const DetailHeaderRef = useRef();
   const ImageContainerRef = useRef();
@@ -72,6 +74,8 @@ const DetailContainer = () => {
         isLoading={isLoading}
         detailObj={detailObj}
         roomImgUrlList={roomImgUrlList}
+        showReviewModal={showReviewModal}
+        setShowReviewModal={setShowReviewModal}
       />
       <Modal>
         <CarouselModal
@@ -81,6 +85,10 @@ const DetailContainer = () => {
           setCurrent={setCurrent}
           infoRes={infoRes}
           roomImgUrlList={roomImgUrlList}
+        />
+        <ReviewModal
+          showReviewModal={showReviewModal}
+          setShowReviewModal={setShowReviewModal}
         />
       </Modal>
     </>

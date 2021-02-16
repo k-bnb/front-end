@@ -102,6 +102,11 @@ const TextBlock = styled.span`
         text-decoration: underline;
       }
     `}
+    ${(props) =>
+    props.reviewModal &&
+    css`
+      font-size: 11px;
+    `}
 `;
 
 const Text = (props) => {

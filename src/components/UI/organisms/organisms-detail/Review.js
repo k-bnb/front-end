@@ -29,7 +29,7 @@ const ReviewItemBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const Review = ({ reviewRef }) => {
+const Review = ({ reviewRef, showReviewModal, setShowReviewModal }) => {
   return (
     <ReveiwSectionWrapper ref={reviewRef}>
       <ReviewContainer className="basic-section-padding">
@@ -42,7 +42,11 @@ const Review = ({ reviewRef }) => {
           <ReviewItem />
           <ReviewItem />
         </ReviewItemBox>
-        <WhiteBtn text="후기 38개 모두 보기" />
+        <WhiteBtn
+          isShowReviewButton={true}
+          text="후기 38개 모두 보기"
+          setShowReviewModal={setShowReviewModal}
+        />
       </ReviewContainer>
     </ReveiwSectionWrapper>
   );

@@ -36,21 +36,25 @@ const ReviewText = styled(Text)`
   line-height: 24px;
 `;
 
-const ReviewItem = () => (
+const ReviewItem = ({
+  name = '사람1',
+  date = '2020년 1월',
+  content = '마지못해 있었습니다.',
+}) => (
   <ReviewListItem>
     <ImgDataContainer className="basic-flex">
       <WriterPhoto></WriterPhoto>
       <WriterOfReview>
         <WriterData big bold block noPadding>
-          name
+          {name}
         </WriterData>
         <WriterData gray block noPadding>
-          date
+          {date}
         </WriterData>
       </WriterOfReview>
     </ImgDataContainer>
     <ReviewText big block>
-      깨끗하고 좋습니다~
+      {content}
     </ReviewText>
   </ReviewListItem>
 );

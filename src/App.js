@@ -6,7 +6,10 @@ import DetailPage from './components/pages/DetailPage';
 import ReservationPage from './components/pages/ReservationPage';
 import AuthRedirect from './components/pages/AuthRedirect';
 import PersonalInfoPage from './components/pages/PersonalInfoPage';
-import Observer from './Observer';
+import {
+  checkDateValidation,
+  checkPasswordValidation,
+} from './lib/validationCheck';
 
 function App() {
   return (

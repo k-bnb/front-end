@@ -52,6 +52,8 @@ const Detail = ({
   isLoading,
   detailObj,
   roomImgUrlList,
+  showReviewModal,
+  setShowReviewModal,
 }) => {
   return (
     <>
@@ -71,11 +73,16 @@ const Detail = ({
           infoRes={infoRes}
           detailObj={detailObj}
         />
-        {isLoading && <LoadingModal />}
-        <ReviewContainer reviewRef={reviewRef} />
+        <ReviewContainer
+          reviewRef={reviewRef}
+          showReviewModal={showReviewModal}
+          setShowReviewModal={setShowReviewModal}
+          commentList={infoRes.commentList}
+        />
         <ImportantNotice infoRes={infoRes} />
-        <Review reviewRef={reviewRef} commentList={infoRes.commentList} />
+        {/* <Review reviewRef={reviewRef} /> */}
       </DetailTemplate>
+      {isLoading && <LoadingModal />}
     </>
   );
 };

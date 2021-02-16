@@ -18,19 +18,33 @@ const AverageGrade = styled.div`
       font-weight: 600;
       font-size: 10px;
     `}
+
+  ${(props) =>
+    props.reviewModal &&
+    css`
+      margin-top: 50px;
+      display: block;
+      font-size: 30px;
+      font-weight: bolder;
+    `}
 `;
 
 const ScoreStar = styled(AiFillStar)`
   border: none;
   color: red;
   margin-right: 4px;
-  /* margin-top: 3px; */
+
+  ${(props) =>
+    props.reviewModal &&
+    css`
+      vertical-align: bottom;
+    `}/* margin-top: 3px; */
 `;
 
-const Grade = ({ grade, small }) => {
+const Grade = ({ grade = '4.3점', small, reviewModal }) => {
   return (
-    <AverageGrade small={small} className="grade">
-      <ScoreStar />
+    <AverageGrade small={small} className="grade" reviewModal={reviewModal}>
+      <ScoreStar reviewModal={reviewModal} />
       {grade}
     </AverageGrade>
   );
