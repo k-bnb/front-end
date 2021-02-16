@@ -34,25 +34,27 @@ const AccommodationPictures = styled.div`
   .one {
     grid-column: 1/3;
     grid-row: 1/3;
-    background: pink;
+    background: lightgray;
   }
   .two {
     grid-column: 3/4;
     grid-row: 1/2;
-    background: skyblue;
+    background: lightgray;
   }
   .three {
     grid-column: 3/4;
     grid-row: 2/3;
+    background: lightgray;
   }
   .four {
     grid-column: 4/5;
     grid-row: 1/2;
+    background: lightgray;
   }
   .five {
     grid-column: 4/5;
     grid-row: 2/3;
-    background: lightgreen;
+    background: lightgray;
   }
 `;
 
@@ -78,7 +80,12 @@ const ImgDetailBtn = styled.a`
   }
 `;
 
-const ImageFrame = ({ setShowModal, setCurrent, ImageContainerRef }) => {
+const ImageFrame = ({
+  setShowModal,
+  setCurrent,
+  ImageContainerRef,
+  roomImgUrlList,
+}) => {
   return (
     <AccommodationPictures ref={ImageContainerRef}>
       <ImgDetailBtn
@@ -113,10 +120,7 @@ const ImageFrame = ({ setShowModal, setCurrent, ImageContainerRef }) => {
           setCurrent(0);
         }}
       >
-        <img
-          src="https://a0.muscache.com/im/pictures/144d8628-1123-4cd4-af93-dd81f47455cd.jpg?im_w=960"
-          alt=""
-        />
+        <img src={roomImgUrlList[0]} alt="" />
       </div>
       <div
         className="two"
@@ -125,10 +129,7 @@ const ImageFrame = ({ setShowModal, setCurrent, ImageContainerRef }) => {
           setCurrent(1);
         }}
       >
-        <img
-          src="https://a0.muscache.com/im/pictures/9471ef27-e408-4bc6-82b3-73d76bc7c693.jpg?im_w=1200"
-          alt=""
-        />{' '}
+        <img src={roomImgUrlList[1]} alt="" />{' '}
       </div>
       <div
         className="three"
@@ -137,10 +138,7 @@ const ImageFrame = ({ setShowModal, setCurrent, ImageContainerRef }) => {
           setCurrent(2);
         }}
       >
-        <img
-          src="https://a0.muscache.com/im/pictures/4f91a3fc-f44e-4c07-a6d5-e653a18fcb5e.jpg?im_w=1200"
-          alt=""
-        />{' '}
+        <img src={roomImgUrlList[2]} alt="" />{' '}
       </div>
       <div
         className="four"
@@ -149,10 +147,7 @@ const ImageFrame = ({ setShowModal, setCurrent, ImageContainerRef }) => {
           setShowModal(true);
         }}
       >
-        <img
-          src="https://a0.muscache.com/im/pictures/ff5353d8-7527-4671-bda3-eadb8a8a327c.jpg?im_w=1200"
-          alt=""
-        />{' '}
+        <img src={roomImgUrlList[3]} alt="" />{' '}
       </div>
       <div
         className="five"
@@ -161,10 +156,7 @@ const ImageFrame = ({ setShowModal, setCurrent, ImageContainerRef }) => {
           setShowModal(true);
         }}
       >
-        <img
-          src="https://a0.muscache.com/im/pictures/b23d7c84-c948-4557-b141-4f36d738d2fa.jpg?im_w=1200"
-          alt=""
-        />{' '}
+        <img src={roomImgUrlList[4]} alt="" />{' '}
       </div>
     </AccommodationPictures>
   );

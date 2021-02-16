@@ -29,6 +29,7 @@ const ReservationContainer = () => {
   const [dateModal, setDateModal] = useState(false);
   const [guestModal, setGuestModal] = useState(false);
   const [comfirmModal, setComfirmModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const manageDateModal = () => {
     setDateModal(!dateModal);
@@ -72,6 +73,12 @@ const ReservationContainer = () => {
   //   dispatch(initialDate());
   // };
 
+  useState(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
   return (
     <Reservation
       change={change}
@@ -87,6 +94,7 @@ const ReservationContainer = () => {
       guestSearch={guestSearch}
       checkDate={checkDate}
       saveDate={saveDate}
+      isLoading={isLoading}
     />
   );
 };

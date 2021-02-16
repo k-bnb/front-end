@@ -9,7 +9,7 @@ import TotalPrice from '../../molecules/molecules-detail/TotalPrice';
 const PositionBox = styled.div`
   position: sticky;
   z-index: 100;
-  top: 200px;
+  top: 160px;
   margin-bottom: 100px;
 `;
 
@@ -34,18 +34,23 @@ const BookingInfoContainer = styled.div`
   }
 `;
 
-const BookingInfo = ({ DetailHeaderRef, moveToReserve }) => (
+const BookingInfo = ({
+  DetailHeaderRef,
+  moveToReserve,
+  detailObj,
+  infoRes,
+}) => (
   <PositionBox>
     <BookingInfoContainer>
-      <OneDayPrice />
-      <DatePersonBox />
+      <OneDayPrice infoRes={infoRes} />
+      <DatePersonBox detailObj={detailObj} />
       <ReserveBtn
         DetailHeaderRef={DetailHeaderRef}
         moveToReserve={moveToReserve}
       ></ReserveBtn>
       <span className="notice">예약 확정 전에는 요금이 청구되지 않습니다.</span>
-      <PriceDetail />
-      <TotalPrice />
+      <PriceDetail infoRes={infoRes} detailObj={detailObj} />
+      <TotalPrice detailObj={detailObj} />
     </BookingInfoContainer>
   </PositionBox>
 );
