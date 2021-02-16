@@ -69,16 +69,22 @@ const GoogleMarkerStyle = styled.div`
 `;
 
 function GoogleMapUse({
-  roomMap,
-  locationSearch,
-  checkDateSearch,
-  guestSearch,
-  costSearch,
-  roomType,
-  bedNum,
-  bedRoomNum,
-  bathRoomNum,
+  moveChange
 }) {
+
+
+  const { 
+    roomMap,
+    locationSearch,
+    room,
+    checkDateSearch,
+    guestSearch,
+    costSearch,
+    roomType,
+    bedNum,
+    bedRoomNum,
+    bathRoomNum} = moveChange();
+
   const [selectedSample, setSelectedSample] = useState(null);
 
   const [locate, setLocate] = useState({
@@ -137,7 +143,7 @@ function GoogleMapUse({
         );
       });
     }
-  }); //TODO : 알아내기 : 재랜더링이 두번되는것같다. 왜지?....흠...
+  }); //TODO : 알아내기 : 재랜더링이 두번.-> React.memo 사용해서 최적화하기.
 
   const getCity = (addressArray) => {
     let city = '';
@@ -338,30 +344,6 @@ function GoogleMapUse({
               </GoogleMarkerStyle>
             </InfoWindow>
           )}
-
-          {/* <MarkerWithLabel
-				// markerWithLabel={window.MarkerWithLabel}
-				icon={"https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"}
-        draggable={true}
-        onDragEnd={onMarkerDragEnd}
-				// label={<div style={{cursor:'help'}}>thisisthis</div>}
-				// label='labelis'
-        position={{ lat: locate.markerPosition.lat, lng: locate.markerPosition.lng }}
-				// opacity={0}
-				labelContent={<div style={{cursor:'help'}}>thisisthis</div>}
-			>
-				<div>9999999940349</div>
-				//<InfoWindow>
-          //<div>
-						//hello world!						
-          //</div>
-        //</InfoWindow>
-      </MarkerWithLabel> */}
-
-          {/* <AutoComplete
-				style={{ width: '100%', height: '40px', paddingLeft: 16, marginTop: 2, marginBottom: '2rem' }}
-				onPlaceSelected={onPlaceSelected}
-			/>*/}
         </GoogleMap>
       );
     }),
@@ -379,4 +361,8 @@ function GoogleMapUse({
   );
 }
 
+
+
+
+ 
 export default GoogleMapUse;

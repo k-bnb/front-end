@@ -1,3 +1,5 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 const sizeStyles = css`
@@ -28,12 +30,12 @@ const sizeStyles = css`
 
     `}
 	${(props) =>
-    props.size === 'heart' &&
+    props.size === 'Pcheart' &&
     css`
 			width:28px;
 			height:28px;
 			border-radius : 50%;
-			font-size:1.5rem;
+      color:#000;
 			padding: 0;
 			margin:0;
 			background-color:none;
@@ -47,31 +49,44 @@ const sizeStyles = css`
         transform: scale(0.92);
       }
     `}
+	${(props) =>
+    props.size === 'Mobileheart' &&
+    css`
+			width:28px;
+			height:28px;
+			border-radius : 50%;
+			padding: 0;
+			margin:0;
+    `}
     
     ${(props) =>
     props.size === 'number' &&
     css`
       width : 20px;
       height: 20px;
+      padding : 0;
       &:hover{
         background:#f7f7f7;
+        color:red;
         border-color:#222;
       }
       &:focus{
         background:#222;
-        color:white;
+        color:blue;
       }
     `}
-		
 `;
 
-const StyledButton = styled.button`
-  /* 공통 스타일 */
-  /* display : inline-flex; */
+const buttonStyle = css`
   border: 1px solid #b0b0b0;
   border-radius: 30px;
   cursor: pointer;
   outline: none;
+`
+
+const StyledButton = styled.button`
+  /* 공통 스타일 */
+  ${buttonStyle}
 
   /* 크기 */
   ${sizeStyles}
@@ -88,16 +103,22 @@ const StyledButton = styled.button`
 
   /* 기타 */
   & + & {
-    margin-left: 1rem;
+    margin-left: 14px;
+  }
+  &:disabled{
+    cursor:not-allowed;
+    color : purple;
+    background : green;
   }
 `;
 
-const Button = ({ children, size, ...rest }) => {
-  return (
-    <StyledButton size={size} {...rest}>
-      {children}
-    </StyledButton>
-  );
+// const StyledLink = styled(Link)`
+//   ${buttonStyle}
+// `;
+
+const Button = ({size, children, ...rest} ) => {
+  // return props.to ? (<StyledLink {...props} />) : (<StyledButton size={size} number={props.number ? 1 : 0} {...props} />); //velopert-p793
+  return<StyledButton size={size} {...rest}>{children}</StyledButton>
 };
 
 Button.defaultProps = {
