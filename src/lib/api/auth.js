@@ -32,3 +32,11 @@ export const userReservation = ({ token }) =>
       'Content-Type': 'application/json',
     },
   });
+
+export const userInfoRemake = ({ token }) => {
+  const body = {};
+
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+  return client.post('http://localhost:8080/user/update', body, headers);
+};

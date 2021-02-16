@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import axios from '../../node_modules/axios/index';
 import PersonalTemplate from '../components/templates/templates-personal/PersonalTemplate';
-import {
-  changeInputPerson,
-  inputReset,
-  resetInputPerson,
-} from '../modules/person';
+import { changeInputPerson, resetInputPerson } from '../modules/user';
 
 const PersonalContainer = () => {
   const [fix, setFix] = useState('');
@@ -16,15 +13,15 @@ const PersonalContainer = () => {
     if (e.target.name === 'name') {
       setFix((state) => ({
         name: true,
-        gender: false,
+        img: false,
         birth: false,
         emailAddress: false,
         cancel: true,
       }));
-    } else if (e.target.name === 'gender') {
+    } else if (e.target.name === 'imageUrl') {
       setFix((state) => ({
         name: false,
-        gender: true,
+        img: true,
         birth: false,
         emailAddress: false,
         cancel: true,
@@ -32,7 +29,7 @@ const PersonalContainer = () => {
     } else if (e.target.name === 'birth') {
       setFix((state) => ({
         name: false,
-        gender: false,
+        img: false,
         birth: true,
         emailAddress: false,
         cancel: true,
@@ -40,7 +37,7 @@ const PersonalContainer = () => {
     } else if (e.target.name === 'emailAddress') {
       setFix((state) => ({
         name: false,
-        gender: false,
+        img: false,
         birth: false,
         emailAddress: true,
         cancel: true,
@@ -51,7 +48,7 @@ const PersonalContainer = () => {
   const fixInfoBtnCancel = () => {
     setFix((state) => ({
       name: false,
-      gender: false,
+      img: false,
       birth: false,
       emailAddress: false,
       cancel: true,
@@ -61,12 +58,17 @@ const PersonalContainer = () => {
   const cancelclick = (e) => {
     if (!e.target.matches('.btn')) return;
     setFix((state) => '');
-    dispatch(resetInputPerson());
   };
 
   const personInfoChange = (e) => {
     console.log(e.target.name, e.target.value);
-    dispatch(changeInputPerson(e.target.name, e.target.value));
+
+    if (e.target.name === 'imageUrl') {
+      const imgArr = e.target.files[0];
+      return;
+    } else {
+      dispatch(changeInputPerson(e.target.name, e.target.value));
+    }
   };
   return (
     <PersonalTemplate
