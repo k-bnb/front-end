@@ -50,6 +50,9 @@ const store = createStore(
       },
       reserveError: null,
     },
+    user: {
+      userRes: JSON.parse(sessionStorage.getItem('userInfo')),
+    },
   },
   composeWithDevTools(applyMiddleware(sagaMiddleware)),
 );
