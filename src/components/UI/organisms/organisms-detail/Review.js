@@ -29,16 +29,17 @@ const ReviewItemBox = styled.div`
   flex-wrap: wrap;
 `;
 
-<<<<<<< HEAD
-const Review = ({ reviewRef, showReviewModal, setShowReviewModal }) => {
-=======
-const Review = ({ reviewRef, infoRes }) => {
->>>>>>> a36cac00cc28fbeea836726b7cbe73cd1e56142a
+const Review = ({
+  reviewRef,
+  showReviewModal,
+  setShowReviewModal,
+  infoRes,
+}) => {
   return (
     <ReveiwSectionWrapper ref={reviewRef}>
       <ReviewContainer className="basic-section-padding">
         <ReviewTitle>
-          <Grade grade={infoRes.grade} /> 점 (후기 {infoRes.commentCount}개){' '}
+          {/* <Grade grade={infoRes.grade} /> 점 (후기 {infoRes.commentCount}개){' '} */}
         </ReviewTitle>
         <ScoreAverage />
         <ReviewItemBox>

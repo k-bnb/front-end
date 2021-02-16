@@ -11,12 +11,11 @@ const PriceBox = styled.ul`
 `;
 
 const PriceDetail = ({ infoRes, CheckInDate, detailObj }) => {
-  const roomPrice = `${infoRes.roomCost}*2박`;
-
   const StartDate = moment(detailObj.startDate);
   const EndDate = moment(detailObj.endDate);
   const totalSchedule = EndDate.diff(StartDate, 'days');
   console.log(totalSchedule);
+  const roomPrice = `${infoRes.roomCost}x${totalSchedule}박`;
 
   return (
     <PriceBox>
