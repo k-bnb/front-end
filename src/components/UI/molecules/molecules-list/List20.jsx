@@ -16,14 +16,13 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 //   width: 100%;
 // `
 
-const ULWrap = styled.ul`
-  list-style: none;
-  display: inline-block;
-  padding: 0;
+const List = styled.li`
+  /* list-style: none; */
+  /* display: inline-block; */
+  /* padding: 0; */
   /* width: 808px; */
   /* height: 5013px; */
   /* height: 100px; */
-  li {
     /* width: 792px; */
     position: relative;
     width: 100%;
@@ -114,17 +113,6 @@ const ULWrap = styled.ul`
     .TextHead {
       /* width: 100%; */
     }
-    .Ellipsis {
-      width: 416px;
-      /* width: 100%; */
-      height: 46px;
-      /* margin-right: 20px; */
-      display: block;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      align-content: center;
-    }
     span:first-child {
       /* background-color: yellow; */
       /* box-sizing:border-box; */
@@ -160,9 +148,6 @@ const ULWrap = styled.ul`
       align-items: flex-end;
       padding: 0 15px;
     }
-    /* .sleep{
-    padding-right: 10px;
-  } */
   }
 `;
 
@@ -303,7 +288,7 @@ const LodgingLists = ({
     <>
       {/* <ListCarousel slides={SliderData} /> */}
       <>
-        <ULWrap className="listWrap">
+        <List className="listWrap">
           <li>
             <div className="slide-group" carouselImg>
               <div className="slide">
@@ -369,7 +354,7 @@ const LodgingLists = ({
               </span>
             </Link>
           </li>
-        </ULWrap>
+        </List>
       </>
     </>
   );

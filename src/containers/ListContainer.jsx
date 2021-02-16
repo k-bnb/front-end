@@ -56,7 +56,6 @@ const ListContainer = () => {
     };
   });
 
-  //여기까지.
   const roomTypes = useCallback(
     (e) => {
       if (e.target.checked) {

@@ -56,12 +56,13 @@ const PageNation = ({
           );
         })}
 
-        <button
+        <Button
+          size='number'
           className={`${currentButton === numberOfPages.length-1 ? 'disabled' : ''}`}
           onClick={() => setCurrentButton(prev => prev >= numberOfPages.length ? prev : prev + 1)}
         >
           &#62;
-        </button>
+        </Button>
     </PageStyle>
   );
 };

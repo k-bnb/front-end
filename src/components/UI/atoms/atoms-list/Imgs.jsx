@@ -19,8 +19,8 @@ const ImgStyle = styled.img`
     `}
 `;
 
-const Imgs = ({ src, alt, ...rest }) => {
-  return <ImgStyle src={src} {...rest} alt={alt} />;
+const Imgs = ({ src, alt, size, ...rest }) => {
+  return <ImgStyle src={src} size={size} {...rest} alt={alt} />;
 };
 
 export default Imgs;
