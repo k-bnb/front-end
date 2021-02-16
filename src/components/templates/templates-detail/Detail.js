@@ -51,6 +51,8 @@ const Detail = ({
   isLoading,
   detailObj,
   roomImgUrlList,
+  showReviewModal,
+  setShowReviewModal,
 }) => {
   // const strStartDate = detailObj.startDate;
   const CheckInDate = () => {
@@ -89,11 +91,20 @@ const Detail = ({
           detailObj={detailObj}
           CancellableDate={CancellableDate}
         />
+        <ReviewContainer
+          reviewRef={reviewRef}
+          showReviewModal={showReviewModal}
+          setShowReviewModal={setShowReviewModal}
+          commentList={infoRes.commentList}
+          infoRes={infoRes}
+        />
+        {/* <Review reviewRef={reviewRef} /> */}
         {isLoading && <LoadingModal />}
         <ReviewContainer reviewRef={reviewRef} infoRes={infoRes} />
         <ImportantNotice infoRes={infoRes} CancellableDate={CancellableDate} />
         {/* <Review reviewRef={reviewRef} commentList={infoRes.commentList} /> */}
       </DetailTemplate>
+      {isLoading && <LoadingModal />}
     </>
   );
 };

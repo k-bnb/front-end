@@ -1,8 +1,8 @@
-import { createAction, handleActions } from "redux-actions";
-import produce from "immer";
-import createRequestSaga from "../lib/createRequestSaga";
-import * as API from '../lib/api/auth'
-import {takeLatest} from 'redux-saga/effects'
+import { createAction, handleActions } from 'redux-actions';
+import produce from 'immer';
+import createRequestSaga from '../lib/createRequestSaga';
+import * as API from '../lib/api/auth';
+import { takeLatest } from 'redux-saga/effects';
 
 //action type
 const CHANGE_INPUT = 'auth/CHANGE_INPUT';
@@ -96,9 +96,9 @@ const auth = handleActions(
     //   };
     // },
 
-    [REGISTER_FAILURE]: (_, { payload: { error } }) => ({
+    [REGISTER_FAILURE]: (_, { payload }) => ({
       ...initialState,
-      registerError: error,
+      registerError: payload.code,
     }),
 
     [LOGIN_SUCCESS]: (_, { payload: { accessToken } }) => {
@@ -106,9 +106,9 @@ const auth = handleActions(
       return { ...initialState, token: accessToken };
     },
 
-    [LOGIN_FAILURE]: (_, { payload: { error } }) => ({
+    [LOGIN_FAILURE]: (_, { payload }) => ({
       ...initialState,
-      loginError: error,
+      loginError: payload.code,
     }),
 
     [LOGOUT]: () => {

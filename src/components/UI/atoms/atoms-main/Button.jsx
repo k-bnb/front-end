@@ -9,6 +9,13 @@ const ButtonStyle = styled.button`
   margin: 0;
   box-sizing: border-box;
   background: none;
+
+  ${(props) =>
+    props.disabled &&
+    css`
+      background-color: gray;
+      cursor: default;
+    `}
   ${(props) =>
     props.submitBtn &&
     css`
@@ -87,8 +94,13 @@ const ButtonStyle = styled.button`
     `}
 `;
 
-const Button = ({ children, ...rest }) => {
-  return <ButtonStyle {...rest}>{children}</ButtonStyle>;
+const Button = ({ children, disabled, ...rest }) => {
+  console.log(disabled);
+  return (
+    <ButtonStyle disabled={disabled} {...rest}>
+      {children}
+    </ButtonStyle>
+  );
 };
 
 export default Button;

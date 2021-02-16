@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PriceListItem from './PriceList';
-// import moment from 'moment';
 
 const PriceBox = styled.ul`
   display: block;
