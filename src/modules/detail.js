@@ -19,7 +19,7 @@ const CLEAR_CHECKDATE_DETAIL = 'detail/CLEAR_CHECKDATE_DETAIL';
 // Action Creator
 export const searchToDetail = createAction(
   SEARCH_TO_DETAIL,
-  ({ startDate, endDate, numOfAdult, numOfKid, numOfInfant }) => ({
+  (startDate, endDate, numOfAdult, numOfKid, numOfInfant) => ({
     startDate,
     endDate,
     numOfAdult,
@@ -96,7 +96,17 @@ const initialStates = {
 // reducer
 const detail = handleActions(
   {
-    [SEARCH_TO_DETAIL]: (state, { payload }) => ({ ...state, ...payload }),
+    [SEARCH_TO_DETAIL]: (
+      state,
+      { payload: { startDate, endDate, numOfAdult, numOfKid, numOfInfant } },
+    ) => ({
+      ...state,
+      startDate,
+      endDate,
+      numOfAdult,
+      numOfKid,
+      numOfInfant,
+    }),
     [DATE_CHANGE_DETAIL]: (state, { payload: { input, date } }) => ({
       ...state,
       [input]: date,
@@ -117,10 +127,13 @@ const detail = handleActions(
       startDate: '',
       endDate: '',
     }),
-    [REQUEST_DETAIL_SUCCESS]: (state, { payload }) => ({
-      ...state,
-      infoRes: payload,
-    }),
+    [REQUEST_DETAIL_SUCCESS]: (state, { payload: infoRes }) => {
+      sessionStorage.setItem('detailRes', JSON.stringify(infoRes));
+      return {
+        ...state,
+        infoRes,
+      };
+    },
     [REQUEST_DETAIL_FAILURE]: (state, { payload: error }) => ({
       ...state,
       detailError: error,

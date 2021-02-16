@@ -56,6 +56,7 @@ const Reservation = ({
   guestSearch,
   checkDate,
   saveDate,
+  reserveInfoRes,
 }) => {
   return (
     <section>
