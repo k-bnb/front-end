@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import ImageFrame from '../../UI/organisms/organisms-detail/ImageFrame';
 import { PageTitle } from '../../UI/molecules/molecules-detail/PageTitle';
@@ -7,6 +7,8 @@ import ImportantNotice from '../../UI/organisms/organisms-detail/ImportantNotice
 import WrappingContainer from '../../UI/organisms/organisms-detail/WrappingContainer';
 import LoadingModal from '../LoadingModal';
 import ReviewContainer from '../../../containers/ReviewContainer';
+import { getCancellableDate } from '../../../modules/detail';
+import { useDispatch } from 'react-redux';
 //import Modal from '../../../portal/Modal';
 
 const Theme = {
@@ -60,6 +62,13 @@ const Detail = ({
     month: parseInt(CheckInDate().month),
     day: parseInt(CheckInDate().day) - 1,
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(CancellableDate.month);
+    dispatch(getCancellableDate(CancellableDate.month, CancellableDate.day));
+  }, []);
 
   return (
     <>

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { BiWon } from 'react-icons/bi';
+import { getTotalPrice } from '../../../../modules/detail';
 
 const TotalPriceBox = styled.ul`
   margin: 4px 0 0;
@@ -26,7 +28,12 @@ const TotalPrice = ({ infoRes, totalSchedule }) => {
     infoRes.cleaningCost +
     (infoRes.roomCost * totalSchedule) / 10 +
     infoRes.tax;
-  console.log(entireCost);
+  //console.log(entireCost);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTotalPrice({ totalCost: entireCost }));
+  }, [dispatch, entireCost]);
 
   return (
     <TotalPriceBox>
