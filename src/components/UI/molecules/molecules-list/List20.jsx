@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 // import ListCarousel from './ListCarousel';
 // import { SliderData } from './SliderData';
-
 const Wrap = styled.div`
   /* width:100%; */
   height: auto;
@@ -19,7 +18,6 @@ const Wrap = styled.div`
   /* padding: 0 24px; */
   box-sizing: border-box;
 `;
-
 const ULWrap = styled.ul`
   list-style: none;
   display: inline-block;
@@ -41,7 +39,6 @@ const ULWrap = styled.ul`
     justify-content: space-between;
     /* border-bottom: 1px solid #000; */
     align-items: center;
-
     :nth-child(1) {
       border-top: 1px solid rgba(0, 0, 0, 0.1);
       /* border-top:2px dashed red; */
@@ -59,9 +56,9 @@ const ULWrap = styled.ul`
         .slideDiv {
           display: flex;
           width: 100%;
-          /* justify-content: flex-start; */
-          transform: translateX(0);
 
+
+          transform: translateX(0);
           img {
             object-fit: 100%;
             width: 100%;
@@ -91,12 +88,10 @@ const ULWrap = styled.ul`
         .next {
           position: absolute;
           /* z-index: 100; */
-
           right: 10px;
         }
         .prev {
           position: absolute;
-
           left: 10px;
           /* z-index: 100; */
         }
@@ -118,17 +113,7 @@ const ULWrap = styled.ul`
     }
     .TextHead {
       /* width: 100%; */
-    }
-    .Ellipsis {
-      width: 416px;
-      /* width: 100%; */
-      height: 46px;
-      /* margin-right: 20px; */
-      display: block;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      align-content: center;
+      margin-bottom: 15px;
     }
     span:first-child {
       /* background-color: yellow; */
@@ -170,7 +155,6 @@ const ULWrap = styled.ul`
   } */
   }
 `;
-
 const LodgingLists = ({
   alt,
   bathRoomNum,
@@ -195,7 +179,6 @@ const LodgingLists = ({
     prev: 'PREV',
   };
   const btnOpcity = useRef();
-
   const [imgs, setImages] = useState({
     img: roomImgUrlList,
     current: 3,
@@ -204,7 +187,6 @@ const LodgingLists = ({
   });
   const slideRef = useRef(null);
   const IMG_LENGTH = imgs.img.length;
-
   const handleSliderTranslateEnd = () => {
     console.log('handelend');
     console.log(imgs.direction);
@@ -219,10 +201,9 @@ const LodgingLists = ({
         break;
     }
   };
-
   const vaildNextSlider = () => {
     const { img, current } = imgs;
-    // const imgSlide = [...img, ...img.slice(0, 1)].slice(-img.length);
+
     // console.log(img);
     if (current > img.length - 1) {
       setTimeout(() => {
@@ -240,6 +221,7 @@ const LodgingLists = ({
     //   needTransition: false,
     //   img: imgSlide,
     // }));
+
   };
   const vaildPrevSlider = () => {
     const { img, current } = imgs;
@@ -280,11 +262,9 @@ const LodgingLists = ({
       direction: DIRECTIOM_TYPE.prev,
     }));
   };
-
   const transLateVal = () => {
     return -(imgs.current * 100);
   };
-
   const sliderStyle = () => {
     if (imgs.needTransition) {
       return {
@@ -311,13 +291,12 @@ const LodgingLists = ({
                   ref={slideRef}
                 >
                   {/* <Imgs carousalImg src={imgs.img[imgs.img.length]} /> */}
+                  {roomImgUrlList.map((src, i, arr) => (
 
-                  {imgs.img.map((src, i, arr) => (
                     <>
                       <Imgs
                         carousalImg
                         src={src}
-
                         // alt={alt}
                       />
                     </>
@@ -340,7 +319,7 @@ const LodgingLists = ({
                   <TextStyled size="blackSmall">
                     {city} {borough} {city || borough ? '의' : ''} {roomType}
                   </TextStyled>
-                  <TextStyled className="Ellipsis" size="blackMiddle">
+                  <TextStyled type='Ellipsis' size="blackMiddle">
                     {name}
                   </TextStyled>
                   <Bookmark className="heart" heart>
@@ -371,5 +350,4 @@ const LodgingLists = ({
     </>
   );
 };
-
 export default LodgingLists;

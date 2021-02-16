@@ -15,6 +15,40 @@ const activeStyles = css`
     `}
 `;
 
+const sizeStyles = css`
+  ${(props) =>
+    props.size === 'carouselImg' &&
+    css`
+      width: 300px;
+      height: 200px;
+      overflow:hidden;
+    `}
+  ${(props) =>
+    props.size === 'bigCarouselImg' &&
+    css`
+      max-width: 100%;
+      max-height: 452px;
+      margin-bottom: 10px;
+      overflow:hidden;
+    `}
+  /* ${(props) =>
+    props.size === 'bookmarkImg' &&
+    css`
+      width: 48px;
+      height: 48px;
+    `} */
+  /* ${(props) =>
+    props.size === 'bigBorder' &&
+    css`
+      max-width: 100%;
+      height: auto;
+      padding: 20px 0;
+      margin: 0 20px;
+      margin-bottom: 10px;
+      overflow:hidden;
+    `} */
+`;
+
 const BorderStyle = styled.div`
   /* 공통 스타일 */
   border-radius: 10px;
@@ -24,39 +58,12 @@ const BorderStyle = styled.div`
   ${activeStyles}
 
   /* 크기 */
-  ${(props) =>
-    props.carouselImg &&
-    css`
-      width: 300px;
-      height: 200px;
-    `}
-  ${(props) =>
-    props.bigCarouselImg &&
-    css`
-      max-width: 100%;
-      height: auto;
-      padding: 20px 0;
-      margin: 0 20px;
-    `}
-  ${(props) =>
-    props.bookmarkImg &&
-    css`
-      width: 48px;
-      height: 48px;
-    `}
-  ${(props) =>
-    props.bigBorder &&
-    css`
-      max-width: 100%;
-      height: auto;
-      padding: 20px 0;
-      margin: 0 20px;
-    `}
+  ${sizeStyles}
 `;
 
-const Border = ({ children, active, ...rest }) => {
+const Border = ({ children, active, size, ...rest }) => {
   return (
-    <BorderStyle active={active} {...rest}>
+    <BorderStyle active={active} size={size} {...rest}>
       {children}
     </BorderStyle>
   );

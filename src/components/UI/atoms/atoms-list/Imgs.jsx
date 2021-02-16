@@ -15,12 +15,12 @@ const ImgStyle = styled.img`
       max-width: 100%;
       height: auto;
       border-radius: 8px;
-      /* margin: 20px; */
+      object-fit:cover;
     `}
 `;
 
-const Imgs = ({ src, alt, ...rest }) => {
-  return <ImgStyle src={src} {...rest} alt={alt} />;
+const Imgs = ({ src, alt,  ...rest }) => {
+  return <ImgStyle src={src}  {...rest} alt={alt} />;
 };
 
 export default Imgs;
