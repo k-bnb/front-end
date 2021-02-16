@@ -18,7 +18,7 @@ const ReserveConfirmContainer = () => {
       reservationId: 1,
       roomId: 1,
       imgUrl: 'this is demo url',
-      status: '이전 예약',
+      status: '예약 완료',
       roomName: 'this is room name',
       roomLocation: '모험들 현실과 답도없는 열쇠 찾아라 비밀의',
       hostName: 'this is host name',

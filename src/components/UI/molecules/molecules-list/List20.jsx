@@ -194,7 +194,7 @@ const LodgingLists = ({
     prev: 'PREV',
   };
   const btnOpcity = useRef();
-  console.log(btnOpcity);
+
   const [imgs, setImages] = useState({
     img: roomImgUrlList,
     current: 3,
@@ -203,9 +203,6 @@ const LodgingLists = ({
   });
   const slideRef = useRef(null);
   const IMG_LENGTH = imgs.img.length;
-
-  console.log(IMG_LENGTH);
-  console.log(imgs.img);
 
   const handleSliderTranslateEnd = () => {
     console.log('handelend');
@@ -241,7 +238,6 @@ const LodgingLists = ({
     setImages((state) => ({
       ...state,
       needTransition: false,
-
       img: imgSlide,
     }));
   };
@@ -261,21 +257,18 @@ const LodgingLists = ({
     setImages((state) => ({
       ...state,
       needTransition: false,
-
       img: imgSlide,
     }));
   };
   console.log(imgs);
   const nextClick = () => {
     let num = imgs.current + 1;
-    // if (num > IMG_LENGTH) return;
     setImages((state) => ({
       ...state,
       needTransition: true,
       current: num,
       direction: DIRECTIOM_TYPE.next,
     }));
-    console.log('num', num);
   };
   const prevClick = () => {
     let num = imgs.current - 1;
