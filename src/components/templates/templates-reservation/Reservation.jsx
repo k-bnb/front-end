@@ -58,6 +58,7 @@ const Reservation = ({
   checkDate,
   saveDate,
   isLoading,
+  reserveInfoRes,
 }) => {
   return (
     <>

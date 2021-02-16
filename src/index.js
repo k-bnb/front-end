@@ -12,6 +12,32 @@ import { rootSaga } from './modules/index';
 
 const sagaMiddleware = createSagaMiddleware();
 
+const detailRes = JSON.parse(sessionStorage.getItem('detailRes')) || {
+  id: '',
+  name: '',
+  roomCost: 0,
+  cleaningCost: 0,
+  tax: 0,
+  peopleLimit: 0,
+  description: 0,
+  bedNum: 0,
+  bathRoomNum: 0,
+  grade: 0,
+};
+
+const {
+  id,
+  name,
+  roomCost,
+  cleaningCost,
+  tax,
+  peopleLimit,
+  description,
+  bedNum,
+  bathRoomNum,
+  grade,
+} = detailRes;
+
 const store = createStore(
   rootReducer,
   {
@@ -32,12 +58,49 @@ const store = createStore(
       registerError: null, // 회원가입 에러
       loginError: null, // 로그인 에러}
     },
+    detail: {
+      startDate: sessionStorage.getItem('startDate'),
+      endDate: sessionStorage.getItem('endDate'),
+      numOfAdult: 0,
+      numOfKid: 0,
+      numOfInfant: 0,
+      infoRes: {
+        id,
+        name,
+        roomType: '',
+        roomCost,
+        cleaningCost,
+        tax,
+        peopleLimit,
+        description: '',
+        checkOutTime: '13:00:00',
+        checkInTime: '15:00:00',
+        isSmoking: false,
+        isParking: false,
+        bedRoomNum: 0,
+        bedNum,
+        bathRoomNum,
+        grade,
+        commentCount: 0,
+        locationDetail: {
+          country: null,
+          city: '',
+          borough: '',
+          neighborhood: '',
+          detailAddress: null,
+          latitude: 0,
+          longitude: 0,
+        },
+        commentList: [],
+        roomImgUrlList: [],
+      },
+      detailError: null,
+    },
     reserve: {
-      // reducer의 state.reserve에 들어가는 초기 상태, checkDateSearch을 로컬 스토리지에서 get 해서 넣어준다. (reserve스토어와 localStorage를 연결)
-      roomId: 5,
-      guestNumber: 2,
-      infantNumber: 2,
-      totalCost: 3000,
+      roomId: null,
+      guestNumber: null,
+      infantNumber: null,
+      totalCost: null,
       message: '',
       checkDateSearch: {
         startDate: sessionStorage.getItem('startDate'),
@@ -47,6 +110,22 @@ const store = createStore(
         numOfAdult: 0,
         numOfKid: 0,
         numOfInfant: 0,
+      },
+      infoRes: {
+        id,
+        name,
+        roomCost,
+        cleaningCost,
+        tax,
+        peopleLimit,
+        description,
+        bedNum,
+        bathRoomNum,
+        grade,
+      },
+      locationDetail: {
+        city: '',
+        borough: '',
       },
       reserveError: null,
     },
