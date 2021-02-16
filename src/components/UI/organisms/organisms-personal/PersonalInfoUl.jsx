@@ -5,9 +5,9 @@ import Button from '../../atoms/atoms-main/Button';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
 import PersonalNameInput from '../../molecules/molecules-personalInfo/PersonalNameInput';
 import PersonalInfoGenderSelect from '../../molecules/molecules-personalInfo/PersonalInfoGenderSelect';
-import Input from '../../atoms/atoms-main/Input';
 import PersonalInfoBirthinput from '../../molecules/molecules-personalInfo/PersonalInfoBirthinput';
 import PersonalInfoEmailInput from '../../molecules/molecules-personalInfo/PersonalInfoEmailInput';
+import PersonalInfoImg from '../../molecules/molecules-personalInfo/PersonalInfoImg';
 
 const PersonalInfoUIStyle = styled.ul`
   display: flex;
@@ -30,7 +30,7 @@ const PersonalInfoUIStyle = styled.ul`
 `;
 
 const PersonalInfoUl = ({
-  fix: { name, gender, birth, emailAddress, cancel },
+  fix: { name, img, birth, emailAddress, cancel },
   fixInfoBtn,
   cancelclick,
   personInfoChange,
@@ -52,15 +52,15 @@ const PersonalInfoUl = ({
       </PersonalInfoLi>
       <PersonalInfoLi>
         <div className="gender">
-          <TextStyle>성별</TextStyle>
-          {gender ? (
-            <PersonalInfoGenderSelect personInfoChange={personInfoChange} />
+          <TextStyle>이미지</TextStyle>
+          {img ? (
+            <PersonalInfoImg personInfoChange={personInfoChange} />
           ) : (
             <TextStyle>지정되지 않음</TextStyle>
           )}
         </div>
-        <Button name="gender" className="btn" greenText>
-          {!gender ? '수정' : '취소'}
+        <Button name="imageUrl" className="btn" greenText>
+          {!img ? '수정' : '취소'}
         </Button>
       </PersonalInfoLi>
       <PersonalInfoLi>
