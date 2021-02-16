@@ -12,6 +12,8 @@ const REQUEST_DETAIL_SUCCESS = 'detail/REQUEST_DETAIL_SUCCESS';
 const REQUEST_DETAIL_FAILURE = 'detail/REQUEST_DETAIL_FAILURE';
 const CLEAR_GUEST_DETAIL = 'detail/CLEAR_GUEST_DETAIL';
 const CLEAR_CHECKDATE_DETAIL = 'detail/CLEAR_CHECKDATE_DETAIL';
+const GET_TOTAL_PRICE = 'detail/GET_TOTAL_PRICE';
+const GET_CANCELLABLE_DATE = 'detail/GET_CANCELLABLE_DATE';
 // Action Creator
 export const searchToDetail = createAction(
   SEARCH_TO_DETAIL,
@@ -34,6 +36,15 @@ export const guestChangeDetail = createAction(
 export const requestDetail = createAction(REQUEST_DETAIL, (id) => id);
 export const clearGuestDetail = createAction(CLEAR_GUEST_DETAIL);
 export const clearCheckDateDtail = createAction(CLEAR_CHECKDATE_DETAIL);
+export const getTotalPrice = createAction(
+  // total 숙박비용
+  GET_TOTAL_PRICE,
+  (totalCost) => totalCost,
+);
+export const getCancellableDate = createAction(
+  GET_CANCELLABLE_DATE,
+  (month, day) => ({ month, day }),
+); // 예약취소 가능한 날짜
 // saga
 const requestDetailSaga = createRequestSaga(
   REQUEST_DETAIL,
@@ -56,6 +67,7 @@ const initialStates = {
     roomCost: 0,
     cleaningCost: 0,
     tax: 0,
+
     peopleLimit: 0,
     description: '',
     checkOutTime: '13:00:00',
@@ -78,6 +90,8 @@ const initialStates = {
     },
     commentList: [],
     roomImgUrlList: [],
+    totalCost: 0,
+    CancellableDate: {},
   },
   detailError: null,
 };
@@ -125,6 +139,14 @@ const detail = handleActions(
     [REQUEST_DETAIL_FAILURE]: (state, { payload: error }) => ({
       ...state,
       detailError: error,
+    }),
+    [GET_TOTAL_PRICE]: (state, { payload: totalCost }) => ({
+      ...state,
+      totalCost,
+    }),
+    [GET_CANCELLABLE_DATE]: (state, { payload: { month, day } }) => ({
+      ...state,
+      cancellableDate: { month, day },
     }),
   },
   initialStates,

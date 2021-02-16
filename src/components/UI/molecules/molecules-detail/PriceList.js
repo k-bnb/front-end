@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BiWon } from 'react-icons/bi';
-import TotalPrice from './TotalPrice';
 
 const PriceList = styled.li`
   display: flex;
