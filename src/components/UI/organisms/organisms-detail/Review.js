@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Grade from '../../atoms/atoms-detail/Grade';
 import WhiteBtn from '../../atoms/atoms-detail/WhiteBtn';
@@ -8,7 +8,7 @@ import { TypeTitle } from '../../molecules/molecules-detail/TypeInfo';
 import '../../atoms/atoms-detail/DetailBasicStyle.css';
 
 const ReveiwSectionWrapper = styled.div`
-  padding: 0 80px;
+  /* padding: 0 80px; */
 `;
 
 const ReviewContainer = styled.div`
@@ -29,12 +29,17 @@ const ReviewItemBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const Review = ({ reviewRef }) => {
+const Review = ({
+  reviewRef,
+  showReviewModal,
+  setShowReviewModal,
+  infoRes,
+}) => {
   return (
     <ReveiwSectionWrapper ref={reviewRef}>
       <ReviewContainer className="basic-section-padding">
         <ReviewTitle>
-          <Grade />{' '}
+          {/* <Grade grade={infoRes.grade} /> 점 (후기 {infoRes.commentCount}개){' '} */}
         </ReviewTitle>
         <ScoreAverage />
         <ReviewItemBox>
@@ -42,7 +47,11 @@ const Review = ({ reviewRef }) => {
           <ReviewItem />
           <ReviewItem />
         </ReviewItemBox>
-        <WhiteBtn text="후기 38개 모두 보기" />
+        <WhiteBtn
+          isShowReviewButton={true}
+          text="후기 38개 모두 보기"
+          setShowReviewModal={setShowReviewModal}
+        />
       </ReviewContainer>
     </ReveiwSectionWrapper>
   );

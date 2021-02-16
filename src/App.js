@@ -12,7 +12,6 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        {/* <Route path="/" component={Observer} /> */}
         <Route path="/reserveconfirm" component={ReserveConfirmPage} />
         <Route path="/personInfo" component={PersonalInfoPage} />
         <Route path="/reserve" component={ReservationPage} />

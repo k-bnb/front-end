@@ -38,7 +38,7 @@ const NoticeEmoticon = styled.div`
   min-width: 20px;
 `;
 
-const AccommodationRules = () => (
+export const AccommodationRules = ({ CheckInTime, CheckOutTime }) => (
   <NoticeDetailBox>
     <NoticeTitle big bold>
       숙소 이용 규칙
@@ -47,13 +47,13 @@ const AccommodationRules = () => (
       <NoticeEmoticon>
         <BiTimeFive />
       </NoticeEmoticon>
-      체크인 시간: 오후 3:00 - 오전 12:00
+      체크인 시간: {CheckInTime}:00 - 오전 12:00
     </NoticeTextBox>
     <NoticeTextBox big>
       <NoticeEmoticon>
         <BiTimeFive />
       </NoticeEmoticon>
-      체크아웃 시간: 오전 11:00
+      체크아웃 시간: {CheckOutTime}:00
     </NoticeTextBox>
     <NoticeTextBox big>
       <NoticeEmoticon>
@@ -96,24 +96,32 @@ const HealthAndSafe = () => (
   </NoticeDetailBox>
 );
 
-const RefundPolicy = () => (
+const RefundPolicy = ({ CancellableDate }) => (
   <NoticeDetailBox>
     <NoticeTitle big bold>
       환불 정책
     </NoticeTitle>
-    <NoticeTextBox big>3월 3일 3:00 PM까지 무료 취소 가능</NoticeTextBox>
     <NoticeTextBox big>
-      그 후에는 3월 4일 3:00 PM 전에 예약을 취소하면 첫 1박 요금 및 서비스
-      수수료를 제외한 요금 전액이 환불됩니다.
+      {CancellableDate.month}월 {CancellableDate.day}일 3:00 PM까지 무료 취소
+      가능
+    </NoticeTextBox>
+    <NoticeTextBox big>
+      그 후에는 {CancellableDate.month}월 {CancellableDate + 1}일 3:00 PM 전에
+      예약을 취소하면 첫 1박 요금 및 서비스 수수료를 제외한 요금 전액이
+      환불됩니다.
     </NoticeTextBox>
   </NoticeDetailBox>
 );
 
-const NoticeAll = () => (
-  <NoticeAllContainer>
-    <AccommodationRules />
+const NoticeAll = ({ infoRes, CancellableDate, CheckInTime, CheckOutTime }) => (
+  <NoticeAllContainer infoRes={infoRes}>
+    <AccommodationRules
+      infoRes={infoRes}
+      CheckInTime={CheckInTime}
+      CheckOutTime={CheckOutTime}
+    />
     <HealthAndSafe />
-    <RefundPolicy />
+    <RefundPolicy CancellableDate={CancellableDate} />
   </NoticeAllContainer>
 );
 

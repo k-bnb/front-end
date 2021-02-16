@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginOraganisms from '../components/UI/organisms/organisms-modals-auth/LoginOraganisms';
 import RegisterOrganism from '../components/UI/organisms/organisms-modals-auth/RegisterOrganism';
-import { changeInput, login, register } from '../modules/auth';
+import { changeInput, initialzeInput, login, register } from '../modules/auth';
 
 const AuthModalContainer = ({
   modal,
@@ -14,6 +14,30 @@ const AuthModalContainer = ({
 }) => {
   const dispatch = useDispatch();
   const [checkEmail, setCheckEmail] = useState(null);
+
+  const [isFirst, setIsFirst] = useState({
+    emailInput: true,
+    nameInput: true,
+    passwordInput: true,
+    dateInput: true,
+  });
+
+  const [registerValidation, setRegisterValidation] = useState({
+    emailValidation: false,
+    nameValidation: false,
+    passwordValidation: {
+      isLongerThanEight: false,
+      hasEveryCharacter: false,
+      doesContainInfo: false,
+    },
+    dateValidation: false,
+  });
+
+  const [loginValidation, setLoginValidation] = useState({
+    emailValidation: false,
+    passwordValidation: false,
+  });
+
   const { loginEmail, loginPassword } = useSelector(
     (state) => state.auth.login,
   );
@@ -28,38 +52,16 @@ const AuthModalContainer = ({
 
   useEffect(() => {
     setCheckEmail(isEmail);
+
+    // return () => {
+    //   dispatch(initialzeInput('register'));
+    //   dispatch(initialzeInput('login'));
+    // };
   }, [isEmail]);
   console.log(checkEmail);
 
   const onChange = async (e) => {
     dispatch(changeInput(formState, e.target.name, e.target.value));
-    console.log(e);
-
-    if (!isEmail && e.target.name === 'loginEmail') {
-      e.target.style.border = '1px solid red';
-      return;
-    }
-    if (!isEmail && e.target.name === 'loginPassword') {
-      e.target.style.border = '1px solid black';
-
-      if (e.target.name === 'name' && e.target.value !== 'kkk') {
-        e.target.style.border = '1px solid red';
-        return;
-      }
-
-      if (!isEmail && e.target.name === 'registerEmail') {
-        e.target.style.border = '1px solid red';
-        return;
-      }
-
-      if (e.target.name === 'registerPassword' && e.target.value !== 'iii') {
-        e.target.style.border = '1px solid red';
-
-        return;
-      }
-
-      e.target.style.border = '1px solid green';
-    }
   };
 
   const onLoginSubmit = (e) => {
@@ -90,6 +92,12 @@ const AuthModalContainer = ({
           modal={modal}
           setModal={setModal}
           changeRegister={changeRegister}
+          registerValidation={registerValidation}
+          setRegisterValidation={setRegisterValidation}
+          isFirst={isFirst}
+          setIsFirst={setIsFirst}
+          loginValidation={loginValidation}
+          setLoginValidation={setLoginValidation}
         />
       )}
       {formState === 'register' && (
@@ -104,6 +112,10 @@ const AuthModalContainer = ({
           birth={birth}
           modal={modal}
           setModal={setModal}
+          registerValidation={registerValidation}
+          setRegisterValidation={setRegisterValidation}
+          isFirst={isFirst}
+          setIsFirst={setIsFirst}
         />
       )}
     </>

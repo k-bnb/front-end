@@ -33,17 +33,19 @@ export const Text = styled.div`
   }
 `;
 
-// const CheckInDate = ({ reservationDates }) => {
-//   const strStartDate = reservationDates.checkIn;
+const CheckDateExists = () => (
+  <div>
+    <Text>체크인 24시간 전까지 수수료 없이 예약 취소 가능</Text>
+    <Text>
+      그 이후로는 체크인 전에 취소하면 첫 1박 요금과 서비스 수수료를 제외한 전액
+    </Text>
+  </div>
+);
 
-//   const strArr = strStartDate.split('-');
-//   console.log(strStartDate);
-//   return { year: strArr[0], month: strArr[1] + 1, day: strArr[2] };
-// };
-
-const TextSummary = ({ infoRes }) => {
-  // console.log(infoRes);
-  // console.log(CheckInDate(infoRes).year);
+const TextSummary = ({ CancellableDate, detailObj }) => {
+  const CheckInDate = detailObj.startDate;
+  const CheckOutDate = detailObj.EndDate;
+  console.log(detailObj);
 
   return (
     <TextSummaryContainer>
@@ -81,13 +83,21 @@ const TextSummary = ({ infoRes }) => {
         <div className="emoticon">
           <RiCalendarCheckLine />
         </div>
-        <div>
-          <Text>3월3일 3:00PM까지 무료 취소 가능 </Text>
-          <Text>
-            그 후에는 3월 4일 3:00PM 전에 예약을 취소하면 첫 1박 요금 및 서비스
-            수수료를 제외한 요금 전액이 환불됩니다.
-          </Text>
-        </div>
+        {CheckInDate === '' || CheckOutDate === '' ? (
+          <CheckDateExists />
+        ) : (
+          <div>
+            <Text>
+              {CancellableDate.month}월{CancellableDate.day}일 3:00PM까지 무료
+              취소 가능
+            </Text>
+            <Text>
+              그 후에는 {CancellableDate.month}월 {CancellableDate.day + 1}일
+              3:00PM 전에 예약을 취소하면 첫 1박 요금 및 서비스 수수료를 제외한
+              요금 전액이 환불됩니다.
+            </Text>
+          </div>
+        )}
       </SimpleSummary>
     </TextSummaryContainer>
   );

@@ -32,14 +32,14 @@ const WrappingContainer = ({
   facilityRef,
   moveToReserve,
   infoRes,
-  reservationDates,
   detailObj,
+  CancellableDate,
 }) => (
   <InfoContainer>
     <DetailInfo>
       <HostingData infoRes={infoRes} />
-      <TextSummary infoRes={infoRes} />
-      <TypeInfo />
+      <TextSummary detailObj={detailObj} CancellableDate={CancellableDate} />
+      <TypeInfo infoRes={infoRes} />
       <EmoticonNotice facilityRef={facilityRef} />
     </DetailInfo>
     <BookingSummaryBox>
@@ -47,6 +47,7 @@ const WrappingContainer = ({
         DetailHeaderRef={DetailHeaderRef}
         moveToReserve={moveToReserve}
         detailObj={detailObj}
+        infoRes={infoRes}
       />
     </BookingSummaryBox>
   </InfoContainer>

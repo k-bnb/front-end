@@ -9,13 +9,23 @@ const PriceBox = styled.ul`
   padding: 0;
 `;
 
-const PriceDetail = () => (
-  <PriceBox>
-    <PriceListItem detail="82,000 x 2박" price="164,000" />
-    <PriceListItem detail="청소비" price="10,000" />
-    <PriceListItem detail="서비스 수수료" price="24,565" />
-    <PriceListItem detail="숙박세와 수수료" price="2,456" />
-  </PriceBox>
-);
+const PriceDetail = ({ infoRes, totalSchedule }) => {
+  const roomPrice = `${infoRes.roomCost}*${totalSchedule}박`;
+
+  return (
+    <PriceBox>
+      <PriceListItem
+        detail={roomPrice}
+        price={infoRes.roomCost * totalSchedule}
+      />
+      <PriceListItem detail="청소비" price={infoRes.cleaningCost} />
+      <PriceListItem
+        detail="서비스 수수료"
+        price={(infoRes.roomCost * totalSchedule) / 10}
+      />
+      <PriceListItem detail="숙박세와 수수료" price={infoRes.tax} />
+    </PriceBox>
+  );
+};
 
 export default PriceDetail;
