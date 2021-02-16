@@ -50,6 +50,17 @@ const Detail = ({
   detailObj,
   roomImgUrlList,
 }) => {
+  // const strStartDate = detailObj.startDate;
+  const CheckInDate = () => {
+    const strDate = detailObj.startDate.split('-');
+    return { year: strDate[0], month: strDate[1], day: strDate[2] };
+  };
+
+  const CancellableDate = {
+    month: parseInt(CheckInDate().month),
+    day: parseInt(CheckInDate().day) - 1,
+  };
+
   return (
     <>
       <DetailTemplate Theme={Theme} infoRes={infoRes}>
@@ -67,10 +78,11 @@ const Detail = ({
           moveToReserve={moveToReserve}
           infoRes={infoRes}
           detailObj={detailObj}
+          CancellableDate={CancellableDate}
         />
         {isLoading && <LoadingModal />}
         <ReviewContainer reviewRef={reviewRef} infoRes={infoRes} />
-        <ImportantNotice infoRes={infoRes} />
+        <ImportantNotice infoRes={infoRes} CancellableDate={CancellableDate} />
         {/* <Review reviewRef={reviewRef} commentList={infoRes.commentList} /> */}
       </DetailTemplate>
     </>
