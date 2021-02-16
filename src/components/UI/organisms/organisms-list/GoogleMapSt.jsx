@@ -1,11 +1,13 @@
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
 import GoogleMapUse from '../../molecules/molecules-list/GoogleMap';
+import React, { useEffect } from 'react';
 
 const PcSize = styled.main`
   display: block;
-  margin-top: -176px;
-  /* padding-top: 80px; */
+  /* margin-top: -176px; */
+  margin-top: -80px;
+  padding-top: 80px;
   top: 0;
   position: sticky;
 
@@ -30,17 +32,9 @@ const MobileSize = styled.main`
 `;
 
 const GoogleStyle = ({
-  roomMap,
-  locationSearch,
-  room,
-  checkDateSearch,
-  guestSearch,
-  costSearch,
-  roomType,
-  bedNum,
-  bedRoomNum,
-  bathRoomNum,
+  moveChange
 }) => {
+  console.log(moveChange());
   const isPc = useMediaQuery({
     query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
   });
@@ -51,21 +45,13 @@ const GoogleStyle = ({
     query: `(max-width: 743px)`, //744px 이하인 경우에만 적용(744이하.)
   });
 
+
   return (
     <>
       {isPc && (
         <PcSize className="Asidemap">
           <GoogleMapUse
-            room={room}
-            roomMap={roomMap}
-            locationSearch={locationSearch}
-            checkDateSearch={checkDateSearch}
-            guestSearch={guestSearch}
-            costSearch={costSearch}
-            roomType={roomType}
-            bedNum={bedNum}
-            bedRoomNum={bedRoomNum}
-            bathRoomNum={bathRoomNum}
+            moveChange={moveChange}
           />
         </PcSize>
       )}
@@ -78,4 +64,16 @@ const GoogleStyle = ({
     </>
   );
 };
+
+// function areEqual1(prevProps, nextProps) {
+//   console.log(prevProps, nextProps)
+//   return (
+//     prevProps.roomMap === nextProps.roomMap &&
+//     prevProps.room === nextProps.room &&
+//     prevProps.locationSearch === nextProps.locationSearch
+//   )};
+
+// export default React.memo(GoogleStyle,areEqual1);
+
+
 export default GoogleStyle;

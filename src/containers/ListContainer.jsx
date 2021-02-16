@@ -15,6 +15,7 @@ const ListContainer = () => {
     minCostState: false,
     minCostPay: '',
   });
+  
   const {
     locationSearch,
     checkDateSearch,

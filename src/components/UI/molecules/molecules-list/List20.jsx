@@ -110,17 +110,7 @@ const ULWrap = styled.ul`
     }
     .TextHead {
       /* width: 100%; */
-    }
-    .Ellipsis {
-      width: 416px;
-      /* width: 100%; */
-      height: 46px;
-      /* margin-right: 20px; */
-      display: block;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      align-content: center;
+      margin-bottom: 15px;
     }
     span:first-child {
       /* background-color: yellow; */
@@ -323,7 +313,7 @@ const LodgingLists = ({
                   <TextStyled size="blackSmall">
                     {city} {borough} {city || borough ? '의' : ''} {roomType}
                   </TextStyled>
-                  <TextStyled className="Ellipsis" size="blackMiddle">
+                  <TextStyled type='Ellipsis' size="blackMiddle">
                     {name}
                   </TextStyled>
                   <Bookmark className="heart" heart>

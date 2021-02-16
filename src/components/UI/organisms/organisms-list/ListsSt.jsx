@@ -23,6 +23,10 @@ const PcSize = styled.main`
 const TabletSize = styled.main`
   width : 100vw;
   min-height : calc(100vh - 80px);
+  padding: 0 30px;
+  ul {
+    width: 100%;
+  }
 `;
 const MobileSize = styled.main`
   width :100vw;
@@ -202,7 +206,17 @@ const ListStyle = ({
               );
             },
           )}
-          <PageNation totalPage={totalPage} pageNationClick={pageNationClick} />
+          <PageNation
+            totalPage={totalPage}
+            pageNationClick={pageNationClick}
+            currentButton={currentButton}
+            setCurrentButton={setCurrentButton}
+            arrOfcurrButtons={arrOfcurrButtons}
+            setArrOfCurrButtons={setArrOfCurrButtons}
+            numberOfPages={numberOfPages}
+            changeCurrentPage={changeCurrentPage}
+            pageNationState={pageNationState}
+          />
         </TabletSize>
       )}
       {isMobile && (
@@ -241,7 +255,17 @@ const ListStyle = ({
               </li>
             </Link>
           )})}
-          <PageNation totalPage={totalPage} pageNationClick={pageNationClick} style={{borderTop:'0'}}/>
+          <PageNation
+            totalPage={totalPage}
+            pageNationClick={pageNationClick}
+            currentButton={currentButton}
+            setCurrentButton={setCurrentButton}
+            arrOfcurrButtons={arrOfcurrButtons}
+            setArrOfCurrButtons={setArrOfCurrButtons}
+            numberOfPages={numberOfPages}
+            changeCurrentPage={changeCurrentPage}
+            pageNationState={pageNationState}
+          />
         </MobileSize>
       )}
     </>
