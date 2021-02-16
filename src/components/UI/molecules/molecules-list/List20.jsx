@@ -11,18 +11,21 @@ import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 // import ListCarousel from './ListCarousel';
 // import { SliderData } from './SliderData';
-
-// const Wrap = styled.ul`
-//   width: 100%;
-// `
-
-const List = styled.li`
-  /* list-style: none; */
-  /* display: inline-block; */
-  /* padding: 0; */
+const Wrap = styled.div`
+  /* width:100%; */
+  height: auto;
+  /* min-height: 5013px;/ */
+  /* padding: 0 24px; */
+  box-sizing: border-box;
+`;
+const ULWrap = styled.ul`
+  list-style: none;
+  display: inline-block;
+  padding: 0;
   /* width: 808px; */
   /* height: 5013px; */
   /* height: 100px; */
+  li {
     /* width: 792px; */
     position: relative;
     width: 100%;
@@ -36,7 +39,6 @@ const List = styled.li`
     justify-content: space-between;
     /* border-bottom: 1px solid #000; */
     align-items: center;
-
     :nth-child(1) {
       border-top: 1px solid rgba(0, 0, 0, 0.1);
       /* border-top:2px dashed red; */
@@ -54,9 +56,7 @@ const List = styled.li`
           display: flex;
           width: 100%;
           justify-content: flex-start;
-
           transform: translateX(0);
-
           img {
             width: 100%;
           }
@@ -85,12 +85,10 @@ const List = styled.li`
         .next {
           position: absolute;
           /* z-index: 100; */
-
           right: 10px;
         }
         .prev {
           position: absolute;
-
           left: 10px;
           /* z-index: 100; */
         }
@@ -112,6 +110,17 @@ const List = styled.li`
     }
     .TextHead {
       /* width: 100%; */
+    }
+    .Ellipsis {
+      width: 416px;
+      /* width: 100%; */
+      height: 46px;
+      /* margin-right: 20px; */
+      display: block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      align-content: center;
     }
     span:first-child {
       /* background-color: yellow; */
@@ -148,9 +157,11 @@ const List = styled.li`
       align-items: flex-end;
       padding: 0 15px;
     }
+    /* .sleep{
+    padding-right: 10px;
+  } */
   }
 `;
-
 const LodgingLists = ({
   alt,
   bathRoomNum,
@@ -175,7 +186,6 @@ const LodgingLists = ({
     prev: 'PREV',
   };
   const btnOpcity = useRef();
-  console.log(btnOpcity);
   const [imgs, setImages] = useState({
     img: roomImgUrlList,
     current: 3,
@@ -184,10 +194,6 @@ const LodgingLists = ({
   });
   const slideRef = useRef(null);
   const IMG_LENGTH = imgs.img.length;
-
-  console.log(IMG_LENGTH);
-  console.log(imgs.img);
-
   const handleSliderTranslateEnd = () => {
     console.log('handelend');
     console.log(imgs.direction);
@@ -202,10 +208,8 @@ const LodgingLists = ({
         break;
     }
   };
-
   const vaildNextSlider = () => {
     const { img, current } = imgs;
-
     // console.log(img);
     if (current > img.length - 1) {
       setTimeout(() => {
@@ -218,11 +222,9 @@ const LodgingLists = ({
       }));
     }
     const imgSlide = [...img, ...img.slice(0, 1)].slice(-img.length);
-
     setImages((state) => ({
       ...state,
       needTransition: false,
-
       img: imgSlide,
     }));
   };
@@ -242,21 +244,18 @@ const LodgingLists = ({
     setImages((state) => ({
       ...state,
       needTransition: false,
-
       img: imgSlide,
     }));
   };
   console.log(imgs);
   const nextClick = () => {
     let num = imgs.current + 1;
-    // if (num > IMG_LENGTH) return;
     setImages((state) => ({
       ...state,
       needTransition: true,
       current: num,
       direction: DIRECTIOM_TYPE.next,
     }));
-    console.log('num', num);
   };
   const prevClick = () => {
     let num = imgs.current - 1;
@@ -268,11 +267,9 @@ const LodgingLists = ({
       direction: DIRECTIOM_TYPE.prev,
     }));
   };
-
   const transLateVal = () => {
     return -(imgs.current * 100);
   };
-
   const sliderStyle = () => {
     if (imgs.needTransition) {
       return {
@@ -287,8 +284,8 @@ const LodgingLists = ({
   return (
     <>
       {/* <ListCarousel slides={SliderData} /> */}
-      <>
-        <List className="listWrap">
+      <Wrap className="listWrap">
+        <ULWrap>
           <li>
             <div className="slide-group" carouselImg>
               <div className="slide">
@@ -299,13 +296,11 @@ const LodgingLists = ({
                   ref={slideRef}
                 >
                   {/* <Imgs carousalImg src={imgs.img[imgs.img.length]} /> */}
-
                   {roomImgUrlList.map((src, i, arr) => (
                     <>
                       <Imgs
                         carousalImg
                         src={src}
-
                         // alt={alt}
                       />
                     </>
@@ -354,10 +349,9 @@ const LodgingLists = ({
               </span>
             </Link>
           </li>
-        </List>
-      </>
+        </ULWrap>
+      </Wrap>
     </>
   );
 };
-
 export default LodgingLists;

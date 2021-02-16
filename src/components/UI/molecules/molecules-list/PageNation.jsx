@@ -1,14 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../atoms/atoms-list/Button';
-
+import Pagination from 'react-pagination-library';
 const PageStyle = styled.div`
   min-width: 547px;
 
   text-align: center;
   padding: 40px;
-  border-top: 1px solid rgba(170,170,170,0.5);
-`
+
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.5rem;
+    li {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      vertical-align: sub;
+      &:hover {
+        background-color: #000;
+        color: #eee;
+
+        border-radius: 50%;
+      }
+    }
+  }
+  /* button {
+    display: inline-flex;
+    padding: 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    border: 0;
+    background: none;
+    &.active {
+      color: #eee;
+      background-color: black;
+    }
+
+    font-size: 1.6rem;
+  } */
+`;
 
 const PageNation = ({
   totalPage,
@@ -18,6 +55,8 @@ const PageNation = ({
   arrOfcurrButtons,
   setArrOfCurrButtons,
   numberOfPages,
+  changeCurrentPage,
+  pageNationState,
 }) => {
   // console.log(numberOfPages);
 
@@ -31,9 +70,16 @@ const PageNation = ({
   //   numberOfPages = [...newArr1, '...', ...newArr2];
   // }
   // console.log(numberOfPages);
+
   return (
     <PageStyle className="PageNation">
-      <Button
+      <Pagination
+        currentPage={pageNationState.currentPage}
+        totalPage={totalPage.totalPages}
+        changeCurrentPage={changeCurrentPage}
+        theme="circle"
+      />
+      {/* <Button
         size="number"
         onClick={() =>
           setCurrentButton((prev) => (prev === 0 ? prev : prev - 1))
@@ -56,13 +102,16 @@ const PageNation = ({
           );
         })}
 
-        <Button
-          size='number'
-          className={`${currentButton === numberOfPages.length-1 ? 'disabled' : ''}`}
-          onClick={() => setCurrentButton(prev => prev >= numberOfPages.length ? prev : prev + 1)}
-        >
-          &#62;
-        </Button>
+      <Button
+        size="number"
+        onClick={() =>
+          setCurrentButton((prev) =>
+            prev === numberOfPages.length ? prev : prev + 1,
+          )
+        }
+      >
+        &#62;
+      </Button> */}
     </PageStyle>
   );
 };

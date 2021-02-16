@@ -4,8 +4,8 @@ import GoogleMapUse from '../../molecules/molecules-list/GoogleMap';
 
 const PcSize = styled.main`
   display: block;
-  margin-top: -80px;
-  padding-top: 80px;
+  margin-top: -176px;
+  /* padding-top: 80px; */
   top: 0;
   position: sticky;
 
@@ -14,7 +14,7 @@ const PcSize = styled.main`
   min-width: calc(100vw - 840px);
 
   height: 100vh;
-  z-index: 100;
+  /* z-index: 100;x */
   /* cursor: url('https://maps.gstatic.com/mapfiles/openhand_8_8.cur'), default; */
   /* background-color: lightcoral; */
 `;
