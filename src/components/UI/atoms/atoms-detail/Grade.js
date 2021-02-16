@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
-import Text from './DetailText';
+// import Text from './DetailText';
 
 const AverageGrade = styled.div`
   display: inline-flex;

@@ -3,14 +3,11 @@ import styled from 'styled-components';
 import ImageFrame from '../../UI/organisms/organisms-detail/ImageFrame';
 import { PageTitle } from '../../UI/molecules/molecules-detail/PageTitle';
 import ImportantNotice from '../../UI/organisms/organisms-detail/ImportantNotice';
-import Review from '../../UI/organisms/organisms-detail/Review';
+//import Review from '../../UI/organisms/organisms-detail/Review';
 import WrappingContainer from '../../UI/organisms/organisms-detail/WrappingContainer';
-//import Modal from '../../../portal/Modal';
-//import LoaderIcon from 'react-loader-icon';
-import { useSelector } from 'react-redux';
 import LoadingModal from '../LoadingModal';
 import ReviewContainer from '../../../containers/ReviewContainer';
-import Modal from '../../../portal/Modal';
+//import Modal from '../../../portal/Modal';
 
 const Theme = {
   laptop: `screen and (min-width: 1024px)`,
@@ -39,7 +36,7 @@ const DetailTemplate = styled.div`
 `;
 
 const Detail = ({
-  showModal,
+  // showModal,
   setShowModal,
   current,
   setCurrent,
@@ -72,9 +69,9 @@ const Detail = ({
           detailObj={detailObj}
         />
         {isLoading && <LoadingModal />}
-        <ReviewContainer reviewRef={reviewRef} />
+        <ReviewContainer reviewRef={reviewRef} infoRes={infoRes} />
         <ImportantNotice infoRes={infoRes} />
-        <Review reviewRef={reviewRef} commentList={infoRes.commentList} />
+        {/* <Review reviewRef={reviewRef} commentList={infoRes.commentList} /> */}
       </DetailTemplate>
     </>
   );
