@@ -60,7 +60,7 @@ const sizeStyles = css`
     `}
     
     ${(props) =>
-    props.number &&
+    props.size === 'number' &&
     css`
       width : 20px;
       height: 20px;
@@ -112,12 +112,13 @@ const StyledButton = styled.button`
   }
 `;
 
-const StyledLink = styled(Link)`
-  ${buttonStyle}
-`;
+// const StyledLink = styled(Link)`
+//   ${buttonStyle}
+// `;
 
-const Button = (size, ...props) => {
-  return props.to ? (<StyledLink {...props} />) : (<StyledButton size={size} number={props.number ? 1 : 0} {...props} />); //velopert-p793
+const Button = ({size, children, ...rest} ) => {
+  // return props.to ? (<StyledLink {...props} />) : (<StyledButton size={size} number={props.number ? 1 : 0} {...props} />); //velopert-p793
+  return<StyledButton size={size} {...rest}>{children}</StyledButton>
 };
 
 Button.defaultProps = {

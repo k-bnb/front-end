@@ -25,6 +25,9 @@ const ListContainer = () => {
     bedRoomNum,
     bathRoomNum,
   } = useSelector((state) => state.search.searchReq);
+
+  const isLoading = useSelector((state) => state.loading['search/SEARCHING']);
+
   const dispatch = useDispatch();
 
   const RoomSearchClick = () => {
@@ -117,9 +120,48 @@ const ListContainer = () => {
   const [currentButton, setCurrentButton] = useState(0);
   const [arrOfcurrButtons, setArrOfCurrButtons] = useState([]);
 
+  let numberOfPages = [];
+
+  Array.from({ length: totalPage.totalPages }, (_, i) => {
+    return numberOfPages.push(i);
+  });
+  console.log(numberOfPages);
+  let dotsInitial = '...';
+  let dotsLeft = '... ';
+  let dotsRight = ' ...';
+  if (numberOfPages.length > 6) {
+    //[0, 1, 2, 3, "...", 22]
+    const newArr1 = numberOfPages.slice(0, 4);
+    numberOfPages = [...newArr1, dotsInitial, numberOfPages.length - 1];
+  } else if (currentButton > 4 && currentButton < numberOfPages.length - 2) {
+    //[0, "...", 21, 22, "...", 23] && [0, "...", 19, 21, 22, "...", 23]
+    const newArr1 = numberOfPages.slice(0, 1);
+    const newArr2 = numberOfPages.slice(currentButton - 2, currentButton);
+    const newArr3 = numberOfPages.slice(currentButton, currentButton + 1);
+    numberOfPages = [
+      ...newArr1,
+      dotsLeft,
+      ...newArr2,
+      ...newArr3,
+      dotsRight,
+      numberOfPages.length - 1,
+    ];
+  } else if (currentButton > numberOfPages.length - 3) {
+    //[0, "...", 19, 20, 21, 22]
+    const newArr1 = numberOfPages.slice(0, 1);
+    const newArr2 = numberOfPages.slice(
+      numberOfPages.length - 4,
+      numberOfPages.length - 1,
+    );
+    numberOfPages = [...newArr1, dotsLeft, ...newArr2];
+  }
+
   const pageNationClick = (e) => {
     setCurrentButton(e.target.name);
     const id = e.target.name;
+    if (numberOfPages[id + 1] === '...') {
+      console.log('ddd');
+    }
     dispatch(
       searching({
         id,
@@ -166,6 +208,8 @@ const ListContainer = () => {
         setCurrentButton={setCurrentButton}
         arrOfcurrButtons={arrOfcurrButtons}
         setArrOfCurrButtons={setArrOfCurrButtons}
+        numberOfPages={numberOfPages}
+        isLoading={isLoading}
       />
     </>
   );

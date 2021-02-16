@@ -39,7 +39,7 @@ const ULWrap = styled.ul`
     align-items: center;
 
     :nth-child(1) {
-      border-top: 2px solid #000;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
       /* border-top:2px dashed red; */
     }
     .slide-group {
@@ -337,7 +337,7 @@ const LodgingLists = ({
                 </button>
               </div>
             </div>
-            <Link to={`/detail/${id}`} key={id}>
+            <Link to={`/detail/1`} key={id}>
               <span className="TextWrap">
                 <div className="TextHead">
                   <TextStyled size="blackSmall">

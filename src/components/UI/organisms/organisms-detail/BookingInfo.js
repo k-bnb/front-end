@@ -9,7 +9,7 @@ import TotalPrice from '../../molecules/molecules-detail/TotalPrice';
 const PositionBox = styled.div`
   position: sticky;
   z-index: 100;
-  top: 200px;
+  top: 160px;
   margin-bottom: 100px;
 `;
 
@@ -34,11 +34,11 @@ const BookingInfoContainer = styled.div`
   }
 `;
 
-const BookingInfo = ({ DetailHeaderRef, moveToReserve }) => (
+const BookingInfo = ({ DetailHeaderRef, moveToReserve, detailObj }) => (
   <PositionBox>
     <BookingInfoContainer>
       <OneDayPrice />
-      <DatePersonBox />
+      <DatePersonBox detailObj={detailObj} />
       <ReserveBtn
         DetailHeaderRef={DetailHeaderRef}
         moveToReserve={moveToReserve}
