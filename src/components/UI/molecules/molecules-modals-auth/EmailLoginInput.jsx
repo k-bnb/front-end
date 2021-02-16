@@ -7,6 +7,7 @@ import { GoMail } from 'react-icons/go';
 import { RiLock2Line } from 'react-icons/ri';
 import styled from 'styled-components';
 import { checkEmailValidation } from '../../../../lib/validationCheck';
+import LoaderIcon from 'react-loader-icon';
 
 const EmailInputStyle = styled.div`
   width: 400px;
@@ -53,6 +54,9 @@ const EmailLoginInput = ({
   setLoginValidation,
   isFirst,
   setIsFirst,
+  serverLoginError,
+  setServerLoginError,
+  isLoading,
 }) => {
   return (
     <EmailInputStyle>
@@ -65,7 +69,10 @@ const EmailLoginInput = ({
                 name="loginEmail"
                 value={email}
                 placeholder={'이메일 주소'}
-                onChange={onChange}
+                onChange={(e) => {
+                  onChange(e);
+                  setServerLoginError(false);
+                }}
                 checkEmail={checkEmail}
                 onFocus={() => {}}
                 onBlur={() => {
@@ -77,13 +84,6 @@ const EmailLoginInput = ({
                   });
                 }}
               />
-              {/* <input
-                type="email"
-                name="email"
-                value={email}
-                placeholder={'이메일 주소'}
-                onChange={onChange}
-              /> */}
               <GoMail />
             </div>
             <div
@@ -107,6 +107,8 @@ const EmailLoginInput = ({
                 placeholder="비밀번호 입력"
                 onChange={(e) => {
                   onChange(e);
+                  setServerLoginError(false);
+
                   setLoginValidation({
                     ...loginValidation,
                     passwordValidation: password
@@ -128,13 +130,6 @@ const EmailLoginInput = ({
                   });
                 }}
               />
-              {/* <input
-                type="password"
-                value={password}
-                name="password"
-                placeholder="비밀번호 입력"
-                onChange={onChange}
-              /> */}
               <RiLock2Line />
             </div>
             <div
@@ -150,6 +145,30 @@ const EmailLoginInput = ({
                   <div>비밀번호는 8자 이상 입력해 주세요.</div>
                 )}
             </div>
+            {isLoading['auth/LOGIN'] && (
+              <div
+                style={{
+                  textAlign: 'center',
+                  height: '20px',
+                  color: 'red',
+                  lineHeight: '10px',
+                }}
+              >
+                <LoaderIcon color={'red'} size={30} />
+              </div>
+            )}
+            {!isLoading['auth/LOGIN'] && serverLoginError && (
+              <div
+                style={{
+                  textAlign: 'center',
+                  height: '20px',
+                  color: 'red',
+                  lineHeight: '10px',
+                }}
+              >
+                {serverLoginError}
+              </div>
+            )}
           </CircleDiv>
           <div className="pass-div">
             <Button className="password-ok">

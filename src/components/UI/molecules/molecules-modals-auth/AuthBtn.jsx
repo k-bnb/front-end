@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
 
 const AuthButton = styled.button`
@@ -14,10 +14,16 @@ const AuthButton = styled.button`
     line-height: 36px;
     font-weight: 800;
   }
+
+  ${(props) =>
+    props.disabled &&
+    css`
+      background-color: lightgray;
+    `}
 `;
-const AuthBtn = ({ name }) => {
+const AuthBtn = ({ name, disabled }) => {
   return (
-    <AuthButton>
+    <AuthButton disabled={disabled}>
       <TextStyle>{name}</TextStyle>{' '}
     </AuthButton>
   );

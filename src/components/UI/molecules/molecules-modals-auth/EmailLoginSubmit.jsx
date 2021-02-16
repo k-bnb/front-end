@@ -16,7 +16,7 @@ const EmailLoginStyle = styled.div`
   }
 `;
 
-const EmailLoginSubmit = () => {
+const EmailLoginSubmit = ({ loginValidation }) => {
   return (
     <EmailLoginStyle>
       <CircleDiv className="submit">
@@ -25,7 +25,15 @@ const EmailLoginSubmit = () => {
             <TextStyle greentextLine>비밀번호를 잊으셨나요?</TextStyle>
           </Button>
 
-          <AuthBtn name="로그인" />
+          <AuthBtn
+            name="로그인"
+            disabled={
+              !(
+                loginValidation.emailValidation &&
+                loginValidation.passwordValidation
+              )
+            }
+          />
         </CircleDiv>
       </CircleDiv>
     </EmailLoginStyle>

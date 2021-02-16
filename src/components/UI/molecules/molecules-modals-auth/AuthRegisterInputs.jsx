@@ -35,6 +35,9 @@ const AuthRegisterInputs = ({
   setRegisterValidation,
   isFirst,
   setIsFirst,
+  setServerRegisterError,
+  serverRegisterError,
+  isLoading,
 }) => {
   console.log(registerValidation.nameValidation);
   console.log(isFirst);
@@ -79,7 +82,10 @@ const AuthRegisterInputs = ({
           name="registerEmail"
           value={email}
           placeholder={'이메일 주소'}
-          onChange={onChange}
+          onChange={(e) => {
+            setServerRegisterError(false);
+            onChange(e);
+          }}
           onBlur={(e) => {
             setRegisterValidation({
               ...registerValidation,
@@ -155,9 +161,6 @@ const AuthRegisterInputs = ({
           />
         )}
       </div>
-      {/* {!registerValidation.passwordValidation && !isFirst.emailInput && <></>} */}
-      {/* {!registerValidation.passwordValidation && !isFirst.emailInput && <></>} */}
-      {/* {!registerValidation.passwordValidation && !isFirst.emailInput && <></>} */}
     </>
   );
 };

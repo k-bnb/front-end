@@ -16,6 +16,7 @@ const HeaderContainer = ({
   const match = useRouteMatch();
   console.log(match);
   console.log(qs);
+
   // 어떤것을 선택했는가 상태를 바꿔주는 함수
   const { locationSearch, checkDateSearch, guestSearch } = useSelector(
     (state) => state.search.searchReq,
