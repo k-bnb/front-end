@@ -6,16 +6,13 @@ import DetailPage from './components/pages/DetailPage';
 import ReservationPage from './components/pages/ReservationPage';
 import AuthRedirect from './components/pages/AuthRedirect';
 import PersonalInfoPage from './components/pages/PersonalInfoPage';
-import {
-  checkDateValidation,
-  checkPasswordValidation,
-} from './lib/validationCheck';
+import ReserveConfirmPage from './components/pages/ReserveConfirmPage';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        {/* <Route path="/" component={Observer} /> */}
+        <Route path="/reserveconfirm" component={ReserveConfirmPage} />
         <Route path="/personInfo" component={PersonalInfoPage} />
         <Route path="/reserve" component={ReservationPage} />
         <Route path="/detail/:roomId" component={DetailPage} />

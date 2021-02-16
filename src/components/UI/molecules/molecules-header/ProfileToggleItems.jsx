@@ -44,6 +44,7 @@ const ProfileToggleItems = ({
   setFormState,
   token,
   dispatch,
+  reservationClick,
 }) => {
   const [modal, setModal] = useState(false);
 
@@ -113,7 +114,9 @@ const ProfileToggleItems = ({
         )}
         {token && (
           <>
-            <ProfileToggleItemLi>예약 내역</ProfileToggleItemLi>
+            <ProfileToggleItemLi onClick={reservationClick}>
+              예약 내역
+            </ProfileToggleItemLi>
             <ProfileToggleItemLi onClick={requestLogOut}>
               로그 아웃
             </ProfileToggleItemLi>

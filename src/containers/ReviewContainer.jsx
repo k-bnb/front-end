@@ -5,12 +5,14 @@ const ReviewContainer = ({
   reviewRef,
   showReviewModal,
   setShowReviewModal,
+  infoRes,
 }) => {
   return (
     <Review
       reviewRef={reviewRef}
       showReviewModal={showReviewModal}
       setShowReviewModal={setShowReviewModal}
+      reviewRef={reviewRef}
     />
   );
 };

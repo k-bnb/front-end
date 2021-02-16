@@ -27,15 +27,16 @@ const PriceInner = styled.span`
   vertical-align: bottom;
 `;
 
-const OneDayPrice = ({ roomCost }) => (
+const OneDayPrice = ({ infoRes }) => (
   <PriceInfo>
     {/* endDate가 null 일 경우에는 roomCost 띄우지 않기 */}
     <PriceBox>
       <BiWon font-size="22px" />
-      <Price>82,000{roomCost}</Price>
+      <Price>{infoRes.roomCost}</Price>
       <PriceInner>/박</PriceInner>
     </PriceBox>
-    <Grade />
+    <Grade grade={infoRes.grade} />
+    {/* ({infoRes.commentCount}) */}
   </PriceInfo>
 );
 

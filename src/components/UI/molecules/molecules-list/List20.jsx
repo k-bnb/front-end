@@ -30,7 +30,7 @@ const ULWrap = styled.ul`
   li {
     /* width: 792px; */
     position: relative;
-    width: 100%;
+    /* width: 100%; */
     min-width: 500px;
     /* max-width: 90px; */
     height: 266px;
@@ -43,26 +43,27 @@ const ULWrap = styled.ul`
     align-items: center;
 
     :nth-child(1) {
-      border-top: 2px solid #000;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
       /* border-top:2px dashed red; */
     }
     .slide-group {
       display: flex;
       position: relative;
-      width: 300px;
+      width: 260px;
+      border: 1px solid red;
       overflow: hidden;
       .slide {
-        flex-shrink: 0;
-        display: flex;
+        /* flex-shrink: 0; */
+        /* display: flex; */
         width: 100%;
         .slideDiv {
           display: flex;
           width: 100%;
-          justify-content: flex-start;
-
+          /* justify-content: flex-start; */
           transform: translateX(0);
 
           img {
+            object-fit: 100%;
             width: 100%;
           }
         }
@@ -194,7 +195,7 @@ const LodgingLists = ({
     prev: 'PREV',
   };
   const btnOpcity = useRef();
-  console.log(btnOpcity);
+
   const [imgs, setImages] = useState({
     img: roomImgUrlList,
     current: 3,
@@ -203,9 +204,6 @@ const LodgingLists = ({
   });
   const slideRef = useRef(null);
   const IMG_LENGTH = imgs.img.length;
-
-  console.log(IMG_LENGTH);
-  console.log(imgs.img);
 
   const handleSliderTranslateEnd = () => {
     console.log('handelend');
@@ -224,7 +222,7 @@ const LodgingLists = ({
 
   const vaildNextSlider = () => {
     const { img, current } = imgs;
-
+    // const imgSlide = [...img, ...img.slice(0, 1)].slice(-img.length);
     // console.log(img);
     if (current > img.length - 1) {
       setTimeout(() => {
@@ -236,14 +234,12 @@ const LodgingLists = ({
         current: 0,
       }));
     }
-    const imgSlide = [...img, ...img.slice(0, 1)].slice(-img.length);
 
-    setImages((state) => ({
-      ...state,
-      needTransition: false,
-
-      img: imgSlide,
-    }));
+    // setImages((state) => ({
+    //   ...state,
+    //   needTransition: false,
+    //   img: imgSlide,
+    // }));
   };
   const vaildPrevSlider = () => {
     const { img, current } = imgs;
@@ -257,25 +253,22 @@ const LodgingLists = ({
         current: img.length,
       }));
     }
-    const imgSlide = [...img.slice(-1), ...img].slice(0, img.length);
-    setImages((state) => ({
-      ...state,
-      needTransition: false,
-
-      img: imgSlide,
-    }));
+    // const imgSlide = [...img.slice(-1), ...img].slice(0, img.length);
+    // setImages((state) => ({
+    //   ...state,
+    //   needTransition: false,
+    //   img: imgSlide,
+    // }));
   };
   console.log(imgs);
   const nextClick = () => {
     let num = imgs.current + 1;
-    // if (num > IMG_LENGTH) return;
     setImages((state) => ({
       ...state,
       needTransition: true,
       current: num,
       direction: DIRECTIOM_TYPE.next,
     }));
-    console.log('num', num);
   };
   const prevClick = () => {
     let num = imgs.current - 1;
@@ -319,7 +312,7 @@ const LodgingLists = ({
                 >
                   {/* <Imgs carousalImg src={imgs.img[imgs.img.length]} /> */}
 
-                  {roomImgUrlList.map((src, i, arr) => (
+                  {imgs.img.map((src, i, arr) => (
                     <>
                       <Imgs
                         carousalImg
@@ -341,7 +334,7 @@ const LodgingLists = ({
                 </button>
               </div>
             </div>
-            <Link to={`/detail/1`} key={id}>
+            <Link to={`/detail/${id}`} key={id}>
               <span className="TextWrap">
                 <div className="TextHead">
                   <TextStyled size="blackSmall">

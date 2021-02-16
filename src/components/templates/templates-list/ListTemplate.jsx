@@ -33,8 +33,12 @@ const ListTemplate = ({
   setCurrentButton,
   arrOfcurrButtons,
   setArrOfCurrButtons,
+  numberOfPages,
   isLoading,
+  changeCurrentPage,
+  pageNationState,
 }) => {
+  console.log(numberOfPages);
   return (
     <>
       <div>
@@ -66,6 +70,9 @@ const ListTemplate = ({
               setCurrentButton={setCurrentButton}
               arrOfcurrButtons={arrOfcurrButtons}
               setArrOfCurrButtons={setArrOfCurrButtons}
+              numberOfPages={numberOfPages}
+              changeCurrentPage={changeCurrentPage}
+              pageNationState={pageNationState}
             />
           </div>
           <GoogleStyle

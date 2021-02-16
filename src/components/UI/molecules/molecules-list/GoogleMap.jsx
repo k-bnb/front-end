@@ -182,59 +182,6 @@ function GoogleMapUse({
     }
   };
 
-  const onMarkerDragEnd = async (e) => {
-    let newLat = e.latLng.lat();
-    let newLng = e.latLng.lng();
-    const res = await Geocode.fromLatLng(newLat, newLng);
-    console.log('res!!!', res);
-    const address = res.results[0].formatted_address,
-      addressArray = res.results[0].address_components,
-      city = getCity(addressArray),
-      area = getArea(addressArray),
-      state = getState(addressArray);
-    console.log('address111', address);
-    setLocate({
-      address: address ? address : '',
-      area: area ? area : '',
-      city: city ? city : '',
-      state: state ? state : '',
-      markerPosition: {
-        lat: newLat,
-        lng: newLng,
-      },
-      mapPosition: {
-        lat: newLat,
-        lng: newLng,
-      },
-    });
-    console.log('newLat22', newLat);
-  };
-
-  const onPlaceSelected = (place) => {
-    console.log(place, 'place');
-    const address = place.formatted_address,
-      addressArray = place.address_components,
-      city = getCity(addressArray),
-      area = getArea(addressArray),
-      state = getState(addressArray),
-      newLat = place.geomety.location.lat(),
-      newLng = place.geomety.location.lng();
-    setLocate({
-      address: address ? address : '',
-      area: area ? area : '',
-      city: city ? city : '',
-      state: state ? state : '',
-      markerPosition: {
-        lat: newLat,
-        lng: newLng,
-      },
-      mapPosition: {
-        lat: newLat,
-        lng: newLng,
-      },
-    });
-  };
-
   const getPixelPositionOffset = (width, height) => ({
     x: -(width / 2),
     y: -(height / 2),
@@ -269,7 +216,7 @@ function GoogleMapUse({
   const [zoom, setZoom] = useState(14);
   const mapRef = useRef();
 
-  console.log(locate);
+  console.log(roomMap);
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);

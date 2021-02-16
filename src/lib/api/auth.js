@@ -24,3 +24,11 @@ export const userMe = (token) =>
       'Content-Type': 'application/json',
     },
   });
+
+export const userReservation = ({ token }) =>
+  client.get('http://3.34.198.174:8080/reservation', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });

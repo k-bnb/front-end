@@ -1,13 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../atoms/atoms-list/Button';
-
+import Pagination from 'react-pagination-library';
 const PageStyle = styled.div`
   min-width: 547px;
 
   text-align: center;
   padding: 40px;
-  button {
+
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.5rem;
+    li {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      vertical-align: sub;
+      &:hover {
+        background-color: #000;
+        color: #eee;
+
+        border-radius: 50%;
+      }
+    }
+  }
+  /* button {
     display: inline-flex;
     padding: 15px;
     flex-direction: column;
@@ -22,7 +44,7 @@ const PageStyle = styled.div`
     }
 
     font-size: 1.6rem;
-  }
+  } */
 `;
 
 const PageNation = ({
@@ -32,28 +54,32 @@ const PageNation = ({
   setCurrentButton,
   arrOfcurrButtons,
   setArrOfCurrButtons,
+  numberOfPages,
+  changeCurrentPage,
+  pageNationState,
 }) => {
-  let numberOfPages = [];
+  // console.log(numberOfPages);
 
-  Array.from({ length: totalPage.totalPages }, (_, i) => {
-    return numberOfPages.push(i);
-  });
+  // if (numberOfPages.length > 6) {
+  //   const newArr1 = numberOfPages.slice(0, 4);
 
-  console.log(numberOfPages);
-  if (numberOfPages.length > 6) {
-    const newArr1 = numberOfPages.slice(0, 4);
-    const newArr2 = numberOfPages.slice(
-      numberOfPages.length - 4,
-      numberOfPages.length,
-    );
-    numberOfPages = [...newArr1, '...', ...newArr2];
+  //   const newArr2 = numberOfPages.slice(
+  //     numberOfPages.length - 4,
+  //     numberOfPages.length,
+  //   );
+  //   numberOfPages = [...newArr1, '...', ...newArr2];
+  // }
+  // console.log(numberOfPages);
 
-    console.log(newArr2);
-  }
-  console.log(numberOfPages);
   return (
     <PageStyle className="PageNation">
-      <Button
+      <Pagination
+        currentPage={pageNationState.currentPage}
+        totalPage={totalPage.totalPages}
+        changeCurrentPage={changeCurrentPage}
+        theme="circle"
+      />
+      {/* <Button
         size="number"
         onClick={() =>
           setCurrentButton((prev) => (prev === 0 ? prev : prev - 1))
@@ -61,18 +87,20 @@ const PageNation = ({
       >
         &#60;
       </Button>
-      {numberOfPages.map((page) => {
-        return (
-          <Button
-            onClick={pageNationClick}
-            size="number"
-            name={page}
-            className={currentButton === page && 'active'}
-          >
-            {page}
-          </Button>
-        );
-      })}
+
+      {numberOfPages &&
+        numberOfPages.map((page) => {
+          return (
+            <Button
+              onClick={pageNationClick}
+              size="number"
+              name={page}
+              className={currentButton === page && 'active'}
+            >
+              {page}
+            </Button>
+          );
+        })}
 
       <Button
         size="number"
@@ -83,7 +111,7 @@ const PageNation = ({
         }
       >
         &#62;
-      </Button>
+      </Button> */}
     </PageStyle>
   );
 };

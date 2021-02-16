@@ -7,8 +7,12 @@ import { requestDetail, searchToDetail } from '../modules/detail';
 import Modal from '../portal/Modal';
 import HeaderContainer from './header-containers/HeaderContainer';
 // import LoaderIcon from 'react-loader-icon';
+<<<<<<< HEAD
 import { detailToReserveDate, detailToReserveGuest } from '../modules/reserve';
 import ReviewModal from '../components/templates/templates-detail/ReviewModal';
+=======
+// import { detailToReserveDate, detailToReserveGuest } from '../modules/reserve';
+>>>>>>> a36cac00cc28fbeea836726b7cbe73cd1e56142a
 const DetailContainer = () => {
   const [showModal, setShowModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
@@ -35,10 +39,10 @@ const DetailContainer = () => {
 
   const detailObj = useSelector((state) => state.detail);
   const { roomImgUrlList } = useSelector((state) => state.detail.infoRes);
-  console.log(roomImgUrlList);
+  //console.log(roomImgUrlList);
 
   const moveToReserve = () => {
-    console.log('hi');
+    //console.log('hi');
     if (!localStorage.getItem('token')) return;
     history.push('/reserve');
     window.scrollTo(0, 0);

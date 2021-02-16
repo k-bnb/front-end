@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import HeaderContainer from './header-containers/HeaderContainer';
 import ListTemplate from '../components/templates/templates-list/ListTemplate';
@@ -122,9 +122,14 @@ const ListContainer = () => {
   const [currentButton, setCurrentButton] = useState(0);
   const [arrOfcurrButtons, setArrOfCurrButtons] = useState([]);
 
-  const pageNationClick = (e) => {
-    setCurrentButton(e.target.name);
-    const id = e.target.name;
+  const [pageNationState, setPageNationState] = useState({ currentPage: 0 });
+
+  const changeCurrentPage = (numPage, e) => {
+    setPageNationState({ currentPage: numPage });
+    console.log(numPage);
+    console.log(e);
+    const id = numPage - 1;
+
     dispatch(
       searching({
         id,
@@ -162,7 +167,6 @@ const ListContainer = () => {
         costState={costState}
         room={room}
         totalPage={totalPage}
-        pageNationClick={pageNationClick}
         roomMap={roomMap}
         locationSearch={locationSearch}
         checkDateSearch={checkDateSearch}
@@ -172,6 +176,8 @@ const ListContainer = () => {
         arrOfcurrButtons={arrOfcurrButtons}
         setArrOfCurrButtons={setArrOfCurrButtons}
         isLoading={isLoading}
+        changeCurrentPage={changeCurrentPage}
+        pageNationState={pageNationState}
       />
     </>
   );
