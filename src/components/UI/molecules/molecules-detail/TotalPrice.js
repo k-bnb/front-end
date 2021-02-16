@@ -20,14 +20,23 @@ const Total = styled.span`
   white-space: nowrap;
 `;
 
-const TotalPrice = () => (
-  <TotalPriceBox>
-    <TotalText>총 합계</TotalText>
-    <Total>
-      <BiWon />
-      201,021
-    </Total>
-  </TotalPriceBox>
-);
+const TotalPrice = ({ infoRes, totalSchedule }) => {
+  const entireCost =
+    infoRes.roomCost * totalSchedule +
+    infoRes.cleaningCost +
+    (infoRes.roomCost * totalSchedule) / 10 +
+    infoRes.tax;
+  console.log(entireCost);
+
+  return (
+    <TotalPriceBox>
+      <TotalText>총 합계</TotalText>
+      <Total>
+        <BiWon />
+        {entireCost}
+      </Total>
+    </TotalPriceBox>
+  );
+};
 
 export default TotalPrice;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PriceListItem from './PriceList';
-import moment from 'moment';
+// import moment from 'moment';
 
 const PriceBox = styled.ul`
   display: block;
@@ -10,13 +10,8 @@ const PriceBox = styled.ul`
   padding: 0;
 `;
 
-const PriceDetail = ({ infoRes, CheckInDate, detailObj }) => {
-  const roomPrice = `${infoRes.roomCost}*2박`;
-
-  const StartDate = moment(detailObj.startDate);
-  const EndDate = moment(detailObj.endDate);
-  const totalSchedule = EndDate.diff(StartDate, 'days');
-  console.log(totalSchedule);
+const PriceDetail = ({ infoRes, totalSchedule }) => {
+  const roomPrice = `${infoRes.roomCost}*${totalSchedule}박`;
 
   return (
     <PriceBox>
