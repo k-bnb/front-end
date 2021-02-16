@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import NoticeAll from './NoticeAll';
 import '../../atoms/atoms-detail/DetailBasicStyle.css';
 
-const ImportantNoticeWrapper = styled.div`
-  padding: 0 80px;
-`;
 const NoticeContainer = styled.div`
   border-top: 1px solid rgb(221, 221, 221);
   margin: 0 auto;
@@ -21,13 +18,11 @@ const SectionTitle = styled.h2`
   margin: 0;
 `;
 
-const ImportantNotice = () => (
-  <ImportantNoticeWrapper>
-    <NoticeContainer className="basic-section-padding">
-      <SectionTitle>알아두어야 할 사항</SectionTitle>
-      <NoticeAll />
-    </NoticeContainer>
-  </ImportantNoticeWrapper>
+const ImportantNotice = ({ infoRes }) => (
+  <NoticeContainer className="basic-section-padding">
+    <SectionTitle>알아두어야 할 사항</SectionTitle>
+    <NoticeAll infoRes={infoRes} />
+  </NoticeContainer>
 );
 
 export default ImportantNotice;

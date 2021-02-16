@@ -5,6 +5,8 @@ import { FaDoorOpen } from 'react-icons/fa';
 import { WiStars } from 'react-icons/wi';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import Text from '../../atoms/atoms-detail/DetailText';
+import { CheckInDate } from '../../molecules/molecules-detail/TextSummary';
+import { TextSummary } from '../../molecules/molecules-detail/TextSummary';
 
 const NoticeAllContainer = styled.div`
   display: flex;
@@ -38,31 +40,41 @@ const NoticeEmoticon = styled.div`
   min-width: 20px;
 `;
 
-const AccommodationRules = () => (
-  <NoticeDetailBox>
-    <NoticeTitle big bold>
-      숙소 이용 규칙
-    </NoticeTitle>
-    <NoticeTextBox big>
-      <NoticeEmoticon>
-        <BiTimeFive />
-      </NoticeEmoticon>
-      체크인 시간: 오후 3:00 - 오전 12:00
-    </NoticeTextBox>
-    <NoticeTextBox big>
-      <NoticeEmoticon>
-        <BiTimeFive />
-      </NoticeEmoticon>
-      체크아웃 시간: 오전 11:00
-    </NoticeTextBox>
-    <NoticeTextBox big>
-      <NoticeEmoticon>
-        <FaDoorOpen />
-      </NoticeEmoticon>
-      키패드(으)로 셀프 체크인
-    </NoticeTextBox>
-  </NoticeDetailBox>
-);
+export const AccommodationRules = ({ infoRes }) => {
+  const numCheckIn = parseInt(infoRes.checkInTime);
+  const numCheckOut = parseInt(infoRes.checkOutTime);
+
+  const CheckInTime =
+    numCheckIn > 12 ? `오후 ${numCheckIn - 12}` : `오전 ${numCheckIn}`;
+  const CheckOutTime =
+    numCheckOut > 12 ? `오후 ${numCheckOut - 12}` : `오전 ${numCheckOut}`;
+
+  return (
+    <NoticeDetailBox>
+      <NoticeTitle big bold>
+        숙소 이용 규칙
+      </NoticeTitle>
+      <NoticeTextBox big>
+        <NoticeEmoticon>
+          <BiTimeFive />
+        </NoticeEmoticon>
+        체크인 시간: {CheckInTime}:00 - 오전 12:00
+      </NoticeTextBox>
+      <NoticeTextBox big>
+        <NoticeEmoticon>
+          <BiTimeFive />
+        </NoticeEmoticon>
+        체크아웃 시간: {CheckOutTime}:00
+      </NoticeTextBox>
+      <NoticeTextBox big>
+        <NoticeEmoticon>
+          <FaDoorOpen />
+        </NoticeEmoticon>
+        키패드(으)로 셀프 체크인
+      </NoticeTextBox>
+    </NoticeDetailBox>
+  );
+};
 
 const HealthAndSafe = () => (
   <NoticeDetailBox>
@@ -96,22 +108,30 @@ const HealthAndSafe = () => (
   </NoticeDetailBox>
 );
 
-const RefundPolicy = () => (
-  <NoticeDetailBox>
-    <NoticeTitle big bold>
-      환불 정책
-    </NoticeTitle>
-    <NoticeTextBox big>3월 3일 3:00 PM까지 무료 취소 가능</NoticeTextBox>
-    <NoticeTextBox big>
-      그 후에는 3월 4일 3:00 PM 전에 예약을 취소하면 첫 1박 요금 및 서비스
-      수수료를 제외한 요금 전액이 환불됩니다.
-    </NoticeTextBox>
-  </NoticeDetailBox>
-);
+const RefundPolicy = ({ infoRes }) => {
+  const CancellableMonth = parseInt(CheckInDate().month);
+  const CancellableDay = parseInt(CheckInDate().day) - 1;
 
-const NoticeAll = () => (
-  <NoticeAllContainer>
-    <AccommodationRules />
+  return (
+    <NoticeDetailBox>
+      <NoticeTitle big bold>
+        환불 정책
+      </NoticeTitle>
+      <NoticeTextBox big>
+        {CancellableMonth}월 {CancellableDay}일 3:00 PM까지 무료 취소 가능
+      </NoticeTextBox>
+      <NoticeTextBox big>
+        그 후에는 {CancellableMonth}월 {CancellableDay + 1}일 3:00 PM 전에
+        예약을 취소하면 첫 1박 요금 및 서비스 수수료를 제외한 요금 전액이
+        환불됩니다.
+      </NoticeTextBox>
+    </NoticeDetailBox>
+  );
+};
+
+const NoticeAll = ({ infoRes }) => (
+  <NoticeAllContainer infoRes={infoRes}>
+    <AccommodationRules infoRes={infoRes} />
     <HealthAndSafe />
     <RefundPolicy />
   </NoticeAllContainer>

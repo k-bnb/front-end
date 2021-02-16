@@ -4,6 +4,7 @@ import { AiOutlineHome } from 'react-icons/ai';
 import { WiStars } from 'react-icons/wi';
 //import { GiDiamonds } from 'react-icons/gi';
 import { RiDoorOpenFill, RiCalendarCheckLine } from 'react-icons/ri';
+import { useSelector } from 'react-redux';
 
 const TextSummaryContainer = styled.div`
   padding: 32px 0 8px;
@@ -33,17 +34,24 @@ export const Text = styled.div`
   }
 `;
 
-// const CheckInDate = ({ reservationDates }) => {
-//   const strStartDate = reservationDates.checkIn;
+export const CheckInDate = () => {
+  const strStartDate = useSelector((state) => state.detail.startDate);
+  const strArr = strStartDate.split('-');
+  // console.log(strStartDate);
+  // console.log(strArr);
+  return { year: strArr[0], month: strArr[1], day: strArr[2] };
+  // reservation page에서 사용할수 있도록 액션모듈 만들기?
+};
 
-//   const strArr = strStartDate.split('-');
-//   console.log(strStartDate);
-//   return { year: strArr[0], month: strArr[1] + 1, day: strArr[2] };
-// };
-
-const TextSummary = ({ infoRes }) => {
-  // console.log(infoRes);
-  // console.log(CheckInDate(infoRes).year);
+const TextSummary = () => {
+  // const numMonth = parseInt(CheckInDate().month);
+  // const numDay = parseInt(CheckInDate().day);
+  // console.log(typeof numMonth);
+  const CancelPossibleDate = {
+    month: parseInt(CheckInDate().month),
+    day: parseInt(CheckInDate().day) - 1,
+  };
+  console.log({ CancelPossibleDate });
 
   return (
     <TextSummaryContainer>
@@ -82,10 +90,14 @@ const TextSummary = ({ infoRes }) => {
           <RiCalendarCheckLine />
         </div>
         <div>
-          <Text>3월3일 3:00PM까지 무료 취소 가능 </Text>
           <Text>
-            그 후에는 3월 4일 3:00PM 전에 예약을 취소하면 첫 1박 요금 및 서비스
-            수수료를 제외한 요금 전액이 환불됩니다.
+            {CancelPossibleDate.month}월{CancelPossibleDate.day}일 3:00PM까지
+            무료 취소 가능{' '}
+          </Text>
+          <Text>
+            그 후에는 {CancelPossibleDate.month}월 {CancelPossibleDate.day + 1}
+            일 3:00PM 전에 예약을 취소하면 첫 1박 요금 및 서비스 수수료를 제외한
+            요금 전액이 환불됩니다.
           </Text>
         </div>
       </SimpleSummary>

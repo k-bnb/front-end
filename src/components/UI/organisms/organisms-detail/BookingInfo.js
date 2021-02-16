@@ -34,18 +34,23 @@ const BookingInfoContainer = styled.div`
   }
 `;
 
-const BookingInfo = ({ DetailHeaderRef, moveToReserve, detailObj }) => (
+const BookingInfo = ({
+  DetailHeaderRef,
+  moveToReserve,
+  detailObj,
+  infoRes,
+}) => (
   <PositionBox>
     <BookingInfoContainer>
-      <OneDayPrice />
+      <OneDayPrice infoRes={infoRes} />
       <DatePersonBox detailObj={detailObj} />
       <ReserveBtn
         DetailHeaderRef={DetailHeaderRef}
         moveToReserve={moveToReserve}
       ></ReserveBtn>
       <span className="notice">예약 확정 전에는 요금이 청구되지 않습니다.</span>
-      <PriceDetail />
-      <TotalPrice />
+      <PriceDetail infoRes={infoRes} detailObj={detailObj} />
+      <TotalPrice detailObj={detailObj} />
     </BookingInfoContainer>
   </PositionBox>
 );
