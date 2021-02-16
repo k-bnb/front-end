@@ -44,7 +44,7 @@ const TypeText = styled.div`
   }
 `;
 
-export const TypeInfo = () => (
+export const TypeInfo = ({ infoRes }) => (
   <TypeInfoContainer className="basic-section-padding">
     <TypeTitle>침대/침구 유형</TypeTitle>
     <CoverBox>
@@ -53,8 +53,8 @@ export const TypeInfo = () => (
       </div>
       <TypeeSummary>
         <div>
-          <TypeText>1번 침실</TypeText>
-          <TypeText>더블 침대 1개</TypeText>
+          <TypeText>침실 {infoRes.bedRoomNum}개</TypeText>
+          <TypeText>더블 침대 {infoRes.bedNum}개</TypeText>
         </div>
       </TypeeSummary>
     </CoverBox>

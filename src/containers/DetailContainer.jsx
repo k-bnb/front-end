@@ -7,7 +7,7 @@ import { requestDetail, searchToDetail } from '../modules/detail';
 import Modal from '../portal/Modal';
 import HeaderContainer from './header-containers/HeaderContainer';
 // import LoaderIcon from 'react-loader-icon';
-import { detailToReserveDate, detailToReserveGuest } from '../modules/reserve';
+// import { detailToReserveDate, detailToReserveGuest } from '../modules/reserve';
 const DetailContainer = () => {
   const [showModal, setShowModal] = useState(false);
   const [current, setCurrent] = useState(0); // 현재 보는 사진의 index
@@ -33,10 +33,10 @@ const DetailContainer = () => {
 
   const detailObj = useSelector((state) => state.detail);
   const { roomImgUrlList } = useSelector((state) => state.detail.infoRes);
-  console.log(roomImgUrlList);
+  //console.log(roomImgUrlList);
 
   const moveToReserve = () => {
-    console.log('hi');
+    //console.log('hi');
     if (!localStorage.getItem('token')) return;
     history.push('/reserve');
     window.scrollTo(0, 0);
