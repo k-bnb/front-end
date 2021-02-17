@@ -26,6 +26,7 @@ const sizeStyles = css`
   ${(props) =>
     props.size === 'bigCarouselImg' &&
     css`
+      width:670px;
       max-width: 100%;
       max-height: 452px;
       margin-bottom: 10px;

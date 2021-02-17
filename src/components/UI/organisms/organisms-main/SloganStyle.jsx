@@ -119,7 +119,7 @@ const SloganStyle = ({ sloganImg }) => {
             만나보세요.
           </TextStyle>
           <div>
-            {sloganImg.map(({ src, alt, name, subtitle }) => {
+            {sloganImg.map(({ src, alt, name, subtitle }, i) => {
               return (
                 <Locations
                   src={src}
@@ -129,6 +129,7 @@ const SloganStyle = ({ sloganImg }) => {
                   whiteMiddleSmallBold
                   imgSize
                   subtitle={subtitle}
+                  key={i}
                 />
               );
             })}
@@ -143,7 +144,7 @@ const SloganStyle = ({ sloganImg }) => {
             만나보세요.
           </TextStyle>
           <div>
-            {sloganImg.map(({ src, alt, name, subtitle }) => {
+            {sloganImg.map(({ src, alt, name, subtitle }, i) => {
               return (
                 <Locations
                   src={src}
@@ -153,6 +154,7 @@ const SloganStyle = ({ sloganImg }) => {
                   whiteMiddleSmallBold
                   imgSize
                   subtitle={subtitle}
+                  key={i}
                 />
               );
             })}
@@ -167,9 +169,10 @@ const SloganStyle = ({ sloganImg }) => {
             만나보세요.
           </TextStyle>
           <div>
-            {sloganImg.map(({ src, alt, name, subtitle }) => {
+            {sloganImg.map(({ src, alt, name, subtitle }, i) => {
               return (
                 <Locations
+                  key={i}
                   src={src}
                   alt={alt}
                   name={name}

@@ -14,14 +14,14 @@ const ReservationContainer = () => {
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.token);
-  const {
-    roomId,
-    guestNumber,
-    infantNumber,
-    totalCost,
-    message,
-    checkDateSearch: checkDate,
-  } = useSelector((state) => state.reserve);
+  const { message, totalCost, checkDateSearch: checkDate } = useSelector(
+    (state) => state.reserve,
+  );
+
+  const { numOfAdult, numOfKid, numOfInfant: infantNumber } = useSelector(
+    ({ reserve }) => reserve.guestSearch,
+  );
+
   const { checkDateSearch, guestSearch } = useSelector(
     ({ search }) => search.searchReq,
   );
@@ -38,37 +38,15 @@ const ReservationContainer = () => {
     grade,
   } = useSelector(({ detail }) => detail.infoRes);
 
-  const {
-    id: reserveId,
-    name: reserveName,
-    roomCost: reserveRoomCost,
-    cleaningCost: reserve,
-    tax: reserveTax,
-    peopleLimit: reservePeopleLimit,
-    description: reserveDescription,
-    bedNum: reserveDedNum,
-    bathRoomNum: reserveBathRoomNum,
-    grade: reserveGrade,
-  } = useSelector(({ reserve }) => reserve.infoRes);
+  const { id: roomId } = useSelector(({ reserve }) => reserve.infoRes);
 
-  const { city, borough } = useSelector(
-    ({ detail }) => detail.infoRes.locationDetail,
+  const { infoRes } = useSelector(({ reserve }) => reserve);
+
+  const { locationDetail } = useSelector(({ detail }) => detail.infoRes);
+
+  const { locationDetail: reserveLocationDetail } = useSelector(
+    (state) => state.reserve,
   );
-
-  const infoRes = {
-    id,
-    name,
-    roomCost,
-    cleaningCost,
-    tax,
-    peopleLimit,
-    description,
-    bedNum,
-    bathRoomNum,
-    grade,
-  };
-
-  const locationDetail = { city, borough };
 
   const { startDate: checkIn, endDate: checkOut } = checkDateSearch;
 
@@ -98,9 +76,13 @@ const ReservationContainer = () => {
     [dispatch],
   );
 
+  //  성인 + 어린이 수
+  const guestNumber = numOfAdult + numOfKid;
+
   // 확인 button 클릭해서 예약하기 event function
   const click = useCallback(() => {
     setComfirmModal(true);
+
     dispatch(
       reserving(
         roomId,
@@ -136,6 +118,23 @@ const ReservationContainer = () => {
   // };
 
   useState(() => {
+    dispatch(
+      detailToReserveRoom(
+        id,
+        name,
+        roomCost,
+        cleaningCost,
+        tax,
+        peopleLimit,
+        description,
+        bedNum,
+        bathRoomNum,
+        grade,
+      ),
+    );
+
+    dispatch(detailToReserveLocation(locationDetail));
+
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
@@ -157,6 +156,8 @@ const ReservationContainer = () => {
       checkDate={checkDate}
       saveDate={saveDate}
       isLoading={isLoading}
+      infoRes={infoRes}
+      reserveLocationDetail={reserveLocationDetail}
     />
   );
 };

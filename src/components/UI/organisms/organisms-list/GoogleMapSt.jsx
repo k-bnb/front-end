@@ -5,9 +5,9 @@ import React, { useEffect } from 'react';
 
 const PcSize = styled.main`
   display: block;
-  /* margin-top: -176px; */
-  margin-top: -80px;
-  padding-top: 80px;
+  margin-top: -176px;
+  /* margin-top: -80px;/ */
+  /* padding-top: 80px; */
   top: 0;
   position: sticky;
 
@@ -32,9 +32,16 @@ const MobileSize = styled.main`
 `;
 
 const GoogleStyle = ({
-  moveChange
+  roomMap,
+  roomType,
+  bathRoomNum,
+  bedRoomNum,
+  bedNum,
+  locationSearch,
+  checkDateSearch,
+  guestSearch,
+  costSearch,
 }) => {
-  console.log(moveChange());
   const isPc = useMediaQuery({
     query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
   });
@@ -45,13 +52,20 @@ const GoogleStyle = ({
     query: `(max-width: 743px)`, //744px 이하인 경우에만 적용(744이하.)
   });
 
-
   return (
     <>
       {isPc && (
         <PcSize className="Asidemap">
           <GoogleMapUse
-            moveChange={moveChange}
+            roomMap={roomMap}
+            locationSearch={locationSearch}
+            checkDateSearch={checkDateSearch}
+            guestSearch={guestSearch}
+            costSearch={costSearch}
+            roomType={roomType}
+            bedNum={bedNum}
+            bedRoomNum={bedRoomNum}
+            bathRoomNum={bathRoomNum}
           />
         </PcSize>
       )}
@@ -74,6 +88,5 @@ const GoogleStyle = ({
 //   )};
 
 // export default React.memo(GoogleStyle,areEqual1);
-
 
 export default GoogleStyle;
