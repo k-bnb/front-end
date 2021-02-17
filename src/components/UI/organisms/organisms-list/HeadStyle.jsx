@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 const PcSize = styled.main`
   width: 100vw;
-  background-color: skyblue;
   /* padding-top:100px; */
   display: flex;
 `;
