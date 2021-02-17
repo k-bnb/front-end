@@ -77,7 +77,7 @@ const AuthModalContainer = ({
       console.log(response.data);
       await dispatch({ type: 'auth/LOGIN_SUCCESS', payload: response.data });
       if (!loginError) {
-        delay(1500).then(() => {
+        await delay(1500).then(() => {
           dispatch(finishLoading('auth/LOGIN'));
           setIsOpen(false);
           return;
@@ -95,9 +95,7 @@ const AuthModalContainer = ({
   };
 
   useEffect(() => {
-    if (loginError === -1000)
-      setServerLoginError('존재하지 않는 이메일 입니다.');
-    else if (loginError === -1002)
+    if (loginError === -1002)
       setServerLoginError('이메일 또는 비밀번호가 잘못되었습니다.');
     else setServerLoginError('');
   }, [loginError]);
@@ -107,6 +105,15 @@ const AuthModalContainer = ({
       setServerRegisterError('이미 사용중인 이메일 입니다.');
     } else setServerRegisterError('');
   }, [registerError]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearError('login'));
+      dispatch(clearError('register'));
+      dispatch(initialzeInput('login'));
+      dispatch(initialzeInput('register'));
+    };
+  }, []);
 
   console.log(loginError);
 
