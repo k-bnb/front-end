@@ -12,7 +12,6 @@ const ReviewContainer = ({
       reviewRef={reviewRef}
       showReviewModal={showReviewModal}
       setShowReviewModal={setShowReviewModal}
-      reviewRef={reviewRef}
     />
   );
 };

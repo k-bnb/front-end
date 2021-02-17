@@ -9,6 +9,7 @@ import AuthHead from '../../molecules/molecules-modals-auth/AuthHead';
 import AuthRegisterdate from '../../molecules/molecules-modals-auth/AuthRegisterDate';
 import AuthRegisterInputs from '../../molecules/molecules-modals-auth/AuthRegisterInputs';
 import LoginGoSignupBtn from '../../molecules/molecules-modals-auth/LoginGoSignupBtn';
+import LoaderIcon from 'react-loader-icon';
 
 const BtnContainer = styled.div`
   width: 40rem;
@@ -38,6 +39,9 @@ const RegisterOrganism = ({
   setRegisterValidation,
   isFirst,
   setIsFirst,
+  serverRegisterError,
+  setServerRegisterError,
+  isLoading,
 }) => {
   return (
     <ModalTemplate modal={modal} setModal={setModal} signup onSubmit={onSubmit}>
@@ -53,6 +57,9 @@ const RegisterOrganism = ({
         setRegisterValidation={setRegisterValidation}
         isFirst={isFirst}
         setIsFirst={setIsFirst}
+        serverRegisterError={serverRegisterError}
+        setServerRegisterError={setServerRegisterError}
+        isLoading={isLoading}
       />
       <AuthRegisterdate
         onChange={onChange}
@@ -63,8 +70,44 @@ const RegisterOrganism = ({
         isFirst={isFirst}
         setIsFirst={setIsFirst}
       />
+      {isLoading['auth/REGISTER'] && (
+        <div
+          style={{
+            textAlign: 'center',
+            height: '20px',
+            color: 'red',
+            lineHeight: '10px',
+          }}
+        >
+          <LoaderIcon color={'red'} size={30} />
+        </div>
+      )}
+      {!isLoading['auth/REGISTER'] && serverRegisterError && (
+        <div
+          style={{
+            textAlign: 'center',
+            height: '20px',
+            color: 'red',
+            lineHeight: '10px',
+          }}
+        >
+          {serverRegisterError}
+        </div>
+      )}
       <BtnContainer>
-        <AuthBtn name="회원가입" />
+        <AuthBtn
+          name="회원가입"
+          disabled={
+            !(
+              registerValidation.emailValidation &&
+              registerValidation.nameValidation &&
+              registerValidation.passwordValidation.isLongerThanEight &&
+              registerValidation.passwordValidation.hasEveryCharacter &&
+              registerValidation.passwordValidation.doesContainInfo &&
+              registerValidation.dateValidation
+            )
+          }
+        />
 
         <Text
           className="register-to-login"
@@ -83,3 +126,14 @@ const RegisterOrganism = ({
 };
 
 export default RegisterOrganism;
+
+// const [registerValidation, setRegisterValidation] = useState({
+//   emailValidation: false,
+//   nameValidation: false,
+//   passwordValidation: {
+//     isLongerThanEight: false,
+//     hasEveryCharacter: false,
+//     doesContainInfo: false,
+//   },
+//   dateValidation: false,
+// });

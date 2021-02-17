@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Reservation from '../components/templates/templates-reservation/Reservation';
-import { clientMessageChange, reserving } from '../modules/reserve';
+import {
+  clientMessageChange,
+  detailToReserveLocation,
+  detailToReserveRoom,
+  reserving,
+} from '../modules/reserve';
 import { dateInput } from '../modules/search';
 
 const ReservationContainer = () => {
@@ -9,16 +14,38 @@ const ReservationContainer = () => {
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.token);
-  const {
-    roomId,
-    guestNumber,
-    infantNumber,
-    totalCost,
-    message,
-    checkDateSearch: checkDate,
-  } = useSelector((state) => state.reserve);
+  const { message, totalCost, checkDateSearch: checkDate } = useSelector(
+    (state) => state.reserve,
+  );
+
+  const { numOfAdult, numOfKid, numOfInfant: infantNumber } = useSelector(
+    ({ reserve }) => reserve.guestSearch,
+  );
+
   const { checkDateSearch, guestSearch } = useSelector(
     ({ search }) => search.searchReq,
+  );
+  const {
+    id,
+    name,
+    roomCost,
+    cleaningCost,
+    tax,
+    peopleLimit,
+    description,
+    bedNum,
+    bathRoomNum,
+    grade,
+  } = useSelector(({ detail }) => detail.infoRes);
+
+  const { id: roomId } = useSelector(({ reserve }) => reserve.infoRes);
+
+  const { infoRes } = useSelector(({ reserve }) => reserve);
+
+  const { locationDetail } = useSelector(({ detail }) => detail.infoRes);
+
+  const { locationDetail: reserveLocationDetail } = useSelector(
+    (state) => state.reserve,
   );
 
   const { startDate: checkIn, endDate: checkOut } = checkDateSearch;
@@ -31,24 +58,31 @@ const ReservationContainer = () => {
   const [comfirmModal, setComfirmModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const manageDateModal = () => {
+  const manageDateModal = useCallback(() => {
     setDateModal(!dateModal);
-  };
+  }, [dateModal]);
 
-  const manageGuestModal = () => {
+  const manageGuestModal = useCallback(() => {
     setGuestModal(!guestModal);
-  };
+  }, [guestModal]);
 
   // textArea state 관리하는 event function
-  const change = (e) => {
-    const value = e.target.value;
+  const change = useCallback(
+    (e) => {
+      const value = e.target.value;
 
-    dispatch(clientMessageChange(value));
-  };
+      dispatch(clientMessageChange(value));
+    },
+    [dispatch],
+  );
+
+  //  성인 + 어린이 수
+  const guestNumber = numOfAdult + numOfKid;
 
   // 확인 button 클릭해서 예약하기 event function
-  const click = () => {
+  const click = useCallback(() => {
     setComfirmModal(true);
+
     dispatch(
       reserving(
         roomId,
@@ -61,19 +95,46 @@ const ReservationContainer = () => {
         token,
       ),
     );
-  };
+  }, [
+    dispatch,
+    roomId,
+    checkIn,
+    checkOut,
+    guestNumber,
+    infantNumber,
+    totalCost,
+    message,
+    token,
+  ]);
 
-  const saveDate = () => {
+  const saveDate = useCallback(() => {
     setDateModal(!dateModal);
     dispatch(dateInput('startDate', startDate)); // 시작일만 선택시 시작일 dispatch
     dispatch(dateInput('endDate', endDate)); // 시작일만 선택시 시작일 dispatch
-  };
+  }, [dispatch, dateModal, startDate, endDate]);
 
   // const deleteDate = () => {
   //   dispatch(initialDate());
   // };
 
   useState(() => {
+    dispatch(
+      detailToReserveRoom(
+        id,
+        name,
+        roomCost,
+        cleaningCost,
+        tax,
+        peopleLimit,
+        description,
+        bedNum,
+        bathRoomNum,
+        grade,
+      ),
+    );
+
+    dispatch(detailToReserveLocation(locationDetail));
+
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
@@ -95,6 +156,8 @@ const ReservationContainer = () => {
       checkDate={checkDate}
       saveDate={saveDate}
       isLoading={isLoading}
+      infoRes={infoRes}
+      reserveLocationDetail={reserveLocationDetail}
     />
   );
 };

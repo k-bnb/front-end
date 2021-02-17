@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ModalTemplate from '../../../templates/templates-modal/ModalTemplate';
 import CircleDiv from '../../atoms/atoms-main/DivStyle';
 import AuthGoogle from '../../molecules/molecules-modals-auth/AuthGoogle';
@@ -21,6 +21,9 @@ const LoginOraganisms = ({
   setLoginValidation,
   isFirst,
   setIsFirst,
+  serverLoginError,
+  setServerLoginError,
+  isLoading,
 }) => {
   return (
     <ModalTemplate modal={modal} setModal={setModal} onSubmit={onSubmit}>
@@ -38,9 +41,12 @@ const LoginOraganisms = ({
         setLoginValidation={setLoginValidation}
         isFirst={isFirst}
         setIsFirst={setIsFirst}
+        serverLoginError={serverLoginError}
+        setServerLoginError={setServerLoginError}
+        isLoading={isLoading}
       />
       {/* 이메일 전송 인풋 */}
-      <EmailLoginSubmit />
+      <EmailLoginSubmit loginValidation={loginValidation} />
       {/* 또는 border */}
       <CircleDiv borderline />
 

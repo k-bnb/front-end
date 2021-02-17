@@ -12,6 +12,7 @@ import CommonButton from '../../UI/atoms/atoms-reservation/CommonButton';
 import ReservationCostDetailOrganism from '../../UI/organisms/organisms-reservation/ReservationCostDetailOrganism';
 import ReservationUnderLine from '../../UI/atoms/atoms-reservation/ResevationUnderLine';
 import LoadingModal from '../LoadingModal';
+import Logo from '../../UI/atoms/atoms-header/Logo';
 
 const TitleContainer = styled.div`
   position: relative;
@@ -58,7 +59,20 @@ const Reservation = ({
   checkDate,
   saveDate,
   isLoading,
+  infoRes,
+  reserveLocationDetail,
 }) => {
+  // const {
+  //   name,
+  //   roomCost,
+  //   cleaningCost,
+  //   tax,
+  //   peopleLimit,
+  //   description,
+  //   bedNum,
+  //   bathRoomNum,
+  //   grade,
+  // } = infoRes;
   return (
     <>
       <section>
@@ -70,7 +84,6 @@ const Reservation = ({
             }}
           >
             <Link to="/">
-              {' '}
               <svg
                 width="102"
                 height="32"
@@ -110,7 +123,10 @@ const Reservation = ({
             </CommonButton>
           </MainContainer>
           <SubContainer>
-            <ReservationCostDetailOrganism />
+            <ReservationCostDetailOrganism
+              infoRes={infoRes}
+              reserveLocationDetail={reserveLocationDetail}
+            />
           </SubContainer>
         </TempContainer>
       </section>

@@ -98,11 +98,7 @@ const Detail = ({
           commentList={infoRes.commentList}
           infoRes={infoRes}
         />
-        {/* <Review reviewRef={reviewRef} /> */}
-        {isLoading && <LoadingModal />}
-        <ReviewContainer reviewRef={reviewRef} infoRes={infoRes} />
         <ImportantNotice infoRes={infoRes} CancellableDate={CancellableDate} />
-        {/* <Review reviewRef={reviewRef} commentList={infoRes.commentList} /> */}
       </DetailTemplate>
       {isLoading && <LoadingModal />}
     </>

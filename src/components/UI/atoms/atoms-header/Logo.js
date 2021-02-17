@@ -56,6 +56,7 @@ const Logo = (props) => {
       {...props}
       onClick={() => {
         history.push('/');
+        window.scrollTo(0, 0);
       }}
     >
       <div className="a11y-hidden">에어비엔비</div>
