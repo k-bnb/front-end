@@ -15,6 +15,7 @@ const ListContainer = () => {
     minCostState: false,
     minCostPay: '',
   });
+  
   const {
     locationSearch,
     checkDateSearch,
@@ -40,7 +41,6 @@ const ListContainer = () => {
     setSearchModalState('bedroom');
   };
 
-  //진솔.
   const room = useSelector((state) => state.search.searchRes);
   const totalPage = useSelector((state) => state.search.totalPage);
   console.log(room);
@@ -57,7 +57,6 @@ const ListContainer = () => {
     };
   });
 
-  //여기까지.
   const roomTypes = useCallback(
     (e) => {
       if (e.target.checked) {
@@ -99,7 +98,6 @@ const ListContainer = () => {
         minCostPay: '',
       }));
     }
-
     const id = 0;
     dispatch(
       searching({
@@ -124,10 +122,10 @@ const ListContainer = () => {
 
   const [pageNationState, setPageNationState] = useState({ currentPage: 0 });
 
-  const changeCurrentPage = (numPage, e) => {
+  const changeCurrentPage = (numPage) => {
     setPageNationState({ currentPage: numPage });
     console.log(numPage);
-    console.log(e);
+  
     const id = numPage - 1;
 
     dispatch(

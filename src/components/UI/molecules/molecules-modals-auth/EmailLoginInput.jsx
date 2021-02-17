@@ -6,6 +6,7 @@ import TextStyle from '../../atoms/atoms-main/TextStyle';
 import { GoMail } from 'react-icons/go';
 import { RiLock2Line } from 'react-icons/ri';
 import styled from 'styled-components';
+import { checkEmailValidation } from '../../../../lib/validationCheck';
 
 const EmailInputStyle = styled.div`
   width: 400px;
@@ -43,7 +44,16 @@ const EmailInputStyle = styled.div`
   }
 `;
 
-const EmailLoginInput = ({ email, password, onChange, checkEmail }) => {
+const EmailLoginInput = ({
+  email,
+  password,
+  onChange,
+  checkEmail,
+  loginValidation,
+  setLoginValidation,
+  isFirst,
+  setIsFirst,
+}) => {
   return (
     <EmailInputStyle>
       <CircleDiv className="email-login">
@@ -57,6 +67,15 @@ const EmailLoginInput = ({ email, password, onChange, checkEmail }) => {
                 placeholder={'이메일 주소'}
                 onChange={onChange}
                 checkEmail={checkEmail}
+                onFocus={() => {}}
+                onBlur={() => {
+                  console.log(email);
+                  setIsFirst({ ...isFirst, emailInput: false });
+                  setLoginValidation({
+                    ...loginValidation,
+                    emailValidation: checkEmailValidation(email),
+                  });
+                }}
               />
               {/* <input
                 type="email"
@@ -67,6 +86,18 @@ const EmailLoginInput = ({ email, password, onChange, checkEmail }) => {
               /> */}
               <GoMail />
             </div>
+            <div
+              style={{
+                textAlign: 'center',
+                height: '20px',
+                color: 'red',
+                lineHeight: '10px',
+              }}
+            >
+              {!isFirst.emailInput && !loginValidation.emailValidation && (
+                <div>이메일 양식이 올바르지 않습니다.</div>
+              )}
+            </div>
 
             <div className="email-div">
               <Input
@@ -74,7 +105,28 @@ const EmailLoginInput = ({ email, password, onChange, checkEmail }) => {
                 name="loginPassword"
                 type="password"
                 placeholder="비밀번호 입력"
-                onChange={onChange}
+                onChange={(e) => {
+                  onChange(e);
+                  setLoginValidation({
+                    ...loginValidation,
+                    passwordValidation: password
+                      ? password.length >= 8
+                        ? true
+                        : false
+                      : false,
+                  });
+                }}
+                onBlur={() => {
+                  setIsFirst({ ...isFirst, passwordInput: false });
+                  setLoginValidation({
+                    ...loginValidation,
+                    passwordValidation: password
+                      ? password.length >= 8
+                        ? true
+                        : false
+                      : false,
+                  });
+                }}
               />
               {/* <input
                 type="password"
@@ -84,6 +136,19 @@ const EmailLoginInput = ({ email, password, onChange, checkEmail }) => {
                 onChange={onChange}
               /> */}
               <RiLock2Line />
+            </div>
+            <div
+              style={{
+                textAlign: 'center',
+                height: '20px',
+                color: 'red',
+                lineHeight: '10px',
+              }}
+            >
+              {!isFirst.passwordInput &&
+                !loginValidation.passwordValidation && (
+                  <div>비밀번호는 8자 이상 입력해 주세요.</div>
+                )}
             </div>
           </CircleDiv>
           <div className="pass-div">

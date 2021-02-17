@@ -16,9 +16,10 @@ export default function createRequestSaga(type, request) {
         payload: response.data,
       });
     } catch (error) {
+      console.log(error.response);
       yield put({
         type: FAILURE,
-        payload: error,
+        payload: error.response.data,
       });
     }
     yield delay(1000);

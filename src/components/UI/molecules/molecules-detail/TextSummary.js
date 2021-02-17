@@ -4,7 +4,6 @@ import { AiOutlineHome } from 'react-icons/ai';
 import { WiStars } from 'react-icons/wi';
 //import { GiDiamonds } from 'react-icons/gi';
 import { RiDoorOpenFill, RiCalendarCheckLine } from 'react-icons/ri';
-import { useSelector } from 'react-redux';
 
 const TextSummaryContainer = styled.div`
   padding: 32px 0 8px;
@@ -34,24 +33,19 @@ export const Text = styled.div`
   }
 `;
 
-export const CheckInDate = () => {
-  const strStartDate = useSelector((state) => state.detail.startDate);
-  const strArr = strStartDate.split('-');
-  // console.log(strStartDate);
-  // console.log(strArr);
-  return { year: strArr[0], month: strArr[1], day: strArr[2] };
-  // reservation page에서 사용할수 있도록 액션모듈 만들기?
-};
+const CheckDateExists = () => (
+  <div>
+    <Text>체크인 24시간 전까지 수수료 없이 예약 취소 가능</Text>
+    <Text>
+      그 이후로는 체크인 전에 취소하면 첫 1박 요금과 서비스 수수료를 제외한 전액
+    </Text>
+  </div>
+);
 
-const TextSummary = () => {
-  // const numMonth = parseInt(CheckInDate().month);
-  // const numDay = parseInt(CheckInDate().day);
-  // console.log(typeof numMonth);
-  const CancelPossibleDate = {
-    month: parseInt(CheckInDate().month),
-    day: parseInt(CheckInDate().day) - 1,
-  };
-  console.log({ CancelPossibleDate });
+const TextSummary = ({ CancellableDate, detailObj }) => {
+  const CheckInDate = detailObj.startDate;
+  const CheckOutDate = detailObj.EndDate;
+  console.log(detailObj);
 
   return (
     <TextSummaryContainer>
@@ -89,17 +83,21 @@ const TextSummary = () => {
         <div className="emoticon">
           <RiCalendarCheckLine />
         </div>
-        <div>
-          <Text>
-            {CancelPossibleDate.month}월{CancelPossibleDate.day}일 3:00PM까지
-            무료 취소 가능{' '}
-          </Text>
-          <Text>
-            그 후에는 {CancelPossibleDate.month}월 {CancelPossibleDate.day + 1}
-            일 3:00PM 전에 예약을 취소하면 첫 1박 요금 및 서비스 수수료를 제외한
-            요금 전액이 환불됩니다.
-          </Text>
-        </div>
+        {CheckInDate === '' || CheckOutDate === '' ? (
+          <CheckDateExists />
+        ) : (
+          <div>
+            <Text>
+              {CancellableDate.month}월{CancellableDate.day}일 3:00PM까지 무료
+              취소 가능
+            </Text>
+            <Text>
+              그 후에는 {CancellableDate.month}월 {CancellableDate.day + 1}일
+              3:00PM 전에 예약을 취소하면 첫 1박 요금 및 서비스 수수료를 제외한
+              요금 전액이 환불됩니다.
+            </Text>
+          </div>
+        )}
       </SimpleSummary>
     </TextSummaryContainer>
   );

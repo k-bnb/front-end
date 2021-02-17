@@ -3,7 +3,8 @@ import GoogleStyle from '../../UI/organisms/organisms-list/GoogleMapSt';
 import FooterFake from '../../UI/organisms/organisms-list/FooterFake';
 import HeadStyle from '../../UI/organisms/organisms-list/HeadStyle';
 import LoadingModal from '../LoadingModal';
-
+import React from 'react';  
+import GoogleMapContainer from '../../../containers/google-map-container/GoogleMapContainer';
 const ListTemplate = ({
   searchModalState,
   setSearchModalState,
@@ -75,19 +76,7 @@ const ListTemplate = ({
               pageNationState={pageNationState}
             />
           </div>
-          <GoogleStyle
-            locationSearch={locationSearch}
-            roomMap={roomMap}
-            room={room}
-            checkDateSearch={checkDateSearch}
-            guestSearch={guestSearch}
-            costSearch={costSearch}
-            roomType={roomType}
-            bedNum={bedNum}
-            bedRoomNum={bedRoomNum}
-            bathRoomNum={bathRoomNum}
-            style={{ flexShrink: '1' }}
-          />
+          <GoogleMapContainer />
         </div>
         <FooterFake />
       </div>
@@ -95,5 +84,16 @@ const ListTemplate = ({
     </>
   );
 };
-
+// function areEqual1(prevProps, nextProps) {
+//   console.log(prevProps === nextProps)
+// if ( prevProps.room === nextProps.room) {
+//     return false;
+//   } 
+//   else if ( prevProps.locationSearch === nextProps.locationSearch) {
+//     return false;
+//   } 
+//  return true;
+// console.log('ddddd');
+// }
 export default ListTemplate;
+ 

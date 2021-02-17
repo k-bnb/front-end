@@ -26,6 +26,7 @@ const HeaderListBlock = styled.div`
   position: fixed;
   width: 100%;
   height: 80px;
+  background-color: #fff;
   position: fixed;
   background-color: white;
   transition: 0.1s ease;

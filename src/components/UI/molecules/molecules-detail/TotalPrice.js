@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { BiWon } from 'react-icons/bi';
+import { getTotalPrice } from '../../../../modules/detail';
 
 const TotalPriceBox = styled.ul`
   margin: 4px 0 0;
@@ -20,14 +22,28 @@ const Total = styled.span`
   white-space: nowrap;
 `;
 
-const TotalPrice = () => (
-  <TotalPriceBox>
-    <TotalText>총 합계</TotalText>
-    <Total>
-      <BiWon />
-      201,021
-    </Total>
-  </TotalPriceBox>
-);
+const TotalPrice = ({ infoRes, totalSchedule }) => {
+  const entireCost =
+    infoRes.roomCost * totalSchedule +
+    infoRes.cleaningCost +
+    (infoRes.roomCost * totalSchedule) / 10 +
+    infoRes.tax;
+  //console.log(entireCost);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTotalPrice({ totalCost: entireCost }));
+  }, [dispatch, entireCost]);
+
+  return (
+    <TotalPriceBox>
+      <TotalText>총 합계</TotalText>
+      <Total>
+        <BiWon />
+        {entireCost}
+      </Total>
+    </TotalPriceBox>
+  );
+};
 
 export default TotalPrice;

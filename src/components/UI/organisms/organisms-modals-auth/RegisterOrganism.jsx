@@ -34,6 +34,10 @@ const RegisterOrganism = ({
   birth,
   modal,
   setModal,
+  registerValidation,
+  setRegisterValidation,
+  isFirst,
+  setIsFirst,
 }) => {
   return (
     <ModalTemplate modal={modal} setModal={setModal} signup onSubmit={onSubmit}>
@@ -45,15 +49,22 @@ const RegisterOrganism = ({
         email={email}
         password={password}
         name={name}
+        registerValidation={registerValidation}
+        setRegisterValidation={setRegisterValidation}
+        isFirst={isFirst}
+        setIsFirst={setIsFirst}
       />
-      <AuthRegisterdate onChange={onChange} name={name} birth={birth} />
+      <AuthRegisterdate
+        onChange={onChange}
+        name={name}
+        birth={birth}
+        registerValidation={registerValidation}
+        setRegisterValidation={setRegisterValidation}
+        isFirst={isFirst}
+        setIsFirst={setIsFirst}
+      />
       <BtnContainer>
-        <AuthBtn
-          name="회원가입"
-          // onClick={() => {
-          //   setFormState('login');
-          // }}
-        />
+        <AuthBtn name="회원가입" />
 
         <Text
           className="register-to-login"
@@ -67,12 +78,6 @@ const RegisterOrganism = ({
           로그인
         </Text>
       </BtnContainer>
-      {/* <LoginGoSignupBtn
-        // changeRegister={changeRegister}
-        onClick={() => {
-          setFormState('register');
-        }}
-      /> */}
     </ModalTemplate>
   );
 };

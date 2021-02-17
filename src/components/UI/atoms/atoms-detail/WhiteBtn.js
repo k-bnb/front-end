@@ -21,9 +21,14 @@ const WhiteButton = styled.a`
   }
 `;
 
-const WhiteBtn = ({ text }) => (
+const WhiteBtn = ({ text, setShowReviewModal, isShowReviewButton }) => (
   <div>
-    <WhiteButton>
+    <WhiteButton
+      className="white-btn"
+      onClick={() => {
+        if (isShowReviewButton) setShowReviewModal(true);
+      }}
+    >
       <Text bold big>
         {text}
       </Text>

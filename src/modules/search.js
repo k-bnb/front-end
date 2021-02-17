@@ -130,6 +130,7 @@ export function* searchSaga() {
 //Reducer
 const search = handleActions(
   {
+    //[DESTINATION_INPUT]: (state,action.type)=>{}
     [DESTINATION_INPUT]: (state, { payload: destinationName }) => ({
       ...state,
       destinationName,

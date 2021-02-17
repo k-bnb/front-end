@@ -18,11 +18,26 @@ const SectionTitle = styled.h2`
   margin: 0;
 `;
 
-const ImportantNotice = ({ infoRes }) => (
-  <NoticeContainer className="basic-section-padding">
-    <SectionTitle>알아두어야 할 사항</SectionTitle>
-    <NoticeAll infoRes={infoRes} />
-  </NoticeContainer>
-);
+const ImportantNotice = ({ infoRes, CancellableDate }) => {
+  const numCheckIn = parseInt(infoRes.checkInTime);
+  const numCheckOut = parseInt(infoRes.checkOutTime);
+
+  const CheckInTime =
+    numCheckIn > 12 ? `오후 ${numCheckIn - 12}` : `오전 ${numCheckIn}`;
+  const CheckOutTime =
+    numCheckOut > 12 ? `오후 ${numCheckOut - 12}` : `오전 ${numCheckOut}`;
+
+  return (
+    <NoticeContainer className="basic-section-padding">
+      <SectionTitle>알아두어야 할 사항</SectionTitle>
+      <NoticeAll
+        infoRes={infoRes}
+        CancellableDate={CancellableDate}
+        CheckInTime={CheckInTime}
+        CheckOutTime={CheckOutTime}
+      />
+    </NoticeContainer>
+  );
+};
 
 export default ImportantNotice;

@@ -17,6 +17,10 @@ const LoginOraganisms = ({
   onSubmit,
   changeRegister,
   setFormState,
+  loginValidation,
+  setLoginValidation,
+  isFirst,
+  setIsFirst,
 }) => {
   return (
     <ModalTemplate modal={modal} setModal={setModal} onSubmit={onSubmit}>
@@ -26,7 +30,15 @@ const LoginOraganisms = ({
       {/* 또는 border */}
       <CircleDiv borderline className="or" />
       {/* 이메일 인풋  */}
-      <EmailLoginInput onChange={onChange} email={email} password={password} />
+      <EmailLoginInput
+        onChange={onChange}
+        email={email}
+        password={password}
+        loginValidation={loginValidation}
+        setLoginValidation={setLoginValidation}
+        isFirst={isFirst}
+        setIsFirst={setIsFirst}
+      />
       {/* 이메일 전송 인풋 */}
       <EmailLoginSubmit />
       {/* 또는 border */}
@@ -34,6 +46,9 @@ const LoginOraganisms = ({
 
       <LoginGoSignupBtn
         changeRegister={changeRegister}
+        disabled={
+          loginValidation.emailValidation && loginValidation.passwordValidation
+        }
         onClick={() => {
           setFormState('register');
         }}
