@@ -6,11 +6,12 @@ import styled from 'styled-components';
 import ReserveConfirmNoData from '../../molecules/molecules-reserveConfirm/ReserveConfirmNoData';
 
 const ReserveConfirmSectionStyle = styled.div`
-  display: grid;
+  display: inline-flex;
+  flex-wrap: wrap;
 
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: repeat(3, 1fr);
+  div {
+    margin-right: 10px;
+  }
 `;
 
 const ReserveConfirmSection = ({ active, activClick, list }) => {

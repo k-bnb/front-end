@@ -4,12 +4,13 @@ import styled from 'styled-components';
 import PersonalInfoArticle from '../../UI/organisms/organisms-personal/PersonalInfoArticle';
 import PersonalInfoHead from '../../UI/organisms/organisms-personal/PersonalInfoHead';
 import PersonalInfoUl from '../../UI/organisms/organisms-personal/PersonalInfoUl';
+import ReserveConfirmheader from '../../UI/organisms/organisms-reserveconfirm/ReserveConfirmheader';
 
 const PersonalTemplateStyle = styled.div`
   /* width: 70vw; */
   max-width: 1000px;
   margin: 50px auto;
-
+  padding-top: 80px;
   div {
   }
   .main-group {
@@ -44,6 +45,7 @@ const PersonalTemplate = ({
 
   return (
     <PersonalTemplateStyle>
+      <ReserveConfirmheader />
       <PersonalInfoHead />
       <div className="main-group">
         <PersonalInfoUl

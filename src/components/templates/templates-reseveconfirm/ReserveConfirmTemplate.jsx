@@ -3,16 +3,20 @@ import styled from 'styled-components';
 import ReserveConfirmFooter from '../../UI/molecules/molecules-reserveConfirm/ReserveConfirmFooter';
 import HeadStyle from '../../UI/organisms/organisms-list/HeadStyle';
 import ReserveConfirmhead from '../../UI/organisms/organisms-reserveconfirm/ReserveConfirmhead';
+import ReserveConfirmheader from '../../UI/organisms/organisms-reserveconfirm/ReserveConfirmheader';
 import ReserveConfirmSection from '../../UI/organisms/organisms-reserveconfirm/ReserveConfirmSection';
 import HeaderList from '../templates-header/HeaderList';
 const ReserveConfirmTemplateStyle = styled.div`
-  max-width: 980px;
-  min-width: 980px;
+  max-width: 1180px;
+  min-width: 1180px;
+  min-height: 900px;
   margin: 0 auto;
+  padding-top: 100px;
 `;
 const ReserveConfirmTemplate = ({ active, activClick, list }) => {
   return (
     <ReserveConfirmTemplateStyle>
+      <ReserveConfirmheader />
       <ReserveConfirmhead />
       <ReserveConfirmSection
         list={list}
