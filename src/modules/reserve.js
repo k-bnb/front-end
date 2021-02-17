@@ -116,6 +116,8 @@ export const reserving = createAction(
     totalCost,
     message,
     token,
+    price,
+    receipt_id,
   ) => ({
     roomId,
     checkIn,
@@ -125,6 +127,8 @@ export const reserving = createAction(
     totalCost,
     message,
     token,
+    price,
+    receipt_id,
   }),
 );
 
