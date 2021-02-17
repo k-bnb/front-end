@@ -27,17 +27,29 @@ const CostContainer = styled.div`
   width: 100%;
 `;
 
-const ReservationCostDetailOrganism = () => {
+const ReservationCostDetailOrganism = ({ infoRes, reserveLocationDetail }) => {
+  const {
+    name,
+    roomCost,
+    cleaningCost,
+    tax,
+    bedNum,
+    bathRoomNum,
+    grade,
+  } = infoRes;
+
+  const { city, borough } = reserveLocationDetail;
+
   const hostInfoChildren = {
-    title: 'Donggyo-dong, Mapo-gu의 집 전체',
-    content: 'Signature in \n HONGDAE[2ROOM&3BED&3minute&free',
-    roomInfo: '침대 3개 · 욕실 1개',
-    rate: '4.7',
+    title: city,
+    content: name,
+    roomInfo: `침대 ${bedNum}개 · 욕실 ${bathRoomNum}개`,
+    rate: grade,
   };
 
   // 임시 고정값, 상세보기 페이지 redux state로 변경 예정
   const staticChildren = {
-    cost: '₩43,000 x 2박',
+    cost: `₩${roomCost} x ${1}박`,
     cleaningFee: '청소비',
     serviceFee: '서비스 수수료',
     lodgmentFee: '숙박세와 수수료',
@@ -45,11 +57,11 @@ const ReservationCostDetailOrganism = () => {
   };
 
   const dataChildren = {
-    cost: '₩86,000',
-    cleaningFee: '₩29,000',
-    serviceFee: '₩16,235',
-    lodgmentFee: '₩1,624',
-    totalFee: '₩132,859',
+    cost: `₩${roomCost * 1}`,
+    cleaningFee: `₩${cleaningCost}`,
+    serviceFee: `₩${tax}`,
+    lodgmentFee: `₩${roomCost * 0.3}`,
+    totalFee: `₩${roomCost}`,
   };
 
   return (
