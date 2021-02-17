@@ -6,7 +6,7 @@ import Detail from '../components/templates/templates-detail/Detail';
 import { requestDetail, searchToDetail } from '../modules/detail';
 import Modal from '../portal/Modal';
 import HeaderContainer from './header-containers/HeaderContainer';
-import LoaderIcon from 'react-loader-icon';
+//import LoaderIcon from 'react-loader-icon';
 import { detailToReserveDate, detailToReserveGuest } from '../modules/reserve';
 import ReviewModal from '../components/templates/templates-detail/ReviewModal';
 
