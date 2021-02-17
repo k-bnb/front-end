@@ -188,13 +188,13 @@ const ULWrap = styled.ul`
   a {
     text-decoration: none;
     padding: 30px 10px 20px 10px;
+    color:#000;
     .TextWrap {
       /* width: 100%; */
       line-height: 25px;
     }
     .TextHead {
       /* width: 100%; */
-      margin-bottom: 15px;
     }
     span:first-child {
       /* background-color: yellow; */
@@ -210,16 +210,17 @@ const ULWrap = styled.ul`
       margin-left: 16px;
       height: 100%;
     }
-    .TextWrap > div > .heart {
+    .heart {
       position: absolute;
-      right: 15px;
-      top: 5px;
+      right: 30px;
+      top: 25px;
+      font-size:25px;
     }
     hr {
       width: 50px;
       text-align: left;
       color: #eee;
-      margin: 0 0 15px 0;
+      margin: 0 15px ;
       padding: 0;
     }
     .TextBottom {
@@ -231,9 +232,10 @@ const ULWrap = styled.ul`
       align-items: flex-end;
       padding: 0 15px;
     }
-    /* .sleep{
-    padding-right: 10px;
-  } */
+    .cost{
+      display:flex;
+      flex-flow:row nowrap;
+    }
   }
 `;
 const LodgingLists = ({
@@ -264,11 +266,10 @@ const LodgingLists = ({
   };
   return (
     <>
-      {/* <ListCarousel slides={SliderData} /> */}
       <Wrap className="listWrap">
         <ULWrap>
           <li>
-            <div className="slide-group" carouselImg>
+            <Border className="slide-group" carouselImg>
               <div className="slide">
                 <div className="slideDiv">
                   <Slider {...settings}>
@@ -285,7 +286,7 @@ const LodgingLists = ({
                   </Slider>
                 </div>
               </div>
-            </div>
+            </Border>
             <Link to={`/detail/${id}`} key={id}>
               <span className="TextWrap">
                 <div className="TextHead">
@@ -295,7 +296,7 @@ const LodgingLists = ({
                   <TextStyled type="Ellipsis" size="blackMiddle">
                     {name}
                   </TextStyled>
-                  <Bookmark className="heart" heart>
+                  <Bookmark className="heart" Pcheart>
                     <AiOutlineHeart />
                   </Bookmark>
                 </div>
@@ -310,9 +311,9 @@ const LodgingLists = ({
                 </TextStyled>
                 <div className="TextBottom">
                   <ScoreText grade={grade} commentCount={commentCount} />
-                  <TextStyled className="sleep" size="blackMiddleBold">
+                  <TextStyled className="cost" size="blackMiddleBold">
                     <BiWon />
-                    {cost}/박
+                    {cost}/<TextStyled size="blackMiddle">박</TextStyled>
                   </TextStyled>
                 </div>
               </span>
