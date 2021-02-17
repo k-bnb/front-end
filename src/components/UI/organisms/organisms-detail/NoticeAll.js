@@ -18,7 +18,7 @@ const NoticeDetailBox = styled.div`
   width: 33.3%;
   margin-right: 32px;
   /* white-space: pre-wrap; */
-  &::last-child {
+  &:last-child {
     margin: 0;
   }
 `;
@@ -106,8 +106,8 @@ const RefundPolicy = ({ CancellableDate }) => (
       가능
     </NoticeTextBox>
     <NoticeTextBox big>
-      그 후에는 {CancellableDate.month}월 {CancellableDate + 1}일 3:00 PM 전에
-      예약을 취소하면 첫 1박 요금 및 서비스 수수료를 제외한 요금 전액이
+      그 후에는 {CancellableDate.month}월 {CancellableDate.day + 1}일 3:00 PM
+      전에 예약을 취소하면 첫 1박 요금 및 서비스 수수료를 제외한 요금 전액이
       환불됩니다.
     </NoticeTextBox>
   </NoticeDetailBox>

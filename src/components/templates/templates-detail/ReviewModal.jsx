@@ -155,7 +155,7 @@ const reviews2 = [
   { name: '이름20', date: '2021년 10월', content: '깨끗하고 좋아요20' },
 ];
 
-const ReviewModal = ({ showReviewModal, setShowReviewModal }) => {
+const ReviewModal = ({ showReviewModal, setShowReviewModal, infoRes }) => {
   const [localShowReviewModal, setLocalShowReviewModal] = useState(
     showReviewModal,
   );

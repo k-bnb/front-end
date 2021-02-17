@@ -8,8 +8,6 @@ import { RiLock2Line } from 'react-icons/ri';
 import styled from 'styled-components';
 import { checkEmailValidation } from '../../../../lib/validationCheck';
 import LoaderIcon from 'react-loader-icon';
-import { dispatch } from '../../../../../../../Library/Caches/typescript/4.1/node_modules/rxjs/internal/observable/range';
-import { clearError } from '../../../../modules/auth';
 
 const EmailInputStyle = styled.div`
   width: 400px;

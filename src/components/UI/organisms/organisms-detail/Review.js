@@ -35,11 +35,12 @@ const Review = ({
   setShowReviewModal,
   infoRes,
 }) => {
+  console.log(infoRes);
   return (
     <ReveiwSectionWrapper ref={reviewRef}>
       <ReviewContainer className="basic-section-padding">
         <ReviewTitle>
-          {/* <Grade grade={infoRes.grade} /> 점 (후기 {infoRes.commentCount}개){' '} */}
+          <Grade grade={infoRes.grade} /> 점 (후기 {infoRes.commentCount}개){' '}
         </ReviewTitle>
         <ScoreAverage />
         <ReviewItemBox>

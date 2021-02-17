@@ -58,8 +58,6 @@ const DetailContainer = () => {
   const checkDateSearch = { startDate: checkIn, endDate: checkOut };
   const guestSearch = { numOfAdult: adult, numOfKid: kid, numOfInfant: infant };
 
-  console.log(checkDateSearch);
-
   const moveToReserve = () => {
     //console.log('hi');
     if (!localStorage.getItem('token')) return;
@@ -114,6 +112,7 @@ const DetailContainer = () => {
         <ReviewModal
           showReviewModal={showReviewModal}
           setShowReviewModal={setShowReviewModal}
+          infoRes={infoRes}
         />
       </Modal>
     </>

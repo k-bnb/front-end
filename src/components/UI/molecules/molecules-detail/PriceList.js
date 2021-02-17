@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BiWon } from 'react-icons/bi';
+import Text from '../../atoms/atoms-detail/DetailText';
 
 const PriceList = styled.li`
   display: flex;
@@ -17,7 +18,8 @@ const DetailItem = styled.span`
   white-space: normal;
 `;
 
-const DetailItemBtn = styled.button`
+const DetailItemBtn = styled.span`
+  display: inline-block;
   font-size: inherit;
   font-weight: 400;
   background: transparent;
@@ -27,6 +29,7 @@ const DetailItemBtn = styled.button`
   border-radius: 4px;
   outline: none;
   text-align: left;
+  padding: 0;
 `;
 
 const PriceItem = styled.span`
@@ -34,15 +37,26 @@ const PriceItem = styled.span`
   white-space: nowrap;
 `;
 
-const PriceListItem = ({ detail, price }) => (
+const WonIcon = styled(BiWon)`
+  display: inline;
+  margin-right: 0px;
+  color: #444;
+`;
+
+const PriceListItem = ({ icon, detail, price }) => (
   <>
     <PriceList>
       <DetailItem>
-        <DetailItemBtn>{detail}</DetailItemBtn>
+        <DetailItemBtn>
+          {icon}
+          {detail}
+        </DetailItemBtn>
       </DetailItem>
       <PriceItem>
-        <BiWon />
-        {price}
+        <Text gray big>
+          <WonIcon />
+        </Text>
+        {price}{' '}
       </PriceItem>
     </PriceList>
   </>

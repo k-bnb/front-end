@@ -67,7 +67,6 @@ const initialStates = {
     roomCost: 0,
     cleaningCost: 0,
     tax: 0,
-
     peopleLimit: 0,
     description: '',
     checkOutTime: '13:00:00',

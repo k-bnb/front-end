@@ -9,6 +9,7 @@ const ReviewContainer = ({
 }) => {
   return (
     <Review
+      infoRes={infoRes}
       reviewRef={reviewRef}
       showReviewModal={showReviewModal}
       setShowReviewModal={setShowReviewModal}
