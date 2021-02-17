@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import HeaderContainer from './header-containers/HeaderContainer';
 import ListTemplate from '../components/templates/templates-list/ListTemplate';
@@ -10,6 +10,7 @@ import {
 } from '../modules/search';
 
 const ListContainer = () => {
+
   const [searchModalState, setSearchModalState] = useState(null);
   const [costState, setCostState] = useState({
     minCostState: false,
@@ -43,7 +44,7 @@ const ListContainer = () => {
 
   const room = useSelector((state) => state.search.searchRes);
   const totalPage = useSelector((state) => state.search.totalPage);
-  console.log(room);
+  
   const roomMap = room.map((item) => {
     return {
       id: item.id,
@@ -56,7 +57,7 @@ const ListContainer = () => {
       roomType: item.roomType,
     };
   });
-
+  console.log(roomMap);
   const roomTypes = useCallback(
     (e) => {
       if (e.target.checked) {
@@ -142,6 +143,10 @@ const ListContainer = () => {
       }),
     );
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

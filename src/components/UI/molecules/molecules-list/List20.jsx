@@ -50,7 +50,7 @@ const ULWrap = styled.ul`
     .slide-group {
       /* display: flex; */
       /* position: relative; */
-      width: 260px;
+      width: 300px;
       /* border: 1px solid red; */
       /* overflow: hidden; */
       position: relative;
@@ -86,6 +86,7 @@ const ULWrap = styled.ul`
             .slick-dots {
               li {
                 border: 0;
+                
                 display: inline !important;
 
                 justify-content: flex-end;
@@ -127,6 +128,7 @@ const ULWrap = styled.ul`
             .slick-list {
               display: flex;
               flex-direction: column;
+              border-radius: 10px;
 
               .slick-track {
                 display: flex;
@@ -181,35 +183,21 @@ const ULWrap = styled.ul`
   }
   a {
     display: block;
-  }
-  span {
-    /* box-sizing:border-box; */
-  }
-  a {
     text-decoration: none;
-    padding: 30px 10px 20px 10px;
+    padding: 20px 20px 20px 25px;
     color:#000;
-    .TextWrap {
-      /* width: 100%; */
-      line-height: 25px;
-    }
     .TextHead {
       /* width: 100%; */
     }
-    span:first-child {
-      /* background-color: yellow; */
-      /* box-sizing:border-box; */
+    /* span:first-child {
       width: 300px;
       height: 100%;
     }
     span:last-child {
-      /* background-color: #fff;max-width: 100%;
-      height: auto; */
-      /* width: 492px; */
       width: 100%;
       margin-left: 16px;
       height: 100%;
-    }
+    } */
     .heart {
       position: absolute;
       right: 30px;
@@ -220,21 +208,22 @@ const ULWrap = styled.ul`
       width: 50px;
       text-align: left;
       color: #eee;
-      margin: 0 15px ;
-      padding: 0;
+      margin: 15px 15px 15px 0;
+      /* padding: 0; */
     }
     .TextBottom {
       display: flex;
       /* box-sizing:border-box; */
       flex-flow: row nowrap;
       justify-content: space-between;
-      height: 93px;
+      height: 80px;
       align-items: flex-end;
-      padding: 0 15px;
+      /* padding: 0 15px; */
     }
     .cost{
       display:flex;
       flex-flow:row nowrap;
+      letter-spacing: 1px;
     }
   }
 `;
