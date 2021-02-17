@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import GoogleStyle from "../../components/UI/organisms/organisms-list/GoogleMapSt";
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import GoogleStyle from '../../components/UI/organisms/organisms-list/GoogleMapSt';
 
 const GoogleMapContainer = () => {
   const room = useSelector((state) => state.search.searchRes);
@@ -29,26 +29,27 @@ const GoogleMapContainer = () => {
         roomType: item.roomType,
       };
     });
-    setRoomMap(roomMap)
-  }, [])
-
+    setRoomMap(roomMap);
+  }, [room]);
 
   console.log(roomMap);
-  const moveChange = () => {
-    return { 
-      roomMap,
-      locationSearch,
-      room,
-      checkDateSearch,
-      guestSearch,
-      costSearch,
-      roomType,
-      bedNum,
-      bedRoomNum,
-      bathRoomNum
-    } 
-  }
-  return  <GoogleStyle moveChange={moveChange} style={{ flexShrink: '1' }} />
-}
+
+  console.log(roomMap);
+
+  return (
+    <GoogleStyle
+      locationSearch={locationSearch}
+      checkDateSearch={checkDateSearch}
+      guestSearch={guestSearch}
+      costSearch={costSearch}
+      roomType={roomType}
+      bedNum={bedNum}
+      bedRoomNum={bedRoomNum}
+      bathRoomNum={bathRoomNum}
+      roomMap={roomMap}
+      style={{ flexShrink: '1' }}
+    />
+  );
+};
 
 export default GoogleMapContainer;
