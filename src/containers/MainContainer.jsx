@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import HeaderMain from '../components/templates/templates-header/HeaderMain';
 import Main from '../components/templates/templates-main/Main';
@@ -52,6 +52,9 @@ const section3Img = [
 ];
 
 const MainContainer = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <HeaderContainer />
