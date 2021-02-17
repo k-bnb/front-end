@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import createRequestSaga from '../lib/createRequestSaga';
+import bootPayRequestSaga from '../lib/bootPayRequestSaga';
 import * as API from '../lib/api/reserve';
 import { takeLatest } from 'redux-saga/effects';
 import produce from 'immer';
@@ -70,7 +71,7 @@ export const detailToReserveGuest = createAction(
 
 export const detailToReserveRoom = createAction(
   DETAIL_TO_RESERVE_ROOM,
-  ({
+  (
     id,
     name,
     roomCost,
@@ -81,7 +82,7 @@ export const detailToReserveRoom = createAction(
     bedNum,
     bathRoomNum,
     grade,
-  }) => ({
+  ) => ({
     id,
     name,
     roomCost,
@@ -129,9 +130,6 @@ export const reserving = createAction(
 
 // initialState
 const initialState = {
-  roomId: null,
-  guestNumber: null,
-  infantNumber: null,
   totalCost: null,
   message: '',
   checkDateSearch: {
