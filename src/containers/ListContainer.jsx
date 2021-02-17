@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import HeaderContainer from './header-containers/HeaderContainer';
 import ListTemplate from '../components/templates/templates-list/ListTemplate';
@@ -10,6 +10,7 @@ import {
 } from '../modules/search';
 
 const ListContainer = () => {
+
   const [searchModalState, setSearchModalState] = useState(null);
   const [costState, setCostState] = useState({
     minCostState: false,
@@ -142,6 +143,10 @@ const ListContainer = () => {
       }),
     );
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
