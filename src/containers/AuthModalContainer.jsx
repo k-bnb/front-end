@@ -91,7 +91,7 @@ const AuthModalContainer = ({
       }
     }
 
-    delay(1500).then(() => dispatch(finishLoading('auth/LOGIN')));
+    delay(1000).then(() => dispatch(finishLoading('auth/LOGIN')));
   };
 
   useEffect(() => {
@@ -130,7 +130,7 @@ const AuthModalContainer = ({
       console.log(response.data);
       await dispatch({ type: 'auth/REGISTER_SUCCESS', payload: response.data });
       if (!registerError) {
-        delay(1500).then(() => {
+        delay(1000).then(() => {
           dispatch(finishLoading('auth/REGISTER'));
           setIsOpen(false);
           return;
