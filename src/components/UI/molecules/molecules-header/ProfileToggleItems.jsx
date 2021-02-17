@@ -16,7 +16,7 @@ const ProfileToggleItemUl = styled.ul`
   align-self: start;
   justify-content: space-around;
   box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.49);
-  overflow: scroll;
+
   background-color: white;
   .login {
     font-weight: 600;
