@@ -109,7 +109,7 @@ const initialState = {
       minCost: 10000,
       maxCost: 1000000,
     },
-    roomType: '',
+    roomType: 'Shared room',
     bedNum: 0,
     bedRoomNum: 0,
     bathRoomNum: 0,
