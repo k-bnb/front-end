@@ -44,7 +44,7 @@ const ListContainer = () => {
 
   const room = useSelector((state) => state.search.searchRes);
   const totalPage = useSelector((state) => state.search.totalPage);
-  console.log(room);
+  
   const roomMap = room.map((item) => {
     return {
       id: item.id,
@@ -57,7 +57,7 @@ const ListContainer = () => {
       roomType: item.roomType,
     };
   });
-
+  console.log(roomMap);
   const roomTypes = useCallback(
     (e) => {
       if (e.target.checked) {
