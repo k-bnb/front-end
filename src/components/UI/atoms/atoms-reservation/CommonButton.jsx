@@ -47,11 +47,11 @@ const CommonButton = ({
       <StyledButton onClick={click || directHome} {...rest}>
         {children}
       </StyledButton>
-      {comfirmModal && (
+      {/* {comfirmModal && (
         <Modal>
           <ComfirmModalOrganism />
         </Modal>
-      )}
+      )} */}
     </>
   );
 };
