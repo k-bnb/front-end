@@ -91,9 +91,10 @@ const Section3Style = ({ section3Img }) => {
             수백만 명에 이르는 에어비앤비 호스트 커뮤니티의 일원이 되어보세요.
           </TextStyle>
           <div className="img-group">
-            {section3Img.map(({ src, alt, name }) => {
+            {section3Img.map(({ src, alt, name }, i) => {
               return (
                 <Locations
+                  key={i}
                   src={src}
                   alt={alt}
                   name={name}
@@ -112,9 +113,10 @@ const Section3Style = ({ section3Img }) => {
             수백만 명에 이르는 에어비앤비 호스트 커뮤니티의 일원이 되어보세요.
           </TextStyle>
           <div className="img-group">
-            {section3Img.map(({ src, alt, name }) => {
+            {section3Img.map(({ src, alt, name }, i) => {
               return (
                 <Locations
+                  key={i}
                   src={src}
                   alt={alt}
                   name={name}
@@ -133,9 +135,10 @@ const Section3Style = ({ section3Img }) => {
             수백만 명에 이르는 에어비앤비 호스트 커뮤니티의 일원이 되어보세요.
           </TextStyle>
           <div className="img-group">
-            {section3Img.map(({ src, alt, name }) => {
+            {section3Img.map(({ src, alt, name }, i) => {
               return (
                 <Locations
+                  key={i}
                   src={src}
                   alt={alt}
                   name={name}

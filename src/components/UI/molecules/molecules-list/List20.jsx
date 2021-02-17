@@ -89,34 +89,35 @@ const ULWrap = styled.ul`
                 display: inline !important;
 
                 justify-content: flex-end;
-
+                height: 30px;
+                cursor: default;
                 &:nth-child(1) {
                   position: absolute;
-                  bottom: -210px;
+                  bottom: 10px;
 
                   left: 100px;
                 }
                 &:nth-child(2) {
                   position: absolute;
-                  bottom: -210px;
+                  bottom: 10px;
 
                   left: 110px;
                 }
                 &:nth-child(3) {
                   position: absolute;
-                  bottom: -210px;
+                  bottom: 10px;
 
                   left: 120px;
                 }
                 &:nth-child(4) {
                   position: absolute;
-                  bottom: -210px;
+                  bottom: 10px;
 
                   left: 130px;
                 }
                 &:nth-child(5) {
                   position: absolute;
-                  bottom: -210px;
+                  bottom: 10px;
 
                   left: 140px;
                 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../atoms/atoms-list/Button';
 import Pagination from 'react-pagination-library';
+import ReactPaginate from 'react-paginate';
 const PageStyle = styled.div`
   min-width: 547px;
 
@@ -21,7 +22,10 @@ const PageStyle = styled.div`
       width: 30px;
       height: 30px;
       vertical-align: sub;
-      &:hover {
+      a {
+        outline: none;
+      }
+      &.active {
         background-color: #000;
         color: #eee;
 
@@ -49,14 +53,8 @@ const PageStyle = styled.div`
 
 const PageNation = ({
   totalPage,
-  pageNationClick,
-  currentButton,
-  setCurrentButton,
-  arrOfcurrButtons,
-  setArrOfCurrButtons,
-  numberOfPages,
+
   changeCurrentPage,
-  pageNationState,
 }) => {
   // console.log(numberOfPages);
 
@@ -70,14 +68,22 @@ const PageNation = ({
   //   numberOfPages = [...newArr1, '...', ...newArr2];
   // }
   // console.log(numberOfPages);
-
+  console.log(totalPage);
   return (
     <PageStyle className="PageNation">
-      <Pagination
+      {/* <Pagination
         currentPage={pageNationState.currentPage}
         totalPage={totalPage.totalPages}
         changeCurrentPage={changeCurrentPage}
         theme="circle"
+      /> */}
+      <ReactPaginate
+        pageCount={totalPage.totalPages}
+        previousLabel={'<'}
+        nextLabel={'>'}
+        activeClassName={'active'}
+        onPageChange={changeCurrentPage}
+        initialPage={0}
       />
       {/* <Button
         size="number"

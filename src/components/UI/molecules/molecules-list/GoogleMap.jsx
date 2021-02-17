@@ -69,22 +69,16 @@ const GoogleMarkerStyle = styled.div`
 `;
 
 function GoogleMapUse({
-  moveChange
+  roomMap,
+  roomType,
+  bathRoomNum,
+  bedRoomNum,
+  bedNum,
+  locationSearch,
+  checkDateSearch,
+  guestSearch,
+  costSearch,
 }) {
-
-
-  const { 
-    roomMap,
-    locationSearch,
-    room,
-    checkDateSearch,
-    guestSearch,
-    costSearch,
-    roomType,
-    bedNum,
-    bedRoomNum,
-    bathRoomNum} = moveChange();
-
   const [selectedSample, setSelectedSample] = useState(null);
 
   const [locate, setLocate] = useState({
@@ -219,7 +213,7 @@ function GoogleMapUse({
       }),
     );
   };
-  const [zoom, setZoom] = useState(14);
+  const [zoom, setZoom] = useState(12);
   const mapRef = useRef();
 
   console.log(roomMap);
@@ -229,7 +223,7 @@ function GoogleMapUse({
   const handleZoomChanged = () => {
     setZoom(mapRef.current.getZoom());
   };
-
+  console.log(roomMap);
   const MapWithAMarker = withScriptjs(
     withGoogleMap((props) => {
       console.log(props);
@@ -237,7 +231,7 @@ function GoogleMapUse({
         <GoogleMap
           // scrollwheel={false}
           ref={mapRef}
-          defaultZoom={12}
+          // defaultZoom={12}
           zoom={zoom}
           defaultCenter={{
             lat: locationSearch.latitude,
@@ -361,8 +355,4 @@ function GoogleMapUse({
   );
 }
 
-
-
-
- 
 export default GoogleMapUse;
