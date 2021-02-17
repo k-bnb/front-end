@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { GrFormClose } from 'react-icons/gr';
-import ScoreAverage from '../../UI/molecules/molecules-detail/ScoreAverage';
+//import ScoreAverage from '../../UI/molecules/molecules-detail/ScoreAverage';
 import Grade from '../../UI/atoms/atoms-detail/Grade';
 import PointItemBox from '../../UI/molecules/molecules-detail/PointItemBox';
 import ReviewItem from '../../UI/molecules/molecules-detail/ReviewItem';
-import { useClickOutside } from '../../../lib/useClickOutside';
+//import { useClickOutside } from '../../../lib/useClickOutside';
 import useInfiniteScroll from '../../../lib/useInfiniteScroll';
 
 const slideUp = keyframes`
