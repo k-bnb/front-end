@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import '../../atoms/atoms-detail/DetailBasicStyle.css';
 import Text from '../../atoms/atoms-detail/DetailText';
 
@@ -43,18 +43,25 @@ const Pointnumber = styled(Text)`
   line-height: 16px;
   margin-left: 6px;
   padding: 0;
+  ${(props) =>
+    props.reviewModal &&
+    css`
+      font-size: 11px;
+    `}
 `;
 
-const PointItemBox = ({ textItem, point }) => (
+const PointItemBox = ({ textItem, point, reviewModal }) => (
   <ItemBox className="basic-flex">
     <TextBox>
-      <Text big>{textItem}</Text>
+      <Text big reviewModal={reviewModal}>
+        {textItem}
+      </Text>
     </TextBox>
     <PointContainer className="basic-flex">
       <PointBar>
         <Point />
       </PointBar>
-      <Pointnumber big bold>
+      <Pointnumber big bold reviewModal={reviewModal}>
         {point}
       </Pointnumber>
     </PointContainer>

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { checkDateValidation } from '../../../../lib/validationCheck';
 import Input from '../../atoms/atoms-main/Input';
 import MainInfoParagraph from '../../atoms/atoms-main/MainInfoParagraph';
 
@@ -24,7 +25,14 @@ const InputContainer = styled.div`
   }
 `;
 
-const AuthRegisterdate = ({ onChange, birth }) => {
+const AuthRegisterdate = ({
+  onChange,
+  birth,
+  registerValidation,
+  setRegisterValidation,
+  isFirst,
+  setIsFirst,
+}) => {
   return (
     <>
       <MainInfoParagraph>
@@ -39,8 +47,31 @@ const AuthRegisterdate = ({ onChange, birth }) => {
           required
           pattern="\d{4}-\d{2}-\d{2}"
           onChange={onChange}
+          onFocus={() => {}}
+          onSelect={() => {
+            setIsFirst({
+              ...isFirst,
+              dateInput: false,
+            });
+            setRegisterValidation({
+              ...registerValidation,
+              dateValidation: checkDateValidation(birth),
+            });
+          }}
         />
       </InputContainer>
+      <span
+        style={{
+          height: '15px',
+          lineHeight: '5px',
+          fontSize: '10px',
+          color: 'red',
+        }}
+      >
+        {!registerValidation.dateValidation && !isFirst.dateInput && (
+          <>생년월일을 선택해 주세요.</>
+        )}
+      </span>
     </>
   );
 };

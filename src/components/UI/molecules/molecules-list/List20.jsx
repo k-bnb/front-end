@@ -9,9 +9,12 @@ import Imgs from '../../atoms/atoms-list/Imgs';
 import ScoreText from './Score-Text';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 // import ListCarousel from './ListCarousel';
 // import { SliderData } from './SliderData';
-
 const Wrap = styled.div`
   /* width:100%; */
   height: auto;
@@ -19,7 +22,6 @@ const Wrap = styled.div`
   /* padding: 0 24px; */
   box-sizing: border-box;
 `;
-
 const ULWrap = styled.ul`
   list-style: none;
   display: inline-block;
@@ -41,30 +43,105 @@ const ULWrap = styled.ul`
     justify-content: space-between;
     /* border-bottom: 1px solid #000; */
     align-items: center;
-
     :nth-child(1) {
       border-top: 1px solid rgba(0, 0, 0, 0.1);
       /* border-top:2px dashed red; */
     }
     .slide-group {
-      display: flex;
-      position: relative;
+      /* display: flex; */
+      /* position: relative; */
       width: 260px;
-      border: 1px solid red;
-      overflow: hidden;
+      /* border: 1px solid red; */
+      /* overflow: hidden; */
+      position: relative;
+
       .slide {
         /* flex-shrink: 0; */
         /* display: flex; */
         width: 100%;
         .slideDiv {
-          display: flex;
-          width: 100%;
-          /* justify-content: flex-start; */
-          transform: translateX(0);
+          /* display: flex; */
+          /* flex-direction: column; */
+          .slick-slider {
+            /* display: inline-block; */
+            .slick-arrow {
+              /* bottom: 50%;
+              transform: translateY(50%); */
+              z-index: 1;
+            }
+            .slick-prev {
+              position: absolute;
+              left: 0;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+            }
+            .slick-next {
+              position: absolute;
+              right: 0;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+            }
+            .slick-dots {
+              li {
+                border: 0;
+                display: inline !important;
 
-          img {
-            object-fit: 100%;
-            width: 100%;
+                justify-content: flex-end;
+
+                &:nth-child(1) {
+                  position: absolute;
+                  bottom: -210px;
+
+                  left: 100px;
+                }
+                &:nth-child(2) {
+                  position: absolute;
+                  bottom: -210px;
+
+                  left: 110px;
+                }
+                &:nth-child(3) {
+                  position: absolute;
+                  bottom: -210px;
+
+                  left: 120px;
+                }
+                &:nth-child(4) {
+                  position: absolute;
+                  bottom: -210px;
+
+                  left: 130px;
+                }
+                &:nth-child(5) {
+                  position: absolute;
+                  bottom: -210px;
+
+                  left: 140px;
+                }
+              }
+            }
+
+            .slick-list {
+              display: flex;
+              flex-direction: column;
+
+              .slick-track {
+                display: flex;
+
+                .slick-slide {
+                  display: flex;
+
+                  div {
+                    display: flex;
+
+                    img {
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -91,12 +168,10 @@ const ULWrap = styled.ul`
         .next {
           position: absolute;
           /* z-index: 100; */
-
           right: 10px;
         }
         .prev {
           position: absolute;
-
           left: 10px;
           /* z-index: 100; */
         }
@@ -118,17 +193,7 @@ const ULWrap = styled.ul`
     }
     .TextHead {
       /* width: 100%; */
-    }
-    .Ellipsis {
-      width: 416px;
-      /* width: 100%; */
-      height: 46px;
-      /* margin-right: 20px; */
-      display: block;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-      align-content: center;
+      margin-bottom: 15px;
     }
     span:first-child {
       /* background-color: yellow; */
@@ -170,7 +235,6 @@ const ULWrap = styled.ul`
   } */
   }
 `;
-
 const LodgingLists = ({
   alt,
   bathRoomNum,
@@ -190,111 +254,12 @@ const LodgingLists = ({
   isSmoking,
   commentCount,
 }) => {
-  const DIRECTIOM_TYPE = {
-    next: 'NEXT',
-    prev: 'PREV',
-  };
-  const btnOpcity = useRef();
-
-  const [imgs, setImages] = useState({
-    img: roomImgUrlList,
-    current: 3,
-    needTransition: true,
-    direction: '',
-  });
-  const slideRef = useRef(null);
-  const IMG_LENGTH = imgs.img.length;
-
-  const handleSliderTranslateEnd = () => {
-    console.log('handelend');
-    console.log(imgs.direction);
-    switch (imgs.direction) {
-      case DIRECTIOM_TYPE.next:
-        vaildNextSlider();
-        break;
-      case DIRECTIOM_TYPE.prev:
-        vaildPrevSlider();
-        break;
-      default:
-        break;
-    }
-  };
-
-  const vaildNextSlider = () => {
-    const { img, current } = imgs;
-    // const imgSlide = [...img, ...img.slice(0, 1)].slice(-img.length);
-    // console.log(img);
-    if (current > img.length - 1) {
-      setTimeout(() => {
-        slideRef.current.style.transition = 'none';
-      }, 0);
-      setImages((state) => ({
-        ...state,
-        needTransition: false,
-        current: 0,
-      }));
-    }
-
-    // setImages((state) => ({
-    //   ...state,
-    //   needTransition: false,
-    //   img: imgSlide,
-    // }));
-  };
-  const vaildPrevSlider = () => {
-    const { img, current } = imgs;
-    if (current <= 0) {
-      setTimeout(() => {
-        slideRef.current.style.transition = 'none';
-      }, 0);
-      setImages((state) => ({
-        ...state,
-        needTransition: false,
-        current: img.length,
-      }));
-    }
-    // const imgSlide = [...img.slice(-1), ...img].slice(0, img.length);
-    // setImages((state) => ({
-    //   ...state,
-    //   needTransition: false,
-    //   img: imgSlide,
-    // }));
-  };
-  console.log(imgs);
-  const nextClick = () => {
-    let num = imgs.current + 1;
-    setImages((state) => ({
-      ...state,
-      needTransition: true,
-      current: num,
-      direction: DIRECTIOM_TYPE.next,
-    }));
-  };
-  const prevClick = () => {
-    let num = imgs.current - 1;
-    // if (num < 0) return;
-    setImages((state) => ({
-      ...state,
-      needTransition: true,
-      current: num,
-      direction: DIRECTIOM_TYPE.prev,
-    }));
-  };
-
-  const transLateVal = () => {
-    return -(imgs.current * 100);
-  };
-
-  const sliderStyle = () => {
-    if (imgs.needTransition) {
-      return {
-        transform: `translateX(${transLateVal()}%)`,
-        transition: 'transform 0.3s ease-in-out',
-      };
-    }
-    return {
-      transform: `translateX(${transLateVal()}%)`,
-    };
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
   };
   return (
     <>
@@ -304,34 +269,20 @@ const LodgingLists = ({
           <li>
             <div className="slide-group" carouselImg>
               <div className="slide">
-                <div
-                  className="slideDiv"
-                  style={sliderStyle()}
-                  onTransitionEnd={handleSliderTranslateEnd}
-                  ref={slideRef}
-                >
-                  {/* <Imgs carousalImg src={imgs.img[imgs.img.length]} /> */}
+                <div className="slideDiv">
+                  <Slider {...settings}>
+                    {roomImgUrlList.map((src, i, arr) => (
+                      <>
+                        <Imgs
+                          carousalImg
+                          src={src}
 
-                  {imgs.img.map((src, i, arr) => (
-                    <>
-                      <Imgs
-                        carousalImg
-                        src={src}
-
-                        // alt={alt}
-                      />
-                    </>
-                  ))}
-                  <Imgs carousalImg src={imgs.img[0]} />
+                          // alt={alt}
+                        />
+                      </>
+                    ))}
+                  </Slider>
                 </div>
-              </div>
-              <div className="btn-group" ref={btnOpcity}>
-                <button onClick={prevClick} className="prev">
-                  <MdKeyboardArrowLeft />
-                </button>
-                <button onClick={nextClick} className="next">
-                  <MdKeyboardArrowRight />
-                </button>
               </div>
             </div>
             <Link to={`/detail/${id}`} key={id}>
@@ -340,7 +291,7 @@ const LodgingLists = ({
                   <TextStyled size="blackSmall">
                     {city} {borough} {city || borough ? '의' : ''} {roomType}
                   </TextStyled>
-                  <TextStyled className="Ellipsis" size="blackMiddle">
+                  <TextStyled type="Ellipsis" size="blackMiddle">
                     {name}
                   </TextStyled>
                   <Bookmark className="heart" heart>
@@ -371,5 +322,4 @@ const LodgingLists = ({
     </>
   );
 };
-
 export default LodgingLists;

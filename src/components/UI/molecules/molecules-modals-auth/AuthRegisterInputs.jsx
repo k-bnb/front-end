@@ -4,6 +4,8 @@ import Input from '../../atoms/atoms-main/Input';
 import { GoMail } from 'react-icons/go';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { AiOutlineUser } from 'react-icons/ai';
+import * as CHECK from '../../../../lib/validationCheck';
+import InputPasswordCondition from './InputPasswordCondition';
 
 const InputContainer = styled.div`
   position: relative;
@@ -24,7 +26,19 @@ const InputContainer = styled.div`
   }
 `;
 
-const AuthRegisterInputs = ({ email, name, password, onChange }) => {
+const AuthRegisterInputs = ({
+  email,
+  name,
+  password,
+  onChange,
+  registerValidation,
+  setRegisterValidation,
+  isFirst,
+  setIsFirst,
+}) => {
+  console.log(registerValidation.nameValidation);
+  console.log(isFirst);
+
   return (
     <>
       <InputContainer>
@@ -34,9 +48,31 @@ const AuthRegisterInputs = ({ email, name, password, onChange }) => {
           value={name}
           placeholder={'이름'}
           onChange={onChange}
+          onBlur={(e) => {
+            setRegisterValidation({
+              ...registerValidation,
+              nameValidation: CHECK.checkNameValidation(name),
+            });
+            setIsFirst({
+              ...isFirst,
+              nameInput: false,
+            });
+          }}
         />
         <AiOutlineUser />
       </InputContainer>
+      <span
+        style={{
+          height: '15px',
+          lineHeight: '5px',
+          fontSize: '10px',
+          color: 'red',
+        }}
+      >
+        {!registerValidation.nameValidation && !isFirst.nameInput && (
+          <>올바른 이름을 입력 해주세요.</>
+        )}
+      </span>
       <InputContainer>
         <Input
           type="email"
@@ -44,19 +80,84 @@ const AuthRegisterInputs = ({ email, name, password, onChange }) => {
           value={email}
           placeholder={'이메일 주소'}
           onChange={onChange}
+          onBlur={(e) => {
+            setRegisterValidation({
+              ...registerValidation,
+              emailValidation: CHECK.checkEmailValidation(email),
+            });
+            setIsFirst({
+              ...isFirst,
+              emailInput: false,
+            });
+          }}
         />
         <GoMail />
       </InputContainer>
+      <span
+        style={{
+          height: '15px',
+          lineHeight: '5px',
+          fontSize: '10px',
+          color: 'red',
+        }}
+      >
+        {!registerValidation.emailValidation && !isFirst.emailInput && (
+          <>이메일 양식이 올바르지 않습니다.</>
+        )}
+      </span>
       <InputContainer>
         <Input
           type="password"
           name="registerPassword"
           value={password}
           placeholder={'비밀번호 입력'}
-          onChange={onChange}
+          onChange={(e) => {
+            onChange(e);
+            setRegisterValidation({
+              ...registerValidation,
+              passwordValidation: CHECK.checkPasswordValidation(
+                name,
+                email,
+                password,
+              ),
+            });
+          }}
+          onBlur={(e) => {
+            if (!e.target.value)
+              setRegisterValidation({
+                ...registerValidation,
+                passwordValidation: {
+                  isLongerThanEight: false,
+                  hasEveryCharacter: false,
+                  doesContainInfo: false,
+                },
+              });
+          }}
+          onFocus={() => {
+            setIsFirst({ ...isFirst, passwordInput: false });
+          }}
         />
         <RiLockPasswordLine />
       </InputContainer>
+      <div
+        style={{
+          lineHeight: '5px',
+          fontSize: '10px',
+          color: 'red',
+        }}
+      >
+        {!isFirst.passwordInput && (
+          <InputPasswordCondition
+            registerValidation={registerValidation}
+            setRegisterValidation={setRegisterValidation}
+            isFirst={isFirst}
+            setIsFirst={setIsFirst}
+          />
+        )}
+      </div>
+      {/* {!registerValidation.passwordValidation && !isFirst.emailInput && <></>} */}
+      {/* {!registerValidation.passwordValidation && !isFirst.emailInput && <></>} */}
+      {/* {!registerValidation.passwordValidation && !isFirst.emailInput && <></>} */}
     </>
   );
 };

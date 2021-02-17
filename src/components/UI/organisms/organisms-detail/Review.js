@@ -29,12 +29,17 @@ const ReviewItemBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const Review = ({ reviewRef, infoRes }) => {
+const Review = ({
+  reviewRef,
+  showReviewModal,
+  setShowReviewModal,
+  infoRes,
+}) => {
   return (
     <ReveiwSectionWrapper ref={reviewRef}>
       <ReviewContainer className="basic-section-padding">
         <ReviewTitle>
-          <Grade grade={infoRes.grade} /> 점 (후기 {infoRes.commentCount}개){' '}
+          {/* <Grade grade={infoRes.grade} /> 점 (후기 {infoRes.commentCount}개){' '} */}
         </ReviewTitle>
         <ScoreAverage />
         <ReviewItemBox>
@@ -42,7 +47,11 @@ const Review = ({ reviewRef, infoRes }) => {
           <ReviewItem />
           <ReviewItem />
         </ReviewItemBox>
-        <WhiteBtn text="후기 38개 모두 보기" />
+        <WhiteBtn
+          isShowReviewButton={true}
+          text="후기 38개 모두 보기"
+          setShowReviewModal={setShowReviewModal}
+        />
       </ReviewContainer>
     </ReveiwSectionWrapper>
   );

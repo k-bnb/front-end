@@ -12,7 +12,7 @@ const LoginGoSignupBtnStyle = styled.div`
   }
 `;
 
-const LoginGoSignupBtn = ({ changeRegister }) => {
+const LoginGoSignupBtn = ({ changeRegister, disabled }) => {
   return (
     <LoginGoSignupBtnStyle>
       <CircleDiv className="signup-div">

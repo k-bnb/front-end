@@ -7,15 +7,14 @@ import RoomReSearch from './RoomReSearch';
 import SearchModal from './SearchModal';
 
 const SearchPlace = styled.div`
-  padding : 20px;
-  padding-top:100px;
+  padding : 100px 30px 40px 30px;
   /* margin-top:100px; */
-
+  
   .filter-style {
     display: flex;
     .roomType {
       position: relative;
-      margin-right: 10px;
+      margin-right: 15px;
       button {
         display: flex;
         /* justify-content: center; */
