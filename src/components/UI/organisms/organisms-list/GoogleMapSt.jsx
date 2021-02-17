@@ -5,9 +5,9 @@ import React, { useEffect } from 'react';
 
 const PcSize = styled.main`
   display: block;
-  /* margin-top: -176px; */
-  margin-top: -80px;
-  padding-top: 80px;
+  margin-top: -176px;
+  /* margin-top: -80px;/ */
+  /* padding-top: 80px; */
   top: 0;
   position: sticky;
 
