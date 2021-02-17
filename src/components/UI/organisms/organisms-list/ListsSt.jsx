@@ -38,7 +38,7 @@ const MobileSize = styled.main`
     padding : 0;
     margin :0;
   }
-  li{
+  .mobileListview{
     height : 608px;
     position : relative;
     min-height : 400px;
@@ -183,26 +183,24 @@ const ListStyle = ({
               roomImgUrlList,
             }) => {
               return (
-                <Link to={`/detail/${id}`} key={id}>
-                  <LodgingLists
-                    bathRoomNum={bathRoomNum}
-                    city={city}
-                    borough={borough}
-                    isCheck={isCheck}
-                    isParking={isParking}
-                    isSmoking={isSmoking}
-                    commentCount={commentCount}
-                    bedNum={bedNum}
-                    roomImgUrlList={roomImgUrlList}
-                    roomType={roomType}
-                    peopleLimit={peopleLimit}
-                    bedRoomNum={bedRoomNum}
-                    cost={cost}
-                    grade={grade}
-                    id={id}
-                    name={name}
-                  />
-                </Link>
+                <LodgingLists
+                  bathRoomNum={bathRoomNum}
+                  city={city}
+                  borough={borough}
+                  isCheck={isCheck}
+                  isParking={isParking}
+                  isSmoking={isSmoking}
+                  commentCount={commentCount}
+                  bedNum={bedNum}
+                  roomImgUrlList={roomImgUrlList}
+                  roomType={roomType}
+                  peopleLimit={peopleLimit}
+                  bedRoomNum={bedRoomNum}
+                  cost={cost}
+                  grade={grade}
+                  id={id}
+                  name={name}
+                />
               );
             },
           )}
@@ -224,7 +222,7 @@ const ListStyle = ({
           {room.map(({bathRoomNum, roomType, city, borough ,bedNum,bedRoomNum ,cost, grade, id, name ,peopleLimit, isCheck, isParking, isSmoking, commentCount,roomImgUrlList}) => {
           return (
             <Link to={`/detail/${id}`} key={id} style={{textDecoration:'none'}}>   
-              <li>
+              <li className = "mobileListview">
                 <span>
                   <Border size='bigCarouselImg'>
                     {roomImgUrlList.map(src => (
