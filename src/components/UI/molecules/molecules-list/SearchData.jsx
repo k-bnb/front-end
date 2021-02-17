@@ -1,15 +1,17 @@
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Button from '../../atoms/atoms-list/Button';
 import TextStyled from '../../atoms/atoms-list/Text';
 import FooterBtn from './FooterBtn';
 import RoomReSearch from './RoomReSearch';
 import SearchModal from './SearchModal';
+import { extractMonthDate } from '../../../../lib/extractMonthDate';
 
 const SearchPlace = styled.div`
-  padding : 100px 30px 40px 30px;
+  padding: 100px 30px 40px 30px;
   /* margin-top:100px; */
-  
+
   .filter-style {
     display: flex;
     .roomType {
@@ -43,6 +45,7 @@ const SearchData = ({
   plusBtn,
   searchBtn,
   costState,
+  search,
 }) => {
   // const modal = useRef();
   const handleClickOutside = ({ target }) => {
@@ -50,20 +53,37 @@ const SearchData = ({
     // if (!modal.current.contains(target)) {
     setSearchModalState(null);
   };
+  const {
+    destinationName,
+    searchReq: {
+      checkDateSearch: { startDate, endDate },
+      guestSearch: { numOfAdult, numOfKid },
+    },
+    totalPage: { totalElements },
+  } = search;
+
+  const startMonthDate = extractMonthDate(startDate);
+  const endMonthDate = extractMonthDate(endDate);
+
   useEffect(() => {
     window.addEventListener('click', handleClickOutside);
     return () => {
       window.removeEventListener('click', handleClickOutside);
     };
   }, []);
+
   return (
     <>
       <SearchPlace className="SearchData">
         <TextStyled size="blackSmall">
-          숙박130건. 2월1일~2월3일. 게스트3명
+          {`숙박${totalElements}건, ${startMonthDate.month}월 ${
+            startMonthDate.date
+          }일 - ${endMonthDate.month}월 ${endMonthDate.date}일, 게스트${
+            numOfAdult + numOfKid
+          }`}{' '}
         </TextStyled>
         <h1>
-          <TextStyled size="blackLargeBold">춘천시의 숙소</TextStyled>
+          <TextStyled size="blackLargeBold">{`${destinationName}의 숙소`}</TextStyled>
         </h1>
         <div className="filter-style">
           <div className="roomType">
