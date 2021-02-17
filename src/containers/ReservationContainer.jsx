@@ -87,7 +87,7 @@ const ReservationContainer = () => {
     setComfirmModal(true);
 
     BootPay.request({
-      price: testCost, //실제 결제되는 가격
+      price: 1000, //실제 결제되는 가격
       application_id: '6024e5ee5b2948001d52037b',
       name: testName, //결제창에서 보여질 이름
       pg: 'nicepay',
