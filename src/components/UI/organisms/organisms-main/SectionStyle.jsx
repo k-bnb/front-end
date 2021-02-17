@@ -194,9 +194,10 @@ const SectionStyle = ({ sectionImg }) => {
         <SectionPc className="section">
           <TextStyle blackBold>어디에서나, 여행은 살아보는 거야!</TextStyle>
           <div className="img-group">
-            {sectionImg.map(({ src, alt, name }) => {
+            {sectionImg.map(({ src, alt, name }, i) => {
               return (
                 <Locations
+                  key={i}
                   src={src}
                   alt={alt}
                   name={name}
@@ -214,9 +215,10 @@ const SectionStyle = ({ sectionImg }) => {
           <ArrowButton className="leftbtn" onClick={leftclick} />
           <TextStyle blackBold>어디에서나, 여행은 살아보는 거야!</TextStyle>
           <div ref={groupImg} className="img-group">
-            {sectionImg.map(({ src, alt, name }) => {
+            {sectionImg.map(({ src, alt, name }, i) => {
               return (
                 <Locations
+                  key={i}
                   src={src}
                   alt={alt}
                   name={name}
@@ -235,9 +237,10 @@ const SectionStyle = ({ sectionImg }) => {
           <ArrowButton className="leftbtn" onClick={leftclick} />
           <TextStyle blackBold>어디에서나, 여행은 살아보는 거야!</TextStyle>
           <div ref={groupImg} className="img-group">
-            {sectionImg.map(({ src, alt, name }) => {
+            {sectionImg.map(({ src, alt, name }, i) => {
               return (
                 <Locations
+                  key={i}
                   src={src}
                   alt={alt}
                   name={name}

@@ -15,7 +15,7 @@ const ListContainer = () => {
     minCostState: false,
     minCostPay: '',
   });
-  
+
   const {
     locationSearch,
     checkDateSearch,
@@ -124,9 +124,9 @@ const ListContainer = () => {
 
   const changeCurrentPage = (numPage) => {
     setPageNationState({ currentPage: numPage });
-    console.log(numPage);
-  
-    const id = numPage - 1;
+    console.log(numPage.selected);
+
+    const id = numPage.selected - 1;
 
     dispatch(
       searching({
