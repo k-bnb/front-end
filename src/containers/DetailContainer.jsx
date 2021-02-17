@@ -58,6 +58,12 @@ const DetailContainer = () => {
   const checkDateSearch = { startDate: checkIn, endDate: checkOut };
   const guestSearch = { numOfAdult: adult, numOfKid: kid, numOfInfant: infant };
 
+  console.log(checkDateSearch);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const moveToReserve = () => {
     //console.log('hi');
     if (!localStorage.getItem('token')) return;

@@ -149,7 +149,9 @@ const HeaderMainSearchNav = ({
                 SearchTypeHandler('location');
               }}
             >
-              {destinationName}
+              {destinationName === '가까운 여행지 둘러보기'
+                ? '근처 추천 장소'
+                : destinationName}
             </Text>
             <Text
               bold
