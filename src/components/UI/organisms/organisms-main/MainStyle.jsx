@@ -7,9 +7,9 @@ const MainComponentPc = styled.main`
 
   padding: 266px 80px 80px;
 
-  background-image: url(./imgs/bg.jpg);
+  background-image: url(./imgs/bgimg.png);
   background-size: cover;
-  background-position: bottom 0% right 100%;
+  background-position: bottom 60% right 100%;
   background-repeat: no-repeat;
   .RoomLink {
     display: flex;
@@ -37,7 +37,7 @@ const MainComponentTablet = styled.main`
 
   padding: 200px 20px 80px;
 
-  background-image: url(./imgs/bg.jpg);
+  background-image: url(./imgs/bgimg.png);
   background-size: cover;
   background-position: bottom 15% left 100%;
   background-repeat: no-repeat;
@@ -72,7 +72,7 @@ const MainComponentMobile = styled.main`
 
   padding: 180px 20px 200px 30px;
 
-  background-image: url(./imgs/bg.jpg);
+  background-image: url(./imgs/bgimg.png);
   background-size: cover;
   background-position: bottom 15% left 100%;
   background-repeat: no-repeat;
