@@ -6,6 +6,8 @@ import Detail from '../components/templates/templates-detail/Detail';
 import { requestDetail, searchToDetail } from '../modules/detail';
 import Modal from '../portal/Modal';
 import HeaderContainer from './header-containers/HeaderContainer';
+import LoaderIcon from 'react-loader-icon';
+import { detailToReserveDate, detailToReserveGuest } from '../modules/reserve';
 import ReviewModal from '../components/templates/templates-detail/ReviewModal';
 
 const DetailContainer = () => {
@@ -36,10 +38,34 @@ const DetailContainer = () => {
   const { roomImgUrlList } = useSelector((state) => state.detail.infoRes);
   //console.log(roomImgUrlList);
 
+  // const { startDate, endDate } = useSelector(
+  //   ({ search }) => search.searchReq.checkDateSearch,
+  // );
+
+  // const { numOfAdult, numOfKid, numOfInfant } = useSelector(
+  //   ({ search }) => search.searchReq.guestSearch,
+  // );
+
+  const { startDate: checkIn, endDate: checkOut } = useSelector(
+    (state) => state.detail,
+  );
+
+  console.log(checkIn, checkOut);
+  const { numOfAdult: adult, numOfKid: kid, numOfInfant: infant } = useSelector(
+    (state) => state.detail,
+  );
+
+  const checkDateSearch = { startDate: checkIn, endDate: checkOut };
+  const guestSearch = { numOfAdult: adult, numOfKid: kid, numOfInfant: infant };
+
+  console.log(checkDateSearch);
+
   const moveToReserve = () => {
     //console.log('hi');
     if (!localStorage.getItem('token')) return;
     history.push('/reserve');
+    dispatch(detailToReserveDate(checkDateSearch));
+    dispatch(detailToReserveGuest(guestSearch));
     window.scrollTo(0, 0);
   };
 

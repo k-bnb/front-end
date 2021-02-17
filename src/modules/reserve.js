@@ -12,6 +12,12 @@ const INITIAL_DATE = 'reserve/INITIAL_DATE';
 // guest number change action type
 const CHANGE_GUEST = 'reserve/CHANGE_GUEST';
 const INITIAL_GUEST = 'reserve/INITIAL_GUEST';
+// detail page date, guest state 받아오기
+const DETAIL_TO_RESERVE_DATE = 'reserve/DETAIL_TO_RESERVE_DATE';
+const DETAIL_TO_RESERVE_GUEST = 'reserve/DETAIL_TO_RESERVE_GUEST';
+const DETAIL_TO_RESERVE_ROOM = 'reserve/DETAIL_TO_RESERVE';
+const DETAIL_TO_RESERVE_LOCATION = 'reserve/DETAIL_TO_RESERVE_LOCATION';
+// const DETAIL_TO_RESERVE_IMG = 'reserve/DETAIL_TO_RESERVE_IMG';
 
 // 비동기 action type
 const RESERVING = 'reserve/RESERVING';
@@ -43,6 +49,60 @@ export const changeGuest = createAction(CHANGE_GUEST, (form, name, value) => ({
 
 export const initialGuest = createAction(INITIAL_GUEST, (form) => form);
 
+// detail page date state => reserve page date state
+export const detailToReserveDate = createAction(
+  DETAIL_TO_RESERVE_DATE,
+  ({ startDate, endDate }) => ({
+    startDate,
+    endDate,
+  }),
+);
+
+// detail page guest state => reserve page guest state
+export const detailToReserveGuest = createAction(
+  DETAIL_TO_RESERVE_GUEST,
+  ({ numOfAdult, numOfKid, numOfInfant }) => ({
+    numOfAdult,
+    numOfKid,
+    numOfInfant,
+  }),
+);
+
+export const detailToReserveRoom = createAction(
+  DETAIL_TO_RESERVE_ROOM,
+  ({
+    id,
+    name,
+    roomCost,
+    cleaningCost,
+    tax,
+    peopleLimit,
+    description,
+    bedNum,
+    bathRoomNum,
+    grade,
+  }) => ({
+    id,
+    name,
+    roomCost,
+    cleaningCost,
+    tax,
+    peopleLimit,
+    description,
+    bedNum,
+    bathRoomNum,
+    grade,
+  }),
+);
+
+export const detailToReserveLocation = createAction(
+  DETAIL_TO_RESERVE_LOCATION,
+  ({ city, borough }) => ({
+    city,
+    borough,
+  }),
+);
+
 // saga action function
 export const reserving = createAction(
   RESERVING,
@@ -69,10 +129,10 @@ export const reserving = createAction(
 
 // initialState
 const initialState = {
-  roomId: 5,
-  guestNumber: 2,
-  infantNumber: 2,
-  totalCost: 3000,
+  roomId: null,
+  guestNumber: null,
+  infantNumber: null,
+  totalCost: null,
   message: '',
   checkDateSearch: {
     startDate: '',
@@ -82,6 +142,22 @@ const initialState = {
     numOfAdult: 0,
     numOfKid: 0,
     numOfInfant: 0,
+  },
+  infoRes: {
+    id: '',
+    name: '',
+    roomCost: 0,
+    cleaningCost: 0,
+    tax: 0,
+    peopleLimit: 0,
+    description: '',
+    bedNum: 0,
+    bathRoomNum: 0,
+    grade: 0,
+  },
+  locationDetail: {
+    city: '',
+    borough: '',
   },
   reserveError: null,
 };
@@ -112,6 +188,26 @@ const reserve = handleActions(
       produce(state, (draft) => {
         draft[form] = initialState[form]; // 선택한 form 초기화.
       }),
+
+    [DETAIL_TO_RESERVE_DATE]: (state, { payload: checkDateSearch }) => ({
+      ...state,
+      checkDateSearch,
+    }),
+
+    [DETAIL_TO_RESERVE_GUEST]: (state, { payload: guestSearch }) => ({
+      ...state,
+      guestSearch,
+    }),
+
+    [DETAIL_TO_RESERVE_ROOM]: (state, { payload: infoRes }) => ({
+      ...state,
+      infoRes,
+    }),
+
+    [DETAIL_TO_RESERVE_LOCATION]: (state, { payload: locationDetail }) => ({
+      ...state,
+      locationDetail,
+    }),
 
     [RESERVING_FAILURE]: (state, { payload: error }) => ({
       ...state,
