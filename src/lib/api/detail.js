@@ -7,3 +7,6 @@ export const detailInformation = (roomId) =>
       'Content-Type': 'application/json',
     },
   });
+
+export const requestComments = (roomId) =>
+  client.get(`http://3.34.198.174:8080/comment?roomId=${roomId}&page=0&size=8`);

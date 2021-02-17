@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ModalTemplate from '../../../templates/templates-modal/ModalTemplate';
 import CircleDiv from '../../atoms/atoms-main/DivStyle';
 import AuthGoogle from '../../molecules/molecules-modals-auth/AuthGoogle';

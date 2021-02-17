@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '../../atoms/atoms-main/Button';
 import CircleDiv from '../../atoms/atoms-main/DivStyle';
 import Input from '../../atoms/atoms-main/Input';
@@ -8,6 +8,8 @@ import { RiLock2Line } from 'react-icons/ri';
 import styled from 'styled-components';
 import { checkEmailValidation } from '../../../../lib/validationCheck';
 import LoaderIcon from 'react-loader-icon';
+import { dispatch } from '../../../../../../../Library/Caches/typescript/4.1/node_modules/rxjs/internal/observable/range';
+import { clearError } from '../../../../modules/auth';
 
 const EmailInputStyle = styled.div`
   width: 400px;
@@ -57,7 +59,15 @@ const EmailLoginInput = ({
   serverLoginError,
   setServerLoginError,
   isLoading,
+  loginError,
 }) => {
+  useEffect(() => {
+    if (loginError === -1000)
+      setServerLoginError('존재하지 않는 이메일 입니다.');
+    else if (loginError === -1002)
+      setServerLoginError('이메일 또는 비밀번호가 잘못되었습니다.');
+    else setServerLoginError('');
+  }, [loginError]);
   return (
     <EmailInputStyle>
       <CircleDiv className="email-login">

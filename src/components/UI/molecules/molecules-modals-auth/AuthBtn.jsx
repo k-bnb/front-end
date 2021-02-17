@@ -7,6 +7,7 @@ const AuthButton = styled.button`
   height: 100%;
   background-color: rgb(255, 90, 95);
   border-radius: 5px;
+  cursor: pointer;
   span {
     color: #eee;
     font-size: 1.4rem;
@@ -18,6 +19,7 @@ const AuthButton = styled.button`
   ${(props) =>
     props.disabled &&
     css`
+      cursor: not-allowed;
       background-color: lightgray;
     `}
 `;
