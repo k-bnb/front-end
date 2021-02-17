@@ -23,7 +23,6 @@ const BookingInfoContainer = styled.div`
   border-radius: 12px;
   margin-top: 48px;
   padding: 24px;
-  padding-bottom: 48px;
   box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
 
   .notice {

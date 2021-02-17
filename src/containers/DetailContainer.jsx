@@ -118,6 +118,7 @@ const DetailContainer = () => {
         <ReviewModal
           showReviewModal={showReviewModal}
           setShowReviewModal={setShowReviewModal}
+          infoRes={infoRes}
         />
       </Modal>
     </>

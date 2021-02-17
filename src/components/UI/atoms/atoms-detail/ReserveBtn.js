@@ -12,7 +12,7 @@ const ReservationBtn = styled.button`
   line-height: 20px;
   font-size: 16px;
   font-weight: 600;
-  padding: 10px 20px;
+  padding: 14px 24px;
   white-space: nowrap;
   transition: opacity 1.25s ease 0s;
   cursor: pointer;
