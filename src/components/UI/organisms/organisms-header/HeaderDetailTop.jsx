@@ -30,15 +30,6 @@ const PositioningBox = styled.div`
 const HeaderDetailTop = ({ isScrolled, isClicked }) => {
   return (
     <HeaderDetailTopBlock isScrolled={isScrolled} isClicked={isClicked}>
-<<<<<<< HEAD
-      <Logo isScrolled={true} />
-      {isClicked && (
-        <Text noPadding bold black after>
-          숙소
-        </Text>
-      )}
-      <ProfileToggleModalContainer />
-=======
       <PositioningBox>
         <Logo isScrolled={true} />
 
@@ -49,7 +40,6 @@ const HeaderDetailTop = ({ isScrolled, isClicked }) => {
         )}
         <ProfileToggleModalContainer />
       </PositioningBox>
->>>>>>> 237b2252aa45bfe34c04180ba8f0afd31a4d8517
     </HeaderDetailTopBlock>
   );
 };

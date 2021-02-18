@@ -66,8 +66,8 @@ const CalendarNewBlock = styled.div`
     justify-content: center !important;
     border-radius: 30px;
     position: absolute !important;
-    top: 100px;
-    left: -285px;
+    top: 80px;
+    left: -296px;
     height: 410px;
     width: 850px !important;
     max-width: 850px !important;

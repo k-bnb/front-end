@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 const StyledLocModal = styled.div`
   position: absolute;
-  top: 90px;
+  top: 80px;
   left: 0;
   border-radius: 40px;
   background-color: white;
