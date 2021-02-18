@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { DateRangePicker, DayPickerRangeController } from 'react-dates';
+import { DayPickerRangeController } from 'react-dates';
 import moment from 'moment';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';

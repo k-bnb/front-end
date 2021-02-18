@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 
 const CircleButtonBlock = styled.button`
   width: 32px;

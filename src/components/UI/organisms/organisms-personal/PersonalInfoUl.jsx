@@ -4,7 +4,7 @@ import PersonalInfoLi from '../../molecules/molecules-personalInfo/PersonalInfoL
 import Button from '../../atoms/atoms-main/Button';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
 import PersonalNameInput from '../../molecules/molecules-personalInfo/PersonalNameInput';
-import PersonalInfoGenderSelect from '../../molecules/molecules-personalInfo/PersonalInfoGenderSelect';
+// import PersonalInfoGenderSelect from '../../molecules/molecules-personalInfo/PersonalInfoGenderSelect';
 import PersonalInfoBirthinput from '../../molecules/molecules-personalInfo/PersonalInfoBirthinput';
 import PersonalInfoEmailInput from '../../molecules/molecules-personalInfo/PersonalInfoEmailInput';
 import PersonalInfoImg from '../../molecules/molecules-personalInfo/PersonalInfoImg';

@@ -1,14 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginOraganisms from '../components/UI/organisms/organisms-modals-auth/LoginOraganisms';
 import RegisterOrganism from '../components/UI/organisms/organisms-modals-auth/RegisterOrganism';
-import client from '../lib/api/client';
+// import client from '../lib/api/client';
 import {
   changeInput,
   clearError,
   initialzeInput,
-  login,
-  register,
+  // login,
+  // register,
 } from '../modules/auth';
 import { finishLoading, startLoading } from '../modules/loading';
 import * as API from '../lib/api/auth';

@@ -16,6 +16,7 @@ export const TypeTitle = styled(Title)`
 
 const CoverBox = styled.div`
   width: 33.3%;
+  min-width: 195px;
   margin: 0;
   padding: 24px;
   border: 1px solid rgb(221, 221, 221);

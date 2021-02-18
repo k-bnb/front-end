@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ReCheckBedCount from '../../organisms/organisms-list/ReCheckBedCount';
 import ReCheckCash from '../../organisms/organisms-list/ReCheckCash';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import SearchButton from '../../atoms/atoms-header/SearchButton';
 import Text from '../../atoms/atoms-header/Text';
 import SearchNavDatesUnit from '../../molecules/molecules-header/SearchNavDatesUnit';

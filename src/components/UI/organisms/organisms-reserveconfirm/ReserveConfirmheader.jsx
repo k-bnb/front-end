@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ProfileToggleModalContainer from '../../../../containers/header-containers/ProfileToggleModalContainer';
-import Button from '../../atoms/atoms-main/Button';
-import ProfileToggleModal from '../organisms-header/ProfileToggleModal';
+// import Button from '../../atoms/atoms-main/Button';
+// import ProfileToggleModal from '../organisms-header/ProfileToggleModal';
 const ReserveConfirmheaderStyle = styled.div`
   position: fixed;
   top: 0;

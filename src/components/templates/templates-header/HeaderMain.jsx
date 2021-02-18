@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import HeaderMainTop from '../../UI/organisms/organisms-header/HeaderMainTop';
-import HeaderMainSearchNav from '../../UI/organisms/organisms-header/HeaderMainSearchNav';
+// import HeaderMainSearchNav from '../../UI/organisms/organisms-header/HeaderMainSearchNav';
 import HeadermainSearchNavContainer from '../../../containers/header-containers/HeadermainSearchNavContainer';
 import { useClickOutside } from '../../../lib/useClickOutside';
 

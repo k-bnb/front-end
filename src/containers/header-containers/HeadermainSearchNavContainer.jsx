@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 import HeaderMainSearchNav from '../../components/UI/organisms/organisms-header/HeaderMainSearchNav';
 
 const HeadermainSearchNavContainer = ({

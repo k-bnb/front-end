@@ -10,7 +10,7 @@ const HeaderDetailTopBlock = styled.header`
   padding-top: 30px;
   background-color: white;
   transition: 0.1s ease-in;
-  position: relatvie;
+  /* position: relatvie; */
   z-index: 9999;
   box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.1);
   ${(props) =>
@@ -20,17 +20,26 @@ const HeaderDetailTopBlock = styled.header`
     `};
 `;
 
+const PositioningBox = styled.div`
+  max-width: 1280px;
+  position: relatvie;
+  background: pink;
+  margin: 0 auto;
+`;
+
 const HeaderDetailTop = ({ isScrolled, isClicked }) => {
   return (
     <HeaderDetailTopBlock isScrolled={isScrolled} isClicked={isClicked}>
-      <Logo isScrolled={true} />
+      <PositioningBox>
+        <Logo isScrolled={true} />
 
-      {isClicked && (
-        <Text noPadding bold black after>
-          숙소
-        </Text>
-      )}
-      <ProfileToggleModalContainer />
+        {isClicked && (
+          <Text noPadding bold black after>
+            숙소
+          </Text>
+        )}
+        <ProfileToggleModalContainer />
+      </PositioningBox>
     </HeaderDetailTopBlock>
   );
 };

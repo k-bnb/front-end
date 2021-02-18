@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import CircleDiv from '../../atoms/atoms-main/DivStyle';
-import TextStyle from '../../atoms/atoms-main/TextStyle';
+// import CircleDiv from '../../atoms/atoms-main/DivStyle';
+// import TextStyle from '../../atoms/atoms-main/TextStyle';
 
 const PersonlInfoDivStyle = styled.div`
   svg {

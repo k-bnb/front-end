@@ -8,7 +8,7 @@ import AuthGoogle from '../../molecules/molecules-modals-auth/AuthGoogle';
 import AuthHead from '../../molecules/molecules-modals-auth/AuthHead';
 import AuthRegisterdate from '../../molecules/molecules-modals-auth/AuthRegisterDate';
 import AuthRegisterInputs from '../../molecules/molecules-modals-auth/AuthRegisterInputs';
-import LoginGoSignupBtn from '../../molecules/molecules-modals-auth/LoginGoSignupBtn';
+// import LoginGoSignupBtn from '../../molecules/molecules-modals-auth/LoginGoSignupBtn';
 import LoaderIcon from 'react-loader-icon';
 
 const BtnContainer = styled.div`

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { checkDateValidation } from '../../../../lib/validationCheck';
 import Input from '../../atoms/atoms-main/Input';

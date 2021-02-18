@@ -35,7 +35,6 @@ const Review = ({
   setShowReviewModal,
   infoRes,
 }) => {
-  console.log(infoRes);
   return (
     <ReveiwSectionWrapper ref={reviewRef}>
       <ReviewContainer className="basic-section-padding">
