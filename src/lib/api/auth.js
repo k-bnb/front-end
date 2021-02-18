@@ -40,3 +40,18 @@ export const userInfoRemake = ({ token }) => {
 
   return client.post('http://localhost:8080/user/update', body, headers);
 };
+export const reserveCancel = ({ token, reservationId, name, reason }) => {
+  const body = {
+    reservationId,
+    name,
+    reason,
+  };
+
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+  client.delete(
+    `http://3.34.198.174:8080/reservation?reservationId=${reservationId}`,
+    body,
+    headers,
+  );
+};

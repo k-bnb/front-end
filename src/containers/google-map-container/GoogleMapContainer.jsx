@@ -32,10 +32,6 @@ const GoogleMapContainer = () => {
     setRoomMap(roomMap);
   }, [room]);
 
-  console.log(roomMap);
-
-  console.log(roomMap);
-
   return (
     <GoogleStyle
       locationSearch={locationSearch}

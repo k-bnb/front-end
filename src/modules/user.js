@@ -15,6 +15,21 @@ const USER_INFO_SUCCESS = 'user/USER_INFO_SUCCESS';
 
 const CHANGE_INPUT_PERSON = 'person/CHANGE_INPUT_PERSON';
 
+const RESERVATION_CANCEL = 'user/RESERVATION_CANCEL';
+const RESERVATION_CANCEL_SUCCESS = 'user/RESERVATION_CANCEL_SUCCESS';
+const RESERVATION_CANCEL_FAILURE = 'user/RESERVATION_CANCEL_FAILURE';
+
+// 유저의 숙소 삭제
+export const reservation_cancel = createAction(
+  RESERVATION_CANCEL,
+  ({ token, reservationId, name, reason }) => ({
+    token,
+    reservationId,
+    name,
+    reason,
+  }),
+);
+
 export const userInfo = createAction(USER_INFO, (token) => token);
 
 export const reserveConfirm = createAction(RESERVE_CONFIRM, ({ token }) => ({
@@ -37,12 +52,19 @@ const initialState = {
     imageUrl: '',
   },
   reserveRes: [],
+  reserveCancelRes: [],
   reserveError: null,
 };
 
 const user = handleActions(
   {
     [RESERVE_CONFIRM_SUCCESS]: (state, action) => {
+      sessionStorage.setItem(
+        'userInfoConFirm',
+        JSON.stringify(
+          action.payload._embedded.reservationConfirmedResponseList,
+        ),
+      );
       return produce(state, (draft) => {
         draft.reserveRes =
           action.payload._embedded.reservationConfirmedResponseList;
@@ -64,6 +86,11 @@ const user = handleActions(
         draft.userRes[payload.name] = payload.value;
       });
     },
+    [RESERVATION_CANCEL_SUCCESS]: (state, { payload }) => {
+      return produce(state, (draft) => {
+        draft.userRes.reserveCancelRes = payload;
+      });
+    },
   },
   initialState,
 );
@@ -80,7 +107,13 @@ const userConfirmSaga = createRequestSaga(USER_INFO, (token) =>
   API.userMe(token),
 );
 
+const reserveCancel = createRequestSaga(
+  RESERVATION_CANCEL,
+  (token, reservationId) => API.reserveCancel(token, reservationId),
+);
+
 export function* userSaga() {
   yield takeLatest(RESERVE_CONFIRM, reserveConfirmSaga);
   yield takeLatest(USER_INFO, userConfirmSaga);
+  yield takeLatest(RESERVATION_CANCEL, reserveCancel);
 }

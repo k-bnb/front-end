@@ -13,7 +13,15 @@ const ReserveConfirmTemplateStyle = styled.div`
   margin: 0 auto;
   padding-top: 100px;
 `;
-const ReserveConfirmTemplate = ({ active, activClick, list }) => {
+const ReserveConfirmTemplate = ({
+  active,
+  activClick,
+  list,
+  modalState,
+  cancel,
+  cancelBtn,
+  cancelModal,
+}) => {
   return (
     <ReserveConfirmTemplateStyle>
       <ReserveConfirmheader />
@@ -22,6 +30,10 @@ const ReserveConfirmTemplate = ({ active, activClick, list }) => {
         list={list}
         active={active}
         activClick={activClick}
+        modalState={modalState}
+        cancel={cancel}
+        cancelBtn={cancelBtn}
+        cancelModal={cancelModal}
       />
       <ReserveConfirmFooter />
     </ReserveConfirmTemplateStyle>
