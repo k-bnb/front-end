@@ -4,6 +4,10 @@ import Button from '../../atoms/atoms-main/Button';
 import Img from '../../atoms/atoms-main/Img';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
 import { MdKeyboardArrowRight } from 'react-icons/md';
+import { extractMonthDate } from '../../../../lib/extractMonthDate';
+import Modal from '../../../../portal/Modal';
+import ReserveCancelModal from './ReserveCancelModal';
+import ReserveCancel from './ReserveCancel';
 const ReserveConfirmListStyle = styled.div`
   /* border: 1px solid; */
   width: 100%;
@@ -51,7 +55,7 @@ const ReserveConfirmListStyle = styled.div`
         width: 100%;
       }
     }
-    div {
+    .title {
       display: block;
       width: 100%;
       overflow: hidden;
@@ -83,7 +87,13 @@ const sectionImg = [
   { src: './imgs/human.jpg', alt: '온수 욕조', name: '온수 욕조' },
 ];
 
-const ReserveConfirmList = ({ item }) => {
+const ReserveConfirmList = ({
+  item,
+  modalState,
+  cancel,
+  cancelBtn,
+  cancelModal,
+}) => {
   return (
     <ReserveConfirmListStyle>
       <div className="Big-img">
@@ -92,21 +102,25 @@ const ReserveConfirmList = ({ item }) => {
       <div className="reserve-info">
         <div className="reserve-date">
           <TextStyle>
-            {'2010'}년 {'01'}월 {'09'}일{item.checkIn}
+            {extractMonthDate(item.checkIn).year}년{' '}
+            {extractMonthDate(item.checkIn).month}월{' '}
+            {extractMonthDate(item.checkIn).date}일
           </TextStyle>
           ~
           <TextStyle>
-            {'2010'}년 {'01'}월 {'09'}일{item.checkOut}
+            {extractMonthDate(item.checkOut).year}년{' '}
+            {extractMonthDate(item.checkOut).month}월{' '}
+            {extractMonthDate(item.checkOut).date}일
           </TextStyle>
         </div>
         <div className="reserve-title">
-          <TextStyle blackmiddlebold>{'Namwon-eup'}</TextStyle>
+          <TextStyle blackmiddlebold>{item.roomName}</TextStyle>
         </div>
         <div className="reserve-link">
           <div className="small-img">
             <Img src={sectionImg[1].src} />
           </div>
-          <div>
+          <div className="title">
             <TextStyle>
               *무료감귤체험*오직 한 팀을 위한 500평 감귤 과수원
             </TextStyle>
@@ -115,9 +129,31 @@ const ReserveConfirmList = ({ item }) => {
         </div>
       </div>
       <div className="reserve-more">
-        <Button>
-          <TextStyle>여행 계획 더 보기</TextStyle>
-        </Button>
+        {item.status === '예약 완료' && (
+          <>
+            <Button onClick={cancel}>
+              <TextStyle>예약 취소</TextStyle>
+            </Button>
+
+            <Modal>
+              <ReserveCancelModal
+                cancelModal={cancelModal}
+                modalState={modalState}
+              >
+                <ReserveCancel
+                  item={item}
+                  cancel={cancel}
+                  cancelBtn={cancelBtn}
+                />
+              </ReserveCancelModal>
+            </Modal>
+          </>
+        )}
+        {item.status === '이전 예약' && (
+          <Button>
+            <TextStyle>리스트 제거</TextStyle>
+          </Button>
+        )}
       </div>
     </ReserveConfirmListStyle>
   );

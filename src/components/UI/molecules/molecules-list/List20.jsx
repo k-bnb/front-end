@@ -86,7 +86,7 @@ const ULWrap = styled.ul`
             .slick-dots {
               li {
                 border: 0;
-                
+
                 display: inline !important;
 
                 justify-content: flex-end;
@@ -185,7 +185,7 @@ const ULWrap = styled.ul`
     display: block;
     text-decoration: none;
     padding: 20px 20px 20px 25px;
-    color:#000;
+    color: #000;
     .TextHead {
       /* width: 100%; */
     }
@@ -202,7 +202,7 @@ const ULWrap = styled.ul`
       position: absolute;
       right: 30px;
       top: 25px;
-      font-size:25px;
+      font-size: 25px;
     }
     hr {
       width: 50px;
@@ -220,9 +220,9 @@ const ULWrap = styled.ul`
       align-items: flex-end;
       /* padding: 0 15px; */
     }
-    .cost{
-      display:flex;
-      flex-flow:row nowrap;
+    .cost {
+      display: flex;
+      flex-flow: row nowrap;
       letter-spacing: 1px;
     }
   }
