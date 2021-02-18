@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { initialGuest } from '../../../../modules/reserve';
 import { guestInput } from '../../../../modules/search';
 import Modal from '../../../../portal/Modal';
-import EditGuestModalOrganism from '../../organisms/organisms-reservation/organisms-modal/EditGuestModalOrganism';
+import ReserveGuestModalContainer from '../../../../containers/modal/ReserveGuestModalContainer';
 
 const StyledButton = styled.button`
   border: 0;
@@ -79,7 +79,7 @@ const ReservationEditButton2 = ({
       </StyledButton>
       {guestModal && (
         <Modal>
-          <EditGuestModalOrganism
+          <ReserveGuestModalContainer
             manageGuestModal={manageGuestModal}
             clearGuest={clearGuest}
             saveGuest={saveGuest}

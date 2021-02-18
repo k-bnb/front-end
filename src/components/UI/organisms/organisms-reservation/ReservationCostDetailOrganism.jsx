@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { extractDay } from '../../../../lib/extractMonthDate';
 import ReservationTitle from '../../atoms/atoms-reservation/ReservationTitle';
 import ReservationUnderLine from '../../atoms/atoms-reservation/ResevationUnderLine';
 import ReservationSummaryMolecule from '../../molecules/molecules-reservation/ReservationSummaryMolecule';
@@ -27,7 +28,11 @@ const CostContainer = styled.div`
   width: 100%;
 `;
 
-const ReservationCostDetailOrganism = ({ infoRes, reserveLocationDetail }) => {
+const ReservationCostDetailOrganism = ({
+  infoRes,
+  reserveLocationDetail,
+  checkDateSearch,
+}) => {
   const {
     name,
     roomCost,
@@ -40,6 +45,9 @@ const ReservationCostDetailOrganism = ({ infoRes, reserveLocationDetail }) => {
 
   const { city, borough } = reserveLocationDetail;
 
+  const price = extractDay(checkDateSearch.startDate, checkDateSearch.endDate);
+  const roomTaxPrice = roomCost * price;
+
   const hostInfoChildren = {
     title: city,
     content: name,
@@ -49,7 +57,7 @@ const ReservationCostDetailOrganism = ({ infoRes, reserveLocationDetail }) => {
 
   // 임시 고정값, 상세보기 페이지 redux state로 변경 예정
   const staticChildren = {
-    cost: `₩${roomCost} x ${1}박`,
+    cost: `₩${roomCost} x ${price}박`,
     cleaningFee: '청소비',
     serviceFee: '서비스 수수료',
     lodgmentFee: '숙박세와 수수료',
@@ -57,11 +65,11 @@ const ReservationCostDetailOrganism = ({ infoRes, reserveLocationDetail }) => {
   };
 
   const dataChildren = {
-    cost: `₩${roomCost * 1}`,
+    cost: `₩${roomTaxPrice}`,
     cleaningFee: `₩${cleaningCost}`,
     serviceFee: `₩${tax}`,
-    lodgmentFee: `₩${roomCost * 0.3}`,
-    totalFee: `₩${roomCost}`,
+    lodgmentFee: `₩${roomTaxPrice * 0.2}`,
+    totalFee: `₩${roomTaxPrice + cleaningCost + tax + roomTaxPrice * 0.3}`,
   };
 
   return (
@@ -77,7 +85,7 @@ const ReservationCostDetailOrganism = ({ infoRes, reserveLocationDetail }) => {
       />
       <CostContainer>
         <ReservationCostMoecule children={staticChildren} />
-        <ReservationCostMoecule children={dataChildren} />
+        <ReservationCostMoecule price children={dataChildren} />
       </CostContainer>
     </Container>
   );
