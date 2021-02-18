@@ -1,7 +1,7 @@
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
 import GoogleMapUse from '../../molecules/molecules-list/GoogleMap';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const PcSize = styled.main`
   display: block;

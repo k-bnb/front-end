@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 const LogoBlock = styled.h1`
@@ -50,7 +50,7 @@ const LogoBlock = styled.h1`
 const Logo = (props) => {
   const history = useHistory();
   // const match = useRouterMatch();
-  const location = useLocation();
+  // const location = useLocation();
   return (
     <LogoBlock
       {...props}

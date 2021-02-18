@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import createRequestSaga from '../lib/createRequestSaga';
 import * as API from '../lib/api/detail';
 import { takeLatest } from 'redux-saga/effects';
+import produce from 'immer';
 // Action Type
 const SEARCH_TO_DETAIL = 'detail/SEARCH_TO_DETAIL';
 const DATE_CHANGE_DETAIL = 'detail/DATE_CHANGE_DETAIL';
@@ -14,6 +15,8 @@ const CLEAR_GUEST_DETAIL = 'detail/CLEAR_GUEST_DETAIL';
 const CLEAR_CHECKDATE_DETAIL = 'detail/CLEAR_CHECKDATE_DETAIL';
 const GET_TOTAL_PRICE = 'detail/GET_TOTAL_PRICE';
 const GET_CANCELLABLE_DATE = 'detail/GET_CANCELLABLE_DATE';
+const GET_ROOM_AVERAGE_SCORE = 'detail/GET_ROOM_AVERAGE_SCORE';
+const GET_ROOM_AVERAGE_SCORE_SUCCESS = 'detail/GET_ROOM_AVERAGE_SCORE_SUCCESS';
 // Action Creator
 export const searchToDetail = createAction(
   SEARCH_TO_DETAIL,
@@ -45,13 +48,23 @@ export const getCancellableDate = createAction(
   GET_CANCELLABLE_DATE,
   (month, day) => ({ month, day }),
 ); // 예약취소 가능한 날짜
+export const getRoomAverageScore = createAction(
+  GET_ROOM_AVERAGE_SCORE,
+  (roomId) => roomId,
+);
+
 // saga
 const requestDetailSaga = createRequestSaga(
   REQUEST_DETAIL,
   API.detailInformation,
 );
+const requestCommentSaga = createRequestSaga(
+  GET_ROOM_AVERAGE_SCORE,
+  API.requestComments,
+);
 export function* detailSaga() {
   yield takeLatest(REQUEST_DETAIL, requestDetailSaga);
+  yield takeLatest(GET_ROOM_AVERAGE_SCORE, requestCommentSaga);
 }
 // initial state
 const initialStates = {
@@ -63,6 +76,8 @@ const initialStates = {
   infoRes: {
     id: '',
     name: '',
+    hostName: '',
+    hostImgURL: '',
     roomType: '',
     roomCost: 0,
     cleaningCost: 0,
@@ -89,9 +104,17 @@ const initialStates = {
     },
     commentList: [],
     roomImgUrlList: [],
-    totalCost: 0,
-    CancellableDate: {},
+    roomAverageScore: {
+      cleanliness: null,
+      accuracy: null,
+      communication: null,
+      locationRate: null,
+      checkIn: null,
+      priceSatisfaction: null,
+    },
   },
+  totalCost: 0,
+  CancellableDate: {},
   detailError: null,
 };
 // reducer
@@ -147,6 +170,29 @@ const detail = handleActions(
       ...state,
       cancellableDate: { month, day },
     }),
+    [GET_ROOM_AVERAGE_SCORE_SUCCESS]: (
+      state,
+      {
+        payload: {
+          cleanliness,
+          accuracy,
+          communication,
+          locationRate,
+          checkIn,
+          priceSatisfaction,
+        },
+      },
+    ) =>
+      produce(state, (draft) => {
+        draft.infoRes.roomAverageScore = {
+          cleanliness,
+          accuracy,
+          communication,
+          locationRate,
+          checkIn,
+          priceSatisfaction,
+        };
+      }),
   },
   initialStates,
 );

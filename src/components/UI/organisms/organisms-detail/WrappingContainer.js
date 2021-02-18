@@ -5,6 +5,7 @@ import { TypeInfo } from '../../molecules/molecules-detail/TypeInfo';
 import { TextSummary } from '../../molecules/molecules-detail/TextSummary';
 import EmoticonNotice from './EmoticonNotice';
 import BookingInfo from './BookingInfo';
+import RoomDescription from '../../molecules/molecules-detail/RoomDescription';
 
 const InfoContainer = styled.div`
   display: flex;
@@ -37,8 +38,9 @@ const WrappingContainer = ({
 }) => (
   <InfoContainer>
     <DetailInfo>
-      <HostingData infoRes={infoRes} />
+      <HostingData detailObj={detailObj} infoRes={infoRes} />
       <TextSummary detailObj={detailObj} CancellableDate={CancellableDate} />
+      <RoomDescription infoRes={infoRes} />
       <TypeInfo infoRes={infoRes} />
       <EmoticonNotice facilityRef={facilityRef} />
     </DetailInfo>

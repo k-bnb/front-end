@@ -35,7 +35,10 @@ const Review = ({
   setShowReviewModal,
   infoRes,
 }) => {
+<<<<<<< HEAD
   console.log(infoRes.commentList);
+=======
+>>>>>>> 237b2252aa45bfe34c04180ba8f0afd31a4d8517
   return (
     <ReveiwSectionWrapper ref={reviewRef}>
       <ReviewContainer className="basic-section-padding">

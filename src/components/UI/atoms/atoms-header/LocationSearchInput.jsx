@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './LocationSearchInput.css';
 import { useLoadScript } from '@react-google-maps/api';
 import '@reach/combobox/styles.css';

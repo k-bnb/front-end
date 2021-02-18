@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { FcGoogle } from 'react-icons/fc';
-import Button from '../../atoms/atoms-main/Button';
+// import Button from '../../atoms/atoms-main/Button';
 import CircleDiv from '../../atoms/atoms-main/DivStyle';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   margin-top: 10px;

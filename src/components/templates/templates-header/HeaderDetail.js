@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import HeaderDetailTop from '../../UI/organisms/organisms-header/HeaderDetailTop';
 import HeaderDetailSearchNavContainer from '../../../containers/header-containers/HeaderDetailSearchNavContainer';
@@ -31,7 +31,7 @@ const BlackOutsideRange = styled.div`
 
 const HeaderDetail = ({
   isScrolled,
-  setIsScrolled,
+  // setIsScrolled,
   isClicked,
   setIsClicked,
   navModalState,

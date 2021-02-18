@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import SearchButton from '../../atoms/atoms-header/SearchButton';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
 const GuestNumberUnitOuterBlock = styled.div`
@@ -16,7 +16,7 @@ const GuestNumberUnitOuterBlock = styled.div`
 
 const SearchButtonUnit = ({ locationSearch, dispatch, SearchTypeHandler }) => {
   const history = useHistory();
-  const buttonRef = useRef();
+  // const buttonRef = useRef();
 
   return (
     <GuestNumberUnitOuterBlock className="search-button-unit">

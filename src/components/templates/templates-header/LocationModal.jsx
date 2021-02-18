@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import Text from '../../UI/atoms/atoms-header/Text';
 import { useClickOutside } from '../../../lib/useClickOutside';

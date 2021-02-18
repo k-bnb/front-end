@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import HeaderMain from '../components/templates/templates-header/HeaderMain';
+import React, { useEffect } from 'react';
+// import axios from 'axios';
+// import HeaderMain from '../components/templates/templates-header/HeaderMain';
 import Main from '../components/templates/templates-main/Main';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeInput } from '../modules/auth';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { changeInput } from '../modules/auth';
 import HeaderContainer from './header-containers/HeaderContainer';
 
 const imgs = [

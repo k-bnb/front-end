@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BiWon } from 'react-icons/bi';
@@ -8,7 +8,6 @@ import TextStyled from '../../atoms/atoms-list/Text';
 import Imgs from '../../atoms/atoms-list/Imgs';
 import ScoreText from './Score-Text';
 import { Link } from 'react-router-dom';
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -86,7 +85,7 @@ const ULWrap = styled.ul`
             .slick-dots {
               li {
                 border: 0;
-                
+
                 display: inline !important;
 
                 justify-content: flex-end;
@@ -185,7 +184,7 @@ const ULWrap = styled.ul`
     display: block;
     text-decoration: none;
     padding: 20px 20px 20px 25px;
-    color:#000;
+    color: #000;
     .TextHead {
       /* width: 100%; */
     }
@@ -202,7 +201,7 @@ const ULWrap = styled.ul`
       position: absolute;
       right: 30px;
       top: 25px;
-      font-size:25px;
+      font-size: 25px;
     }
     hr {
       width: 50px;
@@ -220,9 +219,9 @@ const ULWrap = styled.ul`
       align-items: flex-end;
       /* padding: 0 15px; */
     }
-    .cost{
-      display:flex;
-      flex-flow:row nowrap;
+    .cost {
+      display: flex;
+      flex-flow: row nowrap;
       letter-spacing: 1px;
     }
   }

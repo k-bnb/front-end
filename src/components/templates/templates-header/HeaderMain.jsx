@@ -1,6 +1,10 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import HeaderMainTop from '../../UI/organisms/organisms-header/HeaderMainTop';
+<<<<<<< HEAD
+=======
+// import HeaderMainSearchNav from '../../UI/organisms/organisms-header/HeaderMainSearchNav';
+>>>>>>> 237b2252aa45bfe34c04180ba8f0afd31a4d8517
 import HeadermainSearchNavContainer from '../../../containers/header-containers/HeadermainSearchNavContainer';
 
 const BlackOutsideRange = styled.div`

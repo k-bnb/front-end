@@ -12,7 +12,7 @@ import CommonButton from '../../UI/atoms/atoms-reservation/CommonButton';
 import ReservationCostDetailOrganism from '../../UI/organisms/organisms-reservation/ReservationCostDetailOrganism';
 import ReservationUnderLine from '../../UI/atoms/atoms-reservation/ResevationUnderLine';
 import LoadingModal from '../LoadingModal';
-import Logo from '../../UI/atoms/atoms-header/Logo';
+// import Logo from '../../UI/atoms/atoms-header/Logo';
 
 const TitleContainer = styled.div`
   position: relative;

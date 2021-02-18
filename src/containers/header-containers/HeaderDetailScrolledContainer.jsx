@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import HeaderDetailScrolled from '../../components/UI/organisms/organisms-header/HeaderDetailScrolled';
-import { useGetBounding, useOnScreen } from '../../lib/useOnScreen';
+// import { useGetBounding, useOnScreen } from '../../lib/useOnScreen';
 
 const HeaderDetailScrolledContainer = ({
   showButton,

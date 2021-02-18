@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PriceListItem from './PriceList';
 import { BiWon } from 'react-icons/bi';
-import Text from '../../atoms/atoms-detail/DetailText';
+// import Text from '../../atoms/atoms-detail/DetailText';
 
 const PriceBox = styled.ul`
   display: block;

@@ -1,9 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import HeaderMain from '../../components/templates/templates-header/HeaderMain';
 import HeaderList from '../../components/templates/templates-header/HeaderList';
 import HeaderDetail from '../../components/templates/templates-header/HeaderDetail';
 import { useSelector } from 'react-redux';
+<<<<<<< HEAD
+=======
+//import qs from 'query-string';
+>>>>>>> 237b2252aa45bfe34c04180ba8f0afd31a4d8517
 
 const HeaderContainer = ({
   DetailHeaderRef,
@@ -13,6 +17,11 @@ const HeaderContainer = ({
 }) => {
   const history = useHistory();
   const match = useRouteMatch();
+<<<<<<< HEAD
+=======
+  // console.log(match);
+  // console.log(qs);
+>>>>>>> 237b2252aa45bfe34c04180ba8f0afd31a4d8517
 
   // 어떤것을 선택했는가 상태를 바꿔주는 함수
   const { locationSearch, checkDateSearch, guestSearch } = useSelector(

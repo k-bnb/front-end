@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../../atoms/atoms-main/Button';
-import Input from '../../atoms/atoms-main/Input';
+// import Input from '../../atoms/atoms-main/Input';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
 
 const PersonalInfoEmailInputStyle = styled.div`

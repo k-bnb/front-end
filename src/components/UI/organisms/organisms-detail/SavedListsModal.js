@@ -3,7 +3,7 @@ import styled from './styled-components';
 import { GrFormClose } from './react-icons/gr';
 import { AiOutlinePlus } from './react-icons/ai';
 import '../../atoms/atoms-detail/DetailBasicStyle.css';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const Modalcontainer = styled.div`
   inset: 0px;

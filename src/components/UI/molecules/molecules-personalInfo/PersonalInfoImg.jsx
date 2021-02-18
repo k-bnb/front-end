@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import Input from '../../atoms/atoms-main/Input';
+// import Input from '../../atoms/atoms-main/Input';
 
 const PersonalInfoImg = ({ personInfoChange }) => {
   const infoimg = useRef();
