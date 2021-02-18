@@ -18,8 +18,8 @@ const TitleContainer = styled.div`
   position: relative;
   max-width: 1280px;
   margin: 0 16rem;
-  margin-top: 4rem;
-  margin-bottom: 2rem;
+  margin-top: 3.5rem;
+  margin-bottom: 1rem;
 `;
 
 const TempContainer = styled.div`
@@ -62,17 +62,6 @@ const Reservation = ({
   infoRes,
   reserveLocationDetail,
 }) => {
-  // const {
-  //   name,
-  //   roomCost,
-  //   cleaningCost,
-  //   tax,
-  //   peopleLimit,
-  //   description,
-  //   bedNum,
-  //   bathRoomNum,
-  //   grade,
-  // } = infoRes;
   return (
     <>
       <section>
@@ -126,6 +115,7 @@ const Reservation = ({
             <ReservationCostDetailOrganism
               infoRes={infoRes}
               reserveLocationDetail={reserveLocationDetail}
+              checkDateSearch={checkDateSearch}
             />
           </SubContainer>
         </TempContainer>

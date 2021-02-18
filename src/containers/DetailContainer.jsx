@@ -65,7 +65,6 @@ const DetailContainer = () => {
   }, []);
 
   const moveToReserve = () => {
-    //console.log('hi');
     if (!localStorage.getItem('token')) return;
     history.push('/reserve');
     dispatch(detailToReserveDate(checkDateSearch));
