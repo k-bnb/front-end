@@ -15,7 +15,7 @@ const ReservationInfoOrganism = ({
   saveDate,
 }) => {
   // 예약하기 페이지 날짜 정보 가져오기
-  const { startDate, endDate } = checkDate;
+  const { startDate, endDate } = checkDateSearch;
 
   // 예약하기 페이지 게스터 정보 가져오기
   const { numOfAdult, numOfKid, numOfInfant } = guestSearch;

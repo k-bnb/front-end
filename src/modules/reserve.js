@@ -10,6 +10,7 @@ const CLIENT_MESSAGE_CHANGE = 'reserve/CLIENT_MESSAGE_CHANGE';
 // calendar change action type
 const CHANGE_DATE = 'reserve/CHANGE_DATE';
 const INITIAL_DATE = 'reserve/INITIAL_DATE';
+const CLEAR_END_DATE = 'reserve/CLEAR_END_DATE';
 // guest number change action type
 const CHANGE_GUEST = 'reserve/CHANGE_GUEST';
 const INITIAL_GUEST = 'reserve/INITIAL_GUEST';
@@ -40,6 +41,8 @@ export const changeDate = createAction(
 );
 
 export const initialDate = createAction(INITIAL_DATE);
+
+export const clearEndDate = createAction(CLEAR_END_DATE);
 
 // guest number change action function
 export const changeGuest = createAction(CHANGE_GUEST, (form, name, value) => ({
@@ -179,6 +182,11 @@ const reserve = handleActions(
 
     [INITIAL_DATE]: () => ({
       ...initialState,
+    }),
+
+    [CLEAR_END_DATE]: (state, _) => ({
+      ...state,
+      checkDateSearch: { ...state, endDate: '' },
     }),
 
     [CHANGE_GUEST]: (state, { payload: { form, name, value } }) =>

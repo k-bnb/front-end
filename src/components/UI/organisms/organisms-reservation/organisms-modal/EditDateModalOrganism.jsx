@@ -37,7 +37,14 @@ const CalendarContainer = styled.div`
   position: relative;
 `;
 
-function EditDateModalOrganism({ manageDateModal, checkDate, saveDate }) {
+function EditDateModalOrganism({
+  manageDateModal,
+  checkDate,
+  saveDate,
+  day,
+  bedNum,
+  bathRoomNum,
+}) {
   const checkChildren = {
     checkIn: '체크인',
     checkOut: '체크아웃',
@@ -55,7 +62,12 @@ function EditDateModalOrganism({ manageDateModal, checkDate, saveDate }) {
         </CancelButtonContainer>
         <ScheduleInfoContainer>
           <ScheduleDayContainer>
-            <CommonText day>1박</CommonText>
+            <CommonText day>{isNaN(day) ? '날짜 입력' : `${day}박`}</CommonText>
+            <CommonText furniture>
+              {isNaN(day)
+                ? '여행 날짜를 입력 후 정확한 요금을 확인하세요.'
+                : `침대 ${bedNum}개 · 욕실 ${bathRoomNum}개`}
+            </CommonText>
           </ScheduleDayContainer>
           <ScheduleSelectContainer>
             <ScheduleInfoMolecule
