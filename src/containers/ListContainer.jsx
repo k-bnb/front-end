@@ -10,7 +10,6 @@ import {
 } from '../modules/search';
 
 const ListContainer = () => {
-
   const [searchModalState, setSearchModalState] = useState(null);
   const [costState, setCostState] = useState({
     minCostState: false,
@@ -29,6 +28,7 @@ const ListContainer = () => {
   } = useSelector((state) => state.search.searchReq);
 
   const isLoading = useSelector((state) => state.loading['search/SEARCHING']);
+  const search = useSelector((state) => state.search);
 
   const dispatch = useDispatch();
 
@@ -44,7 +44,7 @@ const ListContainer = () => {
 
   const room = useSelector((state) => state.search.searchRes);
   const totalPage = useSelector((state) => state.search.totalPage);
-  
+
   const roomMap = room.map((item) => {
     return {
       id: item.id,
@@ -181,6 +181,7 @@ const ListContainer = () => {
         isLoading={isLoading}
         changeCurrentPage={changeCurrentPage}
         pageNationState={pageNationState}
+        search={search}
       />
     </>
   );

@@ -26,6 +26,7 @@ const HeadStyle = ({
   plusBtn,
   searchBtn,
   costState,
+  search,
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
@@ -58,6 +59,7 @@ const HeadStyle = ({
             plusBtn={plusBtn}
             searchBtn={searchBtn}
             costState={costState}
+            search={search}
           />
         </PcSize>
       )}

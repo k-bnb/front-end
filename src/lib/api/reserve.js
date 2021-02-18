@@ -9,6 +9,8 @@ export const reserve = ({
   totalCost,
   message,
   token,
+  price,
+  receipt_id,
 }) => {
   const body = {
     roomId,
@@ -18,6 +20,10 @@ export const reserve = ({
     infantNumber,
     totalCost,
     message,
+    payment: {
+      price,
+      receipt_id,
+    },
   };
 
   const headers = { headers: { Authorization: `Bearer ${token}` } };

@@ -1,71 +1,60 @@
-# Getting Started with Create React App
+# K-bnb
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## air-bnb 웹 페이지 clone 코딩 프로젝트
 
-## Available Scripts
+## Feature stacks
 
-In the project directory, you can run:
+- 사용 언어 : HTML5, CSS3, JS
+- 프레임 워크 : React 17.0.1
+- 라이브러리 :
+  "@reach/combobox": "^0.13.0",
+  "@react-google-maps/api": "^2.1.1",
+  "axios": "^0.21.1",
+  "date-fns": "^2.16.1",
+  "emailjs-com": "^2.6.4",
+  "eslint-config-prettier": "^7.2.0",
+  "google": "^2.1.0",
+  "immer": "^8.0.1",
+  "maps": "^0.3.3",
+  "moment": "^2.29.1",
+  "query-string": "^6.13.8",
+  "react-dates": "^21.8.0",
+  "react-dom": "^17.0.1",
+  "react-error-boundary": "^3.1.0",
+  "react-geocode": "^0.2.2",
+  "react-google-autocomplete": "^1.2.6",
+  "react-google-maps": "^9.4.5",
+  "react-icons": "^4.1.0",
+  "react-redux": "^7.2.2",
+  "react-responsive": "^8.2.0",
+  "redux": "^4.0.5",
+  "redux-actions": "^2.6.5",
+  "redux-devtools-extension": "^2.13.8",
+  "redux-saga": "^1.1.3",
+  "styled-components": "^5.2.1"
 
-### `npm start`
+## How to start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- git clone https://github.com/k-bnb/front-end.git
+- $ npm install
+- $ npm start
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## FRONT-END Team
 
-### `npm test`
+- 김용민
+- 원진솔
+- 정지훈
+- 조윤아
+- 박명재
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## BACK-END Team
 
-### `npm run build`
+- 김예찬
+- 정한솔
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Fatures
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# front-end
+- airbnb 페이지의 interactive 요소 구현
+- 조건별 검색 기능과, 조건 필터를 통한 상세 검색 기능
+- Google Map API를 이용한, 숙소 데이터 marker로 렌더링
+- 숙소 예약 및 찜하기, 예약 내역 확인 기능

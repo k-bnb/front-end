@@ -3,7 +3,7 @@ import GoogleStyle from '../../UI/organisms/organisms-list/GoogleMapSt';
 import FooterFake from '../../UI/organisms/organisms-list/FooterFake';
 import HeadStyle from '../../UI/organisms/organisms-list/HeadStyle';
 import LoadingModal from '../LoadingModal';
-import React from 'react';  
+import React from 'react';
 import GoogleMapContainer from '../../../containers/google-map-container/GoogleMapContainer';
 const ListTemplate = ({
   searchModalState,
@@ -38,6 +38,7 @@ const ListTemplate = ({
   isLoading,
   changeCurrentPage,
   pageNationState,
+  search,
 }) => {
   console.log(numberOfPages);
   return (
@@ -60,6 +61,7 @@ const ListTemplate = ({
           plusBtn={plusBtn}
           searchBtn={searchBtn}
           costState={costState}
+          search={search}
         />
         <div style={{ display: 'flex' }}>
           <div style={{ display: 'block' }}>
@@ -88,12 +90,11 @@ const ListTemplate = ({
 //   console.log(prevProps === nextProps)
 // if ( prevProps.room === nextProps.room) {
 //     return false;
-//   } 
+//   }
 //   else if ( prevProps.locationSearch === nextProps.locationSearch) {
 //     return false;
-//   } 
+//   }
 //  return true;
 // console.log('ddddd');
 // }
 export default ListTemplate;
- 

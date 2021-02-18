@@ -111,7 +111,7 @@ const DatePersonBox = ({ peopleLimit, detailObj }) => {
       >
         <CheckTxt>인원</CheckTxt>
         <SelectinoGuest>{`게스트 ${
-          detailObj.numOfAdult + 1 + detailObj.numOfKid
+          detailObj.numOfAdult + detailObj.numOfKid
         } 명`}</SelectinoGuest>
         <GuestBtn>{isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}</GuestBtn>
         {isOpen && (

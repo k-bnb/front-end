@@ -103,7 +103,7 @@ const InputPasswordCondition = ({
           ) : (
             <IoIosClose />
           )}
-          숫자나 기호를 포함하세요{' '}
+          숫자와 기호를 모두 포함하세요{' '}
         </>
       </ConditionText>
     </InputPasswordConditionBlock>

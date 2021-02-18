@@ -21,65 +21,64 @@ const PcSize = styled.main`
 `;
 
 const TabletSize = styled.main`
-  width : 100vw;
-  min-height : calc(100vh - 80px);
+  width: 100vw;
+  min-height: calc(100vh - 80px);
   padding: 0 30px;
   ul {
     width: 100%;
   }
 `;
 const MobileSize = styled.main`
-  width :100vw;
-  min-height : calc(100vh - 0px);
+  width: 100vw;
+  min-height: calc(100vh - 0px);
   /* background-color : purple; */
-  padding : 0 30px;
-  ul{
-    list-style:none;
-    padding : 0;
-    margin :0;
+  padding: 0 30px;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
-  .mobileListview{
-    height : 608px;
-    position : relative;
-    min-height : 400px;
+  .mobileListview {
+    height: 608px;
+    position: relative;
+    min-height: 400px;
     padding: 8px 0 12px 0;
-    box-sizing : border-box;
-    display : inline-block;
-    flex-flow : row no-wrap;
-    justify-content : space-between;
-    align-items : center;
+    box-sizing: border-box;
+    display: inline-block;
+    flex-flow: row no-wrap;
+    justify-content: space-between;
+    align-items: center;
     /* border : 1px solid blue; */
   }
   .TextWrap {
-    padding : 0 10px 10px;
-    line-height : 25px;
+    padding: 0 10px 10px;
+    line-height: 25px;
   }
   span:first-child {
     width: 678px;
     height: 452px;
   }
   span:last-child {
-    width:100%;
-    display : flex;
-    flex-flow : column nowrap;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
   }
-  .heart{
+  .heart {
     position: absolute;
     right: 45px;
     top: 35px;
-    font-size:25px;
+    font-size: 25px;
   }
-  .heartimg{
+  .heartimg {
     fill: rgba(0, 0, 0, 0.5);
     stroke: white;
     stroke-width: 1;
     overflow: visible;
   }
-  .cost{
-    display : flex;
-    flex-flow : row nowrap;
+  .cost {
+    display: flex;
+    flex-flow: row nowrap;
   }
-  
 `;
 
 const ListStyle = ({
@@ -219,40 +218,65 @@ const ListStyle = ({
       )}
       {isMobile && (
         <MobileSize className="Listmain">
-          {room.map(({bathRoomNum, roomType, city, borough ,bedNum,bedRoomNum ,cost, grade, id, name ,peopleLimit, isCheck, isParking, isSmoking, commentCount,roomImgUrlList}) => {
-          return (
-            <Link to={`/detail/${id}`} key={id} style={{textDecoration:'none'}}>   
-              <li className = "mobileListview">
-                <span>
-                  <Border size='bigCarouselImg'>
-                    {roomImgUrlList.map(src => (
-                      <Imgs size ='carousalBigImg' src={src} />
-                    ))}
-                  </Border>
-                </span>
-                <span className="TextWrap">
-                  <div className="TextHead">
-                    <ScoreText 
-                      grade={grade} 
-                      commentCount={commentCount}/>
-                    <TextStyled size="blackSmall">{city} {borough} {city || borough ? '의' : ''} {roomType}</TextStyled>
-                    <TextStyled type="Ellipsis" size="blackMiddle">
-                    {name} 
-                    </TextStyled>
-                    <Link to= '/'>
-                      <Bookmark Mobileheart className="heart">
-                        <BsHeartFill className="heartimg"/>
-                      </Bookmark>
-                    </Link>
-                  </div>
-                  <TextStyled className="cost" size="blackMiddleBold">
-                    <BiWon />
-                    {cost}/<TextStyled size="blackMiddle">박</TextStyled>
-                  </TextStyled>                  
-                </span>
-              </li>
-            </Link>
-          )})}
+          {room.map(
+            ({
+              bathRoomNum,
+              roomType,
+              city,
+              borough,
+              bedNum,
+              bedRoomNum,
+              cost,
+              grade,
+              id,
+              name,
+              peopleLimit,
+              isCheck,
+              isParking,
+              isSmoking,
+              commentCount,
+              roomImgUrlList,
+            }) => {
+              return (
+                <Link
+                  to={`/detail/${id}`}
+                  key={id}
+                  style={{ textDecoration: 'none' }}
+                >
+                  <li className="mobileListview">
+                    <span>
+                      <Border size="bigCarouselImg">
+                        {roomImgUrlList.map((src) => (
+                          <Imgs size="carousalBigImg" src={src} />
+                        ))}
+                      </Border>
+                    </span>
+                    <span className="TextWrap">
+                      <div className="TextHead">
+                        <ScoreText grade={grade} commentCount={commentCount} />
+                        <TextStyled size="blackSmall">
+                          {city} {borough} {city || borough ? '의' : ''}{' '}
+                          {roomType}
+                        </TextStyled>
+                        <TextStyled type="Ellipsis" size="blackMiddle">
+                          {name}
+                        </TextStyled>
+                        <Link to="/">
+                          <Bookmark Mobileheart className="heart">
+                            <BsHeartFill className="heartimg" />
+                          </Bookmark>
+                        </Link>
+                      </div>
+                      <TextStyled className="cost" size="blackMiddleBold">
+                        <BiWon />
+                        {cost}/<TextStyled size="blackMiddle">박</TextStyled>
+                      </TextStyled>
+                    </span>
+                  </li>
+                </Link>
+              );
+            },
+          )}
           <PageNation
             totalPage={totalPage}
             pageNationClick={pageNationClick}
