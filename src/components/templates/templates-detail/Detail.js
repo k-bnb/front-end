@@ -54,6 +54,7 @@ const Detail = ({
   showReviewModal,
   setShowReviewModal,
 }) => {
+  console.log(detailObj);
   // const strStartDate = detailObj.startDate;
   const CheckInDate = () => {
     const strDate = detailObj.startDate.split('-');

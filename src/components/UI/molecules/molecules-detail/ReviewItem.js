@@ -27,6 +27,12 @@ const WriterPhoto = styled.div`
   border-radius: 50%;
   background-color: lightgray;
 `;
+const UserImg = styled.img`
+  height: 56px;
+  width: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+`;
 
 const WriterData = styled(Text)`
   margin-left: 12px;
@@ -40,10 +46,11 @@ const ReviewItem = ({
   name = '사람1',
   date = '2020년 1월',
   content = '마지못해 있었습니다.',
+  userImgUrl,
 }) => (
   <ReviewListItem>
     <ImgDataContainer className="basic-flex">
-      <WriterPhoto></WriterPhoto>
+      <UserImg src={userImgUrl} alt="user 사진" />
       <WriterOfReview>
         <WriterData big bold block noPadding>
           {name}

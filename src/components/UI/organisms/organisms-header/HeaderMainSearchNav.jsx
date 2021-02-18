@@ -23,9 +23,6 @@ const HeaderMainSearchNavBlock = styled.div`
     display: flex;
     list-style: none;
   }
-  li {
-    /* border-right: 1px solid black; */
-  }
   ${(props) =>
     props.isScrolled &&
     !props.isClicked &&

@@ -35,7 +35,7 @@ const Review = ({
   setShowReviewModal,
   infoRes,
 }) => {
-  console.log(infoRes);
+  console.log(infoRes.commentList);
   return (
     <ReveiwSectionWrapper ref={reviewRef}>
       <ReviewContainer className="basic-section-padding">
@@ -44,9 +44,15 @@ const Review = ({
         </ReviewTitle>
         <ScoreAverage />
         <ReviewItemBox>
-          <ReviewItem />
-          <ReviewItem />
-          <ReviewItem />
+          {infoRes.commentList.map((comment, index) => (
+            <ReviewItem
+              name={comment.userName}
+              date={comment.date}
+              content={comment.description}
+              userImgUrl={comment.userImgUrl}
+              key={index}
+            />
+          ))}
         </ReviewItemBox>
         <WhiteBtn
           isShowReviewButton={true}

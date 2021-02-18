@@ -24,7 +24,6 @@ const HeaderDetailTop = ({ isScrolled, isClicked }) => {
   return (
     <HeaderDetailTopBlock isScrolled={isScrolled} isClicked={isClicked}>
       <Logo isScrolled={true} />
-
       {isClicked && (
         <Text noPadding bold black after>
           숙소

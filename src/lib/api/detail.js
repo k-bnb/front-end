@@ -8,5 +8,7 @@ export const detailInformation = (roomId) =>
     },
   });
 
-export const requestComments = (roomId) =>
-  client.get(`http://3.34.198.174:8080/comment?roomId=${roomId}&page=0&size=8`);
+export const requestComments = (roomId, pageNum) =>
+  client.get(
+    `http://3.34.198.174:8080/comment?roomId=${roomId}&page=${pageNum}&size=6`,
+  );

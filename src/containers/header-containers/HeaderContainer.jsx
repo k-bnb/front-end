@@ -4,7 +4,6 @@ import HeaderMain from '../../components/templates/templates-header/HeaderMain';
 import HeaderList from '../../components/templates/templates-header/HeaderList';
 import HeaderDetail from '../../components/templates/templates-header/HeaderDetail';
 import { useSelector } from 'react-redux';
-import qs from 'query-string';
 
 const HeaderContainer = ({
   DetailHeaderRef,
@@ -14,8 +13,6 @@ const HeaderContainer = ({
 }) => {
   const history = useHistory();
   const match = useRouteMatch();
-  console.log(match);
-  console.log(qs);
 
   // 어떤것을 선택했는가 상태를 바꿔주는 함수
   const { locationSearch, checkDateSearch, guestSearch } = useSelector(

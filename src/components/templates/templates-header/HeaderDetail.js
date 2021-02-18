@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import HeaderDetailTop from '../../UI/organisms/organisms-header/HeaderDetailTop';
 import HeaderDetailSearchNavContainer from '../../../containers/header-containers/HeaderDetailSearchNavContainer';
-import { useClickOutside } from '../../../lib/useClickOutside';
 import HeaderDetailScrolledContainer from '../../../containers/header-containers/HeaderDetailScrolledContainer';
 import { useOnScreen } from '../../../lib/useOnScreen';
 
@@ -12,8 +11,22 @@ const HeaderDetailBlock = styled.div`
   height: 80px;
   background-color: transparent;
   transition: 0.1s ease-out;
-  z-index: 101;
+  z-index: 1000;
   background-color: white;
+`;
+
+const BlackOutsideRange = styled.div`
+  .black-outside-boundary {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+  }
 `;
 
 const HeaderDetail = ({
@@ -40,6 +53,18 @@ const HeaderDetail = ({
   const showDetailHeader = useOnScreen(ImageContainerRef, '0px'); // 사진5개 가지고있는 컨테이너를 뷰포트가 지나면 헤더가 생긴다.
   return (
     <>
+      {isClicked && (
+        <BlackOutsideRange
+          className="black-outside-boundary"
+          onClick={(e) => {
+            if (e.target.classList.contains('black-outside-boundary')) {
+              setIsClicked(false);
+            }
+          }}
+        >
+          <div className="black-outside-boundary"></div>
+        </BlackOutsideRange>
+      )}
       {showDetailHeader && (
         <HeaderDetailBlock
           isClicked={isClicked}
