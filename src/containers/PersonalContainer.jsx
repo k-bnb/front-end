@@ -65,6 +65,7 @@ const PersonalContainer = () => {
 
     if (e.target.name === 'imageUrl') {
       const imgArr = e.target.files[0];
+      console.log(imgArr);
       return;
     } else {
       dispatch(changeInputPerson(e.target.name, e.target.value));
