@@ -12,7 +12,7 @@ import { OverlayView } from 'react-google-maps';
 import styled from 'styled-components';
 import Bookmark from '../../atoms/atoms-list/BookMark';
 import { AiOutlineHeart } from 'react-icons/ai';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { locationInput, searching } from '../../../../modules/search';
 // import MarkerWithLabel from "react-google-maps/lib/components/addons/MarkerWithLabel";
 // import AutoComplete from 'react-google-autocomplete';

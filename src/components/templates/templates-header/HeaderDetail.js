@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import HeaderDetailTop from '../../UI/organisms/organisms-header/HeaderDetailTop';
 import HeaderDetailSearchNavContainer from '../../../containers/header-containers/HeaderDetailSearchNavContainer';
-import { useClickOutside } from '../../../lib/useClickOutside';
+// import { useClickOutside } from '../../../lib/useClickOutside';
 import HeaderDetailScrolledContainer from '../../../containers/header-containers/HeaderDetailScrolledContainer';
 import { useOnScreen } from '../../../lib/useOnScreen';
 
@@ -18,7 +18,7 @@ const HeaderDetailBlock = styled.div`
 
 const HeaderDetail = ({
   isScrolled,
-  setIsScrolled,
+  // setIsScrolled,
   isClicked,
   setIsClicked,
   navModalState,

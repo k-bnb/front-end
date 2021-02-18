@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import HeaderListTop from '../../UI/organisms/organisms-header/HeaderListTop';
 import HeaderListSearchNavContainer from '../../../containers/header-containers/HeaderListSearchNavContainer';

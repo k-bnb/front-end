@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ProfileButton from '../../atoms/atoms-header/ProfileButton';
 import ProfileToggleItems from '../../molecules/molecules-header/ProfileToggleItems';

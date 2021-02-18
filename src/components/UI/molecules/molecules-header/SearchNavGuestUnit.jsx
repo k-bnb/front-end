@@ -1,16 +1,16 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import {
-  guestInput,
-  guestInputClear,
+  // guestInput,
+  // guestInputClear,
   specificInputClear,
 } from '../../../../modules/search';
 import GuestNumberModal from '../../../templates/templates-header/GuestNumberModal';
 import RemoveButton from '../../atoms/atoms-header/RemoveButton';
 import Text from '../../atoms/atoms-header/Text';
 import SearchButtonUnit from './SearchButtonUnit';
-import { Link, useHistory } from 'react-router-dom';
+// import { Link, useHistory } from 'react-router-dom';
 
 const SearchNavGuestUnitLi = styled.li`
   position: relative;

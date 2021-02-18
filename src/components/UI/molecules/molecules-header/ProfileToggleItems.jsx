@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Text from '../../atoms/atoms-header/Text';
+// import Text from '../../atoms/atoms-header/Text';
 import styled from 'styled-components';
 import Modal from '../../../../portal/Modal';
 import AuthModalContainer from '../../../../containers/AuthModalContainer';

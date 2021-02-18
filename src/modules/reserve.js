@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import createRequestSaga from '../lib/createRequestSaga';
-import bootPayRequestSaga from '../lib/bootPayRequestSaga';
+// import bootPayRequestSaga from '../lib/bootPayRequestSaga';
 import * as API from '../lib/api/reserve';
 import { takeLatest } from 'redux-saga/effects';
 import produce from 'immer';

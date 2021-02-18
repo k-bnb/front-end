@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import GuestNumberModalUnit from '../../UI/molecules/molecules-header/GuestNumberModalUnit';
 import { useClickOutside } from '../../../lib/useClickOutside';

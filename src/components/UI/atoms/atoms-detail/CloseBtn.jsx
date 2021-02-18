@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { AiOutlineClose } from 'react-icons/ai';
 
 const CloseBtnBlock = styled.button`

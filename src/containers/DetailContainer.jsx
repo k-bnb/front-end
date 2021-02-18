@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import CarouselModal from '../components/templates/templates-detail/CarouselModal';
 import Detail from '../components/templates/templates-detail/Detail';
-import { requestDetail, searchToDetail } from '../modules/detail';
+import {
+  getRoomAverageScore,
+  requestDetail,
+  searchToDetail,
+} from '../modules/detail';
 import Modal from '../portal/Modal';
 import HeaderContainer from './header-containers/HeaderContainer';
 //import LoaderIcon from 'react-loader-icon';
@@ -50,7 +54,7 @@ const DetailContainer = () => {
     (state) => state.detail,
   );
 
-  console.log(checkIn, checkOut);
+  //console.log(checkIn, checkOut);
   const { numOfAdult: adult, numOfKid: kid, numOfInfant: infant } = useSelector(
     (state) => state.detail,
   );
@@ -58,7 +62,7 @@ const DetailContainer = () => {
   const checkDateSearch = { startDate: checkIn, endDate: checkOut };
   const guestSearch = { numOfAdult: adult, numOfKid: kid, numOfInfant: infant };
 
-  console.log(checkDateSearch);
+  // console.log(checkDateSearch);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -78,6 +82,7 @@ const DetailContainer = () => {
       searchToDetail(startDate, endDate, numOfAdult, numOfKid, numOfInfant),
     );
     dispatch(requestDetail(roomId));
+    dispatch(getRoomAverageScore(roomId));
   }, []); // startDate, endDate 잠시 deps에서 빼놓음, 넣으면 detail 페이지에서 달력날짜바꾸면 다시
   // 서버에 숙소 상세 정보 요구함.
   // startDate, endDate, numOfAdult, numOfKid, numOfInfant,

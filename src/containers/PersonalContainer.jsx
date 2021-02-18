@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import axios from '../../node_modules/axios/index';
+// import { Redirect } from 'react-router-dom';
+// import axios from '../../node_modules/axios/index';
 import PersonalTemplate from '../components/templates/templates-personal/PersonalTemplate';
-import { changeInputPerson, resetInputPerson } from '../modules/user';
+import { changeInputPerson } from '../modules/user';
 
 const PersonalContainer = () => {
   const [fix, setFix] = useState('');

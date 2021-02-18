@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import CalendarNew from '../../../calendar/CalendarNew';
 // import '../../../calendar/CalendarTemplate.css';
-import { useClickOutside } from '../../../lib/useClickOutside';
+// import { useClickOutside } from '../../../lib/useClickOutside';
 
 const StyledCalModal = styled.div`
   ${(props) => props.detail && css``}
@@ -16,7 +16,7 @@ const StyledCalModal = styled.div`
 
 const CalendarModal = ({ navModalState, setNavModalState, moveFocusNext }) => {
   const [selected, setSelected] = useState(false);
-  console.log('상태', navModalState);
+  // console.log('상태', navModalState);
 
   return (
     <CalendarNew

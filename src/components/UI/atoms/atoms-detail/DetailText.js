@@ -68,6 +68,18 @@ const TextBlock = styled.span`
     props.block &&
     css`
       display: block;
+    `}
+    
+    ${(props) =>
+    props.paddingTop &&
+    css`
+      padding-top: 10px;
+    `} 
+
+    ${(props) =>
+    props.lineHight &&
+    css`
+      line-height: 22px;
     `} /* ${(props) =>
     props.after &&
     props.black &&

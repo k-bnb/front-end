@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { AiOutlineHome } from 'react-icons/ai';
 import { WiStars } from 'react-icons/wi';
-//import { GiDiamonds } from 'react-icons/gi';
 import { RiDoorOpenFill, RiCalendarCheckLine } from 'react-icons/ri';
 
 const TextSummaryContainer = styled.div`
@@ -45,7 +44,6 @@ const CheckDateExists = () => (
 const TextSummary = ({ CancellableDate, detailObj }) => {
   const CheckInDate = detailObj.startDate;
   const CheckOutDate = detailObj.EndDate;
-  console.log(detailObj);
 
   return (
     <TextSummaryContainer>
@@ -55,7 +53,7 @@ const TextSummary = ({ CancellableDate, detailObj }) => {
         </div>
         <div>
           <Text>집 전체</Text>
-          <Text>펜션(한국) 전체를 단독으로 사용하시게 됩니다.</Text>
+          <Text>숙소(한국) 전체를 단독으로 사용하시게 됩니다.</Text>
         </div>
       </SimpleSummary>
       <SimpleSummary>

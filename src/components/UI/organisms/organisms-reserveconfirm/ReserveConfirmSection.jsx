@@ -1,7 +1,7 @@
 import React from 'react';
 import ReserveConfirmNav from '../../molecules/molecules-reserveConfirm/ReserveConfirmNav';
 import ReserveConfirmList from '../../molecules/molecules-reserveConfirm/ReserveConfirmList';
-import ReserveConfirmFooter from '../../molecules/molecules-reserveConfirm/ReserveConfirmFooter';
+// import ReserveConfirmFooter from '../../molecules/molecules-reserveConfirm/ReserveConfirmFooter';
 import styled from 'styled-components';
 import ReserveConfirmNoData from '../../molecules/molecules-reserveConfirm/ReserveConfirmNoData';
 

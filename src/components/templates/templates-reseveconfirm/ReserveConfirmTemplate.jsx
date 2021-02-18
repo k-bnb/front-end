@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReserveConfirmFooter from '../../UI/molecules/molecules-reserveConfirm/ReserveConfirmFooter';
-import HeadStyle from '../../UI/organisms/organisms-list/HeadStyle';
+// import HeadStyle from '../../UI/organisms/organisms-list/HeadStyle';
 import ReserveConfirmhead from '../../UI/organisms/organisms-reserveconfirm/ReserveConfirmhead';
 import ReserveConfirmheader from '../../UI/organisms/organisms-reserveconfirm/ReserveConfirmheader';
 import ReserveConfirmSection from '../../UI/organisms/organisms-reserveconfirm/ReserveConfirmSection';
-import HeaderList from '../templates-header/HeaderList';
+// import HeaderList from '../templates-header/HeaderList';
 const ReserveConfirmTemplateStyle = styled.div`
   max-width: 1180px;
   min-width: 1180px;
