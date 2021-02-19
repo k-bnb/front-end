@@ -56,15 +56,15 @@ const ReserveCancel = ({
   cancelBtn,
   list,
   reservationConfirmBtn,
+  roomId,
+  item,
   reservationId,
 }) => {
   // const [clickReservationId, setClickReservationId] = useState(
   //   checkId.reservationId,
   // );
-  console.log(list);
-  const Clicktest = (e) => {
-    console.log(e.target.value);
-  };
+
+  console.log(reservationId);
   // setClickReservationId(checkId);
 
   // console.log(clickReservationId);
@@ -117,8 +117,8 @@ const ReserveCancel = ({
       <div>
         <button
           name="reservationId"
-          // value={list.reservationId}
-          onClick={Clicktest}
+          value={roomId}
+          onClick={reservationConfirmBtn}
         >
           <svg
             viewBox="0 0 24 24"

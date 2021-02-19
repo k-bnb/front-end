@@ -79,7 +79,11 @@ const PersonalInfoUl = ({
             />
           ) : (
             <TextStyle>
-              {imageUrl ? <img src={imageUrl} alt="hello" /> : '지정되지 않음'}
+              {imageUrl ? (
+                <img src={userInfo.imageUrl} alt="hello" />
+              ) : (
+                '지정되지 않음'
+              )}
             </TextStyle>
           )}
         </div>

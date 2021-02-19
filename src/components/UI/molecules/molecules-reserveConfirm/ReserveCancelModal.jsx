@@ -4,8 +4,6 @@ import CircleDiv from '../../atoms/atoms-main/DivStyle';
 
 const boxFade = keyframes`
 	0% {
-
-
 		transform: translateY(100%);
 	}
 	50% {
@@ -57,27 +55,32 @@ const Modaldiv = styled.div`
     return (
       props.disappear &&
       css`
-        animation: ${boxFade1} 0.2s ease-in alternate forwards;
+        animation: ${boxFade1} 0.4s ease-in alternate forwards;
       `
     );
   }}
 `;
-const ReserveCancelModal = ({ children, modalState, cancelModal, active }) => {
-  // const [animation, setAnimation] = useState(false);
-  // const [localModalState, setLocalModalState] = useState(modalState);
-  // useEffect(() => {
-  //   if (localModalState && !modalState) {
-  //     setAnimation(true);
-  //     setTimeout(() => {
-  //       setAnimation(false);
-  //     }, 2000);
-  //   }
-  //   setLocalModalState(modalState);
-  // }, [localModalState, modalState]);
-  // if (!animation && !localModalState) return null;
+const ReserveCancelModal = ({
+  children,
+  cancelModalState,
+  cancelModal,
+  active,
+}) => {
+  const [animation, setAnimation] = useState(false);
+  const [localModalState, setLocalModalState] = useState(cancelModalState);
+  useEffect(() => {
+    if (localModalState && !cancelModalState) {
+      setAnimation(true);
+      setTimeout(() => {
+        setAnimation(false);
+      }, 2000);
+    }
+    setLocalModalState(cancelModalState);
+  }, [localModalState, cancelModalState]);
+  if (!animation && !localModalState) return null;
 
   return (
-    <Modaldiv className="bg" disappear={!modalState}>
+    <Modaldiv className="bg" disappear={!cancelModalState}>
       <CircleDiv>{children}</CircleDiv>
     </Modaldiv>
   );

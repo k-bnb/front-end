@@ -27,8 +27,10 @@ const ReserveConfirmSection = ({
   cancelModal,
   reservationConfirmBtn,
   reservationId,
+  listModal,
+  cancelModalState,
+  roomId,
 }) => {
-  console.log(active);
   return (
     <>
       <ReserveConfirmNav active={active} activClick={activClick} />
@@ -47,15 +49,15 @@ const ReserveConfirmSection = ({
         ) : (
           <ReserveConfirmNoData active={active} />
         )}
-        {active === '예약 완료' && (
+        {cancelModalState && (
           <Modal>
             <ReserveCancelModal
               cancelModal={cancelModal}
-              modalState={modalState}
+              cancelModalState={cancelModalState}
             >
               <ReserveCancel
+                roomId={roomId}
                 reservationConfirmBtn={reservationConfirmBtn}
-                list={list}
                 cancel={cancel}
                 cancelBtn={cancelBtn}
                 reservationId={reservationId}

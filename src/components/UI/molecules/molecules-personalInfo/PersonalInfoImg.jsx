@@ -61,6 +61,11 @@ const PersonalInfoImg = ({
       );
       console.log(res);
       dispatch(changeInputImgPerson('imageUrl', res.data.newImgUrl));
+      sessionStorage.removeItem('userInfo');
+      sessionStorage.setItem(
+        'userInfo',
+        JSON.stringify({ name, email, birth, imageUrl: res.data.newImgUrl }),
+      );
       setFix((state) => ({
         name: false,
         img: false,
@@ -68,10 +73,6 @@ const PersonalInfoImg = ({
         emailAddress: false,
         cancel: true,
       }));
-      sessionStorage.setItem(
-        'userInfo',
-        JSON.stringify({ name, email, birth, imageUrl: res.data.newImgUrl }),
-      );
     } catch (error) {
       console.log(error);
     }

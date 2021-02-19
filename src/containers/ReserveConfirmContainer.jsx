@@ -5,8 +5,11 @@ import ReserveConfirmTemplate from '../components/templates/templates-reseveconf
 const ReserveConfirmContainer = () => {
   const [active, setActive] = useState('예약 완료');
   const [list, setList] = useState([]);
-  const [reservationId, setReservationId] = useState('');
+  // const [reservationId, setReservationId] = useState('');
+  const [modalState, setModalState] = useState(false);
+  const [cancelModal, setCancelModal] = useState('');
   const reserveRes = useSelector((state) => state.user);
+  const [listModal, setListModal] = useState([]);
 
   useEffect(() => {
     if (reserveRes.reserveRes === null) return;
@@ -18,6 +21,7 @@ const ReserveConfirmContainer = () => {
     setList(next);
   }, []);
 
+  // 예정된 예약 이전예약 nav
   const activClick = (e) => {
     if (e.target.name === '예약 완료') {
       setActive('예약 완료');
@@ -38,26 +42,25 @@ const ReserveConfirmContainer = () => {
     }
   };
 
-  const [modalState, setModalState] = useState(false);
-  const [cancelModal, setCancelModal] = useState('');
+  const [cancelModalState, setcancelModalState] = useState(false);
+  const [roomId, setRoomId] = useState('');
 
+  let reservationId = null;
   const cancel = (e) => {
-    if (e.target.name === '예약 취소') {
-      setReservationId(e.target.value);
-      setCancelModal('예약 취소');
-      console.log(reservationId);
-    }
-    setModalState(true);
+    setCancelModal('후기 작성');
+    const openModalId =
+      list.find((item) => +item.reservationId === +e.target.value)
+        .reservationId + '';
+    setRoomId(openModalId);
+    setcancelModalState(!cancelModalState);
   };
-  console.log(reservationId);
 
   // 취소 x 버튼
   const cancelBtn = (e) => {
-    setModalState(false);
+    setcancelModalState(!cancelModalState);
   };
+
   const reservationConfirmBtn = (e) => {
-    // console.log(e);
-    console.log(list.filter((item) => item.reservationId === e.target.value));
     console.log(e.target.name, e.target.value);
   };
   return (
@@ -71,6 +74,9 @@ const ReserveConfirmContainer = () => {
       cancelModal={cancelModal}
       reservationConfirmBtn={reservationConfirmBtn}
       reservationId={reservationId}
+      listModal={listModal}
+      cancelModalState={cancelModalState}
+      roomId={roomId}
     />
   );
 };
