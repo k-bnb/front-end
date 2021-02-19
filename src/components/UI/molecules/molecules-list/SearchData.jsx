@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Button from '../../atoms/atoms-list/Button';
 import TextStyled from '../../atoms/atoms-list/Text';
@@ -7,6 +7,7 @@ import FooterBtn from './FooterBtn';
 import RoomReSearch from './RoomReSearch';
 import SearchModal from './SearchModal';
 import { extractMonthDate } from '../../../../lib/extractMonthDate';
+import { moneyfilter } from '../../../../lib/moneyfilter';
 
 const SearchPlace = styled.div`
   padding: 100px 30px 40px 30px;
@@ -28,6 +29,7 @@ const SearchPlace = styled.div`
     }
   }
 `;
+
 const SearchData = ({
   searchModalState,
   setSearchModalState,
@@ -44,8 +46,11 @@ const SearchData = ({
   minusBtn,
   plusBtn,
   searchBtn,
-  costState,
   search,
+  localMinCost,
+  setLocalMinCost,
+  localMaxCost,
+  setLocalMaxCost,
 }) => {
   // const modal = useRef();
   const handleClickOutside = ({ target }) => {
@@ -64,6 +69,7 @@ const SearchData = ({
 
   const startMonthDate = extractMonthDate(startDate);
   const endMonthDate = extractMonthDate(endDate);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.addEventListener('click', handleClickOutside);
@@ -76,14 +82,14 @@ const SearchData = ({
     <>
       <SearchPlace className="SearchData">
         <TextStyled size="blackSmall">
-          {`숙박${totalElements}건, ${startMonthDate.month}월 ${
-            startMonthDate.date
-          }일 - ${endMonthDate.month}월 ${endMonthDate.date}일, 게스트${
-            numOfAdult + numOfKid
-          }`}{' '}
+          {(totalElements ? `숙박${totalElements}건` : '') +
+            (startDate && endDate ?  ` · ${startMonthDate.month}월 ${startMonthDate.date}일 - 
+            ${endMonthDate.month}월 ${endMonthDate.date}일` : '') +
+            (numOfAdult ? ` · 게스트${numOfAdult + numOfKid}명`:'' )
+          }
         </TextStyled>
         <h1>
-          <TextStyled size="blackLargeBold">{`${destinationName}의 숙소`}</TextStyled>
+          <TextStyled size="blackLargeBold">{destinationName ? `${destinationName}의 숙소` : '최근에 검색한 숙소'}</TextStyled>
         </h1>
         <div className="filter-style">
           <div className="roomType">
@@ -116,11 +122,12 @@ const SearchData = ({
               size="large"
               onClick={cashSearchClick}
             >
-              <TextStyled size="blackSmall">
-                {costState.minCostState
-                  ? '$' + costState.minCostPay + '+'
-                  : '요금'}
-              </TextStyled>
+              <>
+              {costSearch.minCost === 10000 && costSearch.maxCost === 1000000 && <TextStyled size="blackSmall">요금</TextStyled>}
+              {costSearch.minCost !== 10000 && costSearch.maxCost === 1000000 && <TextStyled size="blackSmall">₩{moneyfilter(costSearch.minCost)}+</TextStyled>}
+              {costSearch.minCost === 10000 && costSearch.maxCost !== 1000000 && <TextStyled size="blackSmall">최대 ₩{moneyfilter(costSearch.maxCost)}</TextStyled>}
+              {costSearch.minCost !== 10000 && costSearch.maxCost !== 1000000 && <TextStyled size="blackSmall">₩{`${moneyfilter(costSearch.minCost)} - ₩${moneyfilter(costSearch.maxCost)}`}</TextStyled>}
+              </>
             </Button>
             {searchModalState === 'cash' && (
               <SearchModal cash>
@@ -129,8 +136,16 @@ const SearchData = ({
                   searchModalState={searchModalState}
                   cost={cost}
                   costSearch={costSearch}
+                  localMinCost={localMinCost}
+                  setLocalMinCost={setLocalMinCost}
+                  localMaxCost={localMaxCost}
+                  setLocalMaxCost={setLocalMaxCost}
                 />
-                <FooterBtn searchBtn={searchBtn} />
+                <FooterBtn 
+                localMinCost={localMinCost}
+                localMaxCost={localMaxCost}
+                dispatch={dispatch}
+                searchBtn={searchBtn}/>
               </SearchModal>
             )}
           </div>
