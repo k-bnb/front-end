@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import ReservationContent from '../../atoms/atoms-reservation/ReservationContent';
 import ReservationTitle from '../../atoms/atoms-reservation/ReservationTitle';
 import ReservationUnderLine from '../../atoms/atoms-reservation/ResevationUnderLine';
@@ -15,14 +16,18 @@ const PaddingContainer = styled(ReservationContent)`
   padding: 2.4rem 0;
 `;
 
-const ReservationRefundOrganism = () => {
+const ReservationRefundOrganism = ({ refundDate }) => {
+  const x = moment(refundDate).subtract(1, 'days').format('MM-DD');
+
+  const arr = x.split('-');
+
   return (
     <>
       <Container>
         <ReservationTitle sub children="환불 정책" />
         <PaddingContainer
           normal
-          children="2월 3일 3:00 PM 전에 예약을 취소하면 첫 1박 요금 및 서비스 수수료를 제외한 요금의 50%가 환불됩니다."
+          children={`${arr[0]}월 ${arr[1]}일 3:00 PM 전에 예약을 취소하면 첫 1박 요금 및 서비스 수수료를 제외한 요금의 50%가 환불됩니다.`}
         />
         <div>
           <TextStyle

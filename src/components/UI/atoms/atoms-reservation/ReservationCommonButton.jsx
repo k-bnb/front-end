@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import ReserveDateModalContainer from '../../../../containers/modal/ReserveDateModalContainer';
 import Modal from '../../../../portal/Modal';
-import EditDateModalOrganism from '../../organisms/organisms-reservation/organisms-modal/EditDateModalOrganism';
 
 const StyledButton = styled.button`
   border: 0;
@@ -54,7 +54,7 @@ const ReservationEditButton = ({
       </StyledButton>
       {dateModal && (
         <Modal>
-          <EditDateModalOrganism
+          <ReserveDateModalContainer
             manageDateModal={manageDateModal}
             checkDate={checkDate}
             saveDate={saveDate}

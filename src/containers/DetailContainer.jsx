@@ -37,18 +37,21 @@ const DetailContainer = () => {
   );
   const detailObj = useSelector((state) => state.detail);
   const { roomImgUrlList } = useSelector((state) => state.detail.infoRes);
-  // console.log(detailObj);
+
   const { startDate: checkIn, endDate: checkOut } = useSelector(
     (state) => state.detail,
   );
+
   const { numOfAdult: adult, numOfKid: kid, numOfInfant: infant } = useSelector(
     (state) => state.detail,
   );
   const checkDateSearch = { startDate: checkIn, endDate: checkOut };
   const guestSearch = { numOfAdult: adult, numOfKid: kid, numOfInfant: infant };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   useEffect(() => {
     dispatch(
       searchToDetail(startDate, endDate, numOfAdult, numOfKid, numOfInfant),
@@ -56,6 +59,12 @@ const DetailContainer = () => {
     dispatch(getRoomAverageScore(roomId));
     dispatch(requestDetail(roomId));
   }, []);
+
+  useEffect(() => {
+    if (showModal || showReviewModal) document.body.style.overflowY = 'hidden';
+    else document.body.style.overflowY = 'unset';
+  }, [showModal, showReviewModal]);
+
   const moveToReserve = () => {
     if (!localStorage.getItem('token')) return;
     history.push('/reserve');
@@ -104,6 +113,7 @@ const DetailContainer = () => {
           showReviewModal={showReviewModal}
           setShowReviewModal={setShowReviewModal}
           infoRes={infoRes}
+          roomId={roomId}
         />
       </Modal>
     </>

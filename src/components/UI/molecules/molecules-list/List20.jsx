@@ -244,6 +244,8 @@ const LodgingLists = ({
   isParking,
   isSmoking,
   commentCount,
+  checkDateSearch,
+  guestSearch,
 }) => {
   const settings = {
     dots: true,
@@ -252,6 +254,14 @@ const LodgingLists = ({
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+
+  const { startDate, endDate } = checkDateSearch;
+  const { numOfAdult, numOfKid, numOfInfant } = guestSearch;
+  const totalNum = numOfAdult + numOfKid;
+  console.log(numOfAdult, numOfKid, numOfInfant);
+  // console.log(checkDateSearch);
+  // console.log(startDate, endDate);
+
   return (
     <>
       <Wrap className="listWrap">
@@ -275,7 +285,10 @@ const LodgingLists = ({
                 </div>
               </div>
             </Border>
-            <Link to={`/detail/${id}`} key={id}>
+            <Link
+              to={`/detail/${id}?adults=${totalNum}&infants=${numOfInfant}&check_in=${startDate}&check_out=${endDate}`}
+              key={id}
+            >
               <span className="TextWrap">
                 <div className="TextHead">
                   <TextStyled size="blackSmall">

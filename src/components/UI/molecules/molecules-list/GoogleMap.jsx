@@ -102,8 +102,6 @@ function GoogleMapUse({
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log('position33', position);
-        console.log(position);
         // 위치와 이 위치 이후에 현재 위치를 가져올 수 있다. 위도와 경도를 사용하므로 이 값을 먼저 입력한다.
         setLocate(
           {
@@ -121,7 +119,7 @@ function GoogleMapUse({
               position.coords.latitude,
               position.coords.longitude,
             );
-            console.log('res', res);
+
             const address = res.results[0].formatted_address,
               addressArray = res.results[0].address_components,
               city = getCity(addressArray),
@@ -216,17 +214,17 @@ function GoogleMapUse({
   const [zoom, setZoom] = useState(12);
   const mapRef = useRef();
 
-  console.log(roomMap);
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
   const handleZoomChanged = () => {
     setZoom(mapRef.current.getZoom());
   };
-  console.log(roomMap);
+
+  const mapCost = useRef();
+
   const MapWithAMarker = withScriptjs(
     withGoogleMap((props) => {
-      console.log(props);
       return (
         <GoogleMap
           // scrollwheel={false}
@@ -240,12 +238,9 @@ function GoogleMapUse({
           onClick={() => {
             setSelectedSample(null);
           }}
+          options={{ scrollwheel: true }}
           onLoad={onMapLoad}
           onDragEnd={dragMark}
-          onBoundsChanged={() => {
-            console.log('hi');
-            console.log(mapRef.current);
-          }}
           onZoomChanged={handleZoomChanged}
         >
           {roomMap.map((sample) => (
@@ -255,14 +250,7 @@ function GoogleMapUse({
                 opacity={0}
                 labelClass="map-price-container"
                 labelContent={`<div class="map-price-marker"><span>$${sample.cost}</span></div>`}
-                onClick={(e) => {
-                  console.log(sample, e.target);
-                  setSelectedSample(sample);
-                  console.log('marker', e.nextElementSibling);
-                }}
-                onDragStart={(e) => {
-                  console.log('helo', e);
-                }}
+                onDragStart={(e) => {}}
                 position={{ lat: sample.latitude, lng: sample.longitude }}
                 draggable={true}
                 // onDragEnd={onMarkerDragEnd}
@@ -273,16 +261,15 @@ function GoogleMapUse({
               ></Marker>
               <OverlayView
                 position={{ lat: sample.latitude, lng: sample.longitude }}
-                onClick={(e) => {
-                  console.log('overlayView', e);
-                }}
                 mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
                 getPixelPositionOffset={getPixelPositionOffset}
               >
                 <div
                   className="cost-memo"
+                  name={sample.cost}
+                  ref={mapCost}
                   onClick={(e) => {
-                    console.log('overlayviewText', e);
+                    setSelectedSample(sample);
                   }}
                   style={{
                     background: `white`,
@@ -312,9 +299,7 @@ function GoogleMapUse({
           ))}
           {selectedSample && (
             <InfoWindow
-              onClick={(e) => {
-                console.log('infowindow', e);
-              }}
+              onClick={(e) => {}}
               position={{
                 lat: selectedSample.latitude,
                 lng: selectedSample.longitude,

@@ -115,8 +115,6 @@ const AuthModalContainer = ({
     };
   }, []);
 
-  console.log(loginError);
-
   const onRegisterSubmit = async (e) => {
     e.preventDefault();
     dispatch(startLoading('auth/REGISTER'));

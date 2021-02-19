@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { GrFormClose } from 'react-icons/gr';
-//import ScoreAverage from '../../UI/molecules/molecules-detail/ScoreAverage';
 import Grade from '../../UI/atoms/atoms-detail/Grade';
 import PointItemBox from '../../UI/molecules/molecules-detail/PointItemBox';
 import ReviewItem from '../../UI/molecules/molecules-detail/ReviewItem';
-//import { useClickOutside } from '../../../lib/useClickOutside';
-import useInfiniteScroll from '../../../lib/useInfiniteScroll';
+import { requestComments } from '../../../lib/api/detail';
+import LoaderIcon from 'react-loader-icon';
 
 const slideUp = keyframes`
   0% {
@@ -129,67 +128,59 @@ const ReviewModalBlock = styled.div`
   }
 `;
 
-const reviews = [
-  { name: '이름1', date: '2020년 1월', content: '깨끗하고 좋아요' },
-  { name: '이름2', date: '2020년 2월', content: '깨끗하고 좋아요2' },
-  { name: '이름3', date: '2020년 3월', content: '깨끗하고 좋아요3' },
-  { name: '이름4', date: '2020년 4월', content: '깨끗하고 좋아요4' },
-  { name: '이름5', date: '2020년 5월', content: '깨끗하고 좋아요5' },
-  { name: '이름6', date: '2020년 6월', content: '깨끗하고 좋아요6' },
-  { name: '이름7', date: '2020년 7월', content: '깨끗하고 좋아요7' },
-  { name: '이름8', date: '2020년 8월', content: '깨끗하고 좋아요8' },
-  { name: '이름9', date: '2020년 9월', content: '깨끗하고 좋아요9' },
-  { name: '이름10', date: '2020년 10월', content: '깨끗하고 좋아요10' },
-];
-
-const reviews2 = [
-  { name: '이름11', date: '2021년 1월', content: '깨끗하고 좋아요11' },
-  { name: '이름12', date: '2021년 2월', content: '깨끗하고 좋아요12' },
-  { name: '이름13', date: '2021년 3월', content: '깨끗하고 좋아요13' },
-  { name: '이름14', date: '2021년 4월', content: '깨끗하고 좋아요14' },
-  { name: '이름15', date: '2021년 5월', content: '깨끗하고 좋아요15' },
-  { name: '이름16', date: '2021년 6월', content: '깨끗하고 좋아요16' },
-  { name: '이름17', date: '2021년 7월', content: '깨끗하고 좋아요17' },
-  { name: '이름18', date: '2021년 8월', content: '깨끗하고 좋아요18' },
-  { name: '이름19', date: '2021년 9월', content: '깨끗하고 좋아요19' },
-  { name: '이름20', date: '2021년 10월', content: '깨끗하고 좋아요20' },
-];
-
-const ReviewModal = ({ showReviewModal, setShowReviewModal, infoRes }) => {
+const ReviewModal = ({
+  showReviewModal,
+  setShowReviewModal,
+  infoRes,
+  roomId,
+}) => {
+  const [loading, setLoading] = useState(false);
   const [localShowReviewModal, setLocalShowReviewModal] = useState(
     showReviewModal,
   );
   const [showAnimation, setShowAnimation] = useState(false);
 
-  const currentPage = useRef(1); // 현재 페이지 1
-  const totalPage = useRef(2); // 전체 페이지 2
-  const [reviewsArr, setReviewsArr] = useState([...reviews]); // 리뷰 리스트
-  const rootRef = useRef(null);
-  const targetRef = useRef(null); // 마지막 DOM 노드
+  const [pageNum, setPageNum] = useState(0);
+  const totalPage = useRef(null); // 전체 페이지 2
+  const [reviewsArr, setReviewsArr] = useState([]); // 리뷰 리스트
 
-  const fakeFetch = (query, page) => {
-    if (currentPage.current < totalPage.current) {
-      setReviewsArr([...reviewsArr, ...reviews2]);
-      currentPage.current++;
+  const getComments = async (pageNum) => {
+    if (totalPage.current === pageNum) return;
+
+    setLoading(true);
+    const response = await requestComments(roomId, pageNum); // 데이터 요청.
+    if (response.data.allComments._embedded) {
+      const newComments = await response.data.allComments._embedded
+        .commentDtoList;
+      totalPage.current = await response.data.allComments.page.totalPages; // 전체 페이지 수 저장하기
+      await delay(500);
+      setPageNum((pageNum) => pageNum + 1);
+      setReviewsArr([...reviewsArr, ...newComments]);
     }
+
+    setLoading(false);
   };
 
-  useInfiniteScroll({
-    root: rootRef.current,
-    target: targetRef.current,
-    onIntersect: ([{ isIntersecting }]) => {
-      console.log('hey');
-      if (isIntersecting) fakeFetch();
-    },
-  });
-
+  // 모달창이 열리면 초기 댓글을 받아오고 전체 페이지 수를 가져온다.
   useEffect(() => {
-    document.body.style.overflowY = 'hidden';
-
-    return () => {
-      document.body.style.overflowY = 'auto';
-    };
+    getComments(0);
   }, []);
+
+  const observer = useRef();
+  const lastCommentElementRef = useCallback(
+    (node) => {
+      if (loading) return;
+
+      if (observer.current) observer.current.disconnect();
+
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) getComments(pageNum);
+      });
+
+      if (node) observer.current.observe(node);
+    },
+    [loading],
+  );
 
   useEffect(() => {
     if (localShowReviewModal && !showReviewModal) {
@@ -232,18 +223,37 @@ const ReviewModal = ({ showReviewModal, setShowReviewModal, infoRes }) => {
               reviewModal={true}
             />
           </div>
-          <ul className="review-modal-list" ref={rootRef}>
-            {reviewsArr.map((review) => (
-              <li className="review-item">
-                <ReviewItem
-                  name={review.name}
-                  date={review.date}
-                  content={review.content}
-                />
+          <ul className="review-modal-list">
+            {reviewsArr.map((review, index) => {
+              if (reviewsArr.length === index + 1) {
+                return (
+                  <li className="review-item" ref={lastCommentElementRef}>
+                    <ReviewItem
+                      name={review.userName}
+                      date={review.creatingDate}
+                      content={review.description}
+                      userImgUrl={review.userImgUrl}
+                    />
+                  </li>
+                );
+              } else {
+                return (
+                  <li className="review-item">
+                    <ReviewItem
+                      name={review.userName}
+                      date={review.creatingDate}
+                      content={review.description}
+                      userImgUrl={review.userImgUrl}
+                    />
+                  </li>
+                );
+              }
+            })}
+            {loading && (
+              <li>
+                <LoaderIcon type={'bubbles'} size={30} />
               </li>
-            ))}
-            {/* 브라우저가 이 li를 감지하면 마지막 페이지 라는 것. */}
-            <li ref={targetRef} className="last-li"></li>
+            )}
           </ul>
         </div>
       </div>
@@ -252,3 +262,7 @@ const ReviewModal = ({ showReviewModal, setShowReviewModal, infoRes }) => {
 };
 
 export default ReviewModal;
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

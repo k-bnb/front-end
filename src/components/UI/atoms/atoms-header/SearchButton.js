@@ -32,13 +32,7 @@ const SearchButtonBlock = styled.button`
         line-height: 15px;
         font-size: 16px;
       }
-    `}/* ${(props) =>
-    props.rooms &&
-    css`
-      position: absolute;
-      top: -1px;
-      right: -3px;
-    `} */
+    `}
 `;
 
 const SearchButton = ({ isScrolled, onClick, rooms }) => {

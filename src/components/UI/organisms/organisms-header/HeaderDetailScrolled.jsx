@@ -160,7 +160,6 @@ const HeaderDetailScrolled = ({
           noPadding
           className="header-detail-list"
           onClick={() => {
-            // scrollToHandler(1720); // 후기로 이동
             scrollToElement(reviewRef);
           }}
         >

@@ -68,7 +68,6 @@ const Detail = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(CancellableDate.month);
     dispatch(getCancellableDate(CancellableDate.month, CancellableDate.day));
   }, []);
 

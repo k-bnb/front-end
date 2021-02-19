@@ -18,19 +18,25 @@ const LayoutReservationCommonContainer = styled(ReservationCommonContainer)`
   margin-right: 1.5rem;
 `;
 
-const ReservationHostMolecule = () => {
+const HostInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const ReservationHostMolecule = ({ hostName, hostImgURL }) => {
   return (
     <Container>
       <LayoutReservationCommonContainer hostImg>
-        <ReservationHostImg img="/imgs/1.jpg" alt="host profile img" />
+        <ReservationHostImg img={hostImgURL} alt="host profile img" />
       </LayoutReservationCommonContainer>
-      <div>
-        <ReservationHostName host children="호익" />
+      <HostInfoContainer>
+        <ReservationHostName host children={hostName} />
         <ReservationHostNotice
           host
           children="안녕하세요. 저희 집에 방문하셔서 감사합니다."
         />
-      </div>
+      </HostInfoContainer>
     </Container>
   );
 };

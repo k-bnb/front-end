@@ -23,7 +23,12 @@ const FooterContainer = styled.div`
   border-top: 1px solid rgb(235, 235, 235);
 `;
 
-function EditGuestModalOrganism({ manageGuestModal, clearGuest, saveGuest }) {
+function EditGuestModalOrganism({
+  manageGuestModal,
+  clearGuest,
+  saveGuest,
+  peopleLimit,
+}) {
   return (
     <CommonBg modalBg>
       <CommonTemp guestModal>
@@ -41,7 +46,7 @@ function EditGuestModalOrganism({ manageGuestModal, clearGuest, saveGuest }) {
           <GuestNumberModalUnit reservePage type={'유아'} name="numOfInfant" />
 
           <CommonText guestLimitInfo>
-            최대 X명. 유아는 숙박인원에 포함되지 않습니다.
+            {`최대 ${peopleLimit}명. 유아는 숙박인원에 포함되지 않습니다.`}
           </CommonText>
         </MainContainer>
         <FooterContainer>

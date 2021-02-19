@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { initialGuest } from '../../../../modules/reserve';
 import { guestInput } from '../../../../modules/search';
 import Modal from '../../../../portal/Modal';
-import EditGuestModalOrganism from '../../organisms/organisms-reservation/organisms-modal/EditGuestModalOrganism';
+import ReserveGuestModalContainer from '../../../../containers/modal/ReserveGuestModalContainer';
 
 const StyledButton = styled.button`
   border: 0;
@@ -57,8 +57,6 @@ const ReservationEditButton2 = ({
     ({ reserve }) => reserve.guestSearch,
   );
 
-  console.log(numOfAdult, numOfKid, numOfInfant);
-
   // 지우기 button을 클릭 시 reserve guestSearch의 상태 초기화
   const clearGuest = () => {
     dispatch(initialGuest('guestSearch'));
@@ -79,7 +77,7 @@ const ReservationEditButton2 = ({
       </StyledButton>
       {guestModal && (
         <Modal>
-          <EditGuestModalOrganism
+          <ReserveGuestModalContainer
             manageGuestModal={manageGuestModal}
             clearGuest={clearGuest}
             saveGuest={saveGuest}

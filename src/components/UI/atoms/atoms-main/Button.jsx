@@ -95,7 +95,6 @@ const ButtonStyle = styled.button`
 `;
 
 const Button = ({ children, disabled, ...rest }) => {
-  console.log(disabled);
   return (
     <ButtonStyle disabled={disabled} {...rest}>
       {children}

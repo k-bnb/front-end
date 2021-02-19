@@ -43,7 +43,6 @@ const BookingInfo = ({
   const StartDate = moment(detailObj.startDate);
   const EndDate = moment(detailObj.endDate);
   const totalSchedule = EndDate.diff(StartDate, 'days');
-  // console.log(totalSchedule);
 
   return (
     <PositionBox>

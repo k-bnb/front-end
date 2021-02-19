@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import TextStyle from '../../atoms/atoms-reservation/TextStyle';
 
 const Container = styled.div`
@@ -10,13 +10,19 @@ const Container = styled.div`
     display: inline-block;
     margin-bottom: 1.8rem;
   }
+
+  ${(props) =>
+    props.price &&
+    css`
+      align-items: flex-end;
+    `}
 `;
 
-const ReservationCostDetailMolecule = ({ children }) => {
+const ReservationCostDetailMolecule = ({ children, price }) => {
   const { cost, cleaningFee, serviceFee, lodgmentFee, totalFee } = children;
 
   return (
-    <Container>
+    <Container price={price}>
       <TextStyle className="cost-moecule" blackMiddleText children={cost} />
       <TextStyle
         className="cost-moecule"

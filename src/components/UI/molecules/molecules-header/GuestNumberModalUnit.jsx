@@ -46,7 +46,6 @@ const GuestNumberModalUnit = ({
   reservePage,
   infoRes,
 }) => {
-  console.log(detailPage);
   // type (성인, 어린이, 유아) , detail(13세이상..), name:button이름 (numOfAdult, numOfKid, numOfInfant)
   const dispatch = useDispatch();
   const { guestSearch } = useSelector(({ search: { searchReq } }) => searchReq); // main의 header에서 사용하는 경우
@@ -57,10 +56,15 @@ const GuestNumberModalUnit = ({
   const { guestSearch: reserveGuestSearch } = useSelector(
     (state) => state.reserve,
   );
-  console.log('detail', detail);
-  console.log('detail.numOfAdult', detail.numOfAdult);
-  console.log('searchName', searchName);
+
   const disableHandler = () => (searchName === 'numOfAdult' ? 16 : 5); // 성인이면 최대값16, 나머지 5
+
+  // 인원 제한보다 많은 인원을 증가 시 버튼 disable한다.
+  const { peopleLimit } = useSelector(({ reserve }) => reserve.infoRes);
+  const { numOfAdult, numOfKid, numOfInfant } = reserveGuestSearch;
+  const ReserveTotalGuestNum = numOfAdult + numOfKid + numOfInfant;
+  const DetailTotalGuestNum = detail.numOfAdult + detail.numOfKid;
+
   // 성인이 없이 유아, 어린이만 증가시킬때, 성인도 같이 증가시키는 함수
   const increaseWithoutAdult = () => {
     // 성인이 아니고, 성인이 0명 일 경우 성인도 같이 1명 증가.
@@ -70,21 +74,21 @@ const GuestNumberModalUnit = ({
       );
     }
   };
+
   const decreaseWhenNoAdult = () => {
     // 성인이 1 -> 0명이 될떄, 유아, 어린이가 있다면 모두 0명이 된다.
-    if (
-      searchName === 'numOfAdult' &&
-      guestSearch.numOfAdult === 1 &&
-      (guestSearch.numOfKid || guestSearch.numOfInfant)
-    ) {
-      dispatch(specificInputClear('guestSearch'));
-    }
+    if (detailPage && detail.numOfAdult === 1 ? disableHandler() : '')
+      if (
+        searchName === 'numOfAdult' &&
+        guestSearch.numOfAdult === 1 &&
+        (guestSearch.numOfKid || guestSearch.numOfInfant)
+      ) {
+        dispatch(specificInputClear('guestSearch'));
+      }
   };
   // detail page : 성인 없이 유아, 어린이만 증가시킬 때, 성인도 같이 증가시키는 함수
   const detailIncreaseWithoutAdult = () => {
     if (searchName !== 'numOfAdult' && !detail.numOfAdult) {
-      console.log(searchName);
-      console.log(detail.numOfAdult);
       dispatch(guestChangeDetail('numOfAdult', 1));
     }
   };
@@ -101,8 +105,6 @@ const GuestNumberModalUnit = ({
   // reserve page : 성인 없이 유아, 어린이만 증가시킬 때, 성인도 같이 증가시키는 함수
   const reserveIncreaseWithoutAdult = () => {
     if (searchName !== 'numOfAdult' && !reserveGuestSearch.numOfAdult) {
-      console.log(searchName);
-      console.log(reserveGuestSearch.numOfAdult);
       dispatch(
         changeGuest(
           'guestSearch',
@@ -115,9 +117,10 @@ const GuestNumberModalUnit = ({
   // reserve page : 성인 없이 유아, 어린이만 증가시킬 때, 성인도 같이 감소시키는 함수
   const reserveDecreaseWhenNoAdult = () => {
     // 성인이 1 -> 0명이 될떄, 유아, 어린이가 있다면 모두 0명이 된다.
+
     if (
       searchName === 'numOfAdult' &&
-      detail.numOfAdult === 1 &&
+      reserveGuestSearch.numOfAdult === 1 &&
       (reserveGuestSearch.numOfKid || reserveGuestSearch.numOfInfant)
     ) {
       dispatch(initialGuest('guestSearch'));
@@ -173,7 +176,7 @@ const GuestNumberModalUnit = ({
               : reservePage
               ? reserveGuestSearch[searchName] <= 0
               : guestSearch[searchName] <= 0,
-            detailPage ? (detail.numOfAdult === 1 ? disableHandler() : '') : '')
+            detailPage ? (detail.numOfAdult <= 1 ? disableHandler() : '') : '')
           } // detailPage이면, numOfAdult가 0보다 작거나 같으면 더이상 감소 불가, 메인에서는 guestSearch[name] <= 0 이면 감소 불가.
         />
         <Text noPadding className="guest-num-modal-interactive count">
@@ -216,15 +219,14 @@ const GuestNumberModalUnit = ({
           }}
           disable={
             (reservePage
-              ? reserveGuestSearch[searchName] >= disableHandler()
+              ? ReserveTotalGuestNum >= peopleLimit
               : guestSearch[searchName] >= disableHandler(),
             detailPage
-              ? detail.numOfAdult + detail.numOfKid === infoRes.peopleLimit
+              ? DetailTotalGuestNum === infoRes.peopleLimit
                 ? disableHandler()
                 : ''
               : '')
-          }
-          // 최대값은 함수가 반환한 값에따라 바뀐다.
+          } // 최대값은 함수가 반환한 값에따라 바뀐다.
         />
       </div>
     </GuestNumberModalUnitBlock>

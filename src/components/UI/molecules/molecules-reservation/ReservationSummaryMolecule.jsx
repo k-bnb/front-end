@@ -14,8 +14,8 @@ const Container = styled.div`
 `;
 
 const ImgContainer = styled.div`
-  width: 12.8rem;
-  height: 10.6rem;
+  width: 12rem;
+  height: 10.8rem;
 `;
 
 const ContentContainer = styled.div`
@@ -26,13 +26,13 @@ const ContentContainer = styled.div`
   justify-content: space-between;
 `;
 
-const ReservationSummaryMolecule = ({ children }) => {
+const ReservationSummaryMolecule = ({ children, RoomTablePhotoImgURL }) => {
   const { title, content, roomInfo, rate } = children;
 
   return (
     <Container>
       <ImgContainer>
-        <CommonImg />
+        <CommonImg RoomTablePhotoImgURL={RoomTablePhotoImgURL} />
       </ImgContainer>
       <ContentContainer>
         <CommonSpan blackSmall children={title} />

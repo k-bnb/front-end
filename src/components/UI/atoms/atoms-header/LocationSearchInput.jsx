@@ -61,7 +61,6 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext }) {
   const { latitude } = useSelector(
     ({ search }) => search.searchReq.locationSearch,
   );
-
   return (
     <>
       <Combobox
@@ -73,7 +72,7 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext }) {
           // address는 유저가 선택한 제안 값
           try {
             const results = await getGeocode({ address }); // 유저가 검색한 address를 인수로 전달하여 promise를 반환받음.
-            console.log(results[0]);
+
             const { lat, lng } = await getLatLng(results[0]); // 결과에서 lat과 lng정보를 추출
             dispatch(
               // 좌표값 store로 전달
@@ -87,8 +86,6 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext }) {
               }),
             );
             moveFocusNext('location');
-
-            console.log('ㅇㅇ', results[0]);
           } catch (error) {
             console.error('error');
           }
@@ -101,7 +98,6 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext }) {
           onChange={(e) => {
             setValue(e.target.value);
             dispatch(destinationInput(e.target.value)); // DestinationName 변경
-            console.log(e.target.value); // 여기서 dispatch로 스토어 상태 업데이트 하자.
           }}
           disabled={!ready} // 아직 준비되지않으면 사용할수 없음.
           placeholder="어디로 여행가세요?"
