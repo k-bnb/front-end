@@ -76,6 +76,8 @@ const ListTemplate = ({
               numberOfPages={numberOfPages}
               changeCurrentPage={changeCurrentPage}
               pageNationState={pageNationState}
+              checkDateSearch={checkDateSearch}
+              guestSearch={guestSearch}
             />
           </div>
           <GoogleMapContainer />

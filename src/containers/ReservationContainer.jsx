@@ -26,6 +26,12 @@ const ReservationContainer = () => {
     ({ reserve }) => reserve.guestSearch,
   );
 
+  // startDate;
+  // endDate;
+  // numOfAdult;
+  // numOfKid;
+  // numOfInfant;
+
   const { checkDateSearch, guestSearch } = useSelector(
     ({ search }) => search.searchReq,
   );
@@ -40,7 +46,13 @@ const ReservationContainer = () => {
     bedNum,
     bathRoomNum,
     grade,
+    hostName,
+    hostImgURL,
+    commentCount,
+    roomImgUrlList,
   } = useSelector(({ detail }) => detail.infoRes);
+
+  console.log(hostName, hostImgURL, commentCount, roomImgUrlList);
 
   const { id: roomId, roomCost: testCost, name: testName } = useSelector(
     ({ reserve }) => reserve.infoRes,
@@ -52,6 +64,10 @@ const ReservationContainer = () => {
 
   const { locationDetail: reserveLocationDetail } = useSelector(
     (state) => state.reserve,
+  );
+
+  const { roomImgUrlList: RoomTablePhotoImgURL } = useSelector(
+    ({ reserve }) => reserve,
   );
 
   const { startDate: checkIn, endDate: checkOut } = checkDateSearch;
@@ -153,10 +169,6 @@ const ReservationContainer = () => {
     dispatch(dateInput('endDate', endDate)); // 시작일만 선택시 시작일 dispatch
   }, [dispatch, dateModal, startDate, endDate]);
 
-  // const deleteDate = () => {
-  //   dispatch(initialDate());
-  // };
-
   useEffect(() => {
     dispatch(
       detailToReserveRoom(
@@ -170,6 +182,11 @@ const ReservationContainer = () => {
         bedNum,
         bathRoomNum,
         grade,
+        hostName,
+        hostImgURL,
+        commentCount,
+        roomImgUrlList,
+        checkDateSearch,
       ),
     );
 
@@ -184,7 +201,6 @@ const ReservationContainer = () => {
     <Reservation
       change={change}
       click={click}
-      value={message}
       dateModal={dateModal}
       manageDateModal={manageDateModal}
       guestModal={guestModal}
@@ -198,6 +214,7 @@ const ReservationContainer = () => {
       isLoading={isLoading}
       infoRes={infoRes}
       reserveLocationDetail={reserveLocationDetail}
+      RoomTablePhotoImgURL={RoomTablePhotoImgURL}
     />
   );
 };

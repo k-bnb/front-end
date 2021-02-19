@@ -27,6 +27,8 @@ const ListContainer = () => {
     bathRoomNum,
   } = useSelector((state) => state.search.searchReq);
 
+  // console.log(checkDateSearch);
+
   const isLoading = useSelector((state) => state.loading['search/SEARCHING']);
   const search = useSelector((state) => state.search);
 

@@ -47,7 +47,6 @@ const LayoutReservationTitle = styled(ReservationTitle)`
 const Reservation = ({
   change,
   click,
-  value,
   dateModal,
   manageDateModal,
   guestModal,
@@ -61,6 +60,7 @@ const Reservation = ({
   isLoading,
   infoRes,
   reserveLocationDetail,
+  RoomTablePhotoImgURL,
 }) => {
   return (
     <>
@@ -104,8 +104,12 @@ const Reservation = ({
               checkDate={checkDate}
               saveDate={saveDate}
             />
-            <ReservationRequestOrganism change={change} value={value} />
-            <ReservationRefundOrganism />
+            <ReservationRequestOrganism
+              change={change}
+              hostName={infoRes.hostName}
+              hostImgURL={infoRes.hostImgURL}
+            />
+            <ReservationRefundOrganism refundDate={checkDateSearch.startDate} />
             <CommonButton reservation click={click} comfirmModal={comfirmModal}>
               <BiCalendarCheck />
               예약하기
@@ -116,6 +120,7 @@ const Reservation = ({
               infoRes={infoRes}
               reserveLocationDetail={reserveLocationDetail}
               checkDateSearch={checkDateSearch}
+              RoomTablePhotoImgURL={RoomTablePhotoImgURL}
             />
           </SubContainer>
         </TempContainer>
