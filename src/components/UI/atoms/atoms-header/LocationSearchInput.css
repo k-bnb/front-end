@@ -11,6 +11,8 @@
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.6) !important;
   border: 0 !important;
   transform: translate(-32px, 31px) !important;
+  position: relative;
+  z-index: 9999;
 }
 
 .combo-box-input {

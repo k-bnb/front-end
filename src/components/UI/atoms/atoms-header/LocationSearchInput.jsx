@@ -61,7 +61,6 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext }) {
   const { latitude } = useSelector(
     ({ search }) => search.searchReq.locationSearch,
   );
-
   return (
     <>
       <Combobox

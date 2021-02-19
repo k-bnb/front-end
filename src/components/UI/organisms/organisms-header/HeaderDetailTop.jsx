@@ -23,7 +23,7 @@ const HeaderDetailTopBlock = styled.header`
 const PositioningBox = styled.div`
   max-width: 1280px;
   position: relatvie;
-  background: pink;
+  background: white;
   margin: 0 auto;
 `;
 
