@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PriceListItem from './PriceList';
-import { BiWon } from 'react-icons/bi';
-// import Text from '../../atoms/atoms-detail/DetailText';
 
 const PriceBox = styled.ul`
   display: block;
@@ -17,19 +15,13 @@ const PriceBox = styled.ul`
   }
 `;
 
-const WonIcon = styled(BiWon)`
-  display: inline;
-  text-decoration: underline;
-  color: #444;
-`;
-
 const PriceDetail = ({ infoRes, totalSchedule }) => {
   const roomPrice = `${infoRes.roomCost}*${totalSchedule}박`;
 
   return (
     <PriceBox>
       <PriceListItem
-        icon={<WonIcon />}
+        icon="₩"
         detail={roomPrice}
         price={infoRes.roomCost * totalSchedule}
       />

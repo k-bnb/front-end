@@ -49,7 +49,7 @@ const BookingInfo = ({
     <PositionBox>
       <BookingInfoContainer>
         <OneDayPrice infoRes={infoRes} />
-        <DatePersonBox detailObj={detailObj} />
+        <DatePersonBox detailObj={detailObj} infoRes={infoRes} />
         <ReserveBtn
           DetailHeaderRef={DetailHeaderRef}
           moveToReserve={moveToReserve}

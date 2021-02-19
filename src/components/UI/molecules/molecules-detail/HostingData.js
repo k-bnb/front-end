@@ -36,7 +36,7 @@ const HostingData = ({ infoRes }) => {
   return (
     <HostingDataContainer>
       <div>
-        <HostInfo>Joy님이 호스팅하는 펜션</HostInfo>
+        <HostInfo>{infoRes.hostName}님이 호스팅하는 펜션</HostInfo>
         <dataWrapper>
           <Text big noPadding>
             최대 인원 {infoRes.peopleLimit}명.

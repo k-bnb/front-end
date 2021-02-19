@@ -104,14 +104,14 @@ const initialStates = {
     },
     commentList: [],
     roomImgUrlList: [],
-    roomAverageScore: {
-      cleanliness: null,
-      accuracy: null,
-      communication: null,
-      locationRate: null,
-      checkIn: null,
-      priceSatisfaction: null,
-    },
+  },
+  roomAverageScore: {
+    cleanliness: 0,
+    accuracy: 0,
+    communication: 0,
+    locationRate: 0,
+    checkIn: 0,
+    priceSatisfaction: 0,
   },
   totalCost: 0,
   CancellableDate: {},
@@ -174,25 +174,27 @@ const detail = handleActions(
       state,
       {
         payload: {
-          cleanliness,
           accuracy,
+          checkIn,
+          cleanliness,
           communication,
           locationRate,
-          checkIn,
           priceSatisfaction,
         },
       },
-    ) =>
-      produce(state, (draft) => {
-        draft.infoRes.roomAverageScore = {
-          cleanliness,
+    ) => {
+      return {
+        ...state,
+        roomAverageScore: {
           accuracy,
+          checkIn,
+          cleanliness,
           communication,
           locationRate,
-          checkIn,
           priceSatisfaction,
-        };
-      }),
+        },
+      };
+    },
   },
   initialStates,
 );

@@ -38,7 +38,7 @@ const DetailTemplate = styled.div`
 `;
 
 const Detail = ({
-  // showModal,
+  showModal,
   setShowModal,
   current,
   setCurrent,
@@ -97,6 +97,7 @@ const Detail = ({
           setShowReviewModal={setShowReviewModal}
           commentList={infoRes.commentList}
           infoRes={infoRes}
+          detailObj={detailObj}
         />
         <ImportantNotice infoRes={infoRes} CancellableDate={CancellableDate} />
       </DetailTemplate>
