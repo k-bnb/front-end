@@ -23,14 +23,28 @@ const PersonalInfoEmailInputStyle = styled.div`
   }
 `;
 
-const PersonalInfoEmailInput = ({ personInfoChange }) => {
+const PersonalInfoEmailInput = ({
+  personInfoChange,
+  email,
+  ChangeInputBtn,
+}) => {
   return (
     <PersonalInfoEmailInputStyle>
       <TextStyle>언제든지 확인하실 수 있는 주소를 사용하세요</TextStyle>
       <div>
-        <input type="text" name="email" onChange={personInfoChange} />
+        <input
+          type="text"
+          name="email"
+          value={email}
+          onChange={personInfoChange}
+          onFocus={() => {
+            console.log('dd');
+          }}
+        />
       </div>
-      <Button save>저장</Button>
+      <Button onClick={ChangeInputBtn} save>
+        저장
+      </Button>
     </PersonalInfoEmailInputStyle>
   );
 };

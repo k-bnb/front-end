@@ -51,14 +51,14 @@ const ProfileToggleItems = ({
 
   const displayLoginModal = (e) => {
     e.preventDefault();
-    console.log('loginClick');
+
     setFormState('login');
     setModal(true);
   };
 
   const displayRegisterModal = (e) => {
     e.preventDefault();
-    console.log('registerClick');
+
     setFormState('register');
     setModal(true);
   };
@@ -95,7 +95,6 @@ const ProfileToggleItems = ({
       window.removeEventListener('click', clickOutside);
     };
   }, []);
-  console.log(token);
 
   return (
     <>

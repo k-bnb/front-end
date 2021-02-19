@@ -54,8 +54,6 @@ const Modaldiv = styled.div`
   padding: 30px 10px;
   animation: ${boxFade} 0.2s ease-in alternate forwards;
   ${(props) => {
-    console.log(props.disappear);
-
     return (
       props.disappear &&
       css`
@@ -65,8 +63,6 @@ const Modaldiv = styled.div`
   }}
 `;
 const ReserveCancelModal = ({ children, modalState, cancelModal }) => {
-  console.log(modalState);
-
   const [animation, setAnimation] = useState(false);
   const [localModalState, setLocalModalState] = useState(modalState);
   useEffect(() => {

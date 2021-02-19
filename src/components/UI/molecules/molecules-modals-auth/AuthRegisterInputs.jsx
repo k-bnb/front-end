@@ -39,9 +39,6 @@ const AuthRegisterInputs = ({
   serverRegisterError,
   isLoading,
 }) => {
-  console.log(registerValidation.nameValidation);
-  console.log(isFirst);
-
   return (
     <>
       <InputContainer>

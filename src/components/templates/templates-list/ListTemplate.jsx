@@ -40,7 +40,6 @@ const ListTemplate = ({
   pageNationState,
   search,
 }) => {
-  console.log(numberOfPages);
   return (
     <>
       <div>
