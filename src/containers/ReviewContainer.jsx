@@ -6,6 +6,7 @@ const ReviewContainer = ({
   showReviewModal,
   setShowReviewModal,
   infoRes,
+  detailObj,
 }) => {
   return (
     <Review
@@ -13,6 +14,7 @@ const ReviewContainer = ({
       reviewRef={reviewRef}
       showReviewModal={showReviewModal}
       setShowReviewModal={setShowReviewModal}
+      detailObj={detailObj}
     />
   );
 };

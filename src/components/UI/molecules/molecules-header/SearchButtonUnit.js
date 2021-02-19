@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import SearchButton from '../../atoms/atoms-header/SearchButton';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';

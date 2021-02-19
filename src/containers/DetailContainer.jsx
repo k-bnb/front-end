@@ -13,7 +13,6 @@ import HeaderContainer from './header-containers/HeaderContainer';
 //import LoaderIcon from 'react-loader-icon';
 import { detailToReserveDate, detailToReserveGuest } from '../modules/reserve';
 import ReviewModal from '../components/templates/templates-detail/ReviewModal';
-
 const DetailContainer = () => {
   const [showModal, setShowModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
@@ -33,11 +32,9 @@ const DetailContainer = () => {
   const { numOfAdult, numOfKid, numOfInfant } = useSelector(
     ({ search }) => search.searchReq.guestSearch,
   );
-
   const isLoading = useSelector(
     (state) => state.loading['detail/REQUEST_DETAIL'],
   );
-
   const detailObj = useSelector((state) => state.detail);
   const { roomImgUrlList } = useSelector((state) => state.detail.infoRes);
 
@@ -48,12 +45,19 @@ const DetailContainer = () => {
   const { numOfAdult: adult, numOfKid: kid, numOfInfant: infant } = useSelector(
     (state) => state.detail,
   );
-
   const checkDateSearch = { startDate: checkIn, endDate: checkOut };
   const guestSearch = { numOfAdult: adult, numOfKid: kid, numOfInfant: infant };
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    dispatch(
+      searchToDetail(startDate, endDate, numOfAdult, numOfKid, numOfInfant),
+    );
+    dispatch(getRoomAverageScore(roomId));
+    dispatch(requestDetail(roomId));
   }, []);
 
   useEffect(() => {
@@ -68,14 +72,7 @@ const DetailContainer = () => {
     dispatch(detailToReserveGuest(guestSearch));
     window.scrollTo(0, 0);
   };
-
-  useEffect(() => {
-    dispatch(
-      searchToDetail(startDate, endDate, numOfAdult, numOfKid, numOfInfant),
-    );
-    dispatch(requestDetail(roomId));
-    dispatch(getRoomAverageScore(roomId));
-  }, []); // startDate, endDate 잠시 deps에서 빼놓음, 넣으면 detail 페이지에서 달력날짜바꾸면 다시
+  // startDate, endDate 잠시 deps에서 빼놓음, 넣으면 detail 페이지에서 달력날짜바꾸면 다시
   // 서버에 숙소 상세 정보 요구함.
   // startDate, endDate, numOfAdult, numOfKid, numOfInfant,
   return (

@@ -14,36 +14,47 @@ const ScoreAverageItem = styled.div`
   padding: 0 8px;
   align-items: stretch;
   flex-wrap: wrap;
-  /* ${(props) =>
-    props.reviewModal &&
-    css`
-      width: 40%;
-
-      /* margin-right: 0; */
-      /* padding: 0; */
-      align-items: initial;
-      background-color: tomato;
-      padding: 0;
-    `} */
 `;
 
-const ScoreAverage = ({ reviewModal }) => (
-  <ScoreAverageBox reviewModal={reviewModal}>
-    <ScoreAverageItem reviewModal={reviewModal}>
-      <PointItemBox textItem="청결도" point="4.9" reviewModal={reviewModal} />
-      <PointItemBox textItem="정확성" point="4.8" reviewModal={reviewModal} />
-      <PointItemBox textItem="의사소통" point="5.0" reviewModal={reviewModal} />
-    </ScoreAverageItem>
-    <ScoreAverageItem reviewModal={reviewModal}>
-      <PointItemBox textItem="위치" point="4.8" reviewModal={reviewModal} />
-      <PointItemBox textItem="체크인" point="4.9" reviewModal={reviewModal} />
-      <PointItemBox
-        textItem="가격 대비 만족도"
-        point="4.8"
-        reviewModal={reviewModal}
-      />
-    </ScoreAverageItem>
-  </ScoreAverageBox>
-);
+const ScoreAverage = ({ reviewModal, infoRes, detailObj }) => {
+  return (
+    <ScoreAverageBox reviewModal={reviewModal}>
+      <ScoreAverageItem reviewModal={reviewModal}>
+        <PointItemBox
+          textItem="청결도"
+          reviewModal={reviewModal}
+          point={detailObj?.roomAverageScore?.cleanliness} // 옵셔널 체이닝
+        />
+        <PointItemBox
+          textItem="정확성"
+          reviewModal={reviewModal}
+          point={detailObj?.roomAverageScore?.accuracy}
+        />
+        <PointItemBox
+          textItem="의사소통"
+          reviewModal={reviewModal}
+          point={detailObj?.roomAverageScore?.communication}
+        />
+      </ScoreAverageItem>
+      <ScoreAverageItem reviewModal={reviewModal}>
+        <PointItemBox
+          textItem="위치"
+          reviewModal={reviewModal}
+          point={detailObj?.roomAverageScore?.locationRate}
+        />
+        <PointItemBox
+          textItem="체크인"
+          reviewModal={reviewModal}
+          point={detailObj?.roomAverageScore?.checkIn}
+        />
+        <PointItemBox
+          textItem="가격 대비 만족도"
+          reviewModal={reviewModal}
+          point={detailObj?.roomAverageScore?.priceSatisfaction}
+        />
+      </ScoreAverageItem>
+    </ScoreAverageBox>
+  );
+};
 
 export default ScoreAverage;

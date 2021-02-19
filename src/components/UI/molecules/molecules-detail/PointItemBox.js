@@ -29,20 +29,26 @@ const PointBar = styled.div`
   border-radius: 2px;
 `;
 
-const Point = styled.span`
+const Point = styled.div`
   position: absolute;
-  width: 98%;
   top: 0;
   left: 0;
   bottom: 0;
   border-radius: 2px;
   background: rgb(34, 34, 34);
+
+  ${(props) =>
+    props.point &&
+    css`
+      width: ${props.point * 20}%;
+    `}
 `;
 
 const Pointnumber = styled(Text)`
   line-height: 16px;
   margin-left: 6px;
   padding: 0;
+  width: 18px;
   ${(props) =>
     props.reviewModal &&
     css`
@@ -50,22 +56,24 @@ const Pointnumber = styled(Text)`
     `}
 `;
 
-const PointItemBox = ({ textItem, point, reviewModal }) => (
-  <ItemBox className="basic-flex">
-    <TextBox>
-      <Text big reviewModal={reviewModal}>
-        {textItem}
-      </Text>
-    </TextBox>
-    <PointContainer className="basic-flex">
-      <PointBar>
-        <Point />
-      </PointBar>
-      <Pointnumber big bold reviewModal={reviewModal}>
-        {point}
-      </Pointnumber>
-    </PointContainer>
-  </ItemBox>
-);
+const PointItemBox = ({ textItem, point, reviewModal }) => {
+  return (
+    <ItemBox className="basic-flex">
+      <TextBox>
+        <Text big reviewModal={reviewModal}>
+          {textItem}
+        </Text>
+      </TextBox>
+      <PointContainer className="basic-flex">
+        <PointBar>
+          <Point point={point} />
+        </PointBar>
+        <Pointnumber big bold reviewModal={reviewModal}>
+          {point}
+        </Pointnumber>
+      </PointContainer>
+    </ItemBox>
+  );
+};
 
 export default PointItemBox;

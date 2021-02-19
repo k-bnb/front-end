@@ -1,5 +1,5 @@
 import styled, { keyframes, css } from 'styled-components';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CircleDiv from '../../atoms/atoms-main/DivStyle';
 
 const boxFade = keyframes`
