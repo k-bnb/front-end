@@ -57,8 +57,6 @@ const ReservationEditButton2 = ({
     ({ reserve }) => reserve.guestSearch,
   );
 
-  console.log(numOfAdult, numOfKid, numOfInfant);
-
   // 지우기 button을 클릭 시 reserve guestSearch의 상태 초기화
   const clearGuest = () => {
     dispatch(initialGuest('guestSearch'));

@@ -14,7 +14,7 @@ const LayoutReservationContent = styled(ReservationContent)`
   margin-bottom: 0.4rem;
 `;
 
-const ReservationRequestOrganism = ({ change, value }) => {
+const ReservationRequestOrganism = ({ change, hostName, hostImgURL }) => {
   return (
     <section>
       <ReservationTitle sub children="필수 입력 정보" />
@@ -25,7 +25,7 @@ const ReservationRequestOrganism = ({ change, value }) => {
           children="호스트에게 여행 목적과 도착 예정 시간을 알려주세요."
         />
       </PaddingContainer>
-      <ReservationHostMolecule />
+      <ReservationHostMolecule hostName={hostName} hostImgURL={hostImgURL} />
       <ReservationClientNotice host change={change} />
       <ReservationUnderLine />
     </section>

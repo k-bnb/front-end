@@ -92,6 +92,8 @@ const ListStyle = ({
   numberOfPages,
   changeCurrentPage,
   pageNationState,
+  checkDateSearch,
+  guestSearch,
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
@@ -125,6 +127,7 @@ const ListStyle = ({
               commentCount,
               roomImgUrlList,
             }) => {
+              console.log(checkDateSearch);
               return (
                 <LodgingLists
                   bathRoomNum={bathRoomNum}
@@ -143,6 +146,8 @@ const ListStyle = ({
                   grade={grade}
                   id={id}
                   name={name}
+                  checkDateSearch={checkDateSearch}
+                  guestSearch={guestSearch}
                 />
               );
             },
