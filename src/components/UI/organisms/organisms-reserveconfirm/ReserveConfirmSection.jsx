@@ -14,14 +14,30 @@ const ReserveConfirmSectionStyle = styled.div`
   }
 `;
 
-const ReserveConfirmSection = ({ active, activClick, list }) => {
-  console.log(list);
+const ReserveConfirmSection = ({
+  active,
+  activClick,
+  list,
+  modalState,
+  cancel,
+  cancelBtn,
+  cancelModal,
+}) => {
   return (
     <>
       <ReserveConfirmNav active={active} activClick={activClick} />
       <ReserveConfirmSectionStyle>
         {list.length ? (
-          list.map((item) => <ReserveConfirmList item={item} list={list} />)
+          list.map((item) => (
+            <ReserveConfirmList
+              item={item}
+              list={list}
+              modalState={modalState}
+              cancel={cancel}
+              cancelBtn={cancelBtn}
+              cancelModal={cancelModal}
+            />
+          ))
         ) : (
           <ReserveConfirmNoData active={active} />
         )}

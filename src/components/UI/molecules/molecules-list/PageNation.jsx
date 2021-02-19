@@ -68,7 +68,7 @@ const PageNation = ({
   //   numberOfPages = [...newArr1, '...', ...newArr2];
   // }
   // console.log(numberOfPages);
-  console.log(totalPage);
+
   return (
     <PageStyle className="PageNation">
       {/* <Pagination

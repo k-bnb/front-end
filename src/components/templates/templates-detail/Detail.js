@@ -54,7 +54,6 @@ const Detail = ({
   showReviewModal,
   setShowReviewModal,
 }) => {
-  console.log(detailObj);
   // const strStartDate = detailObj.startDate;
   const CheckInDate = () => {
     const strDate = detailObj.startDate.split('-');
@@ -69,7 +68,6 @@ const Detail = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(CancellableDate.month);
     dispatch(getCancellableDate(CancellableDate.month, CancellableDate.day));
   }, []);
 

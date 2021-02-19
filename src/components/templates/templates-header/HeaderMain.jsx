@@ -55,7 +55,6 @@ const HeaderMain = ({
         <BlackOutsideRange
           className="black-outside-boundary"
           onClick={(e) => {
-            console.log('hello!!!!');
             if (e.target.classList.contains('black-outside-boundary')) {
               setIsClicked(false);
               setIsScrolled(true);

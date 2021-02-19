@@ -53,7 +53,6 @@ const SearchNavCheckOutUnit = ({ SearchTypeHandler, navModalState }) => {
           className="checkout-remove-btn"
           checkOutDate
           onMouseDown={(e) => {
-            console.log('lelel');
             dispatch(specificInputClear('checkDateSearch'));
           }}
         />
