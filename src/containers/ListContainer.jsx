@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import HeaderContainer from './header-containers/HeaderContainer';
 import ListTemplate from '../components/templates/templates-list/ListTemplate';
@@ -11,11 +11,6 @@ import {
 
 const ListContainer = () => {
   const [searchModalState, setSearchModalState] = useState(null);
-  const [costState, setCostState] = useState({
-    minCostState: false,
-    minCostPay: '',
-  });
-
   const {
     locationSearch,
     checkDateSearch,
@@ -68,6 +63,8 @@ const ListContainer = () => {
     },
     [dispatch],
   );
+  const [localMinCost, setLocalMinCost] = useState(10000);
+  const [localMaxCost, setLocalMaxCost] = useState(1000000);
 
   const num = /^[0-9]*$/;
 
@@ -88,17 +85,27 @@ const ListContainer = () => {
   };
 
   const searchBtn = () => {
-    if (costSearch.minCost) {
-      setCostState((state) => ({
-        minCostState: true,
-        minCostPay: costSearch.minCost,
-      }));
-    } else {
-      setCostState((state) => ({
-        minCostState: false,
-        minCostPay: '',
-      }));
-    }
+    // if (costSearch.minCost) {
+    //   setCostcState((state) => ({
+    //     ...state,
+    //     minCostState: true,
+    //     minCostPay: costSearch.minCost,
+    //   }));
+    // }   
+    // if (costSearch.maxCost) {
+    //   setCostState((state) => ({
+    //     ...state,
+    //     maxCostState: true,
+    //     maxCostPay: costSearch.maxCost,
+    //   }));
+    // }
+    // else{setCostState((state) => ({
+    //     minCostState: false,
+    //     minCostPay: '',
+    //     maxCostState: false,
+    //     maxCostPay: '',
+    //   }))
+    // };
     const id = 0;
     dispatch(
       searching({
@@ -116,6 +123,7 @@ const ListContainer = () => {
     setSearchModalState(null);
   };
 
+  // console.log(costState);
   // pageNation
 
   const [currentButton, setCurrentButton] = useState(0);
@@ -167,7 +175,6 @@ const ListContainer = () => {
         minusBtn={minusBtn}
         plusBtn={plusBtn}
         searchBtn={searchBtn}
-        costState={costState}
         room={room}
         totalPage={totalPage}
         roomMap={roomMap}
@@ -182,7 +189,11 @@ const ListContainer = () => {
         changeCurrentPage={changeCurrentPage}
         pageNationState={pageNationState}
         search={search}
-      />
+        localMinCost={localMinCost}
+        setLocalMinCost={setLocalMinCost}
+        localMaxCost={localMaxCost}
+        setLocalMaxCost={setLocalMaxCost}
+/>
     </>
   );
 };

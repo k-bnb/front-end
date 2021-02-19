@@ -8,10 +8,10 @@ import TextStyled from '../../atoms/atoms-list/Text';
 import Imgs from '../../atoms/atoms-list/Imgs';
 import ScoreText from './Score-Text';
 import { Link } from 'react-router-dom';
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { moneyfilter } from '../../../../lib/moneyfilter';
 
 // import ListCarousel from './ListCarousel';
 // import { SliderData } from './SliderData';
@@ -29,7 +29,7 @@ const ULWrap = styled.ul`
   /* width: 808px; */
   /* height: 5013px; */
   /* height: 100px; */
-  li {
+  .allList { // === li
     /* width: 792px; */
     position: relative;
     /* width: 100%; */
@@ -75,6 +75,8 @@ const ULWrap = styled.ul`
               width: 30px;
               height: 30px;
               border-radius: 50%;
+              opacity: 0;
+              transition: opacity .3s;
             }
             .slick-next {
               position: absolute;
@@ -82,16 +84,18 @@ const ULWrap = styled.ul`
               width: 30px;
               height: 30px;
               border-radius: 50%;
+              opacity: 0;
+              transition: opacity .3s;
             }
             .slick-dots {
               li {
                 border: 0;
-                
                 display: inline !important;
-
+                margin-bottom:10px;
                 justify-content: flex-end;
                 height: 30px;
                 cursor: default;
+                
                 &:nth-child(1) {
                   position: absolute;
                   bottom: 10px;
@@ -154,7 +158,7 @@ const ULWrap = styled.ul`
           bottom: 50%;
           width: 30px;
           height: 30px;
-          transform: translateY(50%);
+          /* transform: translateY(50%); */
           display: flex;
           justify-content: center;
           align-items: center;
@@ -180,53 +184,84 @@ const ULWrap = styled.ul`
         }
       }
     }
+    a {
+      display: block;
+      text-decoration: none;
+      padding: 20px 20px 20px 25px;
+      color:#000;
+      .TextHead {
+        /* width: 100%; */
+      }
+      /* span:first-child {
+        width: 300px;
+        height: 100%;
+      }
+      span:last-child {
+        width: 100%;
+        margin-left: 16px;
+        height: 100%;
+      } */
+      .heart {
+        position: absolute;
+        right: 30px;
+        top: 25px;
+        font-size:25px;
+      }
+      hr {
+        width: 50px;
+        text-align: left;
+        color: #eee;
+        margin: 15px 15px 15px 0;
+        /* padding: 0; */
+      }
+      .TextBottom {
+        display: flex;
+        /* box-sizing:border-box; */
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        height: 80px;
+        align-items: flex-end;
+        /* padding: 0 15px; */
+      }
+      .cost{
+        display:flex;
+        flex-flow:row nowrap;
+        letter-spacing: 1px;
+      }
+    }
   }
-  a {
-    display: block;
-    text-decoration: none;
-    padding: 20px 20px 20px 25px;
-    color:#000;
-    .TextHead {
-      /* width: 100%; */
+  .allList:hover{
+    .slide-group>.slide>.slideDiv>.slick-slider>.slick-arrow.slick-prev{
+      opacity:1;
+      &:active{
+        opacity:1;
+        transform: translate(0);
+        transform: scale(1.5);
+      }
     }
-    /* span:first-child {
-      width: 300px;
-      height: 100%;
+    .slide-group>.slide>.slideDiv>.slick-slider>.slick-arrow.slick-next {
+      opacity:1;
+      &:active{
+        opacity:1;
+        transform: translate(0);
+        transform: scale(1.5);
+      }
     }
-    span:last-child {
-      width: 100%;
-      margin-left: 16px;
-      height: 100%;
+  }
+  /* .allList:active{
+    .slide-group>.slide>.slideDiv>.slick-slider>.slick-arrow.slick-prev{
+      opacity:1;
+      transform: translate(0);
+      transform: scale(1.04);
     } */
-    .heart {
-      position: absolute;
-      right: 30px;
-      top: 25px;
-      font-size:25px;
+    /* .slide-group>.slide>.slideDiv>.slick-slider>.slick-arrow.slick-next{
+      opacity:1;
+      transform: translate(0);
+      transform: scale(1.04);
     }
-    hr {
-      width: 50px;
-      text-align: left;
-      color: #eee;
-      margin: 15px 15px 15px 0;
-      /* padding: 0; */
-    }
-    .TextBottom {
-      display: flex;
-      /* box-sizing:border-box; */
-      flex-flow: row nowrap;
-      justify-content: space-between;
-      height: 80px;
-      align-items: flex-end;
-      /* padding: 0 15px; */
-    }
-    .cost{
-      display:flex;
-      flex-flow:row nowrap;
-      letter-spacing: 1px;
-    }
-  }
+  } */
 `;
+
 const LodgingLists = ({
   alt,
   bathRoomNum,
@@ -257,7 +292,7 @@ const LodgingLists = ({
     <>
       <Wrap className="listWrap">
         <ULWrap>
-          <li>
+          <li className="allList">
             <Border className="slide-group" carouselImg>
               <div className="slide">
                 <div className="slideDiv">
@@ -267,7 +302,6 @@ const LodgingLists = ({
                         <Imgs
                           carousalImg
                           src={src}
-
                           // alt={alt}
                         />
                       </>
@@ -302,7 +336,7 @@ const LodgingLists = ({
                   <ScoreText grade={grade} commentCount={commentCount} />
                   <TextStyled className="cost" size="blackMiddleBold">
                     <BiWon />
-                    {cost}/<TextStyled size="blackMiddle">박</TextStyled>
+                    {moneyfilter(cost)}/<TextStyled size="blackMiddle">박</TextStyled>
                   </TextStyled>
                 </div>
               </span>
