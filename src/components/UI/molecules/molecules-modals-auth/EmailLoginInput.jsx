@@ -84,7 +84,6 @@ const EmailLoginInput = ({
                 checkEmail={checkEmail}
                 onFocus={() => {}}
                 onBlur={() => {
-                  console.log(email);
                   setIsFirst({ ...isFirst, emailInput: false });
                   setLoginValidation({
                     ...loginValidation,

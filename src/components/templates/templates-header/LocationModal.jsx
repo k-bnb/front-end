@@ -59,7 +59,6 @@ const LocationModal = ({
   moveFocusNext,
 }) => {
   let locationRef = useClickOutside(() => {
-    console.log('locartion start');
     setNavModalState({
       location: false,
       checkIn: false,
@@ -82,7 +81,6 @@ const LocationModal = ({
         className="nearby-outer-container"
         onClick={() => {
           getNearbyAddress();
-          console.log('hi;;');
         }}
       >
         <span className="nearby-icon-container">
@@ -104,7 +102,6 @@ const LocationModal = ({
   function getNearbyAddress() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log(position); // 현위치 반환
         dispatch(destinationInput('가까운 여행지 둘러보기'));
         dispatch(
           locationInput({
@@ -117,7 +114,6 @@ const LocationModal = ({
           }),
         );
         moveFocusNext('location');
-        console.log(locationSearch);
       }, // 성공시 콜백함수
       (e) => {
         console.log('error');

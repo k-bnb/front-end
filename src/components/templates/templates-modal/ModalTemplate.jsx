@@ -50,7 +50,6 @@ const Modaldiv = styled.div`
 const ModalTemplate = ({ children, modal, setModal, signup, onSubmit }) => {
   const bgClick = useCallback(
     (e) => {
-      console.log(e.target);
       if (!e.target.matches('.bg')) return;
       setModal(false);
     },

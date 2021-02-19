@@ -18,8 +18,8 @@ const TitleContainer = styled.div`
   position: relative;
   max-width: 1280px;
   margin: 0 16rem;
-  margin-top: 4rem;
-  margin-bottom: 2rem;
+  margin-top: 3.5rem;
+  margin-bottom: 1rem;
 `;
 
 const TempContainer = styled.div`
@@ -47,7 +47,6 @@ const LayoutReservationTitle = styled(ReservationTitle)`
 const Reservation = ({
   change,
   click,
-  value,
   dateModal,
   manageDateModal,
   guestModal,
@@ -61,18 +60,8 @@ const Reservation = ({
   isLoading,
   infoRes,
   reserveLocationDetail,
+  RoomTablePhotoImgURL,
 }) => {
-  // const {
-  //   name,
-  //   roomCost,
-  //   cleaningCost,
-  //   tax,
-  //   peopleLimit,
-  //   description,
-  //   bedNum,
-  //   bathRoomNum,
-  //   grade,
-  // } = infoRes;
   return (
     <>
       <section>
@@ -115,8 +104,12 @@ const Reservation = ({
               checkDate={checkDate}
               saveDate={saveDate}
             />
-            <ReservationRequestOrganism change={change} value={value} />
-            <ReservationRefundOrganism />
+            <ReservationRequestOrganism
+              change={change}
+              hostName={infoRes.hostName}
+              hostImgURL={infoRes.hostImgURL}
+            />
+            <ReservationRefundOrganism refundDate={checkDateSearch.startDate} />
             <CommonButton reservation click={click} comfirmModal={comfirmModal}>
               <BiCalendarCheck />
               예약하기
@@ -126,6 +119,8 @@ const Reservation = ({
             <ReservationCostDetailOrganism
               infoRes={infoRes}
               reserveLocationDetail={reserveLocationDetail}
+              checkDateSearch={checkDateSearch}
+              RoomTablePhotoImgURL={RoomTablePhotoImgURL}
             />
           </SubContainer>
         </TempContainer>

@@ -27,7 +27,6 @@ const SearchNavCheckInUnit = ({ SearchTypeHandler, navModalState }) => {
   return (
     <SearchNavCheckInUnitLi
       onClick={() => {
-        console.log('in');
         SearchTypeHandler('checkIn');
       }}
       navModalState={navModalState}
@@ -48,7 +47,6 @@ const SearchNavCheckInUnit = ({ SearchTypeHandler, navModalState }) => {
         <RemoveButton
           checkInDate
           onMouseDown={() => {
-            console.log('hi');
             dispatch(specificInputClear('checkDateSearch'));
           }}
         />

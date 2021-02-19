@@ -10,10 +10,12 @@ const Container = styled.div`
     margin-left: 16px;
   }
 `;
-function ScheduleControlMolecule({ saveDate }) {
+function ScheduleControlMolecule({ saveDate, deleteDate }) {
   return (
     <Container>
-      <CommonButton dateDelete>날짜 지우기</CommonButton>
+      <CommonButton dateDelete deleteDate={deleteDate}>
+        날짜 지우기
+      </CommonButton>
       <CommonButton dateSave saveDate={saveDate}>
         저장하기
       </CommonButton>

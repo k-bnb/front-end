@@ -134,6 +134,7 @@ function CommonButton({
   saveDate,
   clearGuest,
   saveGuest,
+  deleteDate,
   ...rest
 }) {
   return (
@@ -144,7 +145,8 @@ function CommonButton({
         manageGuestModal ||
         saveDate ||
         clearGuest ||
-        saveGuest
+        saveGuest ||
+        deleteDate
       }
     >
       {children}

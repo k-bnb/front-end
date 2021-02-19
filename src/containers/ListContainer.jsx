@@ -27,6 +27,8 @@ const ListContainer = () => {
     bathRoomNum,
   } = useSelector((state) => state.search.searchReq);
 
+  // console.log(checkDateSearch);
+
   const isLoading = useSelector((state) => state.loading['search/SEARCHING']);
   const search = useSelector((state) => state.search);
 
@@ -57,7 +59,7 @@ const ListContainer = () => {
       roomType: item.roomType,
     };
   });
-  console.log(roomMap);
+
   const roomTypes = useCallback(
     (e) => {
       if (e.target.checked) {
@@ -125,7 +127,6 @@ const ListContainer = () => {
 
   const changeCurrentPage = (numPage) => {
     setPageNationState({ currentPage: numPage });
-    console.log(numPage.selected);
 
     const id = numPage.selected - 1;
 

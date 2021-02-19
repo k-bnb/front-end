@@ -30,12 +30,22 @@ const StyledSpan = styled.span`
       color: rgba(34, 34, 34, 0.8);
     `}
 
-    ${(props) =>
+  ${(props) =>
     props.guestLimitInfo &&
     css`
       font-size: 12px;
       line-height: 16px;
       color: #484848;
+    `}
+
+  ${(props) =>
+    props.furniture &&
+    css`
+      display: block;
+      font-size: 14px;
+      padding-left: 15px;
+      padding-top: 10px;
+      color: rgb(113, 113, 113);
     `}
 `;
 

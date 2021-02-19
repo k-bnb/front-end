@@ -81,8 +81,6 @@ const CarouselModal = ({
   const [localShowModal, setLocalShowModal] = useState(showModal);
   const [showAnimation, setShowAnimation] = useState(false);
 
-  console.log(current);
-
   useEffect(() => {
     // current의 변화 감지
     if (localShowModal && !showModal) {
