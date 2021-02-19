@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
 const ReserveCancelStyle = styled.div`
@@ -51,7 +51,23 @@ const ReserveCancelStyle = styled.div`
     }
   }
 `;
-const ReserveCancel = ({ cancel, cancelBtn, item }) => {
+const ReserveCancel = ({
+  cancel,
+  cancelBtn,
+  list,
+  reservationConfirmBtn,
+  reservationId,
+}) => {
+  // const [clickReservationId, setClickReservationId] = useState(
+  //   checkId.reservationId,
+  // );
+  console.log(list);
+  const Clicktest = (e) => {
+    console.log(e.target.value);
+  };
+  // setClickReservationId(checkId);
+
+  // console.log(clickReservationId);
   return (
     <ReserveCancelStyle>
       <div className="text">
@@ -60,18 +76,50 @@ const ReserveCancel = ({ cancel, cancelBtn, item }) => {
       <div>
         <p>예약 취소 이유는?</p>
         <div>
-          <input type="radio" value="지인과의 약속이 취소했기 때문에" />
-          <label>지인과의 약속이 취소했기 때문에</label>
-          <input type="radio" />
-          <label>장난으로 예약하다가 실수로 예약 해서</label>
-          <input type="radio" />
-          <label>숙소가 마음에 안들어서</label>
-          <input type="radio" />
-          <label>나의 집하고 거리가 너무 멀기 때문에</label>
+          <input
+            type="radio"
+            name="reason"
+            value="지인과의 약속이 취소했기 때문에"
+            id="own"
+          />
+          <label htmlFor="own" value="지인과의 약속이 취소했기 때문에">
+            지인과의 약속이 취소했기 때문에
+          </label>
+          <div>
+            <input
+              id="two"
+              type="radio"
+              value="장난으로 예약하다가 실수로 예약 해서"
+              name="reason"
+            />
+            <label htmlFor="two">장난으로 예약하다가 실수로 예약 해서</label>
+          </div>
+          <div>
+            <input
+              id="three"
+              value="숙소가 마음에 안들어서"
+              type="radio"
+              name="reason"
+            />
+            <label htmlFor="three">숙소가 마음에 안들어서</label>
+          </div>
+          <div>
+            <input
+              id="fore"
+              value="나의 집하고 거리가 너무 멀기 때문에"
+              type="radio"
+              name="reason"
+            />
+            <label htmlFor="fore">나의 집하고 거리가 너무 멀기 때문에</label>
+          </div>
         </div>
       </div>
       <div>
-        <button name="reservationId" value={item.reservationId}>
+        <button
+          name="reservationId"
+          // value={list.reservationId}
+          onClick={Clicktest}
+        >
           <svg
             viewBox="0 0 24 24"
             role="presentation"
