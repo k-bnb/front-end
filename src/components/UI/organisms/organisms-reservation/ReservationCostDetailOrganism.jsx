@@ -32,6 +32,7 @@ const ReservationCostDetailOrganism = ({
   infoRes,
   reserveLocationDetail,
   checkDateSearch,
+  RoomTablePhotoImgURL,
 }) => {
   const {
     name,
@@ -41,23 +42,27 @@ const ReservationCostDetailOrganism = ({
     bedNum,
     bathRoomNum,
     grade,
+    commentCount,
   } = infoRes;
 
-  const { city, borough } = reserveLocationDetail;
+  const { city, neighborhood } = reserveLocationDetail;
 
-  const price = extractDay(checkDateSearch.startDate, checkDateSearch.endDate);
-  const roomTaxPrice = roomCost * price;
+  const RoomDay =
+    checkDateSearch.startDate || checkDateSearch.endDate
+      ? extractDay(checkDateSearch.startDate, checkDateSearch.endDate)
+      : '/';
+  const roomTaxPrice = isNaN(roomCost) ? roomCost * RoomDay : 0;
 
   const hostInfoChildren = {
-    title: city,
+    title: `${city}, ${neighborhood}`,
     content: name,
     roomInfo: `침대 ${bedNum}개 · 욕실 ${bathRoomNum}개`,
-    rate: grade,
+    rate: `${grade} (${commentCount})`,
   };
 
   // 임시 고정값, 상세보기 페이지 redux state로 변경 예정
   const staticChildren = {
-    cost: `₩${roomCost} x ${price}박`,
+    cost: `₩${roomCost} x ${RoomDay}박`,
     cleaningFee: '청소비',
     serviceFee: '서비스 수수료',
     lodgmentFee: '숙박세와 수수료',
@@ -69,13 +74,20 @@ const ReservationCostDetailOrganism = ({
     cleaningFee: `₩${cleaningCost}`,
     serviceFee: `₩${tax}`,
     lodgmentFee: `₩${roomTaxPrice * 0.2}`,
-    totalFee: `₩${roomTaxPrice + cleaningCost + tax + roomTaxPrice * 0.3}`,
+    totalFee: `₩${
+      isNaN(roomCost)
+        ? roomTaxPrice + cleaningCost + tax + roomTaxPrice * 0.3
+        : 0
+    }`,
   };
 
   return (
     <Container>
       <div className="host-info">
-        <ReservationSummaryMolecule children={hostInfoChildren} />
+        <ReservationSummaryMolecule
+          children={hostInfoChildren}
+          RoomTablePhotoImgURL={RoomTablePhotoImgURL}
+        />
       </div>
       <ReservationUnderLine />
       <ReservationTitle

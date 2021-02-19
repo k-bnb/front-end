@@ -44,6 +44,7 @@ function EditDateModalOrganism({
   day,
   bedNum,
   bathRoomNum,
+  deleteDate,
 }) {
   const checkChildren = {
     checkIn: '체크인',
@@ -84,7 +85,10 @@ function EditDateModalOrganism({
           <EditCalendar />
         </CalendarContainer>
         <div>
-          <ScheduleControlMolecule saveDate={saveDate} />
+          <ScheduleControlMolecule
+            saveDate={saveDate}
+            deleteDate={deleteDate}
+          />
         </div>
       </CommonTemp>
     </CommonBg>

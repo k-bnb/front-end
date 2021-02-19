@@ -17,7 +17,7 @@ const INITIAL_GUEST = 'reserve/INITIAL_GUEST';
 // detail page date, guest state 받아오기
 const DETAIL_TO_RESERVE_DATE = 'reserve/DETAIL_TO_RESERVE_DATE';
 const DETAIL_TO_RESERVE_GUEST = 'reserve/DETAIL_TO_RESERVE_GUEST';
-const DETAIL_TO_RESERVE_ROOM = 'reserve/DETAIL_TO_RESERVE';
+const DETAIL_TO_RESERVE_ROOM = 'reserve/DETAIL_TO_RESERVE_ROOM';
 const DETAIL_TO_RESERVE_LOCATION = 'reserve/DETAIL_TO_RESERVE_LOCATION';
 // const DETAIL_TO_RESERVE_IMG = 'reserve/DETAIL_TO_RESERVE_IMG';
 
@@ -40,7 +40,7 @@ export const changeDate = createAction(
   }),
 );
 
-export const initialDate = createAction(INITIAL_DATE);
+export const initialDate = createAction(INITIAL_DATE, (form) => form);
 
 export const clearEndDate = createAction(CLEAR_END_DATE);
 
@@ -85,6 +85,11 @@ export const detailToReserveRoom = createAction(
     bedNum,
     bathRoomNum,
     grade,
+    hostName,
+    hostImgURL,
+    commentCount,
+    roomImgUrlList,
+    checkDateSearch,
   ) => ({
     id,
     name,
@@ -96,14 +101,19 @@ export const detailToReserveRoom = createAction(
     bedNum,
     bathRoomNum,
     grade,
+    hostName,
+    hostImgURL,
+    commentCount,
+    roomImgUrlList,
+    checkDateSearch,
   }),
 );
 
 export const detailToReserveLocation = createAction(
   DETAIL_TO_RESERVE_LOCATION,
-  ({ city, borough }) => ({
+  ({ city, neighborhood }) => ({
     city,
-    borough,
+    neighborhood,
   }),
 );
 
@@ -159,10 +169,14 @@ const initialState = {
     bedNum: 0,
     bathRoomNum: 0,
     grade: 0,
+    hostName: '',
+    hostImgURL: '',
+    commentCount: 0,
   },
+  roomImgUrlList: '',
   locationDetail: {
     city: '',
-    borough: '',
+    neighborhood: '',
   },
   reserveError: null,
 };
@@ -180,9 +194,10 @@ const reserve = handleActions(
         draft.checkDateSearch[form] = checkDateSearch;
       }),
 
-    [INITIAL_DATE]: () => ({
-      ...initialState,
-    }),
+    [INITIAL_DATE]: (state, { payload: form }) =>
+      produce(state, (draft) => {
+        draft[form] = initialState[form];
+      }),
 
     [CLEAR_END_DATE]: (state, _) => ({
       ...state,
@@ -209,10 +224,12 @@ const reserve = handleActions(
       guestSearch,
     }),
 
-    [DETAIL_TO_RESERVE_ROOM]: (state, { payload: infoRes }) => ({
-      ...state,
-      infoRes,
-    }),
+    [DETAIL_TO_RESERVE_ROOM]: (state, { payload }) =>
+      produce(state, (draft) => {
+        draft.infoRes = payload;
+        draft.roomImgUrlList = payload.roomImgUrlList[0];
+        draft.checkDateSearch = payload.checkDateSearch;
+      }),
 
     [DETAIL_TO_RESERVE_LOCATION]: (state, { payload: locationDetail }) => ({
       ...state,
