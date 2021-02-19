@@ -20,8 +20,6 @@ const ReservationInfoOrganism = ({
   // 예약하기 페이지 게스터 정보 가져오기
   const { numOfAdult, numOfKid, numOfInfant } = guestSearch;
 
-  console.log();
-
   const dateChildren = {
     title: '날짜',
     content: `${startDate}-${endDate}`,

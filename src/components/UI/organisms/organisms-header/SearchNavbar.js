@@ -101,7 +101,6 @@ const SearchNavbar = ({
               condition={condition.checkOut}
               setCondition={setCondition}
               onClick={() => {
-                console.log('djsdfkfnnvnvnvn');
                 setCondition({ ...initialCondition, checkOut: true });
               }}
             >

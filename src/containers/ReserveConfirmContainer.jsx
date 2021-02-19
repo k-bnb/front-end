@@ -6,7 +6,7 @@ const ReserveConfirmContainer = () => {
   const [active, setActive] = useState('예약 완료');
   const [list, setList] = useState([]);
   const reserveRes = useSelector((state) => state.user);
-  console.log(reserveRes.reserveRes);
+
   useEffect(() => {
     if (reserveRes.reserveRes === null) return;
     const next = reserveRes.reserveRes.filter(
@@ -17,7 +17,6 @@ const ReserveConfirmContainer = () => {
     setList(next);
   }, []);
 
-  console.log(list);
   const activClick = (e) => {
     if (e.target.name === '예약 완료') {
       setActive('예약 완료');
@@ -36,14 +35,12 @@ const ReserveConfirmContainer = () => {
       if (prev === null) return;
       setList(prev);
     }
-    console.log(e.target.name);
   };
-  console.log(list);
+
   const [modalState, setModalState] = useState(false);
   const [cancelModal, setCancelModal] = useState('');
 
   const cancel = (e) => {
-    console.log(e.target.name);
     if (e.target.name === cancel) {
       setModalState(false);
       return;
@@ -53,7 +50,7 @@ const ReserveConfirmContainer = () => {
   const cancelBtn = (e) => {
     setModalState(false);
   };
-  console.log(cancelModal);
+
   return (
     <ReserveConfirmTemplate
       list={list}

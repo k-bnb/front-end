@@ -8,6 +8,7 @@ import PersonalNameInput from '../../molecules/molecules-personalInfo/PersonalNa
 import PersonalInfoBirthinput from '../../molecules/molecules-personalInfo/PersonalInfoBirthinput';
 import PersonalInfoEmailInput from '../../molecules/molecules-personalInfo/PersonalInfoEmailInput';
 import PersonalInfoImg from '../../molecules/molecules-personalInfo/PersonalInfoImg';
+import { extractMonthDate } from '../../../../lib/extractMonthDate';
 
 const PersonalInfoUIStyle = styled.ul`
   display: flex;
@@ -30,62 +31,102 @@ const PersonalInfoUIStyle = styled.ul`
 `;
 
 const PersonalInfoUl = ({
-  fix: { name, img, birth, emailAddress, cancel },
+  fix,
   fixInfoBtn,
   cancelclick,
   personInfoChange,
+  name,
+  email,
+  birth,
+  imageUrl,
+  inputFocus,
+  ChangeInputBtn,
+  userInfo,
+  setFix,
 }) => {
+  console.log(userInfo.imageUrl);
   return (
-    <PersonalInfoUIStyle onClick={cancel ? cancelclick : fixInfoBtn}>
+    <PersonalInfoUIStyle onClick={fix.cancel ? cancelclick : fixInfoBtn}>
       <PersonalInfoLi>
         <div>
           <TextStyle>실명</TextStyle>
-          {name ? (
-            <PersonalNameInput personInfoChange={personInfoChange} />
+          {fix.name ? (
+            <PersonalNameInput
+              name={name}
+              personInfoChange={personInfoChange}
+              inputFocus={inputFocus}
+              ChangeInputBtn={ChangeInputBtn}
+            />
           ) : (
-            <TextStyle>Jeong Jeong</TextStyle>
+            <TextStyle>{name}</TextStyle>
           )}
         </div>
         <Button name="name" className="btn" greenText>
-          {!name ? '수정' : '취소'}
+          {!fix.name ? '수정' : '취소'}
         </Button>
       </PersonalInfoLi>
       <PersonalInfoLi>
         <div className="gender">
           <TextStyle>이미지</TextStyle>
-          {img ? (
-            <PersonalInfoImg personInfoChange={personInfoChange} />
+          {fix.img ? (
+            <PersonalInfoImg
+              name={name}
+              email={email}
+              birth={birth}
+              setFix={setFix}
+              personInfoChange={personInfoChange}
+              imageUrl={imageUrl}
+            />
           ) : (
-            <TextStyle>지정되지 않음</TextStyle>
+            <TextStyle>
+              {imageUrl ? <img src={imageUrl} alt="hello" /> : '지정되지 않음'}
+            </TextStyle>
           )}
         </div>
         <Button name="imageUrl" className="btn" greenText>
-          {!img ? '수정' : '취소'}
+          {!fix.img ? '수정' : '취소'}
         </Button>
       </PersonalInfoLi>
       <PersonalInfoLi>
         <div>
           <TextStyle>생년월일</TextStyle>
-          <TextStyle>1995년 8월 12일</TextStyle>
-          {birth && (
-            <PersonalInfoBirthinput personInfoChange={personInfoChange} />
+          <TextStyle>
+            {birth
+              ? `${extractMonthDate(birth).year}년 ${
+                  extractMonthDate(birth).month
+                }월 ${extractMonthDate(birth).date}일 `
+              : '지정되지 않음'}
+          </TextStyle>
+          {fix.birth && (
+            <PersonalInfoBirthinput
+              ChangeInputBtn={ChangeInputBtn}
+              personInfoChange={personInfoChange}
+              birth={birth}
+            />
           )}
         </div>
         <Button name="birth" className="btn" greenText>
-          {!birth ? '수정' : '취소'}
+          {!fix.birth ? '수정' : '취소'}
         </Button>
       </PersonalInfoLi>
       <PersonalInfoLi>
         <div>
           <TextStyle>이메일 주소</TextStyle>
-          {emailAddress ? (
-            <PersonalInfoEmailInput personInfoChange={personInfoChange} />
+          {fix.emailAddress ? (
+            <PersonalInfoEmailInput
+              name={name}
+              email={email}
+              birth={birth}
+              imageUrl={imageUrl}
+              personInfoChange={personInfoChange}
+              ChangeInputBtn={ChangeInputBtn}
+            />
           ) : (
-            <TextStyle>jungjh1234567@gmail.com</TextStyle>
+            <TextStyle>{email}</TextStyle>
           )}
         </div>
         <Button name="emailAddress" className="btn" greenText>
-          {!emailAddress ? '수정' : '취소'}
+          {!fix.emailAddress ? '수정' : '취소'}
         </Button>
       </PersonalInfoLi>
       <PersonalInfoLi>

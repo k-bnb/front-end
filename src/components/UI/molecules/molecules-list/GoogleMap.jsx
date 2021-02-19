@@ -119,7 +119,7 @@ function GoogleMapUse({
               position.coords.latitude,
               position.coords.longitude,
             );
-            console.log('res', res);
+
             const address = res.results[0].formatted_address,
               addressArray = res.results[0].address_components,
               city = getCity(addressArray),
@@ -237,7 +237,6 @@ function GoogleMapUse({
           }}
           onClick={() => {
             setSelectedSample(null);
-            console.log(mapRef.current.getClickableIcons());
           }}
           options={{ scrollwheel: true }}
           onLoad={onMapLoad}
@@ -251,14 +250,7 @@ function GoogleMapUse({
                 opacity={0}
                 labelClass="map-price-container"
                 labelContent={`<div class="map-price-marker"><span>$${sample.cost}</span></div>`}
-                onClick={(e) => {
-                  console.log(sample, e.target);
-
-                  console.log('marker', e.nextElementSibling);
-                }}
-                onDragStart={(e) => {
-                  console.log('helo', e);
-                }}
+                onDragStart={(e) => {}}
                 position={{ lat: sample.latitude, lng: sample.longitude }}
                 draggable={true}
                 // onDragEnd={onMarkerDragEnd}
@@ -269,9 +261,6 @@ function GoogleMapUse({
               ></Marker>
               <OverlayView
                 position={{ lat: sample.latitude, lng: sample.longitude }}
-                onClick={(e) => {
-                  console.log('overlayView', e);
-                }}
                 mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
                 getPixelPositionOffset={getPixelPositionOffset}
               >
@@ -280,7 +269,6 @@ function GoogleMapUse({
                   name={sample.cost}
                   ref={mapCost}
                   onClick={(e) => {
-                    console.log('overlayviewText', e);
                     setSelectedSample(sample);
                   }}
                   style={{
@@ -311,9 +299,7 @@ function GoogleMapUse({
           ))}
           {selectedSample && (
             <InfoWindow
-              onClick={(e) => {
-                console.log('infowindow', e);
-              }}
+              onClick={(e) => {}}
               position={{
                 lat: selectedSample.latitude,
                 lng: selectedSample.longitude,

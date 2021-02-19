@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import GoogleStyle from '../../components/UI/organisms/organisms-list/GoogleMapSt';
 
-const GoogleMapContainer = () => {
+const GoogleMapContainer = React.memo(() => {
   const room = useSelector((state) => state.search.searchRes);
   const {
     locationSearch,
@@ -15,7 +15,14 @@ const GoogleMapContainer = () => {
     bathRoomNum,
   } = useSelector((state) => state.search.searchReq);
   const [roomMap, setRoomMap] = useState([]);
-
+  // console.log('locationSearch', locationSearch);
+  // console.log('checkDateSearch', checkDateSearch);
+  // console.log('guestSearch', guestSearch);
+  // console.log('costSearch', costSearch);
+  // console.log('roomType', roomType);
+  // console.log('bedNum', bedNum);
+  // console.log('bedRoomNum', bedRoomNum);
+  // console.log('bathRoomNum', bathRoomNum);
   useEffect(() => {
     const roomMap = room.map((item) => {
       return {
@@ -46,6 +53,6 @@ const GoogleMapContainer = () => {
       style={{ flexShrink: '1' }}
     />
   );
-};
+});
 
 export default GoogleMapContainer;

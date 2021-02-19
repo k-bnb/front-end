@@ -23,7 +23,6 @@ const ReserveConfirmSection = ({
   cancelBtn,
   cancelModal,
 }) => {
-  console.log(list);
   return (
     <>
       <ReserveConfirmNav active={active} activClick={activClick} />

@@ -15,8 +15,6 @@ const ReserveConfirmNavStyle = styled.div`
   }
 `;
 const ReserveConfirmNav = ({ active, activClick }) => {
-  console.log(active);
-
   return (
     <ReserveConfirmNavStyle onClick={activClick}>
       <div>

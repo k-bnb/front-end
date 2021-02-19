@@ -21,8 +21,6 @@ const FooterContainer = styled.div`
 `;
 
 function ComfirmModalOrganism({ history }) {
-  console.log(history);
-
   const staticChildren = {
     cost: '₩43,000 x 2박',
     cleaningFee: '청소비',

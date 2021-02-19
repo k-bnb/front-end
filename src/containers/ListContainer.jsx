@@ -59,7 +59,7 @@ const ListContainer = () => {
       roomType: item.roomType,
     };
   });
-  console.log(roomMap);
+
   const roomTypes = useCallback(
     (e) => {
       if (e.target.checked) {
@@ -127,7 +127,6 @@ const ListContainer = () => {
 
   const changeCurrentPage = (numPage) => {
     setPageNationState({ currentPage: numPage });
-    console.log(numPage.selected);
 
     const id = numPage.selected - 1;
 

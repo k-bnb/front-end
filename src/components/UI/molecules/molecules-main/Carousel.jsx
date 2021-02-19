@@ -75,8 +75,6 @@ const Carousel = ({ carouselImg }) => {
   const rightClick = (e) => {
     const slide = mySlide.current;
 
-    console.log(slide.offsetWidth);
-    console.log(mySlideImg);
     if (mySlideImg.current.offsetWidth < current) {
       setCurrent((state) => (state = current - slide.offsetWidth));
     }
@@ -89,7 +87,6 @@ const Carousel = ({ carouselImg }) => {
     // slide.style.transform = `translateX(${current})`;
   };
 
-  console.log(current);
   return (
     <CarouselStyle>
       <CircleDiv carouseldiv>

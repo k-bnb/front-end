@@ -9,7 +9,11 @@ const PersonalInfoBirthinputStyle = styled.div`
   }
 `;
 
-const PersonalInfoBirthinput = ({ personInfoChange }) => {
+const PersonalInfoBirthinput = ({
+  personInfoChange,
+  ChangeInputBtn,
+  birth,
+}) => {
   return (
     <PersonalInfoBirthinputStyle>
       <div>
@@ -21,7 +25,9 @@ const PersonalInfoBirthinput = ({ personInfoChange }) => {
           pattern="\d{4}-\d{2}-\d{2}"
         />
       </div>
-      <Button save>저장</Button>
+      <Button onClick={ChangeInputBtn} save>
+        저장
+      </Button>
     </PersonalInfoBirthinputStyle>
   );
 };
