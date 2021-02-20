@@ -4,18 +4,18 @@ import CircleDiv from '../../atoms/atoms-main/DivStyle';
 
 const boxFade = keyframes`
 	0% {
-		width: 0;
-    transform: scale(0);
+
+
 		transform: translateY(100%);
 	}
 	50% {
-		width: 50%;
-    transform: scale(0.5);
+
+    transform: translateY(50%);
 	}
 	100% {
-		width: 100%;
+
     transform: translateY(0%);
-    transform: scale(1);
+
 	}
 `;
 
@@ -23,16 +23,16 @@ const boxFade1 = keyframes`
 	0% {
 		/* width: 0; */
 
-		width: 100%;
+	
     transform: translateY(0%);
 	}
 	50% {
-		width: 50%;
+
     transform: scale(0.5);
 		transform: translateY(70%);
 	}
 	100% {
-    width: 0%;
+
     transform: scale(0);
 		transform: translateY(100%);
 	}
@@ -62,19 +62,20 @@ const Modaldiv = styled.div`
     );
   }}
 `;
-const ReserveCancelModal = ({ children, modalState, cancelModal }) => {
-  const [animation, setAnimation] = useState(false);
-  const [localModalState, setLocalModalState] = useState(modalState);
-  useEffect(() => {
-    if (localModalState && !modalState) {
-      setAnimation(true);
-      setTimeout(() => {
-        setAnimation(false);
-      }, 2000);
-    }
-    setLocalModalState(modalState);
-  }, [localModalState, modalState]);
-  if (!animation && !localModalState) return null;
+const ReserveCancelModal = ({ children, modalState, cancelModal, active }) => {
+  // const [animation, setAnimation] = useState(false);
+  // const [localModalState, setLocalModalState] = useState(modalState);
+  // useEffect(() => {
+  //   if (localModalState && !modalState) {
+  //     setAnimation(true);
+  //     setTimeout(() => {
+  //       setAnimation(false);
+  //     }, 2000);
+  //   }
+  //   setLocalModalState(modalState);
+  // }, [localModalState, modalState]);
+  // if (!animation && !localModalState) return null;
+
   return (
     <Modaldiv className="bg" disappear={!modalState}>
       <CircleDiv>{children}</CircleDiv>

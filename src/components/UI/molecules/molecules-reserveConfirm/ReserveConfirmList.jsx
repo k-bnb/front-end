@@ -11,10 +11,13 @@ import ReserveCancel from './ReserveCancel';
 const ReserveConfirmListStyle = styled.div`
   /* border: 1px solid; */
   width: 100%;
-  max-width: 300px;
+  max-width: 340px;
   border-radius: 10px;
   margin-top: 20px;
+
+  margin-right: 2%;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+
   img {
     border-radius: 10px;
   }
@@ -94,6 +97,7 @@ const ReserveConfirmList = ({
   cancelBtn,
   cancelModal,
 }) => {
+  console.log(item);
   return (
     <ReserveConfirmListStyle>
       <div className="Big-img">
@@ -131,27 +135,18 @@ const ReserveConfirmList = ({
       <div className="reserve-more">
         {item.status === '예약 완료' && (
           <>
-            <Button onClick={cancel}>
+            <Button
+              name="예약 취소"
+              value={item.reservationId}
+              onClick={cancel}
+            >
               <TextStyle>예약 취소</TextStyle>
             </Button>
-
-            <Modal>
-              <ReserveCancelModal
-                cancelModal={cancelModal}
-                modalState={modalState}
-              >
-                <ReserveCancel
-                  item={item}
-                  cancel={cancel}
-                  cancelBtn={cancelBtn}
-                />
-              </ReserveCancelModal>
-            </Modal>
           </>
         )}
-        {item.status === '이전 예약' && (
+        {item.status === '완료된 여정' && (
           <Button>
-            <TextStyle>리스트 제거</TextStyle>
+            <TextStyle>후기 작성</TextStyle>
           </Button>
         )}
       </div>
