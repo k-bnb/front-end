@@ -6,6 +6,7 @@ import PointItemBox from '../../UI/molecules/molecules-detail/PointItemBox';
 import ReviewItem from '../../UI/molecules/molecules-detail/ReviewItem';
 import { requestComments } from '../../../lib/api/detail';
 import LoaderIcon from 'react-loader-icon';
+// import Text from '../../UI/atoms/atoms-detail/DetailText';
 
 const slideUp = keyframes`
   0% {
@@ -62,15 +63,16 @@ const ReviewModalBlock = styled.div`
 
   .review-modal-form {
     width: 95%;
-    max-width: 1000px;
-    height: 92vh;
+    max-width: 1032px;
+    height: 90vh;
     border-radius: 15px;
-    padding: 0 20px 20px 20px;
+    padding: 0 0 20px 20px;
     background-color: white;
-    margin: 0 auto;
+    margin: 40px auto 40px;
     position: relative;
-    overflow-y: auto;
+    overflow-y: none;
     animation: ${slideUp} 0.4s ease;
+    overflow: hidden;
 
     ${(props) =>
       props.disappear &&
@@ -96,28 +98,42 @@ const ReviewModalBlock = styled.div`
     }
   }
   .review-modal-top {
+    display: contents;
     background-color: white;
-
     width: 100%;
     max-width: 960px;
     position: fixed;
     z-index: 1;
     height: 120px;
   }
+
+  .gradeBox {
+    display: flex;
+    font-size: 32px;
+    font-weight: bolder;
+    margin-top: 40px;
+    padding-bottom: 28px;
+
+    span {
+      margin-top: 8px;
+    }
+  }
+
   .review-modal-bottom {
     overflow-y: scroll !important;
-    margin-top: 100px;
-    height: fit-content;
+    max-height: 100%;
     display: flex;
     justify-content: space-between;
+    overflow: hidden;
   }
   .review-itemBox-container {
-    margin-top: 40px;
+    /* margin-top: 32px; */
     width: 37%;
   }
   .review-modal-list {
     width: 63%;
-    margin-top: 40px;
+    padding: 0 8px;
+    margin-left: 8%;
     list-style: none;
     /* background-color: yellowgreen; */
   }
@@ -133,6 +149,7 @@ const ReviewModal = ({
   setShowReviewModal,
   infoRes,
   roomId,
+  detailObj,
 }) => {
   const [loading, setLoading] = useState(false);
   const [localShowReviewModal, setLocalShowReviewModal] = useState(
@@ -191,6 +208,7 @@ const ReviewModal = ({
     }
     setLocalShowReviewModal(showReviewModal);
   }, [localShowReviewModal, showReviewModal]);
+  const itemScore = detailObj.roomAverageScore;
 
   if (!localShowReviewModal && !showAnimation) return null;
   return (
@@ -210,16 +228,41 @@ const ReviewModal = ({
               setShowReviewModal(false);
             }}
           />
-          <Grade reviewModal={true} grade="4.96점" />
+          <div className="gradeBox">
+            <Grade reviewModal={true} grade={infoRes.grade} />
+            <span>점 (후기 {infoRes.commentCount}개)</span>
+          </div>
         </div>
         <div className="review-modal-bottom">
           <div className="review-itemBox-container">
-            <PointItemBox textItem="의사소통" point="5.0" reviewModal={true} />
-            <PointItemBox textItem="위치" point="4.8" reviewModal={true} />
-            <PointItemBox textItem="체크인" point="4.9" reviewModal={true} />
+            <PointItemBox
+              textItem="청결도"
+              point={itemScore.cleanliness}
+              reviewModal={true}
+            />
+            <PointItemBox
+              textItem="정확성"
+              point={itemScore.accuracy}
+              reviewModal={true}
+            />
+            <PointItemBox
+              textItem="의사소통"
+              point={itemScore.communication}
+              reviewModal={true}
+            />
+            <PointItemBox
+              textItem="위치"
+              point={itemScore.locationRate}
+              reviewModal={true}
+            />
+            <PointItemBox
+              textItem="체크인"
+              point={itemScore.checkIn}
+              reviewModal={true}
+            />
             <PointItemBox
               textItem="가격 대비 만족도"
-              point="4.8"
+              point={itemScore.priceSatisfaction}
               reviewModal={true}
             />
           </div>

@@ -7,6 +7,11 @@ const ItemBox = styled.div`
   margin-bottom: 16px;
   justify-content: space-between;
   width: 100%;
+  ${(props) =>
+    props.reviewModal &&
+    css`
+      margin-bottom: 12px;
+    `}
 `;
 const TextBox = styled.div`
   width: 100%;
@@ -58,7 +63,7 @@ const Pointnumber = styled(Text)`
 
 const PointItemBox = ({ textItem, point, reviewModal }) => {
   return (
-    <ItemBox className="basic-flex">
+    <ItemBox className="basic-flex" reviewModal={reviewModal}>
       <TextBox>
         <Text big reviewModal={reviewModal}>
           {textItem}

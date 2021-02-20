@@ -36,6 +36,8 @@ const UserImg = styled.img`
 
 const WriterData = styled(Text)`
   margin-left: 12px;
+  margin-bottom: 3px;
+  line-height: 20px;
 `;
 
 const ReviewText = styled(Text)`
@@ -45,25 +47,29 @@ const ReviewText = styled(Text)`
 const ReviewItem = ({
   name = '사람1',
   date = '2020년 1월',
-  content = '마지못해 있었습니다.',
+  content = '너무 좋았고, 편안하게 머물렀습니다.',
   userImgUrl,
-}) => (
-  <ReviewListItem>
-    <ImgDataContainer className="basic-flex">
-      <UserImg src={userImgUrl} alt="user 사진" />
-      <WriterOfReview>
-        <WriterData big bold block noPadding>
-          {name}
-        </WriterData>
-        <WriterData gray block noPadding>
-          {date}
-        </WriterData>
-      </WriterOfReview>
-    </ImgDataContainer>
-    <ReviewText big block>
-      {content}
-    </ReviewText>
-  </ReviewListItem>
-);
+}) => {
+  const commentDate = date.split('-');
+  console.log(commentDate[0]);
+  return (
+    <ReviewListItem>
+      <ImgDataContainer className="basic-flex">
+        <UserImg src={userImgUrl} alt="user 사진" />
+        <WriterOfReview>
+          <WriterData big bold block noPadding>
+            {name}
+          </WriterData>
+          <WriterData gray block noPadding>
+            {commentDate[0]}년 {commentDate[1]}월
+          </WriterData>
+        </WriterOfReview>
+      </ImgDataContainer>
+      <ReviewText big block>
+        {content}
+      </ReviewText>
+    </ReviewListItem>
+  );
+};
 
 export default ReviewItem;
