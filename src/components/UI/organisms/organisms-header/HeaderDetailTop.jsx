@@ -27,7 +27,14 @@ const PositioningBox = styled.div`
   margin: 0 auto;
 `;
 
-const HeaderDetailTop = ({ isScrolled, isClicked }) => {
+const HeaderDetailTop = ({
+  isScrolled,
+  isClicked,
+  formState,
+  setFormState,
+  modal,
+  setModal,
+}) => {
   return (
     <HeaderDetailTopBlock isScrolled={isScrolled} isClicked={isClicked}>
       <PositioningBox>
@@ -38,7 +45,12 @@ const HeaderDetailTop = ({ isScrolled, isClicked }) => {
             숙소
           </Text>
         )}
-        <ProfileToggleModalContainer />
+        <ProfileToggleModalContainer
+          formState={formState}
+          setFormState={setFormState}
+          modal={modal}
+          setModal={setModal}
+        />
       </PositioningBox>
     </HeaderDetailTopBlock>
   );

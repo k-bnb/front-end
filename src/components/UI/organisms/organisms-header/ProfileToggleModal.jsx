@@ -25,6 +25,9 @@ const ProfileToggleModal = ({
   dispatch,
   reservationClick,
   userInfoClick,
+  modal,
+  setModal,
+  detailPageBtn,
 }) => {
   const handleOnClick = () => {
     setIsOpen(!isOpen); // 토글로 모달창을 켜고 닫는다.
@@ -46,6 +49,8 @@ const ProfileToggleModal = ({
           dispatch={dispatch}
           reservationClick={reservationClick}
           userInfoClick={userInfoClick}
+          modal={modal}
+          setModal={setModal}
         />
       )}
     </ProfileToggleBlock>

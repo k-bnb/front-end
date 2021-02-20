@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
 const ReservationBtn = styled.button`
@@ -16,6 +16,11 @@ const ReservationBtn = styled.button`
   white-space: nowrap;
   transition: opacity 1.25s ease 0s;
   cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:active {
+    transform: scale(0.95);
+  }
 
   ${(props) =>
     props.half &&
@@ -24,9 +29,21 @@ const ReservationBtn = styled.button`
     `}
 `;
 
-const ReserveBtn = ({ half, DetailHeaderRef, moveToReserve }) => (
-  <ReservationBtn half={half} ref={DetailHeaderRef} onClick={moveToReserve}>
-    예약하기
-  </ReservationBtn>
-);
+const ReserveBtn = ({ half, DetailHeaderRef }) => {
+  const determineShowAuthModal = () => {
+    const token = localStorage.getItem('token');
+
+    if (token) return;
+  };
+
+  return (
+    <ReservationBtn
+      half={half}
+      ref={DetailHeaderRef}
+      onClick={determineShowAuthModal}
+    >
+      예약하기
+    </ReservationBtn>
+  );
+};
 export default ReserveBtn;

@@ -6,6 +6,8 @@ import OneDayPrice from '../../molecules/molecules-detail/OneDayPrice';
 import PriceDetail from '../../molecules/molecules-detail/PriceDetail';
 import TotalPrice from '../../molecules/molecules-detail/TotalPrice';
 import moment from 'moment';
+import Modal from '../../../../portal/Modal';
+import AuthModalContainer from '../../../../containers/AuthModalContainer';
 
 const PositionBox = styled.div`
   position: sticky;
@@ -39,35 +41,41 @@ const BookingInfo = ({
   moveToReserve,
   detailObj,
   infoRes,
+  detailAuthModal,
+  setDetailAuthModal,
 }) => {
   const StartDate = moment(detailObj.startDate);
   const EndDate = moment(detailObj.endDate);
   const totalSchedule = EndDate.diff(StartDate, 'days');
 
   return (
-    <PositionBox>
-      <BookingInfoContainer>
-        <OneDayPrice infoRes={infoRes} />
-        <DatePersonBox detailObj={detailObj} />
-        <ReserveBtn
-          DetailHeaderRef={DetailHeaderRef}
-          moveToReserve={moveToReserve}
-        ></ReserveBtn>
-        <span className="notice">
-          예약 확정 전에는 요금이 청구되지 않습니다.
-        </span>
-        <PriceDetail
-          infoRes={infoRes}
-          detailObj={detailObj}
-          totalSchedule={totalSchedule}
-        />
-        <TotalPrice
-          infoRes={infoRes}
-          detailObj={detailObj}
-          totalSchedule={totalSchedule}
-        />
-      </BookingInfoContainer>
-    </PositionBox>
+    <>
+      <PositionBox>
+        <BookingInfoContainer>
+          <OneDayPrice infoRes={infoRes} />
+          <DatePersonBox detailObj={detailObj} />
+          <ReserveBtn
+            DetailHeaderRef={DetailHeaderRef}
+            moveToReserve={moveToReserve}
+            detailAuthModal={detailAuthModal}
+            setDetailAuthModal={setDetailAuthModal}
+          ></ReserveBtn>
+          <span className="notice">
+            예약 확정 전에는 요금이 청구되지 않습니다.
+          </span>
+          <PriceDetail
+            infoRes={infoRes}
+            detailObj={detailObj}
+            totalSchedule={totalSchedule}
+          />
+          <TotalPrice
+            infoRes={infoRes}
+            detailObj={detailObj}
+            totalSchedule={totalSchedule}
+          />
+        </BookingInfoContainer>
+      </PositionBox>
+    </>
   );
 };
 

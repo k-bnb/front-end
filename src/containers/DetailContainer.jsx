@@ -18,6 +18,7 @@ const DetailContainer = () => {
   const [showModal, setShowModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
   const [current, setCurrent] = useState(0); // 현재 보는 사진의 index
+
   const DetailHeaderRef = useRef();
   const ImageContainerRef = useRef();
   const reviewRef = useRef();
@@ -39,6 +40,7 @@ const DetailContainer = () => {
   );
 
   const detailObj = useSelector((state) => state.detail);
+
   const { roomImgUrlList } = useSelector((state) => state.detail.infoRes);
 
   const { startDate: checkIn, endDate: checkOut } = useSelector(

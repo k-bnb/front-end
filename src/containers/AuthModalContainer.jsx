@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginOraganisms from '../components/UI/organisms/organisms-modals-auth/LoginOraganisms';
 import RegisterOrganism from '../components/UI/organisms/organisms-modals-auth/RegisterOrganism';
-// import client from '../lib/api/client';
 import {
   changeInput,
   clearError,
@@ -20,6 +19,7 @@ const AuthModalContainer = ({
   setFormState,
   isOpen,
   setIsOpen,
+  fromDetailPageBtn,
 }) => {
   const dispatch = useDispatch();
 

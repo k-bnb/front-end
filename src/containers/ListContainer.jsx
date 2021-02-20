@@ -47,6 +47,8 @@ const ListContainer = () => {
   const room = useSelector((state) => state.search.searchRes);
   const totalPage = useSelector((state) => state.search.totalPage);
 
+  const [formState, setFormState] = useState(null); // 초기값은 null, 로그인 버튼 누르면 login으로, 회원가입 누르면 'register'
+
   const roomMap = room.map((item) => {
     return {
       id: item.id,
@@ -151,7 +153,7 @@ const ListContainer = () => {
 
   return (
     <>
-      <HeaderContainer />
+      <HeaderContainer formState={formState} setFormState={setFormState} />
       <ListTemplate
         searchModalState={searchModalState}
         setSearchModalState={setSearchModalState}

@@ -46,9 +46,9 @@ const ProfileToggleItems = ({
   dispatch,
   reservationClick,
   userInfoClick,
+  modal,
+  setModal,
 }) => {
-  const [modal, setModal] = useState(false);
-
   const displayLoginModal = (e) => {
     e.preventDefault();
 

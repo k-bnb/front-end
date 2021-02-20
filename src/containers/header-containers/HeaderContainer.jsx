@@ -30,6 +30,9 @@ const HeaderContainer = ({
   const [navModalState, setNavModalState] = useState(initialNavModalState); // 조건검색 모달 4개 open 여부
   const [isClickedOutside, setIsClickedOutside] = useState(false); // 어두운 영역 클릭시 전체 조건 초기화
 
+  const [modal, setModal] = useState(false); // authmodal 렌더링
+  const [formState, setFormState] = useState(null); // 초기값은 null, 로그인 버튼 누르면 login으로, 회원가입 누르면 'register'
+
   const SearchTypeHandler = (searchType) => {
     setNavModalState({ ...initialNavModalState, [searchType]: true }); // 전달받은 타입값만 true로 설정.
   };
@@ -95,8 +98,11 @@ const HeaderContainer = ({
           guestSearch={guestSearch}
           moveFocusNext={moveFocusNext}
           clickHandler={clickHandler}
+          formState={formState}
+          setFormState={setFormState}
         />
       )}
+
       {history.location.pathname === '/rooms' && (
         <HeaderList
           isScrolled={isScrolled}
@@ -112,6 +118,10 @@ const HeaderContainer = ({
           guestSearch={guestSearch}
           moveFocusNext={moveFocusNext}
           clickHandler={clickHandler}
+          formState={formState}
+          setFormState={setFormState}
+          modal={modal}
+          setModal={setModal}
         />
       )}
       {match.params.roomId && (
@@ -133,6 +143,10 @@ const HeaderContainer = ({
           ImageContainerRef={ImageContainerRef}
           reviewRef={reviewRef}
           facilityRef={facilityRef}
+          formState={formState}
+          setFormState={setFormState}
+          modal={modal}
+          setModal={setModal}
         />
       )}
     </>

@@ -31,7 +31,6 @@ const BlackOutsideRange = styled.div`
 
 const HeaderDetail = ({
   isScrolled,
-  // setIsScrolled,
   isClicked,
   setIsClicked,
   navModalState,
@@ -48,9 +47,14 @@ const HeaderDetail = ({
   ImageContainerRef,
   reviewRef,
   facilityRef,
+  formState,
+  setFormState,
+  modal,
+  setModal,
 }) => {
   const showButton = useOnScreen(DetailHeaderRef, '-80px'); // detail header가 스크롤 된 경우, 예약하기 버튼이 가려지면 헤더에 뜬다
   const showDetailHeader = useOnScreen(ImageContainerRef, '0px'); // 사진5개 가지고있는 컨테이너를 뷰포트가 지나면 헤더가 생긴다.
+
   return (
     <>
       {isClicked && (
@@ -75,6 +79,10 @@ const HeaderDetail = ({
             isScrolled={isScrolled}
             isClicked={isClicked}
             detailHeader={true}
+            formState={formState}
+            setFormState={setFormState}
+            modal={modal}
+            setModal={setModal}
           />
           <HeaderDetailSearchNavContainer
             isScrolled={isScrolled}
