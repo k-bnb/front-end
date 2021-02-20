@@ -27,7 +27,7 @@ const RESERVATION_CANCEL_SUCCESS = 'user/RESERVATION_CANCEL_SUCCESS';
 const RESERVATION_CANCEL_FAILURE = 'user/RESERVATION_CANCEL_FAILURE';
 
 // 유저의 숙소 삭제
-export const reservation_cancel = createAction(
+export const reservationCancel = createAction(
   RESERVATION_CANCEL,
   ({ token, reservationId, name, reason }) => ({
     token,
@@ -127,6 +127,11 @@ const user = handleActions(
         draft.userRes.reserveCancelRes = payload;
       });
     },
+    [RESERVATION_CANCEL_FAILURE]: (state, { payload }) => {
+      return produce(state, (draft) => {
+        draft.reserveError = payload;
+      });
+    },
   },
   initialState,
 );
@@ -152,7 +157,8 @@ const changeInputPersonSaga = createRequestSaga(
 
 const reserveCancel = createRequestSaga(
   RESERVATION_CANCEL,
-  (token, reservationId) => API.reserveCancel(token, reservationId),
+  (token, reservationId, name, reason) =>
+    API.reserveCancel(token, reservationId, name, reason),
 );
 
 export function* userSaga() {

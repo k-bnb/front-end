@@ -26,6 +26,9 @@ const ReserveConfirmTemplate = ({
   listModal,
   cancelModalState,
   roomId,
+  resonChange,
+  miniModal,
+  miniModalCancelBtn,
 }) => {
   return (
     <ReserveConfirmTemplateStyle>
@@ -44,6 +47,9 @@ const ReserveConfirmTemplate = ({
         listModal={listModal}
         cancelModalState={cancelModalState}
         roomId={roomId}
+        resonChange={resonChange}
+        miniModal={miniModal}
+        miniModalCancelBtn={miniModalCancelBtn}
       />
       <ReserveConfirmFooter />
     </ReserveConfirmTemplateStyle>

@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ReserveConfirmTemplate from '../components/templates/templates-reseveconfirm/ReserveConfirmTemplate';
-
+import { reservationCancel, reserveConfirm } from '../modules/user';
 const ReserveConfirmContainer = () => {
   const [active, setActive] = useState('예약 완료');
   const [list, setList] = useState([]);
+  const [reason, setReason] = useState('');
   // const [reservationId, setReservationId] = useState('');
   const [modalState, setModalState] = useState(false);
   const [cancelModal, setCancelModal] = useState('');
   const reserveRes = useSelector((state) => state.user);
   const [listModal, setListModal] = useState([]);
+  const { name } = useSelector((person) => person.user.userRes);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (reserveRes.reserveRes === null) return;
@@ -44,8 +47,8 @@ const ReserveConfirmContainer = () => {
 
   const [cancelModalState, setcancelModalState] = useState(false);
   const [roomId, setRoomId] = useState('');
+  const [miniModal, setMiniModal] = useState(false);
 
-  let reservationId = null;
   const cancel = (e) => {
     setCancelModal('후기 작성');
     const openModalId =
@@ -60,8 +63,32 @@ const ReserveConfirmContainer = () => {
     setcancelModalState(!cancelModalState);
   };
 
+  // 모달 안에 작은 모달
+  const miniModalCancelBtn = () => {
+    setMiniModal(!miniModal);
+
+    dispatch(reserveConfirm({ token }));
+  };
+
+  const resonChange = (e) => {
+    setReason(e.target.value);
+  };
+  const { token } = useSelector((state) => state.auth);
+  console.log(token);
+
   const reservationConfirmBtn = (e) => {
-    console.log(e.target.name, e.target.value);
+    dispatch(
+      reservationCancel({
+        token,
+        reservationId: +e.target.value,
+        name: name,
+        reason: reason,
+      }),
+    );
+    // 아 왜 404가 뜨는 거야
+
+    setMiniModal(!miniModal);
+    setcancelModalState(!cancelModalState);
   };
   return (
     <ReserveConfirmTemplate
@@ -73,10 +100,12 @@ const ReserveConfirmContainer = () => {
       cancelBtn={cancelBtn}
       cancelModal={cancelModal}
       reservationConfirmBtn={reservationConfirmBtn}
-      reservationId={reservationId}
       listModal={listModal}
       cancelModalState={cancelModalState}
       roomId={roomId}
+      resonChange={resonChange}
+      miniModal={miniModal}
+      miniModalCancelBtn={miniModalCancelBtn}
     />
   );
 };
