@@ -7,7 +7,7 @@ const EmptyReviewContainer = styled.div`
   max-width: 1128px;
   padding: 48px 0;
   margin: 0 auto;
-  border: 1px solid rgb(221, 221, 221);
+  /* border-bottom: 1px solid rgb(221, 221, 221); */
 `;
 
 const NoReviewHeader = styled.h2`
@@ -18,14 +18,20 @@ const NoReviewHeader = styled.h2`
 `;
 const NoReviewInfo = styled.div`
   padding: 0 8px;
-  width: 33.33%auto;
+  width: 35%;
   margin-right: 8.3%;
   font-size: 24px;
   display: flex;
 `;
-const InfoText = styled(Text)`
+
+const ImoticonBox = styled(Text)`
+  font-size: 24px;
   margin-right: 16px;
-  line-height: 24px;
+`;
+
+const InfoText = styled(Text)`
+  /* margin-right: 16px; */
+  line-height: 20px;
   word-break: break-word;
 `;
 
@@ -33,9 +39,11 @@ const EmptyReview = () => (
   <EmptyReviewContainer>
     <NoReviewHeader>후기 (아직) 없음</NoReviewHeader>
     <NoReviewInfo>
-      <VscGlobe />
+      <ImoticonBox block>
+        <VscGlobe />
+      </ImoticonBox>
       <div>
-        <InfoText big>
+        <InfoText big noPadding>
           여행에 차질이 없도록 최선을 다해 도와드리겠습니다. 모든 예약은{' '}
           <Text big underline bold>
             에어비앤비의 게스트 환불 정책
