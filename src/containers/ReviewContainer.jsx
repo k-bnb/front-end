@@ -1,4 +1,5 @@
 import React from 'react';
+import EmptyReview from '../components/UI/molecules/molecules-detail/EmptyReview';
 import Review from '../components/UI/organisms/organisms-detail/Review';
 
 const ReviewContainer = ({
@@ -8,7 +9,9 @@ const ReviewContainer = ({
   infoRes,
   detailObj,
 }) => {
-  return (
+  return detailObj.commentCount === 0 ? (
+    <EmptyReview />
+  ) : (
     <Review
       infoRes={infoRes}
       reviewRef={reviewRef}
