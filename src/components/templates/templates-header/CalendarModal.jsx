@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // import styled, { css } from 'styled-components';
 import CalendarNew from '../../../calendar/CalendarNew';
 
@@ -13,7 +13,7 @@ import CalendarNew from '../../../calendar/CalendarNew';
 // `;
 
 const CalendarModal = ({ navModalState, setNavModalState, moveFocusNext }) => {
-  const [selected, setSelected] = useState(false);
+  // const [selected, setSelected] = useState(false);
 
   return (
     <CalendarNew

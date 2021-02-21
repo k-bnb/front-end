@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BiWon } from 'react-icons/bi';
 import Text from '../../atoms/atoms-detail/DetailText';
 
 const PriceList = styled.li`
@@ -37,12 +36,6 @@ const PriceItem = styled.span`
   white-space: nowrap;
 `;
 
-const WonIcon = styled(BiWon)`
-  display: inline;
-  margin-right: 0px;
-  color: #444;
-`;
-
 const PriceListItem = ({ icon, detail, price }) => (
   <>
     <PriceList>
@@ -53,8 +46,9 @@ const PriceListItem = ({ icon, detail, price }) => (
         </DetailItemBtn>
       </DetailItem>
       <PriceItem>
-        <Text gray big>
-          <WonIcon />
+        <Text gray big noPadding>
+          {' '}
+          ₩{' '}
         </Text>
         {price}{' '}
       </PriceItem>

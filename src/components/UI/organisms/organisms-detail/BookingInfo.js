@@ -64,6 +64,7 @@ const BookingInfo = ({
           detailObj={detailObj}
           isCalendarOpen={isCalendarOpen}
           setIsCalendarOpen={setIsCalendarOpen}
+          infoRes={infoRes}
         />
         <ReserveBtn
           moveToReserve={moveToReserve}

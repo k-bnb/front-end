@@ -28,7 +28,7 @@ const ReserveConfirmNav = ({ active, activClick }) => {
       <div>
         <Button
           name="이전 예약"
-          className={active === '이전 예약' ? 'active' : ''}
+          className={active === '완료된 여정' ? 'active' : ''}
         >
           이전 예약
         </Button>

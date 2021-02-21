@@ -1,21 +1,19 @@
 import styled, { keyframes, css } from 'styled-components';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CircleDiv from '../../atoms/atoms-main/DivStyle';
 
 const boxFade = keyframes`
 	0% {
-		width: 0;
-    transform: scale(0);
 		transform: translateY(100%);
 	}
 	50% {
-		width: 50%;
-    transform: scale(0.5);
+
+    transform: translateY(50%);
 	}
 	100% {
-		width: 100%;
+
     transform: translateY(0%);
-    transform: scale(1);
+
 	}
 `;
 
@@ -23,16 +21,16 @@ const boxFade1 = keyframes`
 	0% {
 		/* width: 0; */
 
-		width: 100%;
+	
     transform: translateY(0%);
 	}
 	50% {
-		width: 50%;
+
     transform: scale(0.5);
 		transform: translateY(70%);
 	}
 	100% {
-    width: 0%;
+
     transform: scale(0);
 		transform: translateY(100%);
 	}
@@ -57,26 +55,32 @@ const Modaldiv = styled.div`
     return (
       props.disappear &&
       css`
-        animation: ${boxFade1} 0.2s ease-in alternate forwards;
+        animation: ${boxFade1} 0.4s ease-in alternate forwards;
       `
     );
   }}
 `;
-const ReserveCancelModal = ({ children, modalState, cancelModal }) => {
+const ReserveCancelModal = ({
+  children,
+  cancelModalState,
+  cancelModal,
+  active,
+}) => {
   const [animation, setAnimation] = useState(false);
-  const [localModalState, setLocalModalState] = useState(modalState);
+  const [localModalState, setLocalModalState] = useState(cancelModalState);
   useEffect(() => {
-    if (localModalState && !modalState) {
+    if (localModalState && !cancelModalState) {
       setAnimation(true);
       setTimeout(() => {
         setAnimation(false);
       }, 2000);
     }
-    setLocalModalState(modalState);
-  }, [localModalState, modalState]);
+    setLocalModalState(cancelModalState);
+  }, [localModalState, cancelModalState]);
   if (!animation && !localModalState) return null;
+
   return (
-    <Modaldiv className="bg" disappear={!modalState}>
+    <Modaldiv className="bg" disappear={!cancelModalState}>
       <CircleDiv>{children}</CircleDiv>
     </Modaldiv>
   );

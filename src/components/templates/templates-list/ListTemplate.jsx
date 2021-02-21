@@ -1,10 +1,19 @@
 import ListStyle from '../../UI/organisms/organisms-list/ListsSt';
-import GoogleStyle from '../../UI/organisms/organisms-list/GoogleMapSt';
+import GoogleMapContainer from '../../../containers/google-map-container/GoogleMapContainer';
 import FooterFake from '../../UI/organisms/organisms-list/FooterFake';
 import HeadStyle from '../../UI/organisms/organisms-list/HeadStyle';
 import LoadingModal from '../LoadingModal';
 import React from 'react';
-import GoogleMapContainer from '../../../containers/google-map-container/GoogleMapContainer';
+import styled from 'styled-components';
+
+const ListTemplateStyled = styled.div`
+  .list:hover{
+    .map{
+      background:black;
+    }
+  }
+`
+
 const ListTemplate = ({
   searchModalState,
   setSearchModalState,
@@ -39,9 +48,13 @@ const ListTemplate = ({
   changeCurrentPage,
   pageNationState,
   search,
+  localMinCost,
+  setLocalMinCost,
+  localMaxCost,
+  setLocalMaxCost
 }) => {
   return (
-    <>
+    <ListTemplateStyled>
       <div>
         <HeadStyle
           searchModalState={searchModalState}
@@ -59,11 +72,14 @@ const ListTemplate = ({
           minusBtn={minusBtn}
           plusBtn={plusBtn}
           searchBtn={searchBtn}
-          costState={costState}
           search={search}
+          localMinCost={localMinCost}
+          setLocalMinCost={setLocalMinCost}
+          localMaxCost={localMaxCost}
+          setLocalMaxCost={setLocalMaxCost}
         />
-        <div style={{ display: 'flex' }}>
-          <div style={{ display: 'block' }}>
+        <div className='list-map' style={{ display: 'flex' }}>
+          <div className='list' style={{ display: 'block' }}>
             <ListStyle
               room={room}
               totalPage={totalPage}
@@ -79,12 +95,14 @@ const ListTemplate = ({
               guestSearch={guestSearch}
             />
           </div>
-          <GoogleMapContainer />
+          <div className='map'>
+            <GoogleMapContainer />
+          </div>
         </div>
         <FooterFake />
       </div>
       {isLoading && <LoadingModal />}
-    </>
+    </ListTemplateStyled>
   );
 };
 // function areEqual1(prevProps, nextProps) {

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { BiWon } from 'react-icons/bi';
 import { getTotalPrice } from '../../../../modules/detail';
 
 const TotalPriceBox = styled.ul`
@@ -38,10 +37,7 @@ const TotalPrice = ({ infoRes, totalSchedule }) => {
   return (
     <TotalPriceBox>
       <TotalText>총 합계</TotalText>
-      <Total>
-        <BiWon />
-        {entireCost}
-      </Total>
+      <Total>₩ {entireCost}</Total>
     </TotalPriceBox>
   );
 };

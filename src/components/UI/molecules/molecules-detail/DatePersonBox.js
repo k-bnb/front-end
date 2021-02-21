@@ -88,6 +88,7 @@ const DatePersonBox = ({
   setIsCalendarOpen,
   peopleLimit,
   detailObj,
+  infoRes,
 }) => {
   const [isOpen, setIsOpen] = useState(false); // detail page에서 모달창 열고닫기 기능구현
 
@@ -122,7 +123,7 @@ const DatePersonBox = ({
           <GuestNumberModal
             detailPage={true}
             setIsOpen={setIsOpen}
-            peopleLimit={peopleLimit}
+            infoRes={infoRes}
           />
         )}
       </Personnel>

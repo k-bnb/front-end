@@ -2,7 +2,6 @@ import { createAction, handleActions } from 'redux-actions';
 import createRequestSaga from '../lib/createRequestSaga';
 import * as API from '../lib/api/detail';
 import { takeLatest } from 'redux-saga/effects';
-import produce from 'immer';
 // Action Type
 const SEARCH_TO_DETAIL = 'detail/SEARCH_TO_DETAIL';
 const DATE_CHANGE_DETAIL = 'detail/DATE_CHANGE_DETAIL';
@@ -104,14 +103,14 @@ const initialStates = {
     },
     commentList: [],
     roomImgUrlList: [],
-    roomAverageScore: {
-      cleanliness: null,
-      accuracy: null,
-      communication: null,
-      locationRate: null,
-      checkIn: null,
-      priceSatisfaction: null,
-    },
+  },
+  roomAverageScore: {
+    cleanliness: 0,
+    accuracy: 0,
+    communication: 0,
+    locationRate: 0,
+    checkIn: 0,
+    priceSatisfaction: 0,
   },
   totalCost: 0,
   CancellableDate: {},
@@ -174,25 +173,27 @@ const detail = handleActions(
       state,
       {
         payload: {
-          cleanliness,
           accuracy,
+          checkIn,
+          cleanliness,
           communication,
           locationRate,
-          checkIn,
           priceSatisfaction,
         },
       },
-    ) =>
-      produce(state, (draft) => {
-        draft.infoRes.roomAverageScore = {
-          cleanliness,
+    ) => {
+      return {
+        ...state,
+        roomAverageScore: {
           accuracy,
+          checkIn,
+          cleanliness,
           communication,
           locationRate,
-          checkIn,
           priceSatisfaction,
-        };
-      }),
+        },
+      };
+    },
   },
   initialStates,
 );

@@ -38,8 +38,7 @@ export const userInfoRemake = ({ token, name, birth, email }) => {
   const body = { name, birth, email };
 
   const headers = { headers: { Authorization: `Bearer ${token}` } };
-  console.log(body);
-  console.log(headers);
+
   return client.post('http://3.34.198.174:8080/user/update', body, headers);
 };
 
@@ -50,9 +49,15 @@ export const reserveCancel = ({ token, reservationId, name, reason }) => {
     reason,
   };
 
-  const headers = { headers: { Authorization: `Bearer ${token}` } };
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  console.log(body);
+  console.log(headers);
 
-  client.delete(
+  return client.delete(
     `http://3.34.198.174:8080/reservation?reservationId=${reservationId}`,
     body,
     headers,

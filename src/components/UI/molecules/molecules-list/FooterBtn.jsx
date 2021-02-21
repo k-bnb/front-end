@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { costInput } from '../../../../modules/search';
 import Button from '../../atoms/atoms-main/Button';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
 
@@ -21,10 +22,45 @@ const FooterBtnStyle = styled.div`
   }
 `;
 
-const FooterBtn = ({ searchBtn }) => {
+const FooterBtn = ({
+  localMinCost,
+  localMaxCost,
+  dispatch
+  }) => {
+
+  //   const searchBtn = ()=> {
+  //   if (localMinCost) {
+  //     setCostState((state) => ({
+  //       ...state,
+  //       minCostState: true,
+  //       minCostPay: costSearch.minCost,
+  //     }));
+  //   }   
+  //   if (localMaxCost) {
+  //     setCostState((state) => ({
+  //       ...state,
+  //       maxCostState: true,
+  //       maxCostPay: costSearch.maxCost,
+  //     }));
+  //   }
+  //   else{setCostState((state) => ({
+  //       minCostState: false,
+  //       minCostPay: '',
+  //       maxCostState: false,
+  //       maxCostPay: '',
+  //     }))
+  //   };
+  // }
+
+  const changeCostRange = () => {
+    // if (co)
+    dispatch(costInput('minCost', localMinCost));
+    dispatch(costInput('maxCost', localMaxCost));
+  };
+
   return (
     <FooterBtnStyle>
-      <Button onClick={searchBtn}>
+      <Button onClick={changeCostRange}>
         <TextStyle>저장</TextStyle>
       </Button>
     </FooterBtnStyle>

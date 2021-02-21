@@ -18,15 +18,16 @@ const CHANGE_INPUT_PERSON_SUBMIT = 'user/CHANGE_INPUT_PERSON_SUBMIT';
 const CHANGE_INPUT_PERSON_SUBMIT_SUCCESS = 'user/CHANGE_INPUT_PERSON_SUBMIT';
 const CHANGE_INPUT_PERSON_SUBMIT_FAILURE = 'user/CHANGE_INPUT_PERSON_SUBMIT';
 
-const CHANGE_INPUT_PERSON = 'person/CHANGE_INPUT_PERSON';
-const CHANGE_INPUT_IMG_PERSON = 'person/CHANGE_INPUT_IMG_PERSON';
+const CHANGE_INPUT_PERSON = 'user/CHANGE_INPUT_PERSON';
+const CHANGE_INPUT_IMG_PERSON = 'user/CHANGE_INPUT_IMG_PERSON';
 
+// 예약 취소
 const RESERVATION_CANCEL = 'user/RESERVATION_CANCEL';
 const RESERVATION_CANCEL_SUCCESS = 'user/RESERVATION_CANCEL_SUCCESS';
 const RESERVATION_CANCEL_FAILURE = 'user/RESERVATION_CANCEL_FAILURE';
 
 // 유저의 숙소 삭제
-export const reservation_cancel = createAction(
+export const reservationCancel = createAction(
   RESERVATION_CANCEL,
   ({ token, reservationId, name, reason }) => ({
     token,
@@ -100,13 +101,12 @@ const user = handleActions(
       });
     },
     [CHANGE_INPUT_PERSON]: (state, { payload }) => {
-      console.log(payload);
       return produce(state, (draft) => {
         draft.userRes[payload.name] = payload.value;
       });
     },
     [CHANGE_INPUT_IMG_PERSON]: (state, { payload }) => {
-      console.log(payload);
+      sessionStorage.setItem('userInfoImg', JSON.stringify(payload.value));
       return produce(state, (draft) => {
         draft.userRes.imageUrl = payload.value;
       });
@@ -124,6 +124,11 @@ const user = handleActions(
     [RESERVATION_CANCEL_SUCCESS]: (state, { payload }) => {
       return produce(state, (draft) => {
         draft.userRes.reserveCancelRes = payload;
+      });
+    },
+    [RESERVATION_CANCEL_FAILURE]: (state, { payload }) => {
+      return produce(state, (draft) => {
+        draft.reserveError = payload;
       });
     },
   },
@@ -151,7 +156,8 @@ const changeInputPersonSaga = createRequestSaga(
 
 const reserveCancel = createRequestSaga(
   RESERVATION_CANCEL,
-  (token, reservationId) => API.reserveCancel(token, reservationId),
+  (token, reservationId, name, reason) =>
+    API.reserveCancel(token, reservationId, name, reason),
 );
 
 export function* userSaga() {
