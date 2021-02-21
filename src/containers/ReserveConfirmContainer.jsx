@@ -49,7 +49,6 @@ const ReserveConfirmContainer = () => {
     }
     setModalState(true);
   };
-  console.log(reservationId);
 
   // 취소 x 버튼
   const cancelBtn = (e) => {
@@ -60,6 +59,34 @@ const ReserveConfirmContainer = () => {
     console.log(list.filter((item) => item.reservationId === e.target.value));
     console.log(e.target.name, e.target.value);
   };
+
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  // review modal 상태
+  const [reviewModalState, setReviewModalState] = useState(false);
+  const [roomId, setRoomId] = useState('');
+
+  const review = (e) => {
+    setCancelModal('후기 작성');
+    const openModalId =
+      list.find((item) => +item.reservationId === +e.target.value)
+        .reservationId + '';
+    setRoomId(openModalId);
+    setReviewModalState(!reviewModalState);
+  };
+
+  console.log(roomId);
+
   return (
     <ReserveConfirmTemplate
       list={list}
@@ -71,6 +98,10 @@ const ReserveConfirmContainer = () => {
       cancelModal={cancelModal}
       reservationConfirmBtn={reservationConfirmBtn}
       reservationId={reservationId}
+      reviewModalState={reviewModalState}
+      setReviewModalState={setReviewModalState}
+      review={review}
+      roomId={roomId}
     />
   );
 };

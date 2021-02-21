@@ -96,8 +96,8 @@ const ReserveConfirmList = ({
   cancel,
   cancelBtn,
   cancelModal,
+  review,
 }) => {
-  console.log(item);
   return (
     <ReserveConfirmListStyle>
       <div className="Big-img">
@@ -145,7 +145,7 @@ const ReserveConfirmList = ({
           </>
         )}
         {item.status === '완료된 여정' && (
-          <Button>
+          <Button name="후기 작성" value={item.reservationId} onClick={review}>
             <TextStyle>후기 작성</TextStyle>
           </Button>
         )}

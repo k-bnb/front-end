@@ -47,6 +47,17 @@ const StyledSpan = styled.span`
       padding-top: 10px;
       color: rgb(113, 113, 113);
     `}
+
+    ${(props) =>
+    props.starName &&
+    css`
+      display: block;
+      font-size: 18px;
+      font-weight: 700;
+      color: #484848;
+      padding-left: 5px;
+      margin: 10px 0;
+    `}
 `;
 
 function CommonText({ children, ...rest }) {
