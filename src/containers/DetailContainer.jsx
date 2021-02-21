@@ -114,6 +114,7 @@ const DetailContainer = () => {
           setShowReviewModal={setShowReviewModal}
           infoRes={infoRes}
           roomId={roomId}
+          detailObj={detailObj}
         />
       </Modal>
     </>

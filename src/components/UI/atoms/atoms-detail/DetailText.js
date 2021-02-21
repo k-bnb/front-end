@@ -80,6 +80,21 @@ const TextBlock = styled.span`
     props.lineHight &&
     css`
       line-height: 22px;
+    `} 
+    ${(props) =>
+    props.flex &&
+    css`
+      display: flex;
+    `} 
+    ${(props) =>
+    props.bottom &&
+    css`
+      vertical-align: bottom;
+    `} 
+    ${(props) =>
+    props.reviewModal &&
+    css`
+      font-size: 14px;
     `} /* ${(props) =>
     props.after &&
     props.black &&
