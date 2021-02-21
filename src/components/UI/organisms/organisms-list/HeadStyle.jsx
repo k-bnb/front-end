@@ -3,7 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
 
 const PcSize = styled.main`
-  width: 100vw;
+  /* width: 100vw; */ //이거있으면 가로스크롤생김.
   /* padding-top:100px; */
   display: flex;
 `;
@@ -27,6 +27,10 @@ const HeadStyle = ({
   searchBtn,
   costState,
   search,
+  localMinCost,
+  setLocalMinCost,
+  localMaxCost,
+  setLocalMaxCost,
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
@@ -37,7 +41,6 @@ const HeadStyle = ({
   const isMobile = useMediaQuery({
     query: `(max-width: 743px)`, //744px 이하인 경우에만 적용(744이하.)
   });
-
   return (
     <>
       {isPc && (
@@ -60,6 +63,10 @@ const HeadStyle = ({
             searchBtn={searchBtn}
             costState={costState}
             search={search}
+            localMinCost={localMinCost}
+            setLocalMinCost={setLocalMinCost}
+            localMaxCost={localMaxCost}
+            setLocalMaxCost={setLocalMaxCost}
           />
         </PcSize>
       )}
@@ -82,6 +89,7 @@ const HeadStyle = ({
             plusBtn={plusBtn}
             searchBtn={searchBtn}
             costState={costState}
+            search={search}
           />
         </TabletSize>
       )}
@@ -104,6 +112,7 @@ const HeadStyle = ({
             plusBtn={plusBtn}
             searchBtn={searchBtn}
             costState={costState}
+            search={search}
           />
         </MobileSize>
       )}
