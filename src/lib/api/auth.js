@@ -58,7 +58,7 @@ export const reserveCancel = ({ token, reservationId, name, reason }) => {
   console.log(headers);
 
   return client.delete(
-    `http://3.34.198.174:8080/reservationId?reservationId=${reservationId}`,
+    `http://3.34.198.174:8080/reservation?reservationId=${reservationId}`,
     body,
     headers,
   );

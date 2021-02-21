@@ -43,6 +43,7 @@ const PersonalTemplate = ({
   ChangeInputBtn,
   userInfo,
   setFix,
+  loading,
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 900px)',
@@ -69,6 +70,7 @@ const PersonalTemplate = ({
           ChangeInputBtn={ChangeInputBtn}
           userInfo={userInfo}
           setFix={setFix}
+          loading={loading}
         />
         {isPc && (
           <PcDiv>
