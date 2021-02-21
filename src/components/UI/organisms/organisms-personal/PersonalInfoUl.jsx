@@ -55,6 +55,7 @@ const PersonalInfoUl = ({
   setFix,
   loading,
 }) => {
+  console.log(userInfo.imageUrl);
   return (
     <PersonalInfoUIStyle onClick={fix.cancel ? cancelclick : fixInfoBtn}>
       <PersonalInfoLi>

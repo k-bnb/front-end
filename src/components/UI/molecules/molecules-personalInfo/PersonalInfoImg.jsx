@@ -154,7 +154,7 @@ const PersonalInfoImg = ({
         body,
         headers,
       );
-
+      console.log(res);
       sessionStorage.setItem(
         'userInfo',
         JSON.stringify({ name, email, birth, imageUrl: res.data.newImgUrl }),
