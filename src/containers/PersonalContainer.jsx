@@ -73,30 +73,32 @@ const PersonalContainer = () => {
     setFix((state) => '');
   };
 
-  const inputFocus = (e) => {};
   const ChangeInputBtn = () => {
     dispatch(changeInputPersonSubmit({ token, name, email, birth }));
-    setFix((state) => ({
-      name: false,
-      img: false,
-      birth: false,
-      emailAddress: false,
-      cancel: true,
-    }));
+    setTimeout(() => {
+      setFix((state) => ({
+        name: false,
+        img: false,
+        birth: false,
+        emailAddress: false,
+        cancel: true,
+      }));
+    }, 1000);
+
     sessionStorage.setItem(
       'userInfo',
       JSON.stringify({ name, email, birth, imageUrl }),
     );
   };
   const personInfoChange = (e) => {
-    if (e.target.name === 'imageUrl') {
-      const imgArr = e.target.files[0];
-      console.log(imgArr);
-      return;
-    } else {
-      dispatch(changeInputPerson(e.target.name, e.target.value));
-    }
+    if (e.target.name === 'imageUrl') return;
+
+    dispatch(changeInputPerson(e.target.name, e.target.value));
   };
+  const loading = useSelector(
+    (lo) => lo.loading['user/CHANGE_INPUT_PERSON_SUBMIT'],
+  );
+
   return (
     <PersonalTemplate
       fixInfoBtnCancel={fixInfoBtnCancel}
@@ -109,9 +111,9 @@ const PersonalContainer = () => {
       email={email}
       birth={birth}
       imageUrl={imageUrl}
-      inputFocus={inputFocus}
       ChangeInputBtn={ChangeInputBtn}
       userInfo={userInfo}
+      loading={loading}
     />
   );
 };

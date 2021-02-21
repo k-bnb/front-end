@@ -101,13 +101,12 @@ const user = handleActions(
       });
     },
     [CHANGE_INPUT_PERSON]: (state, { payload }) => {
-      console.log(payload);
       return produce(state, (draft) => {
         draft.userRes[payload.name] = payload.value;
       });
     },
     [CHANGE_INPUT_IMG_PERSON]: (state, { payload }) => {
-      console.log(payload);
+      sessionStorage.setItem('userInfoImg', JSON.stringify(payload.value));
       return produce(state, (draft) => {
         draft.userRes.imageUrl = payload.value;
       });
