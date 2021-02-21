@@ -64,34 +64,32 @@ const AuthModalContainer = ({
   const onChange = async (e) => {
     dispatch(changeInput(formState, e.target.name, e.target.value));
   };
-  // kymtest123@gmail.com
-  // 123456789!!xptmxm
+
   const onLoginSubmit = async (e) => {
     e.preventDefault();
+    dispatch(clearError('login'));
     dispatch(startLoading('auth/LOGIN'));
     try {
       const response = await API.login({
         email: loginEmail,
         password: loginPassword,
       });
-      console.log(response.data);
-      await dispatch({ type: 'auth/LOGIN_SUCCESS', payload: response.data });
+      localStorage.setItem('token', response.data.accessToken);
       if (!loginError) {
-        await delay(1500).then(() => {
+        await delay(1000).then(() => {
           dispatch(finishLoading('auth/LOGIN'));
-          setIsOpen(false);
-          return;
+          setModal(false);
+          dispatch({ type: 'auth/LOGIN_SUCCESS', payload: response.data });
         });
       }
     } catch (e) {
-      console.log(e.response.data);
-      await dispatch({ type: 'auth/LOGIN_FAILURE', payload: e.response.data });
+      dispatch({ type: 'auth/LOGIN_FAILURE', payload: e.response.data });
       if (loginError) {
         setServerLoginError(e.response.data);
       }
     }
 
-    delay(1500).then(() => dispatch(finishLoading('auth/LOGIN')));
+    delay(1000).then(() => dispatch(finishLoading('auth/LOGIN')));
   };
 
   useEffect(() => {
@@ -107,16 +105,26 @@ const AuthModalContainer = ({
   }, [registerError]);
 
   useEffect(() => {
+    document.body.style.overflowY = 'hidden';
     return () => {
       dispatch(clearError('login'));
       dispatch(clearError('register'));
       dispatch(initialzeInput('login'));
       dispatch(initialzeInput('register'));
+      setIsFirst({
+        emailInput: true,
+        nameInput: true,
+        passwordInput: true,
+        dateInput: true,
+      });
+
+      document.body.style.overflowY = 'unset';
     };
-  }, []);
+  }, [formState]);
 
   const onRegisterSubmit = async (e) => {
     e.preventDefault();
+    dispatch(clearError('register'));
     dispatch(startLoading('auth/REGISTER'));
     try {
       const response = await API.register({
@@ -125,17 +133,15 @@ const AuthModalContainer = ({
         password: registerPassword,
         birth: birth,
       });
-      console.log(response.data);
-      await dispatch({ type: 'auth/REGISTER_SUCCESS', payload: response.data });
+      localStorage.setItem('token', response.data.accessToken);
       if (!registerError) {
-        delay(1500).then(() => {
+        await delay(1000).then(() => {
           dispatch(finishLoading('auth/REGISTER'));
-          setIsOpen(false);
-          return;
+          setModal(false);
+          dispatch({ type: 'auth/REGISTER_SUCCESS', payload: response.data });
         });
       }
     } catch (e) {
-      console.log(e.response.data);
       await dispatch({
         type: 'auth/REGISTER_FAILURE',
         payload: e.response.data,
@@ -144,7 +150,7 @@ const AuthModalContainer = ({
         setServerLoginError(e.response.data);
       }
     }
-    delay(1500).then(() => dispatch(finishLoading('auth/REGISTER')));
+    delay(1000).then(() => dispatch(finishLoading('auth/REGISTER')));
   };
 
   const changeRegister = () => {
@@ -173,6 +179,7 @@ const AuthModalContainer = ({
           setServerLoginError={setServerLoginError}
           isLoading={isLoading}
           loginError={loginError}
+          dispatch={dispatch}
         />
       )}
       {formState === 'register' && (
@@ -194,6 +201,7 @@ const AuthModalContainer = ({
           serverRegisterError={serverRegisterError}
           setServerRegisterError={setServerRegisterError}
           isLoading={isLoading}
+          dispatch={dispatch}
         />
       )}
     </>

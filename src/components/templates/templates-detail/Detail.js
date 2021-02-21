@@ -53,8 +53,16 @@ const Detail = ({
   roomImgUrlList,
   showReviewModal,
   setShowReviewModal,
+  modal,
+  setModal,
+  isOpen,
+  setIsOpen,
+  formState,
+  setFormState,
+  bookingInfoRef,
+  isCalendarOpen,
+  setIsCalendarOpen,
 }) => {
-  // const strStartDate = detailObj.startDate;
   const CheckInDate = () => {
     const strDate = detailObj.startDate.split('-');
     return { year: strDate[0], month: strDate[1], day: strDate[2] };
@@ -89,6 +97,15 @@ const Detail = ({
           infoRes={infoRes}
           detailObj={detailObj}
           CancellableDate={CancellableDate}
+          modal={modal}
+          setModal={setModal}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          formState={formState}
+          setFormState={setFormState}
+          bookingInfoRef={bookingInfoRef}
+          isCalendarOpen={isCalendarOpen}
+          setIsCalendarOpen={setIsCalendarOpen}
         />
         <ReviewContainer
           reviewRef={reviewRef}

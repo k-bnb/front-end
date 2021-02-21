@@ -15,7 +15,6 @@ const InputContainer = styled.div`
   input {
     height: 100%;
     box-sizing: border-box;
-    /* margin-bottom: 10px; */
   }
   svg {
     color: rgba(0, 0, 0, 0.4);

@@ -1,9 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-// import { GrFormClose } from 'react-icons/gr';
-// import { FiCircle } from 'react-icons/fi';
-// import { BsCheck } from 'react-icons/bs';
-// import { AiOutlineCheck } from 'react-icons/ai';
 import { IoIosClose } from 'react-icons/io';
 import { FcCheckmark } from 'react-icons/fc';
 

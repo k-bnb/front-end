@@ -10,6 +10,15 @@ const HeaderContainer = ({
   ImageContainerRef,
   reviewRef,
   facilityRef,
+  modal,
+  setModal,
+  isOpen,
+  setIsOpen,
+  formState,
+  setFormState,
+  bookingInfoRef,
+  isCalendarOpen,
+  setIsCalendarOpen,
 }) => {
   const history = useHistory();
   const match = useRouteMatch();
@@ -133,6 +142,15 @@ const HeaderContainer = ({
           ImageContainerRef={ImageContainerRef}
           reviewRef={reviewRef}
           facilityRef={facilityRef}
+          modal={modal}
+          setModal={setModal}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          formState={formState}
+          setFormState={setFormState}
+          bookingInfoRef={bookingInfoRef}
+          isCalendarOpen={isCalendarOpen}
+          setIsCalendarOpen={setIsCalendarOpen}
         />
       )}
     </>

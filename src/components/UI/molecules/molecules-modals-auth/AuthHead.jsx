@@ -18,8 +18,12 @@ const Container = styled.div`
     justify-content: center;
     margin-left: 10px;
     align-items: center;
+    transition-duration: 0.3s;
     svg {
       font-size: 15px;
+    }
+    &:active {
+      transform: scale(0.95);
     }
   }
   span {

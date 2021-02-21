@@ -1,5 +1,5 @@
 import React from 'react';
-import ProfileToggleModalContainer from '../../../../containers/header-containers/ProfileToggleModalContainer';
+import DetailProfileToggleModalContainer from '../../../../containers/header-containers/DetailProfileToggleModalContainer';
 import Logo from '../../atoms/atoms-header/Logo';
 import Text from '../../atoms/atoms-header/Text';
 import styled, { css } from 'styled-components';
@@ -27,7 +27,16 @@ const PositioningBox = styled.div`
   margin: 0 auto;
 `;
 
-const HeaderDetailTop = ({ isScrolled, isClicked }) => {
+const HeaderDetailTop = ({
+  isScrolled,
+  isClicked,
+  modal,
+  setModal,
+  isOpen,
+  setIsOpen,
+  formState,
+  setFormState,
+}) => {
   return (
     <HeaderDetailTopBlock isScrolled={isScrolled} isClicked={isClicked}>
       <PositioningBox>
@@ -38,7 +47,14 @@ const HeaderDetailTop = ({ isScrolled, isClicked }) => {
             숙소
           </Text>
         )}
-        <ProfileToggleModalContainer />
+        <DetailProfileToggleModalContainer
+          modal={modal}
+          setModal={setModal}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          formState={formState}
+          setFormState={setFormState}
+        />
       </PositioningBox>
     </HeaderDetailTopBlock>
   );
