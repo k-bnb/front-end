@@ -24,9 +24,29 @@ const ReservationBtn = styled.button`
     `}
 `;
 
-const ReserveBtn = ({ half, DetailHeaderRef, moveToReserve }) => (
-  <ReservationBtn half={half} ref={DetailHeaderRef} onClick={moveToReserve}>
-    예약하기
-  </ReservationBtn>
-);
+const ReserveBtn = ({
+  half,
+  DetailHeaderRef,
+  moveToReserve,
+  NoBookingDate,
+}) => {
+  if (!NoBookingDate) {
+    return (
+      <ReservationBtn half={half} ref={DetailHeaderRef} onClick={moveToReserve}>
+        예약하기
+      </ReservationBtn>
+    );
+  } else {
+    return (
+      <ReservationBtn
+        half={half}
+        ref={DetailHeaderRef}
+        onClick={moveToReserve}
+        NoBookingDate={NoBookingDate}
+      >
+        예약 가능 여부 보기
+      </ReservationBtn>
+    );
+  }
+};
 export default ReserveBtn;

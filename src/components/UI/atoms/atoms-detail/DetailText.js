@@ -92,6 +92,11 @@ const TextBlock = styled.span`
       vertical-align: bottom;
     `} 
     ${(props) =>
+    props.bottom &&
+    css`
+      align-items: baseline;
+    `} 
+    ${(props) =>
     props.reviewModal &&
     css`
       font-size: 14px;

@@ -59,6 +59,7 @@ const SelectionDate = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 14px;
 `;
 
 const SelectionInfo = ({ text, date }) => (
@@ -94,11 +95,14 @@ const DatePersonBox = ({ detailObj, infoRes }) => {
           setIsCalendarOpen(true);
         }}
       >
-        <SelectionInfo text="체크인" date={detailObj.startDate} />
+        <SelectionInfo
+          text="체크인"
+          date={detailObj.startDate ? detailObj.startDate : '날짜 추가'}
+        />
         <SelectionInfo
           className="divider"
           text="체크아웃"
-          date={detailObj.endDate}
+          date={detailObj.endDate ? detailObj.endDate : '날짜 추가'}
         />
         {isCalendarOpen && (
           <CalendarDetail setIsCalendarOpen={setIsCalendarOpen} />

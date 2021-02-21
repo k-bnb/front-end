@@ -22,7 +22,7 @@ const BookingInfoContainer = styled.div`
   border: 1px solid rgb(221, 221, 221);
   border-radius: 12px;
   margin-top: 48px;
-  padding: 24px;
+  padding: 14px 24px 24px;
   box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
 
   .notice {
@@ -43,32 +43,48 @@ const BookingInfo = ({
   const StartDate = moment(detailObj.startDate);
   const EndDate = moment(detailObj.endDate);
   const totalSchedule = EndDate.diff(StartDate, 'days');
-
-  return (
-    <PositionBox>
-      <BookingInfoContainer>
-        <OneDayPrice infoRes={infoRes} />
-        <DatePersonBox detailObj={detailObj} infoRes={infoRes} />
-        <ReserveBtn
-          DetailHeaderRef={DetailHeaderRef}
-          moveToReserve={moveToReserve}
-        ></ReserveBtn>
-        <span className="notice">
-          예약 확정 전에는 요금이 청구되지 않습니다.
-        </span>
-        <PriceDetail
-          infoRes={infoRes}
-          detailObj={detailObj}
-          totalSchedule={totalSchedule}
-        />
-        <TotalPrice
-          infoRes={infoRes}
-          detailObj={detailObj}
-          totalSchedule={totalSchedule}
-        />
-      </BookingInfoContainer>
-    </PositionBox>
-  );
+  console.log(detailObj.startDate);
+  if (detailObj.startDate === '' || detailObj.endDate === '') {
+    return (
+      <PositionBox>
+        <BookingInfoContainer>
+          <OneDayPrice infoRes={infoRes} detailObj={detailObj} />
+          <DatePersonBox detailObj={detailObj} infoRes={infoRes} />
+          <ReserveBtn
+            DetailHeaderRef={DetailHeaderRef}
+            moveToReserve={moveToReserve}
+            NoBookingDate
+          />
+        </BookingInfoContainer>
+      </PositionBox>
+    );
+  } else {
+    return (
+      <PositionBox>
+        <BookingInfoContainer>
+          <OneDayPrice infoRes={infoRes} detailObj={detailObj} />
+          <DatePersonBox detailObj={detailObj} infoRes={infoRes} />
+          <ReserveBtn
+            DetailHeaderRef={DetailHeaderRef}
+            moveToReserve={moveToReserve}
+          />
+          <span className="notice">
+            예약 확정 전에는 요금이 청구되지 않습니다.
+          </span>
+          <PriceDetail
+            infoRes={infoRes}
+            detailObj={detailObj}
+            totalSchedule={totalSchedule}
+          />
+          <TotalPrice
+            infoRes={infoRes}
+            detailObj={detailObj}
+            totalSchedule={totalSchedule}
+          />
+        </BookingInfoContainer>
+      </PositionBox>
+    );
+  }
 };
 
 export default BookingInfo;
