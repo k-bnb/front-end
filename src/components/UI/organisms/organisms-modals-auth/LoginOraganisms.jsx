@@ -24,6 +24,7 @@ const LoginOraganisms = ({
   serverLoginError,
   setServerLoginError,
   isLoading,
+  dispatch,
 }) => {
   return (
     <ModalTemplate modal={modal} setModal={setModal} onSubmit={onSubmit}>
@@ -59,7 +60,7 @@ const LoginOraganisms = ({
           setFormState('register');
         }}
       />
-      <BackLogin />
+      {/* <BackLogin /> */}
     </ModalTemplate>
   );
 };

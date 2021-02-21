@@ -8,6 +8,12 @@ const AuthButton = styled.button`
   background-color: rgb(255, 90, 95);
   border-radius: 5px;
   cursor: pointer;
+  transition-duration: 0.3s;
+
+  &:active {
+    transform: scale(0.95);
+  }
+
   span {
     color: #eee;
     font-size: 1.4rem;

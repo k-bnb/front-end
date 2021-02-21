@@ -52,8 +52,16 @@ const Detail = ({
   setShowReviewModal,
   detailAuthModal,
   setDetailAuthModal,
+  modal,
+  setModal,
+  isOpen,
+  setIsOpen,
+  formState,
+  setFormState,
+  bookingInfoRef,
+  isCalendarOpen,
+  setIsCalendarOpen,
 }) => {
-  // const strStartDate = detailObj.startDate;
   const CheckInDate = () => {
     const strDate = detailObj.startDate.split('-');
     return { year: strDate[0], month: strDate[1], day: strDate[2] };
@@ -90,6 +98,15 @@ const Detail = ({
           CancellableDate={CancellableDate}
           detailAuthModal={detailAuthModal}
           setDetailAuthModal={setDetailAuthModal}
+          modal={modal}
+          setModal={setModal}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          formState={formState}
+          setFormState={setFormState}
+          bookingInfoRef={bookingInfoRef}
+          isCalendarOpen={isCalendarOpen}
+          setIsCalendarOpen={setIsCalendarOpen}
         />
         <ReviewContainer
           reviewRef={reviewRef}

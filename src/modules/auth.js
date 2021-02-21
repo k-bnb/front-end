@@ -50,12 +50,12 @@ const initialState = {
   register: {
     name: '',
     birth: '',
-    email: '',
-    password: '',
+    registerEmail: '',
+    registerPassword: '',
   },
   login: {
-    email: '',
-    password: '',
+    loginEmail: '',
+    loginPassword: '',
   },
   token: null,
   registerError: null,
@@ -83,7 +83,7 @@ const auth = handleActions(
 
     [INITIALIZE_INPUT]: (state, { payload: { form } }) => ({
       ...state,
-      [form]: initialState,
+      [form]: initialState[form],
     }),
     // 성공시 response.data
     [REGISTER_SUCCESS]: (_, { payload: { accessToken } }) => {
@@ -91,16 +91,9 @@ const auth = handleActions(
       localStorage.setItem('token', accessToken);
       return { ...initialState, token: accessToken };
     },
-    // [REGISTER_FAILURE]: (state, action) => {
-    //   console.log(action);
-    //   return {
-    //     ...state,
-    //     registerError: action.payload.error,
-    //   };
-    // },
 
-    [REGISTER_FAILURE]: (_, { payload }) => ({
-      ...initialState,
+    [REGISTER_FAILURE]: (state, { payload }) => ({
+      ...state,
       registerError: payload.code,
     }),
 
@@ -109,8 +102,8 @@ const auth = handleActions(
       return { ...initialState, token: accessToken };
     },
 
-    [LOGIN_FAILURE]: (_, { payload }) => ({
-      ...initialState,
+    [LOGIN_FAILURE]: (state, { payload }) => ({
+      ...state,
       loginError: payload.code,
     }),
 

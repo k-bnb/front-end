@@ -47,10 +47,15 @@ const HeaderDetail = ({
   ImageContainerRef,
   reviewRef,
   facilityRef,
+  isOpen,
+  setIsOpen,
   formState,
   setFormState,
   modal,
   setModal,
+  bookingInfoRef,
+  isCalendarOpen,
+  setIsCalendarOpen,
 }) => {
   const showButton = useOnScreen(DetailHeaderRef, '-80px'); // detail header가 스크롤 된 경우, 예약하기 버튼이 가려지면 헤더에 뜬다
   const showDetailHeader = useOnScreen(ImageContainerRef, '0px'); // 사진5개 가지고있는 컨테이너를 뷰포트가 지나면 헤더가 생긴다.
@@ -69,7 +74,7 @@ const HeaderDetail = ({
           <div className="black-outside-boundary"></div>
         </BlackOutsideRange>
       )}
-      {showDetailHeader && (
+      {
         <HeaderDetailBlock
           isClicked={isClicked}
           isScrolled={isScrolled}
@@ -79,6 +84,8 @@ const HeaderDetail = ({
             isScrolled={isScrolled}
             isClicked={isClicked}
             detailHeader={true}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
             formState={formState}
             setFormState={setFormState}
             modal={modal}
@@ -100,13 +107,20 @@ const HeaderDetail = ({
             clickHandler={clickHandler}
           />
         </HeaderDetailBlock>
-      )}
+      }
       {!showDetailHeader && (
         <HeaderDetailScrolledContainer
           DetailHeaderRef={DetailHeaderRef}
+          bookingInfoRef={bookingInfoRef}
           showButton={showButton}
           reviewRef={reviewRef}
           facilityRef={facilityRef}
+          formState={formState}
+          setFormState={setFormState}
+          modal={modal}
+          setModal={setModal}
+          isCalendarOpen={isCalendarOpen}
+          setIsCalendarOpen={setIsCalendarOpen}
         />
       )}
     </>

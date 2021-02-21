@@ -27,7 +27,6 @@ const ProfileToggleModal = ({
   userInfoClick,
   modal,
   setModal,
-  detailPageBtn,
 }) => {
   const handleOnClick = () => {
     setIsOpen(!isOpen); // 토글로 모달창을 켜고 닫는다.

@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
-// import Text from '../../atoms/atoms-header/Text';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import Modal from '../../../../portal/Modal';
-import AuthModalContainer from '../../../../containers/AuthModalContainer';
 import { logout } from '../../../../modules/auth';
 
 const ProfileToggleItemUl = styled.ul`
@@ -54,6 +51,7 @@ const ProfileToggleItems = ({
 
     setFormState('login');
     setModal(true);
+    setIsOpen(false);
   };
 
   const displayRegisterModal = (e) => {
@@ -61,6 +59,7 @@ const ProfileToggleItems = ({
 
     setFormState('register');
     setModal(true);
+    setIsOpen(false);
   };
 
   const clickOutside = (e) => {
@@ -126,18 +125,6 @@ const ProfileToggleItems = ({
           </>
         )}
       </ProfileToggleItemUl>
-      {modal && (
-        <Modal>
-          <AuthModalContainer
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            modal={modal}
-            setModal={setModal}
-            formState={formState}
-            setFormState={setFormState}
-          />
-        </Modal>
-      )}
     </>
   );
 };
