@@ -70,7 +70,6 @@ const ReviewModalBlock = styled.div`
     background-color: white;
     margin: 40px auto 40px;
     position: relative;
-    overflow-y: none;
     animation: ${slideUp} 0.4s ease;
     overflow: hidden;
 
@@ -98,7 +97,7 @@ const ReviewModalBlock = styled.div`
     }
   }
   .review-modal-top {
-    display: contents;
+    display: block;
     background-color: white;
     width: 100%;
     max-width: 960px;
@@ -119,6 +118,10 @@ const ReviewModalBlock = styled.div`
     }
   }
 
+  .wrapper {
+    width: 100%;
+    height: 120px;
+  }
   .review-modal-bottom {
     overflow-y: scroll !important;
     max-height: 100%;
@@ -127,7 +130,7 @@ const ReviewModalBlock = styled.div`
     overflow: hidden;
   }
   .review-itemBox-container {
-    /* margin-top: 32px; */
+    margin-top: 32px;
     width: 37%;
   }
   .review-modal-list {
@@ -135,12 +138,6 @@ const ReviewModalBlock = styled.div`
     padding: 0 8px;
     margin-left: 8%;
     list-style: none;
-    /* background-color: yellowgreen; */
-  }
-  .last-li {
-    height: 10px;
-    width: 100%;
-    background-color: green;
   }
 `;
 
@@ -158,12 +155,11 @@ const ReviewModal = ({
   const [showAnimation, setShowAnimation] = useState(false);
 
   const [pageNum, setPageNum] = useState(0);
-  const totalPage = useRef(null); // 전체 페이지 2
+  const totalPage = useRef(null);
   const [reviewsArr, setReviewsArr] = useState([]); // 리뷰 리스트
 
   const getComments = async (pageNum) => {
     if (totalPage.current === pageNum) return;
-
     setLoading(true);
     const response = await requestComments(roomId, pageNum); // 데이터 요청.
     if (response.data.allComments._embedded) {
@@ -174,13 +170,13 @@ const ReviewModal = ({
       setPageNum((pageNum) => pageNum + 1);
       setReviewsArr([...reviewsArr, ...newComments]);
     }
-
     setLoading(false);
   };
 
   // 모달창이 열리면 초기 댓글을 받아오고 전체 페이지 수를 가져온다.
   useEffect(() => {
     getComments(0);
+    console.log(reviewsArr);
   }, []);
 
   const observer = useRef();
@@ -191,7 +187,9 @@ const ReviewModal = ({
       if (observer.current) observer.current.disconnect();
 
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) getComments(pageNum);
+        if (entries[0].isIntersecting) {
+          getComments(pageNum);
+        }
       });
 
       if (node) observer.current.observe(node);
@@ -235,6 +233,7 @@ const ReviewModal = ({
         </div>
         <div className="review-modal-bottom">
           <div className="review-itemBox-container">
+            <div className="wrapper"></div>
             <PointItemBox
               textItem="청결도"
               point={itemScore.cleanliness}
@@ -267,7 +266,9 @@ const ReviewModal = ({
             />
           </div>
           <ul className="review-modal-list">
+            <li className="wrapper"></li>
             {reviewsArr.map((review, index) => {
+              console.log(index);
               if (reviewsArr.length === index + 1) {
                 return (
                   <li className="review-item" ref={lastCommentElementRef}>

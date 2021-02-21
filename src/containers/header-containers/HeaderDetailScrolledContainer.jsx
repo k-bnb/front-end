@@ -16,6 +16,7 @@ const HeaderDetailScrolledContainer = ({
   setIsCalendarOpen,
 }) => {
   const { startDate, endDate } = useSelector((state) => state.detail);
+  const { grade } = useSelector((state) => state.detail.infoRes);
 
   const scrollToHandler = (Ycoord) => {
     window.scrollTo({ top: Ycoord, behavior: 'smooth' }); // 전달받은 y 좌표로 스크롤 이동
@@ -42,6 +43,7 @@ const HeaderDetailScrolledContainer = ({
       bookingInfoRef={bookingInfoRef}
       isCalendarOpen={isCalendarOpen}
       setIsCalendarOpen={setIsCalendarOpen}
+      grade={grade}
     />
   );
 };

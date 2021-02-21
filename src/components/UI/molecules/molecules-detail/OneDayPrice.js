@@ -33,7 +33,7 @@ const OneDayPrice = ({ infoRes }) => (
       <Price> ₩ {infoRes.roomCost}</Price>
       <PriceInner>/박</PriceInner>
     </PriceBox>
-    <Grade grade={infoRes.grade} />
+    <Grade grade={infoRes.grade} infobox={true} />
     {/* ({infoRes.commentCount}) */}
   </PriceInfo>
 );

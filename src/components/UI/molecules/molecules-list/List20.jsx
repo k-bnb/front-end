@@ -249,12 +249,6 @@ const ULWrap = styled.ul`
       }
     }
   }
-  /* .allList:active{
-    .slide-group>.slide>.slideDiv>.slick-slider>.slick-arrow.slick-prev{
-      opacity:1;
-      transform: translate(0);
-      transform: scale(1.04);
-    } */
 
     hr {
       width: 50px;
@@ -324,13 +318,6 @@ const LodgingLists = ({
     slidesToScroll: 1,
   };
 
-  const { startDate, endDate } = checkDateSearch;
-  const { numOfAdult, numOfKid, numOfInfant } = guestSearch;
-  const totalNum = numOfAdult + numOfKid;
-
-  // console.log(checkDateSearch);
-  // console.log(startDate, endDate);
-
   return (
     <>
       <Wrap className="listWrap">
@@ -354,7 +341,7 @@ const LodgingLists = ({
               </div>
             </Border>
             <Link
-              to={`/detail/${id}?adults=${totalNum}&infants=${numOfInfant}&check_in=${startDate}&check_out=${endDate}`}
+              to={`/detail/${id}`}
               onClick={(e) => {
                 if (e.target.matches('.heart')) {
                   e.preventDefault();
@@ -384,7 +371,8 @@ const LodgingLists = ({
                   <ScoreText grade={grade} commentCount={commentCount} />
                   <TextStyled className="cost" size="blackMiddleBold">
                     <BiWon />
-                    {moneyfilter(cost)}/<TextStyled size="blackMiddle">박</TextStyled>
+                    {moneyfilter(cost)}/
+                    <TextStyled size="blackMiddle">박</TextStyled>
                   </TextStyled>
                 </div>
               </span>

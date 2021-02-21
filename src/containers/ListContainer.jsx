@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import HeaderContainer from './header-containers/HeaderContainer';
 import ListTemplate from '../components/templates/templates-list/ListTemplate';
@@ -21,8 +21,6 @@ const ListContainer = () => {
     bedRoomNum,
     bathRoomNum,
   } = useSelector((state) => state.search.searchReq);
-
-  // console.log(checkDateSearch);
 
   const isLoading = useSelector((state) => state.loading['search/SEARCHING']);
   const search = useSelector((state) => state.search);
@@ -67,8 +65,8 @@ const ListContainer = () => {
     },
     [dispatch],
   );
-  const [localMinCost, setLocalMinCost] = useState(10000);
-  const [localMaxCost, setLocalMaxCost] = useState(1000000);
+  const [localMinCost, setLocalMinCost] = useState(costSearch.minCost);
+  const [localMaxCost, setLocalMaxCost] = useState(costSearch.maxCost);
 
   const num = /^[0-9]*$/;
 
@@ -88,46 +86,6 @@ const ListContainer = () => {
     dispatch(roomnumInput(e.target.name, ++e.target.value));
   };
 
-  const searchBtn = () => {
-    // if (costSearch.minCost) {
-    //   setCostcState((state) => ({
-    //     ...state,
-    //     minCostState: true,
-    //     minCostPay: costSearch.minCost,
-    //   }));
-    // }   
-    // if (costSearch.maxCost) {
-    //   setCostState((state) => ({
-    //     ...state,
-    //     maxCostState: true,
-    //     maxCostPay: costSearch.maxCost,
-    //   }));
-    // }
-    // else{setCostState((state) => ({
-    //     minCostState: false,
-    //     minCostPay: '',
-    //     maxCostState: false,
-    //     maxCostPay: '',
-    //   }))
-    // };
-    const id = 0;
-    dispatch(
-      searching({
-        id,
-        locationSearch,
-        checkDateSearch,
-        guestSearch,
-        costSearch,
-        roomType,
-        bedNum,
-        bedRoomNum,
-        bathRoomNum,
-      }),
-    );
-    setSearchModalState(null);
-  };
-
-  // console.log(costState);
   // pageNation
 
   const [currentButton, setCurrentButton] = useState(0);
@@ -177,7 +135,7 @@ const ListContainer = () => {
         bathRoomNum={bathRoomNum}
         minusBtn={minusBtn}
         plusBtn={plusBtn}
-        searchBtn={searchBtn}
+        // searchBtn={searchBtn}
         room={room}
         totalPage={totalPage}
         roomMap={roomMap}
@@ -196,7 +154,7 @@ const ListContainer = () => {
         setLocalMinCost={setLocalMinCost}
         localMaxCost={localMaxCost}
         setLocalMaxCost={setLocalMaxCost}
-/>
+      />
     </>
   );
 };

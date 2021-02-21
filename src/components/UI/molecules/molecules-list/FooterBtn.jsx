@@ -1,6 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { costInput } from '../../../../modules/search';
+import { costInput, searching } from '../../../../modules/search';
 import Button from '../../atoms/atoms-main/Button';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
 
@@ -25,42 +26,52 @@ const FooterBtnStyle = styled.div`
 const FooterBtn = ({
   localMinCost,
   localMaxCost,
-  dispatch
-  }) => {
+  dispatch,
+  setSearchModalState,
+  modalType,
+}) => {
+  const {
+    locationSearch,
+    checkDateSearch,
+    guestSearch,
+    costSearch,
+    roomType,
+    bedNum,
+    bedRoomNum,
+    bathRoomNum,
+  } = useSelector((state) => state.search.searchReq);
 
-  //   const searchBtn = ()=> {
-  //   if (localMinCost) {
-  //     setCostState((state) => ({
-  //       ...state,
-  //       minCostState: true,
-  //       minCostPay: costSearch.minCost,
-  //     }));
-  //   }   
-  //   if (localMaxCost) {
-  //     setCostState((state) => ({
-  //       ...state,
-  //       maxCostState: true,
-  //       maxCostPay: costSearch.maxCost,
-  //     }));
-  //   }
-  //   else{setCostState((state) => ({
-  //       minCostState: false,
-  //       minCostPay: '',
-  //       maxCostState: false,
-  //       maxCostPay: '',
-  //     }))
-  //   };
-  // }
-
-  const changeCostRange = () => {
-    // if (co)
-    dispatch(costInput('minCost', localMinCost));
-    dispatch(costInput('maxCost', localMaxCost));
+  const searchBtn = () => {
+    const id = 0;
+    console.log(localMinCost);
+    console.log(localMaxCost);
+    console.log(costSearch);
+    dispatch(
+      searching({
+        id,
+        locationSearch,
+        checkDateSearch,
+        guestSearch,
+        costSearch: {
+          minCost: localMinCost,
+          maxCost: localMaxCost,
+        },
+        roomType,
+        bedNum,
+        bedRoomNum,
+        bathRoomNum,
+      }),
+    );
+    if (modalType === 'cash') {
+      dispatch(costInput('minCost', localMinCost));
+      dispatch(costInput('maxCost', localMaxCost));
+    }
+    setSearchModalState(null);
   };
 
   return (
     <FooterBtnStyle>
-      <Button onClick={changeCostRange}>
+      <Button onClick={searchBtn}>
         <TextStyle>저장</TextStyle>
       </Button>
     </FooterBtnStyle>

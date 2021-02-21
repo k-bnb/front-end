@@ -5,7 +5,6 @@ import { BsHeart } from 'react-icons/bs';
 import Text from '../../atoms/atoms-header/Text';
 import ReserveBtn from '../../atoms/atoms-detail/ReserveBtn';
 import Grade from '../../atoms/atoms-detail/Grade';
-import { useSelector } from 'react-redux';
 
 const fadeIn = keyframes`
   0% {
@@ -136,6 +135,7 @@ const HeaderDetailScrolled = ({
   bookingInfoRef,
   isCalendarOpen,
   setIsCalendarOpen,
+  grade,
 }) => {
   const [localShowButton, setLocalShowButton] = useState(showButton);
   const [displayAnimation, setDisplayAnimation] = useState(false);
@@ -206,7 +206,7 @@ const HeaderDetailScrolled = ({
             isCalendarOpen={isCalendarOpen}
             setIsCalendarOpen={setIsCalendarOpen}
           />
-          <Grade small={true} />
+          <Grade small={true} grade={grade} />
         </div>
       )}
     </HeaderDetailScrolledBlock>

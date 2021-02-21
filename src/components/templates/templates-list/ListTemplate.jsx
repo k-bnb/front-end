@@ -7,12 +7,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ListTemplateStyled = styled.div`
-  .list:hover{
-    .map{
-      background:black;
+  .list:hover {
+    .map {
+      background: black;
     }
   }
-`
+`;
 
 const ListTemplate = ({
   searchModalState,
@@ -24,7 +24,6 @@ const ListTemplate = ({
   cost,
   minusBtn,
   plusBtn,
-
   searchBtn,
   costState,
   room,
@@ -51,7 +50,7 @@ const ListTemplate = ({
   localMinCost,
   setLocalMinCost,
   localMaxCost,
-  setLocalMaxCost
+  setLocalMaxCost,
 }) => {
   return (
     <ListTemplateStyled>
@@ -78,8 +77,8 @@ const ListTemplate = ({
           localMaxCost={localMaxCost}
           setLocalMaxCost={setLocalMaxCost}
         />
-        <div className='list-map' style={{ display: 'flex' }}>
-          <div className='list' style={{ display: 'block' }}>
+        <div className="list-map" style={{ display: 'flex' }}>
+          <div className="list" style={{ display: 'block' }}>
             <ListStyle
               room={room}
               totalPage={totalPage}
@@ -95,7 +94,7 @@ const ListTemplate = ({
               guestSearch={guestSearch}
             />
           </div>
-          <div className='map'>
+          <div className="map">
             <GoogleMapContainer />
           </div>
         </div>
@@ -105,15 +104,5 @@ const ListTemplate = ({
     </ListTemplateStyled>
   );
 };
-// function areEqual1(prevProps, nextProps) {
-//   console.log(prevProps === nextProps)
-// if ( prevProps.room === nextProps.room) {
-//     return false;
-//   }
-//   else if ( prevProps.locationSearch === nextProps.locationSearch) {
-//     return false;
-//   }
-//  return true;
-// console.log('ddddd');
-// }
+
 export default ListTemplate;

@@ -59,6 +59,7 @@ const ReserveBtn = ({
   const makeUserLoggedIn = () => {
     setModal(true);
     setFormState('login');
+    localStorage.setItem('LFT', '/reserve');
   }; // 로그인 모달창을 띄워준다.
 
   const moveUserToReserve = () => {

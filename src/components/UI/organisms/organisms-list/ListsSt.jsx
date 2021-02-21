@@ -17,12 +17,13 @@ const PcSize = styled.main`
   padding: 0 24px;
   ul {
     width: 100%;
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
   }
 `;
 
-const TabletSize = styled.main` // 태블릿사이즈로 줄이지마세요. 안되면 PC사이즈로 늘리고 다시하세요.
+const TabletSize = styled.main`
+  // 태블릿사이즈로 줄이지마세요. 안되면 PC사이즈로 늘리고 다시하세요.
   width: 100vw;
   min-height: calc(100vh - 80px);
   padding: 0 30px;
@@ -30,7 +31,8 @@ const TabletSize = styled.main` // 태블릿사이즈로 줄이지마세요. 안
     width: 100%;
   }
 `;
-const MobileSize = styled.main` // 모바일사이즈로 줄이지마세요. 안되면 PC사이즈로 늘리고 다시하세요.
+const MobileSize = styled.main`
+  // 모바일사이즈로 줄이지마세요. 안되면 PC사이즈로 늘리고 다시하세요.
   width: 100vw;
   min-height: calc(100vh - 0px);
   /* background-color : purple; */
@@ -129,7 +131,6 @@ const ListStyle = ({
               commentCount,
               roomImgUrlList,
             }) => {
-              console.log(checkDateSearch);
               return (
                 <LodgingLists
                   bathRoomNum={bathRoomNum}

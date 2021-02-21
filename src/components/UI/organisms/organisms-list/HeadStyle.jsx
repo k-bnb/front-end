@@ -3,8 +3,6 @@ import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
 
 const PcSize = styled.main`
-  /* width: 100vw; */ //이거있으면 가로스크롤생김.
-  /* padding-top:100px; */
   display: flex;
 `;
 const TabletSize = styled.main``;

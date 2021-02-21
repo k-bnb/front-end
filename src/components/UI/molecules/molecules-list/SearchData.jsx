@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Button from '../../atoms/atoms-list/Button';
 import TextStyled from '../../atoms/atoms-list/Text';
@@ -52,12 +52,7 @@ const SearchData = ({
   localMaxCost,
   setLocalMaxCost,
 }) => {
-  // const modal = useRef();
-  const handleClickOutside = ({ target }) => {
-    if (!target.matches('.modals')) return;
-    // if (!modal.current.contains(target)) {
-    setSearchModalState(null);
-  };
+  const modal = useRef();
   const {
     destinationName,
     searchReq: {
@@ -72,6 +67,11 @@ const SearchData = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const handleClickOutside = ({ target }) => {
+      if (modal.current && !modal.current.contains(target)) {
+        setSearchModalState(null);
+      }
+    };
     window.addEventListener('click', handleClickOutside);
     return () => {
       window.removeEventListener('click', handleClickOutside);
@@ -83,15 +83,20 @@ const SearchData = ({
       <SearchPlace className="SearchData">
         <TextStyled size="blackSmall">
           {(totalElements ? `숙박${totalElements}건` : '') +
-            (startDate && endDate ?  ` · ${startMonthDate.month}월 ${startMonthDate.date}일 - 
-            ${endMonthDate.month}월 ${endMonthDate.date}일` : '') +
-            (numOfAdult ? ` · 게스트${numOfAdult + numOfKid}명`:'' )
-          }
+            (startDate && endDate
+              ? ` · ${startMonthDate.month}월 ${startMonthDate.date}일 - 
+            ${endMonthDate.month}월 ${endMonthDate.date}일`
+              : '') +
+            (numOfAdult ? ` · 게스트${numOfAdult + numOfKid}명` : '')}
         </TextStyled>
         <h1>
-          <TextStyled size="blackLargeBold">{destinationName ? `${destinationName}의 숙소` : '최근에 검색한 숙소'}</TextStyled>
+          <TextStyled size="blackLargeBold">
+            {destinationName === '가까운 여행지 둘러보기'
+              ? '근처의 숙소'
+              : `${destinationName}의 숙소`}
+          </TextStyled>
         </h1>
-        <div className="filter-style">
+        <div className="filter-style" ref={modal}>
           <div className="roomType">
             <Button
               className={roomType && 'blackBorder'}
@@ -108,7 +113,11 @@ const SearchData = ({
                   roomType={roomType}
                   className="modals"
                 />
-                <FooterBtn searchBtn={searchBtn} />
+                <FooterBtn
+                  searchBtn={searchBtn}
+                  dispatch={dispatch}
+                  setSearchModalState={setSearchModalState}
+                />
               </SearchModal>
             )}
           </div>
@@ -123,10 +132,31 @@ const SearchData = ({
               onClick={cashSearchClick}
             >
               <>
-              {costSearch.minCost === 10000 && costSearch.maxCost === 1000000 && <TextStyled size="blackSmall">요금</TextStyled>}
-              {costSearch.minCost !== 10000 && costSearch.maxCost === 1000000 && <TextStyled size="blackSmall">₩{moneyfilter(costSearch.minCost)}+</TextStyled>}
-              {costSearch.minCost === 10000 && costSearch.maxCost !== 1000000 && <TextStyled size="blackSmall">최대 ₩{moneyfilter(costSearch.maxCost)}</TextStyled>}
-              {costSearch.minCost !== 10000 && costSearch.maxCost !== 1000000 && <TextStyled size="blackSmall">₩{`${moneyfilter(costSearch.minCost)} - ₩${moneyfilter(costSearch.maxCost)}`}</TextStyled>}
+                {costSearch.minCost === 10000 &&
+                  costSearch.maxCost === 1000000 && (
+                    <TextStyled size="blackSmall">요금</TextStyled>
+                  )}
+                {costSearch.minCost !== 10000 &&
+                  costSearch.maxCost === 1000000 && (
+                    <TextStyled size="blackSmall">
+                      ₩{moneyfilter(costSearch.minCost)}+
+                    </TextStyled>
+                  )}
+                {costSearch.minCost === 10000 &&
+                  costSearch.maxCost !== 1000000 && (
+                    <TextStyled size="blackSmall">
+                      최대 ₩{moneyfilter(costSearch.maxCost)}
+                    </TextStyled>
+                  )}
+                {costSearch.minCost !== 10000 &&
+                  costSearch.maxCost !== 1000000 && (
+                    <TextStyled size="blackSmall">
+                      ₩
+                      {`${moneyfilter(costSearch.minCost)} - ₩${moneyfilter(
+                        costSearch.maxCost,
+                      )}`}
+                    </TextStyled>
+                  )}
               </>
             </Button>
             {searchModalState === 'cash' && (
@@ -141,11 +171,14 @@ const SearchData = ({
                   localMaxCost={localMaxCost}
                   setLocalMaxCost={setLocalMaxCost}
                 />
-                <FooterBtn 
-                localMinCost={localMinCost}
-                localMaxCost={localMaxCost}
-                dispatch={dispatch}
-                searchBtn={searchBtn}/>
+                <FooterBtn
+                  localMinCost={localMinCost}
+                  localMaxCost={localMaxCost}
+                  dispatch={dispatch}
+                  searchBtn={searchBtn}
+                  setSearchModalState={setSearchModalState}
+                  modalType={'cash'}
+                />
               </SearchModal>
             )}
           </div>
@@ -168,7 +201,11 @@ const SearchData = ({
                   minusBtn={minusBtn}
                   plusBtn={plusBtn}
                 />
-                <FooterBtn searchBtn={searchBtn} />
+                <FooterBtn
+                  searchBtn={searchBtn}
+                  dispatch={dispatch}
+                  setSearchModalState={setSearchModalState}
+                />
               </SearchModal>
             )}
           </div>

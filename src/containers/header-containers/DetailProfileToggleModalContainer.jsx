@@ -38,6 +38,7 @@ const ProfileToggleModalContainer = ({
         userInfoClick={userInfoClick}
         modal={modal}
         setModal={setModal}
+        locationNow={history.location.pathname}
       />
       {modal && (
         <Modal>

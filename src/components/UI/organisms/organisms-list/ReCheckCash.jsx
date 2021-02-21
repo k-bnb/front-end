@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Input from '../../atoms/atoms-main/Input';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
@@ -37,7 +37,7 @@ const ReCheckCashStyle = styled.div`
         font-size: 2rem;
         /* height: 10px; */
         bottom: 50%;
-      
+
         left: 5px;
         transform: translateY(50%);
       }
@@ -68,30 +68,38 @@ const ReCheckCash = ({
   setLocalMinCost,
   localMaxCost,
   setLocalMaxCost,
- }) => {
-  //  const changeMinCost = (e) => {
-  //   setMinCost(e.target.value);
-  //  };
-  //  const changeMaxCost = (e) => {
-  //   setMaxCost(e.target.value);
-  //  };
+}) => {
   return (
     <ReCheckCashStyle>
       <div>
-        <TextStyle>평균 월간 요금은 <BiWon/>3,323,124 입니다.</TextStyle>
-      </div> 
+        <TextStyle>
+          평균 월간 요금은 <BiWon />
+          3,323,124 입니다.
+        </TextStyle>
+      </div>
       <div className="cashInput">
         <div>
-          <Input name="minCost" value={localMinCost}  onChange={(e) => {
-            setLocalMinCost(+e.target.value);
-          }} type="text"/>{' '}
+          <Input
+            name="minCost"
+            value={localMinCost}
+            onChange={(e) => {
+              setLocalMinCost(+e.target.value);
+              console.log('changing');
+            }}
+            type="text"
+          />{' '}
           <span>최소금액</span>
         </div>
         <span>{'-'}</span>{' '}
         <div>
-          <Input type="text" value={localMaxCost} onChange={(e) => {
-            setLocalMaxCost(+e.target.value);
-          }} name="maxCost" />
+          <Input
+            type="text"
+            value={localMaxCost}
+            onChange={(e) => {
+              setLocalMaxCost(+e.target.value);
+            }}
+            name="maxCost"
+          />
           <span>최대금액</span>
         </div>
       </div>
