@@ -3,16 +3,17 @@ import styled from 'styled-components';
 // import SearchData from '../molecules/SearchData';
 
 const PcSize = styled.main`
-  height: 525px;
+  /* height: 525px; */
   background-color: burlywood;
 `;
 
 const TabletSize = styled.main`
-  height: 705px;
-  background-color: burlywood;`;
+  /* height: 705px; */
+  background-color: burlywood;
+`;
 
 const MobileSize = styled.main`
-  height: 1234px;
+  /* height: 1234px; */
   background-color: burlywood;
 `;
 
@@ -29,21 +30,9 @@ const FooterFake = () => {
 
   return (
     <>
-      {isPc && (
-        <PcSize className="Listheader">
-          
-        </PcSize>
-      )}
-      {isTablet && (
-        <TabletSize className="Listheader">
-          
-        </TabletSize>
-      )}
-      {isMobile && (
-        <MobileSize className="Listheader">
-          
-        </MobileSize>
-      )}
+      {isPc && <PcSize className="Listheader"></PcSize>}
+      {isTablet && <TabletSize className="Listheader"></TabletSize>}
+      {isMobile && <MobileSize className="Listheader"></MobileSize>}
     </>
   );
 };

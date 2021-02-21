@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Modal from '../../../../portal/Modal';
 import { moneyfilter } from '../../../../lib/moneyfilter';
 
 // import ListCarousel from './ListCarousel';
@@ -254,12 +255,7 @@ const ULWrap = styled.ul`
       transform: translate(0);
       transform: scale(1.04);
     } */
-    .heart {
-      position: absolute;
-      right: 30px;
-      top: 25px;
-      font-size: 25px;
-    }
+
     hr {
       width: 50px;
       text-align: left;
@@ -281,6 +277,22 @@ const ULWrap = styled.ul`
       flex-flow: row nowrap;
       letter-spacing: 1px;
     }
+  }
+  .heart {
+    position: absolute;
+    /* right: 30px;
+      top: 25px; */
+    top: 10px;
+    right: 20px;
+    font-size: 25px;
+    cursor: pointer;
+    height: auto;
+
+    &:hover {
+      svg {
+      }
+    }
+  }
 `;
 
 const LodgingLists = ({
@@ -315,7 +327,7 @@ const LodgingLists = ({
   const { startDate, endDate } = checkDateSearch;
   const { numOfAdult, numOfKid, numOfInfant } = guestSearch;
   const totalNum = numOfAdult + numOfKid;
-  console.log(numOfAdult, numOfKid, numOfInfant);
+
   // console.log(checkDateSearch);
   // console.log(startDate, endDate);
 
@@ -343,6 +355,11 @@ const LodgingLists = ({
             </Border>
             <Link
               to={`/detail/${id}?adults=${totalNum}&infants=${numOfInfant}&check_in=${startDate}&check_out=${endDate}`}
+              onClick={(e) => {
+                if (e.target.matches('.heart')) {
+                  e.preventDefault();
+                }
+              }}
               key={id}
             >
               <span className="TextWrap">
@@ -353,9 +370,6 @@ const LodgingLists = ({
                   <TextStyled type="Ellipsis" size="blackMiddle">
                     {name}
                   </TextStyled>
-                  <Bookmark className="heart" Pcheart>
-                    <AiOutlineHeart />
-                  </Bookmark>
                 </div>
                 <hr />
                 <TextStyled size="blackSmall">
@@ -375,6 +389,9 @@ const LodgingLists = ({
                 </div>
               </span>
             </Link>
+            <Bookmark className="heart" Pcheart>
+              <AiOutlineHeart />
+            </Bookmark>
           </li>
         </ULWrap>
       </Wrap>
