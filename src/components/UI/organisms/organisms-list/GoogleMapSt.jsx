@@ -76,14 +76,4 @@ const GoogleStyle = ({
   );
 };
 
-// function areEqual1(prevProps, nextProps) {
-//   console.log(prevProps, nextProps)
-//   return (
-//     prevProps.roomMap === nextProps.roomMap &&
-//     prevProps.room === nextProps.room &&
-//     prevProps.locationSearch === nextProps.locationSearch
-//   )};
-
-// export default React.memo(GoogleStyle,areEqual1);
-
 export default GoogleStyle;
