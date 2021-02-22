@@ -8,10 +8,10 @@ import TextStyled from '../../atoms/atoms-list/Text';
 import Imgs from '../../atoms/atoms-list/Imgs';
 import ScoreText from './Score-Text';
 import { Link } from 'react-router-dom';
+import { moneyfilter } from '../../../../lib/moneyfilter';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { moneyfilter } from '../../../../lib/moneyfilter';
 
 // import ListCarousel from './ListCarousel';
 // import { SliderData } from './SliderData';
@@ -39,7 +39,7 @@ const ULWrap = styled.ul`
     padding: 24px 8px;
     box-sizing: border-box;
     display: flex;
-    flex-flow: row no-wrap;
+    flex-flow: row nowrap;
     justify-content: space-between;
     /* border-bottom: 1px solid #000; */
     align-items: center;
@@ -87,6 +87,11 @@ const ULWrap = styled.ul`
               opacity: 0;
               transition: opacity .3s;
             }
+
+            .slick-prev:before, .slick-next:before{
+              font-size: 30px;
+            }
+
             .slick-dots {
               li {
                 border: 0;
@@ -158,7 +163,7 @@ const ULWrap = styled.ul`
           bottom: 50%;
           width: 30px;
           height: 30px;
-          /* transform: translateY(50%); */
+          transform: translateY(50%);
           display: flex;
           justify-content: center;
           align-items: center;
@@ -235,16 +240,14 @@ const ULWrap = styled.ul`
       opacity:1;
       &:active{
         opacity:1;
-        transform: translate(0);
-        transform: scale(1.5);
+        transform: translate(0, -50%);
       }
     }
     .slide-group>.slide>.slideDiv>.slick-slider>.slick-arrow.slick-next {
       opacity:1;
       &:active{
         opacity:1;
-        transform: translate(0);
-        transform: scale(1.5);
+        transform: translate(0, -50%);
       }
     }
   }
@@ -315,7 +318,7 @@ const LodgingLists = ({
   const { startDate, endDate } = checkDateSearch;
   const { numOfAdult, numOfKid, numOfInfant } = guestSearch;
   const totalNum = numOfAdult + numOfKid;
-  console.log(numOfAdult, numOfKid, numOfInfant);
+  // console.log(numOfAdult, numOfKid, numOfInfant);
   // console.log(checkDateSearch);
   // console.log(startDate, endDate);
 

@@ -129,7 +129,7 @@ const ListStyle = ({
               commentCount,
               roomImgUrlList,
             }) => {
-              console.log(checkDateSearch);
+              // console.log(checkDateSearch);
               return (
                 <LodgingLists
                   bathRoomNum={bathRoomNum}
