@@ -70,15 +70,10 @@ const PersonalContainer = () => {
     setFix((state) => '');
   };
 
-  const ChangeInputBtn = () => {
-    dispatch(
-      changeInputPersonSubmit({
-        token,
-        name: userRes?.name,
-        email: userRes?.email,
-        birth: userRes?.imageUrl,
-      }),
-    );
+  const ChangeInputBtn = (e) => {
+    console.log(e.target.name, e.target.value);
+
+    dispatch(changeInputPersonSubmit(token, e.target.name, e.target.value));
     setTimeout(() => {
       setFix((state) => ({
         name: false,
@@ -104,6 +99,7 @@ const PersonalContainer = () => {
 
     dispatch(changeInputPerson(e.target.name, e.target.value));
   };
+
   const loading = useSelector(
     (lo) => lo.loading['user/CHANGE_INPUT_PERSON_SUBMIT'],
   );

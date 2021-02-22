@@ -6,15 +6,15 @@ const ReserveConfirmContainer = () => {
   const [active, setActive] = useState('예약 완료');
   const [list, setList] = useState([]);
   const [reason, setReason] = useState('');
-  const [reservationId, setReservationId] = useState('');
+  // const [reservationId, setReservationId] = useState('');
   const [modalState, setModalState] = useState(false);
   const [cancelModal, setCancelModal] = useState('');
   const reserveRes = useSelector((state) => state.user);
   const [listModal, setListModal] = useState([]);
   const [name, setName] = useState('');
   const dispatch = useDispatch();
+
   const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
-  
   useEffect(() => {
     // if (reserveRes.reserveRes === null) return;
     const next = reserveRes?.reserveRes?.filter((item) =>
@@ -24,7 +24,7 @@ const ReserveConfirmContainer = () => {
     );
     setList(next);
     if (next === null) return;
-  }, [userInfo, active]);
+  }, [reserveRes, active]);
 
   // 예정된 예약 이전예약 nav
   const activClick = (e) => {
@@ -93,34 +93,6 @@ const ReserveConfirmContainer = () => {
     setMiniModal(!miniModal);
     setcancelModalState(!cancelModalState);
   };
-
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  // review modal 상태
-  const [reviewModalState, setReviewModalState] = useState(false);
-  const [reviewRoomId, setReviewRoomId] = useState('');
-
-  const review = (e) => {
-    setCancelModal('후기 작성');
-    const openModalId =
-      list.find((item) => +item.reservationId === +e.target.value)
-        .reservationId + '';
-    setReviewRoomId(openModalId);
-    setReviewModalState(!reviewModalState);
-  };
-
-  console.log(reviewRoomId);
-
   return (
     <ReserveConfirmTemplate
       list={list}
@@ -131,11 +103,6 @@ const ReserveConfirmContainer = () => {
       cancelBtn={cancelBtn}
       cancelModal={cancelModal}
       reservationConfirmBtn={reservationConfirmBtn}
-      reservationId={reservationId}
-      reviewModalState={reviewModalState}
-      setReviewModalState={setReviewModalState}
-      review={review}
-      reviewRoomId={reviewRoomId}
       listModal={listModal}
       cancelModalState={cancelModalState}
       roomId={roomId}

@@ -101,7 +101,7 @@ const PersonalInfoBirthinput = ({
           pattern="\d{4}-\d{2}-\d{2}"
         />
       </div>
-      <Button onClick={ChangeInputBtn} save>
+      <Button name="birth" value={birth} onClick={ChangeInputBtn} save>
         {!loading && '저장'}
         {loading && (
           <div className="animation">

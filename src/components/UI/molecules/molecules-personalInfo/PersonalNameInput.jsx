@@ -58,7 +58,7 @@ const PersonalNameInputStyle = styled.div`
       }
       input {
         padding: 10px;
-        outline: none;
+        /* outline: none; */
         border-radius: 5px;
         border: 1px solid rgba(0, 0, 0, 0.1);
         box-sizing: border-box;
@@ -75,7 +75,9 @@ const PersonalNameInputStyle = styled.div`
   }
   button {
     display: flex;
-
+    &:focus {
+      outline: 1px solid;
+    }
     .animation {
       padding: 0;
       display: flex;
@@ -119,6 +121,7 @@ const PersonalNameInput = ({
   inputFocus,
   ChangeInputBtn,
   loading,
+  KeyDown,
 }) => {
   return (
     <PersonalNameInputStyle>
@@ -134,10 +137,17 @@ const PersonalNameInput = ({
             name={'name'}
             onChange={personInfoChange}
             onClick={inputFocus}
+            onKeyPress={KeyDown}
           />
         </div>
       </div>
-      <Button onClick={ChangeInputBtn} save>
+      <Button
+        name="name"
+        value={name}
+        tabIndex="1"
+        onClick={ChangeInputBtn}
+        save
+      >
         {!loading && '저장'}
         {loading && (
           <div className="animation">

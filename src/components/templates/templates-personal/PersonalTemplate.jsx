@@ -56,7 +56,7 @@ const PersonalTemplate = ({
     <PersonalTemplateStyle>
       <ReserveConfirmheader />
       <PersonalInfoHead />
-      <div className="main-group">
+      <main className="main-group">
         <PersonalInfoUl
           fix={fix}
           cancelclick={cancelclick}
@@ -83,7 +83,7 @@ const PersonalTemplate = ({
             <PersonalInfoArticle />
           </TabletDiv>
         )}
-      </div>
+      </main>
     </PersonalTemplateStyle>
   );
 };
