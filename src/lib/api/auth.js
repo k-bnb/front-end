@@ -43,23 +43,16 @@ export const userInfoRemake = ({ token, name, birth, email }) => {
 };
 
 export const reserveCancel = ({ token, reservationId, name, reason }) => {
-  const body = {
-    reservationId,
-    name,
-    reason,
-  };
-
-  const headers = {
+  const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
+    data: {
+      reservationId,
+      name,
+      reason,
+    },
   };
-  console.log(body);
-  console.log(headers);
 
-  return client.delete(
-    `http://3.34.198.174:8080/reservation?reservationId=${reservationId}`,
-    body,
-    headers,
-  );
+  return client.delete(`http://3.34.198.174:8080/reservation`, config);
 };

@@ -24,7 +24,7 @@ const ReservationContainer = () => {
     (state) => state.reserve,
   );
 
-  const totalCost = '10000';
+  const totalCost = 2000;
   const { numOfAdult, numOfKid, numOfInfant: infantNumber } = useSelector(
     ({ reserve }) => reserve.guestSearch,
   );
@@ -54,8 +54,6 @@ const ReservationContainer = () => {
     commentCount,
     roomImgUrlList,
   } = useSelector(({ detail }) => detail.infoRes);
-
-  console.log(hostName, hostImgURL, commentCount, roomImgUrlList);
 
   const { id: roomId, roomCost: testCost, name: testName } = useSelector(
     ({ reserve }) => reserve.infoRes,
@@ -125,7 +123,7 @@ const ReservationContainer = () => {
     setComfirmModal(true);
 
     BootPay.request({
-      price: 1000, //실제 결제되는 가격
+      price: 2000, //실제 결제되는 가격
       application_id: '6024e5ee5b2948001d52037b',
       name: testName, //결제창에서 보여질 이름
       pg: 'nicepay',
@@ -152,25 +150,23 @@ const ReservationContainer = () => {
       },
     })
       .error((data) => console.log(data))
-      .confirm(({ price, receipt_id }) => {
-        console.log(receipt_id);
-
+      .confirm(async ({ price, receipt_id }) => {
         try {
-          const res = reserving(
-            roomId,
-            checkIn,
-            checkOut,
-            guestNumber,
-            infantNumber,
-            totalCost,
-            message,
-            token,
-            price,
-            receipt_id,
+          await dispatch(
+            reserving(
+              roomId,
+              checkIn,
+              checkOut,
+              guestNumber,
+              infantNumber,
+              totalCost,
+              message,
+              token,
+              price,
+              receipt_id,
+            ),
           );
 
-          dispatch(res);
-          console.log(res);
           // history.push('/reserve');
         } catch (err) {
           console.log(err);
@@ -180,6 +176,16 @@ const ReservationContainer = () => {
         BootPay.removePaymentWindow();
       });
   }, []);
+
+  console.log(
+    roomId,
+    checkIn,
+    checkOut,
+    guestNumber,
+    infantNumber,
+    totalCost,
+    message,
+  );
 
   const saveDate = useCallback(() => {
     setDateModal(!dateModal);
@@ -214,19 +220,6 @@ const ReservationContainer = () => {
       setIsLoading(false);
     }, 1000);
   }, []);
-
-  console.log(
-    roomId,
-    checkIn,
-    checkOut,
-    guestNumber,
-    infantNumber,
-    totalCost,
-    message,
-    token,
-    // price,
-    // receipt_id,
-  );
 
   return (
     <Reservation

@@ -21,7 +21,7 @@ const StarRating = () => {
               type="radio"
               name="rating"
               value={starValue}
-              onClick={() => setRating(starValue)}
+              onChange={() => setRating(starValue)}
             />
             <AiFillStar
               size={30}
