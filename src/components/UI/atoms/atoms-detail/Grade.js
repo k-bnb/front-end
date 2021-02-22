@@ -31,6 +31,15 @@ const AverageGrade = styled.div`
     css`
       font-size: 22px;
     `}
+
+    ${(props) =>
+    props.bookingInfo &&
+    css`
+      font-size: 15px;
+      padding-top: 2px;
+      align-items: bottom;
+      font-weight: 600;
+    `}
 `;
 
 const ScoreStar = styled(AiFillStar)`
@@ -41,19 +50,34 @@ const ScoreStar = styled(AiFillStar)`
   ${(props) =>
     props.reviewModal &&
     css`
-      vertical-align: bottom;
-    `}margin-top: 3px;
+      vertical-align: baseline;
+      margin-top: 3px;
+    `}
+
+  ${(props) =>
+    props.bookingInfo &&
+    css`
+      padding-top: 1px;
+      margin-right: 2px;
+    `}
 `;
 
-const Grade = ({ grade = '4.3점', small, reviewModal, reviewMain }) => {
+const Grade = ({
+  grade = '4.3점',
+  small,
+  reviewModal,
+  reviewMain,
+  bookingInfo,
+}) => {
   return (
     <AverageGrade
       small={small}
       className="grade"
       reviewModal={reviewModal}
       reviewMain={reviewMain}
+      bookingInfo={bookingInfo}
     >
-      <ScoreStar reviewModal={reviewModal} />
+      <ScoreStar reviewModal={reviewModal} bookingInfo={bookingInfo} />
       {grade}
     </AverageGrade>
   );

@@ -7,7 +7,7 @@ import ImportantNotice from '../../UI/organisms/organisms-detail/ImportantNotice
 import WrappingContainer from '../../UI/organisms/organisms-detail/WrappingContainer';
 import LoadingModal from '../LoadingModal';
 import ReviewContainer from '../../../containers/ReviewContainer';
-import { getCancellableDate } from '../../../modules/detail';
+import detail, { getCancellableDate } from '../../../modules/detail';
 import { useDispatch } from 'react-redux';
 //import Modal from '../../../portal/Modal';
 
@@ -56,7 +56,7 @@ const Detail = ({
 }) => {
   // const strStartDate = detailObj.startDate;
   const CheckInDate = () => {
-    const strDate = detailObj.startDate.split('-');
+    const strDate = detailObj.startDate ? detailObj.startDate.split('-') : '';
     return { year: strDate[0], month: strDate[1], day: strDate[2] };
   };
 
