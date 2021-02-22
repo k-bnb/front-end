@@ -5,18 +5,23 @@ import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
+  Marker,
+  OverlayView,
 } from 'react-google-maps';
-import { Marker } from 'react-google-maps';
 import Geocode from 'react-geocode';
-import { OverlayView } from 'react-google-maps';
 import styled from 'styled-components';
 import Bookmark from '../../atoms/atoms-list/BookMark';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { locationInput, searching } from '../../../../modules/search';
+import { BiWon } from 'react-icons/bi';
+import { moneyfilter } from '../../../../lib/moneyfilter';
+// import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 // import MarkerWithLabel from "react-google-maps/lib/components/addons/MarkerWithLabel";
 // import AutoComplete from 'react-google-autocomplete';
-
 // Geocode.setApiKey=('AIzaSyC6KyJE5Cb_kVrW02y-mkWEDGlrUfodq6E'); '='이 표시가 들어가면 안됨... 이거 찾는데 24시간 걸렸다^-^.. 최대적===오타ㅜㅜㅜ
 Geocode.setApiKey('AIzaSyC9pRTw-7zb847DyWLD-fUujKxvlG01s08');
 
@@ -30,8 +35,8 @@ const GoogleMarkerStyle = styled.div`
   position: relative;
   .heart {
     position: absolute;
-    top: -10px;
-    right: 10px;
+    top: 0px;
+    right: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,7 +51,9 @@ const GoogleMarkerStyle = styled.div`
     height: 200px;
   }
   div {
-    padding: 20px 0 0 20px;
+    //지도 팝업
+
+    overflow: hidden;
     .roomTypeclass {
       padding: 0;
       color: rgba(0, 0, 0, 0.4);
@@ -57,12 +64,14 @@ const GoogleMarkerStyle = styled.div`
       font-size: 1.8rem;
       font-weight: 400;
       margin: 0;
-      padding: 0;
+      padding-left: 20px;
     }
     p {
       font-weight: 700;
+      padding-left: 20px;
       span {
         font-weight: 400;
+        padding-left: 20px;
       }
     }
   }
@@ -135,7 +144,7 @@ function GoogleMapUse({
         );
       });
     }
-  }); //TODO : 알아내기 : 재랜더링이 두번.-> React.memo 사용해서 최적화하기.
+  }); //TODO : 알아내기 : 재랜더링이 두번.-> \
 
   const getCity = (addressArray) => {
     let city = '';
@@ -213,9 +222,12 @@ function GoogleMapUse({
   };
   const [zoom, setZoom] = useState(12);
   const mapRef = useRef();
-
+  const mapMarker = useRef();
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
+  }, []);
+  const onMarkLoad = useCallback((map) => {
+    mapMarker.current = map;
   }, []);
   const handleZoomChanged = () => {
     setZoom(mapRef.current.getZoom());
@@ -242,11 +254,13 @@ function GoogleMapUse({
           onLoad={onMapLoad}
           onDragEnd={dragMark}
           onZoomChanged={handleZoomChanged}
+          options={{ scrollwheel: true }} // 마우스휠옵션.
         >
           {roomMap.map((sample) => (
             <>
               <Marker
                 key={sample.id}
+                onLoad={onMarkLoad}
                 opacity={0}
                 labelClass="map-price-container"
                 labelContent={`<div class="map-price-marker"><span>$${sample.cost}</span></div>`}
@@ -257,7 +271,6 @@ function GoogleMapUse({
                 icon={
                   'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
                 }
-                // label={sample.cost}
               ></Marker>
               <OverlayView
                 position={{ lat: sample.latitude, lng: sample.longitude }}
@@ -265,15 +278,23 @@ function GoogleMapUse({
                 getPixelPositionOffset={getPixelPositionOffset}
               >
                 <div
-                  className="cost-memo"
+                  className={sample.id}
                   name={sample.cost}
                   ref={mapCost}
                   onClick={(e) => {
                     setSelectedSample(sample);
+                    console.log(
+                      'overlayviewText',
+                      e.nativeEvent.path[1].className,
+                    );
                   }}
                   style={{
+                    display: 'flex',
+                    alignItems: 'center',
                     background: `white`,
                     border: `1px solid #ccc`,
+                    backGround: 'white',
+                    cursor: 'pointer',
                     borderRadius: '50px',
                     width: '80px',
                     height: '30px',
@@ -291,7 +312,8 @@ function GoogleMapUse({
                       fontSize: '16px',
                     }}
                   >
-                    {sample.cost}
+                    <BiWon />
+                    {moneyfilter(sample.cost)}
                   </p>
                 </div>
               </OverlayView>
@@ -310,11 +332,22 @@ function GoogleMapUse({
             >
               <GoogleMarkerStyle>
                 <img src={selectedSample.roomImgUrlList[0]} alt="" />
+                {/* <div className="slide-group">
+                  <div className="slide">
+                    <div className="slideDiv">
+                      <Slider {...settings}>
+                      <img src={selectedSample.roomImgUrlList[0]} alt="" />
+                      </Slider>
+                    </div>
+                  </div>
+                </div> */}
+
                 <div>
                   <div className="roomTypeclass">{selectedSample.roomType}</div>
                   <h2>{selectedSample.name}</h2>
                   <p>
-                    $ {selectedSample.cost} <span>/ 1박</span>{' '}
+                    <BiWon />
+                    {selectedSample.cost} <span>/ 1박</span>
                   </p>
                 </div>
                 <Bookmark className="heart" heart>

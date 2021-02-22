@@ -8,10 +8,8 @@ import { changeInputPerson, changeInputPersonSubmit } from '../modules/user';
 const PersonalContainer = () => {
   const [fix, setFix] = useState('');
   const { token } = useSelector((state) => state.auth);
-  const { name, email, birth, imageUrl } = useSelector(
-    (state) => state.user.userRes,
-  );
-
+  const userRes = useSelector((state) => state.user.userRes);
+  const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
   const dispatch = useDispatch();
   const fixInfoBtn = (e) => {
     if (!e.target.matches('.btn')) return;
@@ -59,7 +57,6 @@ const PersonalContainer = () => {
       cancel: true,
     }));
   };
-  const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
 
   const cancelclick = (e) => {
     if (!e.target.matches('.btn')) return;
@@ -73,30 +70,44 @@ const PersonalContainer = () => {
     setFix((state) => '');
   };
 
-  const inputFocus = (e) => {};
   const ChangeInputBtn = () => {
-    dispatch(changeInputPersonSubmit({ token, name, email, birth }));
-    setFix((state) => ({
-      name: false,
-      img: false,
-      birth: false,
-      emailAddress: false,
-      cancel: true,
-    }));
+    dispatch(
+      changeInputPersonSubmit({
+        token,
+        name: userRes?.name,
+        email: userRes?.email,
+        birth: userRes?.imageUrl,
+      }),
+    );
+    setTimeout(() => {
+      setFix((state) => ({
+        name: false,
+        img: false,
+        birth: false,
+        emailAddress: false,
+        cancel: true,
+      }));
+    }, 1000);
+
     sessionStorage.setItem(
       'userInfo',
-      JSON.stringify({ name, email, birth, imageUrl }),
+      JSON.stringify({
+        name: userRes?.name,
+        email: userRes?.email,
+        birth: userRes?.birth,
+        imageUrl: userRes?.imageUrl,
+      }),
     );
   };
   const personInfoChange = (e) => {
-    if (e.target.name === 'imageUrl') {
-      const imgArr = e.target.files[0];
-      console.log(imgArr);
-      return;
-    } else {
-      dispatch(changeInputPerson(e.target.name, e.target.value));
-    }
+    if (e.target.name === 'imageUrl') return;
+
+    dispatch(changeInputPerson(e.target.name, e.target.value));
   };
+  const loading = useSelector(
+    (lo) => lo.loading['user/CHANGE_INPUT_PERSON_SUBMIT'],
+  );
+
   return (
     <PersonalTemplate
       fixInfoBtnCancel={fixInfoBtnCancel}
@@ -105,13 +116,13 @@ const PersonalContainer = () => {
       setFix={setFix}
       cancelclick={cancelclick}
       personInfoChange={personInfoChange}
-      name={name}
-      email={email}
-      birth={birth}
-      imageUrl={imageUrl}
-      inputFocus={inputFocus}
+      name={userRes?.name}
+      email={userRes?.email}
+      birth={userRes?.birth}
+      imageUrl={userRes?.imageUrl}
       ChangeInputBtn={ChangeInputBtn}
       userInfo={userInfo}
+      loading={loading}
     />
   );
 };

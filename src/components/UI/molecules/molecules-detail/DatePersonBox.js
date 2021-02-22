@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import GuestNumberModal from '../../../templates/templates-header/GuestNumberModal';
@@ -106,9 +106,15 @@ const AddDate = (
   </Text>
 );
 
-const DatePersonBox = ({ detailObj, infoRes, setNavModalState }) => {
+const DatePersonBox = ({
+  detailObj,
+  infoRes,
+  setNavModalState,
+  isCalendarOpen,
+  setIsCalendarOpen,
+  peopleLimit,
+}) => {
   const [isOpen, setIsOpen] = useState(false); // detail page에서 모달창 열고닫기 기능구현
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [isDateBorderThick, setIsDateBorderThick] = useState(false);
   const [isGuestBorderThick, setGuestIsBorderThick] = useState(false);
 

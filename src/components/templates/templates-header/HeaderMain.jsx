@@ -48,6 +48,8 @@ const HeaderMain = ({
   guestSearch,
   moveFocusNext,
   clickHandler,
+  formState,
+  setFormState,
 }) => {
   return (
     <>
@@ -74,6 +76,8 @@ const HeaderMain = ({
           isScrolled={isScrolled}
           isClicked={isClicked}
           isClickedOutside={isClickedOutside}
+          formState={formState}
+          setFormState={setFormState}
         >
           MainTop
         </HeaderMainTop>

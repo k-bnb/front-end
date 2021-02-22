@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import {
@@ -10,7 +10,6 @@ import GuestNumberModal from '../../../templates/templates-header/GuestNumberMod
 import RemoveButton from '../../atoms/atoms-header/RemoveButton';
 import Text from '../../atoms/atoms-header/Text';
 import SearchButtonUnit from './SearchButtonUnit';
-// import { Link, useHistory } from 'react-router-dom';
 
 const SearchNavGuestUnitLi = styled.li`
   position: relative;
@@ -22,6 +21,10 @@ const SearchNavGuestUnitLi = styled.li`
   cursor: pointer;
   &:hover {
     background-color: rgb(235, 231, 231);
+  }
+
+  &:focus {
+    outline: none;
   }
 
   .guest-texts {
@@ -46,6 +49,7 @@ const SearchNavGuestUnit = ({
   navModalState,
   setNavModalState,
 }) => {
+  const searchBtnRef = useRef();
   const dispatch = useDispatch();
   const { locationSearch } = useSelector((state) => state.search.searchReq);
   const { numOfAdult, numOfKid, numOfInfant } = useSelector(
@@ -59,6 +63,10 @@ const SearchNavGuestUnit = ({
         if (e.target.matches('.search-button-unit')) return;
         SearchTypeHandler('guest');
       }}
+      onFocus={() => {
+        SearchTypeHandler('guest');
+      }}
+      tabIndex="0"
     >
       <div className="guest-texts">
         <Text small bold block noPadding>
@@ -77,6 +85,10 @@ const SearchNavGuestUnit = ({
           <RemoveButton
             guest
             onClick={() => dispatch(specificInputClear('guestSearch'))}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter')
+                dispatch(specificInputClear('guestSearch'));
+            }}
           />
         )}
       </div>
@@ -85,11 +97,13 @@ const SearchNavGuestUnit = ({
         SearchTypeHandler={SearchTypeHandler}
         dispatch={dispatch}
         locationSearch={locationSearch}
+        searchBtnRef={searchBtnRef}
       />
       {navModalState.guest && (
         <GuestNumberModal
           SearchTypeHandler={SearchTypeHandler}
           setNavModalState={setNavModalState}
+          searchBtnRef={searchBtnRef}
         />
       )}
     </SearchNavGuestUnitLi>

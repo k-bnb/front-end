@@ -9,6 +9,8 @@ import PersonalInfoBirthinput from '../../molecules/molecules-personalInfo/Perso
 import PersonalInfoEmailInput from '../../molecules/molecules-personalInfo/PersonalInfoEmailInput';
 import PersonalInfoImg from '../../molecules/molecules-personalInfo/PersonalInfoImg';
 import { extractMonthDate } from '../../../../lib/extractMonthDate';
+import Modal from '../../../../portal/Modal';
+import PersonInfoEmailModal from '../../molecules/molecules-personalInfo/PersonInfoEmailModal';
 
 const PersonalInfoUIStyle = styled.ul`
   display: flex;
@@ -21,6 +23,14 @@ const PersonalInfoUIStyle = styled.ul`
   li {
     div {
       /* border: 1px solid; */
+    }
+    .imgPerson {
+      width: 320px;
+      /* height: 20%; */
+
+      img {
+        width: 100%;
+      }
     }
     .btn {
       position: absolute;
@@ -43,8 +53,8 @@ const PersonalInfoUl = ({
   ChangeInputBtn,
   userInfo,
   setFix,
+  loading,
 }) => {
-  console.log(userInfo.imageUrl);
   return (
     <PersonalInfoUIStyle onClick={fix.cancel ? cancelclick : fixInfoBtn}>
       <PersonalInfoLi>
@@ -56,6 +66,7 @@ const PersonalInfoUl = ({
               personInfoChange={personInfoChange}
               inputFocus={inputFocus}
               ChangeInputBtn={ChangeInputBtn}
+              loading={loading}
             />
           ) : (
             <TextStyle>{name}</TextStyle>
@@ -76,11 +87,18 @@ const PersonalInfoUl = ({
               setFix={setFix}
               personInfoChange={personInfoChange}
               imageUrl={imageUrl}
+              loading={loading}
             />
           ) : (
-            <TextStyle>
-              {imageUrl ? <img src={imageUrl} alt="hello" /> : '지정되지 않음'}
-            </TextStyle>
+            <>
+              {imageUrl ? (
+                <div className="imgPerson">
+                  <img src={userInfo.imageUrl} alt="hello" />
+                </div>
+              ) : (
+                <TextStyle>지정되지 않음</TextStyle>
+              )}
+            </>
           )}
         </div>
         <Button name="imageUrl" className="btn" greenText>
@@ -92,9 +110,9 @@ const PersonalInfoUl = ({
           <TextStyle>생년월일</TextStyle>
           <TextStyle>
             {birth
-              ? `${extractMonthDate(birth).year}년 ${
-                  extractMonthDate(birth).month
-                }월 ${extractMonthDate(birth).date}일 `
+              ? `${extractMonthDate(userInfo.birth).year}년 ${
+                  extractMonthDate(userInfo.birth).month
+                }월 ${extractMonthDate(userInfo.birth).date}일 `
               : '지정되지 않음'}
           </TextStyle>
           {fix.birth && (
@@ -102,6 +120,7 @@ const PersonalInfoUl = ({
               ChangeInputBtn={ChangeInputBtn}
               personInfoChange={personInfoChange}
               birth={birth}
+              loading={loading}
             />
           )}
         </div>
@@ -120,6 +139,7 @@ const PersonalInfoUl = ({
               imageUrl={imageUrl}
               personInfoChange={personInfoChange}
               ChangeInputBtn={ChangeInputBtn}
+              loading={loading}
             />
           ) : (
             <TextStyle>{email}</TextStyle>

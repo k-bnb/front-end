@@ -21,7 +21,7 @@ const HeaderListTopBlock = styled.header`
     `}
 `;
 
-const HeaderListTop = ({ isScrolled, isClicked }) => {
+const HeaderListTop = ({ isScrolled, isClicked, formState, setFormState }) => {
   // Text는 스크롤 되면 사라진다.
   return (
     <HeaderListTopBlock isScrolled={isScrolled} isClicked={isClicked}>
@@ -36,7 +36,10 @@ const HeaderListTop = ({ isScrolled, isClicked }) => {
           숙소
         </Text>
       )}
-      <ProfileToggleModalContainer />
+      <ProfileToggleModalContainer
+        formState={formState}
+        setFormState={setFormState}
+      />
     </HeaderListTopBlock>
   );
 };

@@ -201,7 +201,7 @@ const reserve = handleActions(
 
     [CLEAR_END_DATE]: (state, _) => ({
       ...state,
-      checkDateSearch: { ...state, endDate: '' },
+      checkDateSearch: { ...state.checkDateSearch, endDate: '' },
     }),
 
     [CHANGE_GUEST]: (state, { payload: { form, name, value } }) =>

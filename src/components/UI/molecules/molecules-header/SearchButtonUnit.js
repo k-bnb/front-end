@@ -14,9 +14,13 @@ const GuestNumberUnitOuterBlock = styled.div`
   background-color: transparent;
 `;
 
-const SearchButtonUnit = ({ locationSearch, dispatch, SearchTypeHandler }) => {
+const SearchButtonUnit = ({
+  locationSearch,
+  dispatch,
+  SearchTypeHandler,
+  searchBtnRef,
+}) => {
   const history = useHistory();
-  // const buttonRef = useRef();
 
   return (
     <GuestNumberUnitOuterBlock className="search-button-unit">
@@ -29,6 +33,7 @@ const SearchButtonUnit = ({ locationSearch, dispatch, SearchTypeHandler }) => {
           }
           history.push('/rooms');
         }}
+        searchBtnRef={searchBtnRef}
       />
     </GuestNumberUnitOuterBlock>
   );

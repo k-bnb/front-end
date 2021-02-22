@@ -2,13 +2,11 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import GuestNumberModalUnit from '../../UI/molecules/molecules-header/GuestNumberModalUnit';
 import { useClickOutside } from '../../../lib/useClickOutside';
-//import { useDispatch, useSelector } from 'react-redux';
 
 const StyledGuestModal = styled.div`
   position: absolute;
   top: 80px;
   right: 0;
-  /* transform: translate(-50%, 0); */
   width: 400px;
   height: auto;
   border: 1px solid lightgray;
@@ -43,6 +41,7 @@ const GuestNumberModal = ({
   setIsOpen,
   infoRes,
   setGuestIsBorderThick,
+  searchBtnRef,
 }) => {
   let guestRef = useClickOutside(() => {
     if (detailPage) {
@@ -86,6 +85,7 @@ const GuestNumberModal = ({
         name="numOfInfant"
         detailPage={detailPage}
         infoRes={infoRes}
+        searchBtnRef={searchBtnRef}
       />
     </StyledGuestModal>
   );

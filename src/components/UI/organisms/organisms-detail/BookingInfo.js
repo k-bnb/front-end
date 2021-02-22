@@ -6,10 +6,12 @@ import OneDayPrice from '../../molecules/molecules-detail/OneDayPrice';
 import PriceDetail from '../../molecules/molecules-detail/PriceDetail';
 import TotalPrice from '../../molecules/molecules-detail/TotalPrice';
 import moment from 'moment';
+// import Modal from '../../../../portal/Modal';
+// import AuthModalContainer from '../../../../containers/AuthModalContainer';
 
 const PositionBox = styled.div`
   position: sticky;
-  z-index: 100;
+  z-index: 0;
   top: 160px;
   margin-bottom: 100px;
 `;
@@ -35,25 +37,47 @@ const BookingInfoContainer = styled.div`
 `;
 
 const BookingInfo = ({
-  DetailHeaderRef,
   moveToReserve,
   detailObj,
   infoRes,
+  // detailAuthModal,
+  // setDetailAuthModal,
+  DetailHeaderRef,
+  modal,
+  setModal,
+  setIsOpen,
+  formState,
+  setFormState,
+  bookingInfoRef,
+  isCalendarOpen,
+  setIsCalendarOpen,
 }) => {
   const StartDate = moment(detailObj.startDate);
   const EndDate = moment(detailObj.endDate);
   const totalSchedule = EndDate.diff(StartDate, 'days');
   if (detailObj.startDate === '' || detailObj.endDate === '') {
     return (
-      <PositionBox>
+      <PositionBox ref={bookingInfoRef}>
         <BookingInfoContainer>
           <OneDayPrice infoRes={infoRes} detailObj={detailObj} />
-          <DatePersonBox detailObj={detailObj} infoRes={infoRes} />
-          <ReserveBtn
-            DetailHeaderRef={DetailHeaderRef}
-            moveToReserve={moveToReserve}
-            NoBookingDate
+          <DatePersonBox
+            detailObj={detailObj}
+            isCalendarOpen={isCalendarOpen}
+            setIsCalendarOpen={setIsCalendarOpen}
+            infoRes={infoRes}
           />
+          <ReserveBtn
+            moveToReserve={moveToReserve}
+            modal={modal}
+            setModal={setModal}
+            setIsOpen={setIsOpen}
+            formState={formState}
+            setFormState={setFormState}
+            DetailHeaderRef={DetailHeaderRef}
+            isCalendarOpen={isCalendarOpen}
+            setIsCalendarOpen={setIsCalendarOpen}
+            NoBookingDate
+          ></ReserveBtn>
         </BookingInfoContainer>
       </PositionBox>
     );

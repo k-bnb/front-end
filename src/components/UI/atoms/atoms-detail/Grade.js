@@ -11,6 +11,7 @@ const AverageGrade = styled.div`
   font-size: 18px;
   color: #222222;
   cursor: pointer;
+  vertical-align: bottom;
 
   ${(props) =>
     props.small &&
@@ -25,8 +26,8 @@ const AverageGrade = styled.div`
       font-size: 32px;
       margin-right: 10px;
     `}
-
-    ${(props) =>
+      
+      ${(props) =>
     props.reviewMain &&
     css`
       font-size: 22px;
@@ -39,6 +40,11 @@ const AverageGrade = styled.div`
       padding-top: 2px;
       align-items: bottom;
       font-weight: 600;
+    `}
+      ${(props) =>
+    props.infobox &&
+    css`
+      line-height: initial;
     `}
 `;
 
@@ -68,6 +74,7 @@ const Grade = ({
   reviewModal,
   reviewMain,
   bookingInfo,
+  infobox,
 }) => {
   return (
     <AverageGrade
@@ -76,6 +83,7 @@ const Grade = ({
       reviewModal={reviewModal}
       reviewMain={reviewMain}
       bookingInfo={bookingInfo}
+      infobox={infobox}
     >
       <ScoreStar reviewModal={reviewModal} bookingInfo={bookingInfo} />
       {grade}

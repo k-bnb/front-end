@@ -38,23 +38,21 @@ export const userInfoRemake = ({ token, name, birth, email }) => {
   const body = { name, birth, email };
 
   const headers = { headers: { Authorization: `Bearer ${token}` } };
-  console.log(body);
-  console.log(headers);
+
   return client.post('http://3.34.198.174:8080/user/update', body, headers);
 };
 
 export const reserveCancel = ({ token, reservationId, name, reason }) => {
-  const body = {
-    reservationId,
-    name,
-    reason,
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: {
+      reservationId,
+      name,
+      reason,
+    },
   };
 
-  const headers = { headers: { Authorization: `Bearer ${token}` } };
-
-  client.delete(
-    `http://3.34.198.174:8080/reservation?reservationId=${reservationId}`,
-    body,
-    headers,
-  );
+  return client.delete(`http://3.34.198.174:8080/reservation`, config);
 };

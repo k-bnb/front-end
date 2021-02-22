@@ -4,15 +4,29 @@ import HeaderMain from '../../components/templates/templates-header/HeaderMain';
 import HeaderList from '../../components/templates/templates-header/HeaderList';
 import HeaderDetail from '../../components/templates/templates-header/HeaderDetail';
 import { useSelector } from 'react-redux';
+import SkipNavigation from '../../components/templates/templates-header/SkipNabigation';
 
 const HeaderContainer = ({
   DetailHeaderRef,
   ImageContainerRef,
   reviewRef,
   facilityRef,
+  modal,
+  setModal,
+  isOpen,
+  setIsOpen,
+  formState,
+  setFormState,
+  bookingInfoRef,
+  isCalendarOpen,
+  setIsCalendarOpen,
 }) => {
   const history = useHistory();
   const match = useRouteMatch();
+
+  useEffect(() => {
+    console.log(history.location.pathname);
+  }, []);
 
   // 어떤것을 선택했는가 상태를 바꿔주는 함수
   const { locationSearch, checkDateSearch, guestSearch } = useSelector(
@@ -78,6 +92,7 @@ const HeaderContainer = ({
 
   return (
     <>
+      <SkipNavigation />
       {history.location.pathname === '/' && (
         <HeaderMain
           isScrolled={isScrolled}
@@ -95,8 +110,11 @@ const HeaderContainer = ({
           guestSearch={guestSearch}
           moveFocusNext={moveFocusNext}
           clickHandler={clickHandler}
+          formState={formState}
+          setFormState={setFormState}
         />
       )}
+
       {history.location.pathname === '/rooms' && (
         <HeaderList
           isScrolled={isScrolled}
@@ -112,6 +130,10 @@ const HeaderContainer = ({
           guestSearch={guestSearch}
           moveFocusNext={moveFocusNext}
           clickHandler={clickHandler}
+          formState={formState}
+          setFormState={setFormState}
+          modal={modal}
+          setModal={setModal}
         />
       )}
       {match.params.roomId && (
@@ -133,6 +155,15 @@ const HeaderContainer = ({
           ImageContainerRef={ImageContainerRef}
           reviewRef={reviewRef}
           facilityRef={facilityRef}
+          modal={modal}
+          setModal={setModal}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          formState={formState}
+          setFormState={setFormState}
+          bookingInfoRef={bookingInfoRef}
+          isCalendarOpen={isCalendarOpen}
+          setIsCalendarOpen={setIsCalendarOpen}
         />
       )}
     </>

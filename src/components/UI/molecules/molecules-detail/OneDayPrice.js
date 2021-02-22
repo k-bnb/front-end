@@ -50,7 +50,7 @@ const OneDayPrice = ({ infoRes, detailObj }) => {
           요금을 확인하려면 날짜를 입력하세요.
         </NoDateText>
         <Text block flex>
-          <Grade bold grade={infoRes.grade} bookingInfo />
+          <Grade bold grade={infoRes.grade} bookingInfo infobox={true} />
           <Text gray>({infoRes.commentCount})</Text>
         </Text>
       </NoDateBox>
@@ -63,7 +63,7 @@ const OneDayPrice = ({ infoRes, detailObj }) => {
           <Price> ₩ {infoRes.roomCost}</Price>
           <PriceInner>/박</PriceInner>
         </PriceBox>
-        <Grade grade={infoRes.grade} />
+        <Grade grade={infoRes.grade} infobox={true} />
         {/* ({infoRes.commentCount}) */}
       </PriceInfo>
     );
