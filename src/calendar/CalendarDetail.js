@@ -88,6 +88,19 @@ const CheckInAndOut = styled.div`
   & + & {
     border-left: 1px solid rgb(176, 176, 176);
   }
+  ${(props) =>
+    props.isValid &&
+    css`
+      &:first-child {
+        border-radius: 8px;
+        border: 2px solid rgb(34, 34, 34);
+      }
+
+      &:last-child {
+        border: 2px solid rgb(34, 34, 34);
+        border-radius: 8px;
+      }
+    `}
 `;
 
 export const CheckTxt = styled.div`
@@ -112,7 +125,7 @@ const CheckDate = styled.div`
   justify-content: flex-start;
   flex: 1 1 0%;
   border: 1px solid rgb(176, 176, 176);
-  border-radius: 5px;
+  border-radius: 8px;
   right: 25px;
 `;
 
@@ -123,7 +136,21 @@ const SelectionDate = styled.div`
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-radius: 8px;
   white-space: nowrap;
+
+  input {
+    border: none;
+    width: 80%;
+    outline: none;
+  }
+
+  ${(props) =>
+    props.borderThick &&
+    css`
+      border-radius: 8px;
+      border: solid 2px rgb(34, 34, 34);
+    `}
 `;
 
 const CloseEmoticon = styled.div`
@@ -136,21 +163,38 @@ const CloseEmoticon = styled.div`
   text-align: center;
   cursor: pointer;
   /* ${(props) =>
-    props.checkIn &&
+    props.borderStrong &&
     css`
       left: 135px;
     `} */
 `;
 
-const SelectionInfo = ({ text, date, dispatch }) => (
-  <CheckInAndOut>
-    <CheckTxt>{text}</CheckTxt>
-    <SelectionDate>{date}</SelectionDate>
-    <CloseEmoticon onClick={() => dispatch(clearCheckDateDtail())}>
-      <AiOutlineClose />
-    </CloseEmoticon>
-  </CheckInAndOut>
-);
+const SelectionInfo = ({
+  text,
+  date,
+  dispatch,
+  CheckinInputRef,
+  CheckoutInputRef,
+  isValid,
+}) => {
+  return (
+    <CheckInAndOut isValid={isValid}>
+      <CheckTxt>{text}</CheckTxt>
+      <SelectionDate>
+        <input
+          className="hi"
+          value={date}
+          placeholder="YYYY.MM.DD"
+          ref={CheckinInputRef || CheckoutInputRef}
+        ></input>
+        {/* {date ? date : 'YYYY.MM.DD'} */}
+      </SelectionDate>
+      <CloseEmoticon onClick={() => dispatch(clearCheckDateDtail())}>
+        <AiOutlineClose />
+      </CloseEmoticon>
+    </CheckInAndOut>
+  );
+};
 
 const CalendarBlock = styled.div`
   position: absolute;
@@ -181,7 +225,7 @@ const CalendarBlock = styled.div`
   }
 `;
 
-function Datepicker({ setNavModalState, setIsCalendarOpen }) {
+function Datepicker({ setIsDateBorderThick, setIsCalendarOpen }) {
   const dispatch = useDispatch();
   const detailStartDate = useSelector((state) => state.detail.startDate);
   const detailEndDate = useSelector((state) => state.detail.endDate);
@@ -193,7 +237,6 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
   const [focus, setFocus] = useState('startDate');
 
   let { startDate, endDate } = dateRange;
-  // Calendar modal의 checkIn, CheckOut 날짜 넣기
 
   // startDate의 값이 있으며, 이미 string으로 변화되어 store에 저장된경우
   // 달력에는 다시 moment 객체로 변환시켜 startdate, enddate로 입력시킨다.
@@ -240,6 +283,22 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
     }
   }, [dateRange]);
 
+  // checkIn input에 포커스
+  const CheckinInputRef = useRef();
+  const CheckInFocus = () => CheckinInputRef.current.focus();
+  // const CheckoutInputRef = useRef();
+  // const CheckOutFocus = () => CheckoutInputRef.current.focus();
+
+  // 모달을 켰을때 input에 포커스
+  useEffect(() => {
+    // detailObj.startDate !== null ? CheckOutFocus() :
+    CheckInFocus();
+    setIsBorderStrong(true);
+  }, []);
+
+  // 모달 켰을 때 DateBox border 진하게
+  const [isBorderStrong, setIsBorderStrong] = useState(false);
+
   return (
     <CalendarDetailBlock ref={DetailCalendarModalRef}>
       <CalendarBlock>
@@ -247,22 +306,29 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
           <Text bigger bold className="add-date">
             날짜 선택
           </Text>
-          {/* 버튼의 클릭 이벤트가 되는지 확인하기 */}
           <CheckDate
             onClick={() => {
               setIsCalendarOpen(true);
             }}
+            hasStartDate={detailStartDate}
+            hasEndDate={detailEndDate}
           >
             <SelectionInfo
               text="체크인"
               date={detailStartDate}
               dispatch={dispatch}
+              CheckinInputRef={CheckinInputRef}
+              borderStrong={isBorderStrong}
+              isValid={detailStartDate && !detailEndDate}
             />
             <SelectionInfo
               className="divider"
               text="체크아웃"
               date={detailEndDate}
               dispatch={dispatch}
+              isValid={detailEndDate}
+
+              // CheckoutInputRef={CheckoutInputRef}
             />
           </CheckDate>
         </div>
@@ -291,13 +357,15 @@ function Datepicker({ setNavModalState, setIsCalendarOpen }) {
               e.target.classList.contains('DayPicker__withBorder')
             )
               return;
-
             if (
               DetailCalendarModalRef.current.contains(e.target) &&
               !e.target.classList.contains('close-btn')
             )
               return;
             setIsCalendarOpen(false);
+            setTimeout(() => {
+              setIsDateBorderThick(false);
+            }, 300);
           }}
           verticalHeight={100}
         />
