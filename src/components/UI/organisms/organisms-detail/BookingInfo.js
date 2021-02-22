@@ -86,11 +86,24 @@ const BookingInfo = ({
       <PositionBox>
         <BookingInfoContainer>
           <OneDayPrice infoRes={infoRes} detailObj={detailObj} />
-          <DatePersonBox detailObj={detailObj} infoRes={infoRes} />
-          <ReserveBtn
-            DetailHeaderRef={DetailHeaderRef}
-            moveToReserve={moveToReserve}
+          <DatePersonBox
+            detailObj={detailObj}
+            isCalendarOpen={isCalendarOpen}
+            setIsCalendarOpen={setIsCalendarOpen}
+            infoRes={infoRes}
           />
+          <ReserveBtn
+            moveToReserve={moveToReserve}
+            modal={modal}
+            setModal={setModal}
+            setIsOpen={setIsOpen}
+            formState={formState}
+            setFormState={setFormState}
+            DetailHeaderRef={DetailHeaderRef}
+            isCalendarOpen={isCalendarOpen}
+            setIsCalendarOpen={setIsCalendarOpen}
+            NoBookingDate
+          ></ReserveBtn>
           <span className="notice">
             예약 확정 전에는 요금이 청구되지 않습니다.
           </span>
