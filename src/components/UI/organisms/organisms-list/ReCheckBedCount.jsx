@@ -38,75 +38,71 @@ const ReCheckBedStyle = styled.div`
     }
   }
 `;
-const ReCheckBedCount = ({
-  bedNum,
-  bedRoomNum,
-  bathRoomNum,
-  minusBtn,
-  plusBtn,
-}) => {
-  return (
-    <ReCheckBedStyle>
-      <h1>침실과 침대</h1>
-      <div>
+const ReCheckBedCount = React.memo(
+  ({ bedNum, bedRoomNum, bathRoomNum, minusBtn, plusBtn }) => {
+    return (
+      <ReCheckBedStyle>
+        <h1>침실과 침대</h1>
         <div>
-          <TextStyle className="option">침대 수</TextStyle>
+          <div>
+            <TextStyle className="option">침대 수</TextStyle>
+          </div>
+          <div className="numbers">
+            <CircleButton
+              name="bedNum"
+              value={bedNum}
+              minus
+              onClick={minusBtn}
+              disabled={bedNum === 0 ? 'false' : ''}
+              className={bedNum === 0 && 'zero'}
+            />
+            <TextStyle>{bedNum}</TextStyle>
+            <CircleButton name="bedNum" value={bedNum} onClick={plusBtn} />
+          </div>
         </div>
-        <div className="numbers">
-          <CircleButton
-            name="bedNum"
-            value={bedNum}
-            minus
-            onClick={minusBtn}
-            disabled={bedNum === 0 ? 'false' : ''}
-            className={bedNum === 0 && 'zero'}
-          />
-          <TextStyle>{bedNum}</TextStyle>
-          <CircleButton name="bedNum" value={bedNum} onClick={plusBtn} />
-        </div>
-      </div>
-      <div>
         <div>
-          <TextStyle className="option">침실 수</TextStyle>
+          <div>
+            <TextStyle className="option">침실 수</TextStyle>
+          </div>
+          <div className="numbers">
+            <CircleButton
+              minus
+              name="bedRoomNum"
+              value={bedRoomNum}
+              onClick={minusBtn}
+              className={bedRoomNum === 0 && 'zero'}
+            />
+            <TextStyle>{bedRoomNum}</TextStyle>
+            <CircleButton
+              name="bedRoomNum"
+              value={bedRoomNum}
+              onClick={plusBtn}
+            />
+          </div>
         </div>
-        <div className="numbers">
-          <CircleButton
-            minus
-            name="bedRoomNum"
-            value={bedRoomNum}
-            onClick={minusBtn}
-            className={bedRoomNum === 0 && 'zero'}
-          />
-          <TextStyle>{bedRoomNum}</TextStyle>
-          <CircleButton
-            name="bedRoomNum"
-            value={bedRoomNum}
-            onClick={plusBtn}
-          />
-        </div>
-      </div>
-      <div>
         <div>
-          <TextStyle className="option">욕실 수</TextStyle>
+          <div>
+            <TextStyle className="option">욕실 수</TextStyle>
+          </div>
+          <div className="numbers">
+            <CircleButton
+              minus
+              name="bathRoomNum"
+              value={bathRoomNum}
+              onClick={minusBtn}
+              className={bathRoomNum === 0 && 'zero'}
+            />
+            <TextStyle>{bathRoomNum}</TextStyle>
+            <CircleButton
+              name="bathRoomNum"
+              value={bathRoomNum}
+              onClick={plusBtn}
+            />
+          </div>
         </div>
-        <div className="numbers">
-          <CircleButton
-            minus
-            name="bathRoomNum"
-            value={bathRoomNum}
-            onClick={minusBtn}
-            className={bathRoomNum === 0 && 'zero'}
-          />
-          <TextStyle>{bathRoomNum}</TextStyle>
-          <CircleButton
-            name="bathRoomNum"
-            value={bathRoomNum}
-            onClick={plusBtn}
-          />
-        </div>
-      </div>
-    </ReCheckBedStyle>
-  );
-};
+      </ReCheckBedStyle>
+    );
+  },
+);
 
 export default ReCheckBedCount;

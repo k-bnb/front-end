@@ -28,53 +28,55 @@ const MobileSize = styled.main`
   display: none;
 `;
 
-const GoogleStyle = ({
-  roomMap,
-  roomType,
-  bathRoomNum,
-  bedRoomNum,
-  bedNum,
-  locationSearch,
-  checkDateSearch,
-  guestSearch,
-  costSearch,
-}) => {
-  const isPc = useMediaQuery({
-    query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
-  });
-  const isTablet = useMediaQuery({
-    query: `(min-width: 744px)and (max-width: 1126px)`,
-  });
-  const isMobile = useMediaQuery({
-    query: `(max-width: 743px)`, //744px 이하인 경우에만 적용(744이하.)
-  });
+const GoogleStyle = React.memo(
+  ({
+    roomMap,
+    roomType,
+    bathRoomNum,
+    bedRoomNum,
+    bedNum,
+    locationSearch,
+    checkDateSearch,
+    guestSearch,
+    costSearch,
+  }) => {
+    const isPc = useMediaQuery({
+      query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
+    });
+    const isTablet = useMediaQuery({
+      query: `(min-width: 744px)and (max-width: 1126px)`,
+    });
+    const isMobile = useMediaQuery({
+      query: `(max-width: 743px)`, //744px 이하인 경우에만 적용(744이하.)
+    });
 
-  return (
-    <>
-      {isPc && (
-        <PcSize className="Asidemap">
-          <GoogleMapUse
-            roomMap={roomMap}
-            locationSearch={locationSearch}
-            checkDateSearch={checkDateSearch}
-            guestSearch={guestSearch}
-            costSearch={costSearch}
-            roomType={roomType}
-            bedNum={bedNum}
-            bedRoomNum={bedRoomNum}
-            bathRoomNum={bathRoomNum}
-          />
-        </PcSize>
-      )}
-      {isTablet && (
-        <TabletSize className="Asidemap">{/* <GoogleMapUse /> */}</TabletSize>
-      )}
-      {isMobile && (
-        <MobileSize className="Asidemap">{/* <GoogleMapUse /> */}</MobileSize>
-      )}
-    </>
-  );
-};
+    return (
+      <>
+        {isPc && (
+          <PcSize className="Asidemap">
+            <GoogleMapUse
+              roomMap={roomMap}
+              locationSearch={locationSearch}
+              checkDateSearch={checkDateSearch}
+              guestSearch={guestSearch}
+              costSearch={costSearch}
+              roomType={roomType}
+              bedNum={bedNum}
+              bedRoomNum={bedRoomNum}
+              bathRoomNum={bathRoomNum}
+            />
+          </PcSize>
+        )}
+        {isTablet && (
+          <TabletSize className="Asidemap">{/* <GoogleMapUse /> */}</TabletSize>
+        )}
+        {isMobile && (
+          <MobileSize className="Asidemap">{/* <GoogleMapUse /> */}</MobileSize>
+        )}
+      </>
+    );
+  },
+);
 
 // function areEqual1(prevProps, nextProps) {
 //   console.log(prevProps, nextProps)

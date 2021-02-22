@@ -11,11 +11,12 @@ const ReserveConfirmContainer = () => {
   const [cancelModal, setCancelModal] = useState('');
   const reserveRes = useSelector((state) => state.user);
   const [listModal, setListModal] = useState([]);
-  const { name } = useSelector((person) => person.user.userRes);
-  const dispatch = useDispatch();
+  const [name, setName] = useState('');
 
   useEffect(() => {
     if (reserveRes.reserveRes === null) return;
+    const { name } = JSON.parse(sessionStorage.getItem('userInfo'));
+    setName(name);
     const next = reserveRes.reserveRes.filter(
       (item) => item.status === '예약 완료',
     );
@@ -23,6 +24,8 @@ const ReserveConfirmContainer = () => {
 
     setList(next);
   }, []);
+
+  const dispatch = useDispatch();
 
   // 예정된 예약 이전예약 nav
   const activClick = (e) => {
@@ -77,7 +80,7 @@ const ReserveConfirmContainer = () => {
 
   const reservationConfirmBtn = (e) => {
     console.log(e.target.value);
-    console.log(name);
+
     dispatch(
       reservationCancel({
         token,

@@ -9,7 +9,7 @@ import {
   searching,
 } from '../modules/search';
 
-const ListContainer = () => {
+const ListContainer = React.memo(() => {
   const [searchModalState, setSearchModalState] = useState(null);
   const {
     locationSearch,
@@ -95,7 +95,7 @@ const ListContainer = () => {
     //     minCostState: true,
     //     minCostPay: costSearch.minCost,
     //   }));
-    // }   
+    // }
     // if (costSearch.maxCost) {
     //   setCostState((state) => ({
     //     ...state,
@@ -196,9 +196,9 @@ const ListContainer = () => {
         setLocalMinCost={setLocalMinCost}
         localMaxCost={localMaxCost}
         setLocalMaxCost={setLocalMaxCost}
-/>
+      />
     </>
   );
-};
+});
 
 export default ListContainer;

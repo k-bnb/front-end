@@ -19,6 +19,7 @@ const ProfileToggleModalContainer = () => {
 
   // 예약 내역
   const reservationClick = () => {
+    dispatch(userInfo(token));
     dispatch(reserveConfirm({ token }));
     history.push('/reserveconfirm');
   };
