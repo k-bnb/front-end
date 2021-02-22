@@ -7,6 +7,7 @@ import ReserveConfirmNoData from '../../molecules/molecules-reserveConfirm/Reser
 import Modal from '../../../../portal/Modal';
 import ReserveCancelModal from '../../molecules/molecules-reserveConfirm/ReserveCancelModal';
 import ReserveCancel from '../../molecules/molecules-reserveConfirm/ReserveCancel';
+import ReviewModalContainer from '../../../../containers/modal/ReviewModalContainer';
 
 const ReserveConfirmSectionStyle = styled.div`
   display: inline-flex;
@@ -27,8 +28,11 @@ const ReserveConfirmSection = ({
   cancelModal,
   reservationConfirmBtn,
   reservationId,
+  reviewModalState,
+  setReviewModalState,
+  review,
+  roomId,
 }) => {
-  console.log(active);
   return (
     <>
       <ReserveConfirmNav active={active} activClick={activClick} />
@@ -42,6 +46,8 @@ const ReserveConfirmSection = ({
               cancel={cancel}
               cancelBtn={cancelBtn}
               cancelModal={cancelModal}
+              reviewModalState={reviewModalState}
+              review={review}
             />
           ))
         ) : (
@@ -63,20 +69,15 @@ const ReserveConfirmSection = ({
             </ReserveCancelModal>
           </Modal>
         )}
-        {active === '이전 예약' && (
+        {reviewModalState && (
           <Modal>
-            <ReserveCancelModal
-              cancelModal={cancelModal}
-              modalState={modalState}
-            >
-              <ReserveCancel
-                reservationConfirmBtn={reservationConfirmBtn}
-                list={list}
-                cancel={cancel}
-                cancelBtn={cancelBtn}
-                reservationId={reservationId}
-              />
-            </ReserveCancelModal>
+            <ReviewModalContainer
+              reviewModalState={reviewModalState}
+              setReviewModalState={setReviewModalState}
+              roomId={roomId}
+              list={list}
+              review={review}
+            />
           </Modal>
         )}
       </ReserveConfirmSectionStyle>

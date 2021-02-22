@@ -23,6 +23,10 @@ const ReserveConfirmTemplate = ({
   cancelModal,
   reservationConfirmBtn,
   reservationId,
+  reviewModalState,
+  setReviewModalState,
+  review,
+  roomId,
 }) => {
   return (
     <ReserveConfirmTemplateStyle>
@@ -38,6 +42,10 @@ const ReserveConfirmTemplate = ({
         cancelModal={cancelModal}
         reservationConfirmBtn={reservationConfirmBtn}
         reservationId={reservationId}
+        reviewModalState={reviewModalState}
+        setReviewModalState={setReviewModalState}
+        review={review}
+        roomId={roomId}
       />
       <ReserveConfirmFooter />
     </ReserveConfirmTemplateStyle>
