@@ -16,7 +16,7 @@ const PriceBox = styled.ul`
 `;
 
 const PriceDetail = ({ infoRes, totalSchedule }) => {
-  const roomPrice = `${infoRes.roomCost}*${totalSchedule}박`;
+  const roomPrice = `${infoRes.roomCost} X ${totalSchedule}박`;
 
   return (
     <PriceBox>

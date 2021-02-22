@@ -18,10 +18,13 @@ const ReservationContainer = () => {
   const history = useHistory();
 
   const token = useSelector((state) => state.auth.token);
-  const { message, totalCost, checkDateSearch: checkDate } = useSelector(
+
+  // message 뒤에 totalCost 넣기
+  const { message, checkDateSearch: checkDate } = useSelector(
     (state) => state.reserve,
   );
 
+  const totalCost = 2000;
   const { numOfAdult, numOfKid, numOfInfant: infantNumber } = useSelector(
     ({ reserve }) => reserve.guestSearch,
   );
@@ -51,8 +54,6 @@ const ReservationContainer = () => {
     commentCount,
     roomImgUrlList,
   } = useSelector(({ detail }) => detail.infoRes);
-
-  console.log(hostName, hostImgURL, commentCount, roomImgUrlList);
 
   const { id: roomId, roomCost: testCost, name: testName } = useSelector(
     ({ reserve }) => reserve.infoRes,
@@ -101,28 +102,28 @@ const ReservationContainer = () => {
   //  성인 + 어린이 수
   const guestNumber = numOfAdult + numOfKid;
 
-  function sendPayment({ price, receipt_id }) {
-    const url = 'http://3.34.198.174:8080/payment';
-    const signUpData = {
-      receipt_id: receipt_id,
-      price: 2000,
-    };
-    const config = {
-      headers: {
-        contentType: 'application/json',
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjEzNTg2OTg4LCJleHAiOjE2MTQ0NTA5ODh9.P1cM8achpTQO0Asi61C7Y69J7WPjLQFXbX4F_UzgIwRbHyqNAh170tqj4xJv3pEsuCz_LERu_Igh4GFbzFxVuQ',
-      },
-    };
-    return axios.post(url, signUpData, config);
-  }
+  // function sendPayment(price, receipt_id) {
+  //   const url = 'http://3.34.198.174:8080/payment';
+  //   const signUpData = {
+  //     receipt_id: receipt_id,
+  //     price: 1000,
+  //   };
+  //   const config = {
+  //     headers: {
+  //       contentType: 'application/json',
+  //       Authorization:
+  //         'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjEzNTg2OTg4LCJleHAiOjE2MTQ0NTA5ODh9.P1cM8achpTQO0Asi61C7Y69J7WPjLQFXbX4F_UzgIwRbHyqNAh170tqj4xJv3pEsuCz_LERu_Igh4GFbzFxVuQ',
+  //     },
+  //   };
+  //   return axios.post(url, signUpData, config);
+  // }
 
   // 확인 button 클릭해서 예약하기 event function
   const click = useCallback(() => {
     setComfirmModal(true);
 
     BootPay.request({
-      price: 1000, //실제 결제되는 가격
+      price: 2000, //실제 결제되는 가격
       application_id: '6024e5ee5b2948001d52037b',
       name: testName, //결제창에서 보여질 이름
       pg: 'nicepay',
@@ -149,10 +150,23 @@ const ReservationContainer = () => {
       },
     })
       .error((data) => console.log(data))
-      .confirm(async (data) => {
+      .confirm(async ({ price, receipt_id }) => {
         try {
-          const data1 = await sendPayment(data);
-          console.log(data1);
+          await dispatch(
+            reserving(
+              roomId,
+              checkIn,
+              checkOut,
+              guestNumber,
+              infantNumber,
+              totalCost,
+              message,
+              token,
+              price,
+              receipt_id,
+            ),
+          );
+
           // history.push('/reserve');
         } catch (err) {
           console.log(err);
@@ -162,6 +176,16 @@ const ReservationContainer = () => {
         BootPay.removePaymentWindow();
       });
   }, []);
+
+  console.log(
+    roomId,
+    checkIn,
+    checkOut,
+    guestNumber,
+    infantNumber,
+    totalCost,
+    message,
+  );
 
   const saveDate = useCallback(() => {
     setDateModal(!dateModal);

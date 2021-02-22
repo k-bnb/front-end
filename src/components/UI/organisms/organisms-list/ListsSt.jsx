@@ -10,7 +10,7 @@ import Bookmark from '../../atoms/atoms-list/BookMark';
 import ScoreText from '../../molecules/molecules-list/Score-Text';
 import { BsHeartFill } from 'react-icons/bs';
 import { BiWon } from 'react-icons/bi';
-
+import React from 'react';
 const PcSize = styled.main`
   min-height: calc(100vh - 80px);
   /* background-color: #eee; */
@@ -262,7 +262,10 @@ const ListStyle = ({
                     </span>
                     <span className="TextWrap">
                       <div className="TextHead">
-                        <ScoreText grade={grade} commentCount={commentCount} />
+                        <ScoreText
+                          grade={grade}
+                          commentCount={commentCount}
+                        />
                         <TextStyled size="blackSmall">
                           {city} {borough} {city || borough ? '의' : ''}{' '}
                           {roomType}
@@ -283,23 +286,24 @@ const ListStyle = ({
                     </span>
                   </li>
                 </Link>
-              );
-            },
-          )}
-          <PageNation
-            totalPage={totalPage}
-            pageNationClick={pageNationClick}
-            currentButton={currentButton}
-            setCurrentButton={setCurrentButton}
-            arrOfcurrButtons={arrOfcurrButtons}
-            setArrOfCurrButtons={setArrOfCurrButtons}
-            numberOfPages={numberOfPages}
-            changeCurrentPage={changeCurrentPage}
-            pageNationState={pageNationState}
-          />
-        </MobileSize>
-      )}
-    </>
-  );
-};
+                );
+              },
+            )}
+            <PageNation
+              totalPage={totalPage}
+              pageNationClick={pageNationClick}
+              currentButton={currentButton}
+              setCurrentButton={setCurrentButton}
+              arrOfcurrButtons={arrOfcurrButtons}
+              setArrOfCurrButtons={setArrOfCurrButtons}
+              numberOfPages={numberOfPages}
+              changeCurrentPage={changeCurrentPage}
+              pageNationState={pageNationState}
+            />
+          </MobileSize>
+        )}
+      </>
+    );
+  }
+
 export default ListStyle;

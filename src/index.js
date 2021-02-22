@@ -146,6 +146,9 @@ const store = createStore(
     user: {
       userRes: JSON.parse(sessionStorage.getItem('userInfo')),
       reserveRes: JSON.parse(sessionStorage.getItem('userInfoConFirm')),
+      reserveReviewReq: {
+        description: '',
+      },
     },
   },
   composeWithDevTools(applyMiddleware(sagaMiddleware)),

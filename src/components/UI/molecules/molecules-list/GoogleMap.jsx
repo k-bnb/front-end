@@ -17,10 +17,11 @@ import { locationInput, searching } from '../../../../modules/search';
 import { BiWon } from 'react-icons/bi';
 import { BsHeartFill } from 'react-icons/bs';
 import { moneyfilter } from '../../../../lib/moneyfilter';
-import Slider from 'react-slick';
+// import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ScoreText from './Score-Text';
+import Slider from 'react-slick';
 
 // import MarkerWithLabel from "react-google-maps/lib/components/addons/MarkerWithLabel";
 // import AutoComplete from 'react-google-autocomplete';
@@ -366,9 +367,12 @@ function GoogleMapUse({
   };
   const [zoom, setZoom] = useState(12);
   const mapRef = useRef();
-
+  const mapMarker = useRef();
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
+  }, []);
+  const onMarkLoad = useCallback((map) => {
+    mapMarker.current = map;
   }, []);
   const handleZoomChanged = () => {
     setZoom(mapRef.current.getZoom());
@@ -379,7 +383,7 @@ function GoogleMapUse({
   const MapWithAMarker = withScriptjs(
     withGoogleMap((props) => {
       return (
-        <GoogleMap          
+        <GoogleMap
           // scrollwheel={false}
           ref={mapRef}
           // defaultZoom={12}
@@ -394,12 +398,13 @@ function GoogleMapUse({
           onLoad={onMapLoad}
           onDragEnd={dragMark}
           onZoomChanged={handleZoomChanged}
-          options = {{scrollwheel:true}} // 마우스휠옵션.
+          options={{ scrollwheel: true }} // 마우스휠옵션.
         >
           {roomMap.map((sample) => (
             <>
               <Marker
                 key={sample.id}
+                onLoad={onMarkLoad}
                 opacity={0}
                 labelClass="map-price-container"
                 labelContent={`<div class="map-price-marker"><span>$${sample.cost}</span></div>`}
@@ -417,7 +422,7 @@ function GoogleMapUse({
                 getPixelPositionOffset={getPixelPositionOffset}
               >
                 <div
-                  className="cost-memo"
+                  className={sample.id}
                   name={sample.cost}
                   ref={mapCost}
                   onClick={(e) => {
@@ -430,18 +435,18 @@ function GoogleMapUse({
                     // console.log(nativeevent.path); //1번째가 -memo << 이건데, 이게 className이야.
                   }}
                   style={{
-                    display:'flex',
-                    alignItems:'center',
+                    display: 'flex',
+                    alignItems: 'center',
                     background: `white`,
                     border: `1px solid #ccc`,
-                    backGround:'white',
-                    cursor:'pointer',
+                    backGround: 'white',
+                    cursor: 'pointer',
                     borderRadius: '50px',
                     width: '80px',
                     height: '30px',
                     margin: 0,
                     padding: 0,
-                  }}                  
+                  }}
                 >
                   <p
                     style={{
@@ -453,7 +458,8 @@ function GoogleMapUse({
                       fontSize: '16px',
                     }}
                   >
-                    <BiWon />{moneyfilter(sample.cost)}
+                    <BiWon />
+                    {moneyfilter(sample.cost)}
                   </p>
                 </div>
               </OverlayView>

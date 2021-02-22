@@ -149,11 +149,13 @@ const PersonalInfoImg = ({
       };
 
       const body = formData;
+
       const res = await axios.post(
         'http://3.34.198.174:8080/user/update/photo',
         body,
         headers,
       );
+
       console.log(res);
       sessionStorage.setItem(
         'userInfo',

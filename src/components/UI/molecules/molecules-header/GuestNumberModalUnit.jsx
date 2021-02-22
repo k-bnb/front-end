@@ -45,6 +45,7 @@ const GuestNumberModalUnit = ({
   detailPage,
   reservePage,
   infoRes,
+  searchBtnRef,
 }) => {
   // type (성인, 어린이, 유아) , detail(13세이상..), name:button이름 (numOfAdult, numOfKid, numOfInfant)
   const dispatch = useDispatch();
@@ -171,12 +172,11 @@ const GuestNumberModalUnit = ({
             );
           }}
           disable={
-            (detailPage
+            detailPage
               ? detailName <= 0
               : reservePage
               ? reserveGuestSearch[searchName] <= 0
-              : guestSearch[searchName] <= 0,
-            detailPage ? (detail.numOfAdult <= 1 ? disableHandler() : '') : '')
+              : guestSearch[searchName] <= 0
           } // detailPage이면, numOfAdult가 0보다 작거나 같으면 더이상 감소 불가, 메인에서는 guestSearch[name] <= 0 이면 감소 불가.
         />
         <Text noPadding className="guest-num-modal-interactive count">
@@ -218,15 +218,16 @@ const GuestNumberModalUnit = ({
             );
           }}
           disable={
-            (reservePage
+            reservePage
               ? ReserveTotalGuestNum >= peopleLimit
-              : guestSearch[searchName] >= disableHandler(),
-            detailPage
-              ? DetailTotalGuestNum === infoRes.peopleLimit
-                ? disableHandler()
-                : ''
-              : '')
+              : guestSearch[searchName] >= disableHandler()
+            // detailPage
+            //   ? DetailTotalGuestNum === infoRes.peopleLimit
+            //     ? disableHandler()
+            //     : ''
+            //   : '')
           } // 최대값은 함수가 반환한 값에따라 바뀐다.
+          searchBtnRef={searchBtnRef}
         />
       </div>
     </GuestNumberModalUnitBlock>

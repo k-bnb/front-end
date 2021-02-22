@@ -60,6 +60,7 @@ const Modaldiv = styled.div`
     );
   }}
 `;
+
 const ReserveCancelModal = ({
   children,
   cancelModalState,

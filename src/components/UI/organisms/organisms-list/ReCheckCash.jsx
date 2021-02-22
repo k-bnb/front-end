@@ -61,50 +61,57 @@ const ReCheckCashStyle = styled.div`
   }
 `;
 
-const ReCheckCash = ({
-  cost,
-  costSearch,
-  localMinCost,
-  setLocalMinCost,
-  localMaxCost,
-  setLocalMaxCost,
-}) => {
-  return (
-    <ReCheckCashStyle>
-      <div>
-        <TextStyle>
-          평균 월간 요금은 <BiWon />
-          3,323,124 입니다.
-        </TextStyle>
-      </div>
-      <div className="cashInput">
+const ReCheckCash = React.memo(
+  ({
+    cost,
+    costSearch,
+    localMinCost,
+    setLocalMinCost,
+    localMaxCost,
+    setLocalMaxCost,
+  }) => {
+    //  const changeMinCost = (e) => {
+    //   setMinCost(e.target.value);
+    //  };
+    //  const changeMaxCost = (e) => {
+    //   setMaxCost(e.target.value);
+    //  };
+    return (
+      <ReCheckCashStyle>
         <div>
-          <Input
-            name="minCost"
-            value={localMinCost}
-            onChange={(e) => {
-              setLocalMinCost(+e.target.value);
-              console.log('changing');
-            }}
-            type="text"
-          />{' '}
-          <span>최소금액</span>
+          <TextStyle>
+            평균 월간 요금은 <BiWon />
+            3,323,124 입니다.
+          </TextStyle>
         </div>
-        <span>{'-'}</span>{' '}
-        <div>
-          <Input
-            type="text"
-            value={localMaxCost}
-            onChange={(e) => {
-              setLocalMaxCost(+e.target.value);
-            }}
-            name="maxCost"
-          />
-          <span>최대금액</span>
+        <div className="cashInput">
+          <div>
+            <Input
+              name="minCost"
+              value={localMinCost}
+              onChange={(e) => {
+                setLocalMinCost(+e.target.value);
+              }}
+              type="text"
+            />{' '}
+            <span>최소금액</span>
+          </div>
+          <span>{'-'}</span>{' '}
+          <div>
+            <Input
+              type="text"
+              value={localMaxCost}
+              onChange={(e) => {
+                setLocalMaxCost(+e.target.value);
+              }}
+              name="maxCost"
+            />
+            <span>최대금액</span>
+          </div>
         </div>
-      </div>
-    </ReCheckCashStyle>
-  );
-};
+      </ReCheckCashStyle>
+    );
+  },
+);
 
 export default ReCheckCash;

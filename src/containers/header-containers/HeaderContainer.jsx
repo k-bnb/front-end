@@ -4,6 +4,7 @@ import HeaderMain from '../../components/templates/templates-header/HeaderMain';
 import HeaderList from '../../components/templates/templates-header/HeaderList';
 import HeaderDetail from '../../components/templates/templates-header/HeaderDetail';
 import { useSelector } from 'react-redux';
+import SkipNavigation from '../../components/templates/templates-header/SkipNabigation';
 
 const HeaderContainer = ({
   DetailHeaderRef,
@@ -91,6 +92,7 @@ const HeaderContainer = ({
 
   return (
     <>
+      <SkipNavigation />
       {history.location.pathname === '/' && (
         <HeaderMain
           isScrolled={isScrolled}

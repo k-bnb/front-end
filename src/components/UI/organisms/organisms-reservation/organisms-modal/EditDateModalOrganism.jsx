@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AiOutlineClose } from 'react-icons/ai';
+import { GrClose } from 'react-icons/gr';
 import EditCalendar from '../../../../../calendar/EditCalendar';
 import CommonButton from '../../../atoms/atoms-reservation/atoms-modal/CommonButton';
 import CommonBg from '../../../atoms/atoms-reservation/atoms-modal/CommonBg';
@@ -58,7 +58,7 @@ function EditDateModalOrganism({
       <CommonTemp dateModal>
         <CancelButtonContainer>
           <CommonButton cancelModal manageDateModal={manageDateModal}>
-            <AiOutlineClose />
+            <GrClose />
           </CommonButton>
         </CancelButtonContainer>
         <ScheduleInfoContainer>

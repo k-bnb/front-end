@@ -106,6 +106,9 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext }) {
           onClick={(e) => {
             SearchTypeHandler('location');
           }}
+          onFocus={(e) => {
+            SearchTypeHandler('location');
+          }}
           autoComplete="off"
           selectOnClick={true}
         />

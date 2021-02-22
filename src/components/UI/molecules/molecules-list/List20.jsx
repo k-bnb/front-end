@@ -283,12 +283,7 @@ const ULWrap = styled.ul`
     font-size: 25px;
     cursor: pointer;
     height: auto;
-
-    &:hover {
-      svg {
-      }
-    }
-  
+  }
 `;
 
 const LodgingLists = ({
