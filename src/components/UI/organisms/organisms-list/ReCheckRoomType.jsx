@@ -75,7 +75,7 @@ const ReCheckRoomType = ({ roomTypes, roomType }) => {
   return (
     <ReCheckRoomTypeStyle>
       <div className="checkRooms">
-        <div className="checkRooms-group">
+        <div className="checkRooms-group" tabIndex='0'>
           <div className="box-div">
             <Input
               type="checkbox"
@@ -93,7 +93,7 @@ const ReCheckRoomType = ({ roomTypes, roomType }) => {
             </label>
           </div>
         </div>
-        <div className="checkRooms-group">
+        <div className="checkRooms-group" tabIndex='0'>
           <div className="box-div">
             <Input
               type="checkbox"
@@ -115,7 +115,7 @@ const ReCheckRoomType = ({ roomTypes, roomType }) => {
             </label>
           </div>
         </div>
-        <div className="checkRooms-group">
+        <div className="checkRooms-group" tabIndex='0'>
           <div className="box-div">
             <Input
               type="checkbox"
@@ -135,7 +135,7 @@ const ReCheckRoomType = ({ roomTypes, roomType }) => {
             </label>
           </div>
         </div>
-        <div className="checkRooms-group">
+        <div className="checkRooms-group" tabIndex='0'>
           <div className="box-div">
             <Input
               type="checkbox"

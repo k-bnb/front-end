@@ -75,7 +75,7 @@ const ULWrap = styled.ul`
               width: 30px;
               height: 30px;
               border-radius: 50%;
-              opacity: 0;
+              /* opacity: 0; */
               transition: opacity .3s;
             }
             .slick-next {
@@ -84,7 +84,7 @@ const ULWrap = styled.ul`
               width: 30px;
               height: 30px;
               border-radius: 50%;
-              opacity: 0;
+              /* opacity: 0; */
               transition: opacity .3s;
             }
 
@@ -93,6 +93,8 @@ const ULWrap = styled.ul`
             }
 
             .slick-dots {
+              /* li{ display:none }
+            } */
               li {
                 border: 0;
                 display: inline !important;
@@ -128,10 +130,12 @@ const ULWrap = styled.ul`
                 &:nth-child(5) {
                   position: absolute;
                   bottom: 10px;
-
                   left: 140px;
                 }
               }
+            } */
+            .slick-current{
+
             }
 
             .slick-list {
@@ -159,7 +163,7 @@ const ULWrap = styled.ul`
       }
       .btn-group {
         /* opacity: 0; */
-        button {
+        button[tabIndex=0] {
           bottom: 50%;
           width: 30px;
           height: 30px;
@@ -252,27 +256,26 @@ const ULWrap = styled.ul`
     }
   }
 
-    hr {
-      width: 50px;
-      text-align: left;
-      color: #eee;
-      margin: 15px 15px 15px 0;
-      /* padding: 0; */
-    }
-    .TextBottom {
-      display: flex;
-      /* box-sizing:border-box; */
-      flex-flow: row nowrap;
-      justify-content: space-between;
-      height: 80px;
-      align-items: flex-end;
-      /* padding: 0 15px; */
-    }
-    .cost {
-      display: flex;
-      flex-flow: row nowrap;
-      letter-spacing: 1px;
-    }
+  hr {
+    width: 50px;
+    text-align: left;
+    color: #eee;
+    margin: 15px 15px 15px 0;
+    /* padding: 0; */
+  }
+  .TextBottom {
+    display: flex;
+    /* box-sizing:border-box; */
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    height: 80px;
+    align-items: flex-end;
+    /* padding: 0 15px; */
+  }
+  .cost {
+    display: flex;
+    flex-flow: row nowrap;
+    letter-spacing: 1px;
   }
   .heart {
     position: absolute;
@@ -286,9 +289,9 @@ const ULWrap = styled.ul`
 
     &:hover {
       svg {
-      }
     }
-  
+  }
+}
 `;
 
 const LodgingLists = ({
@@ -320,25 +323,27 @@ const LodgingLists = ({
     slidesToScroll: 1,
   };
 
-  /* const { startDate, endDate } = checkDateSearch;
-  const { numOfAdult, numOfKid, numOfInfant } = guestSearch;
-  const totalNum = numOfAdult + numOfKid; */
+
+  // const { startDate, endDate } = checkDateSearch;
+  // const { numOfAdult, numOfKid, numOfInfant } = guestSearch;
+  // const totalNum = numOfAdult + numOfKid;
   // console.log(numOfAdult, numOfKid, numOfInfant);
   // console.log(checkDateSearch);
   // console.log(startDate, endDate);
 
   return (
     <>
-      <Wrap className="listWrap">
+      <Wrap className="listWrap" >
         <ULWrap>
-          <li className="allList">
-            <Border className="slide-group" carouselImg>
-              <div className="slide">
-                <div className="slideDiv">
-                  <Slider {...settings}>
+          <li className="allList" tabIndex="0">
+            <Border className="slide-group" carouselImg tabIndex="-1">
+              <div className="slide" tabIndex="-1">
+                <div className="slideDiv" tabIndex="-1">
+                  <Slider {...settings} tabIndex="-1">
                     {roomImgUrlList.map((src, i, arr) => (
                       <>
                         <Imgs
+                          tabIndex="-1"
                           carousalImg
                           src={src}
                           // alt={alt}
@@ -386,7 +391,7 @@ const LodgingLists = ({
                 </div>
               </span>
             </Link>
-            <Bookmark className="heart" Pcheart>
+            <Bookmark className="heart" Pcheart tabIndex='0'>
               <AiOutlineHeart />
             </Bookmark>
           </li>

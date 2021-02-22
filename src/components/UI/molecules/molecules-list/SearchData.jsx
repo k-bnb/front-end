@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import Button from '../../atoms/atoms-list/Button';
 import TextStyled from '../../atoms/atoms-list/Text';
+import Button from '../../atoms/atoms-list/Button';
 import FooterBtn from './FooterBtn';
 import RoomReSearch from './RoomReSearch';
 import SearchModal from './SearchModal';
@@ -10,6 +10,11 @@ import { extractMonthDate } from '../../../../lib/extractMonthDate';
 import { moneyfilter } from '../../../../lib/moneyfilter';
 
 const SearchPlace = styled.div`
+  div:focus{
+    transition: box-shadow 0.2s ease 0s;
+    border-color: rgb(34,34,34);
+    box-shadow: rgb(255,255,255) 0px 0px 0px 2px, red(34,34,34) 0px 0px 0px 4px;
+  }
   padding: 100px 30px 40px 30px;
   /* margin-top:100px; */
 
@@ -23,7 +28,7 @@ const SearchPlace = styled.div`
         /* justify-content: center; */
         align-items: center;
         &.blackBorder {
-          border: 2px solid #000;
+          /* border: 2px solid #000; */
         }
       }
     }
@@ -51,6 +56,7 @@ const SearchData = ({
   setLocalMinCost,
   localMaxCost,
   setLocalMaxCost,
+  keyup,
 }) => {
   const modal = useRef();
   const {
@@ -77,7 +83,7 @@ const SearchData = ({
       window.removeEventListener('click', handleClickOutside);
     };
   }, []);
-
+console.log(keyup);
   return (
     <>
       <SearchPlace className="SearchData">
@@ -97,13 +103,14 @@ const SearchData = ({
           </TextStyled>
         </h1>
         <div className="filter-style" ref={modal}>
-          <div className="roomType">
+          <div className="roomType" tabIndex="0">
             <Button
               className={roomType && 'blackBorder'}
               size="large"
               onClick={RoomSearchClick}
+              onkeyup={keyup}
             >
-              <TextStyled size="blackSmall">숙소유형</TextStyled>
+              <TextStyled size="blackSmall" >숙소유형</TextStyled>
             </Button>
             {searchModalState === 'room' && (
               <SearchModal room>
@@ -114,6 +121,7 @@ const SearchData = ({
                   className="modals"
                 />
                 <FooterBtn
+                  tabIndex='0'
                   searchBtn={searchBtn}
                   dispatch={dispatch}
                   setSearchModalState={setSearchModalState}
@@ -121,7 +129,7 @@ const SearchData = ({
               </SearchModal>
             )}
           </div>
-          <div className="roomType">
+          <div className="roomType" tabIndex="0">
             <Button
               className={
                 costSearch &&
@@ -171,7 +179,7 @@ const SearchData = ({
                   localMaxCost={localMaxCost}
                   setLocalMaxCost={setLocalMaxCost}
                 />
-                <FooterBtn
+                <FooterBtn tabIndex='0'
                   localMinCost={localMinCost}
                   localMaxCost={localMaxCost}
                   dispatch={dispatch}
@@ -182,7 +190,7 @@ const SearchData = ({
               </SearchModal>
             )}
           </div>
-          <div className="roomType">
+          <div className="roomType" tabIndex="0">
             <Button
               className={(bedNum || bedRoomNum || bathRoomNum) && 'blackBorder'}
               size="large"
@@ -202,6 +210,7 @@ const SearchData = ({
                   plusBtn={plusBtn}
                 />
                 <FooterBtn
+                  tabIndex='0'
                   searchBtn={searchBtn}
                   dispatch={dispatch}
                   setSearchModalState={setSearchModalState}

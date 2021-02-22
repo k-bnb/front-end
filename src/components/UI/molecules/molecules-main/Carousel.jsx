@@ -89,7 +89,7 @@ const Carousel = ({ carouselImg }) => {
 
   return (
     <CarouselStyle>
-      <CircleDiv carouseldiv>
+      <CircleDiv carouseldiv tabIndex='0'>
         <ArrowButton onClick={leftClick} className="left" />
         <div className="carousel-group" ref={mySlideImg}>
           <div className="slide" ref={mySlide}>

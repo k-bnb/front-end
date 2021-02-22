@@ -27,7 +27,12 @@ const ListContainer = () => {
 
   const dispatch = useDispatch();
 
-  const RoomSearchClick = () => {
+  const keyup = e => {
+    if (e.key === 'Enter')
+    setSearchModalState('room');
+  }
+  
+  const RoomSearchClick = (e) => {
     setSearchModalState('room');
   };
   const cashSearchClick = () => {
@@ -154,6 +159,7 @@ const ListContainer = () => {
         setLocalMinCost={setLocalMinCost}
         localMaxCost={localMaxCost}
         setLocalMaxCost={setLocalMaxCost}
+        keyup={keyup}
       />
     </>
   );
