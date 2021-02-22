@@ -33,6 +33,8 @@ const ReviewSecondOrganism = ({
   cancelModalButton,
   moveNextComponent,
   backButtonRef,
+  wirteReview,
+  description,
 }) => {
   return (
     <Container>
@@ -53,7 +55,10 @@ const ReviewSecondOrganism = ({
       </HeaderContainer>
       <MainContainer>
         <CommonText reviewNameBold>후기를 작성해주세요.</CommonText>
-        <AdjustHeightTeatarea />
+        <AdjustHeightTeatarea
+          wirteReview={wirteReview}
+          description={description}
+        />
       </MainContainer>
       <FooterContainer>
         <MovePageButton reviewNext>저장 후 닫기</MovePageButton>

@@ -23,13 +23,13 @@ const StyledTextarea = styled.textarea`
   }
 `;
 
-const AdjustHeightTeatarea = () => {
+const AdjustHeightTeatarea = ({ wirteReview, description }) => {
   const textareaRef = useRef(null);
-  const [value, setValue] = useState('');
+  // const [value, setValue] = useState('');
 
-  const change = (e) => {
-    setValue(e.target.value);
-  };
+  // const change = (e) => {
+  //   setValue(e.target.value);
+  // };
 
   useLayoutEffect(() => {
     textareaRef.current.style.height = 'inherit';
@@ -37,13 +37,13 @@ const AdjustHeightTeatarea = () => {
       textareaRef.current.scrollHeight,
       MIN_TEXTAREA_HEIGHT,
     )}px`;
-  }, [value]);
+  }, [description]);
 
   return (
     <StyledTextarea
-      onChange={change}
+      onChange={wirteReview}
       ref={textareaRef}
-      value={value}
+      value={description}
       rows="1"
       spellCheck="false"
     ></StyledTextarea>

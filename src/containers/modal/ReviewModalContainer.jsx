@@ -1,5 +1,8 @@
 import React, { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { dispatch } from '../../../../../../Library/Caches/typescript/4.1/node_modules/rxjs/internal/observable/range';
 import ReviewModalOrganism from '../../components/UI/organisms/organisms-reserveconfirm/ReviewModalOrganism';
+import { review, changeInputReview } from '../../modules/user';
 
 const ReviewModalContainer = ({
   reviewModalState,
@@ -7,6 +10,10 @@ const ReviewModalContainer = ({
   reviewRoomId,
   list,
 }) => {
+  const dispatch = useDispatch();
+
+  const { description } = useSelector(({ user }) => user.reserveReviewReq);
+
   // 어떤 모달 페이지 보여주지는지 알려 주는 상태
   const [formState, setFormState] = useState('starForm');
 
@@ -38,6 +45,11 @@ const ReviewModalContainer = ({
 
       if (e.target.name === 'star') setFormState('writeForm');
       if (e.target.name === 'write') setFormState('starForm');
+
+      // 완료 버튼 클릭시 서버에 star rating && review post 하기
+      // if (e.target.name === 'complete') {
+      //   dispatch(review());
+      // }
     } catch (err) {
       console.log(err);
     }
@@ -56,6 +68,17 @@ const ReviewModalContainer = ({
     }
   };
 
+  // 리뷰 작성시 textarea 상태를 관리하는 event function
+  const wirteReview = (e) => {
+    dispatch(changeInputReview(e.target.value));
+  };
+
+  // 각 star rating의 상태를 관리하는 event function (name props로 식별)
+  const changeStarRating = () => {
+    // dispatch()
+  };
+
+  // 모달 밖의 화면 클릭시 모달 닫히는 event function
   const removeModalBg = (e) => {
     if (e.target.classList.contains('remove-modal')) {
       setReviewModalState(false);
@@ -73,6 +96,8 @@ const ReviewModalContainer = ({
       moveNextComponent={moveNextComponent}
       backButtonRef={backButtonRef}
       removeModalBg={removeModalBg}
+      wirteReview={wirteReview}
+      description={description}
     />
   );
 };
