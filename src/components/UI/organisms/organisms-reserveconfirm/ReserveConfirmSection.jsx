@@ -7,6 +7,7 @@ import ReserveConfirmNoData from '../../molecules/molecules-reserveConfirm/Reser
 import Modal from '../../../../portal/Modal';
 import ReserveCancelModal from '../../molecules/molecules-reserveConfirm/ReserveCancelModal';
 import ReserveCancel from '../../molecules/molecules-reserveConfirm/ReserveCancel';
+import ReviewModalContainer from '../../../../containers/modal/ReviewModalContainer';
 import ConfirmModal from '../../molecules/molecules-reserveConfirm/ConfirmModal';
 
 const ReserveConfirmSectionStyle = styled.div`
@@ -28,6 +29,10 @@ const ReserveConfirmSection = ({
   cancelModal,
   reservationConfirmBtn,
   reservationId,
+  reviewModalState,
+  setReviewModalState,
+  review,
+  reviewRoomId,
   listModal,
   cancelModalState,
   roomId,
@@ -48,6 +53,8 @@ const ReserveConfirmSection = ({
               cancel={cancel}
               cancelBtn={cancelBtn}
               cancelModal={cancelModal}
+              reviewModalState={reviewModalState}
+              review={review}
             />
           ))
         ) : (
@@ -79,20 +86,15 @@ const ReserveConfirmSection = ({
           ></ConfirmModal>
         </Modal>
 
-        {active === '이전 예약' && (
+        {reviewModalState && (
           <Modal>
-            <ReserveCancelModal
-              cancelModal={cancelModal}
-              modalState={modalState}
-            >
-              <ReserveCancel
-                reservationConfirmBtn={reservationConfirmBtn}
-                list={list}
-                cancel={cancel}
-                cancelBtn={cancelBtn}
-                reservationId={reservationId}
-              />
-            </ReserveCancelModal>
+            <ReviewModalContainer
+              reviewModalState={reviewModalState}
+              setReviewModalState={setReviewModalState}
+              reviewRoomId={reviewRoomId}
+              list={list}
+              review={review}
+            />
           </Modal>
         )}
       </ReserveConfirmSectionStyle>

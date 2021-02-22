@@ -110,7 +110,7 @@ const StyledCommonButton = styled.button`
     `}
 
 
-    ${(props) =>
+  ${(props) =>
     props.guestDelete &&
     css`
       /* padding: 8px; */
@@ -124,6 +124,29 @@ const StyledCommonButton = styled.button`
       &:hover {
         color: rgba(34, 34, 34, 1);
       }
+    `} 
+    
+  ${(props) =>
+    props.reviewClose &&
+    css`
+      position: absolute;
+      top: 15px;
+      left: 13px;
+      display: flex;
+      align-items: center;
+      border-radius: 50%;
+      color: rgb(34, 34, 34);
+      padding: 10px;
+
+      &:hover {
+        background: rgb(243, 243, 243);
+      }
+
+      svg {
+        width: 16px;
+        height: 16px;
+        font-weight: bold;
+      }
     `}
 `;
 
@@ -135,10 +158,16 @@ function CommonButton({
   clearGuest,
   saveGuest,
   deleteDate,
+  cancelModalButton,
+  roomId,
+  review,
+  moveNextComponent,
+  name,
   ...rest
 }) {
   return (
     <StyledCommonButton
+      name={name}
       {...rest}
       onClick={
         manageDateModal ||
@@ -146,7 +175,9 @@ function CommonButton({
         saveDate ||
         clearGuest ||
         saveGuest ||
-        deleteDate
+        deleteDate ||
+        cancelModalButton ||
+        moveNextComponent
       }
     >
       {children}
