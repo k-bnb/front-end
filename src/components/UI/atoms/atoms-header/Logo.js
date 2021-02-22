@@ -49,17 +49,17 @@ const LogoBlock = styled.h1`
 
 const Logo = (props) => {
   const history = useHistory();
-  // const match = useRouterMatch();
-  // const location = useLocation();
   return (
     <LogoBlock
+      tabIndex="0"
+      role="banner"
       {...props}
       onClick={() => {
         history.push('/');
         window.scrollTo(0, 0);
       }}
     >
-      <div className="a11y-hidden">에어비엔비</div>
+      <div className="a11y-hidden">에어비엔비 로고</div>
       <svg
         width="102"
         height="32"

@@ -35,7 +35,7 @@ const SearchButtonBlock = styled.button`
     `}
 `;
 
-const SearchButton = ({ isScrolled, onClick, rooms }) => {
+const SearchButton = ({ isScrolled, onClick, rooms, searchBtnRef }) => {
   return (
     <>
       <SearchButtonBlock
@@ -43,6 +43,7 @@ const SearchButton = ({ isScrolled, onClick, rooms }) => {
         className="search-button-unit"
         onClick={onClick}
         rooms={rooms}
+        ref={searchBtnRef}
       >
         {!isScrolled && <BiSearch className="search-button-unit" />}
         {isScrolled && <HiSearch className="search-button-unit" />}
