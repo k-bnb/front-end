@@ -9,7 +9,7 @@ import {
   searching,
 } from '../modules/search';
 
-const ListContainer = () => {
+const ListContainer = React.memo(() => {
   const [searchModalState, setSearchModalState] = useState(null);
   const {
     locationSearch,
@@ -86,6 +86,46 @@ const ListContainer = () => {
     dispatch(roomnumInput(e.target.name, ++e.target.value));
   };
 
+  const searchBtn = () => {
+    // if (costSearch.minCost) {
+    //   setCostcState((state) => ({
+    //     ...state,
+    //     minCostState: true,
+    //     minCostPay: costSearch.minCost,
+    //   }));
+    // }
+    // if (costSearch.maxCost) {
+    //   setCostState((state) => ({
+    //     ...state,
+    //     maxCostState: true,
+    //     maxCostPay: costSearch.maxCost,
+    //   }));
+    // }
+    // else{setCostState((state) => ({
+    //     minCostState: false,
+    //     minCostPay: '',
+    //     maxCostState: false,
+    //     maxCostPay: '',
+    //   }))
+    // };
+    const id = 0;
+    dispatch(
+      searching({
+        id,
+        locationSearch,
+        checkDateSearch,
+        guestSearch,
+        costSearch,
+        roomType,
+        bedNum,
+        bedRoomNum,
+        bathRoomNum,
+      }),
+    );
+    setSearchModalState(null);
+  };
+
+  // console.log(costState);
   // pageNation
 
   const [currentButton, setCurrentButton] = useState(0);
@@ -157,6 +197,6 @@ const ListContainer = () => {
       />
     </>
   );
-};
+});
 
 export default ListContainer;

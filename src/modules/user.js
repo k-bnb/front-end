@@ -95,6 +95,7 @@ const user = handleActions(
       reserveError: action.payload.error,
     }),
     [USER_INFO_SUCCESS]: (state, { payload }) => {
+      console.log(payload);
       sessionStorage.setItem('userInfo', JSON.stringify(payload));
       return produce(state, (draft) => {
         draft.userRes = payload;

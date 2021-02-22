@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Button from '../../atoms/atoms-list/Button';
 import TextStyled from '../../atoms/atoms-list/Text';
@@ -53,6 +53,7 @@ const SearchData = ({
   setLocalMaxCost,
 }) => {
   const modal = useRef();
+
   const {
     destinationName,
     searchReq: {

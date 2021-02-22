@@ -10,7 +10,7 @@ import Bookmark from '../../atoms/atoms-list/BookMark';
 import ScoreText from '../../molecules/molecules-list/Score-Text';
 import { BsHeartFill } from 'react-icons/bs';
 import { BiWon } from 'react-icons/bi';
-
+import React from 'react';
 const PcSize = styled.main`
   min-height: calc(100vh - 80px);
   /* background-color: #eee; */
@@ -85,220 +85,226 @@ const MobileSize = styled.main`
   }
 `;
 
-const ListStyle = ({
-  room,
-  totalPage,
-  pageNationClick,
-  currentButton,
-  setCurrentButton,
-  arrOfcurrButtons,
-  setArrOfCurrButtons,
-  numberOfPages,
-  changeCurrentPage,
-  pageNationState,
-  checkDateSearch,
-  guestSearch,
-}) => {
-  const isPc = useMediaQuery({
-    query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
-  });
-  const isTablet = useMediaQuery({
-    query: `(min-width: 744px)and (max-width: 1126px)`,
-  });
-  const isMobile = useMediaQuery({
-    query: `(max-width: 743px)`, //744px 이하인 경우에만 적용(744이하.)
-  });
-  return (
-    <>
-      {isPc && (
-        <PcSize className="Listmain">
-          {room.map(
-            ({
-              bathRoomNum,
-              roomType,
-              city,
-              borough,
-              bedNum,
-              bedRoomNum,
-              cost,
-              grade,
-              id,
-              name,
-              peopleLimit,
-              isCheck,
-              isParking,
-              isSmoking,
-              commentCount,
-              roomImgUrlList,
-            }) => {
-              return (
-                <LodgingLists
-                  bathRoomNum={bathRoomNum}
-                  city={city}
-                  borough={borough}
-                  isCheck={isCheck}
-                  isParking={isParking}
-                  isSmoking={isSmoking}
-                  commentCount={commentCount}
-                  bedNum={bedNum}
-                  roomImgUrlList={roomImgUrlList}
-                  roomType={roomType}
-                  peopleLimit={peopleLimit}
-                  bedRoomNum={bedRoomNum}
-                  cost={cost}
-                  grade={grade}
-                  id={id}
-                  name={name}
-                  checkDateSearch={checkDateSearch}
-                  guestSearch={guestSearch}
-                />
-              );
-            },
-          )}
-          <PageNation
-            totalPage={totalPage}
-            pageNationClick={pageNationClick}
-            currentButton={currentButton}
-            setCurrentButton={setCurrentButton}
-            arrOfcurrButtons={arrOfcurrButtons}
-            setArrOfCurrButtons={setArrOfCurrButtons}
-            numberOfPages={numberOfPages}
-            changeCurrentPage={changeCurrentPage}
-            pageNationState={pageNationState}
-          />
-        </PcSize>
-      )}
-      {isTablet && (
-        <TabletSize className="Listmain">
-          {room.map(
-            ({
-              bathRoomNum,
-              roomType,
-              city,
-              borough,
-              bedNum,
-              bedRoomNum,
-              cost,
-              grade,
-              id,
-              name,
-              peopleLimit,
-              isCheck,
-              isParking,
-              isSmoking,
-              commentCount,
-              roomImgUrlList,
-            }) => {
-              return (
-                <LodgingLists
-                  bathRoomNum={bathRoomNum}
-                  city={city}
-                  borough={borough}
-                  isCheck={isCheck}
-                  isParking={isParking}
-                  isSmoking={isSmoking}
-                  commentCount={commentCount}
-                  bedNum={bedNum}
-                  roomImgUrlList={roomImgUrlList}
-                  roomType={roomType}
-                  peopleLimit={peopleLimit}
-                  bedRoomNum={bedRoomNum}
-                  cost={cost}
-                  grade={grade}
-                  id={id}
-                  name={name}
-                />
-              );
-            },
-          )}
-          <PageNation
-            totalPage={totalPage}
-            pageNationClick={pageNationClick}
-            currentButton={currentButton}
-            setCurrentButton={setCurrentButton}
-            arrOfcurrButtons={arrOfcurrButtons}
-            setArrOfCurrButtons={setArrOfCurrButtons}
-            numberOfPages={numberOfPages}
-            changeCurrentPage={changeCurrentPage}
-            pageNationState={pageNationState}
-          />
-        </TabletSize>
-      )}
-      {isMobile && (
-        <MobileSize className="Listmain">
-          {room.map(
-            ({
-              bathRoomNum,
-              roomType,
-              city,
-              borough,
-              bedNum,
-              bedRoomNum,
-              cost,
-              grade,
-              id,
-              name,
-              peopleLimit,
-              isCheck,
-              isParking,
-              isSmoking,
-              commentCount,
-              roomImgUrlList,
-            }) => {
-              return (
-                <Link
-                  to={`/detail/${id}`}
-                  key={id}
-                  style={{ textDecoration: 'none' }}
-                >
-                  <li className="mobileListview">
-                    <span>
-                      <Border size="bigCarouselImg">
-                        {roomImgUrlList.map((src) => (
-                          <Imgs size="carousalBigImg" src={src} />
-                        ))}
-                      </Border>
-                    </span>
-                    <span className="TextWrap">
-                      <div className="TextHead">
-                        <ScoreText grade={grade} commentCount={commentCount} />
-                        <TextStyled size="blackSmall">
-                          {city} {borough} {city || borough ? '의' : ''}{' '}
-                          {roomType}
+const ListStyle = React.memo(
+  ({
+    room,
+    totalPage,
+    pageNationClick,
+    currentButton,
+    setCurrentButton,
+    arrOfcurrButtons,
+    setArrOfCurrButtons,
+    numberOfPages,
+    changeCurrentPage,
+    pageNationState,
+    checkDateSearch,
+    guestSearch,
+  }) => {
+    const isPc = useMediaQuery({
+      query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
+    });
+    const isTablet = useMediaQuery({
+      query: `(min-width: 744px)and (max-width: 1126px)`,
+    });
+    const isMobile = useMediaQuery({
+      query: `(max-width: 743px)`, //744px 이하인 경우에만 적용(744이하.)
+    });
+
+    return (
+      <>
+        {isPc && (
+          <PcSize className="Listmain">
+            {room.map(
+              ({
+                bathRoomNum,
+                roomType,
+                city,
+                borough,
+                bedNum,
+                bedRoomNum,
+                cost,
+                grade,
+                id,
+                name,
+                peopleLimit,
+                isCheck,
+                isParking,
+                isSmoking,
+                commentCount,
+                roomImgUrlList,
+              }) => {
+                return (
+                  <LodgingLists
+                    bathRoomNum={bathRoomNum}
+                    city={city}
+                    borough={borough}
+                    isCheck={isCheck}
+                    isParking={isParking}
+                    isSmoking={isSmoking}
+                    commentCount={commentCount}
+                    bedNum={bedNum}
+                    roomImgUrlList={roomImgUrlList}
+                    roomType={roomType}
+                    peopleLimit={peopleLimit}
+                    bedRoomNum={bedRoomNum}
+                    cost={cost}
+                    grade={grade}
+                    id={id}
+                    name={name}
+                    checkDateSearch={checkDateSearch}
+                    guestSearch={guestSearch}
+                  />
+                );
+              },
+            )}
+            <PageNation
+              totalPage={totalPage}
+              pageNationClick={pageNationClick}
+              currentButton={currentButton}
+              setCurrentButton={setCurrentButton}
+              arrOfcurrButtons={arrOfcurrButtons}
+              setArrOfCurrButtons={setArrOfCurrButtons}
+              numberOfPages={numberOfPages}
+              changeCurrentPage={changeCurrentPage}
+              pageNationState={pageNationState}
+            />
+          </PcSize>
+        )}
+        {isTablet && (
+          <TabletSize className="Listmain">
+            {room.map(
+              ({
+                bathRoomNum,
+                roomType,
+                city,
+                borough,
+                bedNum,
+                bedRoomNum,
+                cost,
+                grade,
+                id,
+                name,
+                peopleLimit,
+                isCheck,
+                isParking,
+                isSmoking,
+                commentCount,
+                roomImgUrlList,
+              }) => {
+                return (
+                  <LodgingLists
+                    bathRoomNum={bathRoomNum}
+                    city={city}
+                    borough={borough}
+                    isCheck={isCheck}
+                    isParking={isParking}
+                    isSmoking={isSmoking}
+                    commentCount={commentCount}
+                    bedNum={bedNum}
+                    roomImgUrlList={roomImgUrlList}
+                    roomType={roomType}
+                    peopleLimit={peopleLimit}
+                    bedRoomNum={bedRoomNum}
+                    cost={cost}
+                    grade={grade}
+                    id={id}
+                    name={name}
+                  />
+                );
+              },
+            )}
+            <PageNation
+              totalPage={totalPage}
+              pageNationClick={pageNationClick}
+              currentButton={currentButton}
+              setCurrentButton={setCurrentButton}
+              arrOfcurrButtons={arrOfcurrButtons}
+              setArrOfCurrButtons={setArrOfCurrButtons}
+              numberOfPages={numberOfPages}
+              changeCurrentPage={changeCurrentPage}
+              pageNationState={pageNationState}
+            />
+          </TabletSize>
+        )}
+        {isMobile && (
+          <MobileSize className="Listmain">
+            {room.map(
+              ({
+                bathRoomNum,
+                roomType,
+                city,
+                borough,
+                bedNum,
+                bedRoomNum,
+                cost,
+                grade,
+                id,
+                name,
+                peopleLimit,
+                isCheck,
+                isParking,
+                isSmoking,
+                commentCount,
+                roomImgUrlList,
+              }) => {
+                return (
+                  <Link
+                    to={`/detail/${id}`}
+                    key={id}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    <li className="mobileListview">
+                      <span>
+                        <Border size="bigCarouselImg">
+                          {roomImgUrlList.map((src) => (
+                            <Imgs size="carousalBigImg" src={src} />
+                          ))}
+                        </Border>
+                      </span>
+                      <span className="TextWrap">
+                        <div className="TextHead">
+                          <ScoreText
+                            grade={grade}
+                            commentCount={commentCount}
+                          />
+                          <TextStyled size="blackSmall">
+                            {city} {borough} {city || borough ? '의' : ''}{' '}
+                            {roomType}
+                          </TextStyled>
+                          <TextStyled type="Ellipsis" size="blackMiddle">
+                            {name}
+                          </TextStyled>
+                          <Link to="/">
+                            <Bookmark Mobileheart className="heart">
+                              <BsHeartFill className="heartimg" />
+                            </Bookmark>
+                          </Link>
+                        </div>
+                        <TextStyled className="cost" size="blackMiddleBold">
+                          <BiWon />
+                          {cost}/<TextStyled size="blackMiddle">박</TextStyled>
                         </TextStyled>
-                        <TextStyled type="Ellipsis" size="blackMiddle">
-                          {name}
-                        </TextStyled>
-                        <Link to="/">
-                          <Bookmark Mobileheart className="heart">
-                            <BsHeartFill className="heartimg" />
-                          </Bookmark>
-                        </Link>
-                      </div>
-                      <TextStyled className="cost" size="blackMiddleBold">
-                        <BiWon />
-                        {cost}/<TextStyled size="blackMiddle">박</TextStyled>
-                      </TextStyled>
-                    </span>
-                  </li>
-                </Link>
-              );
-            },
-          )}
-          <PageNation
-            totalPage={totalPage}
-            pageNationClick={pageNationClick}
-            currentButton={currentButton}
-            setCurrentButton={setCurrentButton}
-            arrOfcurrButtons={arrOfcurrButtons}
-            setArrOfCurrButtons={setArrOfCurrButtons}
-            numberOfPages={numberOfPages}
-            changeCurrentPage={changeCurrentPage}
-            pageNationState={pageNationState}
-          />
-        </MobileSize>
-      )}
-    </>
-  );
-};
+                      </span>
+                    </li>
+                  </Link>
+                );
+              },
+            )}
+            <PageNation
+              totalPage={totalPage}
+              pageNationClick={pageNationClick}
+              currentButton={currentButton}
+              setCurrentButton={setCurrentButton}
+              arrOfcurrButtons={arrOfcurrButtons}
+              setArrOfCurrButtons={setArrOfCurrButtons}
+              numberOfPages={numberOfPages}
+              changeCurrentPage={changeCurrentPage}
+              pageNationState={pageNationState}
+            />
+          </MobileSize>
+        )}
+      </>
+    );
+  },
+);
 export default ListStyle;
