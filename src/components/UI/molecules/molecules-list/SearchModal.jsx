@@ -29,7 +29,7 @@ const SearchModalStyle = styled.div`
     `}
 `;
 
-const SearchModal = ({ children, ...rest }) => {
+const SearchModal = React.memo(({ children, ...rest }) => {
   // const clickClose = (e) => {
   //   console.log(e.target);
   //   if (e.target.matches('.bg > div') || e.target.matches('.bg')) {
@@ -49,6 +49,6 @@ const SearchModal = ({ children, ...rest }) => {
       {children}
     </SearchModalStyle>
   );
-};
+});
 
 export default SearchModal;

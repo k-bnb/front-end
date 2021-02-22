@@ -71,7 +71,7 @@ const ReCheckRoomTypeStyle = styled.div`
   }
 `;
 
-const ReCheckRoomType = ({ roomTypes, roomType }) => {
+const ReCheckRoomType = React.memo(({ roomTypes, roomType }) => {
   return (
     <ReCheckRoomTypeStyle>
       <div className="checkRooms">
@@ -159,6 +159,6 @@ const ReCheckRoomType = ({ roomTypes, roomType }) => {
       </div>
     </ReCheckRoomTypeStyle>
   );
-};
+});
 
 export default ReCheckRoomType;
