@@ -24,6 +24,7 @@ const ProfileToggleModalContainer = () => {
   };
   const userInfoClick = () => {
     dispatch(userInfo(token));
+
     history.push('/personInfo');
   };
 
