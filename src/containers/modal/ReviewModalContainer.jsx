@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { dispatch } from '../../../../../../Library/Caches/typescript/4.1/node_modules/rxjs/internal/observable/range';
+
 import ReviewModalOrganism from '../../components/UI/organisms/organisms-reserveconfirm/ReviewModalOrganism';
 import { review, changeInputReview } from '../../modules/user';
 
