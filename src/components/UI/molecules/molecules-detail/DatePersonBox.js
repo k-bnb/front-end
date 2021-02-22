@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import GuestNumberModal from '../../../templates/templates-header/GuestNumberModal';
 import CalendarDetail from '../../../../calendar/CalendarDetail';
+import Text from '../../atoms/atoms-detail/DetailText';
+
 const BookingBox = styled.div`
   position: relative;
   margin-bottom: 16px;
@@ -18,6 +20,13 @@ const CheckDate = styled.div`
   position: relative;
   display: flex;
   flex: 1 1 0%;
+
+  ${(props) =>
+    props.borderThick &&
+    css`
+      border-radius: 8px;
+      border: solid 2px black;
+    `}
 `;
 const Personnel = styled.div`
   height: 56px;
@@ -25,6 +34,13 @@ const Personnel = styled.div`
   border-top: 2px solid rgb(176, 176, 176);
   position: relative;
   display: flex;
+
+  ${(props) =>
+    props.borderThick &&
+    css`
+      border-radius: 8px;
+      border: solid 2px black;
+    `}
 `;
 
 const CheckInAndOut = styled.div`
@@ -59,6 +75,7 @@ const SelectionDate = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 14px;
 `;
 
 const SelectionInfo = ({ text, date }) => (
@@ -83,36 +100,57 @@ const GuestBtn = styled.div`
   padding-right: 12px;
 `;
 
+const AddDate = (
+  <Text gray noPadding>
+    날짜 추가
+  </Text>
+);
+
 const DatePersonBox = ({
+  detailObj,
+  infoRes,
+  setNavModalState,
   isCalendarOpen,
   setIsCalendarOpen,
   peopleLimit,
-  detailObj,
-  infoRes,
 }) => {
   const [isOpen, setIsOpen] = useState(false); // detail page에서 모달창 열고닫기 기능구현
+  const [isDateBorderThick, setIsDateBorderThick] = useState(false);
+  const [isGuestBorderThick, setGuestIsBorderThick] = useState(false);
 
   return (
     <BookingBox>
       <CheckDate
         onClick={() => {
-          setIsCalendarOpen(true);
+          setTimeout(() => {
+            setIsCalendarOpen(true);
+          }, 300);
+          setIsDateBorderThick(true);
         }}
+        borderThick={isDateBorderThick}
       >
-        <SelectionInfo text="체크인" date={detailObj.startDate} />
+        <SelectionInfo
+          text="체크인"
+          date={detailObj.startDate ? detailObj.startDate : AddDate}
+        />
         <SelectionInfo
           className="divider"
           text="체크아웃"
-          date={detailObj.endDate}
+          date={detailObj.endDate ? detailObj.endDate : AddDate}
         />
         {isCalendarOpen && (
-          <CalendarDetail setIsCalendarOpen={setIsCalendarOpen} />
+          <CalendarDetail
+            setIsCalendarOpen={setIsCalendarOpen}
+            setIsDateBorderThick={setIsDateBorderThick}
+          />
         )}
       </CheckDate>
       <Personnel
         onClick={() => {
           setIsOpen(true);
+          setGuestIsBorderThick(true);
         }}
+        borderThick={isGuestBorderThick}
       >
         <CheckTxt>인원</CheckTxt>
         <SelectinoGuest>{`게스트 ${
@@ -124,6 +162,8 @@ const DatePersonBox = ({
             detailPage={true}
             setIsOpen={setIsOpen}
             infoRes={infoRes}
+            setGuestIsBorderThick={setGuestIsBorderThick}
+            setNavModalState={setNavModalState}
           />
         )}
       </Personnel>

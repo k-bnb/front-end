@@ -46,6 +46,8 @@ const ReserveBtn = ({
   bookingInfoRef,
   isCalendarOpen,
   setIsCalendarOpen,
+  moveToReserve,
+  NoBookingDate,
 }) => {
   const [showLoadingIcon, setShowLoadingIcon] = useState(false);
   const { startDate, endDate } = useSelector((state) => state.detail);

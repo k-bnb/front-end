@@ -40,11 +40,13 @@ const GuestNumberModal = ({
   detailPage,
   setIsOpen,
   infoRes,
+  setGuestIsBorderThick,
   searchBtnRef,
 }) => {
   let guestRef = useClickOutside(() => {
     if (detailPage) {
       setIsOpen(false);
+      setGuestIsBorderThick(false);
       return;
     }
     setNavModalState({

@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { dispatch } from '../../../../../../Library/Caches/typescript/4.1/node_modules/rxjs/internal/observable/range';
 import ReviewModalOrganism from '../../components/UI/organisms/organisms-reserveconfirm/ReviewModalOrganism';
-import { review, changeInputReview } from '../../modules/user';
+import { changeInputReview } from '../../modules/user';
 
 const ReviewModalContainer = ({
   reviewModalState,
@@ -74,9 +73,9 @@ const ReviewModalContainer = ({
   };
 
   // 각 star rating의 상태를 관리하는 event function (name props로 식별)
-  const changeStarRating = () => {
-    // dispatch()
-  };
+  // const changeStarRating = () => {
+  //   dispatch()
+  // };
 
   // 모달 밖의 화면 클릭시 모달 닫히는 event function
   const removeModalBg = (e) => {

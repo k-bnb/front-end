@@ -4,7 +4,7 @@ import { BiArrowBack } from 'react-icons/bi';
 import CommonButton from '../../atoms/atoms-reservation/atoms-modal/CommonButton';
 import CommonTitle from '../../atoms/atoms-reserveconfirm/CommonTitle';
 import StarRatingReviewModa from '../../molecules/molecules-reserveConfirm/StarRatingReviewModa';
-import { useClickOutside } from '../../../../lib/useClickOutside';
+// import { useClickOutside } from '../../../../lib/useClickOutside';
 import MovePageButton from '../../atoms/atoms-reservation/atoms-modal/MovePageButton';
 
 const ani = keyframes`

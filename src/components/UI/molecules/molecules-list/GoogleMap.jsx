@@ -16,7 +16,7 @@ import { useDispatch } from 'react-redux';
 import { locationInput, searching } from '../../../../modules/search';
 import { BiWon } from 'react-icons/bi';
 import { moneyfilter } from '../../../../lib/moneyfilter';
-import Slider from 'react-slick';
+// import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
