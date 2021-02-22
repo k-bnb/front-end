@@ -13,6 +13,8 @@ function ReviewModalOrganism({
   moveNextComponent,
   backButtonRef,
   removeModalBg,
+  wirteReview,
+  description,
 }) {
   console.log(formState);
 
@@ -32,6 +34,8 @@ function ReviewModalOrganism({
           moveNextComponent={moveNextComponent}
           backButtonRef={backButtonRef}
           cancelModalButton-={cancelModalButton}
+          wirteReview={wirteReview}
+          description={description}
         />
       )}
     </CommonBg>
