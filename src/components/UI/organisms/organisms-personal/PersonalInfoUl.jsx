@@ -55,7 +55,6 @@ const PersonalInfoUl = ({
   setFix,
   loading,
 }) => {
-  console.log(userInfo.imageUrl);
   return (
     <PersonalInfoUIStyle onClick={fix.cancel ? cancelclick : fixInfoBtn}>
       <PersonalInfoLi>
@@ -111,9 +110,9 @@ const PersonalInfoUl = ({
           <TextStyle>생년월일</TextStyle>
           <TextStyle>
             {birth
-              ? `${extractMonthDate(birth).year}년 ${
-                  extractMonthDate(birth).month
-                }월 ${extractMonthDate(birth).date}일 `
+              ? `${extractMonthDate(userInfo.birth).year}년 ${
+                  extractMonthDate(userInfo.birth).month
+                }월 ${extractMonthDate(userInfo.birth).date}일 `
               : '지정되지 않음'}
           </TextStyle>
           {fix.birth && (

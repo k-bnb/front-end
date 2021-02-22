@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReserveConfirmNav from '../../molecules/molecules-reserveConfirm/ReserveConfirmNav';
 import ReserveConfirmList from '../../molecules/molecules-reserveConfirm/ReserveConfirmList';
 // import ReserveConfirmFooter from '../../molecules/molecules-reserveConfirm/ReserveConfirmFooter';
@@ -44,8 +44,8 @@ const ReserveConfirmSection = ({
     <>
       <ReserveConfirmNav active={active} activClick={activClick} />
       <ReserveConfirmSectionStyle>
-        {list.length ? (
-          list.map((item) => (
+        {list?.length ? (
+          list?.map((item) => (
             <ReserveConfirmList
               item={item}
               list={list}
