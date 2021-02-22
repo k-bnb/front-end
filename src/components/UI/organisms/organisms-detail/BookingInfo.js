@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReserveBtn from '../../atoms/atoms-detail/ReserveBtn';
 import DatePersonBox from '../../molecules/molecules-detail/DatePersonBox';
@@ -6,10 +6,12 @@ import OneDayPrice from '../../molecules/molecules-detail/OneDayPrice';
 import PriceDetail from '../../molecules/molecules-detail/PriceDetail';
 import TotalPrice from '../../molecules/molecules-detail/TotalPrice';
 import moment from 'moment';
+import Modal from '../../../../portal/Modal';
+import AuthModalContainer from '../../../../containers/AuthModalContainer';
 
 const PositionBox = styled.div`
   position: sticky;
-  z-index: 100;
+  z-index: 0;
   top: 160px;
   margin-bottom: 100px;
 `;
@@ -35,23 +37,45 @@ const BookingInfoContainer = styled.div`
 `;
 
 const BookingInfo = ({
-  DetailHeaderRef,
   moveToReserve,
   detailObj,
   infoRes,
+  detailAuthModal,
+  setDetailAuthModal,
+  DetailHeaderRef,
+  modal,
+  setModal,
+  setIsOpen,
+  formState,
+  setFormState,
+  bookingInfoRef,
+  isCalendarOpen,
+  setIsCalendarOpen,
 }) => {
   const StartDate = moment(detailObj.startDate);
   const EndDate = moment(detailObj.endDate);
   const totalSchedule = EndDate.diff(StartDate, 'days');
 
   return (
-    <PositionBox>
+    <PositionBox ref={bookingInfoRef}>
       <BookingInfoContainer>
         <OneDayPrice infoRes={infoRes} />
-        <DatePersonBox detailObj={detailObj} />
+        <DatePersonBox
+          detailObj={detailObj}
+          isCalendarOpen={isCalendarOpen}
+          setIsCalendarOpen={setIsCalendarOpen}
+          infoRes={infoRes}
+        />
         <ReserveBtn
-          DetailHeaderRef={DetailHeaderRef}
           moveToReserve={moveToReserve}
+          modal={modal}
+          setModal={setModal}
+          setIsOpen={setIsOpen}
+          formState={formState}
+          setFormState={setFormState}
+          DetailHeaderRef={DetailHeaderRef}
+          isCalendarOpen={isCalendarOpen}
+          setIsCalendarOpen={setIsCalendarOpen}
         ></ReserveBtn>
         <span className="notice">
           예약 확정 전에는 요금이 청구되지 않습니다.

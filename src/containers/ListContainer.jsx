@@ -11,11 +11,6 @@ import {
 
 const ListContainer = () => {
   const [searchModalState, setSearchModalState] = useState(null);
-  const [costState, setCostState] = useState({
-    minCostState: false,
-    minCostPay: '',
-  });
-
   const {
     locationSearch,
     checkDateSearch,
@@ -26,8 +21,6 @@ const ListContainer = () => {
     bedRoomNum,
     bathRoomNum,
   } = useSelector((state) => state.search.searchReq);
-
-  // console.log(checkDateSearch);
 
   const isLoading = useSelector((state) => state.loading['search/SEARCHING']);
   const search = useSelector((state) => state.search);
@@ -46,6 +39,8 @@ const ListContainer = () => {
 
   const room = useSelector((state) => state.search.searchRes);
   const totalPage = useSelector((state) => state.search.totalPage);
+
+  const [formState, setFormState] = useState(null); // 초기값은 null, 로그인 버튼 누르면 login으로, 회원가입 누르면 'register'
 
   const roomMap = room.map((item) => {
     return {
@@ -70,6 +65,8 @@ const ListContainer = () => {
     },
     [dispatch],
   );
+  const [localMinCost, setLocalMinCost] = useState(costSearch.minCost);
+  const [localMaxCost, setLocalMaxCost] = useState(costSearch.maxCost);
 
   const num = /^[0-9]*$/;
 
@@ -87,35 +84,6 @@ const ListContainer = () => {
   const plusBtn = (e) => {
     if (e.target.matches('button > span')) return;
     dispatch(roomnumInput(e.target.name, ++e.target.value));
-  };
-
-  const searchBtn = () => {
-    if (costSearch.minCost) {
-      setCostState((state) => ({
-        minCostState: true,
-        minCostPay: costSearch.minCost,
-      }));
-    } else {
-      setCostState((state) => ({
-        minCostState: false,
-        minCostPay: '',
-      }));
-    }
-    const id = 0;
-    dispatch(
-      searching({
-        id,
-        locationSearch,
-        checkDateSearch,
-        guestSearch,
-        costSearch,
-        roomType,
-        bedNum,
-        bedRoomNum,
-        bathRoomNum,
-      }),
-    );
-    setSearchModalState(null);
   };
 
   // pageNation
@@ -151,7 +119,7 @@ const ListContainer = () => {
 
   return (
     <>
-      <HeaderContainer />
+      <HeaderContainer formState={formState} setFormState={setFormState} />
       <ListTemplate
         searchModalState={searchModalState}
         setSearchModalState={setSearchModalState}
@@ -167,8 +135,7 @@ const ListContainer = () => {
         bathRoomNum={bathRoomNum}
         minusBtn={minusBtn}
         plusBtn={plusBtn}
-        searchBtn={searchBtn}
-        costState={costState}
+        // searchBtn={searchBtn}
         room={room}
         totalPage={totalPage}
         roomMap={roomMap}
@@ -183,6 +150,10 @@ const ListContainer = () => {
         changeCurrentPage={changeCurrentPage}
         pageNationState={pageNationState}
         search={search}
+        localMinCost={localMinCost}
+        setLocalMinCost={setLocalMinCost}
+        localMaxCost={localMaxCost}
+        setLocalMaxCost={setLocalMaxCost}
       />
     </>
   );

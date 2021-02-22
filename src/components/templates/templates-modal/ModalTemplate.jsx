@@ -24,9 +24,11 @@ const Modaldiv = styled.div`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
   .login-group {
     display: flex;
     justify-content: flex-start;
+    padding-bottom: 20px;
     &.active {
       animation: ${boxFade} 0.2s ease-in alternate forwards;
     }

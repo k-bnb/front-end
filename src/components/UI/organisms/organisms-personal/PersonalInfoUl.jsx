@@ -9,6 +9,8 @@ import PersonalInfoBirthinput from '../../molecules/molecules-personalInfo/Perso
 import PersonalInfoEmailInput from '../../molecules/molecules-personalInfo/PersonalInfoEmailInput';
 import PersonalInfoImg from '../../molecules/molecules-personalInfo/PersonalInfoImg';
 import { extractMonthDate } from '../../../../lib/extractMonthDate';
+import Modal from '../../../../portal/Modal';
+import PersonInfoEmailModal from '../../molecules/molecules-personalInfo/PersonInfoEmailModal';
 
 const PersonalInfoUIStyle = styled.ul`
   display: flex;
@@ -21,6 +23,14 @@ const PersonalInfoUIStyle = styled.ul`
   li {
     div {
       /* border: 1px solid; */
+    }
+    .imgPerson {
+      width: 320px;
+      /* height: 20%; */
+
+      img {
+        width: 100%;
+      }
     }
     .btn {
       position: absolute;
@@ -43,6 +53,7 @@ const PersonalInfoUl = ({
   ChangeInputBtn,
   userInfo,
   setFix,
+  loading,
 }) => {
   console.log(userInfo.imageUrl);
   return (
@@ -56,6 +67,7 @@ const PersonalInfoUl = ({
               personInfoChange={personInfoChange}
               inputFocus={inputFocus}
               ChangeInputBtn={ChangeInputBtn}
+              loading={loading}
             />
           ) : (
             <TextStyle>{name}</TextStyle>
@@ -76,11 +88,18 @@ const PersonalInfoUl = ({
               setFix={setFix}
               personInfoChange={personInfoChange}
               imageUrl={imageUrl}
+              loading={loading}
             />
           ) : (
-            <TextStyle>
-              {imageUrl ? <img src={imageUrl} alt="hello" /> : '지정되지 않음'}
-            </TextStyle>
+            <>
+              {imageUrl ? (
+                <div className="imgPerson">
+                  <img src={userInfo.imageUrl} alt="hello" />
+                </div>
+              ) : (
+                <TextStyle>지정되지 않음</TextStyle>
+              )}
+            </>
           )}
         </div>
         <Button name="imageUrl" className="btn" greenText>
@@ -102,6 +121,7 @@ const PersonalInfoUl = ({
               ChangeInputBtn={ChangeInputBtn}
               personInfoChange={personInfoChange}
               birth={birth}
+              loading={loading}
             />
           )}
         </div>
@@ -120,6 +140,7 @@ const PersonalInfoUl = ({
               imageUrl={imageUrl}
               personInfoChange={personInfoChange}
               ChangeInputBtn={ChangeInputBtn}
+              loading={loading}
             />
           ) : (
             <TextStyle>{email}</TextStyle>

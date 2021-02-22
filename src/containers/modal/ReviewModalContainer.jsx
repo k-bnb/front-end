@@ -4,7 +4,7 @@ import ReviewModalOrganism from '../../components/UI/organisms/organisms-reserve
 const ReviewModalContainer = ({
   reviewModalState,
   setReviewModalState,
-  roomId,
+  reviewRoomId,
   list,
 }) => {
   // 어떤 모달 페이지 보여주지는지 알려 주는 상태
@@ -12,7 +12,7 @@ const ReviewModalContainer = ({
 
   // 서버에서 받은 모든 사용자 정보 배열과 각 방의 reservationId가 일치하는 사용자 정보를 계산하는 로직
   //  useMemo 사용가능한지 확인하기,
-  const roomInfo = list.find((room) => +room.reservationId === +roomId);
+  const roomInfo = list.find((room) => +room.reservationId === +reviewRoomId);
 
   const { hostName } = roomInfo;
 
@@ -67,7 +67,7 @@ const ReviewModalContainer = ({
       reviewName={reviewName}
       reviewModalState={reviewModalState}
       cancelModalButton={cancelModalButton}
-      roomId={roomId}
+      reviewRoomId={reviewRoomId}
       hostName={hostName}
       formState={formState}
       moveNextComponent={moveNextComponent}

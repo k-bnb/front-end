@@ -6,6 +6,7 @@ import PointItemBox from '../../UI/molecules/molecules-detail/PointItemBox';
 import ReviewItem from '../../UI/molecules/molecules-detail/ReviewItem';
 import { requestComments } from '../../../lib/api/detail';
 import LoaderIcon from 'react-loader-icon';
+// import Text from '../../UI/atoms/atoms-detail/DetailText';
 
 const slideUp = keyframes`
   0% {
@@ -62,15 +63,15 @@ const ReviewModalBlock = styled.div`
 
   .review-modal-form {
     width: 95%;
-    max-width: 1000px;
-    height: 92vh;
+    max-width: 1032px;
+    height: 90vh;
     border-radius: 15px;
-    padding: 0 20px 20px 20px;
+    padding: 0 0 20px 20px;
     background-color: white;
-    margin: 0 auto;
+    margin: 40px auto 40px;
     position: relative;
-    overflow-y: auto;
     animation: ${slideUp} 0.4s ease;
+    overflow: hidden;
 
     ${(props) =>
       props.disappear &&
@@ -96,35 +97,47 @@ const ReviewModalBlock = styled.div`
     }
   }
   .review-modal-top {
+    display: block;
     background-color: white;
-
     width: 100%;
     max-width: 960px;
     position: fixed;
     z-index: 1;
     height: 120px;
   }
+
+  .gradeBox {
+    display: flex;
+    font-size: 32px;
+    font-weight: bolder;
+    margin-top: 40px;
+    padding-bottom: 28px;
+
+    span {
+      margin-top: 8px;
+    }
+  }
+
+  .wrapper {
+    width: 100%;
+    height: 120px;
+  }
   .review-modal-bottom {
     overflow-y: scroll !important;
-    margin-top: 100px;
-    height: fit-content;
+    max-height: 100%;
     display: flex;
     justify-content: space-between;
+    overflow: hidden;
   }
   .review-itemBox-container {
-    margin-top: 40px;
+    margin-top: 32px;
     width: 37%;
   }
   .review-modal-list {
     width: 63%;
-    margin-top: 40px;
+    padding: 0 8px;
+    margin-left: 8%;
     list-style: none;
-    /* background-color: yellowgreen; */
-  }
-  .last-li {
-    height: 10px;
-    width: 100%;
-    background-color: green;
   }
 `;
 
@@ -133,6 +146,7 @@ const ReviewModal = ({
   setShowReviewModal,
   infoRes,
   roomId,
+  detailObj,
 }) => {
   const [loading, setLoading] = useState(false);
   const [localShowReviewModal, setLocalShowReviewModal] = useState(
@@ -141,12 +155,11 @@ const ReviewModal = ({
   const [showAnimation, setShowAnimation] = useState(false);
 
   const [pageNum, setPageNum] = useState(0);
-  const totalPage = useRef(null); // 전체 페이지 2
+  const totalPage = useRef(null);
   const [reviewsArr, setReviewsArr] = useState([]); // 리뷰 리스트
 
   const getComments = async (pageNum) => {
     if (totalPage.current === pageNum) return;
-
     setLoading(true);
     const response = await requestComments(roomId, pageNum); // 데이터 요청.
     if (response.data.allComments._embedded) {
@@ -157,13 +170,13 @@ const ReviewModal = ({
       setPageNum((pageNum) => pageNum + 1);
       setReviewsArr([...reviewsArr, ...newComments]);
     }
-
     setLoading(false);
   };
 
   // 모달창이 열리면 초기 댓글을 받아오고 전체 페이지 수를 가져온다.
   useEffect(() => {
     getComments(0);
+    console.log(reviewsArr);
   }, []);
 
   const observer = useRef();
@@ -174,7 +187,9 @@ const ReviewModal = ({
       if (observer.current) observer.current.disconnect();
 
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) getComments(pageNum);
+        if (entries[0].isIntersecting) {
+          getComments(pageNum);
+        }
       });
 
       if (node) observer.current.observe(node);
@@ -191,6 +206,7 @@ const ReviewModal = ({
     }
     setLocalShowReviewModal(showReviewModal);
   }, [localShowReviewModal, showReviewModal]);
+  const itemScore = detailObj.roomAverageScore;
 
   if (!localShowReviewModal && !showAnimation) return null;
   return (
@@ -210,21 +226,49 @@ const ReviewModal = ({
               setShowReviewModal(false);
             }}
           />
-          <Grade reviewModal={true} grade="4.96점" />
+          <div className="gradeBox">
+            <Grade reviewModal={true} grade={infoRes.grade} />
+            <span>점 (후기 {infoRes.commentCount}개)</span>
+          </div>
         </div>
         <div className="review-modal-bottom">
           <div className="review-itemBox-container">
-            <PointItemBox textItem="의사소통" point="5.0" reviewModal={true} />
-            <PointItemBox textItem="위치" point="4.8" reviewModal={true} />
-            <PointItemBox textItem="체크인" point="4.9" reviewModal={true} />
+            <div className="wrapper"></div>
+            <PointItemBox
+              textItem="청결도"
+              point={itemScore.cleanliness}
+              reviewModal={true}
+            />
+            <PointItemBox
+              textItem="정확성"
+              point={itemScore.accuracy}
+              reviewModal={true}
+            />
+            <PointItemBox
+              textItem="의사소통"
+              point={itemScore.communication}
+              reviewModal={true}
+            />
+            <PointItemBox
+              textItem="위치"
+              point={itemScore.locationRate}
+              reviewModal={true}
+            />
+            <PointItemBox
+              textItem="체크인"
+              point={itemScore.checkIn}
+              reviewModal={true}
+            />
             <PointItemBox
               textItem="가격 대비 만족도"
-              point="4.8"
+              point={itemScore.priceSatisfaction}
               reviewModal={true}
             />
           </div>
           <ul className="review-modal-list">
+            <li className="wrapper"></li>
             {reviewsArr.map((review, index) => {
+              console.log(index);
               if (reviewsArr.length === index + 1) {
                 return (
                   <li className="review-item" ref={lastCommentElementRef}>

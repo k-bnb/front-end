@@ -1,7 +1,6 @@
 
 .gm-style-iw-d {
   width: 290px;
-  
   margin: 0 !important;
   padding: 0 !important;
     
@@ -10,9 +9,10 @@
 .gm-style .gm-style-iw-c {
   width: 270px;
   margin: 0 !important;
-  padding: 0 !important;  
+  padding: 0 !important;
   top: -17px;
 }
+
 iframe {
   
 }

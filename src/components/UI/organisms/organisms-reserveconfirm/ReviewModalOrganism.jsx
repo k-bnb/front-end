@@ -7,7 +7,7 @@ function ReviewModalOrganism({
   reviewName,
   reviewModalState,
   cancelModalButton,
-  roomId,
+  reviewRoomId,
   hostName,
   formState,
   moveNextComponent,
@@ -23,7 +23,6 @@ function ReviewModalOrganism({
           reviewName={reviewName}
           reviewModalState={reviewModalState}
           cancelModalButton={cancelModalButton}
-          roomId={roomId}
           hostName={hostName}
           moveNextComponent={moveNextComponent}
         />

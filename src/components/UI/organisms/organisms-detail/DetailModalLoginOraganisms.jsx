@@ -8,7 +8,7 @@ import EmailLoginInput from '../../molecules/molecules-modals-auth/EmailLoginInp
 import EmailLoginSubmit from '../../molecules/molecules-modals-auth/EmailLoginSubmit';
 import LoginGoSignupBtn from '../../molecules/molecules-modals-auth/LoginGoSignupBtn';
 
-const LoginOraganisms = ({
+const DetailModalLoginOraganisms = ({
   modal,
   setModal,
   onChange,
@@ -24,7 +24,6 @@ const LoginOraganisms = ({
   serverLoginError,
   setServerLoginError,
   isLoading,
-  dispatch,
 }) => {
   return (
     <ModalTemplate modal={modal} setModal={setModal} onSubmit={onSubmit}>
@@ -60,9 +59,9 @@ const LoginOraganisms = ({
           setFormState('register');
         }}
       />
-      {/* <BackLogin /> */}
+      <BackLogin />
     </ModalTemplate>
   );
 };
 
-export default LoginOraganisms;
+export default DetailModalLoginOraganisms;

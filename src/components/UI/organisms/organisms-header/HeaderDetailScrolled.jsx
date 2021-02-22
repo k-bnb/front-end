@@ -31,7 +31,7 @@ const HeaderDetailScrolledBlock = styled.div`
   background-color: white;
   transition: 0.1s ease-in;
   position: fixed;
-  z-index: 9999;
+  z-index: 1;
   box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.1);
 
   ul {
@@ -71,10 +71,12 @@ const HeaderDetailScrolledBlock = styled.div`
     props.showButton &&
     css`
       .share {
-        right: 540px;
+        right: ${(props) =>
+          !props.startDate || !props.endDate ? '600px' : '540px'};
       }
       .like {
-        right: 500px;
+        right: ${(props) =>
+          !props.startDate || !props.endDate ? '560px' : '500px'};
       }
       .box {
         animation: ${fadeIn} 0.4s ease;
@@ -123,6 +125,17 @@ const HeaderDetailScrolled = ({
   scrollToElement,
   reviewRef,
   facilityRef,
+  DetailHeaderRef,
+  formState,
+  setFormState,
+  modal,
+  setModal,
+  startDate,
+  endDate,
+  bookingInfoRef,
+  isCalendarOpen,
+  setIsCalendarOpen,
+  grade,
 }) => {
   const [localShowButton, setLocalShowButton] = useState(showButton);
   const [displayAnimation, setDisplayAnimation] = useState(false);
@@ -136,7 +149,12 @@ const HeaderDetailScrolled = ({
   }, [localShowButton, showButton]);
 
   return (
-    <HeaderDetailScrolledBlock showButton={showButton} disappear={!showButton}>
+    <HeaderDetailScrolledBlock
+      showButton={showButton}
+      disappear={!showButton}
+      startDate={startDate}
+      endDate={endDate}
+    >
       <ul>
         <Text
           noPadding
@@ -176,8 +194,19 @@ const HeaderDetailScrolled = ({
           <Text className="reserve-notice">
             예약 확정 전에는 요금이 청구되지 않습니다.
           </Text>
-          <ReserveBtn half={true} />
-          <Grade small={true} />
+          <ReserveBtn
+            half={true}
+            formState={formState}
+            setFormState={setFormState}
+            modal={modal}
+            setModal={setModal}
+            DetailHeaderRef={DetailHeaderRef}
+            scrollToElement={scrollToElement}
+            bookingInfoRef={bookingInfoRef}
+            isCalendarOpen={isCalendarOpen}
+            setIsCalendarOpen={setIsCalendarOpen}
+          />
+          <Grade small={true} grade={grade} />
         </div>
       )}
     </HeaderDetailScrolledBlock>

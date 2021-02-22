@@ -83,9 +83,14 @@ const GuestBtn = styled.div`
   padding-right: 12px;
 `;
 
-const DatePersonBox = ({ peopleLimit, detailObj }) => {
+const DatePersonBox = ({
+  isCalendarOpen,
+  setIsCalendarOpen,
+  peopleLimit,
+  detailObj,
+  infoRes,
+}) => {
   const [isOpen, setIsOpen] = useState(false); // detail page에서 모달창 열고닫기 기능구현
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   return (
     <BookingBox>
@@ -118,7 +123,7 @@ const DatePersonBox = ({ peopleLimit, detailObj }) => {
           <GuestNumberModal
             detailPage={true}
             setIsOpen={setIsOpen}
-            peopleLimit={peopleLimit}
+            infoRes={infoRes}
           />
         )}
       </Personnel>

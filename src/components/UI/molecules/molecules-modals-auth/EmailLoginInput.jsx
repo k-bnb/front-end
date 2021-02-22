@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../../atoms/atoms-main/Button';
 import CircleDiv from '../../atoms/atoms-main/DivStyle';
 import Input from '../../atoms/atoms-main/Input';
@@ -39,7 +39,9 @@ const EmailInputStyle = styled.div`
       border: 0;
 
       span {
-        font-size: 0.8rem;
+        font-size: 1rem;
+        padding: 5px 0 5px 5px;
+        display: block;
       }
     }
   }
@@ -59,6 +61,8 @@ const EmailLoginInput = ({
   isLoading,
   loginError,
 }) => {
+  const [inputType, setInputType] = useState('password');
+
   useEffect(() => {
     if (loginError === -1000)
       setServerLoginError('존재하지 않는 이메일 입니다.');
@@ -110,7 +114,7 @@ const EmailLoginInput = ({
               <Input
                 value={password}
                 name="loginPassword"
-                type="password"
+                type={inputType}
                 placeholder="비밀번호 입력"
                 onChange={(e) => {
                   onChange(e);
@@ -178,8 +182,20 @@ const EmailLoginInput = ({
             )}
           </CircleDiv>
           <div className="pass-div">
-            <Button className="password-ok">
-              <TextStyle greentextLine>비밀번호 보기</TextStyle>
+            <Button
+              className="password-ok"
+              onClick={(e) => {
+                e.preventDefault();
+                setInputType(inputType === 'password' ? 'text' : 'password');
+              }}
+            >
+              <TextStyle greentextLine>
+                {inputType === 'password' ? (
+                  <>비밀번호 보기</>
+                ) : (
+                  <>비밀번호 감추기</>
+                )}
+              </TextStyle>
             </Button>
           </div>
         </CircleDiv>

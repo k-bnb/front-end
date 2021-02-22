@@ -41,7 +41,7 @@ const GuestNumberModal = ({
   setNavModalState,
   detailPage,
   setIsOpen,
-  // peopleLimit,
+  infoRes,
 }) => {
   let guestRef = useClickOutside(() => {
     if (detailPage) {
@@ -67,6 +67,7 @@ const GuestNumberModal = ({
         decription={'만 13세 이상'}
         name="numOfAdult"
         detailPage={detailPage}
+        infoRes={infoRes}
       />
 
       <GuestNumberModalUnit
@@ -74,6 +75,7 @@ const GuestNumberModal = ({
         decription={'2~12세'}
         name="numOfKid"
         detailPage={detailPage}
+        infoRes={infoRes}
       />
 
       <GuestNumberModalUnit
@@ -81,6 +83,7 @@ const GuestNumberModal = ({
         decription={'2세 미만'}
         name="numOfInfant"
         detailPage={detailPage}
+        infoRes={infoRes}
       />
     </StyledGuestModal>
   );

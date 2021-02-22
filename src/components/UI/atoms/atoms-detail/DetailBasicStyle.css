@@ -16,6 +16,10 @@
   background-color: rgb(247, 247, 247);
 }
 
+.basic-display-none {
+  display: none;
+}
+
 .combo-box-pop-over {
   width: 500px !important;
   height: auto;

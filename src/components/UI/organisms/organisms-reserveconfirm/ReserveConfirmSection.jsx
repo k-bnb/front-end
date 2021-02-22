@@ -8,6 +8,7 @@ import Modal from '../../../../portal/Modal';
 import ReserveCancelModal from '../../molecules/molecules-reserveConfirm/ReserveCancelModal';
 import ReserveCancel from '../../molecules/molecules-reserveConfirm/ReserveCancel';
 import ReviewModalContainer from '../../../../containers/modal/ReviewModalContainer';
+import ConfirmModal from '../../molecules/molecules-reserveConfirm/ConfirmModal';
 
 const ReserveConfirmSectionStyle = styled.div`
   display: inline-flex;
@@ -31,7 +32,13 @@ const ReserveConfirmSection = ({
   reviewModalState,
   setReviewModalState,
   review,
+  reviewRoomId,
+  listModal,
+  cancelModalState,
   roomId,
+  resonChange,
+  miniModal,
+  miniModalCancelBtn,
 }) => {
   return (
     <>
@@ -53,28 +60,38 @@ const ReserveConfirmSection = ({
         ) : (
           <ReserveConfirmNoData active={active} />
         )}
-        {active === '예약 완료' && (
+        {cancelModalState && (
           <Modal>
             <ReserveCancelModal
               cancelModal={cancelModal}
-              modalState={modalState}
+              cancelModalState={cancelModalState}
             >
               <ReserveCancel
+                roomId={roomId}
                 reservationConfirmBtn={reservationConfirmBtn}
-                list={list}
                 cancel={cancel}
                 cancelBtn={cancelBtn}
                 reservationId={reservationId}
+                resonChange={resonChange}
+                miniModal={miniModal}
               />
             </ReserveCancelModal>
           </Modal>
         )}
+
+        <Modal>
+          <ConfirmModal
+            miniModal={miniModal}
+            miniModalCancelBtn={miniModalCancelBtn}
+          ></ConfirmModal>
+        </Modal>
+
         {reviewModalState && (
           <Modal>
             <ReviewModalContainer
               reviewModalState={reviewModalState}
               setReviewModalState={setReviewModalState}
-              roomId={roomId}
+              reviewRoomId={reviewRoomId}
               list={list}
               review={review}
             />

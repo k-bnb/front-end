@@ -35,24 +35,44 @@ const WrappingContainer = ({
   infoRes,
   detailObj,
   CancellableDate,
-}) => (
-  <InfoContainer>
-    <DetailInfo>
-      <HostingData detailObj={detailObj} infoRes={infoRes} />
-      <TextSummary detailObj={detailObj} CancellableDate={CancellableDate} />
-      <RoomDescription infoRes={infoRes} />
-      <TypeInfo infoRes={infoRes} />
-      <EmoticonNotice facilityRef={facilityRef} />
-    </DetailInfo>
-    <BookingSummaryBox>
-      <BookingInfo
-        DetailHeaderRef={DetailHeaderRef}
-        moveToReserve={moveToReserve}
-        detailObj={detailObj}
-        infoRes={infoRes}
-      />
-    </BookingSummaryBox>
-  </InfoContainer>
-);
+  modal,
+  setModal,
+  isOpen,
+  setIsOpen,
+  formState,
+  setFormState,
+  bookingInfoRef,
+  isCalendarOpen,
+  setIsCalendarOpen,
+}) => {
+  return (
+    <InfoContainer>
+      <DetailInfo>
+        <HostingData detailObj={detailObj} infoRes={infoRes} />
+        <TextSummary detailObj={detailObj} CancellableDate={CancellableDate} />
+        <RoomDescription infoRes={infoRes} />
+        <TypeInfo infoRes={infoRes} />
+        <EmoticonNotice facilityRef={facilityRef} />
+      </DetailInfo>
+      <BookingSummaryBox>
+        <BookingInfo
+          DetailHeaderRef={DetailHeaderRef}
+          moveToReserve={moveToReserve}
+          detailObj={detailObj}
+          infoRes={infoRes}
+          modal={modal}
+          setModal={setModal}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          formState={formState}
+          setFormState={setFormState}
+          bookingInfoRef={bookingInfoRef}
+          isCalendarOpen={isCalendarOpen}
+          setIsCalendarOpen={setIsCalendarOpen}
+        />
+      </BookingSummaryBox>
+    </InfoContainer>
+  );
+};
 
 export default WrappingContainer;

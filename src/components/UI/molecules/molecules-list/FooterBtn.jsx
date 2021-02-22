@@ -1,5 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { costInput, searching } from '../../../../modules/search';
 import Button from '../../atoms/atoms-main/Button';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
 
@@ -21,7 +23,52 @@ const FooterBtnStyle = styled.div`
   }
 `;
 
-const FooterBtn = ({ searchBtn }) => {
+const FooterBtn = ({
+  localMinCost,
+  localMaxCost,
+  dispatch,
+  setSearchModalState,
+  modalType,
+}) => {
+  const {
+    locationSearch,
+    checkDateSearch,
+    guestSearch,
+    costSearch,
+    roomType,
+    bedNum,
+    bedRoomNum,
+    bathRoomNum,
+  } = useSelector((state) => state.search.searchReq);
+
+  const searchBtn = () => {
+    const id = 0;
+    console.log(localMinCost);
+    console.log(localMaxCost);
+    console.log(costSearch);
+    dispatch(
+      searching({
+        id,
+        locationSearch,
+        checkDateSearch,
+        guestSearch,
+        costSearch: {
+          minCost: localMinCost,
+          maxCost: localMaxCost,
+        },
+        roomType,
+        bedNum,
+        bedRoomNum,
+        bathRoomNum,
+      }),
+    );
+    if (modalType === 'cash') {
+      dispatch(costInput('minCost', localMinCost));
+      dispatch(costInput('maxCost', localMaxCost));
+    }
+    setSearchModalState(null);
+  };
+
   return (
     <FooterBtnStyle>
       <Button onClick={searchBtn}>

@@ -69,7 +69,7 @@ const AuthRegisterdate = ({
         }}
       >
         {!registerValidation.dateValidation && !isFirst.dateInput && (
-          <>생년월일을 선택해 주세요.</>
+          <>만 18세 부터 가입할 수 있습니다.</>
         )}
       </span>
     </>

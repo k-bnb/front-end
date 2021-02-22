@@ -11,7 +11,7 @@ export const checkDateValidation = (date) => {
   const dateRegExp = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/; // date 타입체크
   if (!dateRegExp.test(date)) return false;
 
-  return moment().diff(moment(date)) >= 0;
+  return moment().diff(moment(date), 'years') >= 18; // 만 18세 이상이면 true
 };
 
 // 이메일 조건 검사
