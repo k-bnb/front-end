@@ -1,21 +1,40 @@
 import React from 'react';
 import CommonBg from '../../atoms/atoms-reservation/atoms-modal/CommonBg';
 import ReviewFirstpageOrganism from './ReviewFirstpageOrganism';
+import ReviewSecondOrganism from './ReviewSecondOrganism';
 
 function ReviewModalOrganism({
   reviewName,
   reviewModalState,
   cancelModalButton,
   roomId,
+  hostName,
+  formState,
+  moveNextComponent,
+  backButtonRef,
+  removeModalBg,
 }) {
+  console.log(formState);
+
   return (
-    <CommonBg review>
-      <ReviewFirstpageOrganism
-        reviewName={reviewName}
-        reviewModalState={reviewModalState}
-        cancelModalButton={cancelModalButton}
-        roomId={roomId}
-      />
+    <CommonBg className="remove-modal" review onClick={removeModalBg}>
+      {formState === 'starForm' && (
+        <ReviewFirstpageOrganism
+          reviewName={reviewName}
+          reviewModalState={reviewModalState}
+          cancelModalButton={cancelModalButton}
+          roomId={roomId}
+          hostName={hostName}
+          moveNextComponent={moveNextComponent}
+        />
+      )}
+      {formState === 'writeForm' && (
+        <ReviewSecondOrganism
+          moveNextComponent={moveNextComponent}
+          backButtonRef={backButtonRef}
+          cancelModalButton-={cancelModalButton}
+        />
+      )}
     </CommonBg>
   );
 }

@@ -2,10 +2,10 @@ import React from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { BiArrowBack } from 'react-icons/bi';
 import CommonButton from '../../atoms/atoms-reservation/atoms-modal/CommonButton';
-import AdjustHeightTeatarea from '../../atoms/atoms-reserveconfirm/AdjustHeightTeatarea';
-import StarRating from '../../atoms/atoms-reserveconfirm/StarRating';
 import CommonTitle from '../../atoms/atoms-reserveconfirm/CommonTitle';
 import StarRatingReviewModa from '../../molecules/molecules-reserveConfirm/StarRatingReviewModa';
+import { useClickOutside } from '../../../../lib/useClickOutside';
+import MovePageButton from '../../atoms/atoms-reservation/atoms-modal/MovePageButton';
 
 const ani = keyframes`
 0% {
@@ -50,6 +50,8 @@ function ReviewFirstpageOrganism({
   reviewName,
   reviewModalState,
   cancelModalButton,
+  hostName,
+  moveNextComponent,
 }) {
   return (
     <Container disappear={reviewModalState}>
@@ -57,7 +59,7 @@ function ReviewFirstpageOrganism({
       <CommonButton reviewClose roomInfo cancelModalButton={cancelModalButton}>
         <BiArrowBack />
       </CommonButton>
-      <CommonTitle>호스트 xxx님의 숙소를 평가해주세요.</CommonTitle>
+      <CommonTitle>호스트 {hostName}님의 숙소를 평가해주세요.</CommonTitle>
 
       {/* main */}
       <MainContainer>
@@ -70,12 +72,14 @@ function ReviewFirstpageOrganism({
       </MainContainer>
 
       {/* footer(next page) */}
-      {/* <div>
-        <h2>후기 작성하기</h2>
-        <AdjustHeightTeatarea />
-      </div> */}
       <FooterContainer>
-        <CommonButton reviewNext>다음</CommonButton>
+        <MovePageButton
+          name="star"
+          reviewNext
+          moveNextComponent={moveNextComponent}
+        >
+          다음
+        </MovePageButton>
       </FooterContainer>
     </Container>
   );

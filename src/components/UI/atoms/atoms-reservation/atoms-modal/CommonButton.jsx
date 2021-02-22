@@ -148,16 +148,6 @@ const StyledCommonButton = styled.button`
         font-weight: bold;
       }
     `}
-
-  ${(props) =>
-    props.reviewNext &&
-    css`
-      background: #008489;
-      color: #fff;
-      font-size: 14px;
-      padding: 15px 25px;
-      border-radius: 5px;
-    `}
 `;
 
 function CommonButton({
@@ -171,10 +161,13 @@ function CommonButton({
   cancelModalButton,
   roomId,
   review,
+  moveNextComponent,
+  name,
   ...rest
 }) {
   return (
     <StyledCommonButton
+      name={name}
       {...rest}
       onClick={
         manageDateModal ||
@@ -183,7 +176,8 @@ function CommonButton({
         clearGuest ||
         saveGuest ||
         deleteDate ||
-        cancelModalButton
+        cancelModalButton ||
+        moveNextComponent
       }
     >
       {children}

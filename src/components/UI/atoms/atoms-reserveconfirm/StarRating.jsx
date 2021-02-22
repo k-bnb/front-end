@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const HiddenInput = styled.input`
   display: none;
@@ -12,7 +12,7 @@ const StarRating = () => {
 
   return (
     <div>
-      {[...Array(5)].map((star, i) => {
+      {[...Array(5)].map((_, i) => {
         const starValue = i + 1;
 
         return (

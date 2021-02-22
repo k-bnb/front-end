@@ -48,7 +48,7 @@ const StyledSpan = styled.span`
       color: rgb(113, 113, 113);
     `}
 
-    ${(props) =>
+  ${(props) =>
     props.starName &&
     css`
       display: block;
@@ -57,6 +57,26 @@ const StyledSpan = styled.span`
       color: #484848;
       padding-left: 5px;
       margin: 10px 0;
+    `}
+
+  ${(props) =>
+    props.reviewName &&
+    css`
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgb(113, 113, 113);
+      margin-top: 5px;
+    `}
+
+  ${(props) =>
+    props.reviewNameBold &&
+    css`
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #a4a4a4;
+      margin-bottom: 25px;
     `}
 `;
 

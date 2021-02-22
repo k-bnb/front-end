@@ -6,8 +6,9 @@ const MIN_TEXTAREA_HEIGHT = 1;
 const StyledTextarea = styled.textarea`
   resize: none;
   min-height: ${MIN_TEXTAREA_HEIGHT};
+  width: 100%;
   outline: none;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
   border: none;
   border-bottom: 1px solid #ddd;
   // IE and Edge

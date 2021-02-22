@@ -18,10 +18,13 @@ const ReservationContainer = () => {
   const history = useHistory();
 
   const token = useSelector((state) => state.auth.token);
-  const { message, totalCost, checkDateSearch: checkDate } = useSelector(
+
+  // message 뒤에 totalCost 넣기
+  const { message, checkDateSearch: checkDate } = useSelector(
     (state) => state.reserve,
   );
 
+  const totalCost = '10000';
   const { numOfAdult, numOfKid, numOfInfant: infantNumber } = useSelector(
     ({ reserve }) => reserve.guestSearch,
   );
@@ -101,21 +104,21 @@ const ReservationContainer = () => {
   //  성인 + 어린이 수
   const guestNumber = numOfAdult + numOfKid;
 
-  function sendPayment({ price, receipt_id }) {
-    const url = 'http://3.34.198.174:8080/payment';
-    const signUpData = {
-      receipt_id: receipt_id,
-      price: 2000,
-    };
-    const config = {
-      headers: {
-        contentType: 'application/json',
-        Authorization:
-          'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjEzNTg2OTg4LCJleHAiOjE2MTQ0NTA5ODh9.P1cM8achpTQO0Asi61C7Y69J7WPjLQFXbX4F_UzgIwRbHyqNAh170tqj4xJv3pEsuCz_LERu_Igh4GFbzFxVuQ',
-      },
-    };
-    return axios.post(url, signUpData, config);
-  }
+  // function sendPayment(price, receipt_id) {
+  //   const url = 'http://3.34.198.174:8080/payment';
+  //   const signUpData = {
+  //     receipt_id: receipt_id,
+  //     price: 1000,
+  //   };
+  //   const config = {
+  //     headers: {
+  //       contentType: 'application/json',
+  //       Authorization:
+  //         'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjEzNTg2OTg4LCJleHAiOjE2MTQ0NTA5ODh9.P1cM8achpTQO0Asi61C7Y69J7WPjLQFXbX4F_UzgIwRbHyqNAh170tqj4xJv3pEsuCz_LERu_Igh4GFbzFxVuQ',
+  //     },
+  //   };
+  //   return axios.post(url, signUpData, config);
+  // }
 
   // 확인 button 클릭해서 예약하기 event function
   const click = useCallback(() => {
@@ -149,10 +152,25 @@ const ReservationContainer = () => {
       },
     })
       .error((data) => console.log(data))
-      .confirm(async (data) => {
+      .confirm(({ price, receipt_id }) => {
+        console.log(receipt_id);
+
         try {
-          const data1 = await sendPayment(data);
-          console.log(data1);
+          const res = reserving(
+            roomId,
+            checkIn,
+            checkOut,
+            guestNumber,
+            infantNumber,
+            totalCost,
+            message,
+            token,
+            price,
+            receipt_id,
+          );
+
+          dispatch(res);
+          console.log(res);
           // history.push('/reserve');
         } catch (err) {
           console.log(err);
@@ -196,6 +214,19 @@ const ReservationContainer = () => {
       setIsLoading(false);
     }, 1000);
   }, []);
+
+  console.log(
+    roomId,
+    checkIn,
+    checkOut,
+    guestNumber,
+    infantNumber,
+    totalCost,
+    message,
+    token,
+    // price,
+    // receipt_id,
+  );
 
   return (
     <Reservation

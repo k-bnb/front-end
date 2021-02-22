@@ -4,7 +4,6 @@ import ReservationUnderLine from '../../atoms/atoms-reservation/ResevationUnderL
 import StarRating from '../../atoms/atoms-reserveconfirm/StarRating';
 
 const StarRatingReviewModa = ({ children }) => {
-  console.log(children);
   return (
     <div>
       <CommonText starName>{children}</CommonText>
