@@ -13,6 +13,7 @@ const ReserveConfirmContainer = () => {
   const [listModal, setListModal] = useState([]);
   const [name, setName] = useState('');
   const dispatch = useDispatch();
+
   const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
 
   useEffect(() => {
@@ -93,19 +94,12 @@ const ReserveConfirmContainer = () => {
     setMiniModal(!miniModal);
     setcancelModalState(!cancelModalState);
   };
+  const reserveconfirmLoading = useSelector((lo) => lo.loading);
+  console.log(
+    reserveconfirmLoading['user/USER_INFO'],
+    reserveconfirmLoading['user/RESERVE_CONFIRM'],
+  );
 
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
   // review modal 상태
   const [reviewModalState, setReviewModalState] = useState(false);
   const [reviewRoomId, setReviewRoomId] = useState('');
@@ -118,8 +112,6 @@ const ReserveConfirmContainer = () => {
     setReviewRoomId(openModalId);
     setReviewModalState(!reviewModalState);
   };
-
-  console.log(reviewRoomId);
 
   return (
     <ReserveConfirmTemplate
@@ -142,6 +134,7 @@ const ReserveConfirmContainer = () => {
       resonChange={resonChange}
       miniModal={miniModal}
       miniModalCancelBtn={miniModalCancelBtn}
+      reserveconfirmLoading={reserveconfirmLoading}
     />
   );
 };

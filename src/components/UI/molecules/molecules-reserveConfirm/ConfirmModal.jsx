@@ -89,9 +89,7 @@ const ConfirmModalStyle = styled.div`
 `;
 const ConfirmModal = ({ miniModalCancelBtn, miniModal }) => {
   const loading = useSelector((lo) => lo.loading['user/RESERVATION_CANCEL']);
-  console.log(loading);
 
-  console.log(miniModal);
   const [animation, setAnimation] = useState(false);
   const [localModalState, setlocalModalState] = useState(miniModal);
   useEffect(() => {

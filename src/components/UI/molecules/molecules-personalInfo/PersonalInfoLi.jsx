@@ -14,8 +14,8 @@ const PersonalInfoListyle = styled.li`
   }
   div {
     span {
-      margin-bottom: 10px;
       display: flex;
+      margin-bottom: 10px;
       font-weight: 400;
       font-size: 1.6rem;
       color: #484848;

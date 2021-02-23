@@ -2,6 +2,7 @@ import React from 'react';
 import SearchButton from '../../atoms/atoms-header/SearchButton';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import ClickedSearchButton from '../../atoms/atoms-header/ClickedSearchButton';
 
 const GuestNumberUnitOuterBlock = styled.div`
   cursor: pointer;
@@ -12,6 +13,7 @@ const GuestNumberUnitOuterBlock = styled.div`
   border: 0;
   border-radius: 30px;
   background-color: transparent;
+  background-color: green;
 `;
 
 const SearchButtonUnit = ({
@@ -38,6 +40,16 @@ const SearchButtonUnit = ({
         searchBtnRef={searchBtnRef}
         navModalState={navModalState}
         setNavModalState={setNavModalState}
+      />
+      <ClickedSearchButton
+        onClick={() => {
+          // 위치정보값이 비어있을 경우는, 위치정보 모달창을 띄워주고 검색이 되는것을 막는다.
+          if (!locationSearch.latitude) {
+            SearchTypeHandler('location');
+            return;
+          }
+          history.push('/rooms');
+        }}
       />
     </GuestNumberUnitOuterBlock>
   );

@@ -2,7 +2,7 @@ import client from './client';
 
 // 로그인
 export const login = ({ email, password }) =>
-  client.post('http://3.34.198.174:8080/auth/login', {
+  client.post('/auth/login', {
     email,
     password,
   });
@@ -34,11 +34,16 @@ export const userReservation = ({ token }) =>
   });
 
 // 유저 수정
-export const userInfoRemake = ({ token, name, birth, email }) => {
+export const userInfoRemake = ({
+  token,
+  name = null,
+  birth = null,
+  email = null,
+}) => {
   const body = { name, birth, email };
 
   const headers = { headers: { Authorization: `Bearer ${token}` } };
-
+  console.log(body);
   return client.post('http://3.34.198.174:8080/user/update', body, headers);
 };
 
@@ -55,4 +60,36 @@ export const reserveCancel = ({ token, reservationId, name, reason }) => {
   };
 
   return client.delete(`http://3.34.198.174:8080/reservation`, config);
+};
+
+// 리뷰 작성
+export const writeReview = ({
+  token,
+  reservationId,
+  cleanliness,
+  accuracy,
+  communication,
+  locationRate,
+  checkIn,
+  priceSatisfaction,
+  description,
+}) => {
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const data = {
+    reservationId,
+    cleanliness,
+    accuracy,
+    communication,
+    locationRate,
+    checkIn,
+    priceSatisfaction,
+    description,
+  };
+
+  return client.post(`http://3.34.198.174:8080/comment`, data, headers);
 };
