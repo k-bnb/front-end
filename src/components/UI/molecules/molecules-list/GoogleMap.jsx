@@ -17,11 +17,11 @@ import { locationInput, searching } from '../../../../modules/search';
 import { BiWon } from 'react-icons/bi';
 import { BsHeartFill } from 'react-icons/bs';
 import { moneyfilter } from '../../../../lib/moneyfilter';
-// import Slider from 'react-slick';
+import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ScoreText from './Score-Text';
-import Slider from 'react-slick';
+import { Link, useHistory } from 'react-router-dom';
 
 // import MarkerWithLabel from "react-google-maps/lib/components/addons/MarkerWithLabel";
 // import AutoComplete from 'react-google-autocomplete';
@@ -189,6 +189,7 @@ const GoogleMarkerStyle = styled.div`
   .textAllWrap{ //지도 팝업 글 
     margin-top: 15px;
     padding-left:15px;
+    cursor: pointer;
   }
   div { 
     overflow:hidden;
@@ -211,10 +212,10 @@ const GoogleMarkerStyle = styled.div`
       }
     }
   }
-  
+
 `;
 
-function GoogleMapUse({
+const GoogleMapUse = ({
   roomMap,
   roomType,
   bathRoomNum,
@@ -224,7 +225,9 @@ function GoogleMapUse({
   checkDateSearch,
   guestSearch,
   costSearch,
-}) {
+  roomImgUrlList,
+  id,
+}) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -232,7 +235,6 @@ function GoogleMapUse({
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
   const [selectedSample, setSelectedSample] = useState(null);
 
   const [locate, setLocate] = useState({
@@ -379,7 +381,7 @@ function GoogleMapUse({
   };
 
   const mapCost = useRef();
-
+  const history = useHistory();
   const MapWithAMarker = withScriptjs(
     withGoogleMap((props) => {
       return (
@@ -401,6 +403,7 @@ function GoogleMapUse({
           options={{ scrollwheel: true }} // 마우스휠옵션.
         >
           {roomMap.map((sample) => (
+              // console.log(sample.id);
             <>
               <Marker
                 key={sample.id}
@@ -429,9 +432,10 @@ function GoogleMapUse({
                     setSelectedSample(sample);
                     console.log('overlayviewText', e.nativeEvent);
                     console.log('path1', e.nativeEvent.path[1]);
-                    console.log('path13', e.nativeEvent.path[13].childNodes);
-                    // const { text } = e.nativeEvent;
-                    // console.log('e.nativeEvent ? ', e.nativeEvent);
+                    // console.log('path13', e.nativeEvent.path[13].childNodes[0]);
+                    const path13= e.nativeEvent.path[13].childNodes[0];
+                    console.log('path13',path13);
+
                     // console.log(nativeevent.path); //1번째가 -memo << 이건데, 이게 className이야.
                   }}
                   style={{
@@ -478,35 +482,39 @@ function GoogleMapUse({
             >
               <GoogleMarkerStyle>
                 {/* <img src={selectedSample.roomImgUrlList[0]} alt="" /> */}
-                <div className="slide-group">
-                  <div className="slide">
-                    <div className="slideDiv">
-                      <Slider {...settings}>
-                      {/* <img src={selectedSample.roomImgUrlList[0]} alt="" /> */}
-                      {selectedSample.roomImgUrlList.map((src, i, arr,alt) => (
-                      <>
-                        <img
-                          // carousalImg
-                          src={src}
-                          alt={alt}
-                        />
-                      </>
-                    ))}
-                      </Slider>
+                  <div className="slide-group">
+                    <div className="slide">
+                      <div className="slideDiv">
+                        <Slider {...settings}>
+                        {/* <img src={selectedSample.roomImgUrlList[0]} alt="" /> */}
+                        {selectedSample.roomImgUrlList.map((src, i, arr,alt) => (
+                        <>
+                          <img
+                            // carousalImg
+                            src={src}
+                            alt={alt}
+                          />
+                        </>
+                      ))}
+                        </Slider>
+                      </div>
                     </div>
                   </div>
-                </div>
-                
-                <div className="textAllWrap">
-                  <ScoreText grade={selectedSample.grade} commentCount={selectedSample.commentCount} />
-                  <div className="roomTypeclass">{selectedSample.roomType}</div>
-                  <h2>{selectedSample.name}</h2>
-                  <p>
-                    <BiWon />{moneyfilter(selectedSample.cost)} <span>/ 1박</span>
-                  </p>
-                </div>
-                <Bookmark Mobileheart className="heart">
-                  <BsHeartFill className="heartimg" />
+                  <div 
+                    className="textAllWrap"   
+                    onClick={(e)=>{
+                      if(e.target.matches('.heart')) return;
+                      history.push(`/detail/${selectedSample.id}`)                    
+                  }}>
+                    <ScoreText grade={selectedSample.grade} commentCount={selectedSample.commentCount} />
+                    <div className="roomTypeclass">{selectedSample.roomType}</div>
+                    <h2>{selectedSample.name}</h2>
+                    <p>
+                      <BiWon />{moneyfilter(selectedSample.cost)} <span>/ 1박</span>
+                    </p>
+                  </div>
+                  <Bookmark Mobileheart className="heart">
+                    <BsHeartFill className="heartimg" />
                 </Bookmark>
               </GoogleMarkerStyle>
             </InfoWindow>
@@ -515,7 +523,7 @@ function GoogleMapUse({
       );
     }),
   );
-
+  console.log('selectedSample',selectedSample);
   return (
     <>
       <MapWithAMarker
@@ -526,6 +534,6 @@ function GoogleMapUse({
       />
     </>
   );
-}
+};
 
 export default GoogleMapUse;

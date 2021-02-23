@@ -82,7 +82,7 @@ const buttonStyle = css`
   border-radius: 30px;
   cursor: pointer;
   outline: none;
-`
+`;
 
 const StyledButton = styled.button`
   /* 공통 스타일 */
@@ -98,7 +98,7 @@ const StyledButton = styled.button`
     border-color: #222;
   }
   &:active {
-    background: pink;
+    /* background: pink; */
   }
 
   /* 기타 */
@@ -119,11 +119,6 @@ const StyledButton = styled.button`
 const Button = ({size, children, ...rest} ) => {
   // return props.to ? (<StyledLink {...props} />) : (<StyledButton size={size} number={props.number ? 1 : 0} {...props} />); //velopert-p793
   return<StyledButton size={size} {...rest}>{children}</StyledButton>
-};
-
-Button.defaultProps = {
-  color: 'yellow',
-  size: 'medium',
 };
 
 export default Button;
