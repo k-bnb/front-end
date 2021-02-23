@@ -148,8 +148,8 @@ const PersonalNameInput = ({
         onClick={ChangeInputBtn}
         save
       >
-        {!loading && '저장'}
-        {loading && (
+        {!loading['user/CHANGE_INPUT_USER_NAME_SUBMIT'] && '저장'}
+        {loading['user/CHANGE_INPUT_USER_NAME_SUBMIT'] && (
           <div className="animation">
             <div></div>
             <div></div>

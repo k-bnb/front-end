@@ -78,8 +78,6 @@ const ReserveConfirmContainer = () => {
   const { token } = useSelector((state) => state.auth);
 
   const reservationConfirmBtn = (e) => {
-    console.log(e.target.value);
-
     dispatch(
       reservationCancel({
         token,
@@ -94,10 +92,7 @@ const ReserveConfirmContainer = () => {
     setcancelModalState(!cancelModalState);
   };
   const reserveconfirmLoading = useSelector((lo) => lo.loading);
-  console.log(
-    reserveconfirmLoading['user/USER_INFO'],
-    reserveconfirmLoading['user/RESERVE_CONFIRM'],
-  );
+
   return (
     <ReserveConfirmTemplate
       list={list}

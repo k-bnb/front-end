@@ -149,6 +149,7 @@ const store = createStore(
       reserveReviewReq: {
         description: '',
       },
+      userInfoError: null,
     },
   },
   composeWithDevTools(applyMiddleware(sagaMiddleware)),

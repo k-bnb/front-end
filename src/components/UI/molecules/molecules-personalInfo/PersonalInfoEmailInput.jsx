@@ -1,8 +1,10 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import Modal from '../../../../portal/Modal';
 import Button from '../../atoms/atoms-main/Button';
 // import Input from '../../atoms/atoms-main/Input';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
+import NoEmailModal from './NoEmailModal';
 const ani = keyframes`
   0%,
   80%,
@@ -103,6 +105,7 @@ const PersonalInfoEmailInput = ({
   email,
   ChangeInputBtn,
   loading,
+  emailCheck,
 }) => {
   return (
     <PersonalInfoEmailInputStyle>
@@ -119,8 +122,8 @@ const PersonalInfoEmailInput = ({
         />
       </div>
       <Button name="email" value={email} onClick={ChangeInputBtn} save>
-        {!loading && '저장'}
-        {loading && (
+        {!loading['user/CHANGE_INPUT_USER_EMAIL_SUBMIT'] && '저장'}
+        {loading['user/CHANGE_INPUT_USER_EMAIL_SUBMIT'] && (
           <div className="animation">
             <div></div>
             <div></div>
