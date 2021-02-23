@@ -9,7 +9,7 @@ import {
   detailToReserveGuest,
   reserving,
 } from '../modules/reserve';
-import { dateInput } from '../modules/search';
+import { dateInput } from '../modules/detail';
 import BootPay from 'bootpay-js';
 import { useHistory } from 'react-router-dom';
 
@@ -20,19 +20,11 @@ const ReservationContainer = () => {
 
   const token = useSelector((state) => state.auth.token);
 
-  // message 뒤에 totalCost 넣기
-  const { message, checkDateSearch: checkDate } = useSelector(
-    (state) => state.reserve,
-  );
+  // const { checkDateSearch, guestSearch } = useSelector(
+  //   ({ search }) => search.searchReq,
+  // );
 
-  const totalCost = 2000;
-  const { numOfAdult, numOfKid, numOfInfant: infantNumber } = useSelector(
-    ({ reserve }) => reserve.guestSearch,
-  );
-
-  const { checkDateSearch, guestSearch } = useSelector(
-    ({ search }) => search.searchReq,
-  );
+  // detail redux에서 reserve 페이지에 보여지는 상태 가져 오기
   const {
     id,
     name,
@@ -50,16 +42,26 @@ const ReservationContainer = () => {
     roomImgUrlList,
   } = useSelector(({ detail }) => detail.infoRes);
 
+  const { startDate, endDate, numOfAdult, numOfKid, numOfInfant } = useSelector(
+    ({ detail }) => detail,
+  );
+
+  // detail redux에서 날짜, 게스트 인원 받아 오기
+  // const checkDateSearch = { firstDate, lastDate };
+  const guestSearch = { numOfAdult, numOfKid, numOfInfant };
+
+  // reserve redux에서 모달에서 사용하는 날짜, 게스트 인원 받아오기
+  const { message, checkDateSearch: checkDate } = useSelector(
+    (state) => state.reserve,
+  );
+
+  const totalCost = 2000;
+
   const {
-    startDate: firstDate,
-    endDate: lastDate,
     numOfAdult: adult,
     numOfKid: kid,
-    numOfInfant: infant,
-  } = useSelector(({ detail }) => detail);
-
-  const rememberDate = { firstDate, lastDate };
-  const remenberGuestNum = { adult, kid, infant };
+    numOfInfant: infantNumber,
+  } = useSelector(({ reserve }) => reserve.guestSearch);
 
   const { id: roomId, roomCost: testCost, name: testName } = useSelector(
     ({ reserve }) => reserve.infoRes,
@@ -77,9 +79,9 @@ const ReservationContainer = () => {
     ({ reserve }) => reserve,
   );
 
-  const { startDate: checkIn, endDate: checkOut } = checkDateSearch;
+  const checkDateSearch = { startDate, endDate };
 
-  const { startDate, endDate } = checkDate;
+  const { startDate: checkIn, endDate: checkOut } = checkDate;
 
   //  리펙토링시 객체로 묶기
   const [dateModal, setDateModal] = useState(false);
@@ -106,7 +108,7 @@ const ReservationContainer = () => {
   );
 
   //  성인 + 어린이 수
-  const guestNumber = numOfAdult + numOfKid;
+  const guestNumber = adult + kid;
 
   // 확인 button 클릭해서 예약하기 event function
   const click = useCallback(() => {
@@ -169,9 +171,9 @@ const ReservationContainer = () => {
 
   const saveDate = useCallback(() => {
     setDateModal(!dateModal);
-    dispatch(dateInput('startDate', startDate)); // 시작일만 선택시 시작일 dispatch
-    dispatch(dateInput('endDate', endDate)); // 시작일만 선택시 시작일 dispatch
-  }, [dispatch, dateModal, startDate, endDate]);
+    dispatch(dateInput('startDate', checkIn)); // 시작일만 선택시 시작일 dispatch
+    dispatch(dateInput('endDate', checkOut)); // 시작일만 선택시 시작일 dispatch
+  }, [dispatch, dateModal, checkIn, checkOut]);
 
   useEffect(() => {
     dispatch(
@@ -190,18 +192,14 @@ const ReservationContainer = () => {
         hostImgURL,
         commentCount,
         roomImgUrlList,
-        checkDateSearch,
       ),
     );
 
-    console.log(rememberDate);
-    console.log(remenberGuestNum);
-
     dispatch(detailToReserveLocation(locationDetail));
 
-    dispatch(detailToReserveDate(rememberDate));
+    dispatch(detailToReserveDate(startDate, endDate));
 
-    dispatch(detailToReserveGuest(remenberGuestNum));
+    dispatch(detailToReserveGuest(numOfAdult, numOfKid, numOfInfant));
 
     setTimeout(() => {
       setIsLoading(false);

@@ -46,6 +46,11 @@ const PersonalTemplate = ({
   setFix,
   loading,
   pageloading,
+  emailCheck,
+  personInfoEmailSubmit,
+  emailOk,
+  personInfoEmailSubmitKeypress,
+  cancelModalEmail,
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 900px)',
@@ -75,6 +80,11 @@ const PersonalTemplate = ({
               userInfo={userInfo}
               setFix={setFix}
               loading={loading}
+              emailCheck={emailCheck}
+              personInfoEmailSubmit={personInfoEmailSubmit}
+              emailOk={emailOk}
+              personInfoEmailSubmitKeypress={personInfoEmailSubmitKeypress}
+              cancelModalEmail={cancelModalEmail}
             />
             {isPc && (
               <PcDiv>

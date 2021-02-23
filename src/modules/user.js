@@ -13,10 +13,28 @@ const RESERVE_CONFIRM_FAILURE = 'user/RESERVE_CONFIRM_FAILURE';
 const USER_INFO = 'user/USER_INFO';
 const USER_INFO_SUCCESS = 'user/USER_INFO_SUCCESS';
 
-// 유저 정보 수정
-const CHANGE_INPUT_PERSON_SUBMIT = 'user/CHANGE_INPUT_PERSON_SUBMIT';
-const CHANGE_INPUT_PERSON_SUBMIT_SUCCESS = 'user/CHANGE_INPUT_PERSON_SUBMIT';
-const CHANGE_INPUT_PERSON_SUBMIT_FAILURE = 'user/CHANGE_INPUT_PERSON_SUBMIT';
+// 유저 정보 수정 (name)
+const CHANGE_INPUT_USER_NAME_SUBMIT = 'user/CHANGE_INPUT_USER_NAME_SUBMIT';
+const CHANGE_INPUT_USER_NAME_SUBMIT_SUCCESS =
+  'user/CHANGE_INPUT_USER_NAME_SUBMIT_SUCCESS';
+const CHANGE_INPUT_USER_NAME_SUBMIT_FAILURE =
+  'user/CHANGE_INPUT_USER_NAME_SUBMIT_FAILURE';
+
+// 유저 정보 수정 (birth)
+const CHANGE_INPUT_USER_BIRTH_SUBMIT = 'user/CHANGE_INPUT_USER_BIRTH_SUBMIT';
+const CHANGE_INPUT_USER_BIRTH_SUBMIT_SUCCESS =
+  'user/CHANGE_INPUT_USER_BIRTH_SUBMIT_SUCCESS';
+const CHANGE_INPUT_USER_BIRTH_SUBMIT_FAILURE =
+  'user/CHANGE_INPUT_USER_BIRTH_SUBMIT_FAILURE';
+
+// 유저 정보 수정 (email)
+const CHANGE_INPUT_USER_EMAIL_SUBMIT = 'user/CHANGE_INPUT_USER_EMAIL_SUBMIT';
+const CHANGE_INPUT_USER_EMAIL_SUBMIT_SUCCESS =
+  'user/CHANGE_INPUT_USER_EMAIL_SUBMIT_SUCCESS';
+const CHANGE_INPUT_USER_EMAIL_SUBMIT_FAILURE =
+  'user/CHANGE_INPUT_USER_EMAIL_SUBMIT_FAILURE';
+
+const INITIALSTATE_USER_ERROR = 'user/INITIALSTATE_USER_ERROR';
 
 const CHANGE_INPUT_PERSON = 'user/CHANGE_INPUT_PERSON';
 const CHANGE_INPUT_IMG_PERSON = 'user/CHANGE_INPUT_IMG_PERSON';
@@ -57,10 +75,22 @@ export const changeInputImgPerson = createAction(
   }),
 );
 
-export const changeInputPersonSubmit = createAction(
-  CHANGE_INPUT_PERSON_SUBMIT,
+export const changeInputUserNameSubmit = createAction(
+  CHANGE_INPUT_USER_NAME_SUBMIT,
   (token, name, value) => ({ token, [name]: value }),
 );
+
+export const changeInputUserBirthSubmit = createAction(
+  CHANGE_INPUT_USER_BIRTH_SUBMIT,
+  (token, name, value) => ({ token, [name]: value }),
+);
+
+export const changeInputUserEmailSubmit = createAction(
+  CHANGE_INPUT_USER_EMAIL_SUBMIT,
+  (token, name, value) => ({ token, [name]: value }),
+);
+
+export const initialStateUserError = createAction(INITIALSTATE_USER_ERROR);
 
 export const reserveConfirm = createAction(RESERVE_CONFIRM, ({ token }) => ({
   token,
@@ -140,6 +170,7 @@ const initialState = {
     description: '',
   },
   reserveReiewRes: [],
+  userInfoError: null,
   reserveError: null,
   reserveReviewError: null,
 };
@@ -181,16 +212,40 @@ const user = handleActions(
         draft.userRes.imageUrl = payload.value;
       });
     },
-    [CHANGE_INPUT_PERSON_SUBMIT_SUCCESS]: (
-      state,
-      { payload: { name, birth, email } },
-    ) => {
+    [CHANGE_INPUT_USER_NAME_SUBMIT_SUCCESS]: (state, { payload: { name } }) => {
       return produce(state, (draft) => {
         draft.userRes.name = name;
+      });
+    },
+    [CHANGE_INPUT_USER_BIRTH_SUBMIT_SUCCESS]: (
+      state,
+      { payload: { birth } },
+    ) => {
+      return produce(state, (draft) => {
         draft.userRes.birth = birth;
+      });
+    },
+    [CHANGE_INPUT_USER_EMAIL_SUBMIT_SUCCESS]: (
+      state,
+      { payload: { email } },
+    ) => {
+      return produce(state, (draft) => {
         draft.userRes.email = email;
       });
     },
+    [CHANGE_INPUT_USER_EMAIL_SUBMIT_FAILURE]: (state, { payload }) => {
+      console.log(payload);
+      return produce(state, (draft) => {
+        draft.userInfoError = payload;
+      });
+    },
+    [INITIALSTATE_USER_ERROR]: (state, { payload }) => {
+      console.log(payload);
+      return produce(state, (draft) => {
+        draft.userInfoError = null;
+      });
+    },
+
     [RESERVATION_CANCEL_SUCCESS]: (state, { payload }) => {
       return produce(state, (draft) => {
         draft.userRes.reserveCancelRes = payload;
@@ -246,10 +301,19 @@ const userConfirmSaga = createRequestSaga(USER_INFO, (token) =>
 
 // 유저 수정
 
-const changeInputPersonSaga = createRequestSaga(
-  CHANGE_INPUT_PERSON_SUBMIT,
-  (token, name = null, email = null, birth = null) =>
-    API.userInfoRemake(token, name, email, birth),
+const changeInputUserNameSaga = createRequestSaga(
+  CHANGE_INPUT_USER_NAME_SUBMIT,
+  (token, name) => API.userInfoNameRemake(token, name),
+);
+
+const changeInputUserBirthSaga = createRequestSaga(
+  CHANGE_INPUT_USER_BIRTH_SUBMIT,
+  (token, birth) => API.userInfoBirthRemake(token, birth),
+);
+
+const changeInputUserEmailSaga = createRequestSaga(
+  CHANGE_INPUT_USER_EMAIL_SUBMIT,
+  (token, email) => API.userInfoEmailRemake(token, email),
 );
 
 const reserveCancel = createRequestSaga(
@@ -266,6 +330,9 @@ export function* userSaga() {
   yield takeLatest(RESERVE_CONFIRM, reserveConfirmSaga);
   yield takeLatest(USER_INFO, userConfirmSaga);
   yield takeLatest(RESERVATION_CANCEL, reserveCancel);
-  yield takeLatest(CHANGE_INPUT_PERSON_SUBMIT, changeInputPersonSaga);
+
   yield takeLatest(REVIEW, reviewSaga);
+  yield takeLatest(CHANGE_INPUT_USER_NAME_SUBMIT, changeInputUserNameSaga);
+  yield takeLatest(CHANGE_INPUT_USER_BIRTH_SUBMIT, changeInputUserBirthSaga);
+  yield takeLatest(CHANGE_INPUT_USER_EMAIL_SUBMIT, changeInputUserEmailSaga);
 }

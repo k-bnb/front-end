@@ -65,7 +65,7 @@ export const detailToReserveDate = createAction(
 // detail page guest state => reserve page guest state
 export const detailToReserveGuest = createAction(
   DETAIL_TO_RESERVE_GUEST,
-  ({ numOfAdult, numOfKid, numOfInfant }) => ({
+  (numOfAdult, numOfKid, numOfInfant) => ({
     numOfAdult,
     numOfKid,
     numOfInfant,
@@ -214,25 +214,29 @@ const reserve = handleActions(
         draft[form] = initialState[form]; // 선택한 form 초기화.
       }),
 
-    [DETAIL_TO_RESERVE_DATE]: (state, { payload: remenberDate }) => {
-      console.log(remenberDate);
+    [DETAIL_TO_RESERVE_DATE]: (state, { payload }) => {
       return {
         ...state,
 
-        checkDateSearch: remenberDate,
+        checkDateSearch: payload,
       };
     },
 
-    [DETAIL_TO_RESERVE_GUEST]: (state, { payload: guestSearch }) => ({
-      ...state,
-      guestSearch,
-    }),
+    [DETAIL_TO_RESERVE_GUEST]: (
+      state,
+      { payload: { numOfAdult, numOfKid, numOfInfant } },
+    ) =>
+      produce(state, (draft) => {
+        draft.guestSearch.numOfAdult = numOfAdult;
+        draft.guestSearch.numOfKid = numOfKid;
+        draft.guestSearch.numOfInfant = numOfInfant;
+      }),
 
     [DETAIL_TO_RESERVE_ROOM]: (state, { payload }) =>
       produce(state, (draft) => {
         draft.infoRes = payload;
         draft.roomImgUrlList = payload.roomImgUrlList[0];
-        draft.checkDateSearch = payload.checkDateSearch;
+        // draft.checkDateSearch = payload.checkDateSearch;
         // draft.guestSearch = payload.guestSearch;
       }),
 
