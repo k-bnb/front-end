@@ -12,8 +12,8 @@ import moment from 'moment';
 const PositionBox = styled.div`
   position: sticky;
   z-index: 0;
-  top: 160px;
-  margin-bottom: 100px;
+  top: 130px;
+  margin-bottom: 50px;
 `;
 
 const BookingInfoContainer = styled.div`
@@ -45,38 +45,44 @@ const BookingInfo = ({
   DetailHeaderRef,
   modal,
   setModal,
+  isOpen,
   setIsOpen,
   formState,
   setFormState,
   bookingInfoRef,
   isCalendarOpen,
   setIsCalendarOpen,
+  GuestModalRef,
 }) => {
   const StartDate = moment(detailObj.startDate);
   const EndDate = moment(detailObj.endDate);
   const totalSchedule = EndDate.diff(StartDate, 'days');
   if (detailObj.startDate !== '' && detailObj.endDate !== '') {
     return (
-      <PositionBox>
-        <BookingInfoContainer>
+      <PositionBox ref={bookingInfoRef}>
+        <BookingInfoContainer ref={GuestModalRef}>
           <OneDayPrice infoRes={infoRes} detailObj={detailObj} />
           <DatePersonBox
             detailObj={detailObj}
             isCalendarOpen={isCalendarOpen}
             setIsCalendarOpen={setIsCalendarOpen}
             infoRes={infoRes}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
           />
           <ReserveBtn
             moveToReserve={moveToReserve}
             modal={modal}
             setModal={setModal}
+            isOpen={isOpen}
             setIsOpen={setIsOpen}
             formState={formState}
             setFormState={setFormState}
             DetailHeaderRef={DetailHeaderRef}
             isCalendarOpen={isCalendarOpen}
             setIsCalendarOpen={setIsCalendarOpen}
-            NoBookingDate
+            detailObj={detailObj}
+            GuestModalRef={GuestModalRef}
           ></ReserveBtn>
           <span className="notice">
             예약 확정 전에는 요금이 청구되지 않습니다.
@@ -97,25 +103,28 @@ const BookingInfo = ({
   } else {
     return (
       <PositionBox ref={bookingInfoRef}>
-        <BookingInfoContainer>
+        <BookingInfoContainer ref={GuestModalRef}>
           <OneDayPrice infoRes={infoRes} detailObj={detailObj} />
           <DatePersonBox
             detailObj={detailObj}
             isCalendarOpen={isCalendarOpen}
             setIsCalendarOpen={setIsCalendarOpen}
             infoRes={infoRes}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
           />
           <ReserveBtn
             moveToReserve={moveToReserve}
             modal={modal}
             setModal={setModal}
+            isOpen={isOpen}
             setIsOpen={setIsOpen}
             formState={formState}
             setFormState={setFormState}
             DetailHeaderRef={DetailHeaderRef}
             isCalendarOpen={isCalendarOpen}
             setIsCalendarOpen={setIsCalendarOpen}
-            NoBookingDate
+            GuestModalRef={GuestModalRef}
           ></ReserveBtn>
         </BookingInfoContainer>
       </PositionBox>

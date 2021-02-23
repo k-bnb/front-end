@@ -182,7 +182,7 @@ const SelectionInfo = ({
       <CheckTxt>{text}</CheckTxt>
       <SelectionDate>
         <input
-          className="hi"
+          // className="hi"
           value={date}
           placeholder="YYYY.MM.DD"
           ref={CheckinInputRef || CheckoutInputRef}
@@ -247,25 +247,32 @@ function Datepicker({ setIsDateBorderThick, setIsCalendarOpen }) {
     endDate = moment(endDate);
   }
 
-  const handleOnDateChange = (startDate, endDate) => {
-    // if (moment()._d > startDate) {
-    //   return;
-    // }
+  // checkIn date가 checkOut date 보다 이후 날짜 일때 모두 clear
+  // const AdjustCheckDate = () => {
+  //   if (
+  //     moment(endDate).diff(moment(startDate)) > 0 &&
+  //     moment(detailEndDate).diff(moment(detailStartDate)) > 0
+  //   )
+  //     return;
+  //   dispatch(clearCheckDateDtail());
+  // };
 
+  const handleOnDateChange = (startDate, endDate) => {
     if (startDate.startDate && !startDate.endDate) {
       let startD = moment(startDate.startDate._d).format('YYYY-MM-DD');
       dispatch(dateInput('startDate', startD)); // 시작일만 선택시 시작일 main page에 dispatch
-      // console.log(startD);
       dispatch(dateChangeDetail('startDate', startD));
       setdateRange({ startDate: startD, endDate: startD });
     }
     if (startDate.startDate && startDate.endDate) {
       let startD = moment(startDate.startDate._d).format('YYYY-MM-DD');
       let endD = moment(startDate.endDate._d).format('YYYY-MM-DD');
+
       dispatch(dateInput('startDate', startD)); // 시작일만 선택시 시작일 dispatch
       dispatch(dateInput('endDate', endD)); // 끝나는일 선택시 dispatch
       dispatch(dateChangeDetail('endDate', endD));
       setdateRange({ startDate: startD, endDate: endD });
+      // AdjustCheckDate();
     }
     setdateRange(startDate, endDate);
   };
