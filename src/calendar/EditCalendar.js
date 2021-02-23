@@ -6,7 +6,7 @@ import moment from 'moment';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 // import './EditCalendarTemplate.css';
-import { changeDate } from '../modules/reserve';
+import { changeDate, clearEndDate } from '../modules/reserve';
 
 const CalendarNewBlock = styled.div`
   /* // NOTE: the order of these styles DO matter */
@@ -130,9 +130,13 @@ function EditCalendar() {
   }
 
   const handleOnDateChange = (startDate, endDate) => {
+    console.log(startDate.startDate, 'startDate');
+    console.log(endDate, 'endDate');
+
     if (startDate.startDate && !startDate.endDate) {
       let startD = moment(startDate.startDate._d).format('YYYY-MM-DD');
       dispatch(changeDate('startDate', startD)); // 시작일만 선택시 시작일 dispatch
+      dispatch(clearEndDate());
       setDateRange({ startDate: startD, endDate: startD });
     }
 
@@ -168,6 +172,7 @@ function EditCalendar() {
         daySize={40} // 달력크기
         numberOfMonths={2} // 렌더링 되는 달력 갯수 (2이면 2달)
         transitionDuration={200} // 달력넘어가는 속도 millisec
+        autoFocusEndDate={false}
       />
     </CalendarNewBlock>
   );

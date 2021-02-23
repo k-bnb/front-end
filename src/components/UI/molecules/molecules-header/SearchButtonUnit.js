@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import SearchButton from '../../atoms/atoms-header/SearchButton';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
 const GuestNumberUnitOuterBlock = styled.div`
@@ -14,9 +14,15 @@ const GuestNumberUnitOuterBlock = styled.div`
   background-color: transparent;
 `;
 
-const SearchButtonUnit = ({ locationSearch, dispatch, SearchTypeHandler }) => {
+const SearchButtonUnit = ({
+  locationSearch,
+  dispatch,
+  SearchTypeHandler,
+  searchBtnRef,
+  navModalState,
+  setNavModalState,
+}) => {
   const history = useHistory();
-  const buttonRef = useRef();
 
   return (
     <GuestNumberUnitOuterBlock className="search-button-unit">
@@ -29,6 +35,9 @@ const SearchButtonUnit = ({ locationSearch, dispatch, SearchTypeHandler }) => {
           }
           history.push('/rooms');
         }}
+        searchBtnRef={searchBtnRef}
+        navModalState={navModalState}
+        setNavModalState={setNavModalState}
       />
     </GuestNumberUnitOuterBlock>
   );

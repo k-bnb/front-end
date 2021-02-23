@@ -1,5 +1,20 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+
+const ani = keyframes`
+0% {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+50% {
+  opacity: 0.5;
+}
+
+100% {
+  opacity: 1;
+}
+`;
 
 const StyledTemp = styled.div`
   background: transparent;

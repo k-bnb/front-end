@@ -1,6 +1,6 @@
 import { useMediaQuery } from 'react-responsive';
-import styled, { createGlobalStyle } from 'styled-components';
-import TextStyle from '../../atoms/atoms-main/TextStyle';
+import styled from 'styled-components';
+// import TextStyle from '../../atoms/atoms-main/TextStyle';
 import Locations from '../../molecules/molecules-main/Locations';
 
 const SectionPc = styled.section`

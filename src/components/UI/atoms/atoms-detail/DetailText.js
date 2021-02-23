@@ -68,6 +68,38 @@ const TextBlock = styled.span`
     props.block &&
     css`
       display: block;
+    `}
+    
+    ${(props) =>
+    props.paddingTop &&
+    css`
+      padding-top: 10px;
+    `} 
+
+    ${(props) =>
+    props.lineHight &&
+    css`
+      line-height: 22px;
+    `} 
+    ${(props) =>
+    props.flex &&
+    css`
+      display: flex;
+    `} 
+    ${(props) =>
+    props.bottom &&
+    css`
+      vertical-align: bottom;
+    `} 
+    ${(props) =>
+    props.bottom &&
+    css`
+      align-items: baseline;
+    `} 
+    ${(props) =>
+    props.reviewModal &&
+    css`
+      font-size: 14px;
     `} /* ${(props) =>
     props.after &&
     props.black &&

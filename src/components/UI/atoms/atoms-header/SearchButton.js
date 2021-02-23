@@ -32,16 +32,17 @@ const SearchButtonBlock = styled.button`
         line-height: 15px;
         font-size: 16px;
       }
-    `}/* ${(props) =>
-    props.rooms &&
-    css`
-      position: absolute;
-      top: -1px;
-      right: -3px;
-    `} */
+    `}
 `;
 
-const SearchButton = ({ isScrolled, onClick, rooms }) => {
+const SearchButton = ({
+  isScrolled,
+  onClick,
+  rooms,
+  searchBtnRef,
+  navModalState,
+  setNavModalState,
+}) => {
   return (
     <>
       <SearchButtonBlock
@@ -49,10 +50,41 @@ const SearchButton = ({ isScrolled, onClick, rooms }) => {
         className="search-button-unit"
         onClick={onClick}
         rooms={rooms}
+        ref={searchBtnRef}
       >
         {!isScrolled && <BiSearch className="search-button-unit" />}
         {isScrolled && <HiSearch className="search-button-unit" />}
       </SearchButtonBlock>
+      {/* {!navModalState?.location &&
+        !navModalState?.checkIn &&
+        !navModalState?.checkOut &&
+        !navModalState?.guest && (
+        )} */}
+      {/* {(navModalState?.location ||
+        navModalState?.checkIn ||
+        navModalState?.checkOut ||
+        navModalState?.guest) && (
+        <SearchButtonBlock
+          isScrolled={isScrolled}
+          className="search-button-unit"
+          onClick={onClick}
+          rooms={rooms}
+          ref={searchBtnRef}
+          isSelected={
+            navModalState?.location ||
+            navModalState?.checkIn ||
+            navModalState?.checkOut ||
+            navModalState?.guest
+          }
+        >
+          {
+            <>
+              <BiSearch className="search-button-unit" />
+              검색
+            </>
+          } */}
+      {/* </SearchButtonBlock> */}
+      {/* )} */}
     </>
   );
 };

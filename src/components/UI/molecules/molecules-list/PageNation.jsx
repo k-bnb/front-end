@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import Button from '../../atoms/atoms-list/Button';
-import Pagination from 'react-pagination-library';
+// import Button from '../../atoms/atoms-list/Button';
+// import Pagination from 'react-pagination-library';
 import ReactPaginate from 'react-paginate';
 const PageStyle = styled.div`
   min-width: 547px;
@@ -68,7 +68,7 @@ const PageNation = ({
   //   numberOfPages = [...newArr1, '...', ...newArr2];
   // }
   // console.log(numberOfPages);
-  console.log(totalPage);
+
   return (
     <PageStyle className="PageNation">
       {/* <Pagination

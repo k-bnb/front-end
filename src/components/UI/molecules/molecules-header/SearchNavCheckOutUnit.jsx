@@ -12,6 +12,10 @@ const SearchNavCheckOutUnitLi = styled.li`
     background-color: rgb(235, 231, 231);
   }
 
+  &:focus {
+    outline: none;
+  }
+
   ${(props) =>
     props.navModalState.checkOut &&
     css`
@@ -24,16 +28,17 @@ const SearchNavCheckOutUnit = ({ SearchTypeHandler, navModalState }) => {
     (state) => state.search.searchReq.checkDateSearch,
   );
 
-  // console.log(endDate);
-
   return (
     <SearchNavCheckOutUnitLi
       onClick={(e) => {
         if (!e.target.matches('checkout-remove-btn')) {
-          console.log('out');
           SearchTypeHandler('checkOut');
         }
       }}
+      onFocus={() => {
+        SearchTypeHandler('checkOut');
+      }}
+      tabIndex="0"
       navModalState={navModalState}
     >
       <Text small bold block noPadding>
@@ -53,8 +58,11 @@ const SearchNavCheckOutUnit = ({ SearchTypeHandler, navModalState }) => {
           className="checkout-remove-btn"
           checkOutDate
           onMouseDown={(e) => {
-            console.log('lelel');
             dispatch(specificInputClear('checkDateSearch'));
+          }}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter')
+              dispatch(specificInputClear('checkDateSearch'));
           }}
         />
       )}

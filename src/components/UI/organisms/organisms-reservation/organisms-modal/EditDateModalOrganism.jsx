@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AiOutlineClose } from 'react-icons/ai';
+import { GrClose } from 'react-icons/gr';
 import EditCalendar from '../../../../../calendar/EditCalendar';
 import CommonButton from '../../../atoms/atoms-reservation/atoms-modal/CommonButton';
 import CommonBg from '../../../atoms/atoms-reservation/atoms-modal/CommonBg';
@@ -37,7 +37,15 @@ const CalendarContainer = styled.div`
   position: relative;
 `;
 
-function EditDateModalOrganism({ manageDateModal, checkDate, saveDate }) {
+function EditDateModalOrganism({
+  manageDateModal,
+  checkDate,
+  saveDate,
+  day,
+  bedNum,
+  bathRoomNum,
+  deleteDate,
+}) {
   const checkChildren = {
     checkIn: '체크인',
     checkOut: '체크아웃',
@@ -50,12 +58,17 @@ function EditDateModalOrganism({ manageDateModal, checkDate, saveDate }) {
       <CommonTemp dateModal>
         <CancelButtonContainer>
           <CommonButton cancelModal manageDateModal={manageDateModal}>
-            <AiOutlineClose />
+            <GrClose />
           </CommonButton>
         </CancelButtonContainer>
         <ScheduleInfoContainer>
           <ScheduleDayContainer>
-            <CommonText day>1박</CommonText>
+            <CommonText day>{isNaN(day) ? '날짜 입력' : `${day}박`}</CommonText>
+            <CommonText furniture>
+              {isNaN(day)
+                ? '여행 날짜를 입력 후 정확한 요금을 확인하세요.'
+                : `침대 ${bedNum}개 · 욕실 ${bathRoomNum}개`}
+            </CommonText>
           </ScheduleDayContainer>
           <ScheduleSelectContainer>
             <ScheduleInfoMolecule
@@ -72,7 +85,10 @@ function EditDateModalOrganism({ manageDateModal, checkDate, saveDate }) {
           <EditCalendar />
         </CalendarContainer>
         <div>
-          <ScheduleControlMolecule saveDate={saveDate} />
+          <ScheduleControlMolecule
+            saveDate={saveDate}
+            deleteDate={deleteDate}
+          />
         </div>
       </CommonTemp>
     </CommonBg>

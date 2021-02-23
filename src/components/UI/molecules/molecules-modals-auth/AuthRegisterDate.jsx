@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { checkDateValidation } from '../../../../lib/validationCheck';
 import Input from '../../atoms/atoms-main/Input';
@@ -69,7 +69,7 @@ const AuthRegisterdate = ({
         }}
       >
         {!registerValidation.dateValidation && !isFirst.dateInput && (
-          <>생년월일을 선택해 주세요.</>
+          <>만 18세 부터 가입할 수 있습니다.</>
         )}
       </span>
     </>

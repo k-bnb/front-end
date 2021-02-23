@@ -5,18 +5,23 @@ import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
+  Marker,
+  OverlayView,
 } from 'react-google-maps';
-import { Marker } from 'react-google-maps';
 import Geocode from 'react-geocode';
-import { OverlayView } from 'react-google-maps';
 import styled from 'styled-components';
 import Bookmark from '../../atoms/atoms-list/BookMark';
 import { AiOutlineHeart } from 'react-icons/ai';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { locationInput, searching } from '../../../../modules/search';
+import { BiWon } from 'react-icons/bi';
+import { moneyfilter } from '../../../../lib/moneyfilter';
+// import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 // import MarkerWithLabel from "react-google-maps/lib/components/addons/MarkerWithLabel";
 // import AutoComplete from 'react-google-autocomplete';
-
 // Geocode.setApiKey=('AIzaSyC6KyJE5Cb_kVrW02y-mkWEDGlrUfodq6E'); '='이 표시가 들어가면 안됨... 이거 찾는데 24시간 걸렸다^-^.. 최대적===오타ㅜㅜㅜ
 Geocode.setApiKey('AIzaSyC9pRTw-7zb847DyWLD-fUujKxvlG01s08');
 
@@ -30,8 +35,8 @@ const GoogleMarkerStyle = styled.div`
   position: relative;
   .heart {
     position: absolute;
-    top: -10px;
-    right: 10px;
+    top: 0px;
+    right: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,7 +51,9 @@ const GoogleMarkerStyle = styled.div`
     height: 200px;
   }
   div {
-    padding: 20px 0 0 20px;
+    //지도 팝업
+
+    overflow: hidden;
     .roomTypeclass {
       padding: 0;
       color: rgba(0, 0, 0, 0.4);
@@ -57,12 +64,14 @@ const GoogleMarkerStyle = styled.div`
       font-size: 1.8rem;
       font-weight: 400;
       margin: 0;
-      padding: 0;
+      padding-left: 20px;
     }
     p {
       font-weight: 700;
+      padding-left: 20px;
       span {
         font-weight: 400;
+        padding-left: 20px;
       }
     }
   }
@@ -102,8 +111,6 @@ function GoogleMapUse({
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log('position33', position);
-        console.log(position);
         // 위치와 이 위치 이후에 현재 위치를 가져올 수 있다. 위도와 경도를 사용하므로 이 값을 먼저 입력한다.
         setLocate(
           {
@@ -121,7 +128,7 @@ function GoogleMapUse({
               position.coords.latitude,
               position.coords.longitude,
             );
-            console.log('res', res);
+
             const address = res.results[0].formatted_address,
               addressArray = res.results[0].address_components,
               city = getCity(addressArray),
@@ -137,7 +144,7 @@ function GoogleMapUse({
         );
       });
     }
-  }); //TODO : 알아내기 : 재랜더링이 두번.-> React.memo 사용해서 최적화하기.
+  }); //TODO : 알아내기 : 재랜더링이 두번.-> \
 
   const getCity = (addressArray) => {
     let city = '';
@@ -215,18 +222,21 @@ function GoogleMapUse({
   };
   const [zoom, setZoom] = useState(12);
   const mapRef = useRef();
-
-  console.log(roomMap);
+  const mapMarker = useRef();
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
+  }, []);
+  const onMarkLoad = useCallback((map) => {
+    mapMarker.current = map;
   }, []);
   const handleZoomChanged = () => {
     setZoom(mapRef.current.getZoom());
   };
-  console.log(roomMap);
+
+  const mapCost = useRef();
+
   const MapWithAMarker = withScriptjs(
     withGoogleMap((props) => {
-      console.log(props);
       return (
         <GoogleMap
           // scrollwheel={false}
@@ -240,53 +250,51 @@ function GoogleMapUse({
           onClick={() => {
             setSelectedSample(null);
           }}
+          options={{ scrollwheel: true }}
           onLoad={onMapLoad}
           onDragEnd={dragMark}
-          onBoundsChanged={() => {
-            console.log('hi');
-            console.log(mapRef.current);
-          }}
           onZoomChanged={handleZoomChanged}
+          options={{ scrollwheel: true }} // 마우스휠옵션.
         >
           {roomMap.map((sample) => (
             <>
               <Marker
                 key={sample.id}
+                onLoad={onMarkLoad}
                 opacity={0}
                 labelClass="map-price-container"
                 labelContent={`<div class="map-price-marker"><span>$${sample.cost}</span></div>`}
-                onClick={(e) => {
-                  console.log(sample, e.target);
-                  setSelectedSample(sample);
-                  console.log('marker', e.nextElementSibling);
-                }}
-                onDragStart={(e) => {
-                  console.log('helo', e);
-                }}
+                onDragStart={(e) => {}}
                 position={{ lat: sample.latitude, lng: sample.longitude }}
                 draggable={true}
                 // onDragEnd={onMarkerDragEnd}
                 icon={
                   'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
                 }
-                // label={sample.cost}
               ></Marker>
               <OverlayView
                 position={{ lat: sample.latitude, lng: sample.longitude }}
-                onClick={(e) => {
-                  console.log('overlayView', e);
-                }}
                 mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
                 getPixelPositionOffset={getPixelPositionOffset}
               >
                 <div
-                  className="cost-memo"
+                  className={sample.id}
+                  name={sample.cost}
+                  ref={mapCost}
                   onClick={(e) => {
-                    console.log('overlayviewText', e);
+                    setSelectedSample(sample);
+                    console.log(
+                      'overlayviewText',
+                      e.nativeEvent.path[1].className,
+                    );
                   }}
                   style={{
+                    display: 'flex',
+                    alignItems: 'center',
                     background: `white`,
                     border: `1px solid #ccc`,
+                    backGround: 'white',
+                    cursor: 'pointer',
                     borderRadius: '50px',
                     width: '80px',
                     height: '30px',
@@ -304,7 +312,8 @@ function GoogleMapUse({
                       fontSize: '16px',
                     }}
                   >
-                    {sample.cost}
+                    <BiWon />
+                    {moneyfilter(sample.cost)}
                   </p>
                 </div>
               </OverlayView>
@@ -312,9 +321,7 @@ function GoogleMapUse({
           ))}
           {selectedSample && (
             <InfoWindow
-              onClick={(e) => {
-                console.log('infowindow', e);
-              }}
+              onClick={(e) => {}}
               position={{
                 lat: selectedSample.latitude,
                 lng: selectedSample.longitude,
@@ -325,11 +332,22 @@ function GoogleMapUse({
             >
               <GoogleMarkerStyle>
                 <img src={selectedSample.roomImgUrlList[0]} alt="" />
+                {/* <div className="slide-group">
+                  <div className="slide">
+                    <div className="slideDiv">
+                      <Slider {...settings}>
+                      <img src={selectedSample.roomImgUrlList[0]} alt="" />
+                      </Slider>
+                    </div>
+                  </div>
+                </div> */}
+
                 <div>
                   <div className="roomTypeclass">{selectedSample.roomType}</div>
                   <h2>{selectedSample.name}</h2>
                   <p>
-                    $ {selectedSample.cost} <span>/ 1박</span>{' '}
+                    <BiWon />
+                    {selectedSample.cost} <span>/ 1박</span>
                   </p>
                 </div>
                 <Bookmark className="heart" heart>

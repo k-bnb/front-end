@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ModalTemplate from '../../../templates/templates-modal/ModalTemplate';
 import CircleDiv from '../../atoms/atoms-main/DivStyle';
 import AuthGoogle from '../../molecules/molecules-modals-auth/AuthGoogle';
@@ -24,6 +24,7 @@ const LoginOraganisms = ({
   serverLoginError,
   setServerLoginError,
   isLoading,
+  dispatch,
 }) => {
   return (
     <ModalTemplate modal={modal} setModal={setModal} onSubmit={onSubmit}>
@@ -59,7 +60,7 @@ const LoginOraganisms = ({
           setFormState('register');
         }}
       />
-      <BackLogin />
+      {/* <BackLogin /> */}
     </ModalTemplate>
   );
 };

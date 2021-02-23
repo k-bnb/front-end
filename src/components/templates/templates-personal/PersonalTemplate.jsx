@@ -35,6 +35,15 @@ const PersonalTemplate = ({
   fixInfoBtn,
   cancelclick,
   personInfoChange,
+  name,
+  email,
+  birth,
+  imageUrl,
+  inputFocus,
+  ChangeInputBtn,
+  userInfo,
+  setFix,
+  loading,
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 900px)',
@@ -53,6 +62,15 @@ const PersonalTemplate = ({
           cancelclick={cancelclick}
           fixInfoBtn={fixInfoBtn}
           personInfoChange={personInfoChange}
+          name={name}
+          email={email}
+          birth={birth}
+          imageUrl={imageUrl}
+          inputFocus={inputFocus}
+          ChangeInputBtn={ChangeInputBtn}
+          userInfo={userInfo}
+          setFix={setFix}
+          loading={loading}
         />
         {isPc && (
           <PcDiv>

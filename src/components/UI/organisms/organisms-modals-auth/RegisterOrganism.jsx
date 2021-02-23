@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import ModalTemplate from '../../../templates/templates-modal/ModalTemplate';
 import Text from '../../atoms/atoms-header/Text';
@@ -8,7 +8,6 @@ import AuthGoogle from '../../molecules/molecules-modals-auth/AuthGoogle';
 import AuthHead from '../../molecules/molecules-modals-auth/AuthHead';
 import AuthRegisterdate from '../../molecules/molecules-modals-auth/AuthRegisterDate';
 import AuthRegisterInputs from '../../molecules/molecules-modals-auth/AuthRegisterInputs';
-import LoginGoSignupBtn from '../../molecules/molecules-modals-auth/LoginGoSignupBtn';
 import LoaderIcon from 'react-loader-icon';
 
 const BtnContainer = styled.div`
@@ -20,7 +19,7 @@ const BtnContainer = styled.div`
   .register-to-login {
     position: absolute;
     top: -25px;
-    right: 0;
+    left: 0;
   }
 `;
 
@@ -42,6 +41,7 @@ const RegisterOrganism = ({
   serverRegisterError,
   setServerRegisterError,
   isLoading,
+  dispatch,
 }) => {
   return (
     <ModalTemplate modal={modal} setModal={setModal} signup onSubmit={onSubmit}>
@@ -108,32 +108,27 @@ const RegisterOrganism = ({
             )
           }
         />
-
-        <Text
-          className="register-to-login"
-          bold
-          noPadding
-          blue
-          onClick={() => {
-            setFormState('login');
-          }}
-        >
-          로그인
-        </Text>
       </BtnContainer>
+      <CircleDiv borderline />
+      <Text
+        className="register-to-login"
+        bold
+        noPadding
+        blue
+        onClick={() => {
+          setIsFirst({
+            emailInput: true,
+            nameInput: true,
+            passwordInput: true,
+            dateInput: true,
+          });
+          setFormState('login');
+        }}
+      >
+        로그인
+      </Text>
     </ModalTemplate>
   );
 };
 
 export default RegisterOrganism;
-
-// const [registerValidation, setRegisterValidation] = useState({
-//   emailValidation: false,
-//   nameValidation: false,
-//   passwordValidation: {
-//     isLongerThanEight: false,
-//     hasEveryCharacter: false,
-//     doesContainInfo: false,
-//   },
-//   dateValidation: false,
-// });

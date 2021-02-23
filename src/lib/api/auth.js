@@ -33,10 +33,26 @@ export const userReservation = ({ token }) =>
     },
   });
 
-export const userInfoRemake = ({ token }) => {
-  const body = {};
+// 유저 수정
+export const userInfoRemake = ({ token, name, birth, email }) => {
+  const body = { name, birth, email };
 
   const headers = { headers: { Authorization: `Bearer ${token}` } };
 
-  return client.post('http://localhost:8080/user/update', body, headers);
+  return client.post('http://3.34.198.174:8080/user/update', body, headers);
+};
+
+export const reserveCancel = ({ token, reservationId, name, reason }) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data: {
+      reservationId,
+      name,
+      reason,
+    },
+  };
+
+  return client.delete(`http://3.34.198.174:8080/reservation`, config);
 };

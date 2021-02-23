@@ -11,6 +11,7 @@ const StyledTextArea = styled.textarea`
 `;
 
 const ReservationClientNotice = ({ change, value }) => {
+  console.log(value);
   return (
     <Container clientText>
       <StyledTextArea rows="5" onChange={change} value={value}></StyledTextArea>

@@ -1,10 +1,9 @@
-import { useRef } from 'react';
+// import { useRef } from 'react';
 import styled, { css } from 'styled-components';
 
 const ButtonStyle = styled.button`
   border: 1px solid #ddd;
   cursor: pointer;
-  outline: none;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -95,7 +94,6 @@ const ButtonStyle = styled.button`
 `;
 
 const Button = ({ children, disabled, ...rest }) => {
-  console.log(disabled);
   return (
     <ButtonStyle disabled={disabled} {...rest}>
       {children}

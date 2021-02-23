@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import HeaderMain from '../components/templates/templates-header/HeaderMain';
+// import axios from 'axios';
+// import HeaderMain from '../components/templates/templates-header/HeaderMain';
 import Main from '../components/templates/templates-main/Main';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeInput } from '../modules/auth';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { changeInput } from '../modules/auth';
 import HeaderContainer from './header-containers/HeaderContainer';
 
 const imgs = [
@@ -52,12 +52,13 @@ const section3Img = [
 ];
 
 const MainContainer = () => {
+  const [formState, setFormState] = useState(null); // 초기값은 null, 로그인 버튼 누르면 login으로, 회원가입 누르면 'register'
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     <>
-      <HeaderContainer />
+      <HeaderContainer formState={formState} setFormState={setFormState} />
       <Main
         imgs={imgs}
         section3Img={section3Img}

@@ -20,6 +20,7 @@ const ReviewContainer = styled.div`
 const ReviewTitle = styled(TypeTitle)`
   margin: 0;
   padding-bottom: 32px;
+  font-size: 22px;
 `;
 
 const ReviewItemBox = styled.div`
@@ -34,23 +35,34 @@ const Review = ({
   showReviewModal,
   setShowReviewModal,
   infoRes,
+  detailObj,
 }) => {
-  console.log(infoRes);
+  const reviewBtnText = infoRes.commentCount;
+  console.log(reviewBtnText);
+
   return (
     <ReveiwSectionWrapper ref={reviewRef}>
       <ReviewContainer className="basic-section-padding">
         <ReviewTitle>
-          <Grade grade={infoRes.grade} /> 점 (후기 {infoRes.commentCount}개){' '}
+          <Grade grade={infoRes.grade} reviewMain /> 점 (후기{' '}
+          {infoRes.commentCount}
+          개){' '}
         </ReviewTitle>
-        <ScoreAverage />
+        <ScoreAverage infoRes={infoRes} detailObj={detailObj} />
         <ReviewItemBox>
-          <ReviewItem />
-          <ReviewItem />
-          <ReviewItem />
+          {infoRes.commentList.map((comment, index) => (
+            <ReviewItem
+              name={comment.userName}
+              date={comment.date}
+              content={comment.description}
+              userImgUrl={comment.userImgUrl}
+              key={index}
+            />
+          ))}
         </ReviewItemBox>
         <WhiteBtn
           isShowReviewButton={true}
-          text="후기 38개 모두 보기"
+          text="후기 모두 보기"
           setShowReviewModal={setShowReviewModal}
         />
       </ReviewContainer>

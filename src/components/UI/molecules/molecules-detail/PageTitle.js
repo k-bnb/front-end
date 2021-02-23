@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import TextunderlineBtn from '../../atoms/atoms-detail/TextunderlineBtn';
 import Grade from '../../atoms/atoms-detail/Grade';
@@ -29,14 +29,16 @@ const DetailData = styled.div`
 `;
 const AccommodationDetail = styled.div`
   display: inline-flex;
+  align-items: center;
 `;
 
 const DotText = styled(Text)`
-  /* margin: 0 3px; */
+  margin: 0 0 3px;
 `;
 
 const LocateInfo = styled(Text)`
-  margin-bottom: 5px;
+  /* padding-top: 3px; */
+  margin-bottom: 3px;
 `;
 
 const PageTitle = ({ infoRes }) => {
@@ -50,8 +52,8 @@ const PageTitle = ({ infoRes }) => {
         </Title>
         <DetailData>
           <AccommodationDetail>
-            <Grade grade={infoRes.grade} />
-            <Text>( {infoRes.commentCount})</Text>
+            <Grade bold grade={infoRes.grade} bookingInfo />
+            <Text gray>({infoRes.commentCount})</Text>
             <DotText gray>.</DotText>
             <LocateInfo gray bold underline>
               {infoRes.locationDetail.neighborhood},{' '}

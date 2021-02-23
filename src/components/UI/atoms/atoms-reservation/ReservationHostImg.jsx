@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Container from './ReservationCommonContainer';
+// import Container from './ReservationCommonContainer';
 
 // const StyledDiv = styled.div`
 //   width: 42px;

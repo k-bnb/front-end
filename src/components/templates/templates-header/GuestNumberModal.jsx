@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import GuestNumberModalUnit from '../../UI/molecules/molecules-header/GuestNumberModalUnit';
 import { useClickOutside } from '../../../lib/useClickOutside';
-//import { useDispatch, useSelector } from 'react-redux';
 
 const StyledGuestModal = styled.div`
   position: absolute;
   top: 80px;
   right: 0;
-  /* transform: translate(-50%, 0); */
   width: 400px;
   height: auto;
   border: 1px solid lightgray;
@@ -41,11 +39,14 @@ const GuestNumberModal = ({
   setNavModalState,
   detailPage,
   setIsOpen,
-  // peopleLimit,
+  infoRes,
+  setGuestIsBorderThick,
+  searchBtnRef,
 }) => {
   let guestRef = useClickOutside(() => {
     if (detailPage) {
       setIsOpen(false);
+      setGuestIsBorderThick(false);
       return;
     }
     setNavModalState({
@@ -67,6 +68,7 @@ const GuestNumberModal = ({
         decription={'만 13세 이상'}
         name="numOfAdult"
         detailPage={detailPage}
+        infoRes={infoRes}
       />
 
       <GuestNumberModalUnit
@@ -74,6 +76,7 @@ const GuestNumberModal = ({
         decription={'2~12세'}
         name="numOfKid"
         detailPage={detailPage}
+        infoRes={infoRes}
       />
 
       <GuestNumberModalUnit
@@ -81,6 +84,8 @@ const GuestNumberModal = ({
         decription={'2세 미만'}
         name="numOfInfant"
         detailPage={detailPage}
+        infoRes={infoRes}
+        searchBtnRef={searchBtnRef}
       />
     </StyledGuestModal>
   );

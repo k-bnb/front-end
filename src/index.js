@@ -23,6 +23,11 @@ const detailRes = JSON.parse(sessionStorage.getItem('detailRes')) || {
   bedNum: 0,
   bathRoomNum: 0,
   grade: 0,
+  hostName: '',
+  hostImgURL: '',
+  commentCount: 0,
+  roomImgUrlList: [],
+  locationDetail: {},
 };
 
 const {
@@ -36,7 +41,14 @@ const {
   bedNum,
   bathRoomNum,
   grade,
+  hostName,
+  hostImgURL,
+  commentCount,
+  roomImgUrlList,
+  locationDetail,
 } = detailRes;
+
+// console.log(hostName, hostImgURL, commentCount);
 
 const store = createStore(
   rootReducer,
@@ -81,26 +93,24 @@ const store = createStore(
         bedNum,
         bathRoomNum,
         grade,
+        hostName,
+        hostImgURL,
         commentCount: 0,
         locationDetail: {
           country: null,
-          city: '',
+          city: locationDetail.city,
           borough: '',
-          neighborhood: '',
+          neighborhood: locationDetail.neighborhood,
           detailAddress: null,
           latitude: 0,
           longitude: 0,
         },
         commentList: [],
-        roomImgUrlList: [],
+        roomImgUrlList: roomImgUrlList,
       },
       detailError: null,
     },
     reserve: {
-      roomId: null,
-      guestNumber: null,
-      infantNumber: null,
-      totalCost: null,
       message: '',
       checkDateSearch: {
         startDate: sessionStorage.getItem('startDate'),
@@ -122,7 +132,11 @@ const store = createStore(
         bedNum,
         bathRoomNum,
         grade,
+        hostName,
+        hostImgURL,
+        commentCount,
       },
+      roomImgUrlList,
       locationDetail: {
         city: '',
         borough: '',
@@ -131,6 +145,10 @@ const store = createStore(
     },
     user: {
       userRes: JSON.parse(sessionStorage.getItem('userInfo')),
+      reserveRes: JSON.parse(sessionStorage.getItem('userInfoConFirm')),
+      reserveReviewReq: {
+        description: '',
+      },
     },
   },
   composeWithDevTools(applyMiddleware(sagaMiddleware)),

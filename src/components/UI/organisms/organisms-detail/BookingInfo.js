@@ -6,10 +6,12 @@ import OneDayPrice from '../../molecules/molecules-detail/OneDayPrice';
 import PriceDetail from '../../molecules/molecules-detail/PriceDetail';
 import TotalPrice from '../../molecules/molecules-detail/TotalPrice';
 import moment from 'moment';
+// import Modal from '../../../../portal/Modal';
+// import AuthModalContainer from '../../../../containers/AuthModalContainer';
 
 const PositionBox = styled.div`
   position: sticky;
-  z-index: 100;
+  z-index: 0;
   top: 160px;
   margin-bottom: 100px;
 `;
@@ -22,7 +24,7 @@ const BookingInfoContainer = styled.div`
   border: 1px solid rgb(221, 221, 221);
   border-radius: 12px;
   margin-top: 48px;
-  padding: 24px;
+  padding: 14px 24px 24px;
   box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
 
   .notice {
@@ -35,42 +37,90 @@ const BookingInfoContainer = styled.div`
 `;
 
 const BookingInfo = ({
-  DetailHeaderRef,
   moveToReserve,
   detailObj,
   infoRes,
+  // detailAuthModal,
+  // setDetailAuthModal,
+  DetailHeaderRef,
+  modal,
+  setModal,
+  setIsOpen,
+  formState,
+  setFormState,
+  bookingInfoRef,
+  isCalendarOpen,
+  setIsCalendarOpen,
 }) => {
   const StartDate = moment(detailObj.startDate);
   const EndDate = moment(detailObj.endDate);
   const totalSchedule = EndDate.diff(StartDate, 'days');
-
-  console.log(totalSchedule);
-
-  return (
-    <PositionBox>
-      <BookingInfoContainer>
-        <OneDayPrice infoRes={infoRes} />
-        <DatePersonBox detailObj={detailObj} />
-        <ReserveBtn
-          DetailHeaderRef={DetailHeaderRef}
-          moveToReserve={moveToReserve}
-        ></ReserveBtn>
-        <span className="notice">
-          예약 확정 전에는 요금이 청구되지 않습니다.
-        </span>
-        <PriceDetail
-          infoRes={infoRes}
-          detailObj={detailObj}
-          totalSchedule={totalSchedule}
-        />
-        <TotalPrice
-          infoRes={infoRes}
-          detailObj={detailObj}
-          totalSchedule={totalSchedule}
-        />
-      </BookingInfoContainer>
-    </PositionBox>
-  );
+  if (detailObj.startDate === '' || detailObj.endDate === '') {
+    return (
+      <PositionBox ref={bookingInfoRef}>
+        <BookingInfoContainer>
+          <OneDayPrice infoRes={infoRes} detailObj={detailObj} />
+          <DatePersonBox
+            detailObj={detailObj}
+            isCalendarOpen={isCalendarOpen}
+            setIsCalendarOpen={setIsCalendarOpen}
+            infoRes={infoRes}
+          />
+          <ReserveBtn
+            moveToReserve={moveToReserve}
+            modal={modal}
+            setModal={setModal}
+            setIsOpen={setIsOpen}
+            formState={formState}
+            setFormState={setFormState}
+            DetailHeaderRef={DetailHeaderRef}
+            isCalendarOpen={isCalendarOpen}
+            setIsCalendarOpen={setIsCalendarOpen}
+            NoBookingDate
+          ></ReserveBtn>
+        </BookingInfoContainer>
+      </PositionBox>
+    );
+  } else {
+    return (
+      <PositionBox>
+        <BookingInfoContainer>
+          <OneDayPrice infoRes={infoRes} detailObj={detailObj} />
+          <DatePersonBox
+            detailObj={detailObj}
+            isCalendarOpen={isCalendarOpen}
+            setIsCalendarOpen={setIsCalendarOpen}
+            infoRes={infoRes}
+          />
+          <ReserveBtn
+            moveToReserve={moveToReserve}
+            modal={modal}
+            setModal={setModal}
+            setIsOpen={setIsOpen}
+            formState={formState}
+            setFormState={setFormState}
+            DetailHeaderRef={DetailHeaderRef}
+            isCalendarOpen={isCalendarOpen}
+            setIsCalendarOpen={setIsCalendarOpen}
+            NoBookingDate
+          ></ReserveBtn>
+          <span className="notice">
+            예약 확정 전에는 요금이 청구되지 않습니다.
+          </span>
+          <PriceDetail
+            infoRes={infoRes}
+            detailObj={detailObj}
+            totalSchedule={totalSchedule}
+          />
+          <TotalPrice
+            infoRes={infoRes}
+            detailObj={detailObj}
+            totalSchedule={totalSchedule}
+          />
+        </BookingInfoContainer>
+      </PositionBox>
+    );
+  }
 };
 
 export default BookingInfo;

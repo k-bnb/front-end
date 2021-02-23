@@ -11,25 +11,32 @@ const SearchNavCheckInUnitLi = styled.li`
   &:hover {
     background-color: rgb(235, 231, 231);
   }
+  &:focus {
+    outline: none;
+  }
   ${(props) =>
     props.navModalState.checkIn &&
     css`
       background-color: rgb(235, 231, 231);
     `}
 `;
+
 const SearchNavCheckInUnit = ({ SearchTypeHandler, navModalState }) => {
   const dispatch = useDispatch();
   const { startDate } = useSelector(
     (state) => state.search.searchReq.checkDateSearch,
   );
-  // console.log(startDate);
 
   return (
     <SearchNavCheckInUnitLi
       onClick={() => {
-        console.log('in');
         SearchTypeHandler('checkIn');
       }}
+      onFocus={() => {
+        SearchTypeHandler('checkIn');
+      }}
+      onBlur={() => {}}
+      tabIndex="0"
       navModalState={navModalState}
     >
       <Text small bold block noPadding>
@@ -48,8 +55,11 @@ const SearchNavCheckInUnit = ({ SearchTypeHandler, navModalState }) => {
         <RemoveButton
           checkInDate
           onMouseDown={() => {
-            console.log('hi');
             dispatch(specificInputClear('checkDateSearch'));
+          }}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter')
+              dispatch(specificInputClear('checkDateSearch'));
           }}
         />
       )}

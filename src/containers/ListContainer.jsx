@@ -9,13 +9,8 @@ import {
   searching,
 } from '../modules/search';
 
-const ListContainer = () => {
+const ListContainer = React.memo(() => {
   const [searchModalState, setSearchModalState] = useState(null);
-  const [costState, setCostState] = useState({
-    minCostState: false,
-    minCostPay: '',
-  });
-
   const {
     locationSearch,
     checkDateSearch,
@@ -45,6 +40,8 @@ const ListContainer = () => {
   const room = useSelector((state) => state.search.searchRes);
   const totalPage = useSelector((state) => state.search.totalPage);
 
+  const [formState, setFormState] = useState(null); // 초기값은 null, 로그인 버튼 누르면 login으로, 회원가입 누르면 'register'
+
   const roomMap = room.map((item) => {
     return {
       id: item.id,
@@ -57,7 +54,7 @@ const ListContainer = () => {
       roomType: item.roomType,
     };
   });
-  console.log(roomMap);
+
   const roomTypes = useCallback(
     (e) => {
       if (e.target.checked) {
@@ -68,6 +65,8 @@ const ListContainer = () => {
     },
     [dispatch],
   );
+  const [localMinCost, setLocalMinCost] = useState(costSearch.minCost);
+  const [localMaxCost, setLocalMaxCost] = useState(costSearch.maxCost);
 
   const num = /^[0-9]*$/;
 
@@ -88,17 +87,27 @@ const ListContainer = () => {
   };
 
   const searchBtn = () => {
-    if (costSearch.minCost) {
-      setCostState((state) => ({
-        minCostState: true,
-        minCostPay: costSearch.minCost,
-      }));
-    } else {
-      setCostState((state) => ({
-        minCostState: false,
-        minCostPay: '',
-      }));
-    }
+    // if (costSearch.minCost) {
+    //   setCostcState((state) => ({
+    //     ...state,
+    //     minCostState: true,
+    //     minCostPay: costSearch.minCost,
+    //   }));
+    // }
+    // if (costSearch.maxCost) {
+    //   setCostState((state) => ({
+    //     ...state,
+    //     maxCostState: true,
+    //     maxCostPay: costSearch.maxCost,
+    //   }));
+    // }
+    // else{setCostState((state) => ({
+    //     minCostState: false,
+    //     minCostPay: '',
+    //     maxCostState: false,
+    //     maxCostPay: '',
+    //   }))
+    // };
     const id = 0;
     dispatch(
       searching({
@@ -116,6 +125,7 @@ const ListContainer = () => {
     setSearchModalState(null);
   };
 
+  // console.log(costState);
   // pageNation
 
   const [currentButton, setCurrentButton] = useState(0);
@@ -125,7 +135,6 @@ const ListContainer = () => {
 
   const changeCurrentPage = (numPage) => {
     setPageNationState({ currentPage: numPage });
-    console.log(numPage.selected);
 
     const id = numPage.selected - 1;
 
@@ -150,7 +159,7 @@ const ListContainer = () => {
 
   return (
     <>
-      <HeaderContainer />
+      <HeaderContainer formState={formState} setFormState={setFormState} />
       <ListTemplate
         searchModalState={searchModalState}
         setSearchModalState={setSearchModalState}
@@ -166,8 +175,7 @@ const ListContainer = () => {
         bathRoomNum={bathRoomNum}
         minusBtn={minusBtn}
         plusBtn={plusBtn}
-        searchBtn={searchBtn}
-        costState={costState}
+        // searchBtn={searchBtn}
         room={room}
         totalPage={totalPage}
         roomMap={roomMap}
@@ -182,9 +190,13 @@ const ListContainer = () => {
         changeCurrentPage={changeCurrentPage}
         pageNationState={pageNationState}
         search={search}
+        localMinCost={localMinCost}
+        setLocalMinCost={setLocalMinCost}
+        localMaxCost={localMaxCost}
+        setLocalMaxCost={setLocalMaxCost}
       />
     </>
   );
-};
+});
 
 export default ListContainer;

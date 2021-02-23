@@ -3,13 +3,11 @@ import styled from 'styled-components';
 import ImageFrame from '../../UI/organisms/organisms-detail/ImageFrame';
 import { PageTitle } from '../../UI/molecules/molecules-detail/PageTitle';
 import ImportantNotice from '../../UI/organisms/organisms-detail/ImportantNotice';
-//import Review from '../../UI/organisms/organisms-detail/Review';
 import WrappingContainer from '../../UI/organisms/organisms-detail/WrappingContainer';
 import LoadingModal from '../LoadingModal';
 import ReviewContainer from '../../../containers/ReviewContainer';
-import { getCancellableDate } from '../../../modules/detail';
+import detail, { getCancellableDate } from '../../../modules/detail';
 import { useDispatch } from 'react-redux';
-//import Modal from '../../../portal/Modal';
 
 const Theme = {
   laptop: `screen and (min-width: 1024px)`,
@@ -38,7 +36,6 @@ const DetailTemplate = styled.div`
 `;
 
 const Detail = ({
-  // showModal,
   setShowModal,
   current,
   setCurrent,
@@ -53,10 +50,20 @@ const Detail = ({
   roomImgUrlList,
   showReviewModal,
   setShowReviewModal,
+  detailAuthModal,
+  setDetailAuthModal,
+  modal,
+  setModal,
+  isOpen,
+  setIsOpen,
+  formState,
+  setFormState,
+  bookingInfoRef,
+  isCalendarOpen,
+  setIsCalendarOpen,
 }) => {
-  // const strStartDate = detailObj.startDate;
   const CheckInDate = () => {
-    const strDate = detailObj.startDate.split('-');
+    const strDate = detailObj.startDate ? detailObj.startDate.split('-') : '';
     return { year: strDate[0], month: strDate[1], day: strDate[2] };
   };
 
@@ -68,7 +75,6 @@ const Detail = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(CancellableDate.month);
     dispatch(getCancellableDate(CancellableDate.month, CancellableDate.day));
   }, []);
 
@@ -90,6 +96,17 @@ const Detail = ({
           infoRes={infoRes}
           detailObj={detailObj}
           CancellableDate={CancellableDate}
+          detailAuthModal={detailAuthModal}
+          setDetailAuthModal={setDetailAuthModal}
+          modal={modal}
+          setModal={setModal}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          formState={formState}
+          setFormState={setFormState}
+          bookingInfoRef={bookingInfoRef}
+          isCalendarOpen={isCalendarOpen}
+          setIsCalendarOpen={setIsCalendarOpen}
         />
         <ReviewContainer
           reviewRef={reviewRef}
@@ -97,6 +114,7 @@ const Detail = ({
           setShowReviewModal={setShowReviewModal}
           commentList={infoRes.commentList}
           infoRes={infoRes}
+          detailObj={detailObj}
         />
         <ImportantNotice infoRes={infoRes} CancellableDate={CancellableDate} />
       </DetailTemplate>

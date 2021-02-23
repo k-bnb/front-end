@@ -15,7 +15,7 @@ const AuthRedirect = () => {
     return (
       <Redirect
         to={{
-          pathname: '/',
+          pathname: `${localStorage.getItem('LFT')}`,
           state: { from: history.location },
         }}
       />

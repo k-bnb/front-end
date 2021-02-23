@@ -6,7 +6,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 import styled from 'styled-components';
 const BackLoginStyle = styled.div`
   width: 400px;
-  margin: 2% 0;
+  /* margin: 2% 0; */
 `;
 const BackLogin = () => {
   return (

@@ -5,6 +5,7 @@ import { TypeInfo } from '../../molecules/molecules-detail/TypeInfo';
 import { TextSummary } from '../../molecules/molecules-detail/TextSummary';
 import EmoticonNotice from './EmoticonNotice';
 import BookingInfo from './BookingInfo';
+import RoomDescription from '../../molecules/molecules-detail/RoomDescription';
 
 const InfoContainer = styled.div`
   display: flex;
@@ -34,23 +35,44 @@ const WrappingContainer = ({
   infoRes,
   detailObj,
   CancellableDate,
-}) => (
-  <InfoContainer>
-    <DetailInfo>
-      <HostingData infoRes={infoRes} />
-      <TextSummary detailObj={detailObj} CancellableDate={CancellableDate} />
-      <TypeInfo infoRes={infoRes} />
-      <EmoticonNotice facilityRef={facilityRef} />
-    </DetailInfo>
-    <BookingSummaryBox>
-      <BookingInfo
-        DetailHeaderRef={DetailHeaderRef}
-        moveToReserve={moveToReserve}
-        detailObj={detailObj}
-        infoRes={infoRes}
-      />
-    </BookingSummaryBox>
-  </InfoContainer>
-);
+  modal,
+  setModal,
+  isOpen,
+  setIsOpen,
+  formState,
+  setFormState,
+  bookingInfoRef,
+  isCalendarOpen,
+  setIsCalendarOpen,
+}) => {
+  return (
+    <InfoContainer>
+      <DetailInfo>
+        <HostingData detailObj={detailObj} infoRes={infoRes} />
+        <TextSummary detailObj={detailObj} CancellableDate={CancellableDate} />
+        <RoomDescription infoRes={infoRes} />
+        <TypeInfo infoRes={infoRes} />
+        <EmoticonNotice facilityRef={facilityRef} />
+      </DetailInfo>
+      <BookingSummaryBox>
+        <BookingInfo
+          DetailHeaderRef={DetailHeaderRef}
+          moveToReserve={moveToReserve}
+          detailObj={detailObj}
+          infoRes={infoRes}
+          modal={modal}
+          setModal={setModal}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          formState={formState}
+          setFormState={setFormState}
+          bookingInfoRef={bookingInfoRef}
+          isCalendarOpen={isCalendarOpen}
+          setIsCalendarOpen={setIsCalendarOpen}
+        />
+      </BookingSummaryBox>
+    </InfoContainer>
+  );
+};
 
 export default WrappingContainer;

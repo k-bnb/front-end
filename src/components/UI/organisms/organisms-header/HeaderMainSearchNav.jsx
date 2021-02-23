@@ -23,9 +23,6 @@ const HeaderMainSearchNavBlock = styled.div`
     display: flex;
     list-style: none;
   }
-  li {
-    /* border-right: 1px solid black; */
-  }
   ${(props) =>
     props.isScrolled &&
     !props.isClicked &&
@@ -116,7 +113,11 @@ const HeaderMainSearchNav = ({
             <Text bold noPadding>
               검색 시작하기
             </Text>
-            <SearchButton isScrolled={isScrolled} />
+            <SearchButton
+              isScrolled={isScrolled}
+              navModalState={navModalState}
+              setNavModalState={setNavModalState}
+            />
           </div>
         )}
       </HeaderMainSearchNavBlock>

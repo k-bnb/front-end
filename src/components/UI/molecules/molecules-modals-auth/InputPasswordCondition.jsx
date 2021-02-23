@@ -1,10 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { GrFormClose } from 'react-icons/gr';
-import { FiCircle } from 'react-icons/fi';
 import { IoIosClose } from 'react-icons/io';
-import { BsCheck } from 'react-icons/bs';
-import { AiOutlineCheck } from 'react-icons/ai';
 import { FcCheckmark } from 'react-icons/fc';
 
 const InputPasswordConditionBlock = styled.div`
@@ -42,7 +38,6 @@ const InputPasswordCondition = ({
   isFirst,
   setIsFirst,
 }) => {
-  console.log(registerValidation.passwordValidation);
   return (
     <InputPasswordConditionBlock>
       <ConditionText

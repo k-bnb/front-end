@@ -1,5 +1,5 @@
 import React from 'react';
-import Select from 'react-select';
+// import Select from 'react-select';
 import styled from 'styled-components';
 import Button from '../../atoms/atoms-main/Button';
 import Selector from '../../atoms/atoms-personalinfo/Selector';

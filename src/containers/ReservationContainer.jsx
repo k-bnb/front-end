@@ -9,19 +9,31 @@ import {
 } from '../modules/reserve';
 import { dateInput } from '../modules/search';
 import BootPay from 'bootpay-js';
+import axios from '../../node_modules/axios/index';
+import { useHistory } from 'react-router-dom';
 
 const ReservationContainer = () => {
   // store 에서 관리하는 state
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const token = useSelector((state) => state.auth.token);
-  const { message, totalCost, checkDateSearch: checkDate } = useSelector(
+
+  // message 뒤에 totalCost 넣기
+  const { message, checkDateSearch: checkDate } = useSelector(
     (state) => state.reserve,
   );
 
+  const totalCost = 2000;
   const { numOfAdult, numOfKid, numOfInfant: infantNumber } = useSelector(
     ({ reserve }) => reserve.guestSearch,
   );
+
+  // startDate;
+  // endDate;
+  // numOfAdult;
+  // numOfKid;
+  // numOfInfant;
 
   const { checkDateSearch, guestSearch } = useSelector(
     ({ search }) => search.searchReq,
@@ -37,18 +49,26 @@ const ReservationContainer = () => {
     bedNum,
     bathRoomNum,
     grade,
+    hostName,
+    hostImgURL,
+    commentCount,
+    roomImgUrlList,
   } = useSelector(({ detail }) => detail.infoRes);
 
   const { id: roomId, roomCost: testCost, name: testName } = useSelector(
     ({ reserve }) => reserve.infoRes,
   );
 
-  const { infoRes } = useSelector(({ reserve }) => reserve);
+  const { infoRes, reserveError } = useSelector(({ reserve }) => reserve);
 
   const { locationDetail } = useSelector(({ detail }) => detail.infoRes);
 
   const { locationDetail: reserveLocationDetail } = useSelector(
     (state) => state.reserve,
+  );
+
+  const { roomImgUrlList: RoomTablePhotoImgURL } = useSelector(
+    ({ reserve }) => reserve,
   );
 
   const { startDate: checkIn, endDate: checkOut } = checkDateSearch;
@@ -82,12 +102,28 @@ const ReservationContainer = () => {
   //  성인 + 어린이 수
   const guestNumber = numOfAdult + numOfKid;
 
+  // function sendPayment(price, receipt_id) {
+  //   const url = 'http://3.34.198.174:8080/payment';
+  //   const signUpData = {
+  //     receipt_id: receipt_id,
+  //     price: 1000,
+  //   };
+  //   const config = {
+  //     headers: {
+  //       contentType: 'application/json',
+  //       Authorization:
+  //         'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjEzNTg2OTg4LCJleHAiOjE2MTQ0NTA5ODh9.P1cM8achpTQO0Asi61C7Y69J7WPjLQFXbX4F_UzgIwRbHyqNAh170tqj4xJv3pEsuCz_LERu_Igh4GFbzFxVuQ',
+  //     },
+  //   };
+  //   return axios.post(url, signUpData, config);
+  // }
+
   // 확인 button 클릭해서 예약하기 event function
   const click = useCallback(() => {
     setComfirmModal(true);
 
     BootPay.request({
-      price: 1000, //실제 결제되는 가격
+      price: 2000, //실제 결제되는 가격
       application_id: '6024e5ee5b2948001d52037b',
       name: testName, //결제창에서 보여질 이름
       pg: 'nicepay',
@@ -114,25 +150,34 @@ const ReservationContainer = () => {
       },
     })
       .error((data) => console.log(data))
-      .close((data) => console.log(data))
-      .done(({ price, receipt_id }) => {
-        dispatch(
-          reserving(
-            roomId,
-            checkIn,
-            checkOut,
-            guestNumber,
-            infantNumber,
-            totalCost,
-            message,
-            token,
-            price,
-            receipt_id,
-          ),
-        );
+      .confirm(async ({ price, receipt_id }) => {
+        try {
+          await dispatch(
+            reserving(
+              roomId,
+              checkIn,
+              checkOut,
+              guestNumber,
+              infantNumber,
+              totalCost,
+              message,
+              token,
+              price,
+              receipt_id,
+            ),
+          );
+
+          // history.push('/reserve');
+        } catch (err) {
+          console.log(err);
+          // history.push('/');
+        }
+
+        BootPay.removePaymentWindow();
       });
-  }, [
-    dispatch,
+  }, []);
+
+  console.log(
     roomId,
     checkIn,
     checkOut,
@@ -140,18 +185,13 @@ const ReservationContainer = () => {
     infantNumber,
     totalCost,
     message,
-    token,
-  ]);
+  );
 
   const saveDate = useCallback(() => {
     setDateModal(!dateModal);
     dispatch(dateInput('startDate', startDate)); // 시작일만 선택시 시작일 dispatch
     dispatch(dateInput('endDate', endDate)); // 시작일만 선택시 시작일 dispatch
   }, [dispatch, dateModal, startDate, endDate]);
-
-  // const deleteDate = () => {
-  //   dispatch(initialDate());
-  // };
 
   useEffect(() => {
     dispatch(
@@ -166,6 +206,11 @@ const ReservationContainer = () => {
         bedNum,
         bathRoomNum,
         grade,
+        hostName,
+        hostImgURL,
+        commentCount,
+        roomImgUrlList,
+        checkDateSearch,
       ),
     );
 
@@ -180,7 +225,6 @@ const ReservationContainer = () => {
     <Reservation
       change={change}
       click={click}
-      value={message}
       dateModal={dateModal}
       manageDateModal={manageDateModal}
       guestModal={guestModal}
@@ -194,6 +238,7 @@ const ReservationContainer = () => {
       isLoading={isLoading}
       infoRes={infoRes}
       reserveLocationDetail={reserveLocationDetail}
+      RoomTablePhotoImgURL={RoomTablePhotoImgURL}
     />
   );
 };

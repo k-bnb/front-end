@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 
 const CarouselBlock = styled.div`

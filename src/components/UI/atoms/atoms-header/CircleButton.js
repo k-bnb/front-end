@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 
 const CircleButtonBlock = styled.button`
   width: 32px;
@@ -12,7 +11,7 @@ const CircleButtonBlock = styled.button`
   font-size: 25px;
 `;
 
-const CircleButton = ({ minus, ...rest }) => {
+const CircleButton = ({ minus, searchBtnRef, ...rest }) => {
   return (
     <CircleButtonBlock {...rest}>
       {minus ? <span>-</span> : <span>+</span>}

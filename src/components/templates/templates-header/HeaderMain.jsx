@@ -1,26 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import HeaderMainTop from '../../UI/organisms/organisms-header/HeaderMainTop';
-import HeaderMainSearchNav from '../../UI/organisms/organisms-header/HeaderMainSearchNav';
 import HeadermainSearchNavContainer from '../../../containers/header-containers/HeadermainSearchNavContainer';
-import { useClickOutside } from '../../../lib/useClickOutside';
 
 const BlackOutsideRange = styled.div`
-  ${(props) =>
-    !props.isClickedOutside &&
-    css`
-      .black-outside-boundary {
-        position: fixed;
-        color: red;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.4);
-      }
-    `}
+  .black-outside-boundary {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 `;
 
 const HeaderMainBlock = styled.div`
@@ -55,19 +48,23 @@ const HeaderMain = ({
   guestSearch,
   moveFocusNext,
   clickHandler,
+  formState,
+  setFormState,
 }) => {
-  const blackOutsideRef = useClickOutside(() => {
-    if (isClicked && isScrolled && !isClickedOutside) {
-      setIsClickedOutside(true);
-      setIsClicked(false);
-    }
-  });
-
   return (
     <>
       {isScrolled && isClicked && (
-        <BlackOutsideRange ref={blackOutsideRef}>
-          <div className="black-outside-boundary">hi</div>
+        <BlackOutsideRange
+          className="black-outside-boundary"
+          onClick={(e) => {
+            if (e.target.classList.contains('black-outside-boundary')) {
+              setIsClicked(false);
+              setIsScrolled(true);
+            }
+          }}
+        >
+          {' '}
+          <div className="black-outside-boundary"></div>
         </BlackOutsideRange>
       )}
       <HeaderMainBlock
@@ -79,6 +76,8 @@ const HeaderMain = ({
           isScrolled={isScrolled}
           isClicked={isClicked}
           isClickedOutside={isClickedOutside}
+          formState={formState}
+          setFormState={setFormState}
         >
           MainTop
         </HeaderMainTop>
