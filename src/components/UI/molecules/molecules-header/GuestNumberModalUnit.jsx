@@ -9,7 +9,6 @@ import { guestInput, specificInputClear } from '../../../../modules/search';
 import { changeGuest, initialGuest } from '../../../../modules/reserve';
 import CircleButton from '../../atoms/atoms-header/CircleButtonHeader';
 import Text from '../../atoms/atoms-header/Text';
-
 const GuestNumberModalUnitBlock = styled.div`
   display: flex;
   justify-content: space-between;
@@ -58,15 +57,12 @@ const GuestNumberModalUnit = ({
   const { guestSearch: reserveGuestSearch } = useSelector(
     (state) => state.reserve,
   );
-
   const disableHandler = () => (searchName === 'numOfAdult' ? 16 : 5); // 성인이면 최대값16, 나머지 5
-
   // 인원 제한보다 많은 인원을 증가 시 버튼 disable한다.
   const { peopleLimit } = useSelector(({ reserve }) => reserve.infoRes);
   const { numOfAdult, numOfKid } = reserveGuestSearch;
   const ReserveTotalGuestNum = numOfAdult + numOfKid;
   const DetailTotalGuestNum = detail.numOfAdult + detail.numOfKid;
-
   // 성인이 없이 유아, 어린이만 증가시킬때, 성인도 같이 증가시키는 함수
   const increaseWithoutAdult = () => {
     // 성인이 아니고, 성인이 0명 일 경우 성인도 같이 1명 증가.
@@ -76,7 +72,6 @@ const GuestNumberModalUnit = ({
       );
     }
   };
-
   const decreaseWhenNoAdult = () => {
     // 성인이 1 -> 0명이 될떄, 유아, 어린이가 있다면 모두 0명이 된다.
     if (detailPage && detail.numOfAdult === 1 ? disableHandler() : '')
@@ -133,7 +128,6 @@ const GuestNumberModalUnit = ({
   //     dispatch(guestChangeDetail('numOfAdult', detailName + 1));
   //   }
   // };
-
   return (
     <GuestNumberModalUnitBlock
       detailPage={detailPage}
@@ -235,7 +229,6 @@ const GuestNumberModalUnit = ({
             //     ? disableHandler()
             //     : ''
             //   : guestSearch[searchName] >= disableHandler()
-
             detailPage || reservePage
               ? (ReserveTotalGuestNum || DetailTotalGuestNum) >= peopleLimit
                 ? disableHandler()

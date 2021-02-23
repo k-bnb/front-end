@@ -78,8 +78,6 @@ const ReserveConfirmContainer = () => {
   const { token } = useSelector((state) => state.auth);
 
   const reservationConfirmBtn = (e) => {
-    console.log(e.target.value);
-
     dispatch(
       reservationCancel({
         token,
