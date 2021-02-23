@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import createRequestSaga from '../lib/createRequestSaga';
 import * as API from '../lib/api/detail';
 import { takeLatest } from 'redux-saga/effects';
+import produce from 'immer';
 // Action Type
 const SEARCH_TO_DETAIL = 'detail/SEARCH_TO_DETAIL';
 const DATE_CHANGE_DETAIL = 'detail/DATE_CHANGE_DETAIL';
@@ -16,6 +17,11 @@ const GET_TOTAL_PRICE = 'detail/GET_TOTAL_PRICE';
 const GET_CANCELLABLE_DATE = 'detail/GET_CANCELLABLE_DATE';
 const GET_ROOM_AVERAGE_SCORE = 'detail/GET_ROOM_AVERAGE_SCORE';
 const GET_ROOM_AVERAGE_SCORE_SUCCESS = 'detail/GET_ROOM_AVERAGE_SCORE_SUCCESS';
+
+// 예약하기 페이지에서 게스트, 달력 수정했을 경우 게스트, 달력 값 변경하는 액션
+const GUEST_INPUT = 'detail/GUEST_INPUT';
+const DATE_INPUT = 'detail/DATE_INPUT';
+
 // Action Creator
 export const searchToDetail = createAction(
   SEARCH_TO_DETAIL,
@@ -52,6 +58,18 @@ export const getRoomAverageScore = createAction(
   (roomId) => roomId,
 );
 
+// 예약하기 페이지에서 게스트 수정했을 경우 게스트 값 변경하는 액션 생성자 함수
+export const guestInput = createAction(GUEST_INPUT, (name, value) => ({
+  name,
+  value,
+})); // form -> guestinput, name -> numOfAdult, value ->
+
+// 예약하기 페이지에서 달력을 수정했을 경우 달력 값 변경하는 액션 생성자 함수
+export const dateInput = createAction(DATE_INPUT, (form, value) => ({
+  form,
+  value,
+})); //checkDateSearch 객체.
+
 // saga
 const requestDetailSaga = createRequestSaga(
   REQUEST_DETAIL,
@@ -61,10 +79,12 @@ const requestCommentSaga = createRequestSaga(
   GET_ROOM_AVERAGE_SCORE,
   API.requestComments,
 );
+
 export function* detailSaga() {
   yield takeLatest(REQUEST_DETAIL, requestDetailSaga);
   yield takeLatest(GET_ROOM_AVERAGE_SCORE, requestCommentSaga);
 }
+
 // initial state
 const initialStates = {
   startDate: '',
@@ -193,6 +213,18 @@ const detail = handleActions(
           priceSatisfaction,
         },
       };
+    },
+
+    [GUEST_INPUT]: (state, { payload: { name, value } }) => ({
+      ...state,
+      [name]: value,
+    }),
+
+    [DATE_INPUT]: (state, { payload: { form, value } }) => {
+      // token 처럼 초기값이 필요로 하기 때문에 sessionStorage에 저장
+      // sessionStorage.setItem([form], checkDateSearch);
+
+      return { ...state, [form]: value };
     },
   },
   initialStates,
