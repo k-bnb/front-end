@@ -19,6 +19,8 @@ const SearchButtonUnit = ({
   dispatch,
   SearchTypeHandler,
   searchBtnRef,
+  navModalState,
+  setNavModalState,
 }) => {
   const history = useHistory();
 
@@ -34,6 +36,8 @@ const SearchButtonUnit = ({
           history.push('/rooms');
         }}
         searchBtnRef={searchBtnRef}
+        navModalState={navModalState}
+        setNavModalState={setNavModalState}
       />
     </GuestNumberUnitOuterBlock>
   );

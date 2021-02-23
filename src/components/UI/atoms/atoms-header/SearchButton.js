@@ -35,19 +35,56 @@ const SearchButtonBlock = styled.button`
     `}
 `;
 
-const SearchButton = ({ isScrolled, onClick, rooms, searchBtnRef }) => {
+const SearchButton = ({
+  isScrolled,
+  onClick,
+  rooms,
+  searchBtnRef,
+  navModalState,
+  setNavModalState,
+}) => {
   return (
     <>
-      <SearchButtonBlock
-        isScrolled={isScrolled}
-        className="search-button-unit"
-        onClick={onClick}
-        rooms={rooms}
-        ref={searchBtnRef}
-      >
-        {!isScrolled && <BiSearch className="search-button-unit" />}
-        {isScrolled && <HiSearch className="search-button-unit" />}
-      </SearchButtonBlock>
+      {!navModalState?.location &&
+        !navModalState?.checkIn &&
+        !navModalState?.checkOut &&
+        !navModalState?.guest && (
+          <SearchButtonBlock
+            isScrolled={isScrolled}
+            className="search-button-unit"
+            onClick={onClick}
+            rooms={rooms}
+            ref={searchBtnRef}
+          >
+            {!isScrolled && <BiSearch className="search-button-unit" />}
+            {isScrolled && <HiSearch className="search-button-unit" />}
+          </SearchButtonBlock>
+        )}
+      {/* {(navModalState?.location ||
+        navModalState?.checkIn ||
+        navModalState?.checkOut ||
+        navModalState?.guest) && (
+        <SearchButtonBlock
+          isScrolled={isScrolled}
+          className="search-button-unit"
+          onClick={onClick}
+          rooms={rooms}
+          ref={searchBtnRef}
+          isSelected={
+            navModalState?.location ||
+            navModalState?.checkIn ||
+            navModalState?.checkOut ||
+            navModalState?.guest
+          }
+        >
+          {
+            <>
+              <BiSearch className="search-button-unit" />
+              검색
+            </>
+          } */}
+        </SearchButtonBlock>
+      )}
     </>
   );
 };

@@ -14,7 +14,7 @@ const ReserveConfirmContainer = () => {
   const [name, setName] = useState('');
   const dispatch = useDispatch();
   const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
-  
+
   useEffect(() => {
     // if (reserveRes.reserveRes === null) return;
     const next = reserveRes?.reserveRes?.filter((item) =>
@@ -24,7 +24,7 @@ const ReserveConfirmContainer = () => {
     );
     setList(next);
     if (next === null) return;
-  }, [userInfo, active]);
+  }, [reserveRes, active]);
 
   // 예정된 예약 이전예약 nav
   const activClick = (e) => {

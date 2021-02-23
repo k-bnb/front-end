@@ -94,6 +94,7 @@ const SearchNavGuestUnit = ({
       </div>
       <SearchButtonUnit
         navModalState={navModalState}
+        setNavModalState={setNavModalState}
         SearchTypeHandler={SearchTypeHandler}
         dispatch={dispatch}
         locationSearch={locationSearch}
