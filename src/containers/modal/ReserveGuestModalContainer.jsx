@@ -8,7 +8,12 @@ const ReserveGuestModalContainer = ({
   saveGuest,
 }) => {
   const { peopleLimit } = useSelector(({ reserve }) => reserve.infoRes);
+  const { numOfAdult, numOfKid, numOfInfant } = useSelector(
+    ({ reserve }) => reserve.guestSearch,
+  );
 
+  const disabled = numOfAdult + numOfKid + numOfInfant ? 'true' : 'false';
+  console.log(disabled);
   return (
     <EditGuestModalOrganism
       manageGuestModal={manageGuestModal}

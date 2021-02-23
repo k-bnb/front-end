@@ -14,6 +14,9 @@ const ReservationInfoOrganism = ({
   checkDate,
   saveDate,
 }) => {
+  console.log(checkDateSearch);
+
+  // console.log(guestSearch);
   // 예약하기 페이지 날짜 정보 가져오기
   const { startDate, endDate } = checkDateSearch;
 
