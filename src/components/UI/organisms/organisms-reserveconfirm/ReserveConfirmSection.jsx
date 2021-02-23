@@ -40,6 +40,7 @@ const ReserveConfirmSection = ({
   miniModal,
   miniModalCancelBtn,
 }) => {
+  console.log(list);
   return (
     <>
       <ReserveConfirmNav active={active} activClick={activClick} />
@@ -47,6 +48,7 @@ const ReserveConfirmSection = ({
         {list?.length ? (
           list?.map((item) => (
             <ReserveConfirmList
+              key={item.reservationId}
               item={item}
               list={list}
               modalState={modalState}

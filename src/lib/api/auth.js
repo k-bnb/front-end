@@ -34,11 +34,16 @@ export const userReservation = ({ token }) =>
   });
 
 // 유저 수정
-export const userInfoRemake = ({ token, name, birth, email }) => {
+export const userInfoRemake = ({
+  token,
+  name = null,
+  birth = null,
+  email = null,
+}) => {
   const body = { name, birth, email };
 
   const headers = { headers: { Authorization: `Bearer ${token}` } };
-
+  console.log(body);
   return client.post('http://3.34.198.174:8080/user/update', body, headers);
 };
 

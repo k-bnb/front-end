@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PageLoading from '../../UI/molecules/molecules-personalInfo/PageLoading';
 import ReserveConfirmFooter from '../../UI/molecules/molecules-reserveConfirm/ReserveConfirmFooter';
 // import HeadStyle from '../../UI/organisms/organisms-list/HeadStyle';
 import ReserveConfirmhead from '../../UI/organisms/organisms-reserveconfirm/ReserveConfirmhead';
@@ -33,32 +34,39 @@ const ReserveConfirmTemplate = ({
   resonChange,
   miniModal,
   miniModalCancelBtn,
+  reserveconfirmLoading,
 }) => {
   return (
     <ReserveConfirmTemplateStyle>
       <ReserveConfirmheader />
       <ReserveConfirmhead />
-      <ReserveConfirmSection
-        list={list}
-        active={active}
-        activClick={activClick}
-        modalState={modalState}
-        cancel={cancel}
-        cancelBtn={cancelBtn}
-        cancelModal={cancelModal}
-        reservationConfirmBtn={reservationConfirmBtn}
-        reservationId={reservationId}
-        reviewModalState={reviewModalState}
-        setReviewModalState={setReviewModalState}
-        review={review}
-        reviewRoomId={reviewRoomId}
-        listModal={listModal}
-        cancelModalState={cancelModalState}
-        roomId={roomId}
-        resonChange={resonChange}
-        miniModal={miniModal}
-        miniModalCancelBtn={miniModalCancelBtn}
-      />
+      {reserveconfirmLoading['user/USER_INFO'] &&
+      reserveconfirmLoading['user/RESERVE_CONFIRM'] ? (
+        <PageLoading />
+      ) : (
+        <ReserveConfirmSection
+          list={list}
+          active={active}
+          activClick={activClick}
+          modalState={modalState}
+          cancel={cancel}
+          cancelBtn={cancelBtn}
+          cancelModal={cancelModal}
+          reservationConfirmBtn={reservationConfirmBtn}
+          reservationId={reservationId}
+          reviewModalState={reviewModalState}
+          setReviewModalState={setReviewModalState}
+          review={review}
+          reviewRoomId={reviewRoomId}
+          listModal={listModal}
+          cancelModalState={cancelModalState}
+          roomId={roomId}
+          resonChange={resonChange}
+          miniModal={miniModal}
+          miniModalCancelBtn={miniModalCancelBtn}
+        />
+      )}
+
       <ReserveConfirmFooter />
     </ReserveConfirmTemplateStyle>
   );
