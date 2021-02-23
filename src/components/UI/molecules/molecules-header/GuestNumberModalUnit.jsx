@@ -9,6 +9,7 @@ import { guestInput, specificInputClear } from '../../../../modules/search';
 import { changeGuest, initialGuest } from '../../../../modules/reserve';
 import CircleButton from '../../atoms/atoms-header/CircleButtonHeader';
 import Text from '../../atoms/atoms-header/Text';
+
 const GuestNumberModalUnitBlock = styled.div`
   display: flex;
   justify-content: space-between;
@@ -62,8 +63,8 @@ const GuestNumberModalUnit = ({
 
   // 인원 제한보다 많은 인원을 증가 시 버튼 disable한다.
   const { peopleLimit } = useSelector(({ reserve }) => reserve.infoRes);
-  const { numOfAdult, numOfKid, numOfInfant } = reserveGuestSearch;
-  const ReserveTotalGuestNum = numOfAdult + numOfKid + numOfInfant;
+  const { numOfAdult, numOfKid } = reserveGuestSearch;
+  const ReserveTotalGuestNum = numOfAdult + numOfKid;
   const DetailTotalGuestNum = detail.numOfAdult + detail.numOfKid;
 
   // 성인이 없이 유아, 어린이만 증가시킬때, 성인도 같이 증가시키는 함수
@@ -118,7 +119,6 @@ const GuestNumberModalUnit = ({
   // reserve page : 성인 없이 유아, 어린이만 증가시킬 때, 성인도 같이 감소시키는 함수
   const reserveDecreaseWhenNoAdult = () => {
     // 성인이 1 -> 0명이 될떄, 유아, 어린이가 있다면 모두 0명이 된다.
-
     if (
       searchName === 'numOfAdult' &&
       reserveGuestSearch.numOfAdult === 1 &&
@@ -127,6 +127,13 @@ const GuestNumberModalUnit = ({
       dispatch(initialGuest('guestSearch'));
     }
   };
+  // detail page: Guest 인원이 없을때 Adult 수를 하나 추가
+  // const IncreaseAdultWhenNoPerson = () => {
+  //   if (searchName === 'numOfAdult' && reserveGuestSearch.numOfAdult === 0) {
+  //     dispatch(guestChangeDetail('numOfAdult', detailName + 1));
+  //   }
+  // };
+
   return (
     <GuestNumberModalUnitBlock
       detailPage={detailPage}
@@ -217,17 +224,24 @@ const GuestNumberModalUnit = ({
               ),
             );
           }}
+          searchBtnRef={searchBtnRef}
           disable={
-            reservePage
-              ? ReserveTotalGuestNum >= peopleLimit
-              : guestSearch[searchName] >= disableHandler()
             // detailPage
-            //   ? DetailTotalGuestNum === infoRes.peopleLimit
+            //   ? DetailTotalGuestNum === peopleLimit
             //     ? disableHandler()
             //     : ''
-            //   : '')
-          } // 최대값은 함수가 반환한 값에따라 바뀐다.
-          searchBtnRef={searchBtnRef}
+            //   : reservePage
+            //   ? ReserveTotalGuestNum >= peopleLimit
+            //     ? disableHandler()
+            //     : ''
+            //   : guestSearch[searchName] >= disableHandler()
+
+            detailPage || reservePage
+              ? (ReserveTotalGuestNum || DetailTotalGuestNum) >= peopleLimit
+                ? disableHandler()
+                : ''
+              : guestSearch[searchName] >= disableHandler()
+          }
         />
       </div>
     </GuestNumberModalUnitBlock>
