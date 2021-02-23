@@ -6,8 +6,8 @@ const HiddenInput = styled.input`
   display: none;
 `;
 
-const StarRating = () => {
-  const [rating, setRating] = useState(null);
+const StarRating = ({ name, changeStarRating, rating }) => {
+  // const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
 
   return (
@@ -19,9 +19,10 @@ const StarRating = () => {
           <label>
             <HiddenInput
               type="radio"
-              name="rating"
+              name={name}
               value={starValue}
-              onChange={() => setRating(starValue)}
+              // onChange={() => setRating(starValue)}
+              onClick={(e) => changeStarRating(starValue)(e)}
             />
             <AiFillStar
               size={30}

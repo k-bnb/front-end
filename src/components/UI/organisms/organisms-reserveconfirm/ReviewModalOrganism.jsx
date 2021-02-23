@@ -15,9 +15,10 @@ function ReviewModalOrganism({
   removeModalBg,
   wirteReview,
   description,
+  changeStarRating,
+  rating,
+  completeReviewModal,
 }) {
-  console.log(formState);
-
   return (
     <CommonBg className="remove-modal" review onClick={removeModalBg}>
       {formState === 'starForm' && (
@@ -27,6 +28,8 @@ function ReviewModalOrganism({
           cancelModalButton={cancelModalButton}
           hostName={hostName}
           moveNextComponent={moveNextComponent}
+          changeStarRating={changeStarRating}
+          rating={rating}
         />
       )}
       {formState === 'writeForm' && (
@@ -36,6 +39,7 @@ function ReviewModalOrganism({
           cancelModalButton-={cancelModalButton}
           wirteReview={wirteReview}
           description={description}
+          completeReviewModal={completeReviewModal}
         />
       )}
     </CommonBg>

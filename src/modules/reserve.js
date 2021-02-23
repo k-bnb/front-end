@@ -214,10 +214,14 @@ const reserve = handleActions(
         draft[form] = initialState[form]; // 선택한 form 초기화.
       }),
 
-    [DETAIL_TO_RESERVE_DATE]: (state, { payload: checkDateSearch }) => ({
-      ...state,
-      checkDateSearch,
-    }),
+    [DETAIL_TO_RESERVE_DATE]: (state, { payload: remenberDate }) => {
+      console.log(remenberDate);
+      return {
+        ...state,
+
+        checkDateSearch: remenberDate,
+      };
+    },
 
     [DETAIL_TO_RESERVE_GUEST]: (state, { payload: guestSearch }) => ({
       ...state,
@@ -229,6 +233,7 @@ const reserve = handleActions(
         draft.infoRes = payload;
         draft.roomImgUrlList = payload.roomImgUrlList[0];
         draft.checkDateSearch = payload.checkDateSearch;
+        // draft.guestSearch = payload.guestSearch;
       }),
 
     [DETAIL_TO_RESERVE_LOCATION]: (state, { payload: locationDetail }) => ({
