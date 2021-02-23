@@ -1,8 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { dispatch } from '../../../../../../Library/Caches/typescript/4.1/node_modules/rxjs/internal/observable/range';
 import ReviewModalOrganism from '../../components/UI/organisms/organisms-reserveconfirm/ReviewModalOrganism';
-import { review, changeInputReview } from '../../modules/user';
+import {
+  review,
+  changeInputReview,
+  initialInputReview,
+} from '../../modules/user';
 
 const ReviewModalContainer = ({
   reviewModalState,
@@ -12,7 +15,34 @@ const ReviewModalContainer = ({
 }) => {
   const dispatch = useDispatch();
 
+  // review action create function 인자
+  const { token } = useSelector(({ auth }) => auth);
+
+  // review action create function 인자 or textarea value의 상태 관리
   const { description } = useSelector(({ user }) => user.reserveReviewReq);
+
+  // star rating 초기화 및 초기값
+  const initialRating = {
+    cleanliness: null,
+    accuracy: null,
+    communication: null,
+    locationRate: null,
+    checkIn: null,
+    priceSatisfaction: null,
+  };
+
+  // 각 star rating 상태
+  const [rating, setRating] = useState(initialRating);
+
+  // review action create function 인자
+  const {
+    cleanliness,
+    accuracy,
+    communication,
+    locationRate,
+    checkIn,
+    priceSatisfaction,
+  } = rating;
 
   // 어떤 모달 페이지 보여주지는지 알려 주는 상태
   const [formState, setFormState] = useState('starForm');
@@ -20,6 +50,8 @@ const ReviewModalContainer = ({
   // 서버에서 받은 모든 사용자 정보 배열과 각 방의 reservationId가 일치하는 사용자 정보를 계산하는 로직
   //  useMemo 사용가능한지 확인하기,
   const roomInfo = list.find((room) => +room.reservationId === +reviewRoomId);
+
+  const reservationId = roomInfo.reservationId;
 
   const { hostName } = roomInfo;
 
@@ -45,11 +77,6 @@ const ReviewModalContainer = ({
 
       if (e.target.name === 'star') setFormState('writeForm');
       if (e.target.name === 'write') setFormState('starForm');
-
-      // 완료 버튼 클릭시 서버에 star rating && review post 하기
-      // if (e.target.name === 'complete') {
-      //   dispatch(review());
-      // }
     } catch (err) {
       console.log(err);
     }
@@ -74,8 +101,9 @@ const ReviewModalContainer = ({
   };
 
   // 각 star rating의 상태를 관리하는 event function (name props로 식별)
-  const changeStarRating = () => {
-    // dispatch()
+  const changeStarRating = (starValue) => (e) => {
+    const form = e.target.name;
+    setRating({ ...rating, [form]: starValue });
   };
 
   // 모달 밖의 화면 클릭시 모달 닫히는 event function
@@ -83,6 +111,35 @@ const ReviewModalContainer = ({
     if (e.target.classList.contains('remove-modal')) {
       setReviewModalState(false);
     }
+  };
+
+  // 후기 작성 완료 버튼 event function 및 모달 닫기, 초기화
+  const completeReviewModal = (e) => {
+    console.log(e.target.name);
+    if (e.target.name !== 'complete') return;
+    // star rating 초기화
+    setRating(initialRating);
+    // textarea 초기화
+    dispatch(initialInputReview());
+
+    // 후기 작성한 방 roomId localStorage에 저장
+    localStorage.setItem('completeReviewRoomId', reservationId);
+
+    dispatch(
+      review(
+        token,
+        reservationId,
+        cleanliness,
+        accuracy,
+        communication,
+        locationRate,
+        checkIn,
+        priceSatisfaction,
+        description,
+      ),
+    );
+
+    setReviewModalState(false);
   };
 
   return (
@@ -98,6 +155,9 @@ const ReviewModalContainer = ({
       removeModalBg={removeModalBg}
       wirteReview={wirteReview}
       description={description}
+      changeStarRating={changeStarRating}
+      rating={rating}
+      completeReviewModal={completeReviewModal}
     />
   );
 };

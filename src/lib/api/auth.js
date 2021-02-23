@@ -56,3 +56,35 @@ export const reserveCancel = ({ token, reservationId, name, reason }) => {
 
   return client.delete(`http://3.34.198.174:8080/reservation`, config);
 };
+
+// 리뷰 작성
+export const writeReview = ({
+  token,
+  reservationId,
+  cleanliness,
+  accuracy,
+  communication,
+  locationRate,
+  checkIn,
+  priceSatisfaction,
+  description,
+}) => {
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const data = {
+    reservationId,
+    cleanliness,
+    accuracy,
+    communication,
+    locationRate,
+    checkIn,
+    priceSatisfaction,
+    description,
+  };
+
+  return client.post(`http://3.34.198.174:8080/comment`, data, headers);
+};

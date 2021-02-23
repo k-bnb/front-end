@@ -27,8 +27,9 @@ const RESERVATION_CANCEL_SUCCESS = 'user/RESERVATION_CANCEL_SUCCESS';
 const RESERVATION_CANCEL_FAILURE = 'user/RESERVATION_CANCEL_FAILURE';
 
 // 후기 작성 action type 모음집
-
 const CHANGE_INPUT_REVIEW = 'user/CHANGE_INPUT_REVIEW';
+const CHANGE_INPUT_STAR_RATING = 'user/CHANGE_INPUT_STAR_RATING';
+const INITIAL_INPUT_REVIEW = 'user/INITIAL_INPUT_REVIEW';
 
 // 후기 작성 비동기 action type
 const REVIEW = 'user/REVIEW';
@@ -74,11 +75,31 @@ export const changeInputPerson = createAction(
 );
 
 // 후기 작성 action type 모음집
-
 export const changeInputReview = createAction(
   CHANGE_INPUT_REVIEW,
   (value) => value,
 );
+
+export const changeInputStarRating = createAction(
+  CHANGE_INPUT_STAR_RATING,
+  ({
+    cleanliness,
+    accuracy,
+    communication,
+    locationRate,
+    checkIn,
+    priceSatisfaction,
+  }) => ({
+    cleanliness,
+    accuracy,
+    communication,
+    locationRate,
+    checkIn,
+    priceSatisfaction,
+  }),
+);
+
+export const initialInputReview = createAction(INITIAL_INPUT_REVIEW);
 
 // 후기 작성 비동기 action create function
 export const review = createAction(
@@ -118,7 +139,9 @@ const initialState = {
   reserveReviewReq: {
     description: '',
   },
+  reserveReiewRes: [],
   reserveError: null,
+  reserveReviewError: null,
 };
 
 const user = handleActions(
@@ -183,6 +206,27 @@ const user = handleActions(
       ...state,
       reserveReviewReq: { ...state.reserveReviewReq, description },
     }),
+    [CHANGE_INPUT_STAR_RATING]: (state, { payload: ratingStar }) =>
+      produce(state, (draft) => {
+        draft.reserveReviewReq.ratingStar = ratingStar;
+      }),
+    [INITIAL_INPUT_REVIEW]: (state, _) => ({
+      ...state,
+      reserveReviewReq: { ...state.reserveReviewReq, description: '' },
+    }),
+    [REVIEW_SUCCESS]: (state, _) => {
+      // 후기 작성한 방 localStorage에 저장해서 다시 후기 작성하는 button 막기
+      const roomId = localStorage.getItem('completeReviewRoomId');
+
+      return {
+        ...state,
+        reserveReiewRes: [...state.reserveReiewRes, roomId],
+      };
+    },
+    [REVIEW_FAILURE]: (state, { payload: reserveReviewError }) => ({
+      ...state,
+      reserveReviewError,
+    }),
   },
   initialState,
 );
@@ -212,9 +256,14 @@ const reserveCancel = createRequestSaga(
     API.reserveCancel(token, reservationId, name, reason),
 );
 
+// 리뷰 작성
+
+const reviewSaga = createRequestSaga(REVIEW, API.writeReview);
+
 export function* userSaga() {
   yield takeLatest(RESERVE_CONFIRM, reserveConfirmSaga);
   yield takeLatest(USER_INFO, userConfirmSaga);
   yield takeLatest(RESERVATION_CANCEL, reserveCancel);
   yield takeLatest(CHANGE_INPUT_PERSON_SUBMIT, changeInputPersonSaga);
+  yield takeLatest(REVIEW, reviewSaga);
 }

@@ -52,7 +52,27 @@ function ReviewFirstpageOrganism({
   cancelModalButton,
   hostName,
   moveNextComponent,
+  changeStarRating,
+  rating,
 }) {
+  console.log(rating);
+  const {
+    cleanliness,
+    accuracy,
+    communication,
+    locationRate,
+    checkIn,
+    priceSatisfaction,
+  } = rating;
+
+  console.log(
+    cleanliness,
+    accuracy,
+    communication,
+    locationRate,
+    checkIn,
+    priceSatisfaction,
+  );
   return (
     <Container disappear={reviewModalState}>
       {/* header */}
@@ -63,12 +83,42 @@ function ReviewFirstpageOrganism({
 
       {/* main */}
       <MainContainer>
-        <StarRatingReviewModa children={reviewName.cleanliness} />
-        <StarRatingReviewModa children={reviewName.accuracy} />
-        <StarRatingReviewModa children={reviewName.communication} />
-        <StarRatingReviewModa children={reviewName.locationRate} />
-        <StarRatingReviewModa children={reviewName.checkIn} />
-        <StarRatingReviewModa children={reviewName.priceSatisfaction} />
+        <StarRatingReviewModa
+          children={reviewName.cleanliness}
+          name="cleanliness"
+          changeStarRating={changeStarRating}
+          rating={cleanliness}
+        />
+        <StarRatingReviewModa
+          children={reviewName.accuracy}
+          name="accuracy"
+          changeStarRating={changeStarRating}
+          rating={accuracy}
+        />
+        <StarRatingReviewModa
+          children={reviewName.communication}
+          name="communication"
+          changeStarRating={changeStarRating}
+          rating={communication}
+        />
+        <StarRatingReviewModa
+          children={reviewName.locationRate}
+          name="locationRate"
+          changeStarRating={changeStarRating}
+          rating={locationRate}
+        />
+        <StarRatingReviewModa
+          children={reviewName.checkIn}
+          name="checkIn"
+          changeStarRating={changeStarRating}
+          rating={checkIn}
+        />
+        <StarRatingReviewModa
+          children={reviewName.priceSatisfaction}
+          name="priceSatisfaction"
+          changeStarRating={changeStarRating}
+          rating={priceSatisfaction}
+        />
       </MainContainer>
 
       {/* footer(next page) */}
@@ -77,6 +127,14 @@ function ReviewFirstpageOrganism({
           name="star"
           reviewNext
           moveNextComponent={moveNextComponent}
+          disable={
+            cleanliness &&
+            accuracy &&
+            communication &&
+            locationRate &&
+            checkIn &&
+            priceSatisfaction
+          }
         >
           다음
         </MovePageButton>

@@ -54,13 +54,14 @@ const MovePageButton = ({
   name,
   moveNextComponent,
   backButtonRef,
+  completeReviewModal,
   ...rest
 }) => {
   return (
     <StyledButton
       name={name}
       {...rest}
-      onClick={moveNextComponent}
+      onClick={moveNextComponent || completeReviewModal}
       ref={backButtonRef}
     >
       {children}
