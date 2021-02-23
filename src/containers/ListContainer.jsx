@@ -27,7 +27,12 @@ const ListContainer = React.memo(() => {
 
   const dispatch = useDispatch();
 
-  const RoomSearchClick = () => {
+  const keyup = e => {
+    if (e.key === 'Enter')
+    setSearchModalState('room');
+  }
+  
+  const RoomSearchClick = (e) => {
     setSearchModalState('room');
   };
   const cashSearchClick = () => {
@@ -194,6 +199,7 @@ const ListContainer = React.memo(() => {
         setLocalMinCost={setLocalMinCost}
         localMaxCost={localMaxCost}
         setLocalMaxCost={setLocalMaxCost}
+        keyup={keyup}
       />
     </>
   );
