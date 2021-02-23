@@ -2,7 +2,7 @@ import client from './client';
 
 // 로그인
 export const login = ({ email, password }) =>
-  client.post('http://3.34.198.174:8080/auth/login', {
+  client.post('/auth/login', {
     email,
     password,
   });
