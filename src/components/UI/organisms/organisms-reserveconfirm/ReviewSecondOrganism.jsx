@@ -35,6 +35,7 @@ const ReviewSecondOrganism = ({
   backButtonRef,
   wirteReview,
   description,
+  completeReviewModal,
 }) => {
   return (
     <Container>
@@ -61,7 +62,13 @@ const ReviewSecondOrganism = ({
         />
       </MainContainer>
       <FooterContainer>
-        <MovePageButton reviewNext>저장 후 닫기</MovePageButton>
+        <MovePageButton
+          name="complete"
+          reviewNext
+          completeReviewModal={completeReviewModal}
+        >
+          저장 후 닫기
+        </MovePageButton>
       </FooterContainer>
     </Container>
   );
