@@ -249,15 +249,13 @@ function Datepicker({ setIsDateBorderThick, setIsCalendarOpen }) {
 
   const handleOnDateChange = (startDate, endDate) => {
     // if (moment()._d > startDate) {
-    //   console.log('error');
-    //   console.log('dslkfjdslkfjsl');
     //   return;
     // }
 
     if (startDate.startDate && !startDate.endDate) {
       let startD = moment(startDate.startDate._d).format('YYYY-MM-DD');
       dispatch(dateInput('startDate', startD)); // 시작일만 선택시 시작일 main page에 dispatch
-      console.log(startD);
+      // console.log(startD);
       dispatch(dateChangeDetail('startDate', startD));
       setdateRange({ startDate: startD, endDate: startD });
     }
@@ -286,12 +284,9 @@ function Datepicker({ setIsDateBorderThick, setIsCalendarOpen }) {
   // checkIn input에 포커스
   const CheckinInputRef = useRef();
   const CheckInFocus = () => CheckinInputRef.current.focus();
-  // const CheckoutInputRef = useRef();
-  // const CheckOutFocus = () => CheckoutInputRef.current.focus();
 
   // 모달을 켰을때 input에 포커스
   useEffect(() => {
-    // detailObj.startDate !== null ? CheckOutFocus() :
     CheckInFocus();
     setIsBorderStrong(true);
   }, []);
@@ -327,8 +322,6 @@ function Datepicker({ setIsDateBorderThick, setIsCalendarOpen }) {
               date={detailEndDate}
               dispatch={dispatch}
               isValid={detailEndDate}
-
-              // CheckoutInputRef={CheckoutInputRef}
             />
           </CheckDate>
         </div>

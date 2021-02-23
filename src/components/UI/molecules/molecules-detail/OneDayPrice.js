@@ -43,7 +43,7 @@ const NoDateText = styled(Text)`
 `;
 
 const OneDayPrice = ({ infoRes, detailObj }) => {
-  if (detailObj.startDate === '' && detailObj.endDate === '') {
+  if (detailObj.startDate === '' || detailObj.endDate === '') {
     return (
       <NoDateBox>
         <NoDateText bold block noPadding>
