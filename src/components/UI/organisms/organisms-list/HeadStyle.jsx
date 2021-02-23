@@ -29,6 +29,7 @@ const HeadStyle = ({
   setLocalMinCost,
   localMaxCost,
   setLocalMaxCost,
+  keyup,
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
@@ -65,6 +66,7 @@ const HeadStyle = ({
             setLocalMinCost={setLocalMinCost}
             localMaxCost={localMaxCost}
             setLocalMaxCost={setLocalMaxCost}
+            keyup={keyup}
           />
         </PcSize>
       )}

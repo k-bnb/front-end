@@ -4,6 +4,18 @@ import styled from 'styled-components';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
 import { IoIosArrowForward } from 'react-icons/io';
 const PersonalInfoHeadingStyle = styled.header`
+  .a11yHidden {
+    overflow: hidden;
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    clip-path: circle(0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+  }
   width: 100%;
   margin-left: 20px;
   div {
@@ -43,6 +55,7 @@ const PersonalInfoHeadingStyle = styled.header`
 const PersonalInfoHead = () => {
   return (
     <PersonalInfoHeadingStyle>
+      <h1 className="a11yHidden">개인정보</h1>
       <div>
         <Link to="/">계정</Link>
         <IoIosArrowForward />

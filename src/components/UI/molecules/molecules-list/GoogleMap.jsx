@@ -11,14 +11,17 @@ import {
 import Geocode from 'react-geocode';
 import styled from 'styled-components';
 import Bookmark from '../../atoms/atoms-list/BookMark';
-import { AiOutlineHeart } from 'react-icons/ai';
+// import { AiOutlineHeart } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import { locationInput, searching } from '../../../../modules/search';
 import { BiWon } from 'react-icons/bi';
+import { BsHeartFill } from 'react-icons/bs';
 import { moneyfilter } from '../../../../lib/moneyfilter';
-// import Slider from 'react-slick';
+import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import ScoreText from './Score-Text';
+import { Link, useHistory } from 'react-router-dom';
 
 // import MarkerWithLabel from "react-google-maps/lib/components/addons/MarkerWithLabel";
 // import AutoComplete from 'react-google-autocomplete';
@@ -35,49 +38,184 @@ const GoogleMarkerStyle = styled.div`
   position: relative;
   .heart {
     position: absolute;
-    top: 0px;
     right: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &:hover {
-      background: none;
-    }
-    svg {
-    }
+    top: 15px;
+    font-size: 20px;
+  }
+  .heartimg {
+    fill: rgba(0, 0, 0, 0.5);
+    stroke: white;
+    stroke-width: 1;
+    overflow: visible;
+    cursor: pointer;
   }
   img {
     width: 100%;
     height: 200px;
   }
-  div {
-    //지도 팝업
-
-    overflow: hidden;
+  .slide-group {
+    position: relative;
+    .slide {
+      width: 100%;
+      .slideDiv {
+        .slick-slider {
+          .slick-arrow {
+            z-index:1; 
+          }
+          .slick-prev {
+            color: white;
+            position: absolute;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            /* opacity:1; */
+            /* opacity: 0; */
+            /* transition: opacity .3s; */
+          }          
+          .slick-next {
+            color: white;
+            position: absolute;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            /* opacity: 0; */
+            /* transition: opacity .3s; */
+          }
+          .slick-dots {
+            li {
+              border: 0;
+              display: inline !important;
+              margin-bottom:10px;
+              justify-content: flex-end;
+              height: 30px;
+              cursor: default;
+              
+              &:nth-child(1) {
+                position: absolute;
+                bottom: 10px;
+                left: 100px;
+              }
+              &:nth-child(2) {
+                position: absolute;
+                bottom: 10px;
+                left: 110px;
+              }
+              &:nth-child(3) {
+                position: absolute;
+                bottom: 10px;
+                left: 120px;
+              }
+              &:nth-child(4) {
+                position: absolute;
+                bottom: 10px;
+                left: 130px;
+              }
+              &:nth-child(5) {
+                position: absolute;
+                bottom: 10px;
+                left: 140px;
+              }
+            }
+          }
+          .slick-list {
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            .slick-track {
+              display: flex;
+              .slick-slide {
+                display: flex;
+                div {
+                  display: flex;
+                  img {
+                    
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .btn-group {
+      button {
+        bottom: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        border: 0;
+        outline: none;
+        cursor: pointer;
+        &:hover {
+          width: 35px;
+          height: 35px;
+        }
+      }
+      .next {
+        position: absolute;
+        right: 10px;
+      }
+      .prev {
+        position: absolute;
+        left: 10px;
+      }
+    }
+  }
+  /* .slide-group:hover{
+    .slide-group>.slide>.slideDiv>.slick-slider>.slick-arrow.slick-prev{
+      opacity:1;
+      &:active{
+        opacity:1;
+        transform: translate(0);
+        transform: scale(1.5);
+      }
+    }
+    .slide-group>.slide>.slideDiv>.slick-slider {
+      opacity:1;
+      &:active{
+        opacity:1;
+        transform: translate(0);
+        transform: scale(1.5);
+      }
+    }
+  } */
+  .textAllWrap{ //지도 팝업 글 
+    margin-top: 15px;
+    padding-left:15px;
+    cursor: pointer;
+  }
+  div { 
+    overflow:hidden;
     .roomTypeclass {
       padding: 0;
       color: rgba(0, 0, 0, 0.4);
-      margin-bottom: 10px;
     }
     h2 {
       color: #000;
       font-size: 1.8rem;
       font-weight: 400;
       margin: 0;
-      padding-left: 20px;
+      padding: 0;
     }
     p {
       font-weight: 700;
-      padding-left: 20px;
       span {
         font-weight: 400;
-        padding-left: 20px;
+
       }
     }
   }
+
 `;
 
-function GoogleMapUse({
+const GoogleMapUse = ({
   roomMap,
   roomType,
   bathRoomNum,
@@ -87,7 +225,16 @@ function GoogleMapUse({
   checkDateSearch,
   guestSearch,
   costSearch,
-}) {
+  roomImgUrlList,
+  id,
+}) => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   const [selectedSample, setSelectedSample] = useState(null);
 
   const [locate, setLocate] = useState({
@@ -234,7 +381,7 @@ function GoogleMapUse({
   };
 
   const mapCost = useRef();
-
+  const history = useHistory();
   const MapWithAMarker = withScriptjs(
     withGoogleMap((props) => {
       return (
@@ -250,13 +397,13 @@ function GoogleMapUse({
           onClick={() => {
             setSelectedSample(null);
           }}
-          options={{ scrollwheel: true }}
           onLoad={onMapLoad}
           onDragEnd={dragMark}
           onZoomChanged={handleZoomChanged}
           options={{ scrollwheel: true }} // 마우스휠옵션.
         >
           {roomMap.map((sample) => (
+              // console.log(sample.id);
             <>
               <Marker
                 key={sample.id}
@@ -283,10 +430,13 @@ function GoogleMapUse({
                   ref={mapCost}
                   onClick={(e) => {
                     setSelectedSample(sample);
-                    console.log(
-                      'overlayviewText',
-                      e.nativeEvent.path[1].className,
-                    );
+                    console.log('overlayviewText', e.nativeEvent);
+                    console.log('path1', e.nativeEvent.path[1]);
+                    // console.log('path13', e.nativeEvent.path[13].childNodes[0]);
+                    const path13= e.nativeEvent.path[13].childNodes[0];
+                    console.log('path13',path13);
+
+                    // console.log(nativeevent.path); //1번째가 -memo << 이건데, 이게 className이야.
                   }}
                   style={{
                     display: 'flex',
@@ -331,27 +481,40 @@ function GoogleMapUse({
               }}
             >
               <GoogleMarkerStyle>
-                <img src={selectedSample.roomImgUrlList[0]} alt="" />
-                {/* <div className="slide-group">
-                  <div className="slide">
-                    <div className="slideDiv">
-                      <Slider {...settings}>
-                      <img src={selectedSample.roomImgUrlList[0]} alt="" />
-                      </Slider>
+                {/* <img src={selectedSample.roomImgUrlList[0]} alt="" /> */}
+                  <div className="slide-group">
+                    <div className="slide">
+                      <div className="slideDiv">
+                        <Slider {...settings}>
+                        {/* <img src={selectedSample.roomImgUrlList[0]} alt="" /> */}
+                        {selectedSample.roomImgUrlList.map((src, i, arr,alt) => (
+                        <>
+                          <img
+                            // carousalImg
+                            src={src}
+                            alt={alt}
+                          />
+                        </>
+                      ))}
+                        </Slider>
+                      </div>
                     </div>
                   </div>
-                </div> */}
-
-                <div>
-                  <div className="roomTypeclass">{selectedSample.roomType}</div>
-                  <h2>{selectedSample.name}</h2>
-                  <p>
-                    <BiWon />
-                    {selectedSample.cost} <span>/ 1박</span>
-                  </p>
-                </div>
-                <Bookmark className="heart" heart>
-                  <AiOutlineHeart />
+                  <div 
+                    className="textAllWrap"   
+                    onClick={(e)=>{
+                      if(e.target.matches('.heart')) return;
+                      history.push(`/detail/${selectedSample.id}`)                    
+                  }}>
+                    <ScoreText grade={selectedSample.grade} commentCount={selectedSample.commentCount} />
+                    <div className="roomTypeclass">{selectedSample.roomType}</div>
+                    <h2>{selectedSample.name}</h2>
+                    <p>
+                      <BiWon />{moneyfilter(selectedSample.cost)} <span>/ 1박</span>
+                    </p>
+                  </div>
+                  <Bookmark Mobileheart className="heart">
+                    <BsHeartFill className="heartimg" />
                 </Bookmark>
               </GoogleMarkerStyle>
             </InfoWindow>
@@ -360,7 +523,7 @@ function GoogleMapUse({
       );
     }),
   );
-
+  console.log('selectedSample',selectedSample);
   return (
     <>
       <MapWithAMarker
@@ -371,6 +534,6 @@ function GoogleMapUse({
       />
     </>
   );
-}
+};
 
 export default GoogleMapUse;

@@ -55,33 +55,7 @@ const BookingInfo = ({
   const StartDate = moment(detailObj.startDate);
   const EndDate = moment(detailObj.endDate);
   const totalSchedule = EndDate.diff(StartDate, 'days');
-  if (detailObj.startDate === '' || detailObj.endDate === '') {
-    return (
-      <PositionBox ref={bookingInfoRef}>
-        <BookingInfoContainer>
-          <OneDayPrice infoRes={infoRes} detailObj={detailObj} />
-          <DatePersonBox
-            detailObj={detailObj}
-            isCalendarOpen={isCalendarOpen}
-            setIsCalendarOpen={setIsCalendarOpen}
-            infoRes={infoRes}
-          />
-          <ReserveBtn
-            moveToReserve={moveToReserve}
-            modal={modal}
-            setModal={setModal}
-            setIsOpen={setIsOpen}
-            formState={formState}
-            setFormState={setFormState}
-            DetailHeaderRef={DetailHeaderRef}
-            isCalendarOpen={isCalendarOpen}
-            setIsCalendarOpen={setIsCalendarOpen}
-            NoBookingDate
-          ></ReserveBtn>
-        </BookingInfoContainer>
-      </PositionBox>
-    );
-  } else {
+  if (detailObj.startDate !== '' && detailObj.endDate !== '') {
     return (
       <PositionBox>
         <BookingInfoContainer>
@@ -117,6 +91,32 @@ const BookingInfo = ({
             detailObj={detailObj}
             totalSchedule={totalSchedule}
           />
+        </BookingInfoContainer>
+      </PositionBox>
+    );
+  } else {
+    return (
+      <PositionBox ref={bookingInfoRef}>
+        <BookingInfoContainer>
+          <OneDayPrice infoRes={infoRes} detailObj={detailObj} />
+          <DatePersonBox
+            detailObj={detailObj}
+            isCalendarOpen={isCalendarOpen}
+            setIsCalendarOpen={setIsCalendarOpen}
+            infoRes={infoRes}
+          />
+          <ReserveBtn
+            moveToReserve={moveToReserve}
+            modal={modal}
+            setModal={setModal}
+            setIsOpen={setIsOpen}
+            formState={formState}
+            setFormState={setFormState}
+            DetailHeaderRef={DetailHeaderRef}
+            isCalendarOpen={isCalendarOpen}
+            setIsCalendarOpen={setIsCalendarOpen}
+            NoBookingDate
+          ></ReserveBtn>
         </BookingInfoContainer>
       </PositionBox>
     );

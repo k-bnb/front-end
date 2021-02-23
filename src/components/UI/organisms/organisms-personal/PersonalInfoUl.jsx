@@ -36,6 +36,9 @@ const PersonalInfoUIStyle = styled.ul`
       position: absolute;
       top: 0;
       right: 0;
+      &:focus {
+        outline: 1px solid;
+      }
     }
   }
 `;
@@ -72,7 +75,7 @@ const PersonalInfoUl = ({
             <TextStyle>{name}</TextStyle>
           )}
         </div>
-        <Button name="name" className="btn" greenText>
+        <Button name="name" className="btn" greenText tabIndex="0">
           {!fix.name ? '수정' : '취소'}
         </Button>
       </PersonalInfoLi>
