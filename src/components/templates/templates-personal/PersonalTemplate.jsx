@@ -1,6 +1,7 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
+import PageLoading from '../../UI/molecules/molecules-personalInfo/PageLoading';
 import PersonalInfoArticle from '../../UI/organisms/organisms-personal/PersonalInfoArticle';
 import PersonalInfoHead from '../../UI/organisms/organisms-personal/PersonalInfoHead';
 import PersonalInfoUl from '../../UI/organisms/organisms-personal/PersonalInfoUl';
@@ -44,6 +45,7 @@ const PersonalTemplate = ({
   userInfo,
   setFix,
   loading,
+  pageloading,
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 900px)',
@@ -55,35 +57,41 @@ const PersonalTemplate = ({
   return (
     <PersonalTemplateStyle>
       <ReserveConfirmheader />
-      <PersonalInfoHead />
-      <main className="main-group">
-        <PersonalInfoUl
-          fix={fix}
-          cancelclick={cancelclick}
-          fixInfoBtn={fixInfoBtn}
-          personInfoChange={personInfoChange}
-          name={name}
-          email={email}
-          birth={birth}
-          imageUrl={imageUrl}
-          inputFocus={inputFocus}
-          ChangeInputBtn={ChangeInputBtn}
-          userInfo={userInfo}
-          setFix={setFix}
-          loading={loading}
-        />
-        {isPc && (
-          <PcDiv>
-            <PersonalInfoArticle />
-          </PcDiv>
-        )}
+      {!pageloading ? (
+        <>
+          <PersonalInfoHead />
+          <main className="main-group">
+            <PersonalInfoUl
+              fix={fix}
+              cancelclick={cancelclick}
+              fixInfoBtn={fixInfoBtn}
+              personInfoChange={personInfoChange}
+              name={name}
+              email={email}
+              birth={birth}
+              imageUrl={imageUrl}
+              inputFocus={inputFocus}
+              ChangeInputBtn={ChangeInputBtn}
+              userInfo={userInfo}
+              setFix={setFix}
+              loading={loading}
+            />
+            {isPc && (
+              <PcDiv>
+                <PersonalInfoArticle />
+              </PcDiv>
+            )}
 
-        {isTablet && (
-          <TabletDiv>
-            <PersonalInfoArticle />
-          </TabletDiv>
-        )}
-      </main>
+            {isTablet && (
+              <TabletDiv>
+                <PersonalInfoArticle />
+              </TabletDiv>
+            )}
+          </main>
+        </>
+      ) : (
+        <PageLoading />
+      )}
     </PersonalTemplateStyle>
   );
 };

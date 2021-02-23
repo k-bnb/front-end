@@ -16,6 +16,26 @@ const ReserveCancelStyle = styled.div`
       color: #db75df;
     }
   }
+  .radio-group {
+    p {
+      font-size: 2rem;
+      padding: 0;
+      margin: 0;
+      margin-bottom: 10px;
+    }
+    div {
+      display: block;
+
+      input {
+        vertical-align: super;
+      }
+      label {
+        margin-left: 10px;
+
+        vertical-align: super;
+      }
+    }
+  }
   div {
     button {
       padding: 10px 30px;
@@ -78,7 +98,7 @@ const ReserveCancel = ({
         <div className="text">
           <TextStyle>예약을 취소하시겠습니까?</TextStyle>
         </div>
-        <div onChange={resonChange}>
+        <div className="radio-group" onChange={resonChange}>
           <p>예약 취소 이유는?</p>
           <div>
             <input

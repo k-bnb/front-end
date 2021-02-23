@@ -93,6 +93,11 @@ const ReserveConfirmContainer = () => {
     setMiniModal(!miniModal);
     setcancelModalState(!cancelModalState);
   };
+  const reserveconfirmLoading = useSelector((lo) => lo.loading);
+  console.log(
+    reserveconfirmLoading['user/USER_INFO'],
+    reserveconfirmLoading['user/RESERVE_CONFIRM'],
+  );
   return (
     <ReserveConfirmTemplate
       list={list}
@@ -109,6 +114,7 @@ const ReserveConfirmContainer = () => {
       resonChange={resonChange}
       miniModal={miniModal}
       miniModalCancelBtn={miniModalCancelBtn}
+      reserveconfirmLoading={reserveconfirmLoading}
     />
   );
 };

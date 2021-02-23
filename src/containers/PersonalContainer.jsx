@@ -104,22 +104,27 @@ const PersonalContainer = () => {
     (lo) => lo.loading['user/CHANGE_INPUT_PERSON_SUBMIT'],
   );
 
+  const pageloading = useSelector((lo) => lo.loading['user/USER_INFO']);
+  console.log(pageloading);
   return (
-    <PersonalTemplate
-      fixInfoBtnCancel={fixInfoBtnCancel}
-      fixInfoBtn={fixInfoBtn}
-      fix={fix}
-      setFix={setFix}
-      cancelclick={cancelclick}
-      personInfoChange={personInfoChange}
-      name={userRes?.name}
-      email={userRes?.email}
-      birth={userRes?.birth}
-      imageUrl={userRes?.imageUrl}
-      ChangeInputBtn={ChangeInputBtn}
-      userInfo={userInfo}
-      loading={loading}
-    />
+    <>
+      <PersonalTemplate
+        fixInfoBtnCancel={fixInfoBtnCancel}
+        fixInfoBtn={fixInfoBtn}
+        fix={fix}
+        setFix={setFix}
+        cancelclick={cancelclick}
+        personInfoChange={personInfoChange}
+        name={userRes?.name}
+        email={userRes?.email}
+        birth={userRes?.birth}
+        imageUrl={userRes?.imageUrl}
+        ChangeInputBtn={ChangeInputBtn}
+        userInfo={userInfo}
+        loading={loading}
+        pageloading={pageloading}
+      />
+    </>
   );
 };
 
