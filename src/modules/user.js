@@ -58,7 +58,7 @@ export const changeInputImgPerson = createAction(
 
 export const changeInputPersonSubmit = createAction(
   CHANGE_INPUT_PERSON_SUBMIT,
-  ({ token, name, email, birth }) => ({ token, name, email, birth }),
+  (token, name, value) => ({ token, [name]: value }),
 );
 
 export const reserveConfirm = createAction(RESERVE_CONFIRM, ({ token }) => ({
@@ -153,6 +153,7 @@ const user = handleActions(
     },
     [CHANGE_INPUT_IMG_PERSON]: (state, { payload }) => {
       sessionStorage.setItem('userInfoImg', JSON.stringify(payload.value));
+
       return produce(state, (draft) => {
         draft.userRes.imageUrl = payload.value;
       });
@@ -203,7 +204,8 @@ const userConfirmSaga = createRequestSaga(USER_INFO, (token) =>
 
 const changeInputPersonSaga = createRequestSaga(
   CHANGE_INPUT_PERSON_SUBMIT,
-  (token, name, email, birth) => API.userInfoRemake(token, name, email, birth),
+  (token, name = null, email = null, birth = null) =>
+    API.userInfoRemake(token, name, email, birth),
 );
 
 const reserveCancel = createRequestSaga(

@@ -101,7 +101,7 @@ const ReserveConfirmList = ({
   return (
     <ReserveConfirmListStyle>
       <div className="Big-img">
-        <Img src={sectionImg[0].src} />
+        <Img src={item.imgUrl} />
       </div>
       <div className="reserve-info">
         <div className="reserve-date">
@@ -122,7 +122,7 @@ const ReserveConfirmList = ({
         </div>
         <div className="reserve-link">
           <div className="small-img">
-            <Img src={sectionImg[1].src} />
+            <Img src={item.imgUrl} />
           </div>
           <div className="title">
             <TextStyle>
