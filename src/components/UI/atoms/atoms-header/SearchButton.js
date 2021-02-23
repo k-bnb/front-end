@@ -45,21 +45,21 @@ const SearchButton = ({
 }) => {
   return (
     <>
-      {!navModalState?.location &&
+      <SearchButtonBlock
+        isScrolled={isScrolled}
+        className="search-button-unit"
+        onClick={onClick}
+        rooms={rooms}
+        ref={searchBtnRef}
+      >
+        {!isScrolled && <BiSearch className="search-button-unit" />}
+        {isScrolled && <HiSearch className="search-button-unit" />}
+      </SearchButtonBlock>
+      {/* {!navModalState?.location &&
         !navModalState?.checkIn &&
         !navModalState?.checkOut &&
         !navModalState?.guest && (
-          <SearchButtonBlock
-            isScrolled={isScrolled}
-            className="search-button-unit"
-            onClick={onClick}
-            rooms={rooms}
-            ref={searchBtnRef}
-          >
-            {!isScrolled && <BiSearch className="search-button-unit" />}
-            {isScrolled && <HiSearch className="search-button-unit" />}
-          </SearchButtonBlock>
-        )}
+        )} */}
       {/* {(navModalState?.location ||
         navModalState?.checkIn ||
         navModalState?.checkOut ||
@@ -83,8 +83,8 @@ const SearchButton = ({
               검색
             </>
           } */}
-        </SearchButtonBlock>
-      )}
+      {/* </SearchButtonBlock> */}
+      {/* )} */}
     </>
   );
 };
