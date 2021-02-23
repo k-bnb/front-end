@@ -13,8 +13,8 @@ const ReserveConfirmContainer = () => {
   const [listModal, setListModal] = useState([]);
   const [name, setName] = useState('');
   const dispatch = useDispatch();
+
   const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
-  
   useEffect(() => {
     // if (reserveRes.reserveRes === null) return;
     const next = reserveRes?.reserveRes?.filter((item) =>
@@ -24,7 +24,7 @@ const ReserveConfirmContainer = () => {
     );
     setList(next);
     if (next === null) return;
-  }, [userInfo, active]);
+  }, [reserveRes, active]);
 
   // 예정된 예약 이전예약 nav
   const activClick = (e) => {
@@ -93,19 +93,12 @@ const ReserveConfirmContainer = () => {
     setMiniModal(!miniModal);
     setcancelModalState(!cancelModalState);
   };
+  const reserveconfirmLoading = useSelector((lo) => lo.loading);
+  console.log(
+    reserveconfirmLoading['user/USER_INFO'],
+    reserveconfirmLoading['user/RESERVE_CONFIRM'],
+  );
 
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
-  //
   // review modal 상태
   const [reviewModalState, setReviewModalState] = useState(false);
   const [reviewRoomId, setReviewRoomId] = useState('');
@@ -118,8 +111,6 @@ const ReserveConfirmContainer = () => {
     setReviewRoomId(openModalId);
     setReviewModalState(!reviewModalState);
   };
-
-  console.log(reviewRoomId);
 
   return (
     <ReserveConfirmTemplate
@@ -142,6 +133,7 @@ const ReserveConfirmContainer = () => {
       resonChange={resonChange}
       miniModal={miniModal}
       miniModalCancelBtn={miniModalCancelBtn}
+      reserveconfirmLoading={reserveconfirmLoading}
     />
   );
 };

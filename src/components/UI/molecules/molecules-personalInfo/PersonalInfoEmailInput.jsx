@@ -118,7 +118,7 @@ const PersonalInfoEmailInput = ({
           }}
         />
       </div>
-      <Button onClick={ChangeInputBtn} save>
+      <Button name="email" value={email} onClick={ChangeInputBtn} save>
         {!loading && '저장'}
         {loading && (
           <div className="animation">
