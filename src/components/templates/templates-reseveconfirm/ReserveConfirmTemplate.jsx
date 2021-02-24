@@ -40,8 +40,9 @@ const ReserveConfirmTemplate = ({
     <ReserveConfirmTemplateStyle>
       <ReserveConfirmheader />
       <ReserveConfirmhead />
-      {reserveconfirmLoading['user/USER_INFO'] &&
-      reserveconfirmLoading['user/RESERVE_CONFIRM'] ? (
+      {(reserveconfirmLoading['user/USER_INFO'] &&
+        reserveconfirmLoading['user/RESERVE_CONFIRM']) ||
+      reserveconfirmLoading['user/REVIEW'] ? (
         <PageLoading />
       ) : (
         <ReserveConfirmSection
@@ -64,6 +65,7 @@ const ReserveConfirmTemplate = ({
           resonChange={resonChange}
           miniModal={miniModal}
           miniModalCancelBtn={miniModalCancelBtn}
+          reserveconfirmLoading={reserveconfirmLoading}
         />
       )}
 

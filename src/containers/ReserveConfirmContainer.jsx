@@ -93,10 +93,11 @@ const ReserveConfirmContainer = () => {
     setcancelModalState(!cancelModalState);
   };
   const reserveconfirmLoading = useSelector((lo) => lo.loading);
-  console.log(
-    reserveconfirmLoading['user/USER_INFO'],
-    reserveconfirmLoading['user/RESERVE_CONFIRM'],
-  );
+  // console.log(
+  //   reserveconfirmLoading['user/USER_INFO'],
+  //   reserveconfirmLoading['user/RESERVE_CONFIRM'],
+  //   reserveconfirmLoading['user/REVIEW'],
+  // );
 
   // review modal 상태
   const [reviewModalState, setReviewModalState] = useState(false);
