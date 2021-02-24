@@ -72,6 +72,7 @@ const ListContainer = React.memo(() => {
   );
   const [localMinCost, setLocalMinCost] = useState(costSearch.minCost);
   const [localMaxCost, setLocalMaxCost] = useState(costSearch.maxCost);
+  const [isFirst, setIsFirst] = useState(true);
 
   const num = /^[0-9]*$/;
 
@@ -161,7 +162,14 @@ const ListContainer = React.memo(() => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    changeCurrentPage(0);
   }, []);
+
+  useEffect(()=>{
+    
+  },[isLoading])
+
+
 
   return (
     <>

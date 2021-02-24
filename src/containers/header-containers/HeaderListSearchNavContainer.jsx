@@ -1,4 +1,5 @@
 import React from 'react';
+import SkipNabigation from '../../components/templates/templates-header/SkipNabigation';
 import HeaderListSearchNav from '../../components/UI/organisms/organisms-header/HeaderListSearchNav';
 
 const HeadermainSearchNavContainer = ({
@@ -16,20 +17,23 @@ const HeadermainSearchNavContainer = ({
   clickHandler,
 }) => {
   return (
-    <HeaderListSearchNav
-      isScrolled={isScrolled}
-      isClicked={isClicked}
-      setIsClicked={setIsClicked}
-      navModalState={navModalState}
-      setNavModalState={setNavModalState}
-      initialNavModalState={initialNavModalState}
-      SearchTypeHandler={SearchTypeHandler}
-      locationSearch={locationSearch}
-      checkDateSearch={checkDateSearch}
-      guestSearch={guestSearch}
-      clickHandler={clickHandler}
-      moveFocusNext={moveFocusNext}
-    />
+    <>
+      <SkipNabigation />
+      <HeaderListSearchNav
+        isScrolled={isScrolled}
+        isClicked={isClicked}
+        setIsClicked={setIsClicked}
+        navModalState={navModalState}
+        setNavModalState={setNavModalState}
+        initialNavModalState={initialNavModalState}
+        SearchTypeHandler={SearchTypeHandler}
+        locationSearch={locationSearch}
+        checkDateSearch={checkDateSearch}
+        guestSearch={guestSearch}
+        clickHandler={clickHandler}
+        moveFocusNext={moveFocusNext}
+      />
+    </>
   );
 };
 
