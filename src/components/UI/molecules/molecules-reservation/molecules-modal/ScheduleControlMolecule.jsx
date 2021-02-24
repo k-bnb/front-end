@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import CommonButton from '../../../atoms/atoms-reservation/atoms-modal/CommonButton';
+import CommonButtonDisabled from '../../../atoms/atoms-reservation/atoms-modal/CommonButtonDisabled';
 
 const Container = styled.div`
   display: flex;
@@ -16,9 +17,9 @@ function ScheduleControlMolecule({ saveDate, deleteDate }) {
       <CommonButton dateDelete deleteDate={deleteDate}>
         날짜 지우기
       </CommonButton>
-      <CommonButton dateSave saveDate={saveDate}>
+      <CommonButtonDisabled dateSave saveDate={saveDate}>
         저장하기
-      </CommonButton>
+      </CommonButtonDisabled>
     </Container>
   );
 }

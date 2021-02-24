@@ -29,8 +29,6 @@ const DetailContainer = () => {
   const DetailHeaderRef = useRef();
   const ImageContainerRef = useRef();
   const bookingInfoRef = useRef();
-  const GuestModalRef = useRef();
-
   const reviewRef = useRef();
   const facilityRef = useRef();
   const history = useHistory();
@@ -61,6 +59,8 @@ const DetailContainer = () => {
   const checkDateSearch = { startDate: checkIn, endDate: checkOut };
   const guestSearch = { numOfAdult: adult, numOfKid: kid, numOfInfant: infant };
   const [isCalendarOpen, setIsCalendarOpen] = useState(false); // detail page달력 모달열고닫기
+  const [isGuestOpen, setIsGuestOpen] = useState(false); // detail guest모달 열고 닫기.
+  const { peopleLimit } = useSelector(({ reserve }) => reserve.infoRes);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -72,7 +72,13 @@ const DetailContainer = () => {
     if (sessionStorage.getItem('checkIn')) return;
     if (startDate && endDate) {
       dispatch(
-        searchToDetail(startDate, endDate, numOfAdult, numOfKid, numOfInfant),
+        searchToDetail(
+          startDate,
+          endDate,
+          numOfAdult ? numOfAdult : 1,
+          numOfKid,
+          numOfInfant,
+        ),
       );
     }
   }, []);
@@ -97,7 +103,6 @@ const DetailContainer = () => {
   return (
     <>
       <HeaderContainer
-        GuestModalRef={GuestModalRef}
         DetailHeaderRef={DetailHeaderRef}
         ImageContainerRef={ImageContainerRef}
         reviewRef={reviewRef}
@@ -111,6 +116,8 @@ const DetailContainer = () => {
         bookingInfoRef={bookingInfoRef}
         isCalendarOpen={isCalendarOpen}
         setIsCalendarOpen={setIsCalendarOpen}
+        isGuestOpen={isGuestOpen}
+        setIsGuestOpen={setIsGuestOpen}
       />
       <Detail
         showModal={showModal}
@@ -121,7 +128,6 @@ const DetailContainer = () => {
         ImageContainerRef={ImageContainerRef}
         reviewRef={reviewRef}
         facilityRef={facilityRef}
-        GuestModalRef={GuestModalRef}
         infoRes={infoRes}
         moveToReserve={moveToReserve}
         isLoading={isLoading}
@@ -138,6 +144,9 @@ const DetailContainer = () => {
         bookingInfoRef={bookingInfoRef}
         isCalendarOpen={isCalendarOpen}
         setIsCalendarOpen={setIsCalendarOpen}
+        isGuestOpen={isGuestOpen}
+        setIsGuestOpen={setIsGuestOpen}
+        peopleLimit={peopleLimit}
       />
       <Modal>
         <CarouselModal

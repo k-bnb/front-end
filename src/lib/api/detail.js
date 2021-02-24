@@ -10,5 +10,5 @@ export const detailInformation = (roomId) =>
 
 export const requestComments = (roomId, pageNum) =>
   client.get(
-    `https://backend.kbnb.tk/comment?roomId=${roomId}&page=${pageNum}&size=6`,
+    `https://backend.kbnb.tk/comment?roomId=${roomId}&page=${pageNum}&size=6&sort=date,DESC`,
   );

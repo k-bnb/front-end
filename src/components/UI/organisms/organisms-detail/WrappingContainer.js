@@ -45,6 +45,9 @@ const WrappingContainer = ({
   GuestModalRef,
   isCalendarOpen,
   setIsCalendarOpen,
+  isGuestOpen,
+  setIsGuestOpen,
+  peopleLimit,
 }) => {
   return (
     <InfoContainer>
@@ -70,6 +73,9 @@ const WrappingContainer = ({
           isCalendarOpen={isCalendarOpen}
           setIsCalendarOpen={setIsCalendarOpen}
           GuestModalRef={GuestModalRef}
+          isGuestOpen={isGuestOpen}
+          setIsGuestOpen={setIsGuestOpen}
+          peopleLimit={peopleLimit}
         />
       </BookingSummaryBox>
     </InfoContainer>

@@ -47,7 +47,6 @@ const HeaderDetail = ({
   ImageContainerRef,
   reviewRef,
   facilityRef,
-  GuestModalRef,
   isOpen,
   setIsOpen,
   formState,
@@ -57,6 +56,8 @@ const HeaderDetail = ({
   bookingInfoRef,
   isCalendarOpen,
   setIsCalendarOpen,
+  isGuestOpen,
+  setIsGuestOpen,
 }) => {
   const showButton = useOnScreen(DetailHeaderRef, '-80px'); // detail header가 스크롤 된 경우, 예약하기 버튼이 가려지면 헤더에 뜬다
   const showDetailHeader = useOnScreen(ImageContainerRef, '0px'); // 사진5개 가지고있는 컨테이너를 뷰포트가 지나면 헤더가 생긴다.
@@ -113,7 +114,6 @@ const HeaderDetail = ({
         <HeaderDetailScrolledContainer
           DetailHeaderRef={DetailHeaderRef}
           bookingInfoRef={bookingInfoRef}
-          GuestModalRef={GuestModalRef}
           showButton={showButton}
           reviewRef={reviewRef}
           facilityRef={facilityRef}
@@ -123,6 +123,8 @@ const HeaderDetail = ({
           setModal={setModal}
           isCalendarOpen={isCalendarOpen}
           setIsCalendarOpen={setIsCalendarOpen}
+          isGuestOpen={isGuestOpen}
+          setIsGuestOpen={setIsGuestOpen}
           setIsOpen={setIsOpen}
         />
       )}

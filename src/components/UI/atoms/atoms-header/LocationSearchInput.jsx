@@ -83,15 +83,16 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext, setNavModalState }) {
             console.log('dsj323242');
             const results = await getGeocode({ address }); // 유저가 검색한 address를 인수로 전달하여 promise를 반환받음.
             const { lat, lng } = await getLatLng(results[0]); // 결과에서 lat과 lng정보를 추출
+            console.log(results[0]);
             dispatch(
               // 좌표값 store로 전달
               locationInput({
                 latitude: lat,
                 longitude: lng,
-                latitudeMax: results[0].geometry.viewport.Wa.j,
-                latitudeMin: results[0].geometry.viewport.Wa.i,
-                longitudeMax: results[0].geometry.viewport.Qa.j,
-                longitudeMin: results[0].geometry.viewport.Qa.i,
+                latitudeMax: results[0].geometry.viewport.Pa.i,
+                latitudeMin: results[0].geometry.viewport.Pa.g,
+                longitudeMax: results[0].geometry.viewport.Va.i,
+                longitudeMin: results[0].geometry.viewport.Va.g,
               }),
             );
 
@@ -118,9 +119,6 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext, setNavModalState }) {
             SearchTypeHandler('location');
           }}
           onBlur={() => {}}
-          // onFocus={(e) => {
-          //   SearchTypeHandler('location');
-          // }}
           autoComplete="off"
           selectOnClick={true}
         />
@@ -155,7 +153,3 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext, setNavModalState }) {
 }
 
 export default LocationSearchInput;
-
-// function onlyKorean(str) {
-//   return str.replace(/[^\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F]/gi, '');
-// }

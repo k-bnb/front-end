@@ -126,7 +126,6 @@ const HeaderDetailScrolled = ({
   reviewRef,
   facilityRef,
   DetailHeaderRef,
-  GuestModalRef,
   formState,
   setFormState,
   modal,
@@ -138,6 +137,8 @@ const HeaderDetailScrolled = ({
   setIsCalendarOpen,
   grade,
   setIsOpen,
+  isGuestOpen,
+  setIsGuestOpen,
 }) => {
   const [localShowButton, setLocalShowButton] = useState(showButton);
   const [displayAnimation, setDisplayAnimation] = useState(false);
@@ -208,7 +209,8 @@ const HeaderDetailScrolled = ({
             isCalendarOpen={isCalendarOpen}
             setIsCalendarOpen={setIsCalendarOpen}
             setIsOpen={setIsOpen}
-            GuestModalRef={GuestModalRef}
+            isGuestOpen={isGuestOpen}
+            setIsGuestOpen={setIsGuestOpen}
           />
           <Grade small={true} grade={grade} />
         </div>

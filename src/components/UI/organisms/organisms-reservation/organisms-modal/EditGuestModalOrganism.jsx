@@ -6,6 +6,7 @@ import CommonButton from '../../../atoms/atoms-reservation/atoms-modal/CommonBut
 import CommonTemp from '../../../atoms/atoms-reservation/atoms-modal/CommonTemp';
 import CommonText from '../../../atoms/atoms-reservation/atoms-modal/CommonText';
 import GuestNumberModalUnit from '../../../molecules/molecules-header/GuestNumberModalUnit';
+import { useSelector } from 'react-redux';
 
 const HeaderContainer = styled.div`
   padding: 64px 24px 16px;
@@ -40,11 +41,26 @@ function EditGuestModalOrganism({
           <CommonText guestTitle>게스트</CommonText>
         </HeaderContainer>
         <MainContainer>
-          <GuestNumberModalUnit reservePage type={'성인'} name="numOfAdult" />
+          <GuestNumberModalUnit
+            reservePage
+            type={'성인'}
+            name="numOfAdult"
+            peopleLimit={peopleLimit}
+          />
 
-          <GuestNumberModalUnit reservePage type={'어린이'} name="numOfKid" />
+          <GuestNumberModalUnit
+            reservePage
+            type={'어린이'}
+            name="numOfKid"
+            peopleLimit={peopleLimit}
+          />
 
-          <GuestNumberModalUnit reservePage type={'유아'} name="numOfInfant" />
+          <GuestNumberModalUnit
+            reservePage
+            type={'유아'}
+            name="numOfInfant"
+            peopleLimit={peopleLimit}
+          />
 
           <CommonText guestLimitInfo>
             {`최대 ${peopleLimit}명. 유아는 숙박인원에 포함되지 않습니다.`}

@@ -2,7 +2,6 @@ import { createAction, handleActions } from 'redux-actions';
 import createRequestSaga from '../lib/createRequestSaga';
 import * as API from '../lib/api/detail';
 import { takeLatest } from 'redux-saga/effects';
-import produce from 'immer';
 // Action Type
 const SEARCH_TO_DETAIL = 'detail/SEARCH_TO_DETAIL';
 const DATE_CHANGE_DETAIL = 'detail/DATE_CHANGE_DETAIL';
@@ -89,7 +88,7 @@ export function* detailSaga() {
 const initialStates = {
   startDate: '',
   endDate: '',
-  numOfAdult: 0,
+  numOfAdult: 1,
   numOfKid: 0,
   numOfInfant: 0,
   infoRes: {

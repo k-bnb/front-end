@@ -62,6 +62,9 @@ const Detail = ({
   GuestModalRef,
   isCalendarOpen,
   setIsCalendarOpen,
+  isGuestOpen,
+  setIsGuestOpen,
+  peopleLimit,
 }) => {
   const CheckInDate = () => {
     const strDate = detailObj.startDate ? detailObj.startDate.split('-') : '';
@@ -109,6 +112,9 @@ const Detail = ({
           isCalendarOpen={isCalendarOpen}
           setIsCalendarOpen={setIsCalendarOpen}
           GuestModalRef={GuestModalRef}
+          isGuestOpen={isGuestOpen}
+          setIsGuestOpen={setIsGuestOpen}
+          peopleLimit={peopleLimit}
         />
         <ReviewContainer
           reviewRef={reviewRef}
