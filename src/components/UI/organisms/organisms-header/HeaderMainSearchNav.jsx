@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled, { css } from 'styled-components';
 import SearchButton from '../../atoms/atoms-header/SearchButton';
 import Text from '../../atoms/atoms-header/Text';
@@ -113,7 +113,11 @@ const HeaderMainSearchNav = ({
             <Text bold noPadding>
               검색 시작하기
             </Text>
-            <SearchButton isScrolled={isScrolled} />
+            <SearchButton
+              isScrolled={isScrolled}
+              navModalState={navModalState}
+              setNavModalState={setNavModalState}
+            />
           </div>
         )}
       </HeaderMainSearchNavBlock>

@@ -18,7 +18,7 @@ const FooterBtnStyle = styled.div`
     font-weight: 800;
     font-size: 1.7rem;
     border-radius: 10px;
-    background-color: #fff;
+    background-color: #000;
     padding: 10px 20px;
   }
 `;

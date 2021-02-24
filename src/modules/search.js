@@ -24,6 +24,7 @@ const LOCATION_INPUT = 'search/LOCATION_INPUT';
 const DATE_INPUT = 'search/DATE_INPUT';
 const GUEST_INPUT = 'search/GUEST_INPUT';
 const SPECIFIC_INPUT_CLEAR = 'search/SPECIFIC_INPUT_CLEAR';
+const GET_LENGTH_FOR_ZOOM = 'search/GET_LENGTH_FOR_ZOOM';
 
 // Detail Filter
 
@@ -59,6 +60,10 @@ export const specificInputClear = createAction(
   SPECIFIC_INPUT_CLEAR,
   (form) => form,
 ); // form: 초기화할 정보(위치, 날짜, 인원)
+export const getLengthForZoom = createAction(
+  GET_LENGTH_FOR_ZOOM,
+  (length) => length,
+);
 export const searching = createAction(
   SEARCHING,
   ({
@@ -100,6 +105,7 @@ export const roomnumInput = createAction(ROOMNUM_INPUT, (name, value) => ({
 //initial State
 const initialState = {
   destinationName: '',
+  lengthForZoom: '',
   searchReq: {
     locationSearch: {
       latitude: '',
@@ -171,11 +177,23 @@ const search = handleActions(
       produce(state, (draft) => {
         draft.searchReq[form] = initialState.searchReq[form]; // 선택한 form 초기화.
       }),
+    [GET_LENGTH_FOR_ZOOM]: (state, { payload: length }) => ({
+      ...state,
+      lengthForZoom: length,
+    }),
     [SEARCHING_SUCCESS]: (state, action) => {
-      return produce(state, (draft) => {
-        draft.searchRes = action.payload._embedded.roomDtoList;
-        draft.totalPage = action.payload.page;
-      });
+      console.log('heeee');
+      if (action.payload._embedded) {
+        return produce(state, (draft) => {
+          draft.searchRes = action.payload._embedded.roomDtoList;
+          draft.totalPage = action.payload.page;
+        });
+      } else {
+        return produce(state, (draft) => {
+          draft.searchRes = [];
+          draft.totalPage = 0;
+        });
+      }
     },
 
     [SEARCHING_FAILURE]: (state, { payload: { error } }) => ({

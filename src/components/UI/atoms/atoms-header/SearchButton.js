@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { BiSearch } from 'react-icons/bi';
-import { HiSearch } from 'react-icons/hi';
 
 const SearchButtonBlock = styled.button`
   background: rgb(255, 56, 92);
@@ -35,7 +34,15 @@ const SearchButtonBlock = styled.button`
     `}
 `;
 
-const SearchButton = ({ isScrolled, onClick, rooms, searchBtnRef }) => {
+const SearchButton = ({
+  isScrolled,
+  onClick,
+  rooms,
+  searchBtnRef,
+  navModalState,
+  setNavModalState,
+  isModalOpen,
+}) => {
   return (
     <>
       <SearchButtonBlock
@@ -45,8 +52,7 @@ const SearchButton = ({ isScrolled, onClick, rooms, searchBtnRef }) => {
         rooms={rooms}
         ref={searchBtnRef}
       >
-        {!isScrolled && <BiSearch className="search-button-unit" />}
-        {isScrolled && <HiSearch className="search-button-unit" />}
+        <BiSearch className="search-button-unit" />
       </SearchButtonBlock>
     </>
   );

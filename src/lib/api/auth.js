@@ -2,14 +2,14 @@ import client from './client';
 
 // 로그인
 export const login = ({ email, password }) =>
-  client.post('http://3.34.198.174:8080/auth/login', {
+  client.post('https://kbnb-backend.herokuapp.com/auth/login', {
     email,
     password,
   });
 
 // 회원가입
 export const register = ({ name, email, password, birth }) =>
-  client.post('http://3.34.198.174:8080/auth/signup', {
+  client.post('https://backend.kbnb.tk/auth/signup', {
     name,
     email,
     password,
@@ -18,7 +18,7 @@ export const register = ({ name, email, password, birth }) =>
 
 // 유저 정보 조회
 export const userMe = (token) =>
-  client.get('http://3.34.198.174:8080/user/me', {
+  client.get('https://kbnb-backend.herokuapp.com/user/me', {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export const userMe = (token) =>
   });
 
 export const userReservation = ({ token }) =>
-  client.get('http://3.34.198.174:8080/reservation', {
+  client.get('https://kbnb-backend.herokuapp.com/reservation', {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ export const userInfoEmailRemake = ({ token, email }) => {
   const headers = { headers: { Authorization: `Bearer ${token}` } };
   console.log(body);
   return client.post(
-    'http://3.34.198.174:8080/user/update/email',
+    'https://kbnb-backend.herokuapp.com/user/update/email',
     body,
     headers,
   );
@@ -83,7 +83,10 @@ export const reserveCancel = ({ token, reservationId, name, reason }) => {
     },
   };
 
-  return client.delete(`http://3.34.198.174:8080/reservation`, config);
+  return client.delete(
+    `https://kbnb-backend.herokuapp.com/reservation`,
+    config,
+  );
 };
 
 // 리뷰 작성
@@ -115,5 +118,9 @@ export const writeReview = ({
     description,
   };
 
-  return client.post(`http://3.34.198.174:8080/comment`, data, headers);
+  return client.post(
+    `https://kbnb-backend.herokuapp.com/comment`,
+    data,
+    headers,
+  );
 };

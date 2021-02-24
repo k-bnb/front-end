@@ -15,6 +15,7 @@ const ReserveConfirmContainer = () => {
   const dispatch = useDispatch();
 
   const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+
   useEffect(() => {
     // if (reserveRes.reserveRes === null) return;
     const next = reserveRes?.reserveRes?.filter((item) =>

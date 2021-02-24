@@ -15,8 +15,8 @@ const SearchNavGuestUnitLi = styled.li`
   position: relative;
   display: flex;
   justify-content: space-between;
-  width: 27%;
-  max-width: 25%;
+  width: 100%;
+  max-width: 29%;
   border-radius: 30px;
   cursor: pointer;
   &:hover {
@@ -32,14 +32,21 @@ const SearchNavGuestUnitLi = styled.li`
   }
   .total-guest-num {
     color: black;
-    max-width: 121px;
+    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+    ${(props) =>
+      props.isModalOpen &&
+      css`
+        color: red;
+        max-width: 100px;
+      `}
   }
 
   ${(props) =>
     props.navModalState.guest &&
     css`
+      max-width: 32%;
       background-color: rgb(235, 231, 231);
     `}
 `;
@@ -63,9 +70,9 @@ const SearchNavGuestUnit = ({
         if (e.target.matches('.search-button-unit')) return;
         SearchTypeHandler('guest');
       }}
-      onFocus={() => {
-        SearchTypeHandler('guest');
-      }}
+      // onFocus={() => {
+      //   SearchTypeHandler('guest');
+      // }}
       tabIndex="0"
     >
       <div className="guest-texts">
@@ -94,6 +101,7 @@ const SearchNavGuestUnit = ({
       </div>
       <SearchButtonUnit
         navModalState={navModalState}
+        setNavModalState={setNavModalState}
         SearchTypeHandler={SearchTypeHandler}
         dispatch={dispatch}
         locationSearch={locationSearch}

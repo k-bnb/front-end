@@ -86,7 +86,7 @@ const Grade = ({
       infobox={infobox}
     >
       <ScoreStar reviewModal={reviewModal} bookingInfo={bookingInfo} />
-      {grade}
+      {grade.toFixed(1)}
     </AverageGrade>
   );
 };

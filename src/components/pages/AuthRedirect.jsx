@@ -7,7 +7,7 @@ const AuthRedirect = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const parsed = qs.parse(history.location.search);
-  localStorage.setItem('token', parsed.token);
+  localStorage.setItem('token', parsed.token ? parsed.token : null);
   const accessToken = localStorage.getItem('token');
 
   if (accessToken) {

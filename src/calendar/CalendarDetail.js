@@ -3,7 +3,7 @@ import { DayPickerRangeController } from 'react-dates';
 import moment from 'moment';
 import 'react-dates/initialize';
 import { useDispatch, useSelector } from 'react-redux';
-import { dateInput } from '../modules/search';
+// import { dateInput } from '../modules/search';
 import styled, { css } from 'styled-components';
 import Text from '../components/UI/atoms/atoms-header/Text';
 import CloseBtn from '../components/UI/atoms/atoms-detail/CloseBtn';
@@ -238,8 +238,6 @@ function Datepicker({ setIsDateBorderThick, setIsCalendarOpen }) {
 
   let { startDate, endDate } = dateRange;
 
-  // startDate의 값이 있으며, 이미 string으로 변화되어 store에 저장된경우
-  // 달력에는 다시 moment 객체로 변환시켜 startdate, enddate로 입력시킨다.
   if (startDate && !startDate._d) {
     startDate = moment(startDate);
   }
@@ -261,6 +259,7 @@ function Datepicker({ setIsDateBorderThick, setIsCalendarOpen }) {
     if (startDate.startDate && !startDate.endDate) {
       let startD = moment(startDate.startDate._d).format('YYYY-MM-DD');
       dispatch(dateChangeDetail('startDate', startD, 'checkIn'));
+
       setdateRange({ startDate: startD, endDate: startD });
     }
     if (startDate.startDate && startDate.endDate) {

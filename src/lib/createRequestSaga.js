@@ -9,6 +9,7 @@ export default function createRequestSaga(type, request) {
   return function* (action) {
     yield put(startLoading(type)); // 로딩 시작, type: 요청 작업 종류
     try {
+      // yield put(pendingLoading(type));
       const response = yield call(request, action.payload);
       console.log(response);
       yield put({
@@ -21,7 +22,6 @@ export default function createRequestSaga(type, request) {
         payload: error.response.data,
       });
     }
-    yield delay(1000);
     yield put(finishLoading(type)); // 로딩 종료, type: 요청 작업 종류
   };
 }
