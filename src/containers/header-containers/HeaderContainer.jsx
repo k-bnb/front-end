@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import SkipNavigation from '../../components/templates/templates-header/SkipNabigation';
 
 const HeaderContainer = ({
+  GuestModalRef,
   DetailHeaderRef,
   ImageContainerRef,
   reviewRef,
@@ -138,6 +139,7 @@ const HeaderContainer = ({
       )}
       {match.params.roomId && (
         <HeaderDetail
+          GuestModalRef={GuestModalRef}
           isScrolled={isScrolled}
           setIsScrolled={setIsScrolled}
           isClicked={isClicked}

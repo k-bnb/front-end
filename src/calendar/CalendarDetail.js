@@ -3,7 +3,7 @@ import { DayPickerRangeController } from 'react-dates';
 import moment from 'moment';
 import 'react-dates/initialize';
 import { useDispatch, useSelector } from 'react-redux';
-import { dateInput } from '../modules/search';
+// import { dateInput } from '../modules/search';
 import styled, { css } from 'styled-components';
 import Text from '../components/UI/atoms/atoms-header/Text';
 import CloseBtn from '../components/UI/atoms/atoms-detail/CloseBtn';
@@ -182,7 +182,7 @@ const SelectionInfo = ({
       <CheckTxt>{text}</CheckTxt>
       <SelectionDate>
         <input
-          className="hi"
+          // className="hi"
           value={date}
           placeholder="YYYY.MM.DD"
           ref={CheckinInputRef || CheckoutInputRef}
@@ -245,20 +245,29 @@ function Datepicker({ setIsDateBorderThick, setIsCalendarOpen }) {
     endDate = moment(endDate);
   }
 
+  // checkIn date가 checkOut date 보다 이후 날짜 일때 모두 clear
+  // const AdjustCheckDate = () => {
+  //   if (
+  //     moment(endDate).diff(moment(startDate)) > 0 &&
+  //     moment(detailEndDate).diff(moment(detailStartDate)) > 0
+  //   )
+  //     return;
+  //   dispatch(clearCheckDateDtail());
+  // };
+
   const handleOnDateChange = (startDate, endDate) => {
     if (startDate.startDate && !startDate.endDate) {
       let startD = moment(startDate.startDate._d).format('YYYY-MM-DD');
-      dispatch(dateInput('startDate', startD)); // 시작일만 선택시 시작일 main page에 dispatch
-      dispatch(dateChangeDetail('startDate', startD));
+      dispatch(dateChangeDetail('startDate', startD, 'checkIn'));
+
       setdateRange({ startDate: startD, endDate: startD });
     }
     if (startDate.startDate && startDate.endDate) {
       let startD = moment(startDate.startDate._d).format('YYYY-MM-DD');
       let endD = moment(startDate.endDate._d).format('YYYY-MM-DD');
-      dispatch(dateInput('startDate', startD)); // 시작일만 선택시 시작일 dispatch
-      dispatch(dateInput('endDate', endD)); // 끝나는일 선택시 dispatch
-      dispatch(dateChangeDetail('endDate', endD));
+      dispatch(dateChangeDetail('endDate', endD, 'checkOut'));
       setdateRange({ startDate: startD, endDate: endD });
+      // AdjustCheckDate();
     }
     setdateRange(startDate, endDate);
   };

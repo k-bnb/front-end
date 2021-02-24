@@ -9,6 +9,7 @@ import { guestInput, specificInputClear } from '../../../../modules/search';
 import { changeGuest, initialGuest } from '../../../../modules/reserve';
 import CircleButton from '../../atoms/atoms-header/CircleButtonHeader';
 import Text from '../../atoms/atoms-header/Text';
+
 const GuestNumberModalUnitBlock = styled.div`
   display: flex;
   justify-content: space-between;
@@ -44,7 +45,7 @@ const GuestNumberModalUnit = ({
   name: searchName, // searchName은 메인페이지 헤더에서 사용될때 search 모듈 사용할때 쓰는 name을 이름바꿔사용
   detailPage,
   reservePage,
-  infoRes,
+  // infoRes,
   searchBtnRef,
 }) => {
   // type (성인, 어린이, 유아) , detail(13세이상..), name:button이름 (numOfAdult, numOfKid, numOfInfant)
@@ -57,12 +58,15 @@ const GuestNumberModalUnit = ({
   const { guestSearch: reserveGuestSearch } = useSelector(
     (state) => state.reserve,
   );
+
   const disableHandler = () => (searchName === 'numOfAdult' ? 16 : 5); // 성인이면 최대값16, 나머지 5
+
   // 인원 제한보다 많은 인원을 증가 시 버튼 disable한다.
   const { peopleLimit } = useSelector(({ reserve }) => reserve.infoRes);
-  const { numOfAdult, numOfKid } = reserveGuestSearch;
-  const ReserveTotalGuestNum = numOfAdult + numOfKid;
+  const { numOfAdult, numOfKid, numOfInfant } = reserveGuestSearch;
+  const ReserveTotalGuestNum = numOfAdult + numOfKid + numOfInfant;
   const DetailTotalGuestNum = detail.numOfAdult + detail.numOfKid;
+
   // 성인이 없이 유아, 어린이만 증가시킬때, 성인도 같이 증가시키는 함수
   const increaseWithoutAdult = () => {
     // 성인이 아니고, 성인이 0명 일 경우 성인도 같이 1명 증가.
@@ -72,6 +76,7 @@ const GuestNumberModalUnit = ({
       );
     }
   };
+
   const decreaseWhenNoAdult = () => {
     // 성인이 1 -> 0명이 될떄, 유아, 어린이가 있다면 모두 0명이 된다.
     if (detailPage && detail.numOfAdult === 1 ? disableHandler() : '')
@@ -86,7 +91,7 @@ const GuestNumberModalUnit = ({
   // detail page : 성인 없이 유아, 어린이만 증가시킬 때, 성인도 같이 증가시키는 함수
   const detailIncreaseWithoutAdult = () => {
     if (searchName !== 'numOfAdult' && !detail.numOfAdult) {
-      dispatch(guestChangeDetail('numOfAdult', 1));
+      dispatch(guestChangeDetail('numOfAdult', 1, `detail${searchName}`));
     }
   };
   const detailDecreaseWhenNoAdult = () => {
@@ -144,7 +149,13 @@ const GuestNumberModalUnit = ({
           onDecrease={() => {
             if (detailPage) {
               detailDecreaseWhenNoAdult();
-              dispatch(guestChangeDetail(searchName, detailName - 1));
+              dispatch(
+                guestChangeDetail(
+                  searchName,
+                  detailName - 1,
+                  `detail${searchName}`,
+                ),
+              );
               return;
             }
             decreaseWhenNoAdult();
@@ -190,7 +201,13 @@ const GuestNumberModalUnit = ({
           onIncrease={() => {
             if (detailPage) {
               detailIncreaseWithoutAdult();
-              dispatch(guestChangeDetail(searchName, detailName + 1));
+              dispatch(
+                guestChangeDetail(
+                  searchName,
+                  detailName + 1,
+                  `detail${searchName}`,
+                ),
+              );
               return;
             }
             if (reservePage) {
@@ -215,6 +232,16 @@ const GuestNumberModalUnit = ({
           }}
           searchBtnRef={searchBtnRef}
           disable={
+            // detailPage
+            //   ? DetailTotalGuestNum === peopleLimit
+            //     ? disableHandler()
+            //     : ''
+            //   : reservePage
+            //   ? ReserveTotalGuestNum >= peopleLimit
+            //     ? disableHandler()
+            //     : ''
+            //   : guestSearch[searchName] >= disableHandler()
+
             detailPage || reservePage
               ? (ReserveTotalGuestNum || DetailTotalGuestNum) >= peopleLimit
                 ? disableHandler()
