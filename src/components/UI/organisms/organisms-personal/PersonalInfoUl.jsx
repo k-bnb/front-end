@@ -65,7 +65,6 @@ const PersonalInfoUl = ({
   cancelModalEmail,
   nameRef,
   KeyDown,
-  imageImg,
 }) => {
   // const [emailOk, setEmailOk] = useState(false);
   // useEffect(() => {
@@ -75,7 +74,11 @@ const PersonalInfoUl = ({
   //     setEmailOk(true);
   //   }
   // }, [emailCheck]);
+  const [imageImg, setImageImg] = useState();
 
+  useEffect(() => {
+    setImageImg(imageUrl);
+  }, [imageImg, imageUrl]);
   console.log(imageImg);
   return (
     <PersonalInfoUIStyle onClick={fix.cancel ? cancelclick : fixInfoBtn}>
@@ -117,14 +120,9 @@ const PersonalInfoUl = ({
             />
           ) : (
             <>
-              {imageImg && (
-                <div className="imgPerson">
-                  <img src={imageImg} alt="hello" />
-                </div>
-              )}
               {imageUrl ? (
                 <div className="imgPerson">
-                  <img src={userInfo.imageUrl} alt="hello" />
+                  <img src={imageImg} alt="hello" />
                 </div>
               ) : (
                 <TextStyle>지정되지 않음</TextStyle>
@@ -178,20 +176,21 @@ const PersonalInfoUl = ({
           ) : (
             <TextStyle>{email}</TextStyle>
           )}
-
-          <Modal>
-            <NoEmailModal
-              emailCheck={emailCheck}
-              loading={loading}
-              email={email}
-              ChangeInputBtn={ChangeInputBtn}
-              personInfoChange={personInfoChange}
-              personInfoEmailSubmit={personInfoEmailSubmit}
-              emailOk={emailOk}
-              personInfoEmailSubmitKeypress={personInfoEmailSubmitKeypress}
-              cancelModalEmail={cancelModalEmail}
-            ></NoEmailModal>
-          </Modal>
+          {(emailOk || loading['user/CHANGE_INPUT_USER_EMAIL_SUBMIT']) && (
+            <Modal>
+              <NoEmailModal
+                emailCheck={emailCheck}
+                loading={loading}
+                email={email}
+                ChangeInputBtn={ChangeInputBtn}
+                personInfoChange={personInfoChange}
+                personInfoEmailSubmit={personInfoEmailSubmit}
+                emailOk={emailOk}
+                personInfoEmailSubmitKeypress={personInfoEmailSubmitKeypress}
+                cancelModalEmail={cancelModalEmail}
+              ></NoEmailModal>
+            </Modal>
+          )}
         </div>
         <Button name="emailAddress" className="btn" greenText>
           {!fix.emailAddress ? '수정' : '취소'}

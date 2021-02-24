@@ -52,7 +52,6 @@ const PersonalTemplate = ({
   personInfoEmailSubmitKeypress,
   cancelModalEmail,
   KeyDown,
-  imageImg,
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 900px)',
@@ -88,7 +87,6 @@ const PersonalTemplate = ({
               personInfoEmailSubmitKeypress={personInfoEmailSubmitKeypress}
               cancelModalEmail={cancelModalEmail}
               KeyDown={KeyDown}
-              imageImg={imageImg}
             />
             {isPc && (
               <PcDiv>
