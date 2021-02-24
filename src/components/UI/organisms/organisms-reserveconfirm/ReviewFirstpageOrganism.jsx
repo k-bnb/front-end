@@ -55,7 +55,6 @@ function ReviewFirstpageOrganism({
   changeStarRating,
   rating,
 }) {
-  console.log(rating);
   const {
     cleanliness,
     accuracy,
@@ -65,14 +64,6 @@ function ReviewFirstpageOrganism({
     priceSatisfaction,
   } = rating;
 
-  console.log(
-    cleanliness,
-    accuracy,
-    communication,
-    locationRate,
-    checkIn,
-    priceSatisfaction,
-  );
   return (
     <Container disappear={reviewModalState}>
       {/* header */}
