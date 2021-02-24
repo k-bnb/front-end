@@ -20,10 +20,6 @@ const ReservationContainer = () => {
 
   const token = useSelector((state) => state.auth.token);
 
-  // const { checkDateSearch, guestSearch } = useSelector(
-  //   ({ search }) => search.searchReq,
-  // );
-
   // detail redux에서 reserve 페이지에 보여지는 상태 가져 오기
   const {
     id,
@@ -63,11 +59,21 @@ const ReservationContainer = () => {
     numOfInfant: infantNumber,
   } = useSelector(({ reserve }) => reserve.guestSearch);
 
-  const { id: roomId, roomCost: testCost, name: testName } = useSelector(
+  const { id: roomId, roomCost: reserveRoomCost, name: testName } = useSelector(
     ({ reserve }) => reserve.infoRes,
   );
 
   const { infoRes, reserveError } = useSelector(({ reserve }) => reserve);
+
+  // const [completeModal, setCompleteModal] = useState(null);
+
+  // useEffect(() => {
+  //   setCompleteModal(reserveError?.error);
+  // });
+
+  // console.log(completeModal);
+
+  // console.log(reserveError?.error);
 
   const { locationDetail } = useSelector(({ detail }) => detail.infoRes);
 
@@ -82,6 +88,9 @@ const ReservationContainer = () => {
   const checkDateSearch = { startDate, endDate };
 
   const { startDate: checkIn, endDate: checkOut } = checkDate;
+
+  //  성인 + 어린이 수
+  const guestNumber = adult + kid;
 
   //  리펙토링시 객체로 묶기
   const [dateModal, setDateModal] = useState(false);
@@ -107,11 +116,16 @@ const ReservationContainer = () => {
     [dispatch],
   );
 
-  //  성인 + 어린이 수
-  const guestNumber = adult + kid;
-
   // 확인 button 클릭해서 예약하기 event function
   const click = useCallback(() => {
+    console.log(
+      roomId,
+      checkIn,
+      checkOut,
+      guestNumber,
+      infantNumber,
+      totalCost,
+    );
     setComfirmModal(true);
 
     BootPay.request({
@@ -142,9 +156,9 @@ const ReservationContainer = () => {
       },
     })
       .error((data) => console.log(data))
-      .confirm(async ({ price, receipt_id }) => {
+      .confirm(({ price, receipt_id }) => {
         try {
-          await dispatch(
+          dispatch(
             reserving(
               roomId,
               checkIn,
@@ -167,7 +181,19 @@ const ReservationContainer = () => {
 
         BootPay.removePaymentWindow();
       });
-  }, []);
+  }, [
+    reserveRoomCost,
+    dispatch,
+    testName,
+    roomId,
+    checkIn,
+    checkOut,
+    guestNumber,
+    infantNumber,
+    totalCost,
+    message,
+    token,
+  ]);
 
   const saveDate = useCallback(() => {
     setDateModal(!dateModal);

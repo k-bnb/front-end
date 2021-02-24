@@ -169,7 +169,7 @@ const initialState = {
   reserveReviewReq: {
     description: '',
   },
-  reserveReiewRes: [],
+  // reserveReiewRes: [],
   userInfoError: null,
   reserveError: null,
   reserveReviewError: null,
@@ -270,15 +270,16 @@ const user = handleActions(
       ...state,
       reserveReviewReq: { ...state.reserveReviewReq, description: '' },
     }),
-    [REVIEW_SUCCESS]: (state, _) => {
-      // 후기 작성한 방 localStorage에 저장해서 다시 후기 작성하는 button 막기
-      const roomId = localStorage.getItem('completeReviewRoomId');
+    // [REVIEW_SUCCESS]: (state, _) => {
+    //   // 후기 작성한 방 localStorage에 저장해서 다시 후기 작성하는 button 막기
+    //   const roomId = [];
+    //   roomId.push(localStorage.getItem('completeReviewRoomId'));
 
-      return {
-        ...state,
-        reserveReiewRes: [...state.reserveReiewRes, roomId],
-      };
-    },
+    //   return {
+    //     ...state,
+    //     reserveReiewRes: [...state.reserveReiewRes, ...roomId],
+    //   };
+    // },
     [REVIEW_FAILURE]: (state, { payload: reserveReviewError }) => ({
       ...state,
       reserveReviewError,

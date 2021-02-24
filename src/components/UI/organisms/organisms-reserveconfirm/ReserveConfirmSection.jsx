@@ -39,8 +39,8 @@ const ReserveConfirmSection = ({
   resonChange,
   miniModal,
   miniModalCancelBtn,
+  reserveconfirmLoading,
 }) => {
-  console.log(list);
   return (
     <>
       <ReserveConfirmNav active={active} activClick={activClick} />
@@ -96,6 +96,7 @@ const ReserveConfirmSection = ({
               reviewRoomId={reviewRoomId}
               list={list}
               review={review}
+              reserveconfirmLoading={reserveconfirmLoading}
             />
           </Modal>
         )}
