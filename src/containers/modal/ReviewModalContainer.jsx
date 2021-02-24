@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ReviewModalOrganism from '../../components/UI/organisms/organisms-reserveconfirm/ReviewModalOrganism';
 import {
@@ -12,11 +12,15 @@ const ReviewModalContainer = ({
   setReviewModalState,
   reviewRoomId,
   list,
+  reserveconfirmLoading,
 }) => {
   const dispatch = useDispatch();
 
   // review action create function 인자
   const { token } = useSelector(({ auth }) => auth);
+
+  // loading icon
+  const { loading } = useSelector((state) => state);
 
   // review action create function 인자 or textarea value의 상태 관리
   const { description } = useSelector(({ user }) => user.reserveReviewReq);
@@ -115,7 +119,6 @@ const ReviewModalContainer = ({
 
   // 후기 작성 완료 버튼 event function 및 모달 닫기, 초기화
   const completeReviewModal = (e) => {
-    console.log(e.target.name);
     if (e.target.name !== 'complete') return;
     // star rating 초기화
     setRating(initialRating);
@@ -123,8 +126,22 @@ const ReviewModalContainer = ({
     dispatch(initialInputReview());
 
     // 후기 작성한 방 roomId localStorage에 저장
-    localStorage.setItem('completeReviewRoomId', reservationId);
+    // console.log(localStorage.getItem('completeReviewRoomId'));
+    // const roomIdInfo = [];
+    // roomIdInfo.push(localStorage.getItem('completeReviewRoomId'));
 
+    //12  => ['12']  13 => ['12', '13'] => ['13']
+    // ['12']
+    localStorage.setItem('completeReviewRoomId', JSON.stringify(reservationId));
+    const x = localStorage.getItem('completeReviewRoomId');
+    console.log(x);
+
+    const y = localStorage.setItem('y', JSON.stringify([x, reservationId]));
+    console.log(y);
+    // localStorage.setItem('roomIdInfo', JSON.stringify(roomIdInfo));
+
+    // console.log(roomIdInfo);
+    //
     dispatch(
       review(
         token,
@@ -140,6 +157,8 @@ const ReviewModalContainer = ({
     );
 
     setReviewModalState(false);
+
+    setFormState('complete');
   };
 
   return (
@@ -158,6 +177,7 @@ const ReviewModalContainer = ({
       changeStarRating={changeStarRating}
       rating={rating}
       completeReviewModal={completeReviewModal}
+      reserveconfirmLoading={reserveconfirmLoading}
     />
   );
 };

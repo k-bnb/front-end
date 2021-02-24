@@ -28,9 +28,5 @@ export const reserve = ({
 
   const headers = { headers: { Authorization: `Bearer ${token}` } };
 
-  return client.post(
-    'https://kbnb-backend.herokuapp.com/reservation',
-    body,
-    headers,
-  );
+  return client.post('https://backend.kbnb.tk/reservation', body, headers);
 };
