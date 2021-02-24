@@ -25,11 +25,12 @@ const PersonalContainer = () => {
   useEffect(() => {
     if (emailCheck === null) {
       setEmailOk(false);
+      dispatch(initialStateUserError());
     } else {
       setEmailOk(true);
     }
-  }, [emailCheck]);
-  console.log(userInfo);
+  }, [dispatch, emailCheck]);
+
   const fixInfoBtn = (e) => {
     if (!e.target.matches('.btn')) return;
     if (e.target.name === 'name') {
@@ -167,7 +168,6 @@ const PersonalContainer = () => {
   const personInfoEmailSubmitKeypress = (e) => {
     if (e.key !== 'Enter') return;
     dispatch(changeInputUserEmailSubmit(token, e.target.name, e.target.value));
-
     if (emailOk) {
       sessionStorage.setItem(
         'userInfo',
@@ -179,12 +179,14 @@ const PersonalContainer = () => {
         }),
       );
       dispatch(initialStateUserError());
+      console.log('중복되었습니다');
+    } else if (!emailOk) {
+      setEmailOk(false);
     }
   };
 
   const personInfoEmailSubmit = (e) => {
     dispatch(changeInputUserEmailSubmit(token, e.target.name, e.target.value));
-
     if (emailOk) {
       sessionStorage.setItem(
         'userInfo',
@@ -196,6 +198,9 @@ const PersonalContainer = () => {
         }),
       );
       dispatch(initialStateUserError());
+      console.log('중복되었습니다');
+    } else if (!emailOk) {
+      setEmailOk(false);
     }
   };
   const personInfoChange = (e) => {
@@ -211,20 +216,16 @@ const PersonalContainer = () => {
   const cancelModalEmail = (e) => {
     if (e.target.matches('.bg')) {
       dispatch(changeInputPerson('email', userInfo.email));
+      dispatch(initialStateUserError());
       setEmailOk(false);
     }
     if (e.target.matches('.cancelBtn')) {
       dispatch(changeInputPerson('email', userInfo.email));
+      dispatch(initialStateUserError());
       setEmailOk(false);
     }
   };
 
-  const [imageImg, setImageImg] = useState();
-
-  const images = JSON.parse(sessionStorage.getItem('userInfo'));
-  useEffect(() => {
-    setImageImg(images.imageUrl);
-  }, [imageImg, images]);
   return (
     <>
       <PersonalTemplate
@@ -248,7 +249,6 @@ const PersonalContainer = () => {
         personInfoEmailSubmitKeypress={personInfoEmailSubmitKeypress}
         cancelModalEmail={cancelModalEmail}
         KeyDown={KeyDown}
-        imageImg={imageImg}
       />
     </>
   );
