@@ -122,12 +122,7 @@ const GuestNumberModalUnit = ({
       dispatch(initialGuest('guestSearch'));
     }
   };
-  // detail page: Guest 인원이 없을때 Adult 수를 하나 추가
-  // const IncreaseAdultWhenNoPerson = () => {
-  //   if (searchName === 'numOfAdult' && reserveGuestSearch.numOfAdult === 0) {
-  //     dispatch(guestChangeDetail('numOfAdult', detailName + 1));
-  //   }
-  // };
+
   return (
     <GuestNumberModalUnitBlock
       detailPage={detailPage}
@@ -220,15 +215,6 @@ const GuestNumberModalUnit = ({
           }}
           searchBtnRef={searchBtnRef}
           disable={
-            // detailPage
-            //   ? DetailTotalGuestNum === peopleLimit
-            //     ? disableHandler()
-            //     : ''
-            //   : reservePage
-            //   ? ReserveTotalGuestNum >= peopleLimit
-            //     ? disableHandler()
-            //     : ''
-            //   : guestSearch[searchName] >= disableHandler()
             detailPage || reservePage
               ? (ReserveTotalGuestNum || DetailTotalGuestNum) >= peopleLimit
                 ? disableHandler()

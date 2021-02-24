@@ -65,7 +65,7 @@ export const userInfoEmailRemake = ({ token, email }) => {
   const headers = { headers: { Authorization: `Bearer ${token}` } };
   console.log(body);
   return client.post(
-    'https://kbnb-backend.herokuapp.com/user/update/email',
+    'https://kbnb-backend.herokuapp.com/user/update',
     body,
     headers,
   );
