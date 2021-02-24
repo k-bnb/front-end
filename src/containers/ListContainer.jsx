@@ -88,6 +88,7 @@ const ListContainer = React.memo(() => {
 
   const plusBtn = (e) => {
     if (e.target.matches('button > span')) return;
+    if (+e.target.value === 16) return;
     dispatch(roomnumInput(e.target.name, ++e.target.value));
   };
 

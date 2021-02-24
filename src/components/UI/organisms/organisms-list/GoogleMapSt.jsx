@@ -14,7 +14,6 @@ const PcSize = styled.main`
   /* top: 0; */
   width: 100%;
   min-width: calc(100vw - 842px);
-
   height: 100vh;
 `;
 
