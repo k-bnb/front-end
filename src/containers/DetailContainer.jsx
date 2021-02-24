@@ -67,11 +67,14 @@ const DetailContainer = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(
-      searchToDetail(startDate, endDate, numOfAdult, numOfKid, numOfInfant),
-    );
     dispatch(getRoomAverageScore(roomId));
     dispatch(requestDetail(roomId));
+    if (sessionStorage.getItem('checkIn')) return;
+    if (startDate && endDate) {
+      dispatch(
+        searchToDetail(startDate, endDate, numOfAdult, numOfKid, numOfInfant),
+      );
+    }
   }, []);
 
   useEffect(() => {
@@ -87,6 +90,7 @@ const DetailContainer = () => {
     dispatch(detailToReserveGuest(guestSearch));
     window.scrollTo(0, 0);
   };
+
   // startDate, endDate 잠시 deps에서 빼놓음, 넣으면 detail 페이지에서 달력날짜바꾸면 다시
   // 서버에 숙소 상세 정보 요구함.
   // startDate, endDate, numOfAdult, numOfKid, numOfInfant,

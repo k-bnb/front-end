@@ -64,7 +64,7 @@ const ReserveBtn = ({
 
   const makeUserHasAudultGuest = () => {
     GuestModalRef.current.scrollIntoView({ behavior: 'smooth' });
-    setIsOpen(true);
+    // setIsOpen(true);
   };
 
   const makeUserLoggedIn = () => {
@@ -80,6 +80,7 @@ const ReserveBtn = ({
     }
     if (numOfAdult === 0) {
       makeUserHasAudultGuest();
+      setIsOpen(true);
       return;
     } //guest 인원의 성인이 선택되지 않았을시에 선택하게 함.
 

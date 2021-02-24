@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReserveBtn from '../../atoms/atoms-detail/ReserveBtn';
 import DatePersonBox from '../../molecules/molecules-detail/DatePersonBox';
@@ -45,8 +45,8 @@ const BookingInfo = ({
   DetailHeaderRef,
   modal,
   setModal,
-  isOpen,
-  setIsOpen,
+  // isOpen,
+  // setIsOpen,
   formState,
   setFormState,
   bookingInfoRef,
@@ -54,6 +54,7 @@ const BookingInfo = ({
   setIsCalendarOpen,
   GuestModalRef,
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const StartDate = moment(detailObj.startDate);
   const EndDate = moment(detailObj.endDate);
   const totalSchedule = EndDate.diff(StartDate, 'days');
@@ -103,7 +104,7 @@ const BookingInfo = ({
   } else {
     return (
       <PositionBox ref={bookingInfoRef}>
-        <BookingInfoContainer ref={GuestModalRef}>
+        <BookingInfoContainer>
           <OneDayPrice infoRes={infoRes} detailObj={detailObj} />
           <DatePersonBox
             detailObj={detailObj}

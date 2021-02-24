@@ -260,17 +260,13 @@ function Datepicker({ setIsDateBorderThick, setIsCalendarOpen }) {
   const handleOnDateChange = (startDate, endDate) => {
     if (startDate.startDate && !startDate.endDate) {
       let startD = moment(startDate.startDate._d).format('YYYY-MM-DD');
-      dispatch(dateInput('startDate', startD)); // 시작일만 선택시 시작일 main page에 dispatch
-      dispatch(dateChangeDetail('startDate', startD));
+      dispatch(dateChangeDetail('startDate', startD, 'checkIn'));
       setdateRange({ startDate: startD, endDate: startD });
     }
     if (startDate.startDate && startDate.endDate) {
       let startD = moment(startDate.startDate._d).format('YYYY-MM-DD');
       let endD = moment(startDate.endDate._d).format('YYYY-MM-DD');
-
-      dispatch(dateInput('startDate', startD)); // 시작일만 선택시 시작일 dispatch
-      dispatch(dateInput('endDate', endD)); // 끝나는일 선택시 dispatch
-      dispatch(dateChangeDetail('endDate', endD));
+      dispatch(dateChangeDetail('endDate', endD, 'checkOut'));
       setdateRange({ startDate: startD, endDate: endD });
       // AdjustCheckDate();
     }

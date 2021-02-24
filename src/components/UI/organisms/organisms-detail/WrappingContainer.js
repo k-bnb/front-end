@@ -63,7 +63,6 @@ const WrappingContainer = ({
           infoRes={infoRes}
           modal={modal}
           setModal={setModal}
-          isOpen={isOpen}
           setIsOpen={setIsOpen}
           formState={formState}
           setFormState={setFormState}
