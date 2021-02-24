@@ -35,11 +35,11 @@ export const searchToDetail = createAction(
 );
 export const dateChangeDetail = createAction(
   DATE_CHANGE_DETAIL,
-  (input, date) => ({ input, date }),
+  (input, date, checkDate) => ({ input, date, checkDate }),
 );
 export const guestChangeDetail = createAction(
   GUEST_CHANGE_DETAIL,
-  (input, guest) => ({ input, guest }),
+  (input, guest, guestNum) => ({ input, guest, guestNum }),
 );
 export const requestDetail = createAction(REQUEST_DETAIL, (id) => id);
 export const clearGuestDetail = createAction(CLEAR_GUEST_DETAIL);
@@ -150,14 +150,16 @@ const detail = handleActions(
       numOfKid,
       numOfInfant,
     }),
-    [DATE_CHANGE_DETAIL]: (state, { payload: { input, date } }) => ({
-      ...state,
-      [input]: date,
-    }),
-    [GUEST_CHANGE_DETAIL]: (state, { payload: { input, guest } }) => ({
-      ...state,
-      [input]: guest,
-    }),
+    [DATE_CHANGE_DETAIL]: (state, { payload: { input, date, checkDate } }) => {
+      // 날짜를 변경한 후에 새로고침을 했을 때 정보가 그대로 유지될 수 있도록
+      localStorage.setItem(checkDate, date);
+      return { ...state, [input]: date };
+    },
+    [GUEST_CHANGE_DETAIL]: (state, { payload: { input, guest, guestNum } }) => {
+      console.log(guestNum);
+      localStorage.setItem(guestNum, guest);
+      return { ...state, [input]: guest };
+    },
     [ROOM_ID_DETAIL]: (state, { payload: id }) => ({ ...state, rommId: id }),
     [CLEAR_GUEST_DETAIL]: (state, _) => ({
       ...state,

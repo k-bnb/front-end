@@ -8,13 +8,15 @@ import { extractMonthDate } from '../../../../lib/extractMonthDate';
 import Modal from '../../../../portal/Modal';
 import ReserveCancelModal from './ReserveCancelModal';
 import ReserveCancel from './ReserveCancel';
+import PageLoading from '../molecules-personalInfo/PageLoading';
 const ReserveConfirmListStyle = styled.div`
   /* border: 1px solid; */
   width: 100%;
+  position: relative;
   max-width: 340px;
   border-radius: 10px;
   margin-top: 20px;
-
+  min-height: 200px;
   margin-right: 2%;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
 
@@ -97,59 +99,72 @@ const ReserveConfirmList = ({
   cancelBtn,
   cancelModal,
   review,
+  reserveconfirmLoading,
 }) => {
   return (
     <ReserveConfirmListStyle>
-      <div className="Big-img">
-        <Img src={item.imgUrl} />
-      </div>
-      <div className="reserve-info">
-        <div className="reserve-date">
-          <TextStyle>
-            {extractMonthDate(item.checkIn).year}년{' '}
-            {extractMonthDate(item.checkIn).month}월{' '}
-            {extractMonthDate(item.checkIn).date}일
-          </TextStyle>
-          ~
-          <TextStyle>
-            {extractMonthDate(item.checkOut).year}년{' '}
-            {extractMonthDate(item.checkOut).month}월{' '}
-            {extractMonthDate(item.checkOut).date}일
-          </TextStyle>
-        </div>
-        <div className="reserve-title">
-          <TextStyle blackmiddlebold>{item.roomName}</TextStyle>
-        </div>
-        <div className="reserve-link">
-          <div className="small-img">
+      {reserveconfirmLoading['user/RESERVE_CONFIRM'] &&
+      reserveconfirmLoading['user/USER_INFO'] ? (
+        <PageLoading />
+      ) : (
+        <>
+          {' '}
+          <div className="Big-img">
             <Img src={item.imgUrl} />
           </div>
-          <div className="title">
-            <TextStyle>
-              *무료감귤체험*오직 한 팀을 위한 500평 감귤 과수원
-            </TextStyle>
+          <div className="reserve-info">
+            <div className="reserve-date">
+              <TextStyle>
+                {extractMonthDate(item.checkIn).year}년{' '}
+                {extractMonthDate(item.checkIn).month}월{' '}
+                {extractMonthDate(item.checkIn).date}일
+              </TextStyle>
+              ~
+              <TextStyle>
+                {extractMonthDate(item.checkOut).year}년{' '}
+                {extractMonthDate(item.checkOut).month}월{' '}
+                {extractMonthDate(item.checkOut).date}일
+              </TextStyle>
+            </div>
+            <div className="reserve-title">
+              <TextStyle blackmiddlebold>{item.roomName}</TextStyle>
+            </div>
+            <div className="reserve-link">
+              <div className="small-img">
+                <Img src={item.imgUrl} />
+              </div>
+              <div className="title">
+                <TextStyle>
+                  *무료감귤체험*오직 한 팀을 위한 500평 감귤 과수원
+                </TextStyle>
+              </div>
+              <MdKeyboardArrowRight />
+            </div>
           </div>
-          <MdKeyboardArrowRight />
-        </div>
-      </div>
-      <div className="reserve-more">
-        {item.status === '예약 완료' && (
-          <>
-            <Button
-              name="예약 취소"
-              value={item.reservationId}
-              onClick={cancel}
-            >
-              <TextStyle>예약 취소</TextStyle>
-            </Button>
-          </>
-        )}
-        {item.status === '완료된 여정' && (
-          <Button name="후기 작성" value={item.reservationId} onClick={review}>
-            <TextStyle>후기 작성</TextStyle>
-          </Button>
-        )}
-      </div>
+          <div className="reserve-more">
+            {item.status === '예약 완료' && (
+              <>
+                <Button
+                  name="예약 취소"
+                  value={item.reservationId}
+                  onClick={cancel}
+                >
+                  <TextStyle>예약 취소</TextStyle>
+                </Button>
+              </>
+            )}
+            {item.status === '완료된 여정' && (
+              <Button
+                name="후기 작성"
+                value={item.reservationId}
+                onClick={review}
+              >
+                <TextStyle>후기 작성</TextStyle>
+              </Button>
+            )}
+          </div>
+        </>
+      )}
     </ReserveConfirmListStyle>
   );
 };

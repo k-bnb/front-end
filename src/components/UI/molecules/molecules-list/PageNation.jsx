@@ -3,12 +3,18 @@ import styled from 'styled-components';
 // import Button from '../../atoms/atoms-list/Button';
 // import Pagination from 'react-pagination-library';
 import ReactPaginate from 'react-paginate';
-const PageStyle = styled.div`
-  min-width: 547px;
 
+const PageStyle = styled.div`
+  a:focus{
+    width:30px;
+    height:30px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 0px 2px #222;
+    padding-top: 5px;
+  }
+  min-width: 547px;
   text-align: center;
   padding: 40px;
-
   ul {
     list-style: none;
     display: flex;
@@ -28,7 +34,6 @@ const PageStyle = styled.div`
       &.active {
         background-color: #000;
         color: #eee;
-
         border-radius: 50%;
       }
     }

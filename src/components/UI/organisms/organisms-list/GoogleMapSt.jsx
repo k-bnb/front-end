@@ -9,12 +9,13 @@ const PcSize = styled.main`
   /* margin-top: -80px;/ */
   /* padding-top: 80px; */
   top: 0;
+  right:0;
   position: sticky;
 
   /* top: 0; */
   width: 100%;
   min-width: calc(100vw - 842px);
-
+  /* min-width:calc(100vh - 120px); */
   height: 100vh;
 `;
 

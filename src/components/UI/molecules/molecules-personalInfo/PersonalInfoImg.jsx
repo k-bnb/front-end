@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from '../../../../../node_modules/axios/index';
 import Input from '../../atoms/atoms-main/Input';
 import { nanoid } from 'nanoid';
@@ -111,22 +111,18 @@ const PersonalInfoImg = ({
   name,
   email,
   birth,
+  fix,
   imageUrl,
 }) => {
   const { token } = useSelector((tokens) => tokens.auth);
   const [loading, setLoading] = useState(false);
   const infoimg = useRef();
   const dispatch = useDispatch();
-  const [data, setData] = useState({
-    avatar: [],
-  });
-
-  const onClickImageUpload = (files, type, index) => {
-    setData({
-      ...data,
-      avatar: files,
-    });
-  };
+  useEffect(() => {
+    if (fix.img) {
+      infoimg?.current?.focus();
+    }
+  }, [fix.img]);
 
   const Submite = async (e) => {
     e.preventDefault();
@@ -134,13 +130,14 @@ const PersonalInfoImg = ({
     actionImgCompress(infoimg.current.files);
   };
   const actionImgCompress = async (fileSrc) => {
+    console.log(fileSrc);
     try {
       setLoading(true);
       // 압축 결과
       const formData = new FormData();
       formData.append('file', fileSrc[0]);
       formData.append('upload_preset', 'xw4yrog1');
-
+      console.log(fileSrc[0]);
       const headers = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -149,7 +146,7 @@ const PersonalInfoImg = ({
       };
 
       const body = formData;
-
+      console.log(body);
       const res = await axios.post(
         'http://3.34.198.174:8080/user/update/photo',
         body,
@@ -157,15 +154,16 @@ const PersonalInfoImg = ({
       );
 
       console.log(res);
+      console.log(res.data.newImgUrl);
       sessionStorage.setItem(
         'userInfo',
         JSON.stringify({ name, email, birth, imageUrl: res.data.newImgUrl }),
       );
+
       dispatch(changeInputImgPerson('imageUrl', res.data.newImgUrl));
 
       setTimeout(async () => {
         setLoading(true);
-        await sleep(3000);
         setFix(
           (state) => ({
             name: false,

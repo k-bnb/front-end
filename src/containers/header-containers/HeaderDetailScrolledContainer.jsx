@@ -3,10 +3,12 @@ import { useSelector } from 'react-redux';
 import HeaderDetailScrolled from '../../components/UI/organisms/organisms-header/HeaderDetailScrolled';
 
 const HeaderDetailScrolledContainer = ({
+  setIsOpen,
   showButton,
   reviewRef,
   facilityRef,
   DetailHeaderRef,
+  GuestModalRef,
   formState,
   setFormState,
   modal,
@@ -34,6 +36,7 @@ const HeaderDetailScrolledContainer = ({
       reviewRef={reviewRef}
       facilityRef={facilityRef}
       DetailHeaderRef={DetailHeaderRef}
+      GuestModalRef={GuestModalRef}
       formState={formState}
       setFormState={setFormState}
       modal={modal}
@@ -44,6 +47,7 @@ const HeaderDetailScrolledContainer = ({
       isCalendarOpen={isCalendarOpen}
       setIsCalendarOpen={setIsCalendarOpen}
       grade={grade}
+      setIsOpen={setIsOpen}
     />
   );
 };

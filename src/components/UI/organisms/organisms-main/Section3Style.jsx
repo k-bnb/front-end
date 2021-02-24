@@ -13,7 +13,7 @@ const SectionPc = styled.section`
   }
   div {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     .locations-img {
       flex-flow: column;
       /* align-items: flex-start; */

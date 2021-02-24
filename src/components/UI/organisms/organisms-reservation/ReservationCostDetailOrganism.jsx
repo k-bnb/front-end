@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { extractDay } from '../../../../lib/extractMonthDate';
 import ReservationTitle from '../../atoms/atoms-reservation/ReservationTitle';
@@ -51,13 +51,15 @@ const ReservationCostDetailOrganism = ({
     checkDateSearch.startDate || checkDateSearch.endDate
       ? extractDay(checkDateSearch.startDate, checkDateSearch.endDate)
       : '/';
-  const roomTaxPrice = isNaN(roomCost) ? roomCost * RoomDay : 0;
+  const roomTaxPrice = !isNaN(roomCost) ? roomCost * RoomDay : 0;
+
+  // useEffect(() => {}, []);
 
   const hostInfoChildren = {
     title: `${city}, ${neighborhood}`,
     content: name,
     roomInfo: `침대 ${bedNum}개 · 욕실 ${bathRoomNum}개`,
-    rate: `${grade} (${commentCount})`,
+    rate: `${grade.toFixed(1)} (${commentCount})`,
   };
 
   // 임시 고정값, 상세보기 페이지 redux state로 변경 예정
@@ -75,8 +77,8 @@ const ReservationCostDetailOrganism = ({
     serviceFee: `₩${tax}`,
     lodgmentFee: `₩${roomTaxPrice * 0.2}`,
     totalFee: `₩${
-      isNaN(roomCost)
-        ? roomTaxPrice + cleaningCost + tax + roomTaxPrice * 0.3
+      !isNaN(roomCost)
+        ? roomTaxPrice + cleaningCost + tax + roomTaxPrice * 0.1
         : 0
     }`,
   };

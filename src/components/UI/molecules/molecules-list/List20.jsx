@@ -21,8 +21,19 @@ const Wrap = styled.div`
   /* min-height: 5013px;/ */
   /* padding: 0 24px; */
   box-sizing: border-box;
+  margin: 5px 0;
+  a{
+    text-decoration: none;
+  }
 `;
 const ULWrap = styled.ul`
+  button:focus{
+    outline: none;
+    border-color: #222;
+    background: #aaa;
+    color:#222;
+    opacity:1;
+  }
   list-style: none;
   display: inline-block;
   padding: 0;
@@ -30,44 +41,31 @@ const ULWrap = styled.ul`
   /* height: 5013px; */
   /* height: 100px; */
   .allList { // === li
-    /* width: 792px; */
     position: relative;
-    /* width: 100%; */
     min-width: 500px;
-    /* max-width: 90px; */
-    height: 266px;
-    padding: 24px 8px;
+    padding: 14px 8px 0 8px;
     box-sizing: border-box;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    /* border-bottom: 1px solid #000; */
     align-items: center;
     :nth-child(1) {
       border-top: 1px solid rgba(0, 0, 0, 0.1);
-      /* border-top:2px dashed red; */
+      margin-bottom: 10px;
     }
     .slide-group {
-      /* display: flex; */
-      /* position: relative; */
       width: 300px;
-      /* border: 1px solid red; */
-      /* overflow: hidden; */
-      position: relative;
-
+      position: relative;  
       .slide {
-        /* flex-shrink: 0; */
-        /* display: flex; */
         width: 100%;
         .slideDiv {
-          /* display: flex; */
-          /* flex-direction: column; */
           .slick-slider {
-            /* display: inline-block; */
             .slick-arrow {
-              /* bottom: 50%;
-              transform: translateY(50%); */
-              z-index: 1;
+              opacity:0;
+              transition: opacity .3s;
+              &:focus{
+                opacity:1;
+              }
             }
             .slick-prev {
               position: absolute;
@@ -75,8 +73,6 @@ const ULWrap = styled.ul`
               width: 30px;
               height: 30px;
               border-radius: 50%;
-              /* opacity: 0; */
-              transition: opacity .3s;
             }
             .slick-next {
               position: absolute;
@@ -84,8 +80,6 @@ const ULWrap = styled.ul`
               width: 30px;
               height: 30px;
               border-radius: 50%;
-              /* opacity: 0; */
-              transition: opacity .3s;
             }
 
             .slick-prev:before, .slick-next:before{
@@ -93,38 +87,33 @@ const ULWrap = styled.ul`
             }
 
             .slick-dots {
-              /* li{ display:none }
-            } */
+              opacity:1;
               li {
                 border: 0;
-                display: inline !important;
+                display: inline;
                 margin-bottom:10px;
                 justify-content: flex-end;
                 height: 30px;
                 cursor: default;
-                
                 &:nth-child(1) {
                   position: absolute;
                   bottom: 10px;
-
                   left: 100px;
+                  color: #FFF;
                 }
                 &:nth-child(2) {
                   position: absolute;
                   bottom: 10px;
-
                   left: 110px;
                 }
                 &:nth-child(3) {
                   position: absolute;
                   bottom: 10px;
-
                   left: 120px;
                 }
                 &:nth-child(4) {
                   position: absolute;
                   bottom: 10px;
-
                   left: 130px;
                 }
                 &:nth-child(5) {
@@ -133,15 +122,21 @@ const ULWrap = styled.ul`
                   left: 140px;
                 }
               }
-            } */
-            .slick-current{
-
             }
-
+            .slick-dots li.slick-active button:before {
+              content:'∙';
+              color: #FFF;
+            }
+            .slick-dots li button:before{
+              content:'∙';
+              color: #FFF;
+              font-size: 45px;              
+            }
             .slick-list {
               display: flex;
               flex-direction: column;
               border-radius: 10px;
+              z-index:-1;
 
               .slick-track {
                 display: flex;
@@ -159,6 +154,11 @@ const ULWrap = styled.ul`
               }
             }
           }
+          /* .allList:hover{
+            .slick-dots{
+              opacity: 1;
+            }
+          } */
         }
       }
       .btn-group {
@@ -239,22 +239,7 @@ const ULWrap = styled.ul`
       }
     }
   }
-  .allList:hover{
-    .slide-group>.slide>.slideDiv>.slick-slider>.slick-arrow.slick-prev{
-      opacity:1;
-      &:active{
-        opacity:1;
-        transform: translate(0, -50%);
-      }
-    }
-    .slide-group>.slide>.slideDiv>.slick-slider>.slick-arrow.slick-next {
-      opacity:1;
-      &:active{
-        opacity:1;
-        transform: translate(0, -50%);
-      }
-    }
-  }
+  
 
   hr {
     width: 50px;
@@ -286,10 +271,28 @@ const ULWrap = styled.ul`
     font-size: 25px;
     cursor: pointer;
     height: auto;
+    color: #000;
+    &:focus{
+      outline:none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      text-align:center;
+      padding-top: 4px;
+      border-radius: 50%;
+      transition: box-shadow 0.2s ease 0s;
+      box-shadow: rgb(34,34,34) 0px 0px 0px 2px;
+    }
 
     &:hover {
       svg {
     }
+  }
+}
+
+.listSubWrap:focus, .listSubWrap:hover{
+  .slide-group>.slide>.slideDiv>.slick-slider> .slick-arrow{
+    opacity:1;
   }
 }
 `;
@@ -321,6 +324,7 @@ const LodgingLists = ({
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    tabindex:0,
   };
 
 
@@ -335,66 +339,79 @@ const LodgingLists = ({
     <>
       <Wrap className="listWrap" >
         <ULWrap>
-          <li className="allList" tabIndex="0">
-            <Border className="slide-group" carouselImg tabIndex="-1">
-              <div className="slide" tabIndex="-1">
-                <div className="slideDiv" tabIndex="-1">
-                  <Slider {...settings} tabIndex="-1">
-                    {roomImgUrlList.map((src, i, arr) => (
-                      <>
-                        <Imgs
-                          tabIndex="-1"
-                          carousalImg
-                          src={src}
-                          // alt={alt}
-                        />
-                      </>
-                    ))}
-                  </Slider>
+          <Link
+            to={`/detail/${id}`}
+            onClick={(e) => {
+              if (e.target.matches('.slick-arrow')) {
+                e.preventDefault();
+              }
+            }}
+            key={id}
+            tabIndex='0'
+            className='listSubWrap'
+          >
+            <li className="allList" tabIndex='-1'>
+              <Border className="slide-group" carouselImg tabIndex='-1'>
+                <div className="slide" tabIndex='-1'>
+                  <div className="slideDiv" tabIndex='-1'>
+                    <Slider {...settings} tabIndex='-1'>
+                      {roomImgUrlList.map((src, i, arr) => (
+                        <>
+                          <Imgs
+                            tabIndex="-1"
+                            carousalImg
+                            src={src}
+                            // alt={alt}
+                          />
+                        </>
+                      ))}
+                    </Slider>
+                  </div>
                 </div>
-              </div>
-            </Border>
-            <Link
-              to={`/detail/${id}`}
-              onClick={(e) => {
-                if (e.target.matches('.heart')) {
-                  e.preventDefault();
-                }
-              }}
-              key={id}
-            >
-              <span className="TextWrap">
-                <div className="TextHead">
+              </Border>
+              <Link
+                to={`/detail/${id}`}
+                onClick={(e) => {
+                  if (e.target.matches('.heart')) {
+                    e.preventDefault();
+                  }
+                }}
+                key={id}
+                tabIndex='-1'
+              >
+                <span className="TextWrap" >
+                  <div className="TextHead">
+                    <TextStyled size="blackSmall">
+                      {city} {borough} {city || borough ? '의' : ''} {roomType}
+                    </TextStyled>
+                    <TextStyled type="Ellipsis" size="blackMiddle">
+                      {name}
+                    </TextStyled>
+                  </div>
+                  <hr />
                   <TextStyled size="blackSmall">
-                    {city} {borough} {city || borough ? '의' : ''} {roomType}
+                    최대 인원 {peopleLimit}명. 침실{bedRoomNum}개. 침대 {bedNum}
+                    개. 욕실 {bathRoomNum}개
                   </TextStyled>
-                  <TextStyled type="Ellipsis" size="blackMiddle">
-                    {name}
+                  <TextStyled size="blackSmall">
+                    {isSmoking ? '흡연 가능' : '흡연 불가능'}{' '}
+                    {isParking ? '주차 가능' : '주차 불가능'}
                   </TextStyled>
-                </div>
-                <hr />
-                <TextStyled size="blackSmall">
-                  최대 인원 {peopleLimit}명. 침실{bedRoomNum}개. 침대 {bedNum}
-                  개. 욕실 {bathRoomNum}개
-                </TextStyled>
-                <TextStyled size="blackSmall">
-                  {isSmoking ? '흡연 가능' : '흡연 불가능'}{' '}
-                  {isParking ? '주차 가능' : '주차 불가능'}
-                </TextStyled>
-                <div className="TextBottom">
-                  <ScoreText grade={grade} commentCount={commentCount} />
-                  <TextStyled className="cost" size="blackMiddleBold">
-                    <BiWon />
-                    {moneyfilter(cost)}/
-                    <TextStyled size="blackMiddle">박</TextStyled>
-                  </TextStyled>
-                </div>
-              </span>
-            </Link>
-            <Bookmark className="heart" Pcheart tabIndex='0'>
-              <AiOutlineHeart />
-            </Bookmark>
-          </li>
+                  <div className="TextBottom">
+                    <ScoreText grade={grade} commentCount={commentCount} />
+                    <TextStyled className="cost" size="blackMiddleBold">
+                      <BiWon />
+                      {moneyfilter(cost)}/
+                      <TextStyled size="blackMiddle">박</TextStyled>
+                    </TextStyled>
+                  </div>
+                </span>
+              </Link>
+              <Bookmark className="heart" Pcheart tabIndex='0'>
+                <AiOutlineHeart />
+              </Bookmark>
+            </li>
+          </Link>
         </ULWrap>
       </Wrap>
     </>
