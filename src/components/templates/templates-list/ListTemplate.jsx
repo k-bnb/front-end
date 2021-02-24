@@ -1,6 +1,6 @@
 import ListStyle from '../../UI/organisms/organisms-list/ListsSt';
 import GoogleMapContainer from '../../../containers/google-map-container/GoogleMapContainer';
-import FooterFake from '../../UI/organisms/organisms-list/FooterFake';
+import Footer from '../../UI/organisms/organisms-list/FooteStr';
 import HeadStyle from '../../UI/organisms/organisms-list/HeadStyle';
 import LoadingModal from '../LoadingModal';
 import React from 'react';
@@ -71,7 +71,7 @@ const ListTemplate = ({
           keyup={keyup}
         />
         <div className="list-map" style={{ display: 'flex' }}>
-          <div className="list" style={{ display: 'block' }}>
+          <div className="list" style={{ display: 'block', width: '50%' }}>
             <ListStyle
               room={room}
               totalPage={totalPage}
@@ -84,15 +84,15 @@ const ListTemplate = ({
               changeCurrentPage={changeCurrentPage}
               pageNationState={pageNationState}
               checkDateSearch={checkDateSearch}
-              guestSearch={guestSearch}
+              guestSearch={guestSearch} 
+              isLoading={isLoading}
             />
           </div>
           <div className="map">
             <GoogleMapContainer />
           </div>
-          <FooterFake />
         </div>
-        <FooterFake />
+        <Footer />
       </div>
       {isLoading && <LoadingModal />}
     </>
