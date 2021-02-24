@@ -39,6 +39,7 @@ const ReserveConfirmSection = ({
   resonChange,
   miniModal,
   miniModalCancelBtn,
+  reserveconfirmLoading,
 }) => {
   console.log(list);
   return (
@@ -57,6 +58,7 @@ const ReserveConfirmSection = ({
               cancelModal={cancelModal}
               reviewModalState={reviewModalState}
               review={review}
+              reserveconfirmLoading={reserveconfirmLoading}
             />
           ))
         ) : (

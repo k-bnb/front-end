@@ -45,6 +45,7 @@ const ReserveConfirmTemplate = ({
         <PageLoading />
       ) : (
         <ReserveConfirmSection
+          reserveconfirmLoading={reserveconfirmLoading}
           list={list}
           active={active}
           activClick={activClick}
