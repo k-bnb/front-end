@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import GoogleStyle from '../../components/UI/organisms/organisms-list/GoogleMapSt';
 
 const GoogleMapContainer = React.memo(() => {
+  console.log('rerender!');
   const room = useSelector((state) => state.search.searchRes);
   const {
     locationSearch,

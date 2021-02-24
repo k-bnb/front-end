@@ -15,12 +15,20 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from 'use-places-autocomplete';
 import { useDispatch, useSelector } from 'react-redux';
-import { locationInput, destinationInput } from '../../../../modules/search';
+import {
+  locationInput,
+  destinationInput,
+  getLengthForZoom,
+} from '../../../../modules/search';
 
 const libraries = ['places'];
 
 // app 전체 컴포넌트
-const LocationSearchInput = ({ SearchTypeHandler, moveFocusNext }) => {
+const LocationSearchInput = ({
+  SearchTypeHandler,
+  moveFocusNext,
+  setNavModalState,
+}) => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: 'AIzaSyC9pRTw-7zb847DyWLD-fUujKxvlG01s08',
     libraries,
@@ -33,13 +41,14 @@ const LocationSearchInput = ({ SearchTypeHandler, moveFocusNext }) => {
     <div className="location-search-input-outer-container">
       <Search
         SearchTypeHandler={SearchTypeHandler}
+        setNavModalState={setNavModalState}
         moveFocusNext={moveFocusNext}
       />
     </div>
   );
 };
 
-function Search({ panTo, SearchTypeHandler, moveFocusNext }) {
+function Search({ panTo, SearchTypeHandler, moveFocusNext, setNavModalState }) {
   const {
     ready,
     value, // value는 사용자가 input에 검색한 값
@@ -71,23 +80,25 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext }) {
 
           // address는 유저가 선택한 제안 값
           try {
+            console.log('dsj323242');
             const results = await getGeocode({ address }); // 유저가 검색한 address를 인수로 전달하여 promise를 반환받음.
-
             const { lat, lng } = await getLatLng(results[0]); // 결과에서 lat과 lng정보를 추출
             dispatch(
               // 좌표값 store로 전달
               locationInput({
                 latitude: lat,
                 longitude: lng,
-                latitudeMax: results[0].geometry.bounds.Va.j,
-                latitudeMin: results[0].geometry.bounds.Va.i,
-                longitudeMax: results[0].geometry.bounds.Qa.j,
-                longitudeMin: results[0].geometry.bounds.Qa.i,
+                latitudeMax: results[0].geometry.viewport.Wa.j,
+                latitudeMin: results[0].geometry.viewport.Wa.i,
+                longitudeMax: results[0].geometry.viewport.Qa.j,
+                longitudeMin: results[0].geometry.viewport.Qa.i,
               }),
             );
+
+            dispatch(getLengthForZoom(results[0].address_components.length));
             moveFocusNext('location');
           } catch (error) {
-            console.error('error');
+            console.error(error);
           }
         }}
       >
@@ -106,9 +117,10 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext }) {
           onClick={(e) => {
             SearchTypeHandler('location');
           }}
-          onFocus={(e) => {
-            SearchTypeHandler('location');
-          }}
+          onBlur={() => {}}
+          // onFocus={(e) => {
+          //   SearchTypeHandler('location');
+          // }}
           autoComplete="off"
           selectOnClick={true}
         />

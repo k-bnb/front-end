@@ -11,13 +11,16 @@ export const search = ({
   bedRoomNum,
   bathRoomNum,
 }) =>
-  client.post(`http://3.34.198.174:8080/room/list?page=${id}&size=20`, {
-    locationSearch,
-    checkDateSearch,
-    guestSearch,
-    costSearch,
-    roomType,
-    bedNum,
-    bedRoomNum,
-    bathRoomNum,
-  });
+  client.post(
+    `https://kbnb-backend.herokuapp.com/room/list?page=${id}&size=20`,
+    {
+      locationSearch,
+      checkDateSearch,
+      guestSearch,
+      costSearch,
+      roomType,
+      bedNum,
+      bedRoomNum,
+      bathRoomNum,
+    },
+  );
