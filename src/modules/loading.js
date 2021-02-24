@@ -1,12 +1,14 @@
 import { createAction, handleActions } from 'redux-actions';
 
 const START_LOADING = 'loading/START_LOADING';
+
 const FINISH_LOADING = 'loading/FINISH_LOADING';
 
 export const startLoading = createAction(
   START_LOADING,
   (requestType) => requestType,
 );
+
 export const finishLoading = createAction(
   FINISH_LOADING,
   (requestType) => requestType,
@@ -21,6 +23,7 @@ const loading = handleActions(
       ...state,
       [payload]: true, // 내가 보낸 요청이 로딩시작
     }),
+
     [FINISH_LOADING]: (state, { payload }) => ({
       ...state,
       [payload]: false, // 로딩 종료
