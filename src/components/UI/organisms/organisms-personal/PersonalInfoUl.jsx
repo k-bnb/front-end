@@ -67,19 +67,14 @@ const PersonalInfoUl = ({
   KeyDown,
 }) => {
   // const [emailOk, setEmailOk] = useState(false);
-  // useEffect(() => {
-  //   if (emailCheck === null) {
-  //     setEmailOk(false);
-  //   } else {
-  //     setEmailOk(true);
-  //   }
-  // }, [emailCheck]);
+
   const [imageImg, setImageImg] = useState();
 
   useEffect(() => {
     setImageImg(imageUrl);
   }, [imageImg, imageUrl]);
   console.log(imageImg);
+
   return (
     <PersonalInfoUIStyle onClick={fix.cancel ? cancelclick : fixInfoBtn}>
       <PersonalInfoLi>
@@ -139,9 +134,20 @@ const PersonalInfoUl = ({
           <TextStyle>생년월일</TextStyle>
           <TextStyle>
             {birth
-              ? `${extractMonthDate(userInfo.birth).year}년 ${
-                  extractMonthDate(userInfo.birth).month
-                }월 ${extractMonthDate(userInfo.birth).date}일 `
+              ? extractMonthDate(userInfo.birth)?.year &&
+                extractMonthDate(userInfo.birth)?.month &&
+                extractMonthDate(userInfo.birth)?.date
+                ? `${
+                    extractMonthDate(userInfo.birth)?.year &&
+                    extractMonthDate(userInfo.birth)?.year
+                  }년 ${
+                    extractMonthDate(userInfo.birth)?.month &&
+                    extractMonthDate(userInfo.birth)?.month
+                  }월 ${
+                    extractMonthDate(userInfo.birth)?.date &&
+                    extractMonthDate(userInfo.birth)?.date
+                  }일`
+                : '지정되지 않음'
               : '지정되지 않음'}
           </TextStyle>
           {fix.birth && (

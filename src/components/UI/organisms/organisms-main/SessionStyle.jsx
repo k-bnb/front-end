@@ -7,7 +7,7 @@ const SectionPc = styled.section`
   display: grid;
   padding: 50px 80px;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0px 13px;
+  gap: 20px 13px;
 
   align-items: center;
   .locations-img {
@@ -26,7 +26,7 @@ const SectionTablet = styled.section`
   display: grid;
   padding: 50px 80px;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0px 13px;
+  grid-gap: 10px 13px;
 
   align-items: center;
 
