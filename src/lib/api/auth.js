@@ -9,7 +9,7 @@ export const login = ({ email, password }) =>
 
 // 회원가입
 export const register = ({ name, email, password, birth }) =>
-  client.post('https://kbnb-backend.herokuapp.com/auth/signup', {
+  client.post('https://backend.kbnb.tk/auth/signup', {
     name,
     email,
     password,
