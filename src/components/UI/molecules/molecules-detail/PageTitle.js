@@ -47,7 +47,7 @@ const PageTitle = ({ infoRes }) => {
   return (
     <AccommodationTitle>
       <div className="title-container">
-        <Title>
+        <Title tabIndex="1" aria-label="숙소이름">
           조이 하우스 두번째 이야기 오션뷰 & 테라스/이호테우해변{infoRes.name}{' '}
         </Title>
         <DetailData>
@@ -55,7 +55,7 @@ const PageTitle = ({ infoRes }) => {
             <Grade bold grade={infoRes.grade} bookingInfo />
             <Text gray>({infoRes.commentCount})</Text>
             <DotText gray>.</DotText>
-            <LocateInfo gray bold underline>
+            <LocateInfo gray bold underline tabIndex="1">
               {infoRes.locationDetail.neighborhood},{' '}
               {infoRes.locationDetail.city}, {infoRes.locationDetail.country}
             </LocateInfo>

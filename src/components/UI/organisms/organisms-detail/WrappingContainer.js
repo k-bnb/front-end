@@ -37,7 +37,6 @@ const WrappingContainer = ({
   CancellableDate,
   modal,
   setModal,
-  isOpen,
   setIsOpen,
   formState,
   setFormState,
