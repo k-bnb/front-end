@@ -102,8 +102,8 @@ const PersonalInfoBirthinput = ({
         />
       </div>
       <Button name="birth" value={birth} onClick={ChangeInputBtn} save>
-        {!loading && '저장'}
-        {loading && (
+        {!loading['user/CHANGE_INPUT_USER_BIRTH_SUBMIT'] && '저장'}
+        {loading['user/CHANGE_INPUT_USER_BIRTH_SUBMIT'] && (
           <div className="animation">
             <div></div>
             <div></div>

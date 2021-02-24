@@ -33,14 +33,34 @@ export const userReservation = ({ token }) =>
     },
   });
 
-// 유저 수정
-export const userInfoRemake = ({
-  token,
-  name = null,
-  birth = null,
-  email = null,
-}) => {
-  const body = { name, birth, email };
+// 유저 수정 이름
+export const userInfoNameRemake = ({ token, name }) => {
+  const body = { name };
+
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+  console.log(body);
+  return client.post(
+    'http://3.34.198.174:8080/user/update/name',
+    body,
+    headers,
+  );
+};
+// 유저 수정 생일
+export const userInfoBirthRemake = ({ token, birth }) => {
+  const body = { birth };
+
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+  console.log(body);
+  return client.post(
+    'http://3.34.198.174:8080/user/update/birth',
+    body,
+    headers,
+  );
+};
+
+// 유저 수정 이메일
+export const userInfoEmailRemake = ({ token, email }) => {
+  const body = { email };
 
   const headers = { headers: { Authorization: `Bearer ${token}` } };
   console.log(body);

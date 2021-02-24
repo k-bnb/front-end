@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PersonalInfoLi from '../../molecules/molecules-personalInfo/PersonalInfoLi';
 import Button from '../../atoms/atoms-main/Button';
@@ -11,6 +11,7 @@ import PersonalInfoImg from '../../molecules/molecules-personalInfo/PersonalInfo
 import { extractMonthDate } from '../../../../lib/extractMonthDate';
 import Modal from '../../../../portal/Modal';
 import PersonInfoEmailModal from '../../molecules/molecules-personalInfo/PersonInfoEmailModal';
+import NoEmailModal from '../../molecules/molecules-personalInfo/NoEmailModal';
 
 const PersonalInfoUIStyle = styled.ul`
   display: flex;
@@ -57,7 +58,22 @@ const PersonalInfoUl = ({
   userInfo,
   setFix,
   loading,
+  emailCheck,
+  personInfoEmailSubmit,
+  emailOk,
+  personInfoEmailSubmitKeypress,
+  cancelModalEmail,
 }) => {
+  // const [emailOk, setEmailOk] = useState(false);
+  // useEffect(() => {
+  //   if (emailCheck === null) {
+  //     setEmailOk(false);
+  //   } else {
+  //     setEmailOk(true);
+  //   }
+  // }, [emailCheck]);
+
+  // console.log(emailOk);
   return (
     <PersonalInfoUIStyle onClick={fix.cancel ? cancelclick : fixInfoBtn}>
       <PersonalInfoLi>
@@ -143,10 +159,25 @@ const PersonalInfoUl = ({
               personInfoChange={personInfoChange}
               ChangeInputBtn={ChangeInputBtn}
               loading={loading}
+              emailCheck={emailCheck}
             />
           ) : (
             <TextStyle>{email}</TextStyle>
           )}
+
+          <Modal>
+            <NoEmailModal
+              emailCheck={emailCheck}
+              loading={loading}
+              email={email}
+              ChangeInputBtn={ChangeInputBtn}
+              personInfoChange={personInfoChange}
+              personInfoEmailSubmit={personInfoEmailSubmit}
+              emailOk={emailOk}
+              personInfoEmailSubmitKeypress={personInfoEmailSubmitKeypress}
+              cancelModalEmail={cancelModalEmail}
+            ></NoEmailModal>
+          </Modal>
         </div>
         <Button name="emailAddress" className="btn" greenText>
           {!fix.emailAddress ? '수정' : '취소'}

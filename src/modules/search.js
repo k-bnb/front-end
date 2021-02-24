@@ -4,6 +4,19 @@ import * as API from '../lib/api/search';
 import { takeLatest } from 'redux-saga/effects';
 import produce from 'immer';
 
+// const GUEST_INPUT = 'search/GUEST_INPUT';
+
+// export const guestInput = createAction(GUEST_INPUT, (form, name, value) => ({
+//   form,
+//   name,
+//   value,
+// })); // form -> guestinput, name -> numOfAdult, value ->
+
+// [GUEST_INPUT]: (state, { payload: { form, name, value } }) =>
+// produce(state, (draft) => {
+//   draft.searchReq[form][name] = value; // draft.searchReq.guestSearch.numOfAdult = value
+// }),
+
 //action type
 //비동기x
 const DESTINATION_INPUT = 'search/DESTINATION_INPUT';
