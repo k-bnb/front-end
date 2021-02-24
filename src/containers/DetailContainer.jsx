@@ -21,7 +21,7 @@ const DetailContainer = () => {
   const [current, setCurrent] = useState(0); // 현재 보는 사진의 index
 
   // 로그인 / 회원가입 모달창 렌더링을 위해 필요한 상태, isOpen, formState, modal
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // Guest modal 창
   // formState -> 'login', 'register'로 상태 전환 해줌.
   const [formState, setFormState] = useState(null); // 초기값은 null, 로그인 버튼 누르면 login으로, 회원가입 누르면 'register'
   const [modal, setModal] = useState(false); // auth 모달을 켜주고 꺼주고...
@@ -29,6 +29,7 @@ const DetailContainer = () => {
   const DetailHeaderRef = useRef();
   const ImageContainerRef = useRef();
   const bookingInfoRef = useRef();
+  const GuestModalRef = useRef();
 
   const reviewRef = useRef();
   const facilityRef = useRef();
@@ -66,11 +67,14 @@ const DetailContainer = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(
-      searchToDetail(startDate, endDate, numOfAdult, numOfKid, numOfInfant),
-    );
     dispatch(getRoomAverageScore(roomId));
     dispatch(requestDetail(roomId));
+    if (sessionStorage.getItem('checkIn')) return;
+    if (startDate && endDate) {
+      dispatch(
+        searchToDetail(startDate, endDate, numOfAdult, numOfKid, numOfInfant),
+      );
+    }
   }, []);
 
   useEffect(() => {
@@ -86,12 +90,14 @@ const DetailContainer = () => {
     dispatch(detailToReserveGuest(guestSearch));
     window.scrollTo(0, 0);
   };
+
   // startDate, endDate 잠시 deps에서 빼놓음, 넣으면 detail 페이지에서 달력날짜바꾸면 다시
   // 서버에 숙소 상세 정보 요구함.
   // startDate, endDate, numOfAdult, numOfKid, numOfInfant,
   return (
     <>
       <HeaderContainer
+        GuestModalRef={GuestModalRef}
         DetailHeaderRef={DetailHeaderRef}
         ImageContainerRef={ImageContainerRef}
         reviewRef={reviewRef}
@@ -115,6 +121,7 @@ const DetailContainer = () => {
         ImageContainerRef={ImageContainerRef}
         reviewRef={reviewRef}
         facilityRef={facilityRef}
+        GuestModalRef={GuestModalRef}
         infoRes={infoRes}
         moveToReserve={moveToReserve}
         isLoading={isLoading}

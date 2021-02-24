@@ -70,12 +70,55 @@ const store = createStore(
       registerError: null, // 회원가입 에러
       loginError: null, // 로그인 에러}
     },
+    search: {
+      destinationName: '',
+      searchReq: {
+        locationSearch: {
+          latitude: '',
+          longitude: '',
+          latitudeMax: '',
+          latitudeMin: '',
+          longitudeMax: '',
+          longitudeMin: '',
+        },
+        checkDateSearch: {
+          startDate: sessionStorage.getItem('startDate'),
+          endDate: sessionStorage.getItem('endDate'),
+        },
+        guestSearch: {
+          numOfAdult: 0,
+          numOfKid: 0,
+          numOfInfant: 0,
+        },
+        costSearch: {
+          minCost: 10000,
+          maxCost: 1000000,
+        },
+        roomType: 'Shared room',
+        bedNum: 0,
+        bedRoomNum: 0,
+        bathRoomNum: 0,
+      },
+      searchRes: [],
+      totalPage: {},
+      searchError: null,
+    },
+
     detail: {
-      startDate: sessionStorage.getItem('startDate'),
-      endDate: sessionStorage.getItem('endDate'),
-      numOfAdult: 0,
-      numOfKid: 0,
-      numOfInfant: 0,
+      startDate:
+        sessionStorage.getItem('checkIn') ||
+        sessionStorage.getItem('startDate'),
+      endDate:
+        sessionStorage.getItem('checkOut') || sessionStorage.getItem('endDate'),
+      numOfAdult:
+        localStorage.getItem('detailnumOfAdult') ||
+        localStorage.getItem('numOfAdult'),
+      numOfKid:
+        localStorage.getItem('detailnumOfKid') ||
+        localStorage.getItem('numOfKid'),
+      numOfInfant:
+        localStorage.getItem('detailnumOfInfant') ||
+        localStorage.getItem('numOfInfant'),
       infoRes: {
         id,
         name,

@@ -43,7 +43,7 @@ const GuestNumberModal = ({
   setGuestIsBorderThick,
   searchBtnRef,
 }) => {
-  let guestRef = useClickOutside(() => {
+  const guestRef = useClickOutside(() => {
     if (detailPage) {
       setIsOpen(false);
       setGuestIsBorderThick(false);
@@ -56,6 +56,7 @@ const GuestNumberModal = ({
       guest: false,
     });
   });
+  // console.log(guestRef, '******');
 
   return (
     <StyledGuestModal

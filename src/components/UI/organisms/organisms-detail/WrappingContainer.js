@@ -42,6 +42,7 @@ const WrappingContainer = ({
   formState,
   setFormState,
   bookingInfoRef,
+  GuestModalRef,
   isCalendarOpen,
   setIsCalendarOpen,
 }) => {
@@ -62,13 +63,13 @@ const WrappingContainer = ({
           infoRes={infoRes}
           modal={modal}
           setModal={setModal}
-          isOpen={isOpen}
           setIsOpen={setIsOpen}
           formState={formState}
           setFormState={setFormState}
           bookingInfoRef={bookingInfoRef}
           isCalendarOpen={isCalendarOpen}
           setIsCalendarOpen={setIsCalendarOpen}
+          GuestModalRef={GuestModalRef}
         />
       </BookingSummaryBox>
     </InfoContainer>

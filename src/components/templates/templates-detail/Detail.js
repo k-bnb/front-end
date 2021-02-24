@@ -6,7 +6,7 @@ import ImportantNotice from '../../UI/organisms/organisms-detail/ImportantNotice
 import WrappingContainer from '../../UI/organisms/organisms-detail/WrappingContainer';
 import LoadingModal from '../LoadingModal';
 import ReviewContainer from '../../../containers/ReviewContainer';
-import detail, { getCancellableDate } from '../../../modules/detail';
+import { getCancellableDate } from '../../../modules/detail';
 import { useDispatch } from 'react-redux';
 
 const Theme = {
@@ -59,6 +59,7 @@ const Detail = ({
   formState,
   setFormState,
   bookingInfoRef,
+  GuestModalRef,
   isCalendarOpen,
   setIsCalendarOpen,
 }) => {
@@ -107,6 +108,7 @@ const Detail = ({
           bookingInfoRef={bookingInfoRef}
           isCalendarOpen={isCalendarOpen}
           setIsCalendarOpen={setIsCalendarOpen}
+          GuestModalRef={GuestModalRef}
         />
         <ReviewContainer
           reviewRef={reviewRef}

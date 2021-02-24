@@ -112,9 +112,10 @@ const DatePersonBox = ({
   setNavModalState,
   isCalendarOpen,
   setIsCalendarOpen,
-  peopleLimit,
+  isOpen,
+  setIsOpen,
 }) => {
-  const [isOpen, setIsOpen] = useState(false); // detail page에서 모달창 열고닫기 기능구현
+  // const [isOpen, setIsOpen] = useState(false); // detail page에서 모달창 열고닫기 기능구현
   const [isDateBorderThick, setIsDateBorderThick] = useState(false);
   const [isGuestBorderThick, setGuestIsBorderThick] = useState(false);
 

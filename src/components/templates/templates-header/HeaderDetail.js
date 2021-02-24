@@ -47,6 +47,7 @@ const HeaderDetail = ({
   ImageContainerRef,
   reviewRef,
   facilityRef,
+  GuestModalRef,
   isOpen,
   setIsOpen,
   formState,
@@ -112,6 +113,7 @@ const HeaderDetail = ({
         <HeaderDetailScrolledContainer
           DetailHeaderRef={DetailHeaderRef}
           bookingInfoRef={bookingInfoRef}
+          GuestModalRef={GuestModalRef}
           showButton={showButton}
           reviewRef={reviewRef}
           facilityRef={facilityRef}
@@ -121,6 +123,7 @@ const HeaderDetail = ({
           setModal={setModal}
           isCalendarOpen={isCalendarOpen}
           setIsCalendarOpen={setIsCalendarOpen}
+          setIsOpen={setIsOpen}
         />
       )}
     </>
