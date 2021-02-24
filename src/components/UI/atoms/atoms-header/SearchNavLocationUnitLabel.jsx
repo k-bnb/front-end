@@ -21,6 +21,8 @@ const SearchNavLocationUnitLabel = ({
   SearchTypeHandler,
   locationSearch,
   destinationName,
+  setNavModalState,
+  moveFocusNext,
 }) => {
   return (
     <LabelBlock>
@@ -28,7 +30,11 @@ const SearchNavLocationUnitLabel = ({
         <Text small bold>
           위치
         </Text>
-        <LocationSearchInput SearchTypeHandler={SearchTypeHandler} />
+        <LocationSearchInput
+          SearchTypeHandler={SearchTypeHandler}
+          setNavModalState={setNavModalState}
+          moveFocusNext={moveFocusNext}
+        />
       </label>
     </LabelBlock>
   );

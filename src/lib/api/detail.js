@@ -1,14 +1,17 @@
 import client from './client';
 
 export const detailInformation = (roomId) =>
-  client.get(`http://3.34.198.174:8080/room/detail?roomId=${roomId}`, {
-    headers: {
-      Authorization: `Bearer`,
-      'Content-Type': 'application/json',
+  client.get(
+    `https://kbnb-backend.herokuapp.com/room/detail?roomId=${roomId}`,
+    {
+      headers: {
+        Authorization: `Bearer`,
+        'Content-Type': 'application/json',
+      },
     },
-  });
+  );
 
 export const requestComments = (roomId, pageNum) =>
   client.get(
-    `http://3.34.198.174:8080/comment?roomId=${roomId}&page=${pageNum}&size=6`,
+    `https://kbnb-backend.herokuapp.com/comment?roomId=${roomId}&page=${pageNum}&size=6`,
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled, { css } from 'styled-components';
 import SearchButton from '../../atoms/atoms-header/SearchButton';
 import Text from '../../atoms/atoms-header/Text';

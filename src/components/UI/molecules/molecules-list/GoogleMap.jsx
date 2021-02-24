@@ -12,7 +12,7 @@ import Geocode from 'react-geocode';
 import styled from 'styled-components';
 import Bookmark from '../../atoms/atoms-list/BookMark';
 // import { AiOutlineHeart } from 'react-icons/ai';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { locationInput, searching } from '../../../../modules/search';
 import { BiWon } from 'react-icons/bi';
 import { BsHeartFill } from 'react-icons/bs';
@@ -60,7 +60,7 @@ const GoogleMarkerStyle = styled.div`
       .slideDiv {
         .slick-slider {
           .slick-arrow {
-            z-index:1; 
+            z-index: 1;
           }
           .slick-prev {
             color: white;
@@ -72,7 +72,7 @@ const GoogleMarkerStyle = styled.div`
             /* opacity:1; */
             /* opacity: 0; */
             /* transition: opacity .3s; */
-          }          
+          }
           .slick-next {
             color: white;
             position: absolute;
@@ -87,11 +87,11 @@ const GoogleMarkerStyle = styled.div`
             li {
               border: 0;
               display: inline !important;
-              margin-bottom:10px;
+              margin-bottom: 10px;
               justify-content: flex-end;
               height: 30px;
               cursor: default;
-              
+
               &:nth-child(1) {
                 position: absolute;
                 bottom: 10px;
@@ -132,7 +132,6 @@ const GoogleMarkerStyle = styled.div`
                 div {
                   display: flex;
                   img {
-                    
                   }
                 }
               }
@@ -186,13 +185,14 @@ const GoogleMarkerStyle = styled.div`
       }
     }
   } */
-  .textAllWrap{ //지도 팝업 글 
+  .textAllWrap {
+    //지도 팝업 글
     margin-top: 15px;
-    padding-left:15px;
+    padding-left: 15px;
     cursor: pointer;
   }
-  div { 
-    overflow:hidden;
+  div {
+    overflow: hidden;
     .roomTypeclass {
       padding: 0;
       color: rgba(0, 0, 0, 0.4);
@@ -208,11 +208,9 @@ const GoogleMarkerStyle = styled.div`
       font-weight: 700;
       span {
         font-weight: 400;
-
       }
     }
   }
-
 `;
 
 const GoogleMapUse = ({
@@ -403,7 +401,7 @@ const GoogleMapUse = ({
           options={{ scrollwheel: true }} // 마우스휠옵션.
         >
           {roomMap.map((sample) => (
-              // console.log(sample.id);
+            // console.log(sample.id);
             <>
               <Marker
                 key={sample.id}
@@ -433,8 +431,8 @@ const GoogleMapUse = ({
                     console.log('overlayviewText', e.nativeEvent);
                     console.log('path1', e.nativeEvent.path[1]);
                     // console.log('path13', e.nativeEvent.path[13].childNodes[0]);
-                    const path13= e.nativeEvent.path[13].childNodes[0];
-                    console.log('path13',path13);
+                    const path13 = e.nativeEvent.path[13].childNodes[0];
+                    console.log('path13', path13);
 
                     // console.log(nativeevent.path); //1번째가 -memo << 이건데, 이게 className이야.
                   }}
@@ -482,39 +480,46 @@ const GoogleMapUse = ({
             >
               <GoogleMarkerStyle>
                 {/* <img src={selectedSample.roomImgUrlList[0]} alt="" /> */}
-                  <div className="slide-group">
-                    <div className="slide">
-                      <div className="slideDiv">
-                        <Slider {...settings}>
+                <div className="slide-group">
+                  <div className="slide">
+                    <div className="slideDiv">
+                      <Slider {...settings}>
                         {/* <img src={selectedSample.roomImgUrlList[0]} alt="" /> */}
-                        {selectedSample.roomImgUrlList.map((src, i, arr,alt) => (
-                        <>
-                          <img
-                            // carousalImg
-                            src={src}
-                            alt={alt}
-                          />
-                        </>
-                      ))}
-                        </Slider>
-                      </div>
+                        {selectedSample.roomImgUrlList.map(
+                          (src, i, arr, alt) => (
+                            <>
+                              <img
+                                // carousalImg
+                                src={src}
+                                alt={alt}
+                              />
+                            </>
+                          ),
+                        )}
+                      </Slider>
                     </div>
                   </div>
-                  <div 
-                    className="textAllWrap"   
-                    onClick={(e)=>{
-                      if(e.target.matches('.heart')) return;
-                      history.push(`/detail/${selectedSample.id}`)                    
-                  }}>
-                    <ScoreText grade={selectedSample.grade} commentCount={selectedSample.commentCount} />
-                    <div className="roomTypeclass">{selectedSample.roomType}</div>
-                    <h2>{selectedSample.name}</h2>
-                    <p>
-                      <BiWon />{moneyfilter(selectedSample.cost)} <span>/ 1박</span>
-                    </p>
-                  </div>
-                  <Bookmark Mobileheart className="heart">
-                    <BsHeartFill className="heartimg" />
+                </div>
+                <div
+                  className="textAllWrap"
+                  onClick={(e) => {
+                    if (e.target.matches('.heart')) return;
+                    history.push(`/detail/${selectedSample.id}`);
+                  }}
+                >
+                  <ScoreText
+                    grade={selectedSample.grade}
+                    commentCount={selectedSample.commentCount}
+                  />
+                  <div className="roomTypeclass">{selectedSample.roomType}</div>
+                  <h2>{selectedSample.name}</h2>
+                  <p>
+                    <BiWon />
+                    {moneyfilter(selectedSample.cost)} <span>/ 1박</span>
+                  </p>
+                </div>
+                <Bookmark Mobileheart className="heart">
+                  <BsHeartFill className="heartimg" />
                 </Bookmark>
               </GoogleMarkerStyle>
             </InfoWindow>
@@ -523,7 +528,7 @@ const GoogleMapUse = ({
       );
     }),
   );
-  console.log('selectedSample',selectedSample);
+  console.log('selectedSample', selectedSample);
   return (
     <>
       <MapWithAMarker

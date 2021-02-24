@@ -13,7 +13,8 @@ const GuestNumberUnitOuterBlock = styled.div`
   border: 0;
   border-radius: 30px;
   background-color: transparent;
-  background-color: green;
+  position: relative;
+  /* z-index: 2; */
 `;
 
 const SearchButtonUnit = ({
@@ -28,28 +29,16 @@ const SearchButtonUnit = ({
 
   return (
     <GuestNumberUnitOuterBlock className="search-button-unit">
-      <SearchButton
-        onClick={() => {
-          // 위치정보값이 비어있을 경우는, 위치정보 모달창을 띄워주고 검색이 되는것을 막는다.
-          if (!locationSearch.latitude) {
-            SearchTypeHandler('location');
-            return;
-          }
-          history.push('/rooms');
-        }}
-        searchBtnRef={searchBtnRef}
-        navModalState={navModalState}
-        setNavModalState={setNavModalState}
-      />
       <ClickedSearchButton
-        onClick={() => {
-          // 위치정보값이 비어있을 경우는, 위치정보 모달창을 띄워주고 검색이 되는것을 막는다.
-          if (!locationSearch.latitude) {
-            SearchTypeHandler('location');
-            return;
-          }
-          history.push('/rooms');
-        }}
+        isModalOpen={
+          navModalState.location ||
+          navModalState.checkIn ||
+          navModalState.checkOut ||
+          navModalState.guest
+        }
+        SearchTypeHandler={SearchTypeHandler}
+        locationSearch={locationSearch}
+        history={history}
       />
     </GuestNumberUnitOuterBlock>
   );

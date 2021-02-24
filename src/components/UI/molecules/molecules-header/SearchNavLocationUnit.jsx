@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import {
@@ -12,7 +12,7 @@ import SearchNavLocationUnitLabel from '../../atoms/atoms-header/SearchNavLocati
 const SearchNavLocationUnitLi = styled.li`
   position: relative;
   color: black;
-  width: 35%;
+  width: 32%;
   border-radius: 30px;
   &:hover {
     background-color: rgb(235, 231, 231);
@@ -49,6 +49,7 @@ const SearchNavLocationUnit = ({
         locationSearch={locationSearch}
         destinationName={destinationName}
         moveFocusNext={moveFocusNext}
+        setNavModalState={setNavModalState}
       />
       {!!destinationName && navModalState.location && (
         <RemoveButton
