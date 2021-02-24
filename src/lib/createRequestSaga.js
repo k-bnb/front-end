@@ -1,9 +1,5 @@
 import { call, put, delay } from 'redux-saga/effects';
-import {
-  startLoading,
-  finishLoading,
-  pendingLoading,
-} from '../modules/loading';
+import { startLoading, finishLoading } from '../modules/loading';
 
 //  request : 백엔드 api
 export default function createRequestSaga(type, request) {
