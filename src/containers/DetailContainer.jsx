@@ -62,6 +62,11 @@ const DetailContainer = () => {
   const guestSearch = { numOfAdult: adult, numOfKid: kid, numOfInfant: infant };
   const [isCalendarOpen, setIsCalendarOpen] = useState(false); // detail page달력 모달열고닫기
 
+  // 임시 방편 => search 게스트 인원의 값을 직접 받아 오기위해서
+  const guestOfAdult = +sessionStorage.getItem('numOfAdult');
+  const guestOfKid = +sessionStorage.getItem('numOfKid');
+  const guestOfInfant = +sessionStorage.getItem('numOfInfant');
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -71,11 +76,28 @@ const DetailContainer = () => {
     dispatch(requestDetail(roomId));
     if (sessionStorage.getItem('checkIn')) return;
     if (startDate && endDate) {
+      // dispatch(
+      //   searchToDetail(startDate, endDate, numOfAdult, numOfKid, numOfInfant),
+      // );
       dispatch(
-        searchToDetail(startDate, endDate, numOfAdult, numOfKid, numOfInfant),
+        searchToDetail(
+          startDate,
+          endDate,
+          guestOfAdult,
+          guestOfKid,
+          guestOfInfant,
+        ),
       );
     }
-  }, []);
+  }, [
+    dispatch,
+    endDate,
+    startDate,
+    roomId,
+    // guestOfAdult,
+    // guestOfKid,
+    // guestOfInfant,
+  ]);
 
   useEffect(() => {
     if (showModal || showReviewModal || modal)

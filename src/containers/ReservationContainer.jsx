@@ -9,7 +9,8 @@ import {
   detailToReserveGuest,
   reserving,
 } from '../modules/reserve';
-import { dateInput } from '../modules/detail';
+import { dateInput, specificInputClear } from '../modules/search';
+import { clearCheckDateDtail, dateChangeDetail } from '../modules/detail';
 import BootPay from 'bootpay-js';
 import { useHistory } from 'react-router-dom';
 
@@ -44,7 +45,11 @@ const ReservationContainer = () => {
 
   // detail redux에서 날짜, 게스트 인원 받아 오기
   // const checkDateSearch = { firstDate, lastDate };
-  const guestSearch = { numOfAdult, numOfKid, numOfInfant };
+  const guestSearch = {
+    numOfAdult: parseInt(numOfAdult),
+    numOfKid: parseInt(numOfKid),
+    numOfInfant: parseInt(numOfInfant),
+  };
 
   // reserve redux에서 모달에서 사용하는 날짜, 게스트 인원 받아오기
   const { message, checkDateSearch: checkDate } = useSelector(
@@ -64,16 +69,6 @@ const ReservationContainer = () => {
   );
 
   const { infoRes, reserveError } = useSelector(({ reserve }) => reserve);
-
-  // const [completeModal, setCompleteModal] = useState(null);
-
-  // useEffect(() => {
-  //   setCompleteModal(reserveError?.error);
-  // });
-
-  // console.log(completeModal);
-
-  // console.log(reserveError?.error);
 
   const { locationDetail } = useSelector(({ detail }) => detail.infoRes);
 
@@ -118,14 +113,6 @@ const ReservationContainer = () => {
 
   // 확인 button 클릭해서 예약하기 event function
   const click = useCallback(() => {
-    console.log(
-      roomId,
-      checkIn,
-      checkOut,
-      guestNumber,
-      infantNumber,
-      totalCost,
-    );
     setComfirmModal(true);
 
     BootPay.request({
@@ -182,7 +169,7 @@ const ReservationContainer = () => {
         BootPay.removePaymentWindow();
       });
   }, [
-    reserveRoomCost,
+    // reserveRoomCost,
     dispatch,
     testName,
     roomId,
@@ -199,9 +186,32 @@ const ReservationContainer = () => {
     setDateModal(!dateModal);
     dispatch(dateInput('startDate', checkIn)); // 시작일만 선택시 시작일 dispatch
     dispatch(dateInput('endDate', checkOut)); // 시작일만 선택시 시작일 dispatch
+    dispatch(dateChangeDetail('startDate', checkIn)); // 시작일만 선택시 시작일 dispatch
+    dispatch(dateChangeDetail('endDate', checkOut)); // 시작일만 선택시 시작일 dispatch
   }, [dispatch, dateModal, checkIn, checkOut]);
 
+  // 모달 관련 상태 및 스토어
+  const { reserveSuccess } = useSelector((state) => state.reserve);
+
+  const [completeModalState, setCompleteModalState] = useState(false);
+
+  const moveToHomeClick = () => {
+    setCompleteModalState(false);
+    sessionStorage.removeItem('startDate');
+    sessionStorage.removeItem('endDate');
+    sessionStorage.removeItem('numOfAdult');
+    sessionStorage.removeItem('numOfKid');
+    sessionStorage.removeItem('numOfInfant');
+
+    history.push('./');
+  };
+
   useEffect(() => {
+    if (reserveSuccess) {
+      setCompleteModalState(true);
+      document.body.style.overflowY = 'hidden';
+    }
+
     dispatch(
       detailToReserveRoom(
         id,
@@ -230,7 +240,38 @@ const ReservationContainer = () => {
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);
-  }, []);
+
+    return () => {
+      document.body.style.overflowY = 'unset';
+    };
+  }, [
+    dispatch,
+    locationDetail,
+    startDate,
+    endDate,
+    numOfAdult,
+    numOfKid,
+    numOfInfant,
+    id,
+    name,
+    roomCost,
+    cleaningCost,
+    tax,
+    peopleLimit,
+    description,
+    bedNum,
+    bathRoomNum,
+    grade,
+    hostName,
+    hostImgURL,
+    commentCount,
+    roomImgUrlList,
+    setCompleteModalState,
+    reserveSuccess,
+  ]);
+
+  console.log(reserveSuccess); // 예약 성공
+  console.log(completeModalState);
 
   return (
     <Reservation
@@ -250,6 +291,8 @@ const ReservationContainer = () => {
       infoRes={infoRes}
       reserveLocationDetail={reserveLocationDetail}
       RoomTablePhotoImgURL={RoomTablePhotoImgURL}
+      completeModalState={completeModalState}
+      moveToHomeClick={moveToHomeClick}
     />
   );
 };
