@@ -11,6 +11,7 @@ import ScoreText from '../../molecules/molecules-list/Score-Text';
 import { BsHeartFill } from 'react-icons/bs';
 import { BiWon } from 'react-icons/bi';
 import React from 'react';
+
 const PcSize = styled.main`
   min-height: calc(100vh - 80px);
   /* background-color: #eee; */

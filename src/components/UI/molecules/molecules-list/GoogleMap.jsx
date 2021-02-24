@@ -28,6 +28,63 @@ import { Link, useHistory } from 'react-router-dom';
 // Geocode.setApiKey=('AIzaSyC6KyJE5Cb_kVrW02y-mkWEDGlrUfodq6E'); '='이 표시가 들어가면 안됨... 이거 찾는데 24시간 걸렸다^-^.. 최대적===오타ㅜㅜㅜ
 Geocode.setApiKey('AIzaSyC9pRTw-7zb847DyWLD-fUujKxvlG01s08');
 
+
+const MarkerStyle = styled.div`
+    display: flex;
+    /* position:relative; */
+    /* align-items: center; */
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    width: 100%;
+    /* font-size: 16px; */
+    /* cursor: pointer; */
+    /* width: 80px; */
+    /* height: 30px; */
+    /* margin: 0; */
+    /* line-height: 30px; */
+    /* margin: 0 auto; */
+    /* text-align: center; */
+    /* font-weight: 800; */
+  .intoCost{
+    /* align-items: center; */
+    /* background: skyblue;
+    border: 4px dashed darkorange; */
+    cursor: pointer;
+    border-radius: 50px;
+    padding: 0 10px;
+    width: 100%;
+    /* height: 100%; */
+    line-height: 30px;
+    margin: 0 auto;
+    text-align: center;
+    font-weight: 800;
+    font-size: 15px;
+    &:hover{
+      border:none;
+      outline:none;
+      z-index:9999;
+      background-color: #000;
+      border: 1px solid #000;
+      color: #fff;
+      border-radius: 30px;
+      padding: 0 5px;
+      transform: scale(1.12,1.12);
+    }
+    &:focus{
+      border:none;
+      outline:none;
+      z-index:9999;
+      background-color: #000;
+      border: 1px solid #000;
+      color:#fff;
+      border-radius: 30px;
+      padding: 0 5px;
+      transform: scale(1.12,1.12);
+    }
+  }
+`
+
 const GoogleMarkerStyle = styled.div`
   width: 100%;
   padding: 0;
@@ -383,148 +440,121 @@ const GoogleMapUse = ({
   const MapWithAMarker = withScriptjs(
     withGoogleMap((props) => {
       return (
-        <GoogleMap
-          // scrollwheel={false}
-          ref={mapRef}
-          // defaultZoom={12}
-          zoom={zoom}
-          defaultCenter={{
-            lat: locationSearch.latitude,
-            lng: locationSearch.longitude,
-          }}
-          onClick={() => {
-            setSelectedSample(null);
-          }}
-          onLoad={onMapLoad}
-          onDragEnd={dragMark}
-          onZoomChanged={handleZoomChanged}
-          options={{ scrollwheel: true }} // 마우스휠옵션.
-        >
-          {roomMap.map((sample) => (
-            // console.log(sample.id);
-            <>
-              <Marker
-                key={sample.id}
-                onLoad={onMarkLoad}
-                opacity={0}
-                labelClass="map-price-container"
-                labelContent={`<div class="map-price-marker"><span>$${sample.cost}</span></div>`}
-                onDragStart={(e) => {}}
-                position={{ lat: sample.latitude, lng: sample.longitude }}
-                draggable={true}
-                // onDragEnd={onMarkerDragEnd}
-                icon={
-                  'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
-                }
-              ></Marker>
-              <OverlayView
-                position={{ lat: sample.latitude, lng: sample.longitude }}
-                mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-                getPixelPositionOffset={getPixelPositionOffset}
-              >
-                <div
-                  className={sample.id}
-                  name={sample.cost}
-                  ref={mapCost}
-                  onClick={(e) => {
-                    setSelectedSample(sample);
-                    console.log('overlayviewText', e.nativeEvent);
-                    console.log('path1', e.nativeEvent.path[1]);
-                    // console.log('path13', e.nativeEvent.path[13].childNodes[0]);
-                    const path13 = e.nativeEvent.path[13].childNodes[0];
-                    console.log('path13', path13);
-
-                    // console.log(nativeevent.path); //1번째가 -memo << 이건데, 이게 className이야.
-                  }}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    background: `white`,
-                    border: `1px solid #ccc`,
-                    backGround: 'white',
-                    cursor: 'pointer',
-                    borderRadius: '50px',
-                    width: '80px',
-                    height: '30px',
-                    margin: 0,
-                    padding: 0,
-                  }}
+        <>
+          <GoogleMap
+            // scrollwheel={false}
+            ref={mapRef}
+            // defaultZoom={12}
+            zoom={zoom}
+            defaultCenter={{
+              lat: locationSearch.latitude,
+              lng: locationSearch.longitude,
+            }}
+            onClick={() => {
+              setSelectedSample(null);
+            }}
+            onLoad={onMapLoad}
+            onDragEnd={dragMark}
+            onZoomChanged={handleZoomChanged}
+            options={{ scrollwheel: true }} // 마우스휠옵션.
+          >
+            {roomMap.map((sample) => (
+              <>
+                <Marker
+                  key={sample.id}
+                  onLoad={onMarkLoad}
+                  opacity={0}
+                  labelClass="map-price-container"
+                  labelContent={`<div class="map-price-marker"><span>$${sample.cost}</span></div>`}
+                  onDragStart={(e) => {}}
+                  position={{ lat: sample.latitude, lng: sample.longitude }}
+                  draggable={true}
+                  // onDragEnd={onMarkerDragEnd}
+                  icon={
+                    'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+                  }
+                ></Marker>
+                <OverlayView
+                  position={{ lat: sample.latitude, lng: sample.longitude }}
+                  mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+                  getPixelPositionOffset={getPixelPositionOffset}
                 >
-                  <p
-                    style={{
-                      width: '100%',
-                      margin: '0 auto',
-                      textAlign: 'center',
-                      verticalAlign: 'center',
-                      fontWeight: '800',
-                      fontSize: '16px',
+                  <MarkerStyle
+                    className='toTop'
+                    tabIndex='-1'
+                    // className= {sample.id}
+                    name={sample.cost}
+                    ref={mapCost}
+                    onClick={(e) => {
+                      setSelectedSample(sample);
+                      console.log('overlayviewText', e.nativeEvent);
+                      console.log('path1', e.nativeEvent.path[1]);
+                      // console.log('path13', e.nativeEvent.path[13].childNodes[0]);
+                      const path13= e.nativeEvent.path[13].childNodes[0];
+                      console.log('path13',path13);
+                      // console.log(nativeevent.path); //1번째가 -memo << 이건데, 이게 className이야.
                     }}
                   >
-                    <BiWon />
-                    {moneyfilter(sample.cost)}
-                  </p>
-                </div>
-              </OverlayView>
-            </>
-          ))}
-          {selectedSample && (
-            <InfoWindow
-              onClick={(e) => {}}
-              position={{
-                lat: selectedSample.latitude,
-                lng: selectedSample.longitude,
-              }}
-              onCloseClick={() => {
-                setSelectedSample(null);
-              }}
-            >
-              <GoogleMarkerStyle>
-                {/* <img src={selectedSample.roomImgUrlList[0]} alt="" /> */}
-                <div className="slide-group">
-                  <div className="slide">
-                    <div className="slideDiv">
-                      <Slider {...settings}>
-                        {/* <img src={selectedSample.roomImgUrlList[0]} alt="" /> */}
-                        {selectedSample.roomImgUrlList.map(
-                          (src, i, arr, alt) => (
-                            <>
-                              <img
-                                // carousalImg
-                                src={src}
-                                alt={alt}
-                              />
-                            </>
-                          ),
-                        )}
-                      </Slider>
+                    <p className="intoCost" tabIndex='0'>
+                      <BiWon />
+                      {moneyfilter(sample.cost)}
+                    </p>
+                  </MarkerStyle>
+                </OverlayView>
+              </>
+            ))}
+            {selectedSample && (
+              <InfoWindow
+                onClick={(e) => {}}
+                position={{
+                  lat: selectedSample.latitude,
+                  lng: selectedSample.longitude,
+                }}
+                onCloseClick={() => {
+                  setSelectedSample(null);
+                }}
+              >
+                <GoogleMarkerStyle>
+                  {/* <img src={selectedSample.roomImgUrlList[0]} alt="" /> */}
+                    <div className="slide-group">
+                      <div className="slide">
+                        <div className="slideDiv">
+                          <Slider {...settings}>
+                          {/* <img src={selectedSample.roomImgUrlList[0]} alt="" /> */}
+                          {selectedSample.roomImgUrlList.map((src, i, arr,alt) => (
+                          <>
+                            <img
+                              // carousalImg
+                              src={src}
+                              alt={alt}
+                            />
+                          </>
+                        ))}
+                          </Slider>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div
-                  className="textAllWrap"
-                  onClick={(e) => {
-                    if (e.target.matches('.heart')) return;
-                    history.push(`/detail/${selectedSample.id}`);
-                  }}
-                >
-                  <ScoreText
-                    grade={selectedSample.grade}
-                    commentCount={selectedSample.commentCount}
-                  />
-                  <div className="roomTypeclass">{selectedSample.roomType}</div>
-                  <h2>{selectedSample.name}</h2>
-                  <p>
-                    <BiWon />
-                    {moneyfilter(selectedSample.cost)} <span>/ 1박</span>
-                  </p>
-                </div>
-                <Bookmark Mobileheart className="heart">
-                  <BsHeartFill className="heartimg" />
-                </Bookmark>
-              </GoogleMarkerStyle>
-            </InfoWindow>
-          )}
-        </GoogleMap>
+                    <div
+                      className="textAllWrap"
+                      onClick={(e)=>{
+                        if(e.target.matches('.heart')) return;
+                        history.push(`/detail/${selectedSample.id}`)
+                    }}>
+                      <ScoreText grade={selectedSample.grade} commentCount={selectedSample.commentCount} />
+                      <div className="roomTypeclass">{selectedSample.roomType}</div>
+                      <h2>{selectedSample.name}</h2>
+                      <p>
+                        <BiWon />{moneyfilter(selectedSample.cost)} <span>/ 1박</span>
+                      </p>
+                    </div>
+                    <Bookmark Mobileheart className="heart">
+                      <BsHeartFill className="heartimg" />
+                  </Bookmark>
+                </GoogleMarkerStyle>
+              </InfoWindow>
+            )}
+          </GoogleMap>
+        </>
       );
     }),
   );
