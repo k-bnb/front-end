@@ -63,6 +63,24 @@ const StyledTemp = styled.div`
       box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
       padding: 50px 150px;
     `}
+    
+  ${(props) =>
+    props.paymentModal &&
+    css`
+      /* position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); */
+      width: 40%;
+      min-height: 60%;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+      padding: 50px 100px;
+      border-radius: 15px;
+      box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+    `}
 `;
 
 function CommonTemp({ children, ...rest }) {

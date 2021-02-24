@@ -169,10 +169,13 @@ const search = handleActions(
       });
     },
 
-    [GUEST_INPUT]: (state, { payload: { form, name, value } }) =>
-      produce(state, (draft) => {
+    [GUEST_INPUT]: (state, { payload: { form, name, value } }) => {
+      sessionStorage.setItem(name, value);
+
+      return produce(state, (draft) => {
         draft.searchReq[form][name] = value; // draft.searchReq.guestSearch.numOfAdult = value
-      }),
+      });
+    },
     [SPECIFIC_INPUT_CLEAR]: (state, { payload: form }) =>
       produce(state, (draft) => {
         draft.searchReq[form] = initialState.searchReq[form]; // 선택한 form 초기화.
