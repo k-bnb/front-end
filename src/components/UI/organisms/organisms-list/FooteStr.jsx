@@ -1,23 +1,21 @@
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
+import Footer from '../../molecules/molecules-list/Footer'
 // import SearchData from '../molecules/SearchData';
 
 const PcSize = styled.main`
-  /* height: 525px; */
-  background-color: burlywood;
+  height: 525px;
 `;
 
 const TabletSize = styled.main`
   /* height: 705px; */
-  background-color: burlywood;
 `;
 
 const MobileSize = styled.main`
   /* height: 1234px; */
-  background-color: burlywood;
 `;
 
-const FooterFake = () => {
+const FooterStr = () => {
   const isPc = useMediaQuery({
     query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
   });
@@ -30,10 +28,12 @@ const FooterFake = () => {
 
   return (
     <>
-      {isPc && <PcSize className="Listheader"></PcSize>}
+      {isPc && <PcSize className="Listheader">
+          <Footer />
+        </PcSize>}
       {isTablet && <TabletSize className="Listheader"></TabletSize>}
       {isMobile && <MobileSize className="Listheader"></MobileSize>}
     </>
   );
 };
-export default FooterFake;
+export default FooterStr;

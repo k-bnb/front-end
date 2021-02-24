@@ -11,6 +11,7 @@ import ScoreText from '../../molecules/molecules-list/Score-Text';
 import { BsHeartFill } from 'react-icons/bs';
 import { BiWon } from 'react-icons/bi';
 import React from 'react';
+import EmptyList from '../../molecules/molecules-list/EmptyList';
 
 const PcSize = styled.main`
   min-height: calc(100vh - 80px);
@@ -97,6 +98,7 @@ const ListStyle = ({
   pageNationState,
   checkDateSearch,
   guestSearch,
+  isLoading
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
@@ -107,65 +109,71 @@ const ListStyle = ({
   const isMobile = useMediaQuery({
     query: `(max-width: 743px)`, //744px 이하인 경우에만 적용(744이하.)
   });
+  console.log('room', room);
   return (
     <>
       {isPc && (
         <PcSize className="Listmain">
-          {room.map(
-            ({
-              bathRoomNum,
-              roomType,
-              city,
-              borough,
-              bedNum,
-              bedRoomNum,
-              cost,
-              grade,
-              id,
-              name,
-              peopleLimit,
-              isCheck,
-              isParking,
-              isSmoking,
-              commentCount,
-              roomImgUrlList,
-            }) => {
-              // console.log(checkDateSearch);
-              return (
-                <LodgingLists
-                  bathRoomNum={bathRoomNum}
-                  city={city}
-                  borough={borough}
-                  isCheck={isCheck}
-                  isParking={isParking}
-                  isSmoking={isSmoking}
-                  commentCount={commentCount}
-                  bedNum={bedNum}
-                  roomImgUrlList={roomImgUrlList}
-                  roomType={roomType}
-                  peopleLimit={peopleLimit}
-                  bedRoomNum={bedRoomNum}
-                  cost={cost}
-                  grade={grade}
-                  id={id}
-                  name={name}
-                  checkDateSearch={checkDateSearch}
-                  guestSearch={guestSearch}
-                />
-              );
-            },
-          )}
-          <PageNation
-            totalPage={totalPage}
-            pageNationClick={pageNationClick}
-            currentButton={currentButton}
-            setCurrentButton={setCurrentButton}
-            arrOfcurrButtons={arrOfcurrButtons}
-            setArrOfCurrButtons={setArrOfCurrButtons}
-            numberOfPages={numberOfPages}
-            changeCurrentPage={changeCurrentPage}
-            pageNationState={pageNationState}
-          />
+          {room?.length && !isLoading  && (
+            room?.map
+            (({
+                bathRoomNum,
+                roomType,
+                city,
+                borough,
+                bedNum,
+                bedRoomNum,
+                cost,
+                grade,
+                id,
+                name,
+                peopleLimit,
+                isCheck,
+                isParking,
+                isSmoking,
+                commentCount,
+                roomImgUrlList,
+                isLoading
+              }) => {
+                return (
+                  <LodgingLists
+                    bathRoomNum={bathRoomNum}
+                    city={city}
+                    borough={borough}
+                    isCheck={isCheck}
+                    isParking={isParking}
+                    isSmoking={isSmoking}
+                    commentCount={commentCount}
+                    bedNum={bedNum}
+                    roomImgUrlList={roomImgUrlList}
+                    roomType={roomType}
+                    peopleLimit={peopleLimit}
+                    bedRoomNum={bedRoomNum}
+                    cost={cost}
+                    grade={grade}
+                    id={id}
+                    name={name}
+                    checkDateSearch={checkDateSearch}
+                    guestSearch={guestSearch}
+                  />
+                );
+              }
+            )
+          ) 
+        }
+        {!room?.length && !isLoading && <EmptyList />}
+          {room?.length ?
+            (<PageNation
+              totalPage={totalPage}
+              pageNationClick={pageNationClick}
+              currentButton={currentButton}
+              setCurrentButton={setCurrentButton}
+              arrOfcurrButtons={arrOfcurrButtons}
+              setArrOfCurrButtons={setArrOfCurrButtons}
+              numberOfPages={numberOfPages}
+              changeCurrentPage={changeCurrentPage}
+              pageNationState={pageNationState}
+            />) : '' }
         </PcSize>
       )}
       {isTablet && (
