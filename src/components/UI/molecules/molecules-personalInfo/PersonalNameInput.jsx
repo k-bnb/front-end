@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Button from '../../atoms/atoms-main/Button';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
@@ -121,8 +121,17 @@ const PersonalNameInput = ({
   inputFocus,
   ChangeInputBtn,
   loading,
+
+  fix,
   KeyDown,
 }) => {
+  const nameRef = useRef();
+  useEffect(() => {
+    if (fix.name) {
+      nameRef?.current?.focus();
+    }
+  }, [fix.name]);
+
   return (
     <PersonalNameInputStyle>
       <TextStyle>
@@ -133,6 +142,7 @@ const PersonalNameInput = ({
           <label htmlFor="">이름</label>
           <input
             value={name}
+            ref={nameRef}
             type="text"
             name={'name'}
             onChange={personInfoChange}
