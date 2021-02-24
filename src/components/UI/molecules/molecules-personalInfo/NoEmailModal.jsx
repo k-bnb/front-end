@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import styled, { keyframes, css } from 'styled-components';
 import Button from '../../atoms/atoms-main/Button';
@@ -200,8 +200,11 @@ const NoEmailModal = ({
 }) => {
   const [animation, setAnimation] = useState(false);
   const [localModalState, setLocalModalState] = useState(emailOk);
+  const emailsRef = useRef();
+
   console.log(ChangeInputBtn);
   useEffect(() => {
+    emailsRef?.current?.focus();
     if (localModalState && !emailOk) {
       setAnimation(true);
       setTimeout(() => {
@@ -212,7 +215,7 @@ const NoEmailModal = ({
   }, [localModalState, emailOk]);
   if (!animation && !localModalState) return null;
   return (
-    <NoEmailModalStyle>
+    <NoEmailModalStyle className="bg" onClick={cancelModalEmail}>
       <div className="emailClass" disappear={!emailOk}>
         {!loading['user/CHANGE_INPUT_USER_EMAIL_SUBMIT'] ? (
           <>
@@ -227,7 +230,7 @@ const NoEmailModal = ({
                 name="email"
                 value={email}
                 onChange={personInfoChange}
-                tabIndex="2"
+                ref={emailsRef}
                 onKeyPress={personInfoEmailSubmitKeypress}
               />
             </div>

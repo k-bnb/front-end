@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import PersonalInfoLi from '../../molecules/molecules-personalInfo/PersonalInfoLi';
 import Button from '../../atoms/atoms-main/Button';
@@ -63,6 +63,9 @@ const PersonalInfoUl = ({
   emailOk,
   personInfoEmailSubmitKeypress,
   cancelModalEmail,
+  nameRef,
+  KeyDown,
+  imageImg,
 }) => {
   // const [emailOk, setEmailOk] = useState(false);
   // useEffect(() => {
@@ -73,7 +76,7 @@ const PersonalInfoUl = ({
   //   }
   // }, [emailCheck]);
 
-  // console.log(emailOk);
+  console.log(imageImg);
   return (
     <PersonalInfoUIStyle onClick={fix.cancel ? cancelclick : fixInfoBtn}>
       <PersonalInfoLi>
@@ -82,10 +85,13 @@ const PersonalInfoUl = ({
           {fix.name ? (
             <PersonalNameInput
               name={name}
+              fix={fix}
               personInfoChange={personInfoChange}
               inputFocus={inputFocus}
               ChangeInputBtn={ChangeInputBtn}
               loading={loading}
+              nameRef={nameRef}
+              KeyDown={KeyDown}
             />
           ) : (
             <TextStyle>{name}</TextStyle>
@@ -107,9 +113,15 @@ const PersonalInfoUl = ({
               personInfoChange={personInfoChange}
               imageUrl={imageUrl}
               loading={loading}
+              fix={fix}
             />
           ) : (
             <>
+              {imageImg && (
+                <div className="imgPerson">
+                  <img src={imageImg} alt="hello" />
+                </div>
+              )}
               {imageUrl ? (
                 <div className="imgPerson">
                   <img src={userInfo.imageUrl} alt="hello" />
@@ -140,6 +152,7 @@ const PersonalInfoUl = ({
               personInfoChange={personInfoChange}
               birth={birth}
               loading={loading}
+              fix={fix}
             />
           )}
         </div>
@@ -160,6 +173,7 @@ const PersonalInfoUl = ({
               ChangeInputBtn={ChangeInputBtn}
               loading={loading}
               emailCheck={emailCheck}
+              fix={fix}
             />
           ) : (
             <TextStyle>{email}</TextStyle>
