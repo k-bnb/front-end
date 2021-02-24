@@ -1,7 +1,8 @@
 import moment from 'moment';
 
 export const extractMonthDate = (dateStr) => {
-  const arr = dateStr.split('-');
+  const arr = dateStr?.split('-');
+  if (arr === undefined) return;
   return { year: arr[0], month: arr[1], date: arr[2] };
 };
 

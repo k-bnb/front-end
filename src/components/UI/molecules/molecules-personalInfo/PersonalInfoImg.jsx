@@ -164,7 +164,6 @@ const PersonalInfoImg = ({
 
       setTimeout(async () => {
         setLoading(true);
-        await sleep(3000);
         setFix(
           (state) => ({
             name: false,

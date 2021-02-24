@@ -57,6 +57,7 @@ const ReserveConfirmSection = ({
               cancelModal={cancelModal}
               reviewModalState={reviewModalState}
               review={review}
+              reserveconfirmLoading={reserveconfirmLoading}
             />
           ))
         ) : (
