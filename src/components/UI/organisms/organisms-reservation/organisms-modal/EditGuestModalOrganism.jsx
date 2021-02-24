@@ -28,6 +28,7 @@ function EditGuestModalOrganism({
   clearGuest,
   saveGuest,
   peopleLimit,
+  disabled,
 }) {
   return (
     <CommonBg modalBg>
@@ -53,7 +54,7 @@ function EditGuestModalOrganism({
           <CommonButton guestDelete clearGuest={clearGuest}>
             지우기
           </CommonButton>
-          <CommonButton guestSave saveGuest={saveGuest}>
+          <CommonButton guestSave disabled={disabled} saveGuest={saveGuest}>
             저장하기
           </CommonButton>
         </FooterContainer>

@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { initialGuest } from '../../../../modules/reserve';
-import { guestInput } from '../../../../modules/search';
+import { guestInput } from '../../../../modules/detail';
 import Modal from '../../../../portal/Modal';
 import ReserveGuestModalContainer from '../../../../containers/modal/ReserveGuestModalContainer';
 
@@ -66,9 +66,9 @@ const ReservationEditButton2 = ({
   // 월요일날 새로운 search reducer에 새로운 action function 및 action type을 만들어서 한번에 보내기
   const saveGuest = () => {
     setGuestModal(!guestModal);
-    dispatch(guestInput('guestSearch', 'numOfAdult', numOfAdult));
-    dispatch(guestInput('guestSearch', 'numOfKid', numOfKid));
-    dispatch(guestInput('guestSearch', 'numOfInfant', numOfInfant));
+    dispatch(guestInput('numOfAdult', numOfAdult));
+    dispatch(guestInput('numOfKid', numOfKid));
+    dispatch(guestInput('numOfInfant', numOfInfant));
   };
   return (
     <>

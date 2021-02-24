@@ -151,6 +151,7 @@ const store = createStore(
       },
       reserveReiewRes: [],
       reserveReviewError: null,
+      userInfoError: null,
     },
   },
   composeWithDevTools(applyMiddleware(sagaMiddleware)),
