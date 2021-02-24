@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Button from '../../atoms/atoms-main/Button';
 import Input from '../../atoms/atoms-main/Input';
@@ -89,7 +89,15 @@ const PersonalInfoBirthinput = ({
   ChangeInputBtn,
   birth,
   loading,
+  fix,
 }) => {
+  const birthRef = useRef();
+  console.log(birthRef);
+  useEffect(() => {
+    if (fix.birth) {
+      birthRef?.current?.focus();
+    }
+  }, [fix.birth]);
   return (
     <PersonalInfoBirthinputStyle>
       <div>
@@ -97,6 +105,7 @@ const PersonalInfoBirthinput = ({
           type="date"
           name="birth"
           onChange={personInfoChange}
+          ref={birthRef}
           required
           pattern="\d{4}-\d{2}-\d{2}"
         />

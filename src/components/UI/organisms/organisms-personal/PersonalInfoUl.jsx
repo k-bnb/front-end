@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import PersonalInfoLi from '../../molecules/molecules-personalInfo/PersonalInfoLi';
 import Button from '../../atoms/atoms-main/Button';
@@ -63,6 +63,8 @@ const PersonalInfoUl = ({
   emailOk,
   personInfoEmailSubmitKeypress,
   cancelModalEmail,
+  nameRef,
+  KeyDown,
 }) => {
   // const [emailOk, setEmailOk] = useState(false);
   // useEffect(() => {
@@ -72,8 +74,12 @@ const PersonalInfoUl = ({
   //     setEmailOk(true);
   //   }
   // }, [emailCheck]);
+  const [imageImg, setImageImg] = useState();
 
-  // console.log(emailOk);
+  useEffect(() => {
+    setImageImg(imageUrl);
+  }, [imageImg, imageUrl]);
+  console.log(imageImg);
   return (
     <PersonalInfoUIStyle onClick={fix.cancel ? cancelclick : fixInfoBtn}>
       <PersonalInfoLi>
@@ -82,10 +88,13 @@ const PersonalInfoUl = ({
           {fix.name ? (
             <PersonalNameInput
               name={name}
+              fix={fix}
               personInfoChange={personInfoChange}
               inputFocus={inputFocus}
               ChangeInputBtn={ChangeInputBtn}
               loading={loading}
+              nameRef={nameRef}
+              KeyDown={KeyDown}
             />
           ) : (
             <TextStyle>{name}</TextStyle>
@@ -107,12 +116,13 @@ const PersonalInfoUl = ({
               personInfoChange={personInfoChange}
               imageUrl={imageUrl}
               loading={loading}
+              fix={fix}
             />
           ) : (
             <>
               {imageUrl ? (
                 <div className="imgPerson">
-                  <img src={userInfo.imageUrl} alt="hello" />
+                  <img src={imageImg} alt="hello" />
                 </div>
               ) : (
                 <TextStyle>지정되지 않음</TextStyle>
@@ -140,6 +150,7 @@ const PersonalInfoUl = ({
               personInfoChange={personInfoChange}
               birth={birth}
               loading={loading}
+              fix={fix}
             />
           )}
         </div>
@@ -160,24 +171,26 @@ const PersonalInfoUl = ({
               ChangeInputBtn={ChangeInputBtn}
               loading={loading}
               emailCheck={emailCheck}
+              fix={fix}
             />
           ) : (
             <TextStyle>{email}</TextStyle>
           )}
-
-          <Modal>
-            <NoEmailModal
-              emailCheck={emailCheck}
-              loading={loading}
-              email={email}
-              ChangeInputBtn={ChangeInputBtn}
-              personInfoChange={personInfoChange}
-              personInfoEmailSubmit={personInfoEmailSubmit}
-              emailOk={emailOk}
-              personInfoEmailSubmitKeypress={personInfoEmailSubmitKeypress}
-              cancelModalEmail={cancelModalEmail}
-            ></NoEmailModal>
-          </Modal>
+          {(emailOk || loading['user/CHANGE_INPUT_USER_EMAIL_SUBMIT']) && (
+            <Modal>
+              <NoEmailModal
+                emailCheck={emailCheck}
+                loading={loading}
+                email={email}
+                ChangeInputBtn={ChangeInputBtn}
+                personInfoChange={personInfoChange}
+                personInfoEmailSubmit={personInfoEmailSubmit}
+                emailOk={emailOk}
+                personInfoEmailSubmitKeypress={personInfoEmailSubmitKeypress}
+                cancelModalEmail={cancelModalEmail}
+              ></NoEmailModal>
+            </Modal>
+          )}
         </div>
         <Button name="emailAddress" className="btn" greenText>
           {!fix.emailAddress ? '수정' : '취소'}

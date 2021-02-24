@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Modal from '../../../../portal/Modal';
 import Button from '../../atoms/atoms-main/Button';
@@ -106,7 +106,15 @@ const PersonalInfoEmailInput = ({
   ChangeInputBtn,
   loading,
   emailCheck,
+  fix,
 }) => {
+  const emailRef = useRef();
+  useEffect(() => {
+    if (fix.emailAddress) {
+      emailRef?.current?.focus();
+    }
+  }, [fix.emailAddress]);
+
   return (
     <PersonalInfoEmailInputStyle>
       <TextStyle>언제든지 확인하실 수 있는 주소를 사용하세요</TextStyle>
@@ -115,6 +123,7 @@ const PersonalInfoEmailInput = ({
           type="text"
           name="email"
           value={email}
+          ref={emailRef}
           onChange={personInfoChange}
           onFocus={() => {
             console.log('dd');

@@ -28,6 +28,12 @@ const ReCheckBedStyle = styled.div`
           border-color: rgba(0, 0, 0, 0.1);
           color: rgba(0, 0, 0, 0.1);
         }
+        &.maximum{
+          background:none;
+          cursor: not-allowed;
+          border-color: rgba(0, 0, 0, 0.1);
+          color: rgba(0, 0, 0, 0.1);
+        }
       }
       span {
         display: block;
@@ -57,7 +63,14 @@ const ReCheckBedCount = React.memo(
               className={bedNum === 0 && 'zero'}
             />
             <TextStyle>{bedNum}</TextStyle>
-            <CircleButton name="bedNum" value={bedNum} onClick={plusBtn} />
+            <CircleButton 
+              name="bedNum" 
+              value={bedNum} 
+              plusBtn 
+              onClick={plusBtn} 
+              disabled={bedNum === 16 ? 'false' : ''}
+              className={bedNum === 16 && 'maximum'}
+            />
           </div>
         </div>
         <div>
@@ -77,6 +90,9 @@ const ReCheckBedCount = React.memo(
               name="bedRoomNum"
               value={bedRoomNum}
               onClick={plusBtn}
+              plusBtn
+              disabled={bedRoomNum === 16 ? 'false' : ''}
+              className={bedRoomNum === 16 && 'maximum'}
             />
           </div>
         </div>
@@ -97,6 +113,9 @@ const ReCheckBedCount = React.memo(
               name="bathRoomNum"
               value={bathRoomNum}
               onClick={plusBtn}
+              plusBtn 
+              disabled={bathRoomNum === 16 ? 'false' : ''}
+              className={bathRoomNum === 16 && 'maximum'}
             />
           </div>
         </div>
