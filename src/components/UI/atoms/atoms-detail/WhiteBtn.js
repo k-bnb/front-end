@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Text from './DetailText';
 
-const WhiteButton = styled.a`
+const WhiteButton = styled.button`
   display: inline-block;
   margin: 24px 0 0;
   padding: 13px 13px;
@@ -21,9 +21,15 @@ const WhiteButton = styled.a`
   }
 `;
 
-const WhiteBtn = ({ text, setShowReviewModal, isShowReviewButton }) => (
+const WhiteBtn = ({
+  text,
+  setShowReviewModal,
+  isShowReviewButton,
+  ...rest
+}) => (
   <div>
     <WhiteButton
+      {...rest}
       className="white-btn"
       onClick={() => {
         if (isShowReviewButton) setShowReviewModal(true);

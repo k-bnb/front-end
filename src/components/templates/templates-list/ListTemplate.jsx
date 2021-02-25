@@ -71,7 +71,7 @@ const ListTemplate = ({
           keyup={keyup}
         />
         <div className="list-map" style={{ display: 'flex' }}>
-          <div className="list" style={{ display: 'block', width: '50%' }}>
+          <div className="list" style={{ display: 'block', width: '44%' }}>
             <ListStyle
               room={room}
               totalPage={totalPage}

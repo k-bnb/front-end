@@ -1,3 +1,4 @@
+import FooterStr from '../../UI/organisms/organisms-list/FooteStr';
 import MainStyle from '../../UI/organisms/organisms-main/MainStyle';
 import Section3Style from '../../UI/organisms/organisms-main/Section3Style';
 import SectionStyle from '../../UI/organisms/organisms-main/SectionStyle';
@@ -12,6 +13,7 @@ const Main = ({ imgs, sectionImg, sloganImg, section3Img }) => {
       <SectionStyle sectionImg={sectionImg} />
       <SloganStyle sloganImg={sloganImg} />
       <Section3Style section3Img={section3Img} />
+      <FooterStr />
     </>
   );
 };
