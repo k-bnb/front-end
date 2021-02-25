@@ -5,7 +5,7 @@ import HeaderList from '../../components/templates/templates-header/HeaderList';
 import HeaderDetail from '../../components/templates/templates-header/HeaderDetail';
 import { useDispatch, useSelector } from 'react-redux';
 import SkipNavigation from '../../components/templates/templates-header/SkipNabigation';
-import { searching } from '../../modules/search';
+import { destinationInput, searching } from '../../modules/search';
 
 const HeaderContainer = ({
   DetailHeaderRef,
@@ -95,6 +95,10 @@ const HeaderContainer = ({
       return;
     }
   }, [isScrolled, isClicked]);
+
+  useEffect(() => {
+    dispatch(destinationInput(''));
+  }, []);
 
   const dispatch = useDispatch();
   const serchBtn = () => {
