@@ -25,7 +25,7 @@ const EmoticonBox = styled.div`
 `;
 
 const Parking = () => (
-  <EmoticonNoticeBox>
+  <EmoticonNoticeBox aria-label="편의시설 안내">
     <EmoticonBox>
       <RiParkingBoxLine />
     </EmoticonBox>

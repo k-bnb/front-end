@@ -165,7 +165,7 @@ const initialState = {
     imageUrl: '',
   },
   reserveRes: [],
-  reserveCancelRes: [],
+  reserveCancelRes: {},
   reserveReviewReq: {
     description: '',
   },
@@ -181,12 +181,12 @@ const user = handleActions(
       sessionStorage.setItem(
         'userInfoConFirm',
         JSON.stringify(
-          action.payload._embedded.reservationConfirmedResponseList,
+          action?.payload?._embedded?.reservationConfirmedResponseList || [],
         ),
       );
       return produce(state, (draft) => {
         draft.reserveRes =
-          action.payload._embedded.reservationConfirmedResponseList;
+          action?.payload?._embedded?.reservationConfirmedResponseList || [];
       });
     },
     [RESERVE_CONFIRM_FAILURE]: (state, action) => ({
@@ -247,6 +247,7 @@ const user = handleActions(
     },
 
     [RESERVATION_CANCEL_SUCCESS]: (state, { payload }) => {
+      console.log(payload);
       return produce(state, (draft) => {
         draft.userRes.reserveCancelRes = payload;
       });

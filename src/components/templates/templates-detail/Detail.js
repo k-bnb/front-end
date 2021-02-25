@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import ImageFrame from '../../UI/organisms/organisms-detail/ImageFrame';
 import { PageTitle } from '../../UI/molecules/molecules-detail/PageTitle';
@@ -55,14 +55,15 @@ const Detail = ({
   setDetailAuthModal,
   modal,
   setModal,
-  isOpen,
-  setIsOpen,
   formState,
   setFormState,
   bookingInfoRef,
   GuestModalRef,
   isCalendarOpen,
   setIsCalendarOpen,
+  isGuestOpen,
+  setIsGuestOpen,
+  peopleLimit,
 }) => {
   const CheckInDate = () => {
     const strDate = detailObj.startDate ? detailObj.startDate.split('-') : '';
@@ -102,14 +103,15 @@ const Detail = ({
           setDetailAuthModal={setDetailAuthModal}
           modal={modal}
           setModal={setModal}
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
           formState={formState}
           setFormState={setFormState}
           bookingInfoRef={bookingInfoRef}
           isCalendarOpen={isCalendarOpen}
           setIsCalendarOpen={setIsCalendarOpen}
           GuestModalRef={GuestModalRef}
+          isGuestOpen={isGuestOpen}
+          setIsGuestOpen={setIsGuestOpen}
+          peopleLimit={peopleLimit}
         />
         <ReviewContainer
           reviewRef={reviewRef}

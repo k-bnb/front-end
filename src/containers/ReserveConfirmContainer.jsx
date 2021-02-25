@@ -15,24 +15,25 @@ const ReserveConfirmContainer = () => {
   const dispatch = useDispatch();
 
   const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+  const userIfoConFirm = JSON.parse(sessionStorage.getItem('userInfoConFirm'));
 
   useEffect(() => {
     // if (reserveRes.reserveRes === null) return;
-    const next = reserveRes?.reserveRes?.filter((item) =>
+    const next = userIfoConFirm?.filter((item) =>
       active === '예약 완료'
         ? item.status === '예약 완료'
         : item.status === '완료된 여정',
     );
     setList(next);
     if (next === null) return;
-  }, [reserveRes, active]);
+  }, [reserveRes.reserveRes, active]);
 
   // 예정된 예약 이전예약 nav
   const activClick = (e) => {
     if (e.target.name === '예약 완료') {
       setActive('예약 완료');
       if (reserveRes.reserveRes === null) return;
-      const next = reserveRes.reserveRes.filter(
+      const next = userIfoConFirm?.filter(
         (item) => item.status === '예약 완료',
       );
       if (next === null) return;
@@ -40,7 +41,7 @@ const ReserveConfirmContainer = () => {
     } else if (e.target.name === '이전 예약') {
       setActive('완료된 여정');
       if (reserveRes.reserveRes === null) return;
-      const prev = reserveRes.reserveRes.filter(
+      const prev = userIfoConFirm?.filter(
         (item) => item.status === '완료된 여정',
       );
       if (prev === null) return;
@@ -66,6 +67,7 @@ const ReserveConfirmContainer = () => {
     setcancelModalState(!cancelModalState);
   };
 
+  const { token } = useSelector((state) => state.auth);
   // 모달 안에 작은 모달
   const miniModalCancelBtn = () => {
     setMiniModal(!miniModal);
@@ -76,7 +78,6 @@ const ReserveConfirmContainer = () => {
   const resonChange = (e) => {
     setReason(e.target.value);
   };
-  const { token } = useSelector((state) => state.auth);
 
   const reservationConfirmBtn = (e) => {
     dispatch(

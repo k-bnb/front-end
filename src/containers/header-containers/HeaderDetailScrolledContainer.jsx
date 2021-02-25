@@ -8,7 +8,6 @@ const HeaderDetailScrolledContainer = ({
   reviewRef,
   facilityRef,
   DetailHeaderRef,
-  GuestModalRef,
   formState,
   setFormState,
   modal,
@@ -16,6 +15,8 @@ const HeaderDetailScrolledContainer = ({
   bookingInfoRef,
   isCalendarOpen,
   setIsCalendarOpen,
+  isGuestOpen,
+  setIsGuestOpen,
 }) => {
   const { startDate, endDate } = useSelector((state) => state.detail);
   const { grade } = useSelector((state) => state.detail.infoRes);
@@ -36,7 +37,6 @@ const HeaderDetailScrolledContainer = ({
       reviewRef={reviewRef}
       facilityRef={facilityRef}
       DetailHeaderRef={DetailHeaderRef}
-      GuestModalRef={GuestModalRef}
       formState={formState}
       setFormState={setFormState}
       modal={modal}
@@ -48,6 +48,8 @@ const HeaderDetailScrolledContainer = ({
       setIsCalendarOpen={setIsCalendarOpen}
       grade={grade}
       setIsOpen={setIsOpen}
+      isGuestOpen={isGuestOpen}
+      setIsGuestOpen={setIsGuestOpen}
     />
   );
 };

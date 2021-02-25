@@ -46,7 +46,7 @@ const ReserveConfirmNoData = ({ active }) => {
           </Link>
         </TextStyle>
       )}
-      {active === '이전 예약' && (
+      {active === '완료된 여정' && (
         <TextStyle>
           과거 여행이 없습니다. 하지만 여행을 완료하면 여기에서 확인하실 수
           있습니다.
