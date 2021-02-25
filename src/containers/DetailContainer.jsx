@@ -71,6 +71,9 @@ const DetailContainer = () => {
     dispatch(requestDetail(roomId));
     if (sessionStorage.getItem('checkIn')) return;
     if (startDate && endDate) {
+      // dispatch(
+      //   searchToDetail(startDate, endDate, numOfAdult, numOfKid, numOfInfant),
+      // );
       dispatch(
         searchToDetail(
           startDate,
@@ -81,7 +84,7 @@ const DetailContainer = () => {
         ),
       );
     }
-  }, []);
+  }, [dispatch, endDate, startDate, roomId, numOfAdult, numOfKid, numOfInfant]);
 
   useEffect(() => {
     if (showModal || showReviewModal || modal)

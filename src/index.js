@@ -112,13 +112,13 @@ const store = createStore(
         sessionStorage.getItem('checkOut') || sessionStorage.getItem('endDate'),
       numOfAdult:
         localStorage.getItem('detailnumOfAdult') ||
-        localStorage.getItem('numOfAdult'),
+        sessionStorage.getItem('numOfAdult'),
       numOfKid:
         localStorage.getItem('detailnumOfKid') ||
-        localStorage.getItem('numOfKid'),
+        sessionStorage.getItem('numOfKid'),
       numOfInfant:
         localStorage.getItem('detailnumOfInfant') ||
-        localStorage.getItem('numOfInfant'),
+        sessionStorage.getItem('numOfInfant'),
       infoRes: {
         id,
         name,
@@ -156,8 +156,8 @@ const store = createStore(
     reserve: {
       message: '',
       checkDateSearch: {
-        startDate: sessionStorage.getItem('startDate'),
-        endDate: sessionStorage.getItem('endDate'),
+        startDate: '',
+        endDate: '',
       },
       guestSearch: {
         numOfAdult: 0,
