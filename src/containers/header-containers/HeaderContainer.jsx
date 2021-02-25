@@ -28,7 +28,7 @@ const HeaderContainer = ({
   const match = useRouteMatch();
 
   useEffect(() => {
-    console.log(history.location.pathname);
+    return () => {};
   }, []);
 
   // 어떤것을 선택했는가 상태를 바꿔주는 함수

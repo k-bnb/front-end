@@ -8,6 +8,7 @@ import CommonText from '../../atoms/atoms-reservation/atoms-modal/CommonText';
 import CommonTitle from '../../atoms/atoms-reserveconfirm/CommonTitle';
 import { useClickOutside } from '../../../../lib/useClickOutside';
 import MovePageButton from '../../atoms/atoms-reservation/atoms-modal/MovePageButton';
+import { useSelector } from 'react-redux';
 
 const Container = styled.div`
   position: relative;
@@ -37,6 +38,9 @@ const ReviewSecondOrganism = ({
   description,
   completeReviewModal,
 }) => {
+  const reviewDescription = useSelector(
+    (state) => state.user.reserveReviewReq.description,
+  );
   return (
     <Container>
       <MovePageButton
@@ -51,21 +55,34 @@ const ReviewSecondOrganism = ({
       <HeaderContainer>
         <CommonTitle>후기 작성하기</CommonTitle>
         <CommonText reviewName>
-          xxx님에의 숙소에 관해 다른 게스트가 참고할 점을 알려주세요.
+          xxx님에의 숙소에 관해 다른 게스트가 참고할 점을 알려주세요.{' '}
         </CommonText>
       </HeaderContainer>
       <MainContainer>
-        <CommonText reviewNameBold>후기를 작성해주세요.</CommonText>
+        <CommonText reviewNameBold>후기를 작성해주세요.(20자 이상)</CommonText>
         <AdjustHeightTeatarea
           wirteReview={wirteReview}
           description={description}
+          length={reviewDescription.length}
         />
+        <CommonText
+          reviewNameBold
+          style={{ marginTop: '10px', textAlign: 'right' }}
+        >
+          {' '}
+          {`${reviewDescription.length} / 200`}
+        </CommonText>
       </MainContainer>
       <FooterContainer>
         <MovePageButton
           name="complete"
           reviewNext
           completeReviewModal={completeReviewModal}
+          disabled={
+            reviewDescription.length >= 20 && reviewDescription.length <= 200
+              ? false
+              : true
+          }
         >
           저장 후 닫기
         </MovePageButton>

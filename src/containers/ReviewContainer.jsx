@@ -21,19 +21,6 @@ const ReviewContainer = ({
       detailObj={detailObj}
     />
   );
-
-  // return (
-  //   <>
-  //     <EmptyReview />
-  //     <Review
-  //       infoRes={infoRes}
-  //       reviewRef={reviewRef}
-  //       showReviewModal={showReviewModal}
-  //       setShowReviewModal={setShowReviewModal}
-  //       detailObj={detailObj}
-  //     />
-  //   </>
-  // );
 };
 
 export default ReviewContainer;

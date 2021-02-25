@@ -37,9 +37,6 @@ const Review = ({
   infoRes,
   detailObj,
 }) => {
-  const reviewBtnText = infoRes.commentCount;
-  console.log(reviewBtnText);
-
   return (
     <ReveiwSectionWrapper ref={reviewRef}>
       <ReviewContainer className="basic-section-padding">

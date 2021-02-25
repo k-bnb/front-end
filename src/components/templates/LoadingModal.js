@@ -18,8 +18,8 @@ const LoadingModalBlock = styled.div`
   .loader-img {
     position: absolute;
     z-index: 1;
-    background-color: white;
-    border-radius: 30px;
+    /* background-color: white; */
+    /* border-radius: 30px; */
     height: 10px;
   }
 `;
@@ -35,7 +35,7 @@ const LoadingModal = () => {
   return (
     <Portal>
       <LoadingModalBlock>
-        <LoaderIcon type={'bubbles'} className="loader-img" />
+        <LoaderIcon type={'bubbles'} color={'white'} className="loader-img" />={' '}
       </LoadingModalBlock>
     </Portal>
   );

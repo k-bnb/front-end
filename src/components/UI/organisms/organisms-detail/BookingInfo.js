@@ -70,7 +70,6 @@ const BookingInfo = ({
             peopleLimit={peopleLimit}
           />
           <ReserveBtn
-            tabIndex="1"
             moveToReserve={moveToReserve}
             modal={modal}
             setModal={setModal}
@@ -119,7 +118,6 @@ const BookingInfo = ({
             peopleLimit={peopleLimit}
           />
           <ReserveBtn
-            tabIndex="1"
             moveToReserve={moveToReserve}
             modal={modal}
             setModal={setModal}

@@ -68,7 +68,7 @@ const Reservation = ({
 }) => {
   return (
     <>
-      <section>
+      <section className="reserve-container">
         <header>
           <div
             style={{
