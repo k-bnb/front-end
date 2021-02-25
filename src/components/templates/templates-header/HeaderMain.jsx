@@ -50,6 +50,7 @@ const HeaderMain = ({
   clickHandler,
   formState,
   setFormState,
+  serchBtn,
 }) => {
   return (
     <>
@@ -95,6 +96,7 @@ const HeaderMain = ({
           guestSearch={guestSearch}
           moveFocusNext={moveFocusNext}
           clickHandler={clickHandler}
+          serchBtn={serchBtn}
         />
       </HeaderMainBlock>
     </>
