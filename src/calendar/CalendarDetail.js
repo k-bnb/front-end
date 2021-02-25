@@ -9,6 +9,8 @@ import Text from '../components/UI/atoms/atoms-header/Text';
 import CloseBtn from '../components/UI/atoms/atoms-detail/CloseBtn';
 import { clearCheckDateDtail, dateChangeDetail } from '../modules/detail';
 import { AiOutlineClose } from 'react-icons/ai';
+import { useHistory } from 'react-router-dom';
+import qs from 'query-string';
 
 const CalendarDetailBlock = styled.div`
   /* 달력 날짜하나하나 */
@@ -229,6 +231,14 @@ function Datepicker({ setIsDateBorderThick, setIsCalendarOpen }) {
   const dispatch = useDispatch();
   const detailStartDate = useSelector((state) => state.detail.startDate);
   const detailEndDate = useSelector((state) => state.detail.endDate);
+  const { numOfAdult, numOfKid, numOfInfant } = useSelector(
+    (state) => state.detail,
+  );
+  const url = `?check_in=${detailStartDate}&check_out=${detailEndDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`;
+
+  const history = useHistory();
+  const queryObj = qs.parse(history.location.search);
+  console.log(qs.parse(history.location.search));
 
   const [dateRange, setdateRange] = useState({
     startDate: detailStartDate || null,
@@ -270,6 +280,7 @@ function Datepicker({ setIsDateBorderThick, setIsCalendarOpen }) {
       // AdjustCheckDate();
     }
     setdateRange(startDate, endDate);
+    // history.location.search = url;
   };
   const DetailCalendarModalRef = useRef();
 
@@ -289,6 +300,7 @@ function Datepicker({ setIsDateBorderThick, setIsCalendarOpen }) {
 
   // 모달을 켰을때 input에 포커스
   useEffect(() => {
+    console.log(history);
     CheckInFocus();
     setIsBorderStrong(true);
   }, []);

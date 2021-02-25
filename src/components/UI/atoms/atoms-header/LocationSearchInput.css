@@ -21,9 +21,11 @@
   font-size: 15px;
   font-weight: 500;
   background-color: transparent;
+  caret-color: transparent;
 }
 .combo-box-input:focus {
   outline: none;
+  caret-color: gray;
 }
 
 .combo-box-options-container {

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
 import { logout } from '../../../../modules/auth';
 
@@ -46,6 +47,8 @@ const ProfileToggleItems = ({
   modal,
   setModal,
 }) => {
+  const history = useHistory();
+
   const displayLoginModal = (e) => {
     e.preventDefault();
 
@@ -83,8 +86,16 @@ const ProfileToggleItems = ({
 
   // 로그아웃 함수
   const requestLogOut = () => {
+    console.log(history);
     dispatch(logout());
     setIsOpen(false);
+    if (
+      history.location.pathname === '/reserveconfirm' ||
+      history.location.pathname === '/personInfo'
+    ) {
+      history.replace('/');
+      window.scrollTo(0, 0);
+    }
   };
 
   useEffect(() => {

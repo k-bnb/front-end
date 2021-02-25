@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './LocationSearchInput.css';
 import { useLoadScript } from '@react-google-maps/api';
 import '@reach/combobox/styles.css';
@@ -97,6 +97,7 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext, setNavModalState }) {
 
             dispatch(getLengthForZoom(results[0].address_components.length));
             moveFocusNext('location');
+            document.querySelector('.combo-box-input').blur();
           } catch (error) {
             console.error(error);
           }
@@ -108,6 +109,18 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext, setNavModalState }) {
           value={destinationName}
           onChange={(e) => {
             setValue(e.target.value);
+            console.log('cha');
+            SearchTypeHandler('location');
+            dispatch(
+              locationInput({
+                latitude: '',
+                longitude: '',
+                latitudeMax: '',
+                latitudeMin: '',
+                longitudeMax: '',
+                longitudeMin: '',
+              }),
+            );
             dispatch(destinationInput(e.target.value)); // DestinationName 변경
           }}
           disabled={!ready} // 아직 준비되지않으면 사용할수 없음.

@@ -15,6 +15,13 @@ const ProfileButtonBlock = styled.button`
   border-radius: 21px;
   color: #222;
   cursor: pointer;
+  transition-delay: 1.5s;
+  transition-property: red;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+  }
 
   svg:first-child {
     font-size: 16px;

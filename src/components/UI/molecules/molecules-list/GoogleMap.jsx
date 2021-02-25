@@ -395,6 +395,12 @@ const GoogleMapUse = ({
     y: -(height / 2),
   });
   const dispatch = useDispatch();
+  const { startDate, endDate } = useSelector(
+    (state) => state.search.searchReq.checkDateSearch,
+  );
+  const { numOfAdult, numOfInfant, numOfKid } = useSelector(
+    (state) => state.search.searchReq.guestSearch,
+  );
   const dragMark = (map) => {
     dispatch(
       locationInput({
@@ -539,7 +545,10 @@ const GoogleMapUse = ({
                     className="textAllWrap"
                     onClick={(e) => {
                       if (e.target.matches('.heart')) return;
-                      history.push(`/detail/${selectedSample.id}`);
+
+                      history.push(
+                        `/detail/${selectedSample.id}?check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`,
+                      );
                     }}
                   >
                     <ScoreText
