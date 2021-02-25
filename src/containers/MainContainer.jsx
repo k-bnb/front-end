@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 // import axios from 'axios';
 // import HeaderMain from '../components/templates/templates-header/HeaderMain';
 import Main from '../components/templates/templates-main/Main';
@@ -58,9 +59,16 @@ const MainContainer = () => {
   const dispatch = useDispatch();
 
   const [formState, setFormState] = useState(null); // 초기값은 null, 로그인 버튼 누르면 login으로, 회원가입 누르면 'register'
+  const history = useHistory();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-
+    if (history.location.pathname === '/') {
+      sessionStorage.removeItem('destination');
+      sessionStorage.removeItem('location');
+      sessionStorage.removeItem('searchres');
+      sessionStorage.removeItem('totalPage');
+    }
     dispatch(specificInputClear('checkDateSearch'));
     dispatch(specificInputClear('guestSearch'));
     dispatch(clearCheckDateDtail());

@@ -12,6 +12,7 @@ const ReserveConfirmContainer = () => {
   const reserveRes = useSelector((state) => state.user);
   const [listModal, setListModal] = useState([]);
   const [name, setName] = useState('');
+  const [disabledBtn, setDisabledBtn] = useState(true);
   const dispatch = useDispatch();
 
   const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
@@ -54,6 +55,7 @@ const ReserveConfirmContainer = () => {
   const [miniModal, setMiniModal] = useState(false);
 
   const cancel = (e) => {
+    console.log(e.target.name);
     setCancelModal('후기 작성');
     const openModalId =
       list.find((item) => +item.reservationId === +e.target.value)
@@ -64,6 +66,7 @@ const ReserveConfirmContainer = () => {
 
   // 취소 x 버튼
   const cancelBtn = (e) => {
+    setDisabledBtn(true);
     setcancelModalState(!cancelModalState);
   };
 
@@ -75,11 +78,18 @@ const ReserveConfirmContainer = () => {
     dispatch(reserveConfirm({ token }));
   };
 
+  // const [disabledBtn, setDisabledBtn] = useState(true);
   const resonChange = (e) => {
+    if (e.target.value) {
+      setDisabledBtn(false);
+    }
     setReason(e.target.value);
   };
 
   const reservationConfirmBtn = (e) => {
+    if (!e.target.matches('button')) return;
+    if (!reason) return;
+
     dispatch(
       reservationCancel({
         token,
@@ -88,7 +98,7 @@ const ReserveConfirmContainer = () => {
         reason: reason,
       }),
     );
-    // 아 왜 404가 뜨는 거야
+    // // 아 왜 404가 뜨는 거야
 
     setMiniModal(!miniModal);
     setcancelModalState(!cancelModalState);
@@ -135,6 +145,7 @@ const ReserveConfirmContainer = () => {
       miniModal={miniModal}
       miniModalCancelBtn={miniModalCancelBtn}
       reserveconfirmLoading={reserveconfirmLoading}
+      disabledBtn={disabledBtn}
     />
   );
 };

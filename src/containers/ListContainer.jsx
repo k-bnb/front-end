@@ -8,6 +8,7 @@ import {
   roomTypeInput,
   searching,
 } from '../modules/search';
+import { useHistory } from 'react-router-dom';
 
 const ListContainer = React.memo(() => {
   const [searchModalState, setSearchModalState] = useState(null);
@@ -46,6 +47,8 @@ const ListContainer = React.memo(() => {
 
   const [formState, setFormState] = useState(null); // 초기값은 null, 로그인 버튼 누르면 login으로, 회원가입 누르면 'register'
   const [roomMap, setRoomMap] = useState([]);
+  const history = useHistory();
+  console.log(history);
   useEffect(() => {
     const roomMap = room.map((item) => {
       return {
@@ -143,6 +146,7 @@ const ListContainer = React.memo(() => {
   const [pageNationState, setPageNationState] = useState({ currentPage: 0 });
 
   const changeCurrentPage = (numPage) => {
+    window.scrollTo(0, 0);
     setPageNationState({ currentPage: numPage });
 
     const id = numPage.selected - 1;
@@ -164,7 +168,6 @@ const ListContainer = React.memo(() => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    // changeCurrentPage(0);
   }, []);
 
   useEffect(() => {}, [isLoading]);
