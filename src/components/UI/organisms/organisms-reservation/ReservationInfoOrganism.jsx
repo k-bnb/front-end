@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import ReservationTitle from '../../atoms/atoms-reservation/ReservationTitle';
 import ReservationUnderLine from '../../atoms/atoms-reservation/ResevationUnderLine';
 import ReservationInfoMolecule from '../../molecules/molecules-reservation/ReservationInfoMolecule';
@@ -15,10 +16,17 @@ const ReservationInfoOrganism = ({
   saveDate,
 }) => {
   // 예약하기 페이지 날짜 정보 가져오기
-  const { startDate, endDate } = checkDateSearch;
+  // const { startDate, endDate } = checkDateSearch;
 
   // 예약하기 페이지 게스터 정보 가져오기
-  const { numOfAdult, numOfKid, numOfInfant } = guestSearch;
+  // const { numOfAdult, numOfKid, numOfInfant } = guestSearch;
+
+  const { startDate, endDate } = useSelector(
+    (state) => state.reserve.checkDateSearch,
+  );
+  const { numOfInfant, numOfKid, numOfAdult } = useSelector(
+    (state) => state.reserve.guestSearch,
+  );
 
   const dateChildren = {
     title: '날짜',

@@ -4,7 +4,10 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
 import CarouselModal from '../components/templates/templates-detail/CarouselModal';
 import Detail from '../components/templates/templates-detail/Detail';
 import {
+  dateChangeDetail,
   getRoomAverageScore,
+  guestChangeDetail,
+  guestInput,
   requestDetail,
   searchToDetail,
 } from '../modules/detail';
@@ -14,6 +17,7 @@ import HeaderContainer from './header-containers/HeaderContainer';
 import { detailToReserveDate, detailToReserveGuest } from '../modules/reserve';
 import ReviewModal from '../components/templates/templates-detail/ReviewModal';
 import AuthModalContainer from './AuthModalContainer';
+import qs from 'query-string';
 
 const DetailContainer = () => {
   const [showModal, setShowModal] = useState(false);
@@ -34,6 +38,7 @@ const DetailContainer = () => {
   const history = useHistory();
   const match = useRouteMatch();
   const dispatch = useDispatch();
+  const queryObj = qs.parse(history.location.search);
   const roomId = match.params.roomId;
   const { infoRes } = useSelector((state) => state.detail);
   const { startDate, endDate } = useSelector(
@@ -64,9 +69,15 @@ const DetailContainer = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    console.log(queryObj);
   }, []);
 
   useEffect(() => {
+    dispatch(dateChangeDetail('startDate', queryObj.check_in));
+    dispatch(dateChangeDetail('endDate', queryObj.check_out));
+    dispatch(guestChangeDetail('numOfAdult', +queryObj.adults));
+    dispatch(guestChangeDetail('numOfKid', +queryObj.children));
+    dispatch(guestChangeDetail('numOfInfant', +queryObj.infants));
     dispatch(getRoomAverageScore(roomId));
     dispatch(requestDetail(roomId));
     if (sessionStorage.getItem('checkIn')) return;

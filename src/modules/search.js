@@ -162,7 +162,6 @@ const search = handleActions(
 
     [DATE_INPUT]: (state, { payload: { form, checkDateSearch } }) => {
       // token 처럼 초기값이 필요로 하기 때문에 sessionStorage에 저장
-      sessionStorage.setItem([form], checkDateSearch);
 
       return produce(state, (draft) => {
         draft.searchReq.checkDateSearch[form] = checkDateSearch;
@@ -170,8 +169,6 @@ const search = handleActions(
     },
 
     [GUEST_INPUT]: (state, { payload: { form, name, value } }) => {
-      sessionStorage.setItem(name, value);
-
       return produce(state, (draft) => {
         draft.searchReq[form][name] = value; // draft.searchReq.guestSearch.numOfAdult = value
       });

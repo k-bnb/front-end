@@ -4,10 +4,16 @@ import HeaderContainer from './header-containers/HeaderContainer';
 import ListTemplate from '../components/templates/templates-list/ListTemplate';
 import {
   costInput,
+  dateInput,
+  destinationInput,
+  guestInput,
+  locationInput,
   roomnumInput,
   roomTypeInput,
   searching,
 } from '../modules/search';
+import qs from 'query-string';
+import { useHistory } from 'react-router-dom';
 
 const ListContainer = React.memo(() => {
   const [searchModalState, setSearchModalState] = useState(null);
@@ -26,6 +32,7 @@ const ListContainer = React.memo(() => {
   const search = useSelector((state) => state.search);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const keyup = (e) => {
     if (e.key === 'Enter') setSearchModalState('room');
@@ -74,7 +81,6 @@ const ListContainer = React.memo(() => {
   );
   const [localMinCost, setLocalMinCost] = useState(costSearch.minCost);
   const [localMaxCost, setLocalMaxCost] = useState(costSearch.maxCost);
-  const [isFirst, setIsFirst] = useState(true);
 
   const num = /^[0-9]*$/;
 
@@ -134,9 +140,6 @@ const ListContainer = React.memo(() => {
     setSearchModalState(null);
   };
 
-  // console.log(costState);
-  // pageNation
-
   const [currentButton, setCurrentButton] = useState(0);
   const [arrOfcurrButtons, setArrOfCurrButtons] = useState([]);
 
@@ -147,6 +150,7 @@ const ListContainer = React.memo(() => {
 
     const id = numPage.selected - 1;
 
+    console.log(id);
     dispatch(
       searching({
         id,
@@ -164,10 +168,30 @@ const ListContainer = React.memo(() => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    // changeCurrentPage(0);
+    changeCurrentPage(0);
   }, []);
 
-  useEffect(() => {}, [isLoading]);
+  const queryObj = qs.parse(history.location.search);
+  console.log(qs.parse(history.location.search));
+
+  useEffect(() => {
+    dispatch(destinationInput(queryObj.location_search));
+    dispatch(dateInput('startDate', queryObj.check_in));
+    dispatch(dateInput('endDate', queryObj.check_out));
+    dispatch(
+      locationInput({
+        latitude: queryObj.lat,
+        longitude: queryObj.lng,
+        latitudeMax: queryObj.max_lat,
+        latitudeMin: queryObj.min_lat,
+        longitudeMax: queryObj.max_lng,
+        longitudeMin: queryObj.min_lng,
+      }),
+    );
+    dispatch(guestInput('guestSearch', 'numOfAdult', +queryObj.adults));
+    dispatch(guestInput('guestSearch', 'numOfKid', +queryObj.children));
+    dispatch(guestInput('guestSearch', 'numOfInfant', +queryObj.infants));
+  }, []);
 
   return (
     <>

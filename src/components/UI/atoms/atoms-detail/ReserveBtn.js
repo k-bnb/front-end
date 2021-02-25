@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import LoaderIcon from 'react-loader-icon';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 // import detail from '../../../../modules/detail';
+import qs from 'query-string';
 
 const ReservationBtn = styled.button`
   background: #d70466;
@@ -52,10 +53,15 @@ const ReserveBtn = ({
   // NoBookingDate,
 }) => {
   const [showLoadingIcon, setShowLoadingIcon] = useState(false);
-  const { startDate, endDate, numOfAdult } = useSelector(
+  const { startDate, endDate, numOfAdult, numOfKid, numOfInfant } = useSelector(
     (state) => state.detail,
   );
   const history = useHistory();
+  const match = useRouteMatch();
+
+  const queryObj = qs.parse(history.location.search);
+  const pathName = qs.parse(history.location.pathname);
+  const roomId = match.params.roomId;
 
   const makeUserHasDates = () => {
     if (half) bookingInfoRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -70,7 +76,10 @@ const ReserveBtn = ({
   const makeUserLoggedIn = () => {
     setModal(true);
     setFormState('login');
-    localStorage.setItem('LFT', '/reserve');
+    localStorage.setItem(
+      'LFT',
+      `/reserve?roomId=${roomId}&check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`,
+    );
   }; // 로그인 모달창을 띄워준다.
 
   const moveUserToReserve = () => {
@@ -87,7 +96,9 @@ const ReserveBtn = ({
       makeUserLoggedIn(); // 로그인 하게 함.
       return;
     }
-    history.push('/reserve');
+    history.push(
+      `/reserve?roomId=${roomId}&check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`,
+    );
     window.scrollTo(0, 0);
   };
 

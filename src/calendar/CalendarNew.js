@@ -6,6 +6,8 @@ import 'react-dates/lib/css/_datepicker.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { dateInput } from '../modules/search';
 import styled from 'styled-components';
+import qs from 'query-string';
+import { useHistory } from 'react-router-dom';
 
 const CalendarNewBlock = styled.div`
   .App {
@@ -95,6 +97,10 @@ function Datepicker({ setNavModalState, moveFocusNext }) {
   let { startDate, endDate } = dateRange;
   console.log(startDate);
   console.log(endDate);
+
+  const history = useHistory();
+  const queryObj = qs.parse(history.location.search);
+  console.log(qs.parse(history.location.search));
 
   // startDate의 값이 있으며, 이미 string으로 변화되어 store에 저장된경우
   // 달력에는 다시 moment 객체로 변환시켜 startdate, enddate로 입력시킨다.

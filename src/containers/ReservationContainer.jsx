@@ -8,11 +8,14 @@ import {
   detailToReserveDate,
   detailToReserveGuest,
   reserving,
+  changeDate,
+  changeGuest,
 } from '../modules/reserve';
 import { dateInput, specificInputClear } from '../modules/search';
 import { clearCheckDateDtail, dateChangeDetail } from '../modules/detail';
 import BootPay from 'bootpay-js';
 import { useHistory } from 'react-router-dom';
+import qs from 'query-string';
 
 const ReservationContainer = () => {
   // store 에서 관리하는 state
@@ -182,6 +185,10 @@ const ReservationContainer = () => {
     token,
   ]);
 
+  const { adults, children, infants, check_in, check_out } = qs.parse(
+    history.location.search,
+  );
+
   const saveDate = useCallback(() => {
     setDateModal(!dateModal);
     dispatch(dateInput('startDate', checkIn)); // 시작일만 선택시 시작일 dispatch
@@ -196,13 +203,6 @@ const ReservationContainer = () => {
   const [completeModalState, setCompleteModalState] = useState(false);
 
   const moveToHomeClick = () => {
-    setCompleteModalState(false);
-    sessionStorage.removeItem('startDate');
-    sessionStorage.removeItem('endDate');
-    sessionStorage.removeItem('numOfAdult');
-    sessionStorage.removeItem('numOfKid');
-    sessionStorage.removeItem('numOfInfant');
-
     history.push('./');
   };
 
@@ -230,12 +230,15 @@ const ReservationContainer = () => {
         roomImgUrlList,
       ),
     );
-
     dispatch(detailToReserveLocation(locationDetail));
-
     dispatch(detailToReserveDate(startDate, endDate));
-
     dispatch(detailToReserveGuest(numOfAdult, numOfKid, numOfInfant));
+
+    dispatch(changeGuest('guestSearch', 'numOfAdult', adults));
+    dispatch(changeGuest('guestSearch', 'numOfKid', children));
+    dispatch(changeGuest('guestSearch', 'numOfInfant', infants));
+    dispatch(changeDate('startDate', check_in));
+    dispatch(changeDate('endDate', check_out));
 
     setTimeout(() => {
       setIsLoading(false);
@@ -268,6 +271,11 @@ const ReservationContainer = () => {
     roomImgUrlList,
     setCompleteModalState,
     reserveSuccess,
+    check_in,
+    check_out,
+    adults,
+    children,
+    infants,
   ]);
 
   console.log(reserveSuccess); // 예약 성공

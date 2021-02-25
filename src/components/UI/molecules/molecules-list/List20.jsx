@@ -12,6 +12,9 @@ import { moneyfilter } from '../../../../lib/moneyfilter';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import qs from 'query-string';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 // import ListCarousel from './ListCarousel';
 // import { SliderData } from './SliderData';
@@ -22,17 +25,17 @@ const Wrap = styled.div`
   /* padding: 0 24px; */
   box-sizing: border-box;
   margin: 5px 0;
-  a{
+  a {
     text-decoration: none;
   }
 `;
 const ULWrap = styled.ul`
-  button:focus{
+  button:focus {
     outline: none;
     border-color: #222;
     background: #aaa;
-    color:#222;
-    opacity:1;
+    color: #222;
+    opacity: 1;
   }
   list-style: none;
   display: inline-block;
@@ -40,7 +43,8 @@ const ULWrap = styled.ul`
   /* width: 808px; */
   /* height: 5013px; */
   /* height: 100px; */
-  .allList { // === li
+  .allList {
+    // === li
     position: relative;
     min-width: 500px;
     padding: 14px 8px 0 8px;
@@ -55,16 +59,16 @@ const ULWrap = styled.ul`
     }
     .slide-group {
       width: 300px;
-      position: relative;  
+      position: relative;
       .slide {
         width: 100%;
         .slideDiv {
           .slick-slider {
             .slick-arrow {
-              opacity:0;
-              transition: opacity .3s;
-              &:focus{
-                opacity:1;
+              opacity: 0;
+              transition: opacity 0.3s;
+              &:focus {
+                opacity: 1;
               }
             }
             .slick-prev {
@@ -82,16 +86,17 @@ const ULWrap = styled.ul`
               border-radius: 50%;
             }
 
-            .slick-prev:before, .slick-next:before{
+            .slick-prev:before,
+            .slick-next:before {
               font-size: 30px;
             }
 
             .slick-dots {
-              opacity:1;
+              opacity: 1;
               li {
                 border: 0;
                 display: inline;
-                margin-bottom:10px;
+                margin-bottom: 10px;
                 justify-content: flex-end;
                 height: 30px;
                 cursor: default;
@@ -99,7 +104,7 @@ const ULWrap = styled.ul`
                   position: absolute;
                   bottom: 10px;
                   left: 100px;
-                  color: #FFF;
+                  color: #fff;
                 }
                 &:nth-child(2) {
                   position: absolute;
@@ -124,19 +129,19 @@ const ULWrap = styled.ul`
               }
             }
             .slick-dots li.slick-active button:before {
-              content:'∙';
-              color: #FFF;
+              content: '∙';
+              color: #fff;
             }
-            .slick-dots li button:before{
-              content:'∙';
-              color: #FFF;
-              font-size: 45px;              
+            .slick-dots li button:before {
+              content: '∙';
+              color: #fff;
+              font-size: 45px;
             }
             .slick-list {
               display: flex;
               flex-direction: column;
               border-radius: 10px;
-              z-index:-1;
+              z-index: -1;
 
               .slick-track {
                 display: flex;
@@ -163,7 +168,7 @@ const ULWrap = styled.ul`
       }
       .btn-group {
         /* opacity: 0; */
-        button[tabIndex=0] {
+        button[tabIndex='0'] {
           bottom: 50%;
           width: 30px;
           height: 30px;
@@ -197,7 +202,7 @@ const ULWrap = styled.ul`
       display: block;
       text-decoration: none;
       padding: 20px 20px 20px 25px;
-      color:#000;
+      color: #000;
       .TextHead {
         /* width: 100%; */
       }
@@ -214,7 +219,7 @@ const ULWrap = styled.ul`
         position: absolute;
         right: 30px;
         top: 25px;
-        font-size:25px;
+        font-size: 25px;
       }
       hr {
         width: 50px;
@@ -232,14 +237,13 @@ const ULWrap = styled.ul`
         align-items: flex-end;
         /* padding: 0 15px; */
       }
-      .cost{
-        display:flex;
-        flex-flow:row nowrap;
+      .cost {
+        display: flex;
+        flex-flow: row nowrap;
         letter-spacing: 1px;
       }
     }
   }
-  
 
   hr {
     width: 50px;
@@ -272,29 +276,30 @@ const ULWrap = styled.ul`
     cursor: pointer;
     height: auto;
     color: #000;
-    &:focus{
-      outline:none;
+    &:focus {
+      outline: none;
       border-radius: 50%;
       width: 40px;
       height: 40px;
-      text-align:center;
+      text-align: center;
       padding-top: 4px;
       border-radius: 50%;
       transition: box-shadow 0.2s ease 0s;
-      box-shadow: rgb(34,34,34) 0px 0px 0px 2px;
+      box-shadow: rgb(34, 34, 34) 0px 0px 0px 2px;
     }
 
     &:hover {
       svg {
+      }
     }
   }
-}
 
-.listSubWrap:focus, .listSubWrap:hover{
-  .slide-group>.slide>.slideDiv>.slick-slider> .slick-arrow{
-    opacity:1;
+  .listSubWrap:focus,
+  .listSubWrap:hover {
+    .slide-group > .slide > .slideDiv > .slick-slider > .slick-arrow {
+      opacity: 1;
+    }
   }
-}
 `;
 
 const LodgingLists = ({
@@ -324,37 +329,44 @@ const LodgingLists = ({
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    tabindex:0,
+    tabindex: 0,
   };
-
-
   // const { startDate, endDate } = checkDateSearch;
   // const { numOfAdult, numOfKid, numOfInfant } = guestSearch;
   // const totalNum = numOfAdult + numOfKid;
   // console.log(numOfAdult, numOfKid, numOfInfant);
   // console.log(checkDateSearch);
   // console.log(startDate, endDate);
+  const { startDate, endDate } = useSelector(
+    (state) => state.search.searchReq.checkDateSearch,
+  );
+  const { numOfAdult, numOfKid, numOfInfant } = useSelector(
+    (state) => state.search.searchReq.guestSearch,
+  );
 
+  const history = useHistory();
+  const queryObj = qs.parse(history.location.search);
+  console.log(qs.parse(history.location.search));
   return (
     <>
-      <Wrap className="listWrap" >
+      <Wrap className="listWrap">
         <ULWrap>
           <Link
-            to={`/detail/${id}`}
+            to={`/detail/${id}?check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`}
             onClick={(e) => {
               if (e.target.matches('.slick-arrow')) {
                 e.preventDefault();
               }
             }}
             key={id}
-            tabIndex='0'
-            className='listSubWrap'
+            tabIndex="0"
+            className="listSubWrap"
           >
-            <li className="allList" tabIndex='-1'>
-              <Border className="slide-group" carouselImg tabIndex='-1'>
-                <div className="slide" tabIndex='-1'>
-                  <div className="slideDiv" tabIndex='-1'>
-                    <Slider {...settings} tabIndex='-1'>
+            <li className="allList" tabIndex="-1">
+              <Border className="slide-group" carouselImg tabIndex="-1">
+                <div className="slide" tabIndex="-1">
+                  <div className="slideDiv" tabIndex="-1">
+                    <Slider {...settings} tabIndex="-1">
                       {roomImgUrlList.map((src, i, arr) => (
                         <>
                           <Imgs
@@ -370,16 +382,16 @@ const LodgingLists = ({
                 </div>
               </Border>
               <Link
-                to={`/detail/${id}`}
+                to={`/detail/${id}?check_in=${checkDateSearch?.startDate}&check_out=${checkDateSearch?.endDate}&adults=${guestSearch?.numOfAdult}&children=${guestSearch?.numOfKid}&infants=${guestSearch?.numOfInfant}`}
                 onClick={(e) => {
                   if (e.target.matches('.heart')) {
                     e.preventDefault();
                   }
                 }}
                 key={id}
-                tabIndex='-1'
+                tabIndex="-1"
               >
-                <span className="TextWrap" >
+                <span className="TextWrap">
                   <div className="TextHead">
                     <TextStyled size="blackSmall">
                       {city} {borough} {city || borough ? '의' : ''} {roomType}
@@ -407,7 +419,7 @@ const LodgingLists = ({
                   </div>
                 </span>
               </Link>
-              <Bookmark className="heart" Pcheart tabIndex='0'>
+              <Bookmark className="heart" Pcheart tabIndex="0">
                 <AiOutlineHeart />
               </Bookmark>
             </li>

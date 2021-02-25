@@ -63,6 +63,7 @@ const ClickedSearchButton = ({
 }) => {
   const [localIsModalOpen, setLocalIsModalOpen] = useState(isModalOpen);
   const [displayAnimation, setDisplayAnimation] = useState(false);
+  const { destinationName } = useSelector((state) => state.search);
   const {
     checkDateSearch,
     guestSearch,
@@ -108,7 +109,10 @@ const ClickedSearchButton = ({
             SearchTypeHandler('location');
             return;
           }
-          history.push('/rooms');
+          console.log('query');
+          history.push(
+            `/rooms?location_search=${destinationName}&lat=${locationSearch.latitude}&lng=${locationSearch.longitude}&min_lat=${locationSearch.latitudeMin}&max_lat=${locationSearch.latitudeMax}&min_lng=${locationSearch.longitudeMin}&max_lng=${locationSearch.longitudeMax}&check_in=${checkDateSearch.startDate}&check_out=${checkDateSearch.endDate}&adults=${guestSearch.numOfAdult}&children=${guestSearch.numOfKid}&infants=${guestSearch.numOfInfant}`,
+          );
         }}
       />
     );
@@ -123,7 +127,9 @@ const ClickedSearchButton = ({
           return;
         }
         serchBtn();
-        history.push('/rooms');
+        history.push(
+          `/rooms?location_search=${destinationName}&lat=${locationSearch.latitude}&lng=${locationSearch.longitude}&min_lat=${locationSearch.latitudeMin}&max_lat=${locationSearch.latitudeMax}&min_lng=${locationSearch.longitudeMin}&max_lng=${locationSearch.longitudeMax}&check_in=${checkDateSearch.startDate}&check_out=${checkDateSearch.endDate}&adults=${guestSearch.numOfAdult}&children=${guestSearch.numOfKid}&infants=${guestSearch.numOfInfant}`,
+        );
       }}
     >
       <BiSearch className="search-button-unit" />

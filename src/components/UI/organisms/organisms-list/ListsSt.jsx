@@ -99,7 +99,7 @@ const ListStyle = ({
   pageNationState,
   checkDateSearch,
   guestSearch,
-  isLoading
+  isLoading,
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
@@ -115,9 +115,10 @@ const ListStyle = ({
     <>
       {isPc && (
         <PcSize className="Listmain">
-          {!!room?.length && !isLoading  && (
-            room?.map
-            (({
+          {!!room?.length &&
+            !isLoading &&
+            room?.map(
+              ({
                 bathRoomNum,
                 roomType,
                 city,
@@ -134,7 +135,7 @@ const ListStyle = ({
                 isSmoking,
                 commentCount,
                 roomImgUrlList,
-                isLoading
+                isLoading,
               }) => {
                 return (
                   <LodgingLists
@@ -158,13 +159,11 @@ const ListStyle = ({
                     guestSearch={guestSearch}
                   />
                 );
-              }
-            )
-          ) 
-        }
-        {!room?.length && !isLoading && <EmptyList />}
-          {room?.length ?
-            (<PageNation
+              },
+            )}
+          {!room?.length && !isLoading && <EmptyList />}
+          {room?.length ? (
+            <PageNation
               totalPage={totalPage}
               pageNationClick={pageNationClick}
               currentButton={currentButton}
@@ -174,7 +173,10 @@ const ListStyle = ({
               numberOfPages={numberOfPages}
               changeCurrentPage={changeCurrentPage}
               pageNationState={pageNationState}
-            />) : <span style={{color:'white'}}>로딩중 ... </span>}
+            />
+          ) : (
+            <span style={{ color: 'white' }}>로딩중 ... </span>
+          )}
         </PcSize>
       )}
       {isTablet && (
@@ -270,10 +272,7 @@ const ListStyle = ({
                     </span>
                     <span className="TextWrap">
                       <div className="TextHead">
-                        <ScoreText
-                          grade={grade}
-                          commentCount={commentCount}
-                        />
+                        <ScoreText grade={grade} commentCount={commentCount} />
                         <TextStyled size="blackSmall">
                           {city} {borough} {city || borough ? '의' : ''}{' '}
                           {roomType}
@@ -294,24 +293,24 @@ const ListStyle = ({
                     </span>
                   </li>
                 </Link>
-                );
-              },
-            )}
-            <PageNation
-              totalPage={totalPage}
-              pageNationClick={pageNationClick}
-              currentButton={currentButton}
-              setCurrentButton={setCurrentButton}
-              arrOfcurrButtons={arrOfcurrButtons}
-              setArrOfCurrButtons={setArrOfCurrButtons}
-              numberOfPages={numberOfPages}
-              changeCurrentPage={changeCurrentPage}
-              pageNationState={pageNationState}
-            />
-          </MobileSize>
-        )}
-      </>
-    );
-  }
+              );
+            },
+          )}
+          <PageNation
+            totalPage={totalPage}
+            pageNationClick={pageNationClick}
+            currentButton={currentButton}
+            setCurrentButton={setCurrentButton}
+            arrOfcurrButtons={arrOfcurrButtons}
+            setArrOfCurrButtons={setArrOfCurrButtons}
+            numberOfPages={numberOfPages}
+            changeCurrentPage={changeCurrentPage}
+            pageNationState={pageNationState}
+          />
+        </MobileSize>
+      )}
+    </>
+  );
+};
 
 export default ListStyle;

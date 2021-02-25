@@ -82,8 +82,8 @@ const store = createStore(
           longitudeMin: '',
         },
         checkDateSearch: {
-          startDate: sessionStorage.getItem('startDate'),
-          endDate: sessionStorage.getItem('endDate'),
+          startDate: '',
+          endDate: '',
         },
         guestSearch: {
           numOfAdult: 0,
@@ -105,20 +105,11 @@ const store = createStore(
     },
 
     detail: {
-      startDate:
-        sessionStorage.getItem('checkIn') ||
-        sessionStorage.getItem('startDate'),
-      endDate:
-        sessionStorage.getItem('checkOut') || sessionStorage.getItem('endDate'),
-      numOfAdult:
-        localStorage.getItem('detailnumOfAdult') ||
-        sessionStorage.getItem('numOfAdult'),
-      numOfKid:
-        localStorage.getItem('detailnumOfKid') ||
-        sessionStorage.getItem('numOfKid'),
-      numOfInfant:
-        localStorage.getItem('detailnumOfInfant') ||
-        sessionStorage.getItem('numOfInfant'),
+      startDate: '',
+      endDate: '',
+      numOfAdult: '',
+      numOfKid: '',
+      numOfInfant: '',
       infoRes: {
         id,
         name,
