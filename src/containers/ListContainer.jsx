@@ -27,11 +27,10 @@ const ListContainer = React.memo(() => {
 
   const dispatch = useDispatch();
 
-  const keyup = e => {
-    if (e.key === 'Enter')
-    setSearchModalState('room');
-  }
-  
+  const keyup = (e) => {
+    if (e.key === 'Enter') setSearchModalState('room');
+  };
+
   const RoomSearchClick = (e) => {
     setSearchModalState('room');
   };
@@ -165,11 +164,7 @@ const ListContainer = React.memo(() => {
     changeCurrentPage(0);
   }, []);
 
-  useEffect(()=>{
-    
-  },[isLoading])
-
-
+  useEffect(() => {}, [isLoading]);
 
   return (
     <>

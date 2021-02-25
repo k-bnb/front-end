@@ -14,14 +14,17 @@ export default function createRequestSaga(type, request) {
       console.log(response);
       yield put({
         type: SUCCESS,
-        payload: response.data,
+        payload: response?.data || [],
       });
+      yield delay(1000);
+      yield put(finishLoading(type)); // 로딩 종료, type: 요청 작업 종류
     } catch (error) {
+      yield put(finishLoading(type));
       yield put({
         type: FAILURE,
         payload: error.response.data,
       });
     }
-    yield put(finishLoading(type)); // 로딩 종료, type: 요청 작업 종류
+    yield delay(1000);
   };
 }
