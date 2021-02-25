@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Modal from '../../../../portal/Modal';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
 import ConfirmModal from './ConfirmModal';
@@ -37,7 +37,7 @@ const ReserveCancelStyle = styled.div`
     }
   }
   div {
-    button {
+    .okBtn {
       padding: 10px 30px;
       background-color: #fff;
       border-radius: 15px;
@@ -49,6 +49,13 @@ const ReserveCancelStyle = styled.div`
       transition: background-color 0.3s;
       font-size: 1.5rem;
       font-weight: 800;
+      ${(props) =>
+        props.disabled ||
+        css`
+          &:hover {
+            background-color: #fff;
+          }
+        `}
       &:hover {
         background-color: #db75df;
         svg {
@@ -61,7 +68,11 @@ const ReserveCancelStyle = styled.div`
       top: 10px;
       right: 20px;
       background: none;
+      padding: 10px 30px;
 
+      border-radius: 15px;
+      border: 0;
+      cursor: pointer;
       color: #fff;
       font-size: 2.4rem;
       padding: 0 10px;
@@ -83,6 +94,7 @@ const ReserveCancel = ({
   reservationId,
   resonChange,
   miniModal,
+  disabledBtn,
 }) => {
   // const [clickReservationId, setClickReservationId] = useState(
   //   checkId.reservationId,
@@ -92,6 +104,7 @@ const ReserveCancel = ({
   // setClickReservationId(checkId);
 
   // console.log(clickReservationId);
+  console.log(disabledBtn);
   return (
     <>
       <ReserveCancelStyle>
@@ -144,6 +157,13 @@ const ReserveCancel = ({
             name="reservationId"
             value={roomId}
             onClick={reservationConfirmBtn}
+            className="okBtn"
+            disabled={disabledBtn}
+            style={
+              disabledBtn
+                ? { cursor: 'not-allowed', backgroundColor: '#fff' }
+                : { cursor: 'pointer' }
+            }
           >
             <svg
               viewBox="0 0 24 24"
