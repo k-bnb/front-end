@@ -112,8 +112,6 @@ const DatePersonBox = ({
   setNavModalState,
   isCalendarOpen,
   setIsCalendarOpen,
-  // isOpen,
-  // setIsOpen,
   isGuestOpen,
   setIsGuestOpen,
   peopleLimit,

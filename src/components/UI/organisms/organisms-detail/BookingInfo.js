@@ -65,8 +65,6 @@ const BookingInfo = ({
             isCalendarOpen={isCalendarOpen}
             setIsCalendarOpen={setIsCalendarOpen}
             infoRes={infoRes}
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
             isGuestOpen={isGuestOpen}
             setIsGuestOpen={setIsGuestOpen}
             peopleLimit={peopleLimit}
@@ -116,10 +114,9 @@ const BookingInfo = ({
             isCalendarOpen={isCalendarOpen}
             setIsCalendarOpen={setIsCalendarOpen}
             infoRes={infoRes}
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
             isGuestOpen={isGuestOpen}
             setIsGuestOpen={setIsGuestOpen}
+            peopleLimit={peopleLimit}
           />
           <ReserveBtn
             tabIndex="1"
