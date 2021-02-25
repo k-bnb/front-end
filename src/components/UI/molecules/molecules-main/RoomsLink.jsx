@@ -16,7 +16,7 @@ const RoomsLink = (props) => {
 
   return (
     <>
-      <div className="RoomLink" id="content">
+      <div className="RoomLink">
         <TextStyle whiteMainBold>이제, 여행은</TextStyle>
         <TextStyle whiteMainBold>가까운 곳에서</TextStyle>
         <Button normal>
