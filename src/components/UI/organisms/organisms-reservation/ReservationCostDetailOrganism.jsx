@@ -31,7 +31,7 @@ const CostContainer = styled.div`
 const ReservationCostDetailOrganism = ({
   infoRes,
   reserveLocationDetail,
-  checkDateSearch,
+  checkDate,
   RoomTablePhotoImgURL,
 }) => {
   const {
@@ -45,15 +45,27 @@ const ReservationCostDetailOrganism = ({
     commentCount,
   } = infoRes;
 
+  console.log(
+    name,
+    roomCost,
+    cleaningCost,
+    tax,
+    bedNum,
+    bathRoomNum,
+    grade,
+    commentCount,
+  );
+
   const { city, neighborhood } = reserveLocationDetail;
 
   const RoomDay =
-    checkDateSearch.startDate || checkDateSearch.endDate
-      ? extractDay(checkDateSearch.startDate, checkDateSearch.endDate)
+    checkDate.startDate || checkDate.endDate
+      ? extractDay(checkDate.startDate, checkDate.endDate)
       : '/';
-  const roomTaxPrice = !isNaN(roomCost) ? roomCost * RoomDay : 0;
 
-  // useEffect(() => {}, []);
+  console.log(RoomDay);
+
+  const roomTaxPrice = !isNaN(roomCost) ? roomCost * RoomDay : 0;
 
   const hostInfoChildren = {
     title: `${city}, ${neighborhood}`,

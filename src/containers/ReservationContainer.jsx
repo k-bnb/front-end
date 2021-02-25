@@ -47,7 +47,6 @@ const ReservationContainer = () => {
   );
 
   // detail redux에서 날짜, 게스트 인원 받아 오기
-  // const checkDateSearch = { firstDate, lastDate };
   const guestSearch = {
     numOfAdult: parseInt(numOfAdult),
     numOfKid: parseInt(numOfKid),
@@ -85,6 +84,9 @@ const ReservationContainer = () => {
 
   const checkDateSearch = { startDate, endDate };
 
+  // console.log(checkDateSearch);
+
+  // search 날짜 상태
   const { startDate: checkIn, endDate: checkOut } = checkDate;
 
   //  성인 + 어린이 수
@@ -277,9 +279,6 @@ const ReservationContainer = () => {
     children,
     infants,
   ]);
-
-  console.log(reserveSuccess); // 예약 성공
-  console.log(completeModalState);
 
   return (
     <Reservation
