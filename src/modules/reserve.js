@@ -23,6 +23,7 @@ const DETAIL_TO_RESERVE_LOCATION = 'reserve/DETAIL_TO_RESERVE_LOCATION';
 
 // 비동기 action type
 const RESERVING = 'reserve/RESERVING';
+const RESERVING_SUCCESS = 'reserve/RESERVING_SUCCESS';
 const RESERVING_FAILURE = 'reserve/RESERVING_FAILURE';
 
 // action creator function
@@ -56,7 +57,7 @@ export const initialGuest = createAction(INITIAL_GUEST, (form) => form);
 // detail page date state => reserve page date state
 export const detailToReserveDate = createAction(
   DETAIL_TO_RESERVE_DATE,
-  ({ startDate, endDate }) => ({
+  (startDate, endDate) => ({
     startDate,
     endDate,
   }),
@@ -154,7 +155,7 @@ const initialState = {
     endDate: '',
   },
   guestSearch: {
-    numOfAdult: 0,
+    numOfAdult: 1,
     numOfKid: 0,
     numOfInfant: 0,
   },
@@ -178,6 +179,7 @@ const initialState = {
     city: '',
     neighborhood: '',
   },
+  reserveSuccess: null,
   reserveError: null,
 };
 
@@ -243,6 +245,11 @@ const reserve = handleActions(
     [DETAIL_TO_RESERVE_LOCATION]: (state, { payload: locationDetail }) => ({
       ...state,
       locationDetail,
+    }),
+
+    [RESERVING_SUCCESS]: (state, { payload }) => ({
+      ...state,
+      reserveSuccess: payload.message,
     }),
 
     [RESERVING_FAILURE]: (state, { payload: error }) => ({

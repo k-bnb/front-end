@@ -14,9 +14,6 @@ const ReservationInfoOrganism = ({
   checkDate,
   saveDate,
 }) => {
-  console.log(checkDateSearch);
-
-  // console.log(guestSearch);
   // 예약하기 페이지 날짜 정보 가져오기
   const { startDate, endDate } = checkDateSearch;
 
@@ -29,8 +26,8 @@ const ReservationInfoOrganism = ({
   };
 
   //  게스트 수
-  const totalGuestNum = numOfAdult + numOfKid + numOfInfant;
-  const guestNum = `게스트 ${totalGuestNum - numOfInfant}명`;
+  const totalGuestNum = +numOfAdult + +numOfKid;
+  const guestNum = `게스트 ${totalGuestNum}명`;
   const infantNum = numOfInfant ? `, 유아 ${numOfInfant}명` : '';
 
   const guistChildren = {

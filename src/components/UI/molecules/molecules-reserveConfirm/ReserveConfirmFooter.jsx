@@ -5,7 +5,8 @@ import TextStyle from '../../atoms/atoms-main/TextStyle';
 const ReserveConfirmFooterStyle = styled.div`
   margin-top: 2%;
   padding-top: 2%;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 100px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1); 
   a {
     color: #000;
     &:hover {

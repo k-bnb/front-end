@@ -104,11 +104,10 @@ const ReserveConfirmList = ({
   return (
     <ReserveConfirmListStyle>
       {reserveconfirmLoading['user/RESERVE_CONFIRM'] &&
-      reserveconfirmLoading['user/USER_INFO'] ? (
+      !reserveconfirmLoading['user/RESERVATION_CANCEL'] ? (
         <PageLoading />
       ) : (
         <>
-          {' '}
           <div className="Big-img">
             <Img src={item.imgUrl} />
           </div>

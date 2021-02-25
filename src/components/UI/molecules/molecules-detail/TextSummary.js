@@ -46,7 +46,7 @@ const TextSummary = ({ CancellableDate, detailObj }) => {
   const CheckOutDate = detailObj.EndDate;
 
   return (
-    <TextSummaryContainer>
+    <TextSummaryContainer aria-label="숙소 이용 기본사항">
       <SimpleSummary>
         <div className="emoticon">
           <AiOutlineHome />

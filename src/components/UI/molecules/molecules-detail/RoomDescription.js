@@ -14,7 +14,7 @@ const HostContact = styled(Text)`
 `;
 
 const RoomDescription = ({ infoRes }) => (
-  <DescriptionContainer>
+  <DescriptionContainer aria-label="숙소 상세 설명">
     <Text paddingTop big lineHight>
       {infoRes.description}
       <br />

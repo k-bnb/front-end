@@ -2,7 +2,6 @@ import { createAction, handleActions } from 'redux-actions';
 import createRequestSaga from '../lib/createRequestSaga';
 import * as API from '../lib/api/detail';
 import { takeLatest } from 'redux-saga/effects';
-import produce from 'immer';
 // Action Type
 const SEARCH_TO_DETAIL = 'detail/SEARCH_TO_DETAIL';
 const DATE_CHANGE_DETAIL = 'detail/DATE_CHANGE_DETAIL';
@@ -20,7 +19,7 @@ const GET_ROOM_AVERAGE_SCORE_SUCCESS = 'detail/GET_ROOM_AVERAGE_SCORE_SUCCESS';
 
 // 예약하기 페이지에서 게스트, 달력 수정했을 경우 게스트, 달력 값 변경하는 액션
 const GUEST_INPUT = 'detail/GUEST_INPUT';
-const DATE_INPUT = 'detail/DATE_INPUT';
+// const DATE_INPUT = 'detail/DATE_INPUT';
 
 // Action Creator
 export const searchToDetail = createAction(
@@ -65,10 +64,10 @@ export const guestInput = createAction(GUEST_INPUT, (name, value) => ({
 })); // form -> guestinput, name -> numOfAdult, value ->
 
 // 예약하기 페이지에서 달력을 수정했을 경우 달력 값 변경하는 액션 생성자 함수
-export const dateInput = createAction(DATE_INPUT, (form, value) => ({
-  form,
-  value,
-})); //checkDateSearch 객체.
+// export const dateInput = createAction(DATE_INPUT, (form, value) => ({
+//   form,
+//   value,
+// })); //checkDateSearch 객체.
 
 // saga
 const requestDetailSaga = createRequestSaga(
@@ -89,7 +88,7 @@ export function* detailSaga() {
 const initialStates = {
   startDate: '',
   endDate: '',
-  numOfAdult: 0,
+  numOfAdult: 1,
   numOfKid: 0,
   numOfInfant: 0,
   infoRes: {
@@ -152,12 +151,11 @@ const detail = handleActions(
     }),
     [DATE_CHANGE_DETAIL]: (state, { payload: { input, date, checkDate } }) => {
       // 날짜를 변경한 후에 새로고침을 했을 때 정보가 그대로 유지될 수 있도록
-      localStorage.setItem(checkDate, date);
+      sessionStorage.setItem(input, date);
       return { ...state, [input]: date };
     },
     [GUEST_CHANGE_DETAIL]: (state, { payload: { input, guest, guestNum } }) => {
-      console.log(guestNum);
-      localStorage.setItem(guestNum, guest);
+      sessionStorage.setItem(input, guest);
       return { ...state, [input]: guest };
     },
     [ROOM_ID_DETAIL]: (state, { payload: id }) => ({ ...state, rommId: id }),
@@ -171,6 +169,9 @@ const detail = handleActions(
       ...state,
       startDate: '',
       endDate: '',
+      numOfAdult: 0,
+      numOfKid: 0,
+      numOfInfant: 0,
     }),
     [REQUEST_DETAIL_SUCCESS]: (state, { payload: infoRes }) => {
       sessionStorage.setItem('detailRes', JSON.stringify(infoRes));
@@ -222,12 +223,12 @@ const detail = handleActions(
       [name]: value,
     }),
 
-    [DATE_INPUT]: (state, { payload: { form, value } }) => {
-      // token 처럼 초기값이 필요로 하기 때문에 sessionStorage에 저장
-      // sessionStorage.setItem([form], checkDateSearch);
+    // [DATE_INPUT]: (state, { payload: { form, value } }) => {
+    //   // token 처럼 초기값이 필요로 하기 때문에 sessionStorage에 저장
+    //   // sessionStorage.setItem([form], checkDateSearch);
 
-      return { ...state, [form]: value };
-    },
+    //   return { ...state, [form]: value };
+    // },
   },
   initialStates,
 );

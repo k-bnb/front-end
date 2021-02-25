@@ -67,7 +67,7 @@ const CalendarNewBlock = styled.div`
     border-radius: 30px;
     position: absolute !important;
     top: 80px;
-    left: -296px;
+    left: -268px;
     height: 410px;
     width: 850px !important;
     max-width: 850px !important;

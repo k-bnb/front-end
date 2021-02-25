@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import ImageFrame from '../../UI/organisms/organisms-detail/ImageFrame';
 import { PageTitle } from '../../UI/molecules/molecules-detail/PageTitle';
@@ -8,6 +8,7 @@ import LoadingModal from '../LoadingModal';
 import ReviewContainer from '../../../containers/ReviewContainer';
 import { getCancellableDate } from '../../../modules/detail';
 import { useDispatch } from 'react-redux';
+import FooterStr from '../../UI/organisms/organisms-list/FooteStr';
 
 const Theme = {
   laptop: `screen and (min-width: 1024px)`,
@@ -54,14 +55,15 @@ const Detail = ({
   setDetailAuthModal,
   modal,
   setModal,
-  isOpen,
-  setIsOpen,
   formState,
   setFormState,
   bookingInfoRef,
   GuestModalRef,
   isCalendarOpen,
   setIsCalendarOpen,
+  isGuestOpen,
+  setIsGuestOpen,
+  peopleLimit,
 }) => {
   const CheckInDate = () => {
     const strDate = detailObj.startDate ? detailObj.startDate.split('-') : '';
@@ -101,14 +103,15 @@ const Detail = ({
           setDetailAuthModal={setDetailAuthModal}
           modal={modal}
           setModal={setModal}
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
           formState={formState}
           setFormState={setFormState}
           bookingInfoRef={bookingInfoRef}
           isCalendarOpen={isCalendarOpen}
           setIsCalendarOpen={setIsCalendarOpen}
           GuestModalRef={GuestModalRef}
+          isGuestOpen={isGuestOpen}
+          setIsGuestOpen={setIsGuestOpen}
+          peopleLimit={peopleLimit}
         />
         <ReviewContainer
           reviewRef={reviewRef}
@@ -120,6 +123,7 @@ const Detail = ({
         />
         <ImportantNotice infoRes={infoRes} CancellableDate={CancellableDate} />
       </DetailTemplate>
+      <FooterStr />
       {isLoading && <LoadingModal />}
     </>
   );

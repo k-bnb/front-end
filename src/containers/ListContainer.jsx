@@ -27,11 +27,10 @@ const ListContainer = React.memo(() => {
 
   const dispatch = useDispatch();
 
-  const keyup = e => {
-    if (e.key === 'Enter')
-    setSearchModalState('room');
-  }
-  
+  const keyup = (e) => {
+    if (e.key === 'Enter') setSearchModalState('room');
+  };
+
   const RoomSearchClick = (e) => {
     setSearchModalState('room');
   };
@@ -46,19 +45,22 @@ const ListContainer = React.memo(() => {
   const totalPage = useSelector((state) => state.search.totalPage);
 
   const [formState, setFormState] = useState(null); // 초기값은 null, 로그인 버튼 누르면 login으로, 회원가입 누르면 'register'
-
-  const roomMap = room.map((item) => {
-    return {
-      id: item.id,
-      name: item.name,
-      latitude: item.latitude,
-      longitude: item.longitude,
-      commentCount: item.commentCount,
-      cost: item.cost,
-      roomImgUrlList: item.roomImgUrlList,
-      roomType: item.roomType,
-    };
-  });
+  const [roomMap, setRoomMap] = useState([]);
+  useEffect(() => {
+    const roomMap = room.map((item) => {
+      return {
+        id: item.id,
+        name: item.name,
+        latitude: item.latitude,
+        longitude: item.longitude,
+        commentCount: item.commentCount,
+        cost: item.cost,
+        roomImgUrlList: item.roomImgUrlList,
+        roomType: item.roomType,
+      };
+    });
+    setRoomMap(roomMap);
+  }, [room]);
 
   const roomTypes = useCallback(
     (e) => {
@@ -162,14 +164,10 @@ const ListContainer = React.memo(() => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    changeCurrentPage(0);
+    // changeCurrentPage(0);
   }, []);
 
-  useEffect(()=>{
-    
-  },[isLoading])
-
-
+  useEffect(() => {}, [isLoading]);
 
   return (
     <>

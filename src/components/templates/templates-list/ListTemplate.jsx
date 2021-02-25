@@ -71,7 +71,7 @@ const ListTemplate = ({
           keyup={keyup}
         />
         <div className="list-map" style={{ display: 'flex' }}>
-          <div className="list" style={{ display: 'block', width: '50%' }}>
+          <div className="list" style={{ display: 'block', width: '60%' }}>
             <ListStyle
               room={room}
               totalPage={totalPage}
@@ -84,11 +84,11 @@ const ListTemplate = ({
               changeCurrentPage={changeCurrentPage}
               pageNationState={pageNationState}
               checkDateSearch={checkDateSearch}
-              guestSearch={guestSearch} 
+              guestSearch={guestSearch}
               isLoading={isLoading}
             />
           </div>
-          <div className="map">
+          <div className="map" style={{ display: 'block', width: '50%' }}>
             <GoogleMapContainer />
           </div>
         </div>

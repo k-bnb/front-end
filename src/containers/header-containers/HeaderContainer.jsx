@@ -3,11 +3,11 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
 import HeaderMain from '../../components/templates/templates-header/HeaderMain';
 import HeaderList from '../../components/templates/templates-header/HeaderList';
 import HeaderDetail from '../../components/templates/templates-header/HeaderDetail';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SkipNavigation from '../../components/templates/templates-header/SkipNabigation';
+import { searching } from '../../modules/search';
 
 const HeaderContainer = ({
-  GuestModalRef,
   DetailHeaderRef,
   ImageContainerRef,
   reviewRef,
@@ -21,6 +21,8 @@ const HeaderContainer = ({
   bookingInfoRef,
   isCalendarOpen,
   setIsCalendarOpen,
+  isGuestOpen,
+  setIsGuestOpen,
 }) => {
   const history = useHistory();
   const match = useRouteMatch();
@@ -30,9 +32,16 @@ const HeaderContainer = ({
   }, []);
 
   // 어떤것을 선택했는가 상태를 바꿔주는 함수
-  const { locationSearch, checkDateSearch, guestSearch } = useSelector(
-    (state) => state.search.searchReq,
-  );
+  const {
+    locationSearch,
+    checkDateSearch,
+    guestSearch,
+    costSearch,
+    roomType,
+    bedNum,
+    bedRoomNum,
+    bathRoomNum,
+  } = useSelector((state) => state.search.searchReq);
 
   const [isScrolled, setIsScrolled] = useState(false); // scrollY값이 80이상이면 UI 변경
   const [isClicked, setIsClicked] = useState(false); // HeaderMainSearchNav가 클릭되면 스크롤된 상태에서 UI 원래대로 변경.
@@ -91,6 +100,23 @@ const HeaderContainer = ({
     }
   }, [isScrolled, isClicked]);
 
+  const dispatch = useDispatch();
+  const serchBtn = () => {
+    const id = 0;
+    dispatch(
+      searching({
+        id,
+        locationSearch,
+        checkDateSearch,
+        guestSearch,
+        costSearch,
+        roomType,
+        bedNum,
+        bedRoomNum,
+        bathRoomNum,
+      }),
+    );
+  };
   return (
     <>
       <SkipNavigation />
@@ -113,6 +139,7 @@ const HeaderContainer = ({
           clickHandler={clickHandler}
           formState={formState}
           setFormState={setFormState}
+          serchBtn={serchBtn}
         />
       )}
 
@@ -139,7 +166,6 @@ const HeaderContainer = ({
       )}
       {match.params.roomId && (
         <HeaderDetail
-          GuestModalRef={GuestModalRef}
           isScrolled={isScrolled}
           setIsScrolled={setIsScrolled}
           isClicked={isClicked}
@@ -166,6 +192,8 @@ const HeaderContainer = ({
           bookingInfoRef={bookingInfoRef}
           isCalendarOpen={isCalendarOpen}
           setIsCalendarOpen={setIsCalendarOpen}
+          isGuestOpen={isGuestOpen}
+          setIsGuestOpen={setIsGuestOpen}
         />
       )}
     </>

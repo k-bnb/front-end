@@ -8,10 +8,11 @@ const HostingDataContainer = styled.div`
   justify-content: space-between;
 `;
 
-const HostInfo = styled.div`
+const HostInfo = styled.h2`
   font-weight: 600;
   font-size: 22px;
   line-height: 26px;
+  margin-top: 0;
   margin-bottom: 8px;
 `;
 
@@ -37,7 +38,7 @@ const HostingData = ({ infoRes }) => {
     <HostingDataContainer>
       <div>
         <HostInfo>{infoRes.hostName}님이 호스팅하는 펜션</HostInfo>
-        <dataWrapper>
+        <div aria-label="숙소 상세 정보">
           <Text big noPadding>
             최대 인원 {infoRes.peopleLimit}명.
           </Text>
@@ -50,7 +51,7 @@ const HostingData = ({ infoRes }) => {
           <Text big noPadding>
             욕실 {infoRes.bathRoomNum}개
           </Text>
-        </dataWrapper>
+        </div>
       </div>
       <HostImgBox>
         <HostImg src={hostImage} alt="호스트 사진" />

@@ -12,6 +12,8 @@ import CommonButton from '../../UI/atoms/atoms-reservation/CommonButton';
 import ReservationCostDetailOrganism from '../../UI/organisms/organisms-reservation/ReservationCostDetailOrganism';
 import ReservationUnderLine from '../../UI/atoms/atoms-reservation/ResevationUnderLine';
 import LoadingModal from '../LoadingModal';
+import Modal from '../../../portal/Modal';
+import CompletePaymentModalOrganism from '../../UI/organisms/organisms-reservation/organisms-modal/CompletePaymentModalOrganism';
 // import Logo from '../../UI/atoms/atoms-header/Logo';
 
 const TitleContainer = styled.div`
@@ -61,6 +63,8 @@ const Reservation = ({
   infoRes,
   reserveLocationDetail,
   RoomTablePhotoImgURL,
+  completeModalState,
+  moveToHomeClick,
 }) => {
   return (
     <>
@@ -123,6 +127,11 @@ const Reservation = ({
               RoomTablePhotoImgURL={RoomTablePhotoImgURL}
             />
           </SubContainer>
+          {completeModalState && (
+            <Modal>
+              <CompletePaymentModalOrganism moveToHomeClick={moveToHomeClick} />
+            </Modal>
+          )}
         </TempContainer>
       </section>
       {isLoading && <LoadingModal />}

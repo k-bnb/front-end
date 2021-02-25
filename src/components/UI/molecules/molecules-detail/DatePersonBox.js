@@ -112,16 +112,17 @@ const DatePersonBox = ({
   setNavModalState,
   isCalendarOpen,
   setIsCalendarOpen,
-  isOpen,
-  setIsOpen,
+  isGuestOpen,
+  setIsGuestOpen,
+  peopleLimit,
 }) => {
-  // const [isOpen, setIsOpen] = useState(false); // detail page에서 모달창 열고닫기 기능구현
   const [isDateBorderThick, setIsDateBorderThick] = useState(false);
   const [isGuestBorderThick, setGuestIsBorderThick] = useState(false);
 
   return (
     <BookingBox>
       <CheckDate
+        tabIndex="1"
         onClick={() => {
           setTimeout(() => {
             setIsCalendarOpen(true);
@@ -147,8 +148,9 @@ const DatePersonBox = ({
         )}
       </CheckDate>
       <Personnel
+        tabIndex="1"
         onClick={() => {
-          setIsOpen(true);
+          setIsGuestOpen(true);
           setGuestIsBorderThick(true);
         }}
         borderThick={isGuestBorderThick}
@@ -157,14 +159,17 @@ const DatePersonBox = ({
         <SelectinoGuest>{`게스트 ${
           detailObj.numOfAdult + detailObj.numOfKid
         } 명`}</SelectinoGuest>
-        <GuestBtn>{isOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}</GuestBtn>
-        {isOpen && (
+        <GuestBtn>
+          {isGuestOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        </GuestBtn>
+        {isGuestOpen && (
           <GuestNumberModal
             detailPage={true}
-            setIsOpen={setIsOpen}
+            setIsGuestOpen={setIsGuestOpen}
             infoRes={infoRes}
             setGuestIsBorderThick={setGuestIsBorderThick}
             setNavModalState={setNavModalState}
+            peopleLimit={peopleLimit}
           />
         )}
       </Personnel>
