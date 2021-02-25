@@ -30,7 +30,7 @@ const LocationSearchInput = ({
   setNavModalState,
 }) => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyC9pRTw-7zb847DyWLD-fUujKxvlG01s08',
+    googleMapsApiKey: 'AIzaSyDi2VswS8ZRJ3Vk6aDl0Mx3RbxI27GeXbQ',
     libraries,
   });
 
@@ -82,6 +82,7 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext, setNavModalState }) {
           try {
             const results = await getGeocode({ address }); // 유저가 검색한 address를 인수로 전달하여 promise를 반환받음.
             const { lat, lng } = await getLatLng(results[0]); // 결과에서 lat과 lng정보를 추출
+            console.log(results[0]);
             dispatch(
               // 좌표값 store로 전달
               locationInput({

@@ -180,12 +180,12 @@ const ListContainer = React.memo(() => {
     dispatch(dateInput('endDate', queryObj.check_out));
     dispatch(
       locationInput({
-        latitude: queryObj.lat,
-        longitude: queryObj.lng,
-        latitudeMax: queryObj.max_lat,
-        latitudeMin: queryObj.min_lat,
-        longitudeMax: queryObj.max_lng,
-        longitudeMin: queryObj.min_lng,
+        latitude: +queryObj.lat,
+        longitude: +queryObj.lng,
+        latitudeMax: +queryObj.max_lat,
+        latitudeMin: +queryObj.min_lat,
+        longitudeMax: +queryObj.max_lng,
+        longitudeMin: +queryObj.min_lng,
       }),
     );
     dispatch(guestInput('guestSearch', 'numOfAdult', +queryObj.adults));
