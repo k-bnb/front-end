@@ -38,14 +38,16 @@ const GuestNumberModal = ({
   // SearchTypeHandler,
   setNavModalState,
   detailPage,
-  setIsOpen,
   infoRes,
   setGuestIsBorderThick,
   searchBtnRef,
+  isGuestOpen,
+  setIsGuestOpen,
+  peopleLimit,
 }) => {
   const guestRef = useClickOutside(() => {
     if (detailPage) {
-      setIsOpen(false);
+      setIsGuestOpen(false);
       setGuestIsBorderThick(false);
       return;
     }
@@ -56,7 +58,6 @@ const GuestNumberModal = ({
       guest: false,
     });
   });
-  // console.log(guestRef, '******');
 
   return (
     <StyledGuestModal
@@ -70,6 +71,7 @@ const GuestNumberModal = ({
         name="numOfAdult"
         detailPage={detailPage}
         infoRes={infoRes}
+        peopleLimit={peopleLimit}
       />
 
       <GuestNumberModalUnit
@@ -78,6 +80,7 @@ const GuestNumberModal = ({
         name="numOfKid"
         detailPage={detailPage}
         infoRes={infoRes}
+        peopleLimit={peopleLimit}
       />
 
       <GuestNumberModalUnit
@@ -87,6 +90,7 @@ const GuestNumberModal = ({
         detailPage={detailPage}
         infoRes={infoRes}
         searchBtnRef={searchBtnRef}
+        peopleLimit={peopleLimit}
       />
     </StyledGuestModal>
   );

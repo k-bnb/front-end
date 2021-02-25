@@ -1,10 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const StyledTitle = styled.h1`
   margin: 0;
   font-size: 26px;
   color: #484848;
+
+  ${(props) =>
+    props.center &&
+    css`
+      text-align: center;
+    `}
 `;
 
 const CommonTitle = ({ children, ...rest }) => {

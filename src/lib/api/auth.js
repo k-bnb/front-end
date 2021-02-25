@@ -2,7 +2,7 @@ import client from './client';
 
 // 로그인
 export const login = ({ email, password }) =>
-  client.post('https://kbnb-backend.herokuapp.com/auth/login', {
+  client.post('https://backend.kbnb.tk/auth/login', {
     email,
     password,
   });
@@ -18,7 +18,7 @@ export const register = ({ name, email, password, birth }) =>
 
 // 유저 정보 조회
 export const userMe = (token) =>
-  client.get('https://kbnb-backend.herokuapp.com/user/me', {
+  client.get('https://backend.kbnb.tk/user/me', {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export const userMe = (token) =>
   });
 
 export const userReservation = ({ token }) =>
-  client.get('https://kbnb-backend.herokuapp.com/reservation', {
+  client.get('https://backend.kbnb.tk/reservation', {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -39,11 +39,7 @@ export const userInfoNameRemake = ({ token, name }) => {
 
   const headers = { headers: { Authorization: `Bearer ${token}` } };
   console.log(body);
-  return client.post(
-    'http://3.34.198.174:8080/user/update/name',
-    body,
-    headers,
-  );
+  return client.post('https://backend.kbnb.tk/user/update/name', body, headers);
 };
 // 유저 수정 생일
 export const userInfoBirthRemake = ({ token, birth }) => {
@@ -52,7 +48,7 @@ export const userInfoBirthRemake = ({ token, birth }) => {
   const headers = { headers: { Authorization: `Bearer ${token}` } };
   console.log(body);
   return client.post(
-    'http://3.34.198.174:8080/user/update/birth',
+    'https://backend.kbnb.tk/user/update/birth',
     body,
     headers,
   );
@@ -64,11 +60,7 @@ export const userInfoEmailRemake = ({ token, email }) => {
 
   const headers = { headers: { Authorization: `Bearer ${token}` } };
   console.log(body);
-  return client.post(
-    'https://kbnb-backend.herokuapp.com/user/update',
-    body,
-    headers,
-  );
+  return client.post('https://backend.kbnb.tk/user/update', body, headers);
 };
 
 export const reserveCancel = ({ token, reservationId, name, reason }) => {
@@ -83,10 +75,7 @@ export const reserveCancel = ({ token, reservationId, name, reason }) => {
     },
   };
 
-  return client.delete(
-    `https://kbnb-backend.herokuapp.com/reservation`,
-    config,
-  );
+  return client.delete(`https://backend.kbnb.tk/reservation`, config);
 };
 
 // 리뷰 작성
@@ -118,9 +107,5 @@ export const writeReview = ({
     description,
   };
 
-  return client.post(
-    `https://kbnb-backend.herokuapp.com/comment`,
-    data,
-    headers,
-  );
+  return client.post(`https://backend.kbnb.tk/comment`, data, headers);
 };

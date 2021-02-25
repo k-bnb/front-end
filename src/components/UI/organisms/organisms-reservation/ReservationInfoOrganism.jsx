@@ -29,14 +29,15 @@ const ReservationInfoOrganism = ({
   };
 
   //  게스트 수
-  const totalGuestNum = numOfAdult + numOfKid + numOfInfant;
-  const guestNum = `게스트 ${totalGuestNum - numOfInfant}명`;
+  const totalGuestNum = +numOfAdult + +numOfKid;
+  const guestNum = `게스트 ${totalGuestNum}명`;
   const infantNum = numOfInfant ? `, 유아 ${numOfInfant}명` : '';
 
   const guistChildren = {
     title: '게스트',
     content: guestNum + infantNum,
   };
+  console.log(typeof numOfAdult);
 
   return (
     <>

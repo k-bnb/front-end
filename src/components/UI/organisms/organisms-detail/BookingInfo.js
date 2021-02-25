@@ -47,6 +47,9 @@ const BookingInfo = ({
   isCalendarOpen,
   setIsCalendarOpen,
   GuestModalRef,
+  isGuestOpen,
+  setIsGuestOpen,
+  peopleLimit,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const StartDate = moment(detailObj.startDate);
@@ -64,6 +67,9 @@ const BookingInfo = ({
             infoRes={infoRes}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
+            isGuestOpen={isGuestOpen}
+            setIsGuestOpen={setIsGuestOpen}
+            peopleLimit={peopleLimit}
           />
           <ReserveBtn
             tabIndex="1"
@@ -79,6 +85,8 @@ const BookingInfo = ({
             setIsCalendarOpen={setIsCalendarOpen}
             detailObj={detailObj}
             GuestModalRef={GuestModalRef}
+            isGuestOpen={isGuestOpen}
+            setIsGuestOpen={setIsGuestOpen}
           ></ReserveBtn>
           <span className="notice">
             예약 확정 전에는 요금이 청구되지 않습니다.
@@ -110,6 +118,8 @@ const BookingInfo = ({
             infoRes={infoRes}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
+            isGuestOpen={isGuestOpen}
+            setIsGuestOpen={setIsGuestOpen}
           />
           <ReserveBtn
             tabIndex="1"
@@ -124,6 +134,8 @@ const BookingInfo = ({
             isCalendarOpen={isCalendarOpen}
             setIsCalendarOpen={setIsCalendarOpen}
             GuestModalRef={GuestModalRef}
+            isGuestOpen={isGuestOpen}
+            setIsGuestOpen={setIsGuestOpen}
           ></ReserveBtn>
         </BookingInfoContainer>
       </PositionBox>

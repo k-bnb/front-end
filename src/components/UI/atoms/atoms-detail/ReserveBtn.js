@@ -46,8 +46,8 @@ const ReserveBtn = ({
   DetailHeaderRef,
   bookingInfoRef,
   setIsCalendarOpen,
-  setIsOpen,
-  GuestModalRef,
+  isGuestOpen,
+  setIsGuestOpen,
   // moveToReserve,
   // NoBookingDate,
 }) => {
@@ -63,8 +63,8 @@ const ReserveBtn = ({
   }; // 날짜를 선택하도록 날짜 모달을 켜주는 함수
 
   const makeUserHasAudultGuest = () => {
-    GuestModalRef.current.scrollIntoView({ behavior: 'smooth' });
-    // setIsOpen(true);
+    if (half) bookingInfoRef.current.scrollIntoView({ behavior: 'smooth' });
+    setIsGuestOpen(true);
   };
 
   const makeUserLoggedIn = () => {
@@ -80,7 +80,6 @@ const ReserveBtn = ({
     }
     if (numOfAdult === 0) {
       makeUserHasAudultGuest();
-      setIsOpen(true);
       return;
     } //guest 인원의 성인이 선택되지 않았을시에 선택하게 함.
 

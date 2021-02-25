@@ -45,14 +45,15 @@ const GuestNumberModalUnit = ({
   name: searchName, // searchName은 메인페이지 헤더에서 사용될때 search 모듈 사용할때 쓰는 name을 이름바꿔사용
   detailPage,
   reservePage,
-  // infoRes,
   searchBtnRef,
+  peopleLimit,
 }) => {
   // type (성인, 어린이, 유아) , detail(13세이상..), name:button이름 (numOfAdult, numOfKid, numOfInfant)
   const dispatch = useDispatch();
   const { guestSearch } = useSelector(({ search: { searchReq } }) => searchReq); // main의 header에서 사용하는 경우
   // detail 페이지 일 경우는 스토어의 값을 name 이라고 쓴다
   const detailName = useSelector(({ detail }) => detail[searchName]);
+  const reserve = useSelector((reserve) => reserve);
   const detail = useSelector(({ detail }) => detail);
   // reserve reducder에서 상태 가져오기
   const { guestSearch: reserveGuestSearch } = useSelector(
@@ -62,10 +63,36 @@ const GuestNumberModalUnit = ({
   const disableHandler = () => (searchName === 'numOfAdult' ? 16 : 5); // 성인이면 최대값16, 나머지 5
 
   // 인원 제한보다 많은 인원을 증가 시 버튼 disable한다.
-  const { peopleLimit } = useSelector(({ reserve }) => reserve.infoRes);
-  const { numOfAdult, numOfKid, numOfInfant } = reserveGuestSearch;
-  const ReserveTotalGuestNum = numOfAdult + numOfKid + numOfInfant;
+  const ReserveTotalGuestNum =
+    reserveGuestSearch.numOfAdult + reserveGuestSearch.numOfKid;
   const DetailTotalGuestNum = detail.numOfAdult + detail.numOfKid;
+
+  // 페이지 별로 최소값 조건을 반환해주는 함수
+  const setMinDisabled = () => {
+    if (detailPage)
+      return searchName === 'numOfAdult' ? detailName <= 1 : detailName <= 0;
+    // detail page이면서 성인 버튼이면 1이 최소값.
+    else if (reservePage)
+      return searchName === 'numOfAdult'
+        ? reserveGuestSearch[searchName] <= 1
+        : reserveGuestSearch[searchName] <= 0;
+    // reserve page 이면서, 성인 버튼이면 1이 최솟값
+    else return guestSearch[searchName] <= 0;
+    // main page 에선, 0이 최소값
+  };
+
+  // 페이지 별로 최대값 조건을 반환해주는 함수
+  const setMaxDisabled = () => {
+    if (detailPage)
+      return searchName === 'numOfInfant'
+        ? detail.numOfInfant >= 5
+        : DetailTotalGuestNum >= peopleLimit;
+    else if (reservePage)
+      return searchName === 'numOfInfant'
+        ? reserveGuestSearch.numOfInfant >= 5
+        : ReserveTotalGuestNum >= peopleLimit;
+    else return guestSearch[searchName] >= disableHandler();
+  };
 
   // 성인이 없이 유아, 어린이만 증가시킬때, 성인도 같이 증가시키는 함수
   const increaseWithoutAdult = () => {
@@ -79,52 +106,12 @@ const GuestNumberModalUnit = ({
 
   const decreaseWhenNoAdult = () => {
     // 성인이 1 -> 0명이 될떄, 유아, 어린이가 있다면 모두 0명이 된다.
-    if (detailPage && detail.numOfAdult === 1 ? disableHandler() : '')
-      if (
-        searchName === 'numOfAdult' &&
-        guestSearch.numOfAdult === 1 &&
-        (guestSearch.numOfKid || guestSearch.numOfInfant)
-      ) {
-        dispatch(specificInputClear('guestSearch'));
-      }
-  };
-  // detail page : 성인 없이 유아, 어린이만 증가시킬 때, 성인도 같이 증가시키는 함수
-  const detailIncreaseWithoutAdult = () => {
-    if (searchName !== 'numOfAdult' && !detail.numOfAdult) {
-      dispatch(guestChangeDetail('numOfAdult', 1, `detail${searchName}`));
-    }
-  };
-  const detailDecreaseWhenNoAdult = () => {
-    // 성인이 1 -> 0명이 될떄, 유아, 어린이가 있다면 모두 0명이 된다.
     if (
       searchName === 'numOfAdult' &&
-      detail.numOfAdult === 1 &&
-      (detail.numOfKid || detail.numOfInfant)
+      guestSearch.numOfAdult === 1 &&
+      (guestSearch.numOfKid || guestSearch.numOfInfant)
     ) {
-      dispatch(clearGuestDetail());
-    }
-  };
-  // reserve page : 성인 없이 유아, 어린이만 증가시킬 때, 성인도 같이 증가시키는 함수
-  const reserveIncreaseWithoutAdult = () => {
-    if (searchName !== 'numOfAdult' && !reserveGuestSearch.numOfAdult) {
-      dispatch(
-        changeGuest(
-          'guestSearch',
-          'numOfAdult',
-          reserveGuestSearch.numOfAdult + 1,
-        ),
-      );
-    }
-  };
-  // reserve page : 성인 없이 유아, 어린이만 증가시킬 때, 성인도 같이 감소시키는 함수
-  const reserveDecreaseWhenNoAdult = () => {
-    // 성인이 1 -> 0명이 될떄, 유아, 어린이가 있다면 모두 0명이 된다.
-    if (
-      searchName === 'numOfAdult' &&
-      reserveGuestSearch.numOfAdult === 1 &&
-      (reserveGuestSearch.numOfKid || reserveGuestSearch.numOfInfant)
-    ) {
-      dispatch(initialGuest('guestSearch'));
+      dispatch(specificInputClear('guestSearch'));
     }
   };
 
@@ -147,8 +134,8 @@ const GuestNumberModalUnit = ({
           minus
           name={searchName}
           onDecrease={() => {
+            decreaseWhenNoAdult();
             if (detailPage) {
-              detailDecreaseWhenNoAdult();
               dispatch(
                 guestChangeDetail(
                   searchName,
@@ -160,7 +147,6 @@ const GuestNumberModalUnit = ({
             }
             decreaseWhenNoAdult();
             if (reservePage) {
-              reserveDecreaseWhenNoAdult();
               dispatch(
                 changeGuest(
                   'guestSearch',
@@ -178,13 +164,7 @@ const GuestNumberModalUnit = ({
               ),
             );
           }}
-          disable={
-            detailPage
-              ? detailName <= 0
-              : reservePage
-              ? reserveGuestSearch[searchName] <= 0
-              : guestSearch[searchName] <= 0
-          } // detailPage이면, numOfAdult가 0보다 작거나 같으면 더이상 감소 불가, 메인에서는 guestSearch[name] <= 0 이면 감소 불가.
+          disable={setMinDisabled()}
         />
         <Text noPadding className="guest-num-modal-interactive count">
           {/* 각 타입의 인원수 guestSearch.numOfAdult, numOfKid, numOfInfant*/}
@@ -200,7 +180,6 @@ const GuestNumberModalUnit = ({
           name={searchName}
           onIncrease={() => {
             if (detailPage) {
-              detailIncreaseWithoutAdult();
               dispatch(
                 guestChangeDetail(
                   searchName,
@@ -211,7 +190,6 @@ const GuestNumberModalUnit = ({
               return;
             }
             if (reservePage) {
-              reserveIncreaseWithoutAdult();
               dispatch(
                 changeGuest(
                   'guestSearch',
@@ -231,23 +209,7 @@ const GuestNumberModalUnit = ({
             );
           }}
           searchBtnRef={searchBtnRef}
-          disable={
-            // detailPage
-            //   ? DetailTotalGuestNum === peopleLimit
-            //     ? disableHandler()
-            //     : ''
-            //   : reservePage
-            //   ? ReserveTotalGuestNum >= peopleLimit
-            //     ? disableHandler()
-            //     : ''
-            //   : guestSearch[searchName] >= disableHandler()
-
-            detailPage || reservePage
-              ? (ReserveTotalGuestNum || DetailTotalGuestNum) >= peopleLimit
-                ? disableHandler()
-                : ''
-              : guestSearch[searchName] >= disableHandler()
-          }
+          disable={setMaxDisabled()}
         />
       </div>
     </GuestNumberModalUnitBlock>
