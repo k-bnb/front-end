@@ -24,6 +24,10 @@ const ReservationContainer = () => {
 
   const token = useSelector((state) => state.auth.token);
 
+  const { adults, children, infants, check_in, check_out } = qs.parse(
+    history.location.search,
+  );
+
   // detail redux에서 reserve 페이지에 보여지는 상태 가져 오기
   const {
     id,
@@ -102,6 +106,10 @@ const ReservationContainer = () => {
 
   const manageGuestModal = useCallback(() => {
     setGuestModal(!guestModal);
+    console.log('heeee');
+    dispatch(changeGuest('guestSearch', 'numOfAdult', +adult));
+    dispatch(changeGuest('guestSearch', 'numOfKid', +children));
+    dispatch(changeGuest('guestSearch', 'numOfInfant', +infants));
   }, [guestModal]);
 
   // textArea state 관리하는 event function
@@ -185,17 +193,34 @@ const ReservationContainer = () => {
     token,
   ]);
 
-  const { adults, children, infants, check_in, check_out } = qs.parse(
-    history.location.search,
-  );
-
   const saveDate = useCallback(() => {
     setDateModal(!dateModal);
     dispatch(dateInput('startDate', checkIn)); // 시작일만 선택시 시작일 dispatch
     dispatch(dateInput('endDate', checkOut)); // 시작일만 선택시 시작일 dispatch
     dispatch(dateChangeDetail('startDate', checkIn)); // 시작일만 선택시 시작일 dispatch
     dispatch(dateChangeDetail('endDate', checkOut)); // 시작일만 선택시 시작일 dispatch
-  }, [dispatch, dateModal, checkIn, checkOut]);
+    history.push({
+      pathname: '/reserve',
+      search:
+        '?' +
+        new URLSearchParams({
+          roomId,
+          check_in: checkIn,
+          check_out: checkOut,
+          adults: adult,
+          children: kid,
+          infants: infantNumber,
+        }).toString(),
+    });
+  }, [
+    dispatch,
+    dateModal,
+    checkIn,
+    checkOut,
+    numOfAdult,
+    numOfKid,
+    numOfInfant,
+  ]);
 
   // 모달 관련 상태 및 스토어
   const { reserveSuccess } = useSelector((state) => state.reserve);
@@ -205,6 +230,13 @@ const ReservationContainer = () => {
   const moveToHomeClick = () => {
     history.push('./');
   };
+
+  useEffect(() => {
+    if (!checkIn || !checkOut) {
+      dispatch(changeDate('startDate', check_in));
+      dispatch(changeDate('endDate', check_out));
+    }
+  }, [dateModal]);
 
   useEffect(() => {
     if (reserveSuccess) {
@@ -277,9 +309,6 @@ const ReservationContainer = () => {
     children,
     infants,
   ]);
-
-  console.log(reserveSuccess); // 예약 성공
-  console.log(completeModalState);
 
   return (
     <Reservation

@@ -5,6 +5,7 @@ import { initialGuest } from '../../../../modules/reserve';
 import { guestInput } from '../../../../modules/detail';
 import Modal from '../../../../portal/Modal';
 import ReserveGuestModalContainer from '../../../../containers/modal/ReserveGuestModalContainer';
+import { useHistory } from 'react-router-dom';
 
 const StyledButton = styled.button`
   border: 0;
@@ -51,10 +52,15 @@ const ReservationEditButton2 = ({
   saveDate,
   ...rest
 }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
-
+  const roomId = useSelector((state) => state.reserve.infoRes.id);
   const { numOfAdult, numOfKid, numOfInfant } = useSelector(
     ({ reserve }) => reserve.guestSearch,
+  );
+
+  const { startDate, endDate } = useSelector(
+    (state) => state.reserve.checkDateSearch,
   );
 
   // 지우기 button을 클릭 시 reserve guestSearch의 상태 초기화
@@ -69,6 +75,19 @@ const ReservationEditButton2 = ({
     dispatch(guestInput('numOfAdult', numOfAdult));
     dispatch(guestInput('numOfKid', numOfKid));
     dispatch(guestInput('numOfInfant', numOfInfant));
+    history.push({
+      pathname: '/reserve',
+      search:
+        '?' +
+        new URLSearchParams({
+          roomId,
+          check_in: startDate,
+          check_out: endDate,
+          adults: numOfAdult,
+          children: numOfKid,
+          infants: numOfInfant,
+        }).toString(),
+    });
   };
   return (
     <>
