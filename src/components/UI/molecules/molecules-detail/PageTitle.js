@@ -42,14 +42,10 @@ const LocateInfo = styled(Text)`
 `;
 
 const PageTitle = ({ infoRes }) => {
-  // const [isClick, setIsClick] = useState(false);
-
   return (
     <AccommodationTitle>
       <div className="title-container">
-        <Title tabIndex="1" aria-label="숙소이름">
-          조이 하우스 두번째 이야기 오션뷰 & 테라스/이호테우해변{infoRes.name}{' '}
-        </Title>
+        <Title aria-label="숙소이름">{infoRes.name} </Title>
         <DetailData>
           <AccommodationDetail>
             <Grade bold grade={infoRes.grade} bookingInfo />
@@ -64,7 +60,6 @@ const PageTitle = ({ infoRes }) => {
             isChecked={!infoRes.isChecked}
             onClick={() => {
               // store의 isChecked 값을 바꿔주어야 한다.
-              // console.log('fdfds');
               // setIsClick(!isClick);
             }}
           />

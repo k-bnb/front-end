@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 const ButtonStyle = styled.button`
   border: 1px solid #ddd;
   cursor: pointer;
-  padding: 0;
+  padding: 0 10px;
   margin: 0;
   box-sizing: border-box;
   background: none;
@@ -62,6 +62,7 @@ const ButtonStyle = styled.button`
     props.normal &&
     css`
       background-color: white;
+      width: 16rem;
       &:hover {
         background-color: rgba(235, 231, 231);
       }

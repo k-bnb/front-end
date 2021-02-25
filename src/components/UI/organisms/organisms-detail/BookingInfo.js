@@ -6,8 +6,6 @@ import OneDayPrice from '../../molecules/molecules-detail/OneDayPrice';
 import PriceDetail from '../../molecules/molecules-detail/PriceDetail';
 import TotalPrice from '../../molecules/molecules-detail/TotalPrice';
 import moment from 'moment';
-// import Modal from '../../../../portal/Modal';
-// import AuthModalContainer from '../../../../containers/AuthModalContainer';
 
 const PositionBox = styled.div`
   position: sticky;
@@ -40,13 +38,9 @@ const BookingInfo = ({
   moveToReserve,
   detailObj,
   infoRes,
-  // detailAuthModal,
-  // setDetailAuthModal,
   DetailHeaderRef,
   modal,
   setModal,
-  // isOpen,
-  // setIsOpen,
   formState,
   setFormState,
   bookingInfoRef,
@@ -60,7 +54,7 @@ const BookingInfo = ({
   const totalSchedule = EndDate.diff(StartDate, 'days');
   if (detailObj.startDate !== '' && detailObj.endDate !== '') {
     return (
-      <PositionBox ref={bookingInfoRef}>
+      <PositionBox ref={bookingInfoRef} aria-label="예약 상세 정보">
         <BookingInfoContainer ref={GuestModalRef}>
           <OneDayPrice infoRes={infoRes} detailObj={detailObj} />
           <DatePersonBox
@@ -72,6 +66,7 @@ const BookingInfo = ({
             setIsOpen={setIsOpen}
           />
           <ReserveBtn
+            tabIndex="1"
             moveToReserve={moveToReserve}
             modal={modal}
             setModal={setModal}
@@ -89,11 +84,13 @@ const BookingInfo = ({
             예약 확정 전에는 요금이 청구되지 않습니다.
           </span>
           <PriceDetail
+            aria-label="상세 가격 정보"
             infoRes={infoRes}
             detailObj={detailObj}
             totalSchedule={totalSchedule}
           />
           <TotalPrice
+            aria-label="총 가격"
             infoRes={infoRes}
             detailObj={detailObj}
             totalSchedule={totalSchedule}
@@ -115,6 +112,7 @@ const BookingInfo = ({
             setIsOpen={setIsOpen}
           />
           <ReserveBtn
+            tabIndex="1"
             moveToReserve={moveToReserve}
             modal={modal}
             setModal={setModal}
