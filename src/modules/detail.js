@@ -88,7 +88,7 @@ export function* detailSaga() {
 const initialStates = {
   startDate: '',
   endDate: '',
-  numOfAdult: 1,
+  numOfAdult: 0,
   numOfKid: 0,
   numOfInfant: 0,
   infoRes: {

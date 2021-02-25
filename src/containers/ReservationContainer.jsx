@@ -234,9 +234,9 @@ const ReservationContainer = () => {
     dispatch(detailToReserveDate(startDate, endDate));
     dispatch(detailToReserveGuest(numOfAdult, numOfKid, numOfInfant));
 
-    dispatch(changeGuest('guestSearch', 'numOfAdult', adults));
-    dispatch(changeGuest('guestSearch', 'numOfKid', children));
-    dispatch(changeGuest('guestSearch', 'numOfInfant', infants));
+    dispatch(changeGuest('guestSearch', 'numOfAdult', +adults));
+    dispatch(changeGuest('guestSearch', 'numOfKid', +children));
+    dispatch(changeGuest('guestSearch', 'numOfInfant', +infants));
     dispatch(changeDate('startDate', check_in));
     dispatch(changeDate('endDate', check_out));
 

@@ -443,7 +443,7 @@ const GoogleMapUse = ({
           <GoogleMap
             // scrollwheel={false}
             ref={mapRef}
-            // defaultZoom={12}
+            defaultZoom={20}
             zoom={zoom}
             defaultCenter={{
               lat: +locationSearch.latitude,
