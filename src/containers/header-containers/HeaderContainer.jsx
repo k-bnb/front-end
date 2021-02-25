@@ -27,10 +27,6 @@ const HeaderContainer = ({
   const history = useHistory();
   const match = useRouteMatch();
 
-  useEffect(() => {
-    return () => {};
-  }, []);
-
   // 어떤것을 선택했는가 상태를 바꿔주는 함수
   const {
     locationSearch,

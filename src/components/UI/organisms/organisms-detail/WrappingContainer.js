@@ -12,7 +12,6 @@ const InfoContainer = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   border-bottom: 1px solid rgb(221, 221, 221);
-  /* padding: 0 80px; */
 `;
 
 const DetailInfo = styled.div`
@@ -25,7 +24,6 @@ const BookingSummaryBox = styled.div`
   position: relative;
   width: 33.3%;
   margin-left: 8.3%;
-  /* top: 80px; */
 `;
 
 const WrappingContainer = ({

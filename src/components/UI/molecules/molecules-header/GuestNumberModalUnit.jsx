@@ -47,6 +47,7 @@ const GuestNumberModalUnit = ({
   reservePage,
   searchBtnRef,
   peopleLimit,
+  changeUrl,
 }) => {
   // type (성인, 어린이, 유아) , detail(13세이상..), name:button이름 (numOfAdult, numOfKid, numOfInfant)
   const dispatch = useDispatch();

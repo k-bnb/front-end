@@ -13,8 +13,6 @@ import {
 } from '../modules/detail';
 import Modal from '../portal/Modal';
 import HeaderContainer from './header-containers/HeaderContainer';
-//import LoaderIcon from 'react-loader-icon';
-import { detailToReserveDate, detailToReserveGuest } from '../modules/reserve';
 import ReviewModal from '../components/templates/templates-detail/ReviewModal';
 import AuthModalContainer from './AuthModalContainer';
 import qs from 'query-string';
@@ -66,6 +64,31 @@ const DetailContainer = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false); // detail page달력 모달열고닫기
   const [isGuestOpen, setIsGuestOpen] = useState(false); // detail guest모달 열고 닫기.
   const { peopleLimit } = useSelector(({ reserve }) => reserve.infoRes);
+
+  // const changeUrl = () => {
+  //   dispatch(dateChangeDetail('startDate', queryObj.check_in));
+  //   dispatch(dateChangeDetail('endDate', queryObj.check_out));
+  //   dispatch(guestChangeDetail('numOfAdult', +queryObj.adults));
+  //   dispatch(guestChangeDetail('numOfKid', +queryObj.children));
+  //   dispatch(guestChangeDetail('numOfInfant', +queryObj.infants));
+  //   dispatch(getRoomAverageScore(roomId));
+  //   dispatch(requestDetail(roomId));
+  //   history.push({
+  //     pathname: `/detail/${roomId}`,
+  //     search:
+  //       '?' +
+  //       new URLSearchParams({
+  //         check_in: startDate,
+  //         check_out: endDate,
+  //         adults: numOfAdult,
+  //         children: numOfKid,
+  //         infants: numOfInfant,
+  //       }).toString(),
+  //   });
+  // };
+  // useEffect(() => {
+  //   changeUrl();
+  // }, [isGuestOpen, isCalendarOpen]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

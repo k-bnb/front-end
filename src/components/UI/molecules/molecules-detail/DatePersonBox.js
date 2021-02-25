@@ -168,6 +168,8 @@ const DatePersonBox = ({
             setGuestIsBorderThick={setGuestIsBorderThick}
             setNavModalState={setNavModalState}
             peopleLimit={peopleLimit}
+            isCalendarOpen={isCalendarOpen}
+            setIsCalendarOpen={setIsCalendarOpen}
           />
         )}
       </Personnel>

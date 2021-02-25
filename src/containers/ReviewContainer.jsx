@@ -10,17 +10,17 @@ const ReviewContainer = ({
   detailObj,
 }) => {
   if (infoRes.commentCount === 0) {
-    return <EmptyReview />;
-  }
-  return (
-    <Review
-      infoRes={infoRes}
-      reviewRef={reviewRef}
-      showReviewModal={showReviewModal}
-      setShowReviewModal={setShowReviewModal}
-      detailObj={detailObj}
-    />
-  );
+    return <EmptyReview reviewRef={reviewRef} />;
+  } else
+    return (
+      <Review
+        infoRes={infoRes}
+        reviewRef={reviewRef}
+        showReviewModal={showReviewModal}
+        setShowReviewModal={setShowReviewModal}
+        detailObj={detailObj}
+      />
+    );
 };
 
 export default ReviewContainer;
