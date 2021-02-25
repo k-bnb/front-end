@@ -88,6 +88,7 @@ const ReserveBtn = ({
       return;
     }
     history.push('/reserve');
+    window.scrollTo(0, 0);
   };
 
   useEffect(() => {

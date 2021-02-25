@@ -155,7 +155,7 @@ const initialState = {
     endDate: '',
   },
   guestSearch: {
-    numOfAdult: 0,
+    numOfAdult: 1,
     numOfKid: 0,
     numOfInfant: 0,
   },
