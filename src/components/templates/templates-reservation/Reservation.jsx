@@ -123,7 +123,7 @@ const Reservation = ({
             <ReservationCostDetailOrganism
               infoRes={infoRes}
               reserveLocationDetail={reserveLocationDetail}
-              checkDateSearch={checkDateSearch}
+              checkDate={checkDate}
               RoomTablePhotoImgURL={RoomTablePhotoImgURL}
             />
           </SubContainer>
