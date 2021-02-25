@@ -15,6 +15,7 @@ import EmptyList from '../../molecules/molecules-list/EmptyList';
 
 const PcSize = styled.main`
   min-height: calc(100vh - 80px);
+  max-width: calc(100vw - 80px);
   /* background-color: #eee; */
   padding: 0 24px;
   ul {
@@ -109,12 +110,12 @@ const ListStyle = ({
   const isMobile = useMediaQuery({
     query: `(max-width: 743px)`, //744px 이하인 경우에만 적용(744이하.)
   });
-  console.log('room', room);
+
   return (
     <>
       {isPc && (
         <PcSize className="Listmain">
-          {room?.length && !isLoading  && (
+          {!!room?.length && !isLoading  && (
             room?.map
             (({
                 bathRoomNum,
@@ -173,7 +174,7 @@ const ListStyle = ({
               numberOfPages={numberOfPages}
               changeCurrentPage={changeCurrentPage}
               pageNationState={pageNationState}
-            />) : '' }
+            />) : <span style={{color:'white'}}>로딩중 ... </span>}
         </PcSize>
       )}
       {isTablet && (

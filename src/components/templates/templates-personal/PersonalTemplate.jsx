@@ -2,6 +2,7 @@ import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
 import PageLoading from '../../UI/molecules/molecules-personalInfo/PageLoading';
+import FooterStr from '../../UI/organisms/organisms-list/FooteStr';
 import PersonalInfoArticle from '../../UI/organisms/organisms-personal/PersonalInfoArticle';
 import PersonalInfoHead from '../../UI/organisms/organisms-personal/PersonalInfoHead';
 import PersonalInfoUl from '../../UI/organisms/organisms-personal/PersonalInfoUl';
@@ -104,6 +105,7 @@ const PersonalTemplate = ({
       ) : (
         <PageLoading />
       )}
+      <FooterStr />
     </PersonalTemplateStyle>
   );
 };

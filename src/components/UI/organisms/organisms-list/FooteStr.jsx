@@ -5,6 +5,7 @@ import Footer from '../../molecules/molecules-list/Footer'
 
 const PcSize = styled.main`
   height: 525px;
+  width: 100%;
 `;
 
 const TabletSize = styled.main`

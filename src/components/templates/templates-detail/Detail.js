@@ -8,6 +8,7 @@ import LoadingModal from '../LoadingModal';
 import ReviewContainer from '../../../containers/ReviewContainer';
 import { getCancellableDate } from '../../../modules/detail';
 import { useDispatch } from 'react-redux';
+import FooterStr from '../../UI/organisms/organisms-list/FooteStr';
 
 const Theme = {
   laptop: `screen and (min-width: 1024px)`,
@@ -122,6 +123,7 @@ const Detail = ({
         />
         <ImportantNotice infoRes={infoRes} CancellableDate={CancellableDate} />
       </DetailTemplate>
+      <FooterStr />
       {isLoading && <LoadingModal />}
     </>
   );
