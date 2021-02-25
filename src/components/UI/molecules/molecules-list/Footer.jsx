@@ -3,12 +3,13 @@ import styled from 'styled-components';
 
 const FooterStyle = styled.div`
   height: 100%;
+  width:100%;
   padding : 50px 80px 0px 80px;
   font-size: 15px;
   display:flex;
   flex-flow: row nowrap;
   justify-content: space-around;
-  background-color: #F7F7F7;
+  /* background-color: #F7F7F7; */
   border-top: 1px solid #DDDDDD;
 `
 
