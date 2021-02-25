@@ -107,7 +107,7 @@ const ReservationContainer = () => {
   const manageGuestModal = useCallback(() => {
     setGuestModal(!guestModal);
     console.log('heeee');
-    dispatch(changeGuest('guestSearch', 'numOfAdult', +adult));
+    dispatch(changeGuest('guestSearch', 'numOfAdult', +adults));
     dispatch(changeGuest('guestSearch', 'numOfKid', +children));
     dispatch(changeGuest('guestSearch', 'numOfInfant', +infants));
   }, [guestModal]);
