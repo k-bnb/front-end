@@ -1,6 +1,8 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import { destinationInput, locationInput } from '../../../../modules/search';
 
 const LogoBlock = styled.h1`
   position: absolute;
@@ -49,12 +51,24 @@ const LogoBlock = styled.h1`
 
 const Logo = (props) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   return (
     <LogoBlock
       tabIndex="0"
       role="banner"
       {...props}
       onClick={() => {
+        dispatch(
+          locationInput({
+            latitude: '',
+            longitude: '',
+            latitudeMax: '',
+            latitudeMin: '',
+            longitudeMax: '',
+            longitudeMin: '',
+          }),
+        );
+        dispatch(destinationInput('')); // DestinationName 변경
         history.push('/');
         window.scrollTo(0, 0);
       }}

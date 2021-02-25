@@ -52,7 +52,7 @@ const SearchButton = ({
         rooms={rooms}
         ref={searchBtnRef}
       >
-        <BiSearch className="search-button-unit" />
+        <BiSearch className="search-button-unit" onClick={onClick} />
       </SearchButtonBlock>
     </>
   );

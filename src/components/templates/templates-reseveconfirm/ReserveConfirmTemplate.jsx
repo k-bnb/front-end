@@ -37,6 +37,7 @@ const ReserveConfirmTemplate = ({
   miniModal,
   miniModalCancelBtn,
   reserveconfirmLoading,
+  disabledBtn,
 }) => {
   return (
     <ReserveConfirmTemplateStyle>
@@ -68,6 +69,7 @@ const ReserveConfirmTemplate = ({
           resonChange={resonChange}
           miniModal={miniModal}
           miniModalCancelBtn={miniModalCancelBtn}
+          disabledBtn={disabledBtn}
         />
       )}
 

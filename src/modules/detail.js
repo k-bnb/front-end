@@ -88,7 +88,7 @@ export function* detailSaga() {
 const initialStates = {
   startDate: '',
   endDate: '',
-  numOfAdult: 1,
+  numOfAdult: 0,
   numOfKid: 0,
   numOfInfant: 0,
   infoRes: {
@@ -151,11 +151,9 @@ const detail = handleActions(
     }),
     [DATE_CHANGE_DETAIL]: (state, { payload: { input, date, checkDate } }) => {
       // 날짜를 변경한 후에 새로고침을 했을 때 정보가 그대로 유지될 수 있도록
-      sessionStorage.setItem(input, date);
       return { ...state, [input]: date };
     },
     [GUEST_CHANGE_DETAIL]: (state, { payload: { input, guest, guestNum } }) => {
-      sessionStorage.setItem(input, guest);
       return { ...state, [input]: guest };
     },
     [ROOM_ID_DETAIL]: (state, { payload: id }) => ({ ...state, rommId: id }),
@@ -169,9 +167,6 @@ const detail = handleActions(
       ...state,
       startDate: '',
       endDate: '',
-      numOfAdult: 0,
-      numOfKid: 0,
-      numOfInfant: 0,
     }),
     [REQUEST_DETAIL_SUCCESS]: (state, { payload: infoRes }) => {
       sessionStorage.setItem('detailRes', JSON.stringify(infoRes));

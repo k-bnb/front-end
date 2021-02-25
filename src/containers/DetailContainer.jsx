@@ -4,16 +4,18 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
 import CarouselModal from '../components/templates/templates-detail/CarouselModal';
 import Detail from '../components/templates/templates-detail/Detail';
 import {
+  dateChangeDetail,
   getRoomAverageScore,
+  guestChangeDetail,
+  guestInput,
   requestDetail,
   searchToDetail,
 } from '../modules/detail';
 import Modal from '../portal/Modal';
 import HeaderContainer from './header-containers/HeaderContainer';
-//import LoaderIcon from 'react-loader-icon';
-import { detailToReserveDate, detailToReserveGuest } from '../modules/reserve';
 import ReviewModal from '../components/templates/templates-detail/ReviewModal';
 import AuthModalContainer from './AuthModalContainer';
+import qs from 'query-string';
 
 const DetailContainer = () => {
   const [showModal, setShowModal] = useState(false);
@@ -34,6 +36,7 @@ const DetailContainer = () => {
   const history = useHistory();
   const match = useRouteMatch();
   const dispatch = useDispatch();
+  const queryObj = qs.parse(history.location.search);
   const roomId = match.params.roomId;
   const { infoRes } = useSelector((state) => state.detail);
   const { startDate, endDate } = useSelector(
@@ -67,24 +70,14 @@ const DetailContainer = () => {
   }, []);
 
   useEffect(() => {
+    dispatch(dateChangeDetail('startDate', queryObj.check_in));
+    dispatch(dateChangeDetail('endDate', queryObj.check_out));
+    dispatch(guestChangeDetail('numOfAdult', +queryObj.adults));
+    dispatch(guestChangeDetail('numOfKid', +queryObj.children));
+    dispatch(guestChangeDetail('numOfInfant', +queryObj.infants));
     dispatch(getRoomAverageScore(roomId));
     dispatch(requestDetail(roomId));
-    if (sessionStorage.getItem('checkIn')) return;
-    if (startDate && endDate) {
-      // dispatch(
-      //   searchToDetail(startDate, endDate, numOfAdult, numOfKid, numOfInfant),
-      // );
-      dispatch(
-        searchToDetail(
-          startDate,
-          endDate,
-          numOfAdult ? numOfAdult : 1,
-          numOfKid,
-          numOfInfant,
-        ),
-      );
-    }
-  }, [dispatch, endDate, startDate, roomId, numOfAdult, numOfKid, numOfInfant]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (showModal || showReviewModal || modal)
@@ -92,17 +85,6 @@ const DetailContainer = () => {
     else document.body.style.overflowY = 'unset';
   }, [showModal, showReviewModal, modal]);
 
-  const moveToReserve = () => {
-    if (!localStorage.getItem('token')) return;
-    history.push('/reserve');
-    dispatch(detailToReserveDate(checkDateSearch));
-    dispatch(detailToReserveGuest(guestSearch));
-    window.scrollTo(0, 0);
-  };
-
-  // startDate, endDate 잠시 deps에서 빼놓음, 넣으면 detail 페이지에서 달력날짜바꾸면 다시
-  // 서버에 숙소 상세 정보 요구함.
-  // startDate, endDate, numOfAdult, numOfKid, numOfInfant,
   return (
     <>
       <HeaderContainer
@@ -132,7 +114,6 @@ const DetailContainer = () => {
         reviewRef={reviewRef}
         facilityRef={facilityRef}
         infoRes={infoRes}
-        moveToReserve={moveToReserve}
         isLoading={isLoading}
         detailObj={detailObj}
         roomImgUrlList={roomImgUrlList}

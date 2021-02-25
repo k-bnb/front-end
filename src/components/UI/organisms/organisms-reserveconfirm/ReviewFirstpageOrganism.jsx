@@ -118,13 +118,15 @@ function ReviewFirstpageOrganism({
           name="star"
           reviewNext
           moveNextComponent={moveNextComponent}
-          disable={
-            cleanliness &&
-            accuracy &&
-            communication &&
-            locationRate &&
-            checkIn &&
-            priceSatisfaction
+          disabled={
+            !(
+              cleanliness &&
+              accuracy &&
+              communication &&
+              locationRate &&
+              checkIn &&
+              priceSatisfaction
+            )
           }
         >
           다음

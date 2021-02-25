@@ -16,7 +16,7 @@ const ReserveConfirmListStyle = styled.div`
   max-width: 340px;
   border-radius: 10px;
   margin-top: 20px;
-  min-height: 200px;
+  min-height: 300px;
   margin-right: 2%;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
 
@@ -27,7 +27,7 @@ const ReserveConfirmListStyle = styled.div`
     width: 100%;
     img {
       width: 100%;
-      height: 120px;
+      height: 190px;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
@@ -101,6 +101,8 @@ const ReserveConfirmList = ({
   review,
   reserveconfirmLoading,
 }) => {
+  console.log(item.reviewed);
+
   return (
     <ReserveConfirmListStyle>
       {reserveconfirmLoading['user/RESERVE_CONFIRM'] &&
@@ -148,7 +150,7 @@ const ReserveConfirmList = ({
                   value={item.reservationId}
                   onClick={cancel}
                 >
-                  <TextStyle>예약 취소</TextStyle>
+                  예약 취소
                 </Button>
               </>
             )}
@@ -157,8 +159,10 @@ const ReserveConfirmList = ({
                 name="후기 작성"
                 value={item.reservationId}
                 onClick={review}
+                noneStyleDisabled
+                disabled={item.reviewed}
               >
-                <TextStyle>후기 작성</TextStyle>
+                {item.reviewed ? '작성 완료되었습니다.' : '후기 작성'}
               </Button>
             )}
           </div>

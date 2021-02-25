@@ -25,11 +25,6 @@ const StyledTextarea = styled.textarea`
 
 const AdjustHeightTeatarea = ({ wirteReview, description }) => {
   const textareaRef = useRef(null);
-  // const [value, setValue] = useState('');
-
-  // const change = (e) => {
-  //   setValue(e.target.value);
-  // };
 
   useLayoutEffect(() => {
     textareaRef.current.style.height = 'inherit';

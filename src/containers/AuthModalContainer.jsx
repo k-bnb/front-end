@@ -11,6 +11,7 @@ import {
 } from '../modules/auth';
 import { finishLoading, startLoading } from '../modules/loading';
 import * as API from '../lib/api/auth';
+import { useHistory } from 'react-router-dom';
 
 const AuthModalContainer = ({
   modal,
@@ -22,6 +23,7 @@ const AuthModalContainer = ({
   fromDetailPageBtn,
 }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { registerError, loginError } = useSelector((state) => state.auth);
 
@@ -61,6 +63,11 @@ const AuthModalContainer = ({
     (state) => state.auth.register,
   );
 
+  const roomId = useSelector((state) => state.detail.infoRes.id);
+  const { startDate, endDate, numOfAdult, numOfKid, numOfInfant } = useSelector(
+    (state) => state.detail,
+  );
+
   const onChange = async (e) => {
     dispatch(changeInput(formState, e.target.name, e.target.value));
   };
@@ -82,13 +89,17 @@ const AuthModalContainer = ({
           dispatch({ type: 'auth/LOGIN_SUCCESS', payload: response.data });
         });
       }
+      if (sessionStorage.getItem('DGR'))
+        history.push(
+          `/reserve?roomId=${roomId}&check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`,
+        );
+      window.scrollTo(0, 0);
     } catch (e) {
       dispatch({ type: 'auth/LOGIN_FAILURE', payload: e.response.data });
       if (loginError) {
         setServerLoginError(e.response.data);
       }
     }
-
     delay(1000).then(() => dispatch(finishLoading('auth/LOGIN')));
   };
 
@@ -141,6 +152,11 @@ const AuthModalContainer = ({
           dispatch({ type: 'auth/REGISTER_SUCCESS', payload: response.data });
         });
       }
+      if (sessionStorage.getItem('DGR'))
+        history.push(
+          `/reserve?roomId=${roomId}&check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`,
+        );
+      window.scrollTo(0, 0);
     } catch (e) {
       await dispatch({
         type: 'auth/REGISTER_FAILURE',

@@ -27,6 +27,7 @@ const ProfileToggleModalContainer = () => {
 
     history.push('/personInfo');
   };
+  console.log(history);
 
   return (
     <>
@@ -41,7 +42,7 @@ const ProfileToggleModalContainer = () => {
         userInfoClick={userInfoClick}
         modal={modal}
         setModal={setModal}
-        locationNow={history.location.pathname}
+        locationNow={history.location.pathname + history.location.search}
       />
       {modal && (
         <Modal>

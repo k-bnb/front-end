@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './LocationSearchInput.css';
 import { useLoadScript } from '@react-google-maps/api';
 import '@reach/combobox/styles.css';
@@ -30,7 +30,7 @@ const LocationSearchInput = ({
   setNavModalState,
 }) => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyC9pRTw-7zb847DyWLD-fUujKxvlG01s08',
+    googleMapsApiKey: 'AIzaSyDi2VswS8ZRJ3Vk6aDl0Mx3RbxI27GeXbQ',
     libraries,
   });
 
@@ -82,6 +82,7 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext, setNavModalState }) {
           try {
             const results = await getGeocode({ address }); // 유저가 검색한 address를 인수로 전달하여 promise를 반환받음.
             const { lat, lng } = await getLatLng(results[0]); // 결과에서 lat과 lng정보를 추출
+            console.log(results[0]);
             dispatch(
               // 좌표값 store로 전달
               locationInput({
@@ -96,6 +97,7 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext, setNavModalState }) {
 
             dispatch(getLengthForZoom(results[0].address_components.length));
             moveFocusNext('location');
+            document.querySelector('.combo-box-input').blur();
           } catch (error) {
             console.error(error);
           }
@@ -107,6 +109,18 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext, setNavModalState }) {
           value={destinationName}
           onChange={(e) => {
             setValue(e.target.value);
+            console.log('cha');
+            SearchTypeHandler('location');
+            dispatch(
+              locationInput({
+                latitude: '',
+                longitude: '',
+                latitudeMax: '',
+                latitudeMin: '',
+                longitudeMax: '',
+                longitudeMin: '',
+              }),
+            );
             dispatch(destinationInput(e.target.value)); // DestinationName 변경
           }}
           disabled={!ready} // 아직 준비되지않으면 사용할수 없음.

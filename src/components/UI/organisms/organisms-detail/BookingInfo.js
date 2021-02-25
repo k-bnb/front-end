@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import ReserveBtn from '../../atoms/atoms-detail/ReserveBtn';
 import DatePersonBox from '../../molecules/molecules-detail/DatePersonBox';
@@ -6,6 +6,16 @@ import OneDayPrice from '../../molecules/molecules-detail/OneDayPrice';
 import PriceDetail from '../../molecules/molecules-detail/PriceDetail';
 import TotalPrice from '../../molecules/molecules-detail/TotalPrice';
 import moment from 'moment';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import qs from 'query-string';
+import { dispatch } from '../../../../../../../Library/Caches/typescript/4.1/node_modules/rxjs/internal/observable/pairs';
+import {
+  dateChangeDetail,
+  getRoomAverageScore,
+  guestChangeDetail,
+  requestDetail,
+} from '../../../../modules/detail';
 
 const PositionBox = styled.div`
   position: sticky;
@@ -55,6 +65,12 @@ const BookingInfo = ({
   const StartDate = moment(detailObj.startDate);
   const EndDate = moment(detailObj.endDate);
   const totalSchedule = EndDate.diff(StartDate, 'days');
+  const history = useHistory();
+  const roomId = useSelector(({ detail }) => detail.infoRes.id);
+  const { startDate, endDate, numOfAdult, numOfKid, numOfInfant } = useSelector(
+    ({ detail }) => detail,
+  );
+
   if (detailObj.startDate !== '' && detailObj.endDate !== '') {
     return (
       <PositionBox ref={bookingInfoRef} aria-label="예약 상세 정보">
@@ -70,7 +86,6 @@ const BookingInfo = ({
             peopleLimit={peopleLimit}
           />
           <ReserveBtn
-            tabIndex="1"
             moveToReserve={moveToReserve}
             modal={modal}
             setModal={setModal}
@@ -119,7 +134,6 @@ const BookingInfo = ({
             peopleLimit={peopleLimit}
           />
           <ReserveBtn
-            tabIndex="1"
             moveToReserve={moveToReserve}
             modal={modal}
             setModal={setModal}

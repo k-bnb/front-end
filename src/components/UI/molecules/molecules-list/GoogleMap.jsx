@@ -26,27 +26,26 @@ import { Link, useHistory } from 'react-router-dom';
 // import MarkerWithLabel from "react-google-maps/lib/components/addons/MarkerWithLabel";
 // import AutoComplete from 'react-google-autocomplete';
 // Geocode.setApiKey=('AIzaSyC6KyJE5Cb_kVrW02y-mkWEDGlrUfodq6E'); '='이 표시가 들어가면 안됨... 이거 찾는데 24시간 걸렸다^-^.. 최대적===오타ㅜㅜㅜ
-Geocode.setApiKey('AIzaSyC9pRTw-7zb847DyWLD-fUujKxvlG01s08');
-
+Geocode.setApiKey('AIzaSyDi2VswS8ZRJ3Vk6aDl0Mx3RbxI27GeXbQ');
 
 const MarkerStyle = styled.div`
-    display: flex;
-    /* position:relative; */
-    /* align-items: center; */
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 50px;
-    width: 100%;
-    /* font-size: 16px; */
-    /* cursor: pointer; */
-    /* width: 80px; */
-    /* height: 30px; */
-    /* margin: 0; */
-    /* line-height: 30px; */
-    /* margin: 0 auto; */
-    /* text-align: center; */
-    /* font-weight: 800; */
-  .intoCost{
+  display: flex;
+  /* position:relative; */
+  /* align-items: center; */
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  width: 100%;
+  /* font-size: 16px; */
+  /* cursor: pointer; */
+  /* width: 80px; */
+  /* height: 30px; */
+  /* margin: 0; */
+  /* line-height: 30px; */
+  /* margin: 0 auto; */
+  /* text-align: center; */
+  /* font-weight: 800; */
+  .intoCost {
     /* align-items: center; */
     /* background: skyblue;
     border: 4px dashed darkorange; */
@@ -60,30 +59,30 @@ const MarkerStyle = styled.div`
     text-align: center;
     font-weight: 800;
     font-size: 15px;
-    &:hover{
-      border:none;
-      outline:none;
-      z-index:9999;
+    &:hover {
+      border: none;
+      outline: none;
+      z-index: 9999;
       background-color: #000;
       border: 1px solid #000;
       color: #fff;
       border-radius: 30px;
       padding: 0 5px;
-      transform: scale(1.12,1.12);
+      transform: scale(1.12, 1.12);
     }
-    &:focus{
-      border:none;
-      outline:none;
-      z-index:9999;
+    &:focus {
+      border: none;
+      outline: none;
+      z-index: 9999;
       background-color: #000;
       border: 1px solid #000;
-      color:#fff;
+      color: #fff;
       border-radius: 30px;
       padding: 0 5px;
-      transform: scale(1.12,1.12);
+      transform: scale(1.12, 1.12);
     }
   }
-`
+`;
 
 const GoogleMarkerStyle = styled.div`
   width: 100%;
@@ -396,6 +395,12 @@ const GoogleMapUse = ({
     y: -(height / 2),
   });
   const dispatch = useDispatch();
+  const { startDate, endDate } = useSelector(
+    (state) => state.search.searchReq.checkDateSearch,
+  );
+  const { numOfAdult, numOfInfant, numOfKid } = useSelector(
+    (state) => state.search.searchReq.guestSearch,
+  );
   const dragMark = (map) => {
     dispatch(
       locationInput({
@@ -444,11 +449,11 @@ const GoogleMapUse = ({
           <GoogleMap
             // scrollwheel={false}
             ref={mapRef}
-            // defaultZoom={12}
+            defaultZoom={20}
             zoom={zoom}
             defaultCenter={{
-              lat: locationSearch.latitude,
-              lng: locationSearch.longitude,
+              lat: +locationSearch.latitude,
+              lng: +locationSearch.longitude,
             }}
             onClick={() => {
               setSelectedSample(null);
@@ -480,8 +485,8 @@ const GoogleMapUse = ({
                   getPixelPositionOffset={getPixelPositionOffset}
                 >
                   <MarkerStyle
-                    className='toTop'
-                    tabIndex='-1'
+                    className="toTop"
+                    tabIndex="-1"
                     // className= {sample.id}
                     name={sample.cost}
                     ref={mapCost}
@@ -490,12 +495,12 @@ const GoogleMapUse = ({
                       console.log('overlayviewText', e.nativeEvent);
                       console.log('path1', e.nativeEvent.path[1]);
                       // console.log('path13', e.nativeEvent.path[13].childNodes[0]);
-                      const path13= e.nativeEvent.path[13].childNodes[0];
-                      console.log('path13',path13);
+                      const path13 = e.nativeEvent.path[13].childNodes[0];
+                      console.log('path13', path13);
                       // console.log(nativeevent.path); //1번째가 -memo << 이건데, 이게 className이야.
                     }}
                   >
-                    <p className="intoCost" tabIndex='0'>
+                    <p className="intoCost" tabIndex="0">
                       <BiWon />
                       {moneyfilter(sample.cost)}
                     </p>
@@ -516,39 +521,51 @@ const GoogleMapUse = ({
               >
                 <GoogleMarkerStyle>
                   {/* <img src={selectedSample.roomImgUrlList[0]} alt="" /> */}
-                    <div className="slide-group">
-                      <div className="slide">
-                        <div className="slideDiv">
-                          <Slider {...settings}>
+                  <div className="slide-group">
+                    <div className="slide">
+                      <div className="slideDiv">
+                        <Slider {...settings}>
                           {/* <img src={selectedSample.roomImgUrlList[0]} alt="" /> */}
-                          {selectedSample.roomImgUrlList.map((src, i, arr,alt) => (
-                          <>
-                            <img
-                              // carousalImg
-                              src={src}
-                              alt={alt}
-                            />
-                          </>
-                        ))}
-                          </Slider>
-                        </div>
+                          {selectedSample.roomImgUrlList.map(
+                            (src, i, arr, alt) => (
+                              <>
+                                <img
+                                  // carousalImg
+                                  src={src}
+                                  alt={alt}
+                                />
+                              </>
+                            ),
+                          )}
+                        </Slider>
                       </div>
                     </div>
-                    <div
-                      className="textAllWrap"
-                      onClick={(e)=>{
-                        if(e.target.matches('.heart')) return;
-                        history.push(`/detail/${selectedSample.id}`)
-                    }}>
-                      <ScoreText grade={selectedSample.grade} commentCount={selectedSample.commentCount} />
-                      <div className="roomTypeclass">{selectedSample.roomType}</div>
-                      <h2>{selectedSample.name}</h2>
-                      <p>
-                        <BiWon />{moneyfilter(selectedSample.cost)} <span>/ 1박</span>
-                      </p>
+                  </div>
+                  <div
+                    className="textAllWrap"
+                    onClick={(e) => {
+                      if (e.target.matches('.heart')) return;
+
+                      history.push(
+                        `/detail/${selectedSample.id}?check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`,
+                      );
+                    }}
+                  >
+                    <ScoreText
+                      grade={selectedSample.grade}
+                      commentCount={selectedSample.commentCount}
+                    />
+                    <div className="roomTypeclass">
+                      {selectedSample.roomType}
                     </div>
-                    <Bookmark Mobileheart className="heart">
-                      <BsHeartFill className="heartimg" />
+                    <h2>{selectedSample.name}</h2>
+                    <p>
+                      <BiWon />
+                      {moneyfilter(selectedSample.cost)} <span>/ 1박</span>
+                    </p>
+                  </div>
+                  <Bookmark Mobileheart className="heart">
+                    <BsHeartFill className="heartimg" />
                   </Bookmark>
                 </GoogleMarkerStyle>
               </InfoWindow>
@@ -562,7 +579,7 @@ const GoogleMapUse = ({
   return (
     <>
       <MapWithAMarker
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6KyJE5Cb_kVrW02y-mkWEDGlrUfodq6E&v=3.exp&libraries=geometry,drawing,places"
+        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDi2VswS8ZRJ3Vk6aDl0Mx3RbxI27GeXbQ&v=3.exp&libraries=geometry,drawing,places"
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `100%` }} />}
         mapElement={<div style={{ height: `100%` }} />}

@@ -236,32 +236,32 @@ const ReviewModal = ({
             <div className="wrapper"></div>
             <PointItemBox
               textItem="청결도"
-              point={itemScore.cleanliness}
+              point={itemScore.cleanliness.toFixed(1)}
               reviewModal={true}
             />
             <PointItemBox
               textItem="정확성"
-              point={itemScore.accuracy}
+              point={itemScore.accuracy.toFixed(1)}
               reviewModal={true}
             />
             <PointItemBox
               textItem="의사소통"
-              point={itemScore.communication}
+              point={itemScore.communication.toFixed(1)}
               reviewModal={true}
             />
             <PointItemBox
               textItem="위치"
-              point={itemScore.locationRate}
+              point={itemScore.locationRate.toFixed(1)}
               reviewModal={true}
             />
             <PointItemBox
               textItem="체크인"
-              point={itemScore.checkIn}
+              point={itemScore.checkIn.toFixed(1)}
               reviewModal={true}
             />
             <PointItemBox
               textItem="가격 대비 만족도"
-              point={itemScore.priceSatisfaction}
+              point={itemScore.priceSatisfaction.toFixed(1)}
               reviewModal={true}
             />
           </div>

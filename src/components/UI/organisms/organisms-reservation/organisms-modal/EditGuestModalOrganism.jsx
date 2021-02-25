@@ -6,7 +6,6 @@ import CommonButton from '../../../atoms/atoms-reservation/atoms-modal/CommonBut
 import CommonTemp from '../../../atoms/atoms-reservation/atoms-modal/CommonTemp';
 import CommonText from '../../../atoms/atoms-reservation/atoms-modal/CommonText';
 import GuestNumberModalUnit from '../../../molecules/molecules-header/GuestNumberModalUnit';
-import { useSelector } from 'react-redux';
 
 const HeaderContainer = styled.div`
   padding: 64px 24px 16px;

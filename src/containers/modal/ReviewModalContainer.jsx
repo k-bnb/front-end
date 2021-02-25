@@ -1,11 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ReviewModalOrganism from '../../components/UI/organisms/organisms-reserveconfirm/ReviewModalOrganism';
+import { finishLoading, startLoading } from '../../modules/loading';
 import {
   review,
   changeInputReview,
   initialInputReview,
+  // reserveConfirm,
 } from '../../modules/user';
+import * as API from '../../lib/api/auth';
 
 const ReviewModalContainer = ({
   reviewModalState,
@@ -19,11 +22,14 @@ const ReviewModalContainer = ({
   // review action create function 인자
   const { token } = useSelector(({ auth }) => auth);
 
-  // loading icon
-  const { loading } = useSelector((state) => state);
-
   // review action create function 인자 or textarea value의 상태 관리
   const { description } = useSelector(({ user }) => user.reserveReviewReq);
+
+  // catch에서 에러 잡기 위한 상태
+  const { reserveError, reserveReviewError } = useSelector(({ user }) => user);
+
+  // 리뷰 작성 유무 확인 상태
+  const userIfoConFirm = JSON.parse(sessionStorage.getItem('userInfoConFirm'));
 
   // star rating 초기화 및 초기값
   const initialRating = {
@@ -102,6 +108,9 @@ const ReviewModalContainer = ({
   // 리뷰 작성시 textarea 상태를 관리하는 event function
   const wirteReview = (e) => {
     dispatch(changeInputReview(e.target.value));
+    if (e.target.value.length > 200) {
+      dispatch(changeInputReview(e.target.value.slice(0, 200)));
+    }
   };
 
   // 각 star rating의 상태를 관리하는 event function (name props로 식별)
@@ -114,36 +123,24 @@ const ReviewModalContainer = ({
   const removeModalBg = (e) => {
     if (e.target.classList.contains('remove-modal')) {
       setReviewModalState(false);
+      dispatch(initialInputReview());
     }
   };
 
   // 후기 작성 완료 버튼 event function 및 모달 닫기, 초기화
-  const completeReviewModal = (e) => {
+  const completeReviewModal = async (e) => {
+    e.preventDefault();
     if (e.target.name !== 'complete') return;
     // star rating 초기화
     setRating(initialRating);
+
     // textarea 초기화
     dispatch(initialInputReview());
 
-    // 후기 작성한 방 roomId localStorage에 저장
-    // console.log(localStorage.getItem('completeReviewRoomId'));
-    // const roomIdInfo = [];
-    // roomIdInfo.push(localStorage.getItem('completeReviewRoomId'));
+    dispatch(startLoading('user/REVIEW'));
 
-    //12  => ['12']  13 => ['12', '13'] => ['13']
-    // ['12']
-    localStorage.setItem('completeReviewRoomId', JSON.stringify(reservationId));
-    const x = localStorage.getItem('completeReviewRoomId');
-    console.log(x);
-
-    const y = localStorage.setItem('y', JSON.stringify([x, reservationId]));
-    console.log(y);
-    // localStorage.setItem('roomIdInfo', JSON.stringify(roomIdInfo));
-
-    // console.log(roomIdInfo);
-    //
-    dispatch(
-      review(
+    try {
+      const postResponse = await API.writeReview({
         token,
         reservationId,
         cleanliness,
@@ -153,10 +150,25 @@ const ReviewModalContainer = ({
         checkIn,
         priceSatisfaction,
         description,
-      ),
-    );
+      });
 
-    setReviewModalState(false);
+      const getResponse = await API.userReservation({ token });
+
+      dispatch({
+        type: 'user/REVIEW_SUCCESS',
+        payload: postResponse.data,
+      });
+
+      dispatch({
+        type: 'user/RESERVE_CONFIRM_SUCCESS',
+        payload: getResponse.data,
+      });
+
+      setReviewModalState(false);
+      delay(1000).then(() => dispatch(finishLoading('user/REVIEW')));
+    } catch (error) {
+      console.log(error);
+    }
 
     setFormState('complete');
   };
@@ -183,3 +195,7 @@ const ReviewModalContainer = ({
 };
 
 export default ReviewModalContainer;
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

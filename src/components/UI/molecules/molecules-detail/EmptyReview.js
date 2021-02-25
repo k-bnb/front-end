@@ -35,8 +35,8 @@ const InfoText = styled(Text)`
   word-break: break-word;
 `;
 
-const EmptyReview = () => (
-  <EmptyReviewContainer>
+const EmptyReview = ({ reviewRef }) => (
+  <EmptyReviewContainer ref={reviewRef}>
     <NoReviewHeader>후기 (아직) 없음</NoReviewHeader>
     <NoReviewInfo>
       <ImoticonBox block>

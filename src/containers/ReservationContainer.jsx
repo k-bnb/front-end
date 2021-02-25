@@ -8,11 +8,14 @@ import {
   detailToReserveDate,
   detailToReserveGuest,
   reserving,
+  changeDate,
+  changeGuest,
 } from '../modules/reserve';
 import { dateInput, specificInputClear } from '../modules/search';
 import { clearCheckDateDtail, dateChangeDetail } from '../modules/detail';
 import BootPay from 'bootpay-js';
 import { useHistory } from 'react-router-dom';
+import qs from 'query-string';
 
 const ReservationContainer = () => {
   // store 에서 관리하는 state
@@ -20,6 +23,10 @@ const ReservationContainer = () => {
   const history = useHistory();
 
   const token = useSelector((state) => state.auth.token);
+
+  const { adults, children, infants, check_in, check_out } = qs.parse(
+    history.location.search,
+  );
 
   // detail redux에서 reserve 페이지에 보여지는 상태 가져 오기
   const {
@@ -99,6 +106,10 @@ const ReservationContainer = () => {
 
   const manageGuestModal = useCallback(() => {
     setGuestModal(!guestModal);
+    console.log('heeee');
+    dispatch(changeGuest('guestSearch', 'numOfAdult', +adults));
+    dispatch(changeGuest('guestSearch', 'numOfKid', +children));
+    dispatch(changeGuest('guestSearch', 'numOfInfant', +infants));
   }, [guestModal]);
 
   // textArea state 관리하는 event function
@@ -188,7 +199,28 @@ const ReservationContainer = () => {
     dispatch(dateInput('endDate', checkOut)); // 시작일만 선택시 시작일 dispatch
     dispatch(dateChangeDetail('startDate', checkIn)); // 시작일만 선택시 시작일 dispatch
     dispatch(dateChangeDetail('endDate', checkOut)); // 시작일만 선택시 시작일 dispatch
-  }, [dispatch, dateModal, checkIn, checkOut]);
+    history.push({
+      pathname: '/reserve',
+      search:
+        '?' +
+        new URLSearchParams({
+          roomId,
+          check_in: checkIn,
+          check_out: checkOut,
+          adults: adult,
+          children: kid,
+          infants: infantNumber,
+        }).toString(),
+    });
+  }, [
+    dispatch,
+    dateModal,
+    checkIn,
+    checkOut,
+    numOfAdult,
+    numOfKid,
+    numOfInfant,
+  ]);
 
   // 모달 관련 상태 및 스토어
   const { reserveSuccess } = useSelector((state) => state.reserve);
@@ -196,15 +228,15 @@ const ReservationContainer = () => {
   const [completeModalState, setCompleteModalState] = useState(false);
 
   const moveToHomeClick = () => {
-    setCompleteModalState(false);
-    sessionStorage.removeItem('startDate');
-    sessionStorage.removeItem('endDate');
-    sessionStorage.removeItem('numOfAdult');
-    sessionStorage.removeItem('numOfKid');
-    sessionStorage.removeItem('numOfInfant');
-
     history.push('./');
   };
+
+  useEffect(() => {
+    if (!checkIn || !checkOut) {
+      dispatch(changeDate('startDate', check_in));
+      dispatch(changeDate('endDate', check_out));
+    }
+  }, [dateModal]);
 
   useEffect(() => {
     if (reserveSuccess) {
@@ -230,12 +262,15 @@ const ReservationContainer = () => {
         roomImgUrlList,
       ),
     );
-
     dispatch(detailToReserveLocation(locationDetail));
-
     dispatch(detailToReserveDate(startDate, endDate));
-
     dispatch(detailToReserveGuest(numOfAdult, numOfKid, numOfInfant));
+
+    dispatch(changeGuest('guestSearch', 'numOfAdult', +adults));
+    dispatch(changeGuest('guestSearch', 'numOfKid', +children));
+    dispatch(changeGuest('guestSearch', 'numOfInfant', +infants));
+    dispatch(changeDate('startDate', check_in));
+    dispatch(changeDate('endDate', check_out));
 
     setTimeout(() => {
       setIsLoading(false);
@@ -268,10 +303,12 @@ const ReservationContainer = () => {
     roomImgUrlList,
     setCompleteModalState,
     reserveSuccess,
+    check_in,
+    check_out,
+    adults,
+    children,
+    infants,
   ]);
-
-  console.log(reserveSuccess); // 예약 성공
-  console.log(completeModalState);
 
   return (
     <Reservation

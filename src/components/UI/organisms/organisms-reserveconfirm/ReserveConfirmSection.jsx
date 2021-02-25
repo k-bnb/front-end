@@ -40,6 +40,7 @@ const ReserveConfirmSection = ({
   miniModal,
   miniModalCancelBtn,
   reserveconfirmLoading,
+  disabledBtn,
 }) => {
   return (
     <>
@@ -77,6 +78,7 @@ const ReserveConfirmSection = ({
                 reservationId={reservationId}
                 resonChange={resonChange}
                 miniModal={miniModal}
+                disabledBtn={disabledBtn}
               />
             </ReserveCancelModal>
           </Modal>

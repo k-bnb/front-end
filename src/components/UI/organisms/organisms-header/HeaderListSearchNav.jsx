@@ -23,9 +23,6 @@ const HeaderListSearchNavBlock = styled.div`
     display: flex;
     list-style: none;
   }
-  li {
-    /* border-right: 1px solid black; */
-  }
   ${(props) =>
     !props.isClicked &&
     css`
@@ -46,12 +43,18 @@ const HeaderListSearchNavBlock = styled.div`
         display: flex;
         justify-content: space-evenly;
         position: relative;
+
+        .list-destination-name {
+          max-width: 120px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
       }
       span {
         text-align: center;
         line-height: 30px;
         padding: 0 5px;
-        /* background-color: green; */
       }
       span:first-child {
         width: 30%;
@@ -64,7 +67,6 @@ const HeaderListSearchNavBlock = styled.div`
       .guest-button-comp {
         width: 29%;
         display: flex;
-        /* background-color: pink; */
         justify-content: space-between;
         span {
           border: 0;
@@ -145,6 +147,7 @@ const HeaderMainSearchNav = ({
             <Text
               bold
               noPadding
+              className="list-destination-name"
               onClick={() => {
                 SearchTypeHandler('location');
               }}
@@ -173,7 +176,7 @@ const HeaderMainSearchNav = ({
               }}
             >
               <Text noPadding gray>
-                {numOfAdult && numOfKid
+                {numOfAdult
                   ? `게스트 ${numOfAdult + numOfKid}명`
                   : '게스트 추가'}
               </Text>

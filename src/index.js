@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -71,24 +71,17 @@ const store = createStore(
       loginError: null, // 로그인 에러}
     },
     search: {
-      destinationName: '',
+      destinationName: JSON.parse(sessionStorage.getItem('destination')) || '',
       searchReq: {
-        locationSearch: {
-          latitude: '',
-          longitude: '',
-          latitudeMax: '',
-          latitudeMin: '',
-          longitudeMax: '',
-          longitudeMin: '',
-        },
+        locationSearch: JSON.parse(sessionStorage.getItem('location')) || {},
         checkDateSearch: {
-          startDate: sessionStorage.getItem('startDate'),
-          endDate: sessionStorage.getItem('endDate'),
+          startDate: '',
+          endDate: '',
         },
         guestSearch: {
-          numOfAdult: 0,
-          numOfKid: 0,
-          numOfInfant: 0,
+          numOfAdult: sessionStorage.getItem('numOfAdult'),
+          numOfKid: sessionStorage.getItem('numOfKid'),
+          numOfInfant: sessionStorage.getItem('numOfInfant'),
         },
         costSearch: {
           minCost: 10000,
@@ -99,26 +92,17 @@ const store = createStore(
         bedRoomNum: 0,
         bathRoomNum: 0,
       },
-      searchRes: [],
-      totalPage: {},
+      searchRes: JSON.parse(sessionStorage.getItem('searchres')) || [],
+      totalPage: JSON.parse(sessionStorage.getItem('totalPage')) || {},
       searchError: null,
     },
 
     detail: {
-      startDate:
-        sessionStorage.getItem('checkIn') ||
-        sessionStorage.getItem('startDate'),
-      endDate:
-        sessionStorage.getItem('checkOut') || sessionStorage.getItem('endDate'),
-      numOfAdult:
-        localStorage.getItem('detailnumOfAdult') ||
-        sessionStorage.getItem('numOfAdult'),
-      numOfKid:
-        localStorage.getItem('detailnumOfKid') ||
-        sessionStorage.getItem('numOfKid'),
-      numOfInfant:
-        localStorage.getItem('detailnumOfInfant') ||
-        sessionStorage.getItem('numOfInfant'),
+      startDate: '',
+      endDate: '',
+      numOfAdult: '',
+      numOfKid: '',
+      numOfInfant: '',
       infoRes: {
         id,
         name,
