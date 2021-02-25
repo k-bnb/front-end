@@ -101,6 +101,8 @@ const ReserveConfirmList = ({
   review,
   reserveconfirmLoading,
 }) => {
+  console.log(item.reviewed);
+
   return (
     <ReserveConfirmListStyle>
       {reserveconfirmLoading['user/RESERVE_CONFIRM'] &&
@@ -157,8 +159,10 @@ const ReserveConfirmList = ({
                 name="후기 작성"
                 value={item.reservationId}
                 onClick={review}
+                noneStyleDisabled
+                disabled={item.reviewed}
               >
-                후기 작성
+                {item.reviewed ? '작성 완료되었습니다.' : '후기 작성'}
               </Button>
             )}
           </div>
