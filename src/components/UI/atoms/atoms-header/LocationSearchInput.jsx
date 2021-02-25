@@ -89,10 +89,10 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext, setNavModalState }) {
               locationInput({
                 latitude: lat,
                 longitude: lng,
-                latitudeMax: results[0].geometry.viewport.Pa.i,
-                latitudeMin: results[0].geometry.viewport.Pa.g,
-                longitudeMax: results[0].geometry.viewport.Va.i,
-                longitudeMin: results[0].geometry.viewport.Va.g,
+                latitudeMax: results[0].geometry.viewport.Va.i,
+                latitudeMin: results[0].geometry.viewport.Va.g,
+                longitudeMax: results[0].geometry.viewport.Pa.i,
+                longitudeMin: results[0].geometry.viewport.Pa.g,
               }),
             );
 
