@@ -65,6 +65,7 @@ const Reservation = ({
   RoomTablePhotoImgURL,
   completeModalState,
   moveToHomeClick,
+  paymentLoading,
 }) => {
   return (
     <>
@@ -127,7 +128,7 @@ const Reservation = ({
               RoomTablePhotoImgURL={RoomTablePhotoImgURL}
             />
           </SubContainer>
-          {completeModalState && (
+          {completeModalState && !paymentLoading && (
             <Modal>
               <CompletePaymentModalOrganism moveToHomeClick={moveToHomeClick} />
             </Modal>
@@ -135,6 +136,7 @@ const Reservation = ({
         </TempContainer>
       </section>
       {isLoading && <LoadingModal />}
+      {paymentLoading && <LoadingModal />}
     </>
   );
 };

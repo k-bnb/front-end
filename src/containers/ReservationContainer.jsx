@@ -10,6 +10,7 @@ import {
   reserving,
   changeDate,
   changeGuest,
+  clearSuccessMessage,
 } from '../modules/reserve';
 import { dateInput, specificInputClear } from '../modules/search';
 import { clearCheckDateDtail, dateChangeDetail } from '../modules/detail';
@@ -21,6 +22,10 @@ const ReservationContainer = () => {
   // store 에서 관리하는 state
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const { loading } = useSelector((state) => state);
+
+  const paymentLoading = loading['reserve/RESERVING'];
 
   const token = useSelector((state) => state.auth.token);
 
@@ -230,8 +235,14 @@ const ReservationContainer = () => {
   const [completeModalState, setCompleteModalState] = useState(false);
 
   const moveToHomeClick = () => {
+    setCompleteModalState(false);
+    console.log('홈');
+    dispatch(clearSuccessMessage());
+
     history.push('./');
   };
+
+  console.log(completeModalState);
 
   useEffect(() => {
     if (!checkIn || !checkOut) {
@@ -280,6 +291,7 @@ const ReservationContainer = () => {
 
     return () => {
       document.body.style.overflowY = 'unset';
+      // setCompleteModalState(false);
     };
   }, [
     dispatch,
@@ -332,6 +344,7 @@ const ReservationContainer = () => {
       RoomTablePhotoImgURL={RoomTablePhotoImgURL}
       completeModalState={completeModalState}
       moveToHomeClick={moveToHomeClick}
+      paymentLoading={paymentLoading}
     />
   );
 };

@@ -19,8 +19,8 @@ const DETAIL_TO_RESERVE_DATE = 'reserve/DETAIL_TO_RESERVE_DATE';
 const DETAIL_TO_RESERVE_GUEST = 'reserve/DETAIL_TO_RESERVE_GUEST';
 const DETAIL_TO_RESERVE_ROOM = 'reserve/DETAIL_TO_RESERVE_ROOM';
 const DETAIL_TO_RESERVE_LOCATION = 'reserve/DETAIL_TO_RESERVE_LOCATION';
-// const DETAIL_TO_RESERVE_IMG = 'reserve/DETAIL_TO_RESERVE_IMG';
-
+const CLEAR_SUCCESS_MESSAGE = 'reserve/CLEAR_SUCCESS_MESSAGE';
+// clearSuccessMessage
 // 비동기 action type
 const RESERVING = 'reserve/RESERVING';
 const RESERVING_SUCCESS = 'reserve/RESERVING_SUCCESS';
@@ -117,6 +117,8 @@ export const detailToReserveLocation = createAction(
     neighborhood,
   }),
 );
+
+export const clearSuccessMessage = createAction(CLEAR_SUCCESS_MESSAGE);
 
 // saga action function
 export const reserving = createAction(
@@ -255,6 +257,11 @@ const reserve = handleActions(
     [RESERVING_FAILURE]: (state, { payload: error }) => ({
       ...state,
       reserveError: error,
+    }),
+
+    [CLEAR_SUCCESS_MESSAGE]: (state, _) => ({
+      ...state,
+      reserveSuccess: initialState.reserveSuccess,
     }),
   },
   initialState,
