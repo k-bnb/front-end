@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 import { BiSearch } from 'react-icons/bi';
 import SearchButton from './SearchButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { searching } from '../../../../modules/search';
 
 const shortened = keyframes`
   0%{
@@ -61,7 +63,16 @@ const ClickedSearchButton = ({
 }) => {
   const [localIsModalOpen, setLocalIsModalOpen] = useState(isModalOpen);
   const [displayAnimation, setDisplayAnimation] = useState(false);
-
+  const {
+    checkDateSearch,
+    guestSearch,
+    costSearch,
+    roomType,
+    bedNum,
+    bedRoomNum,
+    bathRoomNum,
+  } = useSelector((state) => state.search.searchReq);
+  const dispatch = useDispatch();
   useEffect(() => {
     if (localIsModalOpen && !isModalOpen) {
       setDisplayAnimation(true);
@@ -71,7 +82,22 @@ const ClickedSearchButton = ({
     }
     setLocalIsModalOpen(isModalOpen);
   }, [localIsModalOpen, isModalOpen]);
-
+  const serchBtn = () => {
+    const id = 0;
+    dispatch(
+      searching({
+        id,
+        locationSearch,
+        checkDateSearch,
+        guestSearch,
+        costSearch,
+        roomType,
+        bedNum,
+        bedRoomNum,
+        bathRoomNum,
+      }),
+    );
+  };
   if (!localIsModalOpen && !displayAnimation)
     return (
       <SearchButton
@@ -96,6 +122,7 @@ const ClickedSearchButton = ({
           SearchTypeHandler('location');
           return;
         }
+        serchBtn();
         history.push('/rooms');
       }}
     >
