@@ -276,8 +276,8 @@ function Datepicker({ setIsDateBorderThick, setIsCalendarOpen }) {
   // 날짜 변경시 시작일 종료일을
   useEffect(() => {
     if (dateRange.startDate !== null && dateRange.endDate !== null) {
-      const start = dateRange.startDate._d;
-      const end = dateRange.endDate._d;
+      //const start = dateRange.startDate._d;
+      //const end = dateRange.endDate._d;
     } else {
       return;
     }

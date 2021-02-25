@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import ImageFrame from '../../UI/organisms/organisms-detail/ImageFrame';
 import { PageTitle } from '../../UI/molecules/molecules-detail/PageTitle';
@@ -54,8 +54,6 @@ const Detail = ({
   setDetailAuthModal,
   modal,
   setModal,
-  isOpen,
-  setIsOpen,
   formState,
   setFormState,
   bookingInfoRef,
@@ -104,8 +102,6 @@ const Detail = ({
           setDetailAuthModal={setDetailAuthModal}
           modal={modal}
           setModal={setModal}
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
           formState={formState}
           setFormState={setFormState}
           bookingInfoRef={bookingInfoRef}

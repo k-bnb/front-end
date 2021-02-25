@@ -87,8 +87,9 @@ const ImageFrame = ({
   roomImgUrlList,
 }) => {
   return (
-    <AccommodationPictures ref={ImageContainerRef}>
+    <AccommodationPictures ref={ImageContainerRef} tabIndex="1">
       <ImgDetailBtn
+        tabIndex="1"
         onClick={() => {
           setShowModal(true);
         }}
