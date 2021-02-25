@@ -86,9 +86,9 @@ const store = createStore(
           endDate: sessionStorage.getItem('endDate'),
         },
         guestSearch: {
-          numOfAdult: 0,
-          numOfKid: 0,
-          numOfInfant: 0,
+          numOfAdult: sessionStorage.getItem('numOfAdult'),
+          numOfKid: sessionStorage.getItem('numOfKid'),
+          numOfInfant: sessionStorage.getItem('numOfInfant'),
         },
         costSearch: {
           minCost: 10000,

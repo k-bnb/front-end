@@ -76,7 +76,6 @@ export const detailToReserveGuest = createAction(
 export const detailToReserveRoom = createAction(
   DETAIL_TO_RESERVE_ROOM,
   (
-    id,
     name,
     roomCost,
     cleaningCost,
@@ -90,9 +89,7 @@ export const detailToReserveRoom = createAction(
     hostImgURL,
     commentCount,
     roomImgUrlList,
-    checkDateSearch,
   ) => ({
-    id,
     name,
     roomCost,
     cleaningCost,
@@ -106,7 +103,6 @@ export const detailToReserveRoom = createAction(
     hostImgURL,
     commentCount,
     roomImgUrlList,
-    checkDateSearch,
   }),
 );
 
@@ -155,7 +151,7 @@ const initialState = {
     endDate: '',
   },
   guestSearch: {
-    numOfAdult: 0,
+    numOfAdult: 1,
     numOfKid: 0,
     numOfInfant: 0,
   },

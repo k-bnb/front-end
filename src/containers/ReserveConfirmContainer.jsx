@@ -113,6 +113,8 @@ const ReserveConfirmContainer = () => {
     setReviewModalState(!reviewModalState);
   };
 
+  console.log(list);
+
   return (
     <ReserveConfirmTemplate
       list={list}

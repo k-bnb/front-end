@@ -92,6 +92,15 @@ const ButtonStyle = styled.button`
       font-weight: 800;
       border-radius: 5px;
     `}
+
+    ${(props) =>
+    props.disabled &&
+    props.noneStyleDisabled &&
+    css`
+      /* background-color: gray; */
+      background: transparent;
+      cursor: not-allowed;
+    `}
 `;
 
 const Button = ({ children, disabled, ...rest }) => {
