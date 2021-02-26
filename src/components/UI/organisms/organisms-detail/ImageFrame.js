@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const AccommodationPictures = styled.div`
@@ -86,6 +87,9 @@ const ImageFrame = ({
   ImageContainerRef,
   roomImgUrlList,
 }) => {
+  const isLoading = useSelector(
+    (state) => state.loading['detail/REQUEST_DETAIL'],
+  );
   return (
     <AccommodationPictures ref={ImageContainerRef} tabIndex="1">
       <ImgDetailBtn
@@ -114,51 +118,119 @@ const ImageFrame = ({
         </svg>
         사진 모두 보기
       </ImgDetailBtn>
-      <div
-        className="one"
-        onClick={() => {
-          setShowModal(true);
-          setCurrent(0);
-        }}
-      >
-        <img src={roomImgUrlList[0]} alt="" />
-      </div>
-      <div
-        className="two"
-        onClick={() => {
-          setShowModal(true);
-          setCurrent(1);
-        }}
-      >
-        <img src={roomImgUrlList[1]} alt="" />{' '}
-      </div>
-      <div
-        className="three"
-        onClick={() => {
-          setShowModal(true);
-          setCurrent(2);
-        }}
-      >
-        <img src={roomImgUrlList[2]} alt="" />{' '}
-      </div>
-      <div
-        className="four"
-        onClick={() => {
-          setCurrent(3);
-          setShowModal(true);
-        }}
-      >
-        <img src={roomImgUrlList[3]} alt="" />{' '}
-      </div>
-      <div
-        className="five"
-        onClick={() => {
-          setCurrent(4);
-          setShowModal(true);
-        }}
-      >
-        <img src={roomImgUrlList[4]} alt="" />{' '}
-      </div>
+      {isLoading && (
+        <>
+          <div
+            className="one"
+            onClick={() => {
+              setShowModal(true);
+              setCurrent(0);
+            }}
+          >
+            <img
+              src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.sherwin-williams.com%2Fhomeowners%2Fcolor%2Ffind-and-explore-colors%2Fpaint-colors-by-family%2FSW0055-light-french-gray&psig=AOvVaw39fAAy17GnxN81CjH9kvGg&ust=1614416941089000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNiAl_aZh-8CFQAAAAAdAAAAABAT"
+              alt=""
+            />
+          </div>
+          <div
+            className="two"
+            onClick={() => {
+              setShowModal(true);
+              setCurrent(1);
+            }}
+          >
+            <img
+              src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.sherwin-williams.com%2Fhomeowners%2Fcolor%2Ffind-and-explore-colors%2Fpaint-colors-by-family%2FSW0055-light-french-gray&psig=AOvVaw39fAAy17GnxN81CjH9kvGg&ust=1614416941089000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNiAl_aZh-8CFQAAAAAdAAAAABAT"
+              alt=""
+            />{' '}
+          </div>
+          <div
+            className="three"
+            onClick={() => {
+              setShowModal(true);
+              setCurrent(2);
+            }}
+          >
+            <img
+              src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.sherwin-williams.com%2Fhomeowners%2Fcolor%2Ffind-and-explore-colors%2Fpaint-colors-by-family%2FSW0055-light-french-gray&psig=AOvVaw39fAAy17GnxN81CjH9kvGg&ust=1614416941089000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNiAl_aZh-8CFQAAAAAdAAAAABAT"
+              alt=""
+            />{' '}
+          </div>
+          <div
+            className="four"
+            onClick={() => {
+              setCurrent(3);
+              setShowModal(true);
+            }}
+          >
+            <img
+              src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.sherwin-williams.com%2Fhomeowners%2Fcolor%2Ffind-and-explore-colors%2Fpaint-colors-by-family%2FSW0055-light-french-gray&psig=AOvVaw39fAAy17GnxN81CjH9kvGg&ust=1614416941089000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNiAl_aZh-8CFQAAAAAdAAAAABAT"
+              alt=""
+            />{' '}
+          </div>
+          <div
+            className="five"
+            onClick={() => {
+              setCurrent(4);
+              setShowModal(true);
+            }}
+          >
+            <img
+              src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.sherwin-williams.com%2Fhomeowners%2Fcolor%2Ffind-and-explore-colors%2Fpaint-colors-by-family%2FSW0055-light-french-gray&psig=AOvVaw39fAAy17GnxN81CjH9kvGg&ust=1614416941089000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNiAl_aZh-8CFQAAAAAdAAAAABAT"
+              alt=""
+            />{' '}
+          </div>
+        </>
+      )}
+      {!isLoading && (
+        <>
+          <div
+            className="one"
+            onClick={() => {
+              setShowModal(true);
+              setCurrent(0);
+            }}
+          >
+            <img src={roomImgUrlList[0]} alt="" />
+          </div>
+          <div
+            className="two"
+            onClick={() => {
+              setShowModal(true);
+              setCurrent(1);
+            }}
+          >
+            <img src={roomImgUrlList[1]} alt="" />{' '}
+          </div>
+          <div
+            className="three"
+            onClick={() => {
+              setShowModal(true);
+              setCurrent(2);
+            }}
+          >
+            <img src={roomImgUrlList[2]} alt="" />{' '}
+          </div>
+          <div
+            className="four"
+            onClick={() => {
+              setCurrent(3);
+              setShowModal(true);
+            }}
+          >
+            <img src={roomImgUrlList[3]} alt="" />{' '}
+          </div>
+          <div
+            className="five"
+            onClick={() => {
+              setCurrent(4);
+              setShowModal(true);
+            }}
+          >
+            <img src={roomImgUrlList[4]} alt="" />{' '}
+          </div>
+        </>
+      )}
     </AccommodationPictures>
   );
 };
