@@ -9,7 +9,6 @@ import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import qs from 'query-string';
-import { dispatch } from '../../../../../../../Library/Caches/typescript/4.1/node_modules/rxjs/internal/observable/pairs';
 import {
   dateChangeDetail,
   getRoomAverageScore,
