@@ -60,7 +60,11 @@ export const userInfoEmailRemake = ({ token, email }) => {
 
   const headers = { headers: { Authorization: `Bearer ${token}` } };
   console.log(body);
-  return client.post('https://backend.kbnb.tk/user/update', body, headers);
+  return client.post(
+    'https://backend.kbnb.tk/user/update/email',
+    body,
+    headers,
+  );
 };
 
 export const reserveCancel = ({ token, reservationId, name, reason }) => {
