@@ -17,10 +17,26 @@ const AuthRedirect = () => {
   if (accessToken) {
     dispatch({ type: 'auth/REGISTER_SUCCESS', payload: { accessToken } });
     if (localStorage.getItem('DGR')) {
-      history.push(
-        `/reserve?roomId=${roomId}&check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`,
+      return (
+        <Redirect
+          push
+          to={`/reserve?roomId=${localStorage.getItem(
+            'roomId',
+          )}&check_in=${localStorage.getItem(
+            'startDate',
+          )}&check_out=${localStorage.getItem(
+            'endDate',
+          )}&adults=${localStorage.getItem(
+            'numOfAdult',
+          )}&children=${localStorage.getItem(
+            'numOfKid',
+          )}&infants=${localStorage.getItem('numOfInfant')}`}
+        />
+        // <Redirect
+        //   push
+        //   to={`/reserve?roomId=${roomId}&check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`}
+        // />
       );
-      return;
     }
     return (
       <Redirect

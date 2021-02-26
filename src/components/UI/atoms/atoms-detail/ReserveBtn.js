@@ -97,6 +97,12 @@ const ReserveBtn = ({
       makeUserLoggedIn(); // 로그인 하게 함.
       return;
     }
+    localStorage.setItem('roomId', roomId);
+    localStorage.setItem('startDate', queryObj.startDate);
+    localStorage.setItem('endDate', queryObj.endDate);
+    localStorage.setItem('numOfAdult', queryObj.adults);
+    localStorage.setItem('numOfKid', queryObj.children);
+    localStorage.setItem('numOfInfant', queryObj.infants);
     history.push(
       `/reserve?roomId=${roomId}&check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`,
     );
@@ -128,3 +134,5 @@ const ReserveBtn = ({
   );
 };
 export default ReserveBtn;
+
+to={`/reserve?roomId=${roomId}&check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`}
