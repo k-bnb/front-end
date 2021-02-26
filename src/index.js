@@ -122,7 +122,7 @@ const store = createStore(
         grade,
         hostName,
         hostImgURL,
-        commentCount: 0,
+        commentCount,
         locationDetail: {
           country: null,
           city: locationDetail.city,
