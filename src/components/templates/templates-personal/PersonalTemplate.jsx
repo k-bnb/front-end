@@ -100,12 +100,12 @@ const PersonalTemplate = ({
                 <PersonalInfoArticle />
               </TabletDiv>
             )}
+            <FooterStr />
           </main>
         </>
       ) : (
         <PageLoading />
       )}
-      <FooterStr />
     </PersonalTemplateStyle>
   );
 };

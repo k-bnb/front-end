@@ -38,7 +38,16 @@ const PersonalInfoUIStyle = styled.ul`
       top: 0;
       right: 0;
       &:focus {
-        outline: 1px solid;
+        outline: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      }
+      &:disabled {
+        background: none;
+        color: rgba(0, 0, 0, 0.3);
+        cursor: not-allowed;
+      }
+      &:disabled:hover {
+        text-decoration: none;
       }
     }
   }
@@ -95,7 +104,13 @@ const PersonalInfoUl = ({
             <TextStyle>{name}</TextStyle>
           )}
         </div>
-        <Button name="name" className="btn" greenText tabIndex="0">
+        <Button
+          name="name"
+          className="btn"
+          greenText
+          tabIndex="0"
+          disabled={!!fix.img || !!fix.birth || !!fix.emailAddress}
+        >
           {!fix.name ? '수정' : '취소'}
         </Button>
       </PersonalInfoLi>
@@ -125,7 +140,12 @@ const PersonalInfoUl = ({
             </>
           )}
         </div>
-        <Button name="imageUrl" className="btn" greenText>
+        <Button
+          name="imageUrl"
+          className="btn"
+          disabled={!!fix.name || !!fix.birth || !!fix.emailAddress}
+          greenText
+        >
           {!fix.img ? '수정' : '취소'}
         </Button>
       </PersonalInfoLi>
@@ -160,7 +180,12 @@ const PersonalInfoUl = ({
             />
           )}
         </div>
-        <Button name="birth" className="btn" greenText>
+        <Button
+          name="birth"
+          className="btn"
+          disabled={!!fix.img || !!fix.name || !!fix.emailAddress}
+          greenText
+        >
           {!fix.birth ? '수정' : '취소'}
         </Button>
       </PersonalInfoLi>
@@ -198,7 +223,12 @@ const PersonalInfoUl = ({
             </Modal>
           )}
         </div>
-        <Button name="emailAddress" className="btn" greenText>
+        <Button
+          name="emailAddress"
+          disabled={!!fix.img || !!fix.birth || !!fix.name}
+          className="btn"
+          greenText
+        >
           {!fix.emailAddress ? '수정' : '취소'}
         </Button>
       </PersonalInfoLi>
@@ -207,8 +237,14 @@ const PersonalInfoUl = ({
           <TextStyle>전화번호</TextStyle>
           <TextStyle>제공되지 않음</TextStyle>
         </div>
-        <Button className="btn">
-          <TextStyle greentextLine>추가</TextStyle>
+        <Button
+          className="btn"
+          disabled={
+            !!fix.img || !!fix.birth || !!fix.name || !!fix.emailAddress
+          }
+          greenText
+        >
+          추가
         </Button>
       </PersonalInfoLi>
       <PersonalInfoLi>
@@ -216,7 +252,13 @@ const PersonalInfoUl = ({
           <TextStyle>정부 발급 신분증</TextStyle>
           <TextStyle>제공되지 않음</TextStyle>
         </div>
-        <Button className="btn" greenText>
+        <Button
+          className="btn"
+          disabled={
+            !!fix.img || !!fix.birth || !!fix.name || !!fix.emailAddress
+          }
+          greenText
+        >
           추가
         </Button>
       </PersonalInfoLi>
@@ -225,7 +267,13 @@ const PersonalInfoUl = ({
           <TextStyle>주소</TextStyle>
           <TextStyle>제공되지 않음</TextStyle>
         </div>
-        <Button className="btn" greenText>
+        <Button
+          disabled={
+            !!fix.img || !!fix.birth || !!fix.name || !!fix.emailAddress
+          }
+          className="btn"
+          greenText
+        >
           추가
         </Button>
       </PersonalInfoLi>
@@ -234,7 +282,13 @@ const PersonalInfoUl = ({
           <TextStyle>비상 연락처</TextStyle>
           <TextStyle>제공되지 않음</TextStyle>
         </div>
-        <Button className="btn" greenText>
+        <Button
+          disabled={
+            !!fix.img || !!fix.birth || !!fix.name || !!fix.emailAddress
+          }
+          className="btn"
+          greenText
+        >
           추가
         </Button>
       </PersonalInfoLi>
@@ -243,7 +297,13 @@ const PersonalInfoUl = ({
           <TextStyle>중국 여행에 필요한 여권 정보</TextStyle>
           <TextStyle>제공되지 않음</TextStyle>
         </div>
-        <Button className="btn" greenText>
+        <Button
+          disabled={
+            !!fix.img || !!fix.birth || !!fix.name || !!fix.emailAddress
+          }
+          className="btn"
+          greenText
+        >
           추가
         </Button>
       </PersonalInfoLi>
