@@ -10,6 +10,7 @@ import {
   reserving,
   changeDate,
   changeGuest,
+  clearSuccessMessage,
 } from '../modules/reserve';
 import { dateInput, specificInputClear } from '../modules/search';
 import { clearCheckDateDtail, dateChangeDetail } from '../modules/detail';
@@ -27,6 +28,10 @@ const ReservationContainer = () => {
   const { adults, children, infants, check_in, check_out } = qs.parse(
     history.location.search,
   );
+
+  const { loading } = useSelector((state) => state);
+
+  const paymentLoading = loading['reserve/RESERVING'];
 
   // detail redux에서 reserve 페이지에 보여지는 상태 가져 오기
   const {
@@ -228,6 +233,9 @@ const ReservationContainer = () => {
   const [completeModalState, setCompleteModalState] = useState(false);
 
   const moveToHomeClick = () => {
+    setCompleteModalState(false);
+    console.log('홈');
+    dispatch(clearSuccessMessage());
     history.push('./');
   };
 
@@ -330,6 +338,7 @@ const ReservationContainer = () => {
       RoomTablePhotoImgURL={RoomTablePhotoImgURL}
       completeModalState={completeModalState}
       moveToHomeClick={moveToHomeClick}
+      paymentLoading={paymentLoading}
     />
   );
 };
