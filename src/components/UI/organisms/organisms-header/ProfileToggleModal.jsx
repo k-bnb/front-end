@@ -32,13 +32,13 @@ const ProfileToggleModal = ({
   const handleOnClick = () => {
     // 이미 켜있었는데 끈경우, 로그인 버튼을 닫은것. -> 프로필 토글 버튼을 이용해서 로그인 한 것이 아님
     if (isOpen) {
-      sessionStorage.removeItem('LFT');
-      sessionStorage.removeItem('DGR');
+      localStorage.removeItem('LFT');
+      localStorage.removeItem('DGR');
     }
     // 새로 킨 경우 -> 로그인 하기 위해서 켰다고 가정하고 LFT 생성
     if (!isOpen) {
-      sessionStorage.removeItem('DGR');
-      sessionStorage.setItem('LFT', locationNow);
+      localStorage.removeItem('DGR');
+      localStorage.setItem('LFT', locationNow);
     }
     setIsOpen(!isOpen); // 토글로 모달창을 켜고 닫는다.
   };
