@@ -89,7 +89,7 @@ const AuthModalContainer = ({
           dispatch({ type: 'auth/LOGIN_SUCCESS', payload: response.data });
         });
       }
-      if (sessionStorage.getItem('DGR'))
+      if (localStorage.getItem('DGR'))
         history.push(
           `/reserve?roomId=${roomId}&check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`,
         );
@@ -152,7 +152,7 @@ const AuthModalContainer = ({
           dispatch({ type: 'auth/REGISTER_SUCCESS', payload: response.data });
         });
       }
-      if (sessionStorage.getItem('DGR'))
+      if (localStorage.getItem('DGR'))
         history.push(
           `/reserve?roomId=${roomId}&check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`,
         );
