@@ -74,7 +74,7 @@ const PersonalContainer = () => {
       img: false,
       birth: false,
       emailAddress: false,
-      cancel: true,
+      cancel: false,
     }));
   };
 
