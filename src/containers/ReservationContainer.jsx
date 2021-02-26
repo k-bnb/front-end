@@ -33,10 +33,6 @@ const ReservationContainer = () => {
     history.location.search,
   );
 
-  // const { loading } = useSelector((state) => state);
-
-  // const paymentLoading = loading['reserve/RESERVING'];
-
   // detail redux에서 reserve 페이지에 보여지는 상태 가져 오기
   const {
     id,

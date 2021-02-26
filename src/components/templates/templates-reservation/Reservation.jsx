@@ -128,6 +128,7 @@ const Reservation = ({
               RoomTablePhotoImgURL={RoomTablePhotoImgURL}
             />
           </SubContainer>
+
           {completeModalState && !paymentLoading && (
             <Modal>
               <CompletePaymentModalOrganism moveToHomeClick={moveToHomeClick} />
