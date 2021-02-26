@@ -76,11 +76,11 @@ const ReserveBtn = ({
   const makeUserLoggedIn = () => {
     setModal(true);
     setFormState('login');
-    sessionStorage.setItem(
+    localStorage.setItem(
       'LFT',
       `/reserve?roomId=${roomId}&check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`,
     );
-    sessionStorage.setItem('DGR', true);
+    localStorage.setItem('DGR', true);
   }; // 로그인 모달창을 띄워준다.
 
   const moveUserToReserve = () => {
