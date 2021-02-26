@@ -23,15 +23,15 @@ const ReservationContainer = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const { loading } = useSelector((state) => state);
+
+  const paymentLoading = loading['reserve/RESERVING'];
+
   const token = useSelector((state) => state.auth.token);
 
   const { adults, children, infants, check_in, check_out } = qs.parse(
     history.location.search,
   );
-
-  const { loading } = useSelector((state) => state);
-
-  const paymentLoading = loading['reserve/RESERVING'];
 
   // detail redux에서 reserve 페이지에 보여지는 상태 가져 오기
   const {
@@ -51,12 +51,13 @@ const ReservationContainer = () => {
     roomImgUrlList,
   } = useSelector(({ detail }) => detail.infoRes);
 
+  console.log(id, commentCount, '하이');
+
   const { startDate, endDate, numOfAdult, numOfKid, numOfInfant } = useSelector(
     ({ detail }) => detail,
   );
 
   // detail redux에서 날짜, 게스트 인원 받아 오기
-  // const checkDateSearch = { firstDate, lastDate };
   const guestSearch = {
     numOfAdult: parseInt(numOfAdult),
     numOfKid: parseInt(numOfKid),
@@ -94,6 +95,9 @@ const ReservationContainer = () => {
 
   const checkDateSearch = { startDate, endDate };
 
+  // console.log(checkDateSearch);
+
+  // search 날짜 상태
   const { startDate: checkIn, endDate: checkOut } = checkDate;
 
   //  성인 + 어린이 수
@@ -286,6 +290,7 @@ const ReservationContainer = () => {
 
     return () => {
       document.body.style.overflowY = 'unset';
+      // setCompleteModalState(false);
     };
   }, [
     dispatch,

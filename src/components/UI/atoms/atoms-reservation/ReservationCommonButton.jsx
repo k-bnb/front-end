@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import ReserveDateModalContainer from '../../../../containers/modal/ReserveDateModalContainer';
 import Modal from '../../../../portal/Modal';
@@ -47,9 +48,14 @@ const ReservationEditButton = ({
   saveDate,
   ...rest
 }) => {
+  const history = useHistory();
+  const backToThePage = () => {
+    history.go(-1);
+  };
+
   return (
     <>
-      <StyledButton onClick={manageDateModal} {...rest}>
+      <StyledButton onClick={manageDateModal || backToThePage} {...rest}>
         {children}
       </StyledButton>
       {dateModal && (
