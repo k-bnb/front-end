@@ -54,6 +54,8 @@ export const changeGuest = createAction(CHANGE_GUEST, (form, name, value) => ({
 
 export const initialGuest = createAction(INITIAL_GUEST, (form) => form);
 
+export const clearSuccessMessage = createAction(CLEAR_SUCCESS_MESSAGE);
+
 // detail page date state => reserve page date state
 export const detailToReserveDate = createAction(
   DETAIL_TO_RESERVE_DATE,
@@ -118,7 +120,7 @@ export const detailToReserveLocation = createAction(
   }),
 );
 
-export const clearSuccessMessage = createAction(CLEAR_SUCCESS_MESSAGE);
+// export const clearSuccessMessage = createAction(CLEAR_SUCCESS_MESSAGE);
 
 // saga action function
 export const reserving = createAction(

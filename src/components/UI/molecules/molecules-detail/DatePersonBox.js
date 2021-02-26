@@ -122,7 +122,6 @@ const DatePersonBox = ({
   return (
     <BookingBox>
       <CheckDate
-        tabIndex="1"
         onClick={() => {
           setTimeout(() => {
             setIsCalendarOpen(true);
@@ -148,7 +147,6 @@ const DatePersonBox = ({
         )}
       </CheckDate>
       <Personnel
-        tabIndex="1"
         onClick={() => {
           setIsGuestOpen(true);
           setGuestIsBorderThick(true);
@@ -170,6 +168,8 @@ const DatePersonBox = ({
             setGuestIsBorderThick={setGuestIsBorderThick}
             setNavModalState={setNavModalState}
             peopleLimit={peopleLimit}
+            isCalendarOpen={isCalendarOpen}
+            setIsCalendarOpen={setIsCalendarOpen}
           />
         )}
       </Personnel>

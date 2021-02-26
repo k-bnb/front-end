@@ -167,9 +167,6 @@ const detail = handleActions(
       ...state,
       startDate: '',
       endDate: '',
-      numOfAdult: 0,
-      numOfKid: 0,
-      numOfInfant: 0,
     }),
     [REQUEST_DETAIL_SUCCESS]: (state, { payload: infoRes }) => {
       sessionStorage.setItem('detailRes', JSON.stringify(infoRes));

@@ -97,14 +97,6 @@ const PersonalInfoImgStyle = styled.div`
   }
 `;
 
-function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, ms);
-  });
-}
-
 const PersonalInfoImg = ({
   personInfoChange,
   setFix,
@@ -170,7 +162,7 @@ const PersonalInfoImg = ({
             img: false,
             birth: false,
             emailAddress: false,
-            cancel: true,
+            cancel: false,
           }),
           400,
         );

@@ -19,9 +19,13 @@ const StyledButton = styled.button`
       padding: 15px 25px;
       border-radius: 5px;
       opacity: 0.9;
+      transition-duration: 0.3s;
 
       &:hover {
         opacity: 1;
+      }
+      &:active {
+        transform: scale(0.95);
       }
     `}
 
@@ -47,6 +51,12 @@ const StyledButton = styled.button`
         font-weight: bold;
       }
     `}
+        ${(props) =>
+    props.disabled &&
+    css`
+      background-color: lightgray;
+      cursor: not-allowed;
+    `}
 `;
 
 const MovePageButton = ({
@@ -55,14 +65,17 @@ const MovePageButton = ({
   moveNextComponent,
   backButtonRef,
   completeReviewModal,
+  disabled,
   ...rest
 }) => {
+  console.log(disabled);
   return (
     <StyledButton
       name={name}
       {...rest}
       onClick={moveNextComponent || completeReviewModal}
       ref={backButtonRef}
+      disabled={disabled}
     >
       {children}
     </StyledButton>

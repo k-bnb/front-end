@@ -108,6 +108,9 @@ const ReviewModalContainer = ({
   // 리뷰 작성시 textarea 상태를 관리하는 event function
   const wirteReview = (e) => {
     dispatch(changeInputReview(e.target.value));
+    if (e.target.value.length > 200) {
+      dispatch(changeInputReview(e.target.value.slice(0, 200)));
+    }
   };
 
   // 각 star rating의 상태를 관리하는 event function (name props로 식별)
@@ -120,6 +123,7 @@ const ReviewModalContainer = ({
   const removeModalBg = (e) => {
     if (e.target.classList.contains('remove-modal')) {
       setReviewModalState(false);
+      dispatch(initialInputReview());
     }
   };
 

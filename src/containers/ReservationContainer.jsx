@@ -33,6 +33,10 @@ const ReservationContainer = () => {
     history.location.search,
   );
 
+  // const { loading } = useSelector((state) => state);
+
+  // const paymentLoading = loading['reserve/RESERVING'];
+
   // detail redux에서 reserve 페이지에 보여지는 상태 가져 오기
   const {
     id,
@@ -114,7 +118,7 @@ const ReservationContainer = () => {
   const manageGuestModal = useCallback(() => {
     setGuestModal(!guestModal);
     console.log('heeee');
-    dispatch(changeGuest('guestSearch', 'numOfAdult', +adult));
+    dispatch(changeGuest('guestSearch', 'numOfAdult', +adults));
     dispatch(changeGuest('guestSearch', 'numOfKid', +children));
     dispatch(changeGuest('guestSearch', 'numOfInfant', +infants));
   }, [guestModal]);
@@ -238,7 +242,6 @@ const ReservationContainer = () => {
     setCompleteModalState(false);
     console.log('홈');
     dispatch(clearSuccessMessage());
-
     history.push('./');
   };
 

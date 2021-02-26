@@ -176,7 +176,7 @@ const HeaderMainSearchNav = ({
               }}
             >
               <Text noPadding gray>
-                {numOfAdult && numOfKid
+                {numOfAdult
                   ? `게스트 ${numOfAdult + numOfKid}명`
                   : '게스트 추가'}
               </Text>
