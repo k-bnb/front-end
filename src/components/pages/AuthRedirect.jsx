@@ -17,14 +17,10 @@ const AuthRedirect = () => {
   if (accessToken) {
     dispatch({ type: 'auth/REGISTER_SUCCESS', payload: { accessToken } });
     if (localStorage.getItem('DGR')) {
-      return (
-        <Redirect
-          to={{
-            pathname: `/reserve?roomId=${roomId}&check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`,
-            state: { from: history.location },
-          }}
-        />
+      history.push(
+        `/reserve?roomId=${roomId}&check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`,
       );
+      return;
     }
     return (
       <Redirect
