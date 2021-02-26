@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { moneyfilter } from '../../../../lib/moneyfilter';
 import { getTotalPrice } from '../../../../modules/detail';
 
 const TotalPriceBox = styled.ul`
@@ -37,7 +38,7 @@ const TotalPrice = ({ infoRes, totalSchedule }) => {
   return (
     <TotalPriceBox>
       <TotalText>총 합계</TotalText>
-      <Total>₩ {entireCost}</Total>
+      <Total>₩ {moneyfilter(entireCost)}</Total>
     </TotalPriceBox>
   );
 };

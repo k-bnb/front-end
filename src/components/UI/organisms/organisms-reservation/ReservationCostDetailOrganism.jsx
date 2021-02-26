@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { extractDay } from '../../../../lib/extractMonthDate';
+import { moneyfilter } from '../../../../lib/moneyfilter';
 import ReservationTitle from '../../atoms/atoms-reservation/ReservationTitle';
 import ReservationUnderLine from '../../atoms/atoms-reservation/ResevationUnderLine';
 import ReservationSummaryMolecule from '../../molecules/molecules-reservation/ReservationSummaryMolecule';
@@ -64,7 +65,7 @@ const ReservationCostDetailOrganism = ({
 
   // 임시 고정값, 상세보기 페이지 redux state로 변경 예정
   const staticChildren = {
-    cost: `₩${roomCost} x ${RoomDay}박`,
+    cost: `₩${moneyfilter(roomCost)} x ${RoomDay}박`,
     cleaningFee: '청소비',
     serviceFee: '서비스 수수료',
     lodgmentFee: '숙박세와 수수료',
@@ -72,14 +73,14 @@ const ReservationCostDetailOrganism = ({
   };
 
   const dataChildren = {
-    cost: `₩${roomTaxPrice}`,
-    cleaningFee: `₩${cleaningCost}`,
-    serviceFee: `₩${tax}`,
-    lodgmentFee: `₩${roomTaxPrice * 0.2}`,
+    cost: `₩${moneyfilter(roomTaxPrice)}`,
+    cleaningFee: `₩${moneyfilter(cleaningCost)}`,
+    serviceFee: `₩${moneyfilter(tax)}`,
+    lodgmentFee: `₩${moneyfilter(roomTaxPrice * 0.2)}`,
     totalFee: `₩${
       !isNaN(roomCost)
-        ? roomTaxPrice + cleaningCost + tax + roomTaxPrice * 0.1
-        : 0
+        ? moneyfilter(roomTaxPrice + cleaningCost + tax + roomTaxPrice * 0.1)
+        : moneyfilter(0)
     }`,
   };
 
