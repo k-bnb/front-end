@@ -42,39 +42,41 @@ const ReserveConfirmTemplate = ({
   return (
     <ReserveConfirmTemplateStyle>
       <ReserveConfirmheader />
-      <ReserveConfirmhead />
+
       {(reserveconfirmLoading['user/USER_INFO'] &&
         reserveconfirmLoading['user/RESERVE_CONFIRM']) ||
       reserveconfirmLoading['user/REVIEW'] ? (
         <PageLoading />
       ) : (
-        <ReserveConfirmSection
-          reserveconfirmLoading={reserveconfirmLoading}
-          list={list}
-          active={active}
-          activClick={activClick}
-          modalState={modalState}
-          cancel={cancel}
-          cancelBtn={cancelBtn}
-          cancelModal={cancelModal}
-          reservationConfirmBtn={reservationConfirmBtn}
-          reservationId={reservationId}
-          reviewModalState={reviewModalState}
-          setReviewModalState={setReviewModalState}
-          review={review}
-          reviewRoomId={reviewRoomId}
-          listModal={listModal}
-          cancelModalState={cancelModalState}
-          roomId={roomId}
-          resonChange={resonChange}
-          miniModal={miniModal}
-          miniModalCancelBtn={miniModalCancelBtn}
-          disabledBtn={disabledBtn}
-        />
+        <>
+          <ReserveConfirmhead />
+          <ReserveConfirmSection
+            reserveconfirmLoading={reserveconfirmLoading}
+            list={list}
+            active={active}
+            activClick={activClick}
+            modalState={modalState}
+            cancel={cancel}
+            cancelBtn={cancelBtn}
+            cancelModal={cancelModal}
+            reservationConfirmBtn={reservationConfirmBtn}
+            reservationId={reservationId}
+            reviewModalState={reviewModalState}
+            setReviewModalState={setReviewModalState}
+            review={review}
+            reviewRoomId={reviewRoomId}
+            listModal={listModal}
+            cancelModalState={cancelModalState}
+            roomId={roomId}
+            resonChange={resonChange}
+            miniModal={miniModal}
+            miniModalCancelBtn={miniModalCancelBtn}
+            disabledBtn={disabledBtn}
+          />
+          <ReserveConfirmFooter />
+          <FooterStr />
+        </>
       )}
-
-      <ReserveConfirmFooter />
-      <FooterStr />
     </ReserveConfirmTemplateStyle>
   );
 };

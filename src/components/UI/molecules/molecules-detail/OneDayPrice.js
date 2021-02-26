@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { moneyfilter } from '../../../../lib/moneyfilter';
 import Text from '../../atoms/atoms-detail/DetailText';
 import Grade from '../../atoms/atoms-detail/Grade';
 
@@ -60,7 +61,7 @@ const OneDayPrice = ({ infoRes, detailObj }) => {
       <PriceInfo>
         {/* endDate가 null 일 경우에는 roomCost 띄우지 않기 */}
         <PriceBox>
-          <Price> ₩ {infoRes.roomCost}</Price>
+          <Price> ₩ {moneyfilter(infoRes.roomCost)}</Price>
           <PriceInner>/박</PriceInner>
         </PriceBox>
         <Grade grade={infoRes.grade} infobox={true} />
