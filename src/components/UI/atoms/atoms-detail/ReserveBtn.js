@@ -63,6 +63,7 @@ const ReserveBtn = ({
   const pathName = qs.parse(history.location.pathname);
   const roomId = match.params.roomId;
 
+  console.log(queryObj);
   const makeUserHasDates = () => {
     if (half) bookingInfoRef.current.scrollIntoView({ behavior: 'smooth' });
     setIsCalendarOpen(true);
@@ -74,6 +75,12 @@ const ReserveBtn = ({
   };
 
   const makeUserLoggedIn = () => {
+    localStorage.setItem('roomId', roomId);
+    localStorage.setItem('startDate', queryObj.check_in);
+    localStorage.setItem('endDate', queryObj.check_out);
+    localStorage.setItem('numOfAdult', queryObj.adults);
+    localStorage.setItem('numOfKid', queryObj.children);
+    localStorage.setItem('numOfInfant', queryObj.infants);
     setModal(true);
     setFormState('login');
     localStorage.setItem(
@@ -97,12 +104,6 @@ const ReserveBtn = ({
       makeUserLoggedIn(); // 로그인 하게 함.
       return;
     }
-    localStorage.setItem('roomId', roomId);
-    localStorage.setItem('startDate', queryObj.startDate);
-    localStorage.setItem('endDate', queryObj.endDate);
-    localStorage.setItem('numOfAdult', queryObj.adults);
-    localStorage.setItem('numOfKid', queryObj.children);
-    localStorage.setItem('numOfInfant', queryObj.infants);
     history.push(
       `/reserve?roomId=${roomId}&check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`,
     );
