@@ -92,7 +92,6 @@ export const detailToReserveRoom = createAction(
     hostImgURL,
     commentCount,
     roomImgUrlList,
-    checkDateSearch,
   ) => ({
     id,
     name,
@@ -108,7 +107,6 @@ export const detailToReserveRoom = createAction(
     hostImgURL,
     commentCount,
     roomImgUrlList,
-    checkDateSearch,
   }),
 );
 
@@ -238,14 +236,16 @@ const reserve = handleActions(
         draft.guestSearch.numOfInfant = numOfInfant;
       }),
 
-    [DETAIL_TO_RESERVE_ROOM]: (state, { payload }) =>
-      produce(state, (draft) => {
+    [DETAIL_TO_RESERVE_ROOM]: (state, { payload }) => {
+      console.log(payload);
+
+      return produce(state, (draft) => {
         draft.infoRes = payload;
         draft.roomImgUrlList = payload.roomImgUrlList[0];
         // draft.checkDateSearch = payload.checkDateSearch;
         // draft.guestSearch = payload.guestSearch;
-      }),
-
+      });
+    },
     [DETAIL_TO_RESERVE_LOCATION]: (state, { payload: locationDetail }) => ({
       ...state,
       locationDetail,

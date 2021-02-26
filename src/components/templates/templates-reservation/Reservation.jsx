@@ -114,7 +114,7 @@ const Reservation = ({
               hostName={infoRes.hostName}
               hostImgURL={infoRes.hostImgURL}
             />
-            <ReservationRefundOrganism refundDate={checkDateSearch.startDate} />
+            <ReservationRefundOrganism refundDate={checkDate.startDate} />
             <CommonButton reservation click={click} comfirmModal={comfirmModal}>
               <BiCalendarCheck />
               예약하기

@@ -55,6 +55,8 @@ const ReservationContainer = () => {
     roomImgUrlList,
   } = useSelector(({ detail }) => detail.infoRes);
 
+  console.log(id, commentCount, '하이');
+
   const { startDate, endDate, numOfAdult, numOfKid, numOfInfant } = useSelector(
     ({ detail }) => detail,
   );
@@ -244,8 +246,6 @@ const ReservationContainer = () => {
     dispatch(clearSuccessMessage());
     history.push('./');
   };
-
-  console.log(completeModalState);
 
   useEffect(() => {
     if (!checkIn || !checkOut) {
