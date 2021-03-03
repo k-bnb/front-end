@@ -7,7 +7,7 @@ import ReservedInfo from './ReservedInfo';
 
 const MainContainer = styled.main`
   display: flex;
-  height: 90vh;
+  height: 100vh;
 `;
 
 const HeaderContainer = styled.header`

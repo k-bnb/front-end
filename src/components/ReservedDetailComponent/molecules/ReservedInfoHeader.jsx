@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Title = styled.header``;
+const Title = styled.header`
+  border-bottom: 1px solid #ebebeb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const ReservedInfoHeader = () => {
   return (
