@@ -117,7 +117,7 @@ const ReserveConfirmList = ({
         <PageLoading />
       ) : (
         <>
-          <Link to="/reservedDetail">
+          <Link to={`/reservedDetail?reservationId=${item.reservationId}`}>
             <div className="Big-img">
               <Img src={item.imgUrl} />
             </div>

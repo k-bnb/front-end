@@ -2,12 +2,17 @@ import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
 import '../../index.css';
-import MapContainer from './MapContainer';
-import ReservedInfoContainer from './ReservedInfoContainer';
+import MapContainer from './Map';
+import ReservedInfo from './ReservedInfo';
 
 const MainContainer = styled.main`
   display: flex;
-  height: 100vh;
+  height: 90vh;
+`;
+
+const HeaderContainer = styled.header`
+  height: 10vh;
+  background-color: black;
 `;
 
 const ReservedDetail = () => {
@@ -19,20 +24,23 @@ const ReservedDetail = () => {
     query: `(max-width: 700px)`,
   });
   return (
-    <MainContainer>
-      <h1 className="readable-hidden">예약 상세 페이지</h1>
-      {isPc && (
-        <>
-          <ReservedInfoContainer pc />
-          <MapContainer />
-        </>
-      )}
-      {isMobile && (
-        <>
-          <ReservedInfoContainer mobile />
-        </>
-      )}
-    </MainContainer>
+    <>
+      <HeaderContainer>하이</HeaderContainer>
+      <MainContainer>
+        <h1 className="readable-hidden">예약 상세 페이지</h1>
+        {isPc && (
+          <>
+            <ReservedInfo pc />
+            <MapContainer />
+          </>
+        )}
+        {isMobile && (
+          <>
+            <ReservedInfo mobile />
+          </>
+        )}
+      </MainContainer>
+    </>
   );
 };
 
