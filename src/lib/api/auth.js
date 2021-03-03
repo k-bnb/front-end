@@ -113,3 +113,14 @@ export const writeReview = ({
 
   return client.post(`https://backend.kbnb.tk/comment`, data, headers);
 };
+
+// 유저 예약 상세 보기
+
+export const getReservedRoomInfo = ({ token, reservationId }) => {
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+  return client.get(
+    `https://backend.kbnb.tk/reservation/detail?reservationId=${reservationId}`,
+    headers,
+  );
+};
