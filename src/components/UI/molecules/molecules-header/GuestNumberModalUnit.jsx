@@ -65,20 +65,20 @@ const GuestNumberModalUnit = ({
 
   // 인원 제한보다 많은 인원을 증가 시 버튼 disable한다.
   const ReserveTotalGuestNum =
-    reserveGuestSearch.numOfAdult + reserveGuestSearch.numOfKid;
-  const DetailTotalGuestNum = detail.numOfAdult + detail.numOfKid;
+    +reserveGuestSearch.numOfAdult + +reserveGuestSearch.numOfKid;
+  const DetailTotalGuestNum = +detail.numOfAdult + +detail.numOfKid;
 
   // 페이지 별로 최소값 조건을 반환해주는 함수
   const setMinDisabled = () => {
     if (detailPage)
-      return searchName === 'numOfAdult' ? detailName <= 1 : detailName <= 0;
+      return searchName === 'numOfAdult' ? +detailName <= 1 : +detailName <= 0;
     // detail page이면서 성인 버튼이면 1이 최소값.
     else if (reservePage)
       return searchName === 'numOfAdult'
-        ? reserveGuestSearch[searchName] <= 1
-        : reserveGuestSearch[searchName] <= 0;
+        ? +reserveGuestSearch[searchName] <= 1
+        : +reserveGuestSearch[searchName] <= 0;
     // reserve page 이면서, 성인 버튼이면 1이 최솟값
-    else return guestSearch[searchName] <= 0;
+    else return +guestSearch[searchName] <= 0;
     // main page 에선, 0이 최소값
   };
 
@@ -86,13 +86,13 @@ const GuestNumberModalUnit = ({
   const setMaxDisabled = () => {
     if (detailPage)
       return searchName === 'numOfInfant'
-        ? detail.numOfInfant >= 5
-        : DetailTotalGuestNum >= peopleLimit;
+        ? +detail.numOfInfant >= 5
+        : +DetailTotalGuestNum >= +peopleLimit;
     else if (reservePage)
       return searchName === 'numOfInfant'
-        ? reserveGuestSearch.numOfInfant >= 5
-        : ReserveTotalGuestNum >= peopleLimit;
-    else return guestSearch[searchName] >= disableHandler();
+        ? +reserveGuestSearch.numOfInfant >= 5
+        : +ReserveTotalGuestNum >= +peopleLimit;
+    else return +guestSearch[searchName] >= disableHandler();
   };
 
   // 성인이 없이 유아, 어린이만 증가시킬때, 성인도 같이 증가시키는 함수
@@ -100,7 +100,7 @@ const GuestNumberModalUnit = ({
     // 성인이 아니고, 성인이 0명 일 경우 성인도 같이 1명 증가.
     if (searchName !== 'numOfAdult' && !guestSearch.numOfAdult) {
       dispatch(
-        guestInput('guestSearch', 'numOfAdult', guestSearch.numOfAdult + 1),
+        guestInput('guestSearch', 'numOfAdult', +guestSearch.numOfAdult + 1),
       );
     }
   };
@@ -109,7 +109,7 @@ const GuestNumberModalUnit = ({
     // 성인이 1 -> 0명이 될떄, 유아, 어린이가 있다면 모두 0명이 된다.
     if (
       searchName === 'numOfAdult' &&
-      guestSearch.numOfAdult === 1 &&
+      +guestSearch.numOfAdult === 1 &&
       (guestSearch.numOfKid || guestSearch.numOfInfant)
     ) {
       dispatch(specificInputClear('guestSearch'));
@@ -140,7 +140,7 @@ const GuestNumberModalUnit = ({
               dispatch(
                 guestChangeDetail(
                   searchName,
-                  detailName - 1,
+                  +detailName - 1,
                   `detail${searchName}`,
                 ),
               );
@@ -152,7 +152,7 @@ const GuestNumberModalUnit = ({
                 changeGuest(
                   'guestSearch',
                   searchName,
-                  reserveGuestSearch[searchName] - 1,
+                  +reserveGuestSearch[searchName] - 1,
                 ),
               );
               return;
@@ -161,7 +161,7 @@ const GuestNumberModalUnit = ({
               guestInput(
                 'guestSearch',
                 searchName,
-                guestSearch[searchName] - 1,
+                +guestSearch[searchName] - 1,
               ),
             );
           }}
@@ -195,7 +195,7 @@ const GuestNumberModalUnit = ({
                 changeGuest(
                   'guestSearch',
                   searchName,
-                  reserveGuestSearch[searchName] + 1,
+                  +reserveGuestSearch[searchName] + 1,
                 ),
               );
               return;
@@ -205,7 +205,7 @@ const GuestNumberModalUnit = ({
               guestInput(
                 'guestSearch',
                 searchName,
-                guestSearch[searchName] + 1,
+                +guestSearch[searchName] + 1,
               ),
             );
           }}
