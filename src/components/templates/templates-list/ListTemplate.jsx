@@ -4,6 +4,9 @@ import Footer from '../../UI/organisms/organisms-list/FooteStr';
 import HeadStyle from '../../UI/organisms/organisms-list/HeadStyle';
 import LoadingModal from '../LoadingModal';
 import React from 'react';
+import Modal from '../../../portal/Modal';
+import AuthModalContainer from '../../../containers/AuthModalContainer';
+import { useSelector } from 'react-redux';
 
 const ListTemplate = ({
   searchModalState,
@@ -43,7 +46,14 @@ const ListTemplate = ({
   localMaxCost,
   setLocalMaxCost,
   keyup,
+  formState,
+  setFormState,
+  modal,
+  setModal,
+  isRoomCheckModalOpen,
+  setIsRoomCheckModalOpen,
 }) => {
+  const { isCheck } = useSelector(({ search }) => search.searchRes);
   return (
     <>
       <div>
@@ -86,7 +96,24 @@ const ListTemplate = ({
               checkDateSearch={checkDateSearch}
               guestSearch={guestSearch}
               isLoading={isLoading}
+              formState={formState}
+              setFormState={setFormState}
+              modal={modal}
+              setModal={setModal}
+              isRoomCheckModalOpen={isRoomCheckModalOpen}
+              setIsRoomCheckModalOpen={setIsRoomCheckModalOpen}
+              isCheck={isCheck}
             />
+            {modal && (
+              <Modal>
+                <AuthModalContainer
+                  modal={modal}
+                  setModal={setModal}
+                  formState={formState}
+                  setFormState={setFormState}
+                />
+              </Modal>
+            )}
           </div>
           <div className="map" style={{ display: 'block', width: '50%' }}>
             <GoogleMapContainer />

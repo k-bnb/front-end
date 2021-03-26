@@ -1,6 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-import { AiOutlineHeart } from 'react-icons/ai';
+import styled, { css, keyframes } from 'styled-components';
 import { BiWon } from 'react-icons/bi';
 import Bookmark from '../../atoms/atoms-list/BookMark';
 import Border from '../../atoms/atoms-list/Border';
@@ -15,6 +14,48 @@ import 'slick-carousel/slick/slick-theme.css';
 import qs from 'query-string';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+
+const heartFilling = keyframes`
+  0%{
+    transform:scale(0);
+  }
+  50%{
+    transform:scale(1.2);
+  }
+  100%{
+    transform:scale(1);
+  }
+`;
+
+const HeartEmoticon = styled(AiOutlineHeart)`
+  position: absolute;
+  top: 20px;
+  right: -20px;
+  font-size: 35px;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  transition-duration: 0.3s;
+  transition-property: transform;
+  &:hover {
+    background-color: #f1eded;
+    border-radius: 50%;
+  }
+  &:active {
+    transform: scale(0.93);
+  }
+`;
+const FilledHeartEmoticon = styled(AiFillHeart)`
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  position: absolute;
+  top: 20px;
+  right: -20px;
+  color: red;
+  animation: ${heartFilling} 0.4s ease;
+`;
 
 // import ListCarousel from './ListCarousel';
 // import { SliderData } from './SliderData';
@@ -276,7 +317,7 @@ const ULWrap = styled.ul`
     cursor: pointer;
     height: auto;
     color: #000;
-    &:focus {
+    /* &:focus {
       outline: none;
       border-radius: 50%;
       width: 40px;
@@ -286,7 +327,7 @@ const ULWrap = styled.ul`
       border-radius: 50%;
       transition: box-shadow 0.2s ease 0s;
       box-shadow: rgb(34, 34, 34) 0px 0px 0px 2px;
-    }
+    } */
 
     &:hover {
       svg {
@@ -322,6 +363,12 @@ const LodgingLists = ({
   commentCount,
   checkDateSearch,
   guestSearch,
+  formState,
+  setFormState,
+  modal,
+  setModal,
+  isRoomCheckModalOpen,
+  setIsRoomCheckModalOpen,
 }) => {
   const settings = {
     dots: true,
@@ -331,12 +378,8 @@ const LodgingLists = ({
     slidesToScroll: 1,
     tabindex: 0,
   };
-  // const { startDate, endDate } = checkDateSearch;
-  // const { numOfAdult, numOfKid, numOfInfant } = guestSearch;
-  // const totalNum = numOfAdult + numOfKid;
-  // console.log(numOfAdult, numOfKid, numOfInfant);
-  // console.log(checkDateSearch);
-  // console.log(startDate, endDate);
+  const { token } = useSelector(({ auth }) => auth);
+
   const { startDate, endDate } = useSelector(
     (state) => state.search.searchReq.checkDateSearch,
   );
@@ -345,19 +388,12 @@ const LodgingLists = ({
   );
 
   const history = useHistory();
-  const queryObj = qs.parse(history.location.search);
-  console.log(qs.parse(history.location.search));
   return (
     <>
       <Wrap className="listWrap">
         <ULWrap>
           <Link
             to={`/detail/${id}?check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`}
-            onClick={(e) => {
-              if (e.target.matches('.slick-arrow')) {
-                e.preventDefault();
-              }
-            }}
             key={id}
             tabIndex="0"
             className="listSubWrap"
@@ -367,7 +403,7 @@ const LodgingLists = ({
                 <div className="slide" tabIndex="-1">
                   <div className="slideDiv" tabIndex="-1">
                     <Slider {...settings} tabIndex="-1">
-                      {roomImgUrlList.map((src, i, arr) => (
+                      {roomImgUrlList.map((src) => (
                         <>
                           <Imgs
                             tabIndex="-1"
@@ -384,7 +420,7 @@ const LodgingLists = ({
               <Link
                 to={`/detail/${id}?check_in=${checkDateSearch?.startDate}&check_out=${checkDateSearch?.endDate}&adults=${guestSearch?.numOfAdult}&children=${guestSearch?.numOfKid}&infants=${guestSearch?.numOfInfant}`}
                 onClick={(e) => {
-                  if (e.target.matches('.heart')) {
+                  if (e.target.classList.contains('heart')) {
                     e.preventDefault();
                   }
                 }}
@@ -419,8 +455,27 @@ const LodgingLists = ({
                   </div>
                 </span>
               </Link>
-              <Bookmark className="heart" Pcheart tabIndex="0">
-                <AiOutlineHeart />
+              <Bookmark
+                className="heart"
+                Pcheart
+                tabIndex="0"
+                onClick={(e) => {
+                  if (e.target.classList.contains('heart')) {
+                    e.preventDefault();
+                    if (!token) {
+                      setModal(true);
+                      setFormState('login');
+                      return;
+                    }
+                    setIsRoomCheckModalOpen(true);
+                  }
+                }}
+              >
+                {isCheck ? (
+                  <FilledHeartEmoticon className="heart" />
+                ) : (
+                  <HeartEmoticon className="heart" />
+                )}
               </Bookmark>
             </li>
           </Link>

@@ -23,7 +23,7 @@ const Modaldiv = styled.div`
   z-index: 0;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 9999;
   .login-group {
     display: flex;

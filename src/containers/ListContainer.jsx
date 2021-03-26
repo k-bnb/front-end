@@ -14,6 +14,8 @@ import {
 } from '../modules/search';
 import qs from 'query-string';
 import { useHistory } from 'react-router-dom';
+import Modal from '../portal/Modal';
+import RoomCheckModal from '../components/templates/RoomCheckModal';
 
 const ListContainer = React.memo(() => {
   const [searchModalState, setSearchModalState] = useState(null);
@@ -52,7 +54,9 @@ const ListContainer = React.memo(() => {
   const totalPage = useSelector((state) => state.search.totalPage);
 
   const [formState, setFormState] = useState(null); // 초기값은 null, 로그인 버튼 누르면 login으로, 회원가입 누르면 'register'
+  const [modal, setModal] = useState(false); // auth 모달을 켜주고 꺼주고...
   const [roomMap, setRoomMap] = useState([]);
+
   useEffect(() => {
     const roomMap = room.map((item) => {
       return {
@@ -145,6 +149,8 @@ const ListContainer = React.memo(() => {
 
   const [pageNationState, setPageNationState] = useState({ currentPage: 0 });
 
+  const [isRoomCheckModalOpen, setIsRoomCheckModalOpen] = useState(false);
+
   const changeCurrentPage = (numPage) => {
     window.scrollTo(0, 0);
     setPageNationState({ currentPage: numPage });
@@ -172,7 +178,6 @@ const ListContainer = React.memo(() => {
   }, []);
 
   const queryObj = qs.parse(history.location.search);
-  console.log(qs.parse(history.location.search));
 
   useEffect(() => {
     dispatch(destinationInput(queryObj.location_search));
@@ -231,7 +236,20 @@ const ListContainer = React.memo(() => {
         localMaxCost={localMaxCost}
         setLocalMaxCost={setLocalMaxCost}
         keyup={keyup}
+        formState={formState}
+        setFormState={setFormState}
+        modal={modal}
+        setModal={setModal}
+        isRoomCheckModalOpen={isRoomCheckModalOpen}
+        setIsRoomCheckModalOpen={setIsRoomCheckModalOpen}
       />
+      <Modal>
+        <RoomCheckModal
+          isRoomCheckModalOpen={isRoomCheckModalOpen}
+          setIsRoomCheckModalOpen={setIsRoomCheckModalOpen}
+          isList={true}
+        />
+      </Modal>
     </>
   );
 });

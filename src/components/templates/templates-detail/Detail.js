@@ -9,6 +9,7 @@ import ReviewContainer from '../../../containers/ReviewContainer';
 import { getCancellableDate } from '../../../modules/detail';
 import { useDispatch } from 'react-redux';
 import FooterStr from '../../UI/organisms/organisms-list/FooteStr';
+import RoomCheckModal from '../RoomCheckModal';
 
 const Theme = {
   laptop: `screen and (min-width: 1024px)`,
@@ -64,6 +65,8 @@ const Detail = ({
   isGuestOpen,
   setIsGuestOpen,
   peopleLimit,
+  isRoomCheckModalOpen,
+  setIsRoomCheckModalOpen,
 }) => {
   const CheckInDate = () => {
     const strDate = detailObj.startDate ? detailObj.startDate.split('-') : '';
@@ -84,7 +87,11 @@ const Detail = ({
   return (
     <>
       <DetailTemplate Theme={Theme} infoRes={infoRes}>
-        <PageTitle infoRes={infoRes} />
+        <PageTitle
+          infoRes={infoRes}
+          isRoomCheckModalOpen={isRoomCheckModalOpen}
+          setIsRoomCheckModalOpen={setIsRoomCheckModalOpen}
+        />
         <ImageFrame
           setShowModal={setShowModal}
           current={current}

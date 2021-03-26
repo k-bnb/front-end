@@ -12,11 +12,12 @@ import { BsHeartFill } from 'react-icons/bs';
 import { BiWon } from 'react-icons/bi';
 import React from 'react';
 import EmptyList from '../../molecules/molecules-list/EmptyList';
+import Modal from '../../../../portal/Modal';
+import AuthModalContainer from '../../../../containers/AuthModalContainer';
 
 const PcSize = styled.main`
   min-height: calc(100vh - 80px);
   max-width: calc(100vw - 80px);
-  /* background-color: #eee; */
   padding: 0 24px;
   ul {
     width: 100%;
@@ -36,7 +37,6 @@ const TabletSize = styled.main`
 const MobileSize = styled.main`
   width: 100vw;
   min-height: calc(100vh - 0px);
-  /* background-color : purple; */
   padding: 0 30px;
   ul {
     list-style: none;
@@ -100,6 +100,13 @@ const ListStyle = ({
   checkDateSearch,
   guestSearch,
   isLoading,
+  formState,
+  setFormState,
+  modal,
+  setModal,
+  isRoomCheckModalOpen,
+  setIsRoomCheckModalOpen,
+  isCheck,
 }) => {
   const isPc = useMediaQuery({
     query: '(min-width: 1127px)', //1025 px 이상인 경우에만 적용(1127이상.)
@@ -138,26 +145,34 @@ const ListStyle = ({
                 isLoading,
               }) => {
                 return (
-                  <LodgingLists
-                    bathRoomNum={bathRoomNum}
-                    city={city}
-                    borough={borough}
-                    isCheck={isCheck}
-                    isParking={isParking}
-                    isSmoking={isSmoking}
-                    commentCount={commentCount}
-                    bedNum={bedNum}
-                    roomImgUrlList={roomImgUrlList}
-                    roomType={roomType}
-                    peopleLimit={peopleLimit}
-                    bedRoomNum={bedRoomNum}
-                    cost={cost}
-                    grade={grade}
-                    id={id}
-                    name={name}
-                    checkDateSearch={checkDateSearch}
-                    guestSearch={guestSearch}
-                  />
+                  <>
+                    <LodgingLists
+                      bathRoomNum={bathRoomNum}
+                      city={city}
+                      borough={borough}
+                      isCheck={isCheck}
+                      isParking={isParking}
+                      isSmoking={isSmoking}
+                      commentCount={commentCount}
+                      bedNum={bedNum}
+                      roomImgUrlList={roomImgUrlList}
+                      roomType={roomType}
+                      peopleLimit={peopleLimit}
+                      bedRoomNum={bedRoomNum}
+                      cost={cost}
+                      grade={grade}
+                      id={id}
+                      name={name}
+                      checkDateSearch={checkDateSearch}
+                      guestSearch={guestSearch}
+                      formState={formState}
+                      setFormState={setFormState}
+                      modal={modal}
+                      setModal={setModal}
+                      isRoomCheckModalOpen={isRoomCheckModalOpen}
+                      setIsRoomCheckModalOpen={setIsRoomCheckModalOpen}
+                    />
+                  </>
                 );
               },
             )}
