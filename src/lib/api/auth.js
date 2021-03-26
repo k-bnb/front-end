@@ -113,3 +113,17 @@ export const writeReview = ({
 
   return client.post(`https://backend.kbnb.tk/comment`, data, headers);
 };
+
+// 찜하기, 찜하기 취소
+export const roomCheck = ({ token, roomId }) => {
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  const data = {
+    roomId,
+  };
+
+  return client.patch(`https://backend.kbnb.tk/room/check`, data, headers);
+};

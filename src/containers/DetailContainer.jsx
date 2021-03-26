@@ -16,6 +16,7 @@ import HeaderContainer from './header-containers/HeaderContainer';
 import ReviewModal from '../components/templates/templates-detail/ReviewModal';
 import AuthModalContainer from './AuthModalContainer';
 import qs from 'query-string';
+import RoomCheckModal from '../components/templates/RoomCheckModal';
 
 const DetailContainer = () => {
   const [showModal, setShowModal] = useState(false);
@@ -27,6 +28,8 @@ const DetailContainer = () => {
   // formState -> 'login', 'register'로 상태 전환 해줌.
   const [formState, setFormState] = useState(null); // 초기값은 null, 로그인 버튼 누르면 login으로, 회원가입 누르면 'register'
   const [modal, setModal] = useState(false); // auth 모달을 켜주고 꺼주고...
+
+  const [isRoomCheckModalOpen, setIsRoomCheckModalOpen] = useState(false);
 
   const DetailHeaderRef = useRef();
   const ImageContainerRef = useRef();
@@ -123,6 +126,8 @@ const DetailContainer = () => {
         setModal={setModal}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
+        isRoomCheckModalOpen={isRoomCheckModalOpen}
+        setIsRoomCheckModalOpen={setIsRoomCheckModalOpen}
         formState={formState}
         setFormState={setFormState}
         bookingInfoRef={bookingInfoRef}
@@ -149,6 +154,14 @@ const DetailContainer = () => {
           detailObj={detailObj}
         />
         <AuthModalContainer />
+        <RoomCheckModal
+          isRoomCheckModalOpen={isRoomCheckModalOpen}
+          setIsRoomCheckModalOpen={setIsRoomCheckModalOpen}
+          modal={modal}
+          setModal={setModal}
+          formState={formState}
+          setFormState={setFormState}
+        />
       </Modal>
     </>
   );

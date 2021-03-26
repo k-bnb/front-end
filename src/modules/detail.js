@@ -16,6 +16,7 @@ const GET_TOTAL_PRICE = 'detail/GET_TOTAL_PRICE';
 const GET_CANCELLABLE_DATE = 'detail/GET_CANCELLABLE_DATE';
 const GET_ROOM_AVERAGE_SCORE = 'detail/GET_ROOM_AVERAGE_SCORE';
 const GET_ROOM_AVERAGE_SCORE_SUCCESS = 'detail/GET_ROOM_AVERAGE_SCORE_SUCCESS';
+const CHANGE_IS_CHECKED = 'detail/CHANGE_IS_CHECKED';
 
 // 예약하기 페이지에서 게스트, 달력 수정했을 경우 게스트, 달력 값 변경하는 액션
 const GUEST_INPUT = 'detail/GUEST_INPUT';
@@ -62,6 +63,11 @@ export const guestInput = createAction(GUEST_INPUT, (name, value) => ({
   name,
   value,
 })); // form -> guestinput, name -> numOfAdult, value ->
+
+export const changeIsChecked = createAction(
+  CHANGE_IS_CHECKED,
+  ({ isChecked }) => isChecked,
+);
 
 // 예약하기 페이지에서 달력을 수정했을 경우 달력 값 변경하는 액션 생성자 함수
 // export const dateInput = createAction(DATE_INPUT, (form, value) => ({
@@ -216,6 +222,14 @@ const detail = handleActions(
     [GUEST_INPUT]: (state, { payload: { name, value } }) => ({
       ...state,
       [name]: value,
+    }),
+
+    [CHANGE_IS_CHECKED]: (state, { payload: isChecked }) => ({
+      ...state,
+      infoRes: {
+        ...state.infoRes,
+        isChecked,
+      },
     }),
 
     // [DATE_INPUT]: (state, { payload: { form, value } }) => {

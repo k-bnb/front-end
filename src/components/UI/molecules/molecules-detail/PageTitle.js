@@ -41,7 +41,11 @@ const LocateInfo = styled(Text)`
   margin-bottom: 3px;
 `;
 
-const PageTitle = ({ infoRes }) => {
+const PageTitle = ({
+  infoRes,
+  isRoomCheckModalOpen,
+  setIsRoomCheckModalOpen,
+}) => {
   return (
     <AccommodationTitle>
       <div className="title-container">
@@ -57,10 +61,9 @@ const PageTitle = ({ infoRes }) => {
             </LocateInfo>
           </AccommodationDetail>
           <TextunderlineBtn
-            isChecked={!infoRes.isChecked}
+            isChecked={infoRes.isChecked}
             onClick={() => {
-              // store의 isChecked 값을 바꿔주어야 한다.
-              // setIsClick(!isClick);
+              setIsRoomCheckModalOpen(true);
             }}
           />
         </DetailData>

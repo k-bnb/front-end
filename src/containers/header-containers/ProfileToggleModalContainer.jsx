@@ -27,7 +27,6 @@ const ProfileToggleModalContainer = () => {
 
     history.push('/personInfo');
   };
-  console.log(history.location.pathname + history.location.search);
 
   return (
     <>
