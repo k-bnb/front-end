@@ -127,3 +127,13 @@ export const roomCheck = ({ token, roomId }) => {
 
   return client.patch(`https://backend.kbnb.tk/room/check`, data, headers);
 };
+// 유저 예약 상세 보기
+
+export const getReservedRoomInfo = ({ token, reservationId }) => {
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+  return client.get(
+    `https://backend.kbnb.tk/reservation/detail?reservationId=${reservationId}`,
+    headers,
+  );
+};

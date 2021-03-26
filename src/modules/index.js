@@ -5,6 +5,7 @@ import { all } from 'redux-saga/effects';
 import search, { searchSaga } from './search';
 import reserve, { reserveSaga } from './reserve';
 import detail, { detailSaga } from './detail';
+import reservedDetail, { ReservedDetailSaga } from './reservedDetail';
 
 import user, { userSaga } from './user';
 // 이곳은 모듈을 합치는 곳입니다
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   reserve,
   detail,
   user,
+  reservedDetail,
 });
 
 export function* rootSaga() {
@@ -24,6 +26,7 @@ export function* rootSaga() {
     reserveSaga(),
     detailSaga(),
     userSaga(),
+    ReservedDetailSaga(),
   ]);
 }
 
