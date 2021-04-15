@@ -1,11 +1,7 @@
 import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
-import {
-  // guestInput,
-  // guestInputClear,
-  specificInputClear,
-} from '../../../../modules/search';
+import { specificInputClear } from '../../../../modules/search';
 import GuestNumberModal from '../../../templates/templates-header/GuestNumberModal';
 import RemoveButton from '../../atoms/atoms-header/RemoveButton';
 import Text from '../../atoms/atoms-header/Text';
@@ -70,9 +66,6 @@ const SearchNavGuestUnit = ({
         if (e.target.matches('.search-button-unit')) return;
         SearchTypeHandler('guest');
       }}
-      // onFocus={() => {
-      //   SearchTypeHandler('guest');
-      // }}
       tabIndex="0"
     >
       <div className="guest-texts">

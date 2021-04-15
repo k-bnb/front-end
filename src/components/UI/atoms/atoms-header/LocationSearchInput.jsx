@@ -88,8 +88,8 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext, setNavModalState }) {
               locationInput({
                 latitude: lat,
                 longitude: lng,
-                latitudeMax: results[0].geometry.viewport.Ta.i,
-                latitudeMin: results[0].geometry.viewport.Ta.g,
+                latitudeMax: results[0].geometry.viewport.Ua.i,
+                latitudeMin: results[0].geometry.viewport.Ua.g,
                 longitudeMax: results[0].geometry.viewport.La.i,
                 longitudeMin: results[0].geometry.viewport.La.g,
               }),
@@ -109,7 +109,6 @@ function Search({ panTo, SearchTypeHandler, moveFocusNext, setNavModalState }) {
           value={destinationName}
           onChange={(e) => {
             setValue(e.target.value);
-            console.log('cha');
             SearchTypeHandler('location');
             dispatch(
               locationInput({

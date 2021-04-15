@@ -2,26 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginOraganisms from '../components/UI/organisms/organisms-modals-auth/LoginOraganisms';
 import RegisterOrganism from '../components/UI/organisms/organisms-modals-auth/RegisterOrganism';
-import {
-  changeInput,
-  clearError,
-  initialzeInput,
-  // login,
-  // register,
-} from '../modules/auth';
+import { changeInput, clearError, initialzeInput } from '../modules/auth';
 import { finishLoading, startLoading } from '../modules/loading';
 import * as API from '../lib/api/auth';
 import { useHistory } from 'react-router-dom';
 
-const AuthModalContainer = ({
-  modal,
-  setModal,
-  formState,
-  setFormState,
-  isOpen,
-  setIsOpen,
-  fromDetailPageBtn,
-}) => {
+const AuthModalContainer = ({ modal, setModal, formState, setFormState }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -166,7 +152,7 @@ const AuthModalContainer = ({
         setServerLoginError(e.response.data);
       }
     }
-    delay(1000).then(() => dispatch(finishLoading('auth/REGISTER')));
+    dispatch(finishLoading('auth/REGISTER'));
   };
 
   const changeRegister = () => {

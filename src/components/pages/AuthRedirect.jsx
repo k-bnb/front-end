@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import qs from 'query-string';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const AuthRedirect = () => {
   const history = useHistory();
@@ -9,10 +9,6 @@ const AuthRedirect = () => {
   const parsed = qs.parse(history.location.search);
   localStorage.setItem('token', parsed.token ? parsed.token : null);
   const accessToken = localStorage.getItem('token');
-  const roomId = useSelector(({ detail }) => detail.infoRes.id);
-  const { startDate, endDate, numOfAdult, numOfInfant, numOfKid } = useSelector(
-    ({ detail }) => detail,
-  );
 
   if (accessToken) {
     dispatch({ type: 'auth/REGISTER_SUCCESS', payload: { accessToken } });
@@ -32,10 +28,6 @@ const AuthRedirect = () => {
             'numOfKid',
           )}&infants=${localStorage.getItem('numOfInfant')}`}
         />
-        // <Redirect
-        //   push
-        //   to={`/reserve?roomId=${roomId}&check_in=${startDate}&check_out=${endDate}&adults=${numOfAdult}&children=${numOfKid}&infants=${numOfInfant}`}
-        // />
       );
     }
     return (

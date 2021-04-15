@@ -67,6 +67,7 @@ const DetailContainer = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false); // detail page달력 모달열고닫기
   const [isGuestOpen, setIsGuestOpen] = useState(false); // detail guest모달 열고 닫기.
   const { peopleLimit } = useSelector(({ reserve }) => reserve.infoRes);
+  console.log(peopleLimit);
 
   useEffect(() => {
     window.scrollTo(0, 0);

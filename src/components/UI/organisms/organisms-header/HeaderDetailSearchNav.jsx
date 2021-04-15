@@ -78,9 +78,6 @@ const HeaderDetailSearchNav = ({
   setNavModalState,
   SearchTypeHandler,
   clickHandler,
-  locationSearch,
-  checkDateSearch,
-  guestSearch,
   moveFocusNext,
 }) => {
   return (

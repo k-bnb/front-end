@@ -33,8 +33,7 @@ const Container = styled.div`
 const AuthGoogle = () => {
   return (
     <Container className="google-login">
-      <a href="https://backend.kbnb.tk/oauth2/authorize/google?redirect_uri=https://kbnb.herokuapp.com/redirect">
-        {/* <a href="https://backend.kbnb.tk/oauth2/authorize/google?redirect_uri=http://localhost:3000/redirect"> */}
+      <a href="https://backend.kbnb.tk/oauth2/authorize/google?redirect_uri=https://k-bnb.netlify.app/redirect">
         <CircleDiv>
           <FcGoogle />
           <TextStyle blackmiddlebold>구글 로그인</TextStyle>
