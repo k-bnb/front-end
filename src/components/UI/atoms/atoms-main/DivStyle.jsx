@@ -40,8 +40,6 @@ const DivStyle = styled.div`
       flex-direction: column;
 
       border-radius: 0;
-
-      border: 1px solid red;
     `}
 	${(props) =>
     props.bigimgSize &&
