@@ -19,11 +19,10 @@ const MapContainer = () => {
     <MapContainerStyle>
       <h1 className="readable-hidden">숙소 상세 위치</h1>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyDi2VswS8ZRJ3Vk6aDl0Mx3RbxI27GeXbQ' }}
+        bootstrapURLKeys={{ key: 'AIzaSyCPfYVXBU0msr6iNjHJzWbk4b1yatfh-eg' }}
         defaultCenter={center}
         defaultZoom={18}
         hoverDistance={20}
-        // style={{ backgroundColor: 'red' }}
       >
         <AnyReatComponent lat={37.535984} lng={126.991705} text="My Marker" />
       </GoogleMapReact>

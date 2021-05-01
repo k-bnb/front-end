@@ -11,7 +11,7 @@ export const search = ({
   bedRoomNum,
   bathRoomNum,
 }) =>
-  client.post(`https://backend.kbnb.tk/room/list?page=${id}&size=20`, {
+  client.post(`/room/list?page=${id}&size=20`, {
     locationSearch,
     checkDateSearch,
     guestSearch,
