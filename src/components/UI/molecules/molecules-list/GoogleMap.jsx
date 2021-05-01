@@ -11,7 +11,6 @@ import {
 import Geocode from 'react-geocode';
 import styled from 'styled-components';
 import Bookmark from '../../atoms/atoms-list/BookMark';
-// import { AiOutlineHeart } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { locationInput, searching } from '../../../../modules/search';
 import { BiWon } from 'react-icons/bi';
@@ -21,8 +20,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ScoreText from './Score-Text';
-import { Link, useHistory } from 'react-router-dom';
-import Event from '../../../../../../../Library/Caches/typescript/4.2/node_modules/microevent.ts/lib/Event';
+import { useHistory } from 'react-router-dom';
 
 Geocode.setApiKey('AIzaSyDi2VswS8ZRJ3Vk6aDl0Mx3RbxI27GeXbQ');
 
