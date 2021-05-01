@@ -81,7 +81,7 @@ const MainComponentMobile = styled.main`
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
-    border: 1px solid red;
+
     display: flex;
     flex-direction: column;
     span {
@@ -93,7 +93,7 @@ const MainComponentMobile = styled.main`
 
     button {
       width: 15rem;
-      border: 1px solid red;
+
       span {
         font-size: 1.3rem;
         line-height: 2;
@@ -121,17 +121,17 @@ const MainStyle = () => {
   return (
     <>
       {isPc && (
-        <MainComponentPc className="main">
+        <MainComponentPc id="mainBookmark" className="main">
           <RoomsLink />
         </MainComponentPc>
       )}
       {isTablet && (
-        <MainComponentTablet className="main">
+        <MainComponentTablet id="mainBookmark" className="main">
           <RoomsLink />
         </MainComponentTablet>
       )}
       {isMobile && (
-        <MainComponentMobile className="main">
+        <MainComponentMobile id="mainBookmark" className="main">
           <RoomsLink />
         </MainComponentMobile>
       )}
