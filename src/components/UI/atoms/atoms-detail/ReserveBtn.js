@@ -47,10 +47,7 @@ const ReserveBtn = ({
   DetailHeaderRef,
   bookingInfoRef,
   setIsCalendarOpen,
-  isGuestOpen,
   setIsGuestOpen,
-  // moveToReserve,
-  // NoBookingDate,
 }) => {
   const [showLoadingIcon, setShowLoadingIcon] = useState(false);
   const { startDate, endDate, numOfAdult, numOfKid, numOfInfant } = useSelector(
@@ -60,10 +57,8 @@ const ReserveBtn = ({
   const match = useRouteMatch();
 
   const queryObj = qs.parse(history.location.search);
-  const pathName = qs.parse(history.location.pathname);
   const roomId = match.params.roomId;
 
-  console.log(queryObj);
   const makeUserHasDates = () => {
     if (half) bookingInfoRef.current.scrollIntoView({ behavior: 'smooth' });
     setIsCalendarOpen(true);

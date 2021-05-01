@@ -11,7 +11,6 @@ import {
 import Geocode from 'react-geocode';
 import styled from 'styled-components';
 import Bookmark from '../../atoms/atoms-list/BookMark';
-// import { AiOutlineHeart } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { locationInput, searching } from '../../../../modules/search';
 import { BiWon } from 'react-icons/bi';
@@ -21,39 +20,21 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import ScoreText from './Score-Text';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-// import MarkerWithLabel from "react-google-maps/lib/components/addons/MarkerWithLabel";
-// import AutoComplete from 'react-google-autocomplete';
-// Geocode.setApiKey=('AIzaSyC6KyJE5Cb_kVrW02y-mkWEDGlrUfodq6E'); '='이 표시가 들어가면 안됨... 이거 찾는데 24시간 걸렸다^-^.. 최대적===오타ㅜㅜㅜ
 Geocode.setApiKey('AIzaSyDi2VswS8ZRJ3Vk6aDl0Mx3RbxI27GeXbQ');
 
 const MarkerStyle = styled.div`
   display: flex;
-  /* position:relative; */
-  /* align-items: center; */
   background: white;
   border: 1px solid #ccc;
   border-radius: 50px;
   width: 100%;
-  /* font-size: 16px; */
-  /* cursor: pointer; */
-  /* width: 80px; */
-  /* height: 30px; */
-  /* margin: 0; */
-  /* line-height: 30px; */
-  /* margin: 0 auto; */
-  /* text-align: center; */
-  /* font-weight: 800; */
   .intoCost {
-    /* align-items: center; */
-    /* background: skyblue;
-    border: 4px dashed darkorange; */
     cursor: pointer;
     border-radius: 50px;
     padding: 0 10px;
     width: 100%;
-    /* height: 100%; */
     line-height: 30px;
     margin: 0 auto;
     text-align: center;
@@ -125,9 +106,6 @@ const GoogleMarkerStyle = styled.div`
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            /* opacity:1; */
-            /* opacity: 0; */
-            /* transition: opacity .3s; */
           }
           .slick-next {
             color: white;
@@ -136,8 +114,6 @@ const GoogleMarkerStyle = styled.div`
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            /* opacity: 0; */
-            /* transition: opacity .3s; */
           }
           .slick-dots {
             li {
@@ -223,24 +199,6 @@ const GoogleMarkerStyle = styled.div`
       }
     }
   }
-  /* .slide-group:hover{
-    .slide-group>.slide>.slideDiv>.slick-slider>.slick-arrow.slick-prev{
-      opacity:1;
-      &:active{
-        opacity:1;
-        transform: translate(0);
-        transform: scale(1.5);
-      }
-    }
-    .slide-group>.slide>.slideDiv>.slick-slider {
-      opacity:1;
-      &:active{
-        opacity:1;
-        transform: translate(0);
-        transform: scale(1.5);
-      }
-    }
-  } */
   .textAllWrap {
     //지도 팝업 글
     margin-top: 15px;
@@ -298,7 +256,6 @@ const GoogleMapUse = ({
     state: '',
     zoom: 8,
     height: '',
-    // gestureHandling:'greedy',
     mapPosition: {
       lat: locationSearch.latitude,
       lng: locationSearch.longitude,
@@ -447,7 +404,6 @@ const GoogleMapUse = ({
       return (
         <>
           <GoogleMap
-            // scrollwheel={false}
             ref={mapRef}
             defaultZoom={20}
             zoom={zoom}
@@ -474,7 +430,6 @@ const GoogleMapUse = ({
                   onDragStart={(e) => {}}
                   position={{ lat: sample.latitude, lng: sample.longitude }}
                   draggable={true}
-                  // onDragEnd={onMarkerDragEnd}
                   icon={
                     'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
                   }
@@ -487,17 +442,14 @@ const GoogleMapUse = ({
                   <MarkerStyle
                     className="toTop"
                     tabIndex="-1"
-                    // className= {sample.id}
                     name={sample.cost}
                     ref={mapCost}
                     onClick={(e) => {
                       setSelectedSample(sample);
                       console.log('overlayviewText', e.nativeEvent);
                       console.log('path1', e.nativeEvent.path[1]);
-                      // console.log('path13', e.nativeEvent.path[13].childNodes[0]);
                       const path13 = e.nativeEvent.path[13].childNodes[0];
                       console.log('path13', path13);
-                      // console.log(nativeevent.path); //1번째가 -memo << 이건데, 이게 className이야.
                     }}
                   >
                     <p className="intoCost" tabIndex="0">
@@ -579,7 +531,7 @@ const GoogleMapUse = ({
   return (
     <>
       <MapWithAMarker
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDi2VswS8ZRJ3Vk6aDl0Mx3RbxI27GeXbQ&v=3.exp&libraries=geometry,drawing,places"
+        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPfYVXBU0msr6iNjHJzWbk4b1yatfh-eg&v=3.exp&libraries=geometry,drawing,places"
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `100%` }} />}
         mapElement={<div style={{ height: `100%` }} />}

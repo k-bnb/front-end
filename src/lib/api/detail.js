@@ -1,7 +1,7 @@
 import client from './client';
 
 export const detailInformation = (roomId) =>
-  client.get(`https://backend.kbnb.tk/room/detail?roomId=${roomId}`, {
+  client.get(`/room/detail?roomId=${roomId}`, {
     headers: {
       Authorization: `Bearer`,
       'Content-Type': 'application/json',
@@ -9,6 +9,4 @@ export const detailInformation = (roomId) =>
   });
 
 export const requestComments = (roomId, pageNum) =>
-  client.get(
-    `https://backend.kbnb.tk/comment?roomId=${roomId}&page=${pageNum}&size=6&sort=date,DESC`,
-  );
+  client.get(`/comment?roomId=${roomId}&page=${pageNum}&size=6&sort=date,DESC`);

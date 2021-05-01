@@ -3,7 +3,6 @@ import ModalTemplate from '../../../templates/templates-modal/ModalTemplate';
 import CircleDiv from '../../atoms/atoms-main/DivStyle';
 import AuthGoogle from '../../molecules/molecules-modals-auth/AuthGoogle';
 import AuthHead from '../../molecules/molecules-modals-auth/AuthHead';
-import BackLogin from '../../molecules/molecules-modals-auth/BackLogin';
 import EmailLoginInput from '../../molecules/molecules-modals-auth/EmailLoginInput';
 import EmailLoginSubmit from '../../molecules/molecules-modals-auth/EmailLoginSubmit';
 import LoginGoSignupBtn from '../../molecules/molecules-modals-auth/LoginGoSignupBtn';
@@ -60,7 +59,6 @@ const LoginOraganisms = ({
           setFormState('register');
         }}
       />
-      {/* <BackLogin /> */}
     </ModalTemplate>
   );
 };

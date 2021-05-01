@@ -1,4 +1,3 @@
-// import { useRef } from 'react';
 import styled, { css } from 'styled-components';
 
 const ButtonStyle = styled.button`
@@ -97,7 +96,6 @@ const ButtonStyle = styled.button`
     props.disabled &&
     props.noneStyleDisabled &&
     css`
-      /* background-color: gray; */
       background: transparent;
       cursor: not-allowed;
     `}

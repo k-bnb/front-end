@@ -1,12 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
-import {
-  clearGuestDetail,
-  guestChangeDetail,
-} from '../../../../modules/detail';
+import { guestChangeDetail } from '../../../../modules/detail';
 import { guestInput, specificInputClear } from '../../../../modules/search';
-import { changeGuest, initialGuest } from '../../../../modules/reserve';
+import { changeGuest } from '../../../../modules/reserve';
 import CircleButton from '../../atoms/atoms-header/CircleButtonHeader';
 import Text from '../../atoms/atoms-header/Text';
 
@@ -21,6 +18,9 @@ const GuestNumberModalUnitBlock = styled.div`
     font-size: 15px;
     margin: 0 15px;
     vertical-align: super;
+    display: inline-block;
+    min-width: 20px;
+    text-align: center;
   }
   ${(props) =>
     !props.detailPage &&
@@ -67,6 +67,8 @@ const GuestNumberModalUnit = ({
   const ReserveTotalGuestNum =
     +reserveGuestSearch.numOfAdult + +reserveGuestSearch.numOfKid;
   const DetailTotalGuestNum = +detail.numOfAdult + +detail.numOfKid;
+
+  console.log(detail.numOfAdult, detail.numOfAdult, peopleLimit);
 
   // 페이지 별로 최소값 조건을 반환해주는 함수
   const setMinDisabled = () => {

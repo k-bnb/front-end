@@ -118,7 +118,7 @@ const DatePersonBox = ({
 }) => {
   const [isDateBorderThick, setIsDateBorderThick] = useState(false);
   const [isGuestBorderThick, setGuestIsBorderThick] = useState(false);
-
+  console.log(peopleLimit);
   return (
     <BookingBox>
       <CheckDate

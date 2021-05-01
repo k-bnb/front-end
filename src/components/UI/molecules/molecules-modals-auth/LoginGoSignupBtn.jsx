@@ -12,13 +12,12 @@ const LoginGoSignupBtnStyle = styled.div`
   }
 `;
 
-const LoginGoSignupBtn = ({ changeRegister, disabled }) => {
+const LoginGoSignupBtn = ({ changeRegister }) => {
   return (
     <LoginGoSignupBtnStyle>
       <CircleDiv className="signup-div">
         <TextStyle blacknormal>에어비앤비 계정이 없으세요?</TextStyle>
 
-        {/* <Button className="signup" onClick={signupBtn}> */}
         <Button className="signup" onClick={changeRegister}>
           <TextStyle greentextLine>회원가입</TextStyle>
         </Button>

@@ -65,6 +65,7 @@ const Detail = ({
   isGuestOpen,
   setIsGuestOpen,
   peopleLimit,
+
   isRoomCheckModalOpen,
   setIsRoomCheckModalOpen,
 }) => {
