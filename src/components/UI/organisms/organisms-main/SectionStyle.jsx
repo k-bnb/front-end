@@ -8,7 +8,7 @@ const SectionPc = styled.section`
   display: flex;
   padding: 50px 80px;
   flex-flow: column;
-
+  z-index: 0;
   span {
     margin-bottom: 3%;
   }
@@ -31,7 +31,7 @@ const SectionTablet = styled.section`
   flex-flow: column;
   position: relative;
   overflow: hidden;
-
+  z-index: -1;
   .leftbtn {
     background-color: #ffffff;
     position: absolute;
@@ -91,7 +91,7 @@ const SectionMobile = styled.section`
   flex-flow: column;
   position: relative;
   overflow: hidden;
-
+  z-index: -1;
   .leftbtn {
     background-color: #ffffff;
     position: absolute;
@@ -106,6 +106,7 @@ const SectionMobile = styled.section`
       font-size: 1.2rem;
     }
   }
+
   span {
     margin-bottom: 3%;
   }
