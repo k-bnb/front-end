@@ -35,6 +35,10 @@
 
 ## How to start
 
+- https://k-bnb.netlify.app/
+
+  OR
+
 - git clone https://github.com/k-bnb/front-end.git
 - $ npm install
 - $ npm start
