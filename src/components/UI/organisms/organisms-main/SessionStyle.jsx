@@ -72,6 +72,7 @@ const SectionMobile = styled.section`
 /* width: 100%; */
 
 const SessionStyle = ({ imgs }) => {
+  console.log(imgs);
   const isPc = useMediaQuery({
     query: '(min-width: 900px)',
   });
@@ -85,13 +86,14 @@ const SessionStyle = ({ imgs }) => {
     <>
       {isPc && (
         <SectionPc>
-          {imgs.map(({ src, alt, name }, i) => {
+          {imgs.map(({ src, alt, name, coords }, i) => {
             return (
               <Locations
                 src={src}
                 key={i}
                 alt={alt}
                 name={name}
+                coords={coords}
                 smallImg
                 blackmiddlebold
                 imgSize
@@ -102,13 +104,14 @@ const SessionStyle = ({ imgs }) => {
       )}
       {isTablet && (
         <SectionTablet>
-          {imgs.map(({ src, alt, name }, i) => {
+          {imgs.map(({ src, alt, name, coords }, i) => {
             return (
               <Locations
                 src={src}
                 key={i}
                 alt={alt}
                 name={name}
+                coords={coords}
                 smallImg
                 blackmiddlebold
                 imgSize
@@ -119,13 +122,14 @@ const SessionStyle = ({ imgs }) => {
       )}
       {isMobile && (
         <SectionMobile>
-          {imgs.map(({ src, alt, name }, i) => {
+          {imgs.map(({ src, alt, name, coords }, i) => {
             return (
               <Locations
                 src={src}
                 key={i}
                 alt={alt}
                 name={name}
+                coords={coords}
                 smallImg
                 blackmiddlebold
                 imgSize

@@ -7,14 +7,57 @@ import { specificInputClear } from '../modules/search';
 import HeaderContainer from './header-containers/HeaderContainer';
 
 const imgs = [
-  { src: './imgs/3.jpg', alt: '서울 지역 숙소', name: '서울' },
-  { src: './imgs/2.jpg', alt: '인천 지역 숙소', name: '인천' },
-  { src: './imgs/1.jpg', alt: '부천시 지역 숙소', name: '부천시' },
-  { src: './imgs/4.jpg', alt: '안산시 지역 숙소', name: '안산시' },
-  { src: './imgs/5.jpg', alt: '의정부시 지역 숙소', name: '의정부시' },
-  { src: './imgs/6.jpg', alt: '대전 지역 숙소', name: '대전' },
-  { src: './imgs/7.jpg', alt: '수원시 지역 숙소', name: '수원시' },
-  { src: './imgs/8.jpg', alt: '성남시 지역 숙소', name: '성남시' },
+  {
+    src: './imgs/3.jpg',
+    alt: '서울 지역 숙소',
+    name: '서울',
+    coords: { lat: 37.541, lng: 126.986 },
+  },
+  {
+    src: './imgs/2.jpg',
+    alt: '인천 지역 숙소',
+    name: '인천',
+    coords: { lat: 37.45639, lng: 126.70528 },
+  },
+  {
+    src: './imgs/1.jpg',
+    alt: '부천시 지역 숙소',
+    name: '부천시',
+    coords: {
+      lat: 37.5,
+      lng: 126.77,
+    },
+  },
+  {
+    src: './imgs/4.jpg',
+    alt: '안산시 지역 숙소',
+    name: '안산시',
+    coords: { lat: 37.3218778, lng: 126.8308848 },
+  },
+  {
+    src: './imgs/5.jpg',
+    alt: '의정부시 지역 숙소',
+    name: '의정부시',
+    coords: { lat: 37.73889, lng: 127.03444 },
+  },
+  {
+    src: './imgs/6.jpg',
+    alt: '대전 지역 숙소',
+    name: '대전',
+    coords: { lat: 36.35111, lng: 127.385 },
+  },
+  {
+    src: './imgs/7.jpg',
+    alt: '수원시 지역 숙소',
+    name: '수원시',
+    coords: { lat: 37.26389, lng: 127.02861 },
+  },
+  {
+    src: './imgs/8.jpg',
+    alt: '성남시 지역 숙소',
+    name: '성남시',
+    coords: { lat: 37.44722, lng: 127.1375 },
+  },
 ];
 
 const sectionImg = [
