@@ -82,16 +82,23 @@ function Search({ SearchTypeHandler, moveFocusNext }) {
           try {
             const results = await getGeocode({ address }); // 유저가 검색한 address를 인수로 전달하여 promise를 반환받음.
             const { lat, lng } = await getLatLng(results[0]); // 결과에서 lat과 lng정보를 추출
+            let viewport = [];
+            for (let prop in results[0].geometry.viewport) {
+              viewport.push(results[0].geometry.viewport[prop]);
+            }
+            viewport = viewport.slice(0, 2);
+            console.log(viewport);
             console.log(results[0]);
+
             dispatch(
               // 좌표값 store로 전달
               locationInput({
                 latitude: lat,
                 longitude: lng,
-                latitudeMax: results[0].geometry.viewport.tc.i,
-                latitudeMin: results[0].geometry.viewport.tc.g,
-                longitudeMax: results[0].geometry.viewport.Hb.i,
-                longitudeMin: results[0].geometry.viewport.Hb.g,
+                latitudeMax: viewport[0].i,
+                latitudeMin: viewport[0].g,
+                longitudeMax: viewport[1].i,
+                longitudeMin: viewport[1].g,
               }),
             );
 

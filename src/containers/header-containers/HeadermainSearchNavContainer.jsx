@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import HeaderMainSearchNav from '../../components/UI/organisms/organisms-header/HeaderMainSearchNav';
 
 const HeadermainSearchNavContainer = ({

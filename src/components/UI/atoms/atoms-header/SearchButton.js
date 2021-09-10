@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { BiSearch } from 'react-icons/bi';
 
 const SearchButtonBlock = styled.button`
-  background: rgb(255, 56, 92);
+  background: linear-gradient(
+    to right,
+    rgb(230, 30, 77) 0%,
+    rgb(227, 28, 95) 50%,
+    rgb(215, 4, 102) 100%
+  );
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -13,14 +18,7 @@ const SearchButtonBlock = styled.button`
     color: white;
     font-size: 18px;
   }
-  &:hover {
-    background: linear-gradient(
-      to right,
-      rgb(230, 30, 77) 0%,
-      rgb(227, 28, 95) 50%,
-      rgb(215, 4, 102) 100%
-    );
-  }
+
   ${(props) =>
     (props.isScrolled || props.rooms) &&
     css`
@@ -34,15 +32,7 @@ const SearchButtonBlock = styled.button`
     `}
 `;
 
-const SearchButton = ({
-  isScrolled,
-  onClick,
-  rooms,
-  searchBtnRef,
-  navModalState,
-  setNavModalState,
-  isModalOpen,
-}) => {
+const SearchButton = ({ isScrolled, onClick, rooms, searchBtnRef }) => {
   return (
     <>
       <SearchButtonBlock

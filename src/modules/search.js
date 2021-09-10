@@ -149,7 +149,6 @@ export function* searchSaga() {
 //Reducer
 const search = handleActions(
   {
-    //[DESTINATION_INPUT]: (state,action.type)=>{}
     [DESTINATION_INPUT]: (state, { payload: destinationName }) => {
       sessionStorage.setItem('destination', JSON.stringify(destinationName));
       return {
@@ -165,7 +164,6 @@ const search = handleActions(
     },
     [DATE_INPUT]: (state, { payload: { form, checkDateSearch } }) => {
       // token 처럼 초기값이 필요로 하기 때문에 sessionStorage에 저장
-
       return produce(state, (draft) => {
         draft.searchReq.checkDateSearch[form] = checkDateSearch;
       });
@@ -205,7 +203,6 @@ const search = handleActions(
         });
       }
     },
-
     [SEARCHING_FAILURE]: (state, { payload: { error } }) => ({
       ...state,
       searchError: error,

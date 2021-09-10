@@ -102,10 +102,9 @@ const HeaderContainer = ({
 
   const dispatch = useDispatch();
   const serchBtn = () => {
-    const id = 0;
     dispatch(
       searching({
-        id,
+        id: 0,
         locationSearch,
         checkDateSearch,
         guestSearch,

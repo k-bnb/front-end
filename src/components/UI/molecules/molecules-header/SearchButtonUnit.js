@@ -1,5 +1,4 @@
 import React from 'react';
-import SearchButton from '../../atoms/atoms-header/SearchButton';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import ClickedSearchButton from '../../atoms/atoms-header/ClickedSearchButton';
@@ -14,7 +13,6 @@ const GuestNumberUnitOuterBlock = styled.div`
   border-radius: 30px;
   background-color: transparent;
   position: relative;
-  /* z-index: 2; */
 `;
 
 const SearchButtonUnit = ({

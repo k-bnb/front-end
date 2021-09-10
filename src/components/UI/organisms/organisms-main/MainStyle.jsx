@@ -3,10 +3,7 @@ import styled from 'styled-components';
 import RoomsLink from '../../molecules/molecules-main/RoomsLink';
 
 const MainComponentPc = styled.main`
-  /* width: 100%; */
-
   padding: 266px 80px 80px;
-
   background-image: url(./imgs/bgimg.png);
   background-size: cover;
   background-position: bottom 60% right 100%;
@@ -24,7 +21,6 @@ const MainComponentPc = styled.main`
       }
       width: 15rem;
       border-radius: 10px;
-      /* width: 100px; */
       padding: 5px 0px;
       margin-top: 20px;
     }
@@ -33,22 +29,14 @@ const MainComponentPc = styled.main`
 `;
 
 const MainComponentTablet = styled.main`
-  /* width: 100%; */
-
   padding: 200px 20px 80px;
-
   background-image: url(./imgs/bgimg.png);
   background-size: cover;
   background-position: bottom 15% left 100%;
   background-repeat: no-repeat;
   .RoomLink {
-    /* width: 400px; */
     display: flex;
     flex-direction: column;
-
-    span {
-      /* font-size: 3rem; */
-    }
 
     button {
       span {
@@ -59,7 +47,6 @@ const MainComponentTablet = styled.main`
       }
       width: 15rem;
       border-radius: 5px;
-      /* width: 100px; */
       padding: 5px 0px;
       margin-top: 20px;
     }
@@ -68,10 +55,7 @@ const MainComponentTablet = styled.main`
 `;
 
 const MainComponentMobile = styled.main`
-  /* width: 100%; */
-
   padding: 180px 20px 200px 30px;
-
   background-image: url(./imgs/bgimg.png);
   background-size: cover;
   background-position: bottom 15% left 100%;
@@ -100,7 +84,6 @@ const MainComponentMobile = styled.main`
         font-weight: 700;
       }
       border-radius: 5px;
-      /* width: 100px; */
       padding: 5px 0px;
       margin-top: 20px;
     }
