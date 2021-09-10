@@ -157,8 +157,7 @@ const SectionStyle = ({ sectionImg }) => {
   });
   const groupImg = useRef();
 
-  const rightclick = (e) => {
-    // if (e.target.matches('.img-group > button')) return;
+  const rightclick = () => {
     const RightBtn = document.querySelector('.rightbtn');
     const LeftBtn = document.querySelector('.leftbtn');
 
@@ -169,14 +168,9 @@ const SectionStyle = ({ sectionImg }) => {
       RightBtn.style.display = 'none';
       LeftBtn.style.display = 'flex';
     }
-
-    // if (e.target === ) {
-    // 	console.log('hello');
-    // }
   };
 
-  const leftclick = (e) => {
-    // if (e.target.matches('.img-group > button')) return;
+  const leftclick = () => {
     const RightBtn = document.querySelector('.rightbtn');
     const LeftBtn = document.querySelector('.leftbtn');
 
@@ -185,9 +179,6 @@ const SectionStyle = ({ sectionImg }) => {
       RightBtn.style.display = 'flex';
       groupImg.current.style.transform = 'translateX(0)';
     }
-    // if (e.target === ) {
-    // 	console.log('hello');
-    // }
   };
   return (
     <>

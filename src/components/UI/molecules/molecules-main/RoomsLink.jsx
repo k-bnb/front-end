@@ -7,10 +7,6 @@ import {
 } from '../../../../modules/search';
 import Button from '../../atoms/atoms-main/Button';
 import TextStyle from '../../atoms/atoms-main/TextStyle';
-// import { useState } from 'react';
-// import LoginPotal from '../../../../potals/modals/LoginModal';
-// import Modal from '../../../../potals/modals/Modal';
-// import AuthModalContainer from '../../../../containers/AuthModalContainer';
 
 const RoomsLink = (props) => {
   const {
@@ -24,12 +20,16 @@ const RoomsLink = (props) => {
   } = useSelector((state) => state.search.searchReq);
   const dispatch = useDispatch();
   const history = useHistory();
+  const getPosition = () =>
+    new Promise((res, rej) =>
+      navigator.geolocation.getCurrentPosition(res, rej, { timeout: 5000 }),
+    );
 
   const searchNearBy = async () => {
     try {
-      const position = await new Promise((res, rej) =>
-        navigator.geolocation.getCurrentPosition(res, rej),
-      );
+      console.log('he');
+      const position = await getPosition();
+      console.log('he1');
       const locationSearch = {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
@@ -38,6 +38,7 @@ const RoomsLink = (props) => {
         longitudeMax: position.coords.longitude + 0.08,
         longitudeMin: position.coords.longitude - 0.08,
       };
+      console.log(locationSearch, 'lsdkfjsldkjf23094230948230980#(802)(*$)(*0');
       dispatch(destinationInput('가까운 여행지 둘러보기'));
       dispatch(locationInput(locationSearch));
       dispatch(
@@ -72,20 +73,13 @@ const RoomsLink = (props) => {
   };
 
   return (
-    <>
-      <div className="RoomLink" id="content">
-        <TextStyle whiteMainBold>이제, 여행은</TextStyle>
-        <TextStyle whiteMainBold>가까운 곳에서</TextStyle>
-        <Button normal onClick={searchNearBy}>
-          <TextStyle blacknormal> 근처의 숙소 둘러보기</TextStyle>
-        </Button>
-      </div>
-      {/* {modal && (
-        <Modal>
-          <AuthModalContainer modal={modal} setModal={setModal} />
-        </Modal>
-      )} */}
-    </>
+    <div className="RoomLink" id="content">
+      <TextStyle whiteMainBold>이제, 여행은</TextStyle>
+      <TextStyle whiteMainBold>가까운 곳에서</TextStyle>
+      <Button normal onClick={searchNearBy}>
+        <TextStyle blacknormal> 근처의 숙소 둘러보기</TextStyle>
+      </Button>
+    </div>
   );
 };
 
