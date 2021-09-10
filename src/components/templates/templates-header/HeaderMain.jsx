@@ -41,7 +41,6 @@ const HeaderMain = ({
   setNavModalState,
   initialNavModalState,
   isClickedOutside,
-  setIsClickedOutside,
   SearchTypeHandler,
   locationSearch,
   checkDateSearch,
@@ -79,9 +78,7 @@ const HeaderMain = ({
           isClickedOutside={isClickedOutside}
           formState={formState}
           setFormState={setFormState}
-        >
-          MainTop
-        </HeaderMainTop>
+        />
         <HeadermainSearchNavContainer
           isScrolled={isScrolled}
           isClicked={isClicked}

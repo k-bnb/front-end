@@ -21,4 +21,3 @@ export const search = ({
     bedRoomNum,
     bathRoomNum,
   });
-// https://kbnb-backend.herokuapp.com/
