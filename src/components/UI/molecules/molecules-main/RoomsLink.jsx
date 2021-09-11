@@ -22,7 +22,10 @@ const RoomsLink = (props) => {
   const history = useHistory();
   const getPosition = () =>
     new Promise((res, rej) =>
-      navigator.geolocation.getCurrentPosition(res, rej, { timeout: 5000 }),
+      navigator.geolocation.getCurrentPosition(res, rej, {
+        timeout: 5000,
+        maximumAge: Infinity,
+      }),
     );
 
   const searchNearBy = async () => {

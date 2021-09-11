@@ -1,10 +1,7 @@
 import React from 'react';
-// import styled from 'styled-components';
 import ReCheckBedCount from '../../organisms/organisms-list/ReCheckBedCount';
 import ReCheckCash from '../../organisms/organisms-list/ReCheckCash';
 import ReCheckRoomType from '../../organisms/organisms-list/ReCheckRoomType';
-
-// const StyleRoomReSearch = styled.div``;
 
 const RoomReSearch = React.memo(
   ({

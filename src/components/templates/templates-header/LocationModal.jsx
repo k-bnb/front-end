@@ -118,7 +118,7 @@ const LocationModal = ({
       (e) => {
         console.log('error');
       }, // 실패시 콜백함수, 따로 처리 안해줘서 null 반환
-      { timeout: 10000 },
+      { timeout: 10000, maximumAge: Infinity },
     );
   }
 };

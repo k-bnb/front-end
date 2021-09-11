@@ -91,7 +91,6 @@ function Search({ SearchTypeHandler, moveFocusNext }) {
             console.log(results[0]);
 
             dispatch(
-              // 좌표값 store로 전달
               locationInput({
                 latitude: lat,
                 longitude: lng,
@@ -127,9 +126,9 @@ function Search({ SearchTypeHandler, moveFocusNext }) {
                 longitudeMin: '',
               }),
             );
-            dispatch(destinationInput(e.target.value)); // DestinationName 변경
+            dispatch(destinationInput(e.target.value));
           }}
-          disabled={!ready} // 아직 준비되지않으면 사용할수 없음.
+          disabled={!ready}
           placeholder="어디로 여행가세요?"
           className="combo-box-input"
           id="locationInput"

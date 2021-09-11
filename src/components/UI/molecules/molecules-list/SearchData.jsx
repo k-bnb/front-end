@@ -10,13 +10,11 @@ import { extractMonthDate } from '../../../../lib/extractMonthDate';
 import { moneyfilter } from '../../../../lib/moneyfilter';
 
 const SearchPlace = styled.div`
-  button:focus{
+  button:focus {
     transition: box-shadow 0.2s ease 0s;
-    box-shadow: rgb(34,34,34) 0px 0px 0px 2px;
+    box-shadow: rgb(34, 34, 34) 0px 0px 0px 2px;
   }
   padding: 100px 30px 40px 30px;
-  /* margin-top:100px; */
-
   .filter-style {
     display: flex;
     .roomType {
@@ -24,10 +22,8 @@ const SearchPlace = styled.div`
       margin-right: 15px;
       button {
         display: flex;
-        /* justify-content: center; */
         align-items: center;
         &.blackBorder {
-          /* border: 2px solid #000; */
         }
       }
     }
@@ -83,7 +79,6 @@ const SearchData = ({
       window.removeEventListener('click', handleClickOutside);
     };
   }, []);
-// console.log(keyup);
   return (
     <>
       <SearchPlace className="SearchData">
@@ -103,18 +98,18 @@ const SearchData = ({
           </TextStyled>
         </h1>
         <div className="filter-style" ref={modal}>
-          <div className="roomType" tabIndex="-1" >
+          <div className="roomType" tabIndex="-1">
             <Button
               className={roomType && 'blackBorder'}
               size="large"
               onClick={RoomSearchClick}
               // onkeyup={keyup}
-              tabIndex='0'
+              tabIndex="0"
             >
-              <TextStyled size="blackSmall" >숙소유형</TextStyled>
+              <TextStyled size="blackSmall">숙소유형</TextStyled>
             </Button>
             {searchModalState === 'room' && (
-              <SearchModal room >
+              <SearchModal room>
                 <RoomReSearch
                   roomTypes={roomTypes}
                   searchModalState={searchModalState}
@@ -122,7 +117,7 @@ const SearchData = ({
                   className="modals"
                 />
                 <FooterBtn
-                  tabIndex='0'
+                  tabIndex="0"
                   searchBtn={searchBtn}
                   dispatch={dispatch}
                   setSearchModalState={setSearchModalState}
@@ -139,7 +134,7 @@ const SearchData = ({
               }
               size="large"
               onClick={cashSearchClick}
-              tabIndex='0'
+              tabIndex="0"
             >
               <>
                 {costSearch.minCost === 10000 &&
@@ -181,7 +176,8 @@ const SearchData = ({
                   localMaxCost={localMaxCost}
                   setLocalMaxCost={setLocalMaxCost}
                 />
-                <FooterBtn tabIndex='0'
+                <FooterBtn
+                  tabIndex="0"
                   localMinCost={localMinCost}
                   localMaxCost={localMaxCost}
                   dispatch={dispatch}
@@ -197,7 +193,7 @@ const SearchData = ({
               className={(bedNum || bedRoomNum || bathRoomNum) && 'blackBorder'}
               size="large"
               onClick={bedroomSearchClick}
-              tabIndex='0'
+              tabIndex="0"
             >
               <TextStyled size="blackSmall">침실과 침대</TextStyled>
             </Button>
@@ -213,7 +209,7 @@ const SearchData = ({
                   plusBtn={plusBtn}
                 />
                 <FooterBtn
-                  tabIndex='0'
+                  tabIndex="0"
                   searchBtn={searchBtn}
                   dispatch={dispatch}
                   setSearchModalState={setSearchModalState}

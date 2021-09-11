@@ -113,15 +113,11 @@ const SectionMobile = styled.section`
 
   .img-group {
     display: flex;
-
-    /* justify-content: center; */
-
     .locations-img {
       flex-flow: column;
       align-items: flex-start;
       justify-content: center;
       margin-right: 20px;
-
       img {
         margin-bottom: 3%;
         margin-right: 5px;
@@ -193,6 +189,7 @@ const SectionStyle = ({ sectionImg }) => {
                   src={src}
                   alt={alt}
                   name={name}
+                  isRoomType={true}
                   bigImg
                   blackmiddlebold
                   bigimgSize
@@ -214,6 +211,7 @@ const SectionStyle = ({ sectionImg }) => {
                   src={src}
                   alt={alt}
                   name={name}
+                  isRoomType={true}
                   bigImg
                   blackmiddlebold
                   bigimgSize
@@ -236,6 +234,7 @@ const SectionStyle = ({ sectionImg }) => {
                   src={src}
                   alt={alt}
                   name={name}
+                  isRoomType={true}
                   bigImg
                   blackmiddlebold
                   bigimgSize

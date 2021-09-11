@@ -61,10 +61,10 @@ const imgs = [
 ];
 
 const sectionImg = [
-  { src: './imgs/house.jpg', alt: '집 전체', name: '집 전체' },
-  { src: './imgs/human.jpg', alt: '온수 욕조', name: '온수 욕조' },
-  { src: './imgs/nanlo.jpg', alt: '캠핑 및 글램핑', name: '캠핑 및 글램핑' },
-  { src: './imgs/tent.jpg', alt: '독특한 공간', name: '독특한 공간' },
+  { src: './imgs/house.jpg', alt: 'Entire home/apt', name: '집 전체' },
+  { src: './imgs/privateRoom.jpg', alt: 'Private room', name: '개인실' },
+  { src: './imgs/hotelRoom.jpg', alt: 'hotelroom', name: '호텔 객실' },
+  { src: './imgs/dormitoryRoom.jpg', alt: 'Shared room', name: '다인실' },
 ];
 
 const sloganImg = [

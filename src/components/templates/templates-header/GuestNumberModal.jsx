@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import GuestNumberModalUnit from '../../UI/molecules/molecules-header/GuestNumberModalUnit';
 import { useClickOutside } from '../../../lib/useClickOutside';
-import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 const StyledGuestModal = styled.div`
   position: absolute;
@@ -43,11 +41,8 @@ const GuestNumberModal = ({
   infoRes,
   setGuestIsBorderThick,
   searchBtnRef,
-  isGuestOpen,
   setIsGuestOpen,
   peopleLimit,
-  setIsCalendarOpen,
-  isCalendarOpen,
 }) => {
   const guestRef = useClickOutside(() => {
     if (detailPage) {
